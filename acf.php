@@ -2,7 +2,7 @@
 /*
  * Plugin Name: Applied Content Forms
  * Plugin URI: https://github.com/ControlledChaos/applied-content-forms
- * Description: Customize WordPress with powerful, professional and intuitive fields.
+ * Description: Content editing for WordPress and ClassicPress.
  * Version: 5.9.6
  * Author: Elliot Condon + Controlled Chaos Design
  * Author URI: https://twitter.com/elliotcondon
