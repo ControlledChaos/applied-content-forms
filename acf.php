@@ -188,7 +188,7 @@ class ACF {
 		acf_include('includes/legacy/legacy-locations.php');
 
 		// Include PRO.
-		acf_include('advanced/acf-pro.php');
+		acf_include('advanced/advanced.php');
 
 		// Include tests.
 		if( defined('ACF_DEV') && ACF_DEV ) {
