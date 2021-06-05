@@ -4,7 +4,7 @@
  * Plugin URI: https://github.com/ControlledChaos/applied-content-forms
  * Description: Customize WordPress with powerful, professional and intuitive fields.
  * Version: 5.9.6
- * Author: Elliot Condon + COntrolled Chaos Design
+ * Author: Elliot Condon + Controlled Chaos Design
  * Author URI: https://twitter.com/elliotcondon
  * Text Domain: acf
  * Domain Path: /lang
