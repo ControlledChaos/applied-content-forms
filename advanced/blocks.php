@@ -477,7 +477,7 @@ function acf_enqueue_block_assets() {
 	));
 	
 	// Enqueue script.
-	wp_enqueue_script( 'acf-blocks', acf_get_url("pro/assets/js/acf-pro-blocks.min.js"), array('acf-input', 'wp-blocks'), ACF_VERSION, true );
+	wp_enqueue_script( 'acf-blocks', acf_get_url("advanced/assets/js/acf-pro-blocks.min.js"), array('acf-input', 'wp-blocks'), ACF_VERSION, true );
 	
 	// Enqueue block assets.
 	array_map( 'acf_enqueue_block_type_assets', $block_types );
