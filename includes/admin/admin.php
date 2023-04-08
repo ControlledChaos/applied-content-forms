@@ -1,11 +1,11 @@
-<?php 
+<?php
 
 if( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 if( ! class_exists('ACF_Admin') ) :
 
 class ACF_Admin {
-	
+
 	/**
 	 * Constructor.
 	 *
@@ -23,7 +23,7 @@ class ACF_Admin {
 		add_action( 'admin_body_class', 		array( $this, 'admin_body_class' ) );
 		add_action( 'current_screen',			array( $this, 'current_screen' ) );
 	}
-	
+
 	/**
 	 * Adds the ACF menu item.
 	 *
@@ -34,22 +34,22 @@ class ACF_Admin {
 	 * @return	void
 	 */
 	function admin_menu() {
-		
+
 		// Bail early if ACF is hidden.
 		if( !acf_get_setting('show_admin') ) {
 			return;
 		}
-		
+
 		// Vars.
 		$slug = 'edit.php?post_type=acf-field-group';
 		$cap = acf_get_setting('capability');
-		
+
 		// Add menu items.
 		add_menu_page( __("Custom Fields",'acf'), __("Custom Fields",'acf'), $cap, $slug, false, 'dashicons-welcome-widgets-menus', '80.025' );
 		add_submenu_page( $slug, __('Field Groups','acf'), __('Field Groups','acf'), $cap, $slug );
 		add_submenu_page( $slug, __('Add New','acf'), __('Add New','acf'), $cap, 'post-new.php?post_type=acf-field-group' );
 	}
-	
+
 	/**
 	 * Enqueues global admin styling.
 	 *
@@ -62,7 +62,7 @@ class ACF_Admin {
 	function admin_enqueue_scripts() {
 		wp_enqueue_style( 'acf-global' );
 	}
-	
+
 	/**
 	 * Appends custom admin body classes.
 	 *
@@ -74,7 +74,7 @@ class ACF_Admin {
 	 */
 	function admin_body_class( $classes ) {
 		global $wp_version;
-		
+
 		// Determine body class version.
 		$wp_minor_version = floatval( $wp_version );
 		if( $wp_minor_version >= 5.3 ) {
@@ -82,16 +82,23 @@ class ACF_Admin {
 		} else {
 			$classes .= ' acf-admin-3-8';
 		}
-		
+
 		// Add browser for specific CSS.
 		$classes .= ' acf-browser-' . acf_get_browser();
 
 		// Return classes.
 		return $classes;
 	}
-	
+
 	/**
-	 * Adds custom functionality to "ACF" admin pages.
+	 * Admin screens
+	 *
+	 * Adds custom functionality to this plugin's admin screens.
+	 *
+	 * Navigation toolbar and footer text mod are
+	 * commented out.
+	 *
+	 * @todo Make an opt-in setting for nav toolbar.
 	 *
 	 * @date	7/4/20
 	 * @since	5.9.0
@@ -100,11 +107,11 @@ class ACF_Admin {
 	 * @return	void
 	 */
 	function current_screen( $screen ) {
-		
+
 		// Determine if the current page being viewed is "ACF" related.
 		if( isset( $screen->post_type ) && $screen->post_type === 'acf-field-group' ) {
-			add_action( 'in_admin_header',		array( $this, 'in_admin_header' ) );
-			add_filter( 'admin_footer_text',	array( $this, 'admin_footer_text' ) );
+			// add_action( 'in_admin_header',		array( $this, 'in_admin_header' ) );
+			// add_filter( 'admin_footer_text',	array( $this, 'admin_footer_text' ) );
 			$this->setup_help_tab();
 		}
 	}
@@ -126,7 +133,7 @@ class ACF_Admin {
 			array(
 				'id'      => 'overview',
 				'title'   => __( 'Overview', 'acf' ),
-				'content' => 
+				'content' =>
 					'<p><strong>' . __( 'Overview', 'acf' ) . '</strong></p>' .
 					'<p>' . __( 'The Advanced Custom Fields plugin provides a visual form builder to customize WordPress edit screens with extra fields, and an intuitive API to display custom field values in any theme template file.', 'acf' ) . '</p>' .
 					'<p>' . sprintf(
@@ -143,7 +150,7 @@ class ACF_Admin {
 			array(
 				'id'      => 'help',
 				'title'   => __( 'Help & Support', 'acf' ),
-				'content' => 
+				'content' =>
 					'<p><strong>' . __( 'Help & Support', 'acf' ) . '</strong></p>' .
 					'<p>' . __( 'We are fanatical about support, and want you to get the best out of your website with ACF. If you run into any difficulties, there are several places you can find help:', 'acf' ) . '</p>' .
 					'<ul>' .
@@ -172,7 +179,7 @@ class ACF_Admin {
 			''
 		);
 	}
-	
+
 	/**
 	 * Renders the admin navigation element.
 	 *
@@ -185,7 +192,7 @@ class ACF_Admin {
 	function in_admin_header() {
 		acf_get_view( 'html-admin-navigation' );
 	}
-	
+
 	/**
 	 * Modifies the admin footer text.
 	 *
