@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Advanced Custom Fields Pro v5.7.11\n"
+"Project-Id-Version: Applied Content Forms Pro v5.7.11\n"
 "Report-Msgid-Bugs-To: http://support.advancedcustomfields.com\n"
 "POT-Creation-Date: 2019-05-08 14:09+0430\n"
 "PO-Revision-Date: 2019-05-08 14:13+0430\n"
@@ -23,7 +23,7 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
 #: acf.php:80
-msgid "Advanced Custom Fields"
+msgid "Applied Content Forms"
 msgstr "زمینه‌های سفارشی پیشرفته"
 
 #: acf.php:363 includes/admin/admin.php:58
@@ -459,7 +459,7 @@ msgstr "وارد کردن گروه های زمینه"
 
 #: includes/admin/tools/class-acf-admin-tool-import.php:47
 msgid ""
-"Select the Advanced Custom Fields JSON file you would like to import. When you "
+"Select the Applied Content Forms JSON file you would like to import. When you "
 "click the import button below, ACF will import the field groups."
 msgstr ""
 "فایل JSON ای که قبلا از این افزونه خروجی گرفته اید را انتخاب کنید تا وارد شود. "
@@ -937,7 +937,7 @@ msgid "Installed"
 msgstr "نصب شده"
 
 #: includes/admin/views/settings-info.php:3
-msgid "Welcome to Advanced Custom Fields"
+msgid "Welcome to Applied Content Forms"
 msgstr "به افزونه زمینه‌های سفارشی پیشرفته خوش آمدید"
 
 #: includes/admin/views/settings-info.php:4
@@ -2869,7 +2869,7 @@ msgstr "مقدار %s لازم است"
 
 #. Plugin Name of the plugin/theme
 #: pro/acf-pro.php:28
-msgid "Advanced Custom Fields PRO"
+msgid "Applied Content Forms PRO"
 msgstr "زمینه‌های سفارشی پیشرفته نسخه حرفه ای"
 
 #: pro/admin/admin-options-page.php:198
@@ -3299,7 +3299,7 @@ msgstr "http://www.elliotcondon.com/"
 #~ msgid "<b>Error</b>. Could not load add-ons list"
 #~ msgstr "<b>خطا</b>. لیست افزونه ها قابل خواندن نیست"
 
-#~ msgid "Advanced Custom Fields Database Upgrade"
+#~ msgid "Applied Content Forms Database Upgrade"
 #~ msgstr "به‌روزرسانی پایگاه داده زمینه های دلخواه پیشرفته"
 
 #~ msgid "Upgrade complete"
@@ -3841,12 +3841,12 @@ msgstr "http://www.elliotcondon.com/"
 #~ msgid "Assign one or more contact form 7 forms to a post"
 #~ msgstr "اختصاص یک یا چند فرم تماس (Contact Form 7) به یک نوشته"
 
-#~ msgid "Advanced Custom Fields Add-Ons"
+#~ msgid "Applied Content Forms Add-Ons"
 #~ msgstr "افزودنی های افزونه زمینه های دلخواه پیشرفته"
 
 #~ msgid ""
 #~ "The following Add-ons are available to increase the functionality of the "
-#~ "Advanced Custom Fields plugin."
+#~ "Applied Content Forms plugin."
 #~ msgstr ""
 #~ "افزودنی های زیر برای افزایش قابلیت های افزونه زمینه های دلخواه پیشرفته قابل "
 #~ "استفاده هستند."
@@ -3953,7 +3953,7 @@ msgstr "http://www.elliotcondon.com/"
 #~ msgstr "قرار دادن در پوسته"
 
 #~ msgid ""
-#~ "The Advanced Custom Fields plugin can be included within a theme. To do so, "
+#~ "The Applied Content Forms plugin can be included within a theme. To do so, "
 #~ "move the ACF plugin inside your theme and add the following code to your "
 #~ "functions.php file:"
 #~ msgstr ""

@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Advanced Custom Fields Pro v5.7.10\n"
+"Project-Id-Version: Applied Content Forms Pro v5.7.10\n"
 "Report-Msgid-Bugs-To: http://support.advancedcustomfields.com\n"
 "POT-Creation-Date: 2019-01-15 11:15+1000\n"
 "PO-Revision-Date: 2019-02-06 15:35+0100\n"
@@ -24,8 +24,8 @@ msgstr ""
 
 # @ acf
 #: acf.php:80
-msgid "Advanced Custom Fields"
-msgstr "Advanced Custom Fields"
+msgid "Applied Content Forms"
+msgstr "Applied Content Forms"
 
 # @ acf
 #: acf.php:362 includes/admin/admin.php:58
@@ -540,10 +540,10 @@ msgstr "Feld-Gruppen importieren"
 # @ acf
 #: includes/admin/tools/class-acf-admin-tool-import.php:61
 msgid ""
-"Select the Advanced Custom Fields JSON file you would like to import. When "
+"Select the Applied Content Forms JSON file you would like to import. When "
 "you click the import button below, ACF will import the field groups."
 msgstr ""
-"Wähle die Advanced Custom Fields JSON-Datei aus, welche Du importieren "
+"Wähle die Applied Content Forms JSON-Datei aus, welche Du importieren "
 "möchtest. Nach dem Klicken des Importieren-Buttons wird ACF die Felder-"
 "Gruppen hinzufügen."
 
@@ -1122,8 +1122,8 @@ msgstr "Installiert"
 
 # @ acf
 #: includes/admin/views/settings-info.php:3
-msgid "Welcome to Advanced Custom Fields"
-msgstr "Willkommen bei Advanced Custom Fields"
+msgid "Welcome to Applied Content Forms"
+msgstr "Willkommen bei Applied Content Forms"
 
 # @ acf
 #: includes/admin/views/settings-info.php:4
@@ -3372,8 +3372,8 @@ msgstr "%s Wert ist notwendig"
 # @ acf
 #. Plugin Name of the plugin/theme
 #: pro/acf-pro.php:28
-msgid "Advanced Custom Fields PRO"
-msgstr "Advanced Custom Fields PRO"
+msgid "Applied Content Forms PRO"
+msgstr "Applied Content Forms PRO"
 
 # @ acf
 #: pro/admin/admin-options-page.php:198
@@ -3854,8 +3854,8 @@ msgstr "http://www.elliotcondon.com/"
 #~ "<b>Fehler</b>. Die Liste der Zusatz-Module kann nicht geladen werden"
 
 # @ acf
-#~ msgid "Advanced Custom Fields Database Upgrade"
-#~ msgstr "Advanced Custom Fields Datenbank Aktualisierung"
+#~ msgid "Applied Content Forms Database Upgrade"
+#~ msgstr "Applied Content Forms Datenbank Aktualisierung"
 
 # @ acf
 #~ msgid ""
@@ -4225,8 +4225,8 @@ msgstr "http://www.elliotcondon.com/"
 #~ "hier über die <a href=\"%s\">Details und Preise</a>"
 
 # @ acf
-#~ msgid "Advanced Custom Fields Pro"
-#~ msgstr "Advanced Custom Fields Pro"
+#~ msgid "Applied Content Forms Pro"
+#~ msgstr "Applied Content Forms Pro"
 
 # @ acf
 #~ msgid "http://www.advancedcustomfields.com/"

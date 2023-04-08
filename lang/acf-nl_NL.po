@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Advanced Custom Fields Pro v5.6.6\n"
+"Project-Id-Version: Applied Content Forms Pro v5.6.6\n"
 "Report-Msgid-Bugs-To: http://support.advancedcustomfields.com\n"
 "POT-Creation-Date: 2017-11-22 15:53+0200\n"
 "PO-Revision-Date: 2019-03-25 09:21+1000\n"
@@ -23,8 +23,8 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
 #: acf.php:67
-msgid "Advanced Custom Fields"
-msgstr "Advanced Custom Fields"
+msgid "Applied Content Forms"
+msgstr "Applied Content Forms"
 
 #: acf.php:369 includes/admin/admin.php:117
 msgid "Field Groups"
@@ -774,8 +774,8 @@ msgstr "Upgrade websites"
 
 #: includes/admin/views/install-network.php:9
 #: includes/admin/views/install.php:3
-msgid "Advanced Custom Fields Database Upgrade"
-msgstr "Advanced Custom Fields database upgrade"
+msgid "Applied Content Forms Database Upgrade"
+msgstr "Applied Content Forms database upgrade"
 
 #: includes/admin/views/install-network.php:11
 #, php-format
@@ -890,8 +890,8 @@ msgid "Installed"
 msgstr "Geïnstalleerd"
 
 #: includes/admin/views/settings-info.php:3
-msgid "Welcome to Advanced Custom Fields"
-msgstr "Welkom bij Advanced Custom Fields"
+msgid "Welcome to Applied Content Forms"
+msgstr "Welkom bij Applied Content Forms"
 
 #: includes/admin/views/settings-info.php:4
 #, php-format
@@ -1217,10 +1217,10 @@ msgstr "Importeer groepen"
 
 #: includes/admin/views/settings-tools.php:67
 msgid ""
-"Select the Advanced Custom Fields JSON file you would like to import. When "
+"Select the Applied Content Forms JSON file you would like to import. When "
 "you click the import button below, ACF will import the field groups."
 msgstr ""
-"Selecteer het Advanced Custom Fields JSON bestand die je wilt importeren. "
+"Selecteer het Applied Content Forms JSON bestand die je wilt importeren. "
 "Klik op de importeer button om het importeren te starten."
 
 #: includes/admin/views/settings-tools.php:77
@@ -2842,8 +2842,8 @@ msgstr "%s waarde is verplicht"
 
 #. Plugin Name of the plugin/theme
 #: pro/acf-pro.php:28
-msgid "Advanced Custom Fields PRO"
-msgstr "Advanced Custom Fields PRO"
+msgid "Applied Content Forms PRO"
+msgstr "Applied Content Forms PRO"
 
 #: pro/admin/admin-options-page.php:200
 msgid "Publish"
@@ -3360,8 +3360,8 @@ msgstr "http://www.elliotcondon.com/"
 #~ "licentiecode in op de <a href=\"%s\">Updates</a> pagina, of schaf een "
 #~ "licentiecode aan via <a href=\"%s\">details & prijzen</a>."
 
-#~ msgid "Advanced Custom Fields Pro"
-#~ msgstr "Advanced Custom Fields Pro"
+#~ msgid "Applied Content Forms Pro"
+#~ msgstr "Applied Content Forms Pro"
 
 #~ msgid "http://www.advancedcustomfields.com/"
 #~ msgstr "http://www.advancedcustomfields.com/"
@@ -3671,8 +3671,8 @@ msgstr "http://www.elliotcondon.com/"
 #~ msgid "Back to settings"
 #~ msgstr "Terug naar instellingen"
 
-#~ msgid "Advanced Custom Fields Settings"
-#~ msgstr "Advanced Custom Fields instellingen"
+#~ msgid "Applied Content Forms Settings"
+#~ msgstr "Applied Content Forms instellingen"
 
 #~ msgid "requires a database upgrade"
 #~ msgstr "vereist een database upgrade"

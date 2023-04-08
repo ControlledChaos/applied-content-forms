@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Advanced Custom Fields Pro v5.8.5\n"
+"Project-Id-Version: Applied Content Forms Pro v5.8.5\n"
 "Report-Msgid-Bugs-To: http://support.advancedcustomfields.com\n"
 "POT-Creation-Date: 2020-08-17 10:46+0200\n"
 "PO-Revision-Date: 2021-03-31 09:22+0930\n"
@@ -25,8 +25,8 @@ msgstr ""
 
 # @ acf
 #: acf.php:68
-msgid "Advanced Custom Fields"
-msgstr "Advanced Custom Fields"
+msgid "Applied Content Forms"
+msgstr "Applied Content Forms"
 
 # @ acf
 #: acf.php:348 includes/admin/admin.php:49
@@ -511,11 +511,11 @@ msgstr "Aperçu"
 
 #: includes/admin/admin.php:131
 msgid ""
-"The Advanced Custom Fields plugin provides a visual form builder to "
+"The Applied Content Forms plugin provides a visual form builder to "
 "customize WordPress edit screens with extra fields, and an intuitive API to "
 "display custom field values in any theme template file."
 msgstr ""
-"Advanced Custom Fields fournit un constructeur visuel vous permettant de "
+"Applied Content Forms fournit un constructeur visuel vous permettant de "
 "personnaliser les écrans de WordPress en ajoutant des champs additionnels, "
 "ainsi qu’une API intuitive pour afficher ces valeurs dans tous les modèles "
 "de votre thème."
@@ -686,7 +686,7 @@ msgstr "Importer les groupes de champs"
 
 #: includes/admin/tools/class-acf-admin-tool-import.php:47
 msgid ""
-"Select the Advanced Custom Fields JSON file you would like to import. When "
+"Select the Applied Content Forms JSON file you would like to import. When "
 "you click the import button below, ACF will import the field groups."
 msgstr ""
 "Sélectionnez le fichier JSON que vous souhaitez importer et cliquez sur "
@@ -2975,8 +2975,8 @@ msgstr "La valeur %s est requise"
 # @ acf
 #. Plugin Name of the plugin/theme
 #: pro/acf-pro.php:28
-msgid "Advanced Custom Fields PRO"
-msgstr "Advanced Custom Fields PRO"
+msgid "Applied Content Forms PRO"
+msgstr "Applied Content Forms PRO"
 
 #: pro/admin/admin-options-page.php:198
 msgid "Publish"

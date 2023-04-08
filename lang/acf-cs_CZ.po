@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Advanced Custom Fields Pro v5.2.9\n"
+"Project-Id-Version: Applied Content Forms Pro v5.2.9\n"
 "Report-Msgid-Bugs-To: http://support.advancedcustomfields.com\n"
 "POT-Creation-Date: 2018-09-06 12:21+1000\n"
 "PO-Revision-Date: 2018-12-11 09:20+0100\n"
@@ -23,8 +23,8 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
 #: acf.php:80
-msgid "Advanced Custom Fields"
-msgstr "Advanced Custom Fields"
+msgid "Applied Content Forms"
+msgstr "Applied Content Forms"
 
 #: acf.php:385 includes/admin/admin.php:117
 msgid "Field Groups"
@@ -490,10 +490,10 @@ msgstr "Importovat skupiny polí"
 
 #: includes/admin/tools/class-acf-admin-tool-import.php:61
 msgid ""
-"Select the Advanced Custom Fields JSON file you would like to import. When "
+"Select the Applied Content Forms JSON file you would like to import. When "
 "you click the import button below, ACF will import the field groups."
 msgstr ""
-"Vyberte Advanced Custom Fields JSON soubor, který chcete importovat. Po "
+"Vyberte Applied Content Forms JSON soubor, který chcete importovat. Po "
 "klepnutí na tlačítko importu níže bude ACF importovat skupiny polí."
 
 #: includes/admin/tools/class-acf-admin-tool-import.php:66
@@ -967,8 +967,8 @@ msgid "Installed"
 msgstr "Instalováno"
 
 #: includes/admin/views/settings-info.php:3
-msgid "Welcome to Advanced Custom Fields"
-msgstr "Vítejte v Advanced Custom Fields"
+msgid "Welcome to Applied Content Forms"
+msgstr "Vítejte v Applied Content Forms"
 
 #: includes/admin/views/settings-info.php:4
 #, php-format
@@ -2898,8 +2898,8 @@ msgstr "%s hodnota je vyžadována"
 
 #. Plugin Name of the plugin/theme
 #: pro/acf-pro.php:28
-msgid "Advanced Custom Fields PRO"
-msgstr "Advanced Custom Fields PRO"
+msgid "Applied Content Forms PRO"
+msgstr "Applied Content Forms PRO"
 
 #: pro/admin/admin-options-page.php:200
 msgid "Publish"
@@ -3422,8 +3422,8 @@ msgstr "http://www.elliotcondon.com/"
 #~ msgid "Generate export code"
 #~ msgstr "Generovat kód pro exportu"
 
-#~ msgid "Advanced Custom Fields Database Upgrade"
-#~ msgstr "Aktualizace databáze Advanced Custom Fields"
+#~ msgid "Applied Content Forms Database Upgrade"
+#~ msgstr "Aktualizace databáze Applied Content Forms"
 
 #~ msgid "Upgrading data to"
 #~ msgstr "Aktualizace dat na"
@@ -3530,8 +3530,8 @@ msgstr "http://www.elliotcondon.com/"
 #~ msgid "Maximum {label} limit reached ({max} {identifier})"
 #~ msgstr "Maximální {label} limit dosažen ({max} {identifier})"
 
-#~ msgid "Advanced Custom Fields Pro"
-#~ msgstr "Advanced Custom Fields Pro"
+#~ msgid "Applied Content Forms Pro"
+#~ msgstr "Applied Content Forms Pro"
 
 #~ msgid "Custom field updated."
 #~ msgstr "Vlastní pole aktualizováno."
@@ -3792,7 +3792,7 @@ msgstr "http://www.elliotcondon.com/"
 #~ msgid "No field groups were selected"
 #~ msgstr "Nebyly vybrány žádné skupiny polí"
 
-#~ msgid "Advanced Custom Fields Settings"
+#~ msgid "Applied Content Forms Settings"
 #~ msgstr "Nastavení Pokročilých vlastních polí"
 
 #~ msgid "requires a database upgrade"

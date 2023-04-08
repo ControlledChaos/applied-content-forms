@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Advanced Custom Fields Pro\n"
+"Project-Id-Version: Applied Content Forms Pro\n"
 "POT-Creation-Date: 2020-06-27 13:40+0200\n"
 "PO-Revision-Date: 2020-06-27 15:50+0200\n"
 "Last-Translator: Elliot Condon <e@elliotcondon.com>\n"
@@ -22,7 +22,7 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
 #: acf.php:68
-msgid "Advanced Custom Fields"
+msgid "Applied Content Forms"
 msgstr "الحقول المخصصة المتقدمة"
 
 #: acf.php:342 includes/admin/admin.php:52
@@ -480,7 +480,7 @@ msgstr "استيراد مجموعات الحقول"
 
 #: includes/admin/tools/class-acf-admin-tool-import.php:47
 msgid ""
-"Select the Advanced Custom Fields JSON file you would like to import. When "
+"Select the Applied Content Forms JSON file you would like to import. When "
 "you click the import button below, ACF will import the field groups."
 msgstr ""
 "حدد ملف JSON الذي ترغب في استيراده. عند النقر على زر استيراد أدناه، ACF "
@@ -947,7 +947,7 @@ msgid ""
 msgstr "يرجى أيضا التأكد من تحديث أي إضافات مدفوعة (%s) أولا إلى أحدث إصدار."
 
 #: includes/admin/views/settings-info.php:3
-msgid "Welcome to Advanced Custom Fields"
+msgid "Welcome to Applied Content Forms"
 msgstr "مرحبا بك في الحقول المخصصة المتقدمة"
 
 #: includes/admin/views/settings-info.php:4
@@ -2892,7 +2892,7 @@ msgstr "قيمة %s مطلوبة"
 
 #. Plugin Name of the plugin/theme
 #: pro/acf-pro.php:28
-msgid "Advanced Custom Fields PRO"
+msgid "Applied Content Forms PRO"
 msgstr "الحقول المخصصة المتقدمة للمحترفين"
 
 #: pro/admin/admin-options-page.php:198
@@ -3343,7 +3343,7 @@ msgstr "إليوت كوندون"
 #~ msgid "<b>Error</b>. Could not load add-ons list"
 #~ msgstr "<b>خطأ.</b> لا يمكن تحميل قائمة الإضافات"
 
-#~ msgid "Advanced Custom Fields Database Upgrade"
+#~ msgid "Applied Content Forms Database Upgrade"
 #~ msgstr " ترقية قاعدة بيانات الحقول المخصصة المتقدمة"
 
 #~ msgid ""
@@ -3591,5 +3591,5 @@ msgstr "إليوت كوندون"
 #~ msgid "details & pricing"
 #~ msgstr "التفاصيل & الأسعار"
 
-#~ msgid "Advanced Custom Fields Pro"
+#~ msgid "Applied Content Forms Pro"
 #~ msgstr "حقول مخصصة متقدمة برو"

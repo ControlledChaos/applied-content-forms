@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Advanced Custom Fields Pro v5.9.3\n"
+"Project-Id-Version: Applied Content Forms Pro v5.9.3\n"
 "Report-Msgid-Bugs-To: http://support.advancedcustomfields.com\n"
 "POT-Creation-Date: 2015-08-11 23:33+0200\n"
 "PO-Revision-Date: 2021-01-11 23:02+0900\n"
@@ -22,8 +22,8 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
 #: acf.php:63
-msgid "Advanced Custom Fields"
-msgstr "Advanced Custom Fields"
+msgid "Applied Content Forms"
+msgstr "Applied Content Forms"
 
 #: acf.php:205 admin/admin.php:61
 msgid "Field Groups"
@@ -876,8 +876,8 @@ msgid "Installed"
 msgstr "インストール済み"
 
 #: admin/views/settings-info.php:9
-msgid "Welcome to Advanced Custom Fields"
-msgstr "ようこそ Advanced Custom Fields"
+msgid "Welcome to Applied Content Forms"
+msgstr "ようこそ Applied Content Forms"
 
 #: admin/views/settings-info.php:10
 #, php-format
@@ -1160,7 +1160,7 @@ msgstr "フィールドグループをインポート"
 
 #: admin/views/settings-tools.php:67
 msgid ""
-"Select the Advanced Custom Fields JSON file you would like to import. When you click the import button "
+"Select the Applied Content Forms JSON file you would like to import. When you click the import button "
 "below, ACF will import the field groups."
 msgstr ""
 "インポートしたいACFのJSONファイルを選択してください。下のインポートボタンをクリックすると、ACFはフィール"
@@ -1175,8 +1175,8 @@ msgid "Import"
 msgstr "インポート"
 
 #: admin/views/update-network.php:8 admin/views/update.php:8
-msgid "Advanced Custom Fields Database Upgrade"
-msgstr "Advanced Custom Fields データベースのアップグレード"
+msgid "Applied Content Forms Database Upgrade"
+msgstr "Applied Content Forms データベースのアップグレード"
 
 #: admin/views/update-network.php:10
 msgid ""
@@ -2139,8 +2139,8 @@ msgid "Edit field group"
 msgstr "フィールドグループを編集"
 
 #: pro/acf-pro.php:24
-msgid "Advanced Custom Fields PRO"
-msgstr "Advanced Custom Fields PRO"
+msgid "Applied Content Forms PRO"
+msgstr "Applied Content Forms PRO"
 
 #: pro/acf-pro.php:175
 msgid "Flexible Content requires at least 1 layout"
@@ -2464,8 +2464,8 @@ msgid "Maximum Rows"
 msgstr "最大行数"
 
 #. Plugin Name of the plugin/theme
-msgid "Advanced Custom Fields Pro"
-msgstr "Advanced Custom Fields Pro"
+msgid "Applied Content Forms Pro"
+msgstr "Applied Content Forms Pro"
 
 #. Plugin URI of the plugin/theme
 msgid "http://www.advancedcustomfields.com/"
@@ -2635,13 +2635,13 @@ msgstr "http://www.elliotcondon.com/"
 #~ msgstr "Assign one or more contact form 7 forms to a post"
 
 #, fuzzy
-#~ msgid "Advanced Custom Fields Add-Ons"
-#~ msgstr "Advanced Custom Fields"
+#~ msgid "Applied Content Forms Add-Ons"
+#~ msgstr "Applied Content Forms"
 
 #~ msgid ""
-#~ "The following Add-ons are available to increase the functionality of the Advanced Custom Fields "
+#~ "The following Add-ons are available to increase the functionality of the Applied Content Forms "
 #~ "plugin."
-#~ msgstr "Advanced Custom Fields プラグインに機能を追加するアドオンが利用できます。"
+#~ msgstr "Applied Content Forms プラグインに機能を追加するアドオンが利用できます。"
 
 #~ msgid ""
 #~ "Each Add-on can be installed as a separate plugin (receives updates) or included in your theme (does "
@@ -2742,17 +2742,17 @@ msgstr "http://www.elliotcondon.com/"
 #~ msgstr "テーマに含める"
 
 #~ msgid ""
-#~ "The Advanced Custom Fields plugin can be included within a theme. To do so, move the ACF plugin "
+#~ "The Applied Content Forms plugin can be included within a theme. To do so, move the ACF plugin "
 #~ "inside your theme and add the following code to your functions.php file:"
 #~ msgstr ""
-#~ "Advanced Custom Fields プラグインは、テーマに含めることができます。プラグインをテーマ内に移動し、"
+#~ "Applied Content Forms プラグインは、テーマに含めることができます。プラグインをテーマ内に移動し、"
 #~ "functions.php に下記コードを追加してください。"
 
 #~ msgid ""
 #~ "To remove all visual interfaces from the ACF plugin, you can use a constant to enable lite mode. Add "
 #~ "the following code to your functions.php file <b>before</b> the include_once code:"
 #~ msgstr ""
-#~ "Advanced Custom Fields プラグインのビジュアルインターフェースを取り除くには、定数を利用して「ライト"
+#~ "Applied Content Forms プラグインのビジュアルインターフェースを取り除くには、定数を利用して「ライト"
 #~ "モード」を有効にすることができます。functions.php の include_once よりも<b>前</b>に下記のコードを追加"
 #~ "してください。"
 

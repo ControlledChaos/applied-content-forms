@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Advanced Custom Fields\n"
+"Project-Id-Version: Applied Content Forms\n"
 "Report-Msgid-Bugs-To: http://support.advancedcustomfields.com\n"
 "POT-Creation-Date: 2017-06-27 15:36+1000\n"
 "PO-Revision-Date: 2018-02-06 10:03+1000\n"
@@ -22,7 +22,7 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
 #: acf.php:63
-msgid "Advanced Custom Fields"
+msgid "Applied Content Forms"
 msgstr "Модерни потребителски полета"
 
 #: acf.php:355 includes/admin/admin.php:117
@@ -779,7 +779,7 @@ msgstr "Забележки за обновяването"
 
 #: includes/admin/views/install-network.php:9
 #: includes/admin/views/install.php:3
-msgid "Advanced Custom Fields Database Upgrade"
+msgid "Applied Content Forms Database Upgrade"
 msgstr "Модерни потребителски полета - Обновяване на базата данни"
 
 #: includes/admin/views/install-network.php:11
@@ -896,7 +896,7 @@ msgid "Installed"
 msgstr "Инсталирано"
 
 #: includes/admin/views/settings-info.php:3
-msgid "Welcome to Advanced Custom Fields"
+msgid "Welcome to Applied Content Forms"
 msgstr "Добре дошли в Модерни потребителски полета"
 
 #: includes/admin/views/settings-info.php:4
@@ -1224,7 +1224,7 @@ msgstr "Импортиране на групи полета"
 
 #: includes/admin/views/settings-tools.php:67
 msgid ""
-"Select the Advanced Custom Fields JSON file you would like to import. When "
+"Select the Applied Content Forms JSON file you would like to import. When "
 "you click the import button below, ACF will import the field groups."
 msgstr ""
 "Изберете JSON файла, който искате да импортирате. Когато натиснете бутона за "
@@ -2839,7 +2839,7 @@ msgstr "%s стойност е задължителна"
 
 #. Plugin Name of the plugin/theme
 #: pro/acf-pro.php:28
-msgid "Advanced Custom Fields PRO"
+msgid "Applied Content Forms PRO"
 msgstr "Модерни потребителски полета PRO"
 
 #: pro/admin/admin-options-page.php:196
@@ -3332,5 +3332,5 @@ msgstr "http://www.elliotcondon.com/"
 #~ msgid "details & pricing"
 #~ msgstr "детайли и цени"
 
-#~ msgid "Advanced Custom Fields Pro"
+#~ msgid "Applied Content Forms Pro"
 #~ msgstr "Модерни потребителски полета PRO"

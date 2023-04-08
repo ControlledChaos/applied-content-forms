@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Advanced Custom Fields Pro v5.9.0\n"
+"Project-Id-Version: Applied Content Forms Pro v5.9.0\n"
 "Report-Msgid-Bugs-To: http://support.advancedcustomfields.com\n"
 "POT-Creation-Date: 2020-08-18 08:57+1000\n"
 "PO-Revision-Date: 2020-08-20 09:50+0300\n"
@@ -23,8 +23,8 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
 #: acf.php:68
-msgid "Advanced Custom Fields"
-msgstr "Advanced Custom Fields"
+msgid "Applied Content Forms"
+msgstr "Applied Content Forms"
 
 #: acf.php:348 includes/admin/admin.php:49
 msgid "Field Groups"
@@ -465,11 +465,11 @@ msgstr "Genel bakış"
 
 #: includes/admin/admin.php:131
 msgid ""
-"The Advanced Custom Fields plugin provides a visual form builder to "
+"The Applied Content Forms plugin provides a visual form builder to "
 "customize WordPress edit screens with extra fields, and an intuitive API to "
 "display custom field values in any theme template file."
 msgstr ""
-"The Advanced Custom Fields eklentisi bir görsel form oluşturucu ile "
+"The Applied Content Forms eklentisi bir görsel form oluşturucu ile "
 "WordPress düzenleme ekranlarını ek alanlarla özelleştirme imkanı sağlıyor, "
 "ve sezgisel API ile her türlü tema şablon dosyasında bu özel alanlar "
 "gösterilebiliyor."
@@ -632,10 +632,10 @@ msgstr "Alan gruplarını içeri aktar"
 
 #: includes/admin/tools/class-acf-admin-tool-import.php:47
 msgid ""
-"Select the Advanced Custom Fields JSON file you would like to import. When "
+"Select the Applied Content Forms JSON file you would like to import. When "
 "you click the import button below, ACF will import the field groups."
 msgstr ""
-"İçeri aktarmak istediğiniz Advanced Custom Fields JSON dosyasını seçin. "
+"İçeri aktarmak istediğiniz Applied Content Forms JSON dosyasını seçin. "
 "Aşağıdaki içeri aktar tuşuna bastığınızda ACF alan gruplarını içeri "
 "aktaracak."
 
@@ -2769,8 +2769,8 @@ msgstr "%s değeri gerekli"
 
 #. Plugin Name of the plugin/theme
 #: pro/acf-pro.php:28
-msgid "Advanced Custom Fields PRO"
-msgstr "Advanced Custom Fields PRO"
+msgid "Applied Content Forms PRO"
+msgstr "Applied Content Forms PRO"
 
 #: pro/admin/admin-options-page.php:198
 msgid "Publish"
@@ -3245,8 +3245,8 @@ msgstr "Elliot Condon"
 #~ msgid "What's New"
 #~ msgstr "Neler yeni"
 
-#~ msgid "Welcome to Advanced Custom Fields"
-#~ msgstr "Advanced Custom Fields eklentisine hoş geldiniz"
+#~ msgid "Welcome to Applied Content Forms"
+#~ msgstr "Applied Content Forms eklentisine hoş geldiniz"
 
 #~ msgid ""
 #~ "Thank you for updating! ACF %s is bigger and better than ever before. We "
@@ -3516,8 +3516,8 @@ msgstr "Elliot Condon"
 #~ msgid "Error validating request"
 #~ msgstr "İstek doğrulanırken hata oluştu"
 
-#~ msgid "Advanced Custom Fields Database Upgrade"
-#~ msgstr "Advanced Custom Fields veritabanı güncellemesi"
+#~ msgid "Applied Content Forms Database Upgrade"
+#~ msgstr "Applied Content Forms veritabanı güncellemesi"
 
 #~ msgid ""
 #~ "Before you start using the new awesome features, please update your "

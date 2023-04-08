@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Advanced Custom Fields Pro v5.2.9\n"
+"Project-Id-Version: Applied Content Forms Pro v5.2.9\n"
 "Report-Msgid-Bugs-To: http://support.advancedcustomfields.com\n"
 "POT-Creation-Date: 2015-08-11 23:26+0200\n"
 "PO-Revision-Date: 2018-02-06 10:06+1000\n"
@@ -22,8 +22,8 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
 #: acf.php:63
-msgid "Advanced Custom Fields"
-msgstr "Advanced Custom Fields"
+msgid "Applied Content Forms"
+msgstr "Applied Content Forms"
 
 #: acf.php:205 admin/admin.php:61
 msgid "Field Groups"
@@ -880,8 +880,8 @@ msgid "Installed"
 msgstr "Telepítve"
 
 #: admin/views/settings-info.php:9
-msgid "Welcome to Advanced Custom Fields"
-msgstr "Üdvözlet! Itt az Advanced Custom Fields"
+msgid "Welcome to Applied Content Forms"
+msgstr "Üdvözlet! Itt az Applied Content Forms"
 
 #: admin/views/settings-info.php:10
 #, php-format
@@ -1168,10 +1168,10 @@ msgstr "Mezőcsoportok importálása"
 
 #: admin/views/settings-tools.php:67
 msgid ""
-"Select the Advanced Custom Fields JSON file you would like to import. When you click the import button "
+"Select the Applied Content Forms JSON file you would like to import. When you click the import button "
 "below, ACF will import the field groups."
 msgstr ""
-"Válasszuk ki az importálni kívánt Advanced Custom Fields JSON fájlt. A gombra kattintva az ACF "
+"Válasszuk ki az importálni kívánt Applied Content Forms JSON fájlt. A gombra kattintva az ACF "
 "bővítmény importálja a fájlban definiált mezőcsoportokat."
 
 #: admin/views/settings-tools.php:77 fields/file.php:46
@@ -1183,7 +1183,7 @@ msgid "Import"
 msgstr "Importálás"
 
 #: admin/views/update-network.php:8 admin/views/update.php:8
-msgid "Advanced Custom Fields Database Upgrade"
+msgid "Applied Content Forms Database Upgrade"
 msgstr ""
 
 #: admin/views/update-network.php:10
@@ -2157,8 +2157,8 @@ msgstr ""
 
 #: pro/acf-pro.php:24
 #, fuzzy
-msgid "Advanced Custom Fields PRO"
-msgstr "Advanced Custom Fields PRO"
+msgid "Applied Content Forms PRO"
+msgstr "Applied Content Forms PRO"
 
 #: pro/acf-pro.php:175
 msgid "Flexible Content requires at least 1 layout"
@@ -2492,7 +2492,7 @@ msgid "Maximum Rows"
 msgstr "Sorok maximális száma"
 
 #. Plugin Name of the plugin/theme
-msgid "Advanced Custom Fields Pro"
+msgid "Applied Content Forms Pro"
 msgstr ""
 
 #. Plugin URI of the plugin/theme

@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Advanced Custom Fields Pro v5.2.9\n"
+"Project-Id-Version: Applied Content Forms Pro v5.2.9\n"
 "Report-Msgid-Bugs-To: http://support.advancedcustomfields.com\n"
 "POT-Creation-Date: 2017-06-27 15:28+1000\n"
 "PO-Revision-Date: 2019-05-15 09:55+1000\n"
@@ -23,8 +23,8 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
 #: acf.php:63
-msgid "Advanced Custom Fields"
-msgstr "Advanced Custom Fields"
+msgid "Applied Content Forms"
+msgstr "Applied Content Forms"
 
 #: acf.php:355 includes/admin/admin.php:117
 msgid "Field Groups"
@@ -775,8 +775,8 @@ msgstr "Uppgradera sajter"
 
 #: includes/admin/views/install-network.php:9
 #: includes/admin/views/install.php:3
-msgid "Advanced Custom Fields Database Upgrade"
-msgstr "Advanced Custom Fields databasuppgradering"
+msgid "Applied Content Forms Database Upgrade"
+msgstr "Applied Content Forms databasuppgradering"
 
 #: includes/admin/views/install-network.php:11
 #, php-format
@@ -890,8 +890,8 @@ msgid "Installed"
 msgstr "Installerad"
 
 #: includes/admin/views/settings-info.php:3
-msgid "Welcome to Advanced Custom Fields"
-msgstr "Välkommen till Advanced Custom Fields"
+msgid "Welcome to Applied Content Forms"
+msgstr "Välkommen till Applied Content Forms"
 
 #: includes/admin/views/settings-info.php:4
 #, php-format
@@ -1212,10 +1212,10 @@ msgstr "Importera fältgrupper"
 
 #: includes/admin/views/settings-tools.php:67
 msgid ""
-"Select the Advanced Custom Fields JSON file you would like to import. When "
+"Select the Applied Content Forms JSON file you would like to import. When "
 "you click the import button below, ACF will import the field groups."
 msgstr ""
-"Välj den Advanced Custom Fields JSON-fil som du vill importera. När du "
+"Välj den Applied Content Forms JSON-fil som du vill importera. När du "
 "klickar på import knappen så kommer ACF importera fältgrupperna."
 
 #: includes/admin/views/settings-tools.php:77
@@ -1517,7 +1517,7 @@ msgstr "Formatet som visas när du redigerar ett inlägg"
 #: includes/fields/class-acf-field-time_picker.php:150
 #, fuzzy
 msgid "Custom:"
-msgstr "Advanced Custom Fields"
+msgstr "Applied Content Forms"
 
 #: includes/fields/class-acf-field-date_picker.php:242
 msgid "Save Format"
@@ -2799,8 +2799,8 @@ msgstr "%s värde är obligatorisk"
 
 #. Plugin Name of the plugin/theme
 #: pro/acf-pro.php:28
-msgid "Advanced Custom Fields PRO"
-msgstr "Advanced Custom Fields PRO"
+msgid "Applied Content Forms PRO"
+msgstr "Applied Content Forms PRO"
 
 #: pro/admin/admin-options-page.php:196
 msgid "Publish"

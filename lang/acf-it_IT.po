@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Advanced Custom Fields Pro v5.2.9\n"
+"Project-Id-Version: Applied Content Forms Pro v5.2.9\n"
 "Report-Msgid-Bugs-To: http://support.advancedcustomfields.com\n"
 "POT-Creation-Date: 2018-04-16 17:11+1000\n"
 "PO-Revision-Date: 2018-07-16 09:34+1000\n"
@@ -24,7 +24,7 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
 #: acf.php:81
-msgid "Advanced Custom Fields"
+msgid "Applied Content Forms"
 msgstr "Campi Personalizzati Avanzati"
 
 #: acf.php:388 includes/admin/admin.php:117
@@ -537,10 +537,10 @@ msgstr ""
 
 #: includes/admin/tools/class-acf-admin-tool-import.php:61
 msgid ""
-"Select the Advanced Custom Fields JSON file you would like to import. When "
+"Select the Applied Content Forms JSON file you would like to import. When "
 "you click the import button below, ACF will import the field groups."
 msgstr ""
-"Selezionare il file JSON di Advanced Custom Fields che si desidera "
+"Selezionare il file JSON di Applied Content Forms che si desidera "
 "importare. Quando si fa clic sul pulsante di importazione di seguito, ACF "
 "importerà i \n"
 "Field Group\n"
@@ -896,10 +896,10 @@ msgstr "Aggiornamento siti"
 
 #: includes/admin/views/install-network.php:9
 #: includes/admin/views/install.php:3
-msgid "Advanced Custom Fields Database Upgrade"
+msgid "Applied Content Forms Database Upgrade"
 msgstr ""
 "Aggiornamento Database \n"
-"Advanced Custom Fields"
+"Applied Content Forms"
 
 #: includes/admin/views/install-network.php:11
 #, php-format
@@ -1017,8 +1017,8 @@ msgid "Installed"
 msgstr "Installato"
 
 #: includes/admin/views/settings-info.php:3
-msgid "Welcome to Advanced Custom Fields"
-msgstr "Benvenuto in Advanced Custom Fields"
+msgid "Welcome to Applied Content Forms"
+msgstr "Benvenuto in Applied Content Forms"
 
 #: includes/admin/views/settings-info.php:4
 #, php-format
@@ -2958,8 +2958,8 @@ msgstr "Il valore %s è richiesto"
 
 #. Plugin Name of the plugin/theme
 #: pro/acf-pro.php:28
-msgid "Advanced Custom Fields PRO"
-msgstr "Advanced Custom Fields PRO"
+msgid "Applied Content Forms PRO"
+msgstr "Applied Content Forms PRO"
 
 #: pro/admin/admin-options-page.php:200
 msgid "Publish"
@@ -3595,8 +3595,8 @@ msgstr "http://www.elliotcondon.com/"
 #~ "pagina <a href=\"%s\">Aggiornamenti</a>. Se non si dispone di una chiave "
 #~ "di licenza, si prega di consultare <a href=\"%s\">dettagli & prezzi</a>"
 
-#~ msgid "Advanced Custom Fields Pro"
-#~ msgstr "Advanced Custom Fields Pro"
+#~ msgid "Applied Content Forms Pro"
+#~ msgstr "Applied Content Forms Pro"
 
 #~ msgid "http://www.advancedcustomfields.com/"
 #~ msgstr "http://www.advancedcustomfields.com/"

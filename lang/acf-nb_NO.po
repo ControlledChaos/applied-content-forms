@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Advanced Custom Fields Pro\n"
+"Project-Id-Version: Applied Content Forms Pro\n"
 "Report-Msgid-Bugs-To: http://support.advancedcustomfields.com\n"
 "POT-Creation-Date: 2017-06-27 15:33+1000\n"
 "PO-Revision-Date: 2018-02-06 10:06+1000\n"
@@ -22,8 +22,8 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
 #: acf.php:63
-msgid "Advanced Custom Fields"
-msgstr "Advanced Custom Fields"
+msgid "Applied Content Forms"
+msgstr "Applied Content Forms"
 
 #: acf.php:355 includes/admin/admin.php:117
 msgid "Field Groups"
@@ -772,8 +772,8 @@ msgstr "Oppgrader nettsteder"
 
 #: includes/admin/views/install-network.php:9
 #: includes/admin/views/install.php:3
-msgid "Advanced Custom Fields Database Upgrade"
-msgstr "Databaseoppgradering for Advanced Custom Fields"
+msgid "Applied Content Forms Database Upgrade"
+msgstr "Databaseoppgradering for Applied Content Forms"
 
 #: includes/admin/views/install-network.php:11
 #, php-format
@@ -888,8 +888,8 @@ msgid "Installed"
 msgstr "Installert"
 
 #: includes/admin/views/settings-info.php:3
-msgid "Welcome to Advanced Custom Fields"
-msgstr "Velkommen til Advanced Custom Fields"
+msgid "Welcome to Applied Content Forms"
+msgstr "Velkommen til Applied Content Forms"
 
 #: includes/admin/views/settings-info.php:4
 #, php-format
@@ -1207,7 +1207,7 @@ msgstr "Importer feltgrupper"
 
 #: includes/admin/views/settings-tools.php:67
 msgid ""
-"Select the Advanced Custom Fields JSON file you would like to import. When "
+"Select the Applied Content Forms JSON file you would like to import. When "
 "you click the import button below, ACF will import the field groups."
 msgstr ""
 "Velg ACF JSON-filen du vil importere. Når du klikker importerknappen under, "
@@ -1512,7 +1512,7 @@ msgstr "Visningsformat når du redigerer et innlegg"
 #: includes/fields/class-acf-field-time_picker.php:150
 #, fuzzy
 msgid "Custom:"
-msgstr "Advanced Custom Fields"
+msgstr "Applied Content Forms"
 
 #: includes/fields/class-acf-field-date_picker.php:242
 msgid "Save Format"
@@ -2794,8 +2794,8 @@ msgstr "%s verdi som kreves"
 
 #. Plugin Name of the plugin/theme
 #: pro/acf-pro.php:28
-msgid "Advanced Custom Fields PRO"
-msgstr "Advanced Custom Fields Pro"
+msgid "Applied Content Forms PRO"
+msgstr "Applied Content Forms Pro"
 
 #: pro/admin/admin-options-page.php:196
 msgid "Publish"
@@ -3361,8 +3361,8 @@ msgstr "http://www.elliotcondon.com/"
 #~ "\">oppdateringer</a> -siden. Hvis du ikke har en lisensnøkkel, se <a href="
 #~ "\"%s\">detaljer og priser</a>"
 
-#~ msgid "Advanced Custom Fields Pro"
-#~ msgstr "Advanced Custom Fields Pro"
+#~ msgid "Applied Content Forms Pro"
+#~ msgstr "Applied Content Forms Pro"
 
 #~ msgid "http://www.advancedcustomfields.com/"
 #~ msgstr "http://www.advancedcustomfields.com/"

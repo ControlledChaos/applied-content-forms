@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Advanced Custom Fields Pro v5.2.9\n"
+"Project-Id-Version: Applied Content Forms Pro v5.2.9\n"
 "Report-Msgid-Bugs-To: http://support.advancedcustomfields.com\n"
 "POT-Creation-Date: 2018-04-16 17:11+1000\n"
 "PO-Revision-Date: 2019-11-12 08:00+1000\n"
@@ -24,7 +24,7 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
 #: acf.php:81
-msgid "Advanced Custom Fields"
+msgid "Applied Content Forms"
 msgstr "Câmpuri Personalizate Avansate"
 
 #: acf.php:388 includes/admin/admin.php:117
@@ -489,7 +489,7 @@ msgstr "Importă Grupurile de câmpuri"
 
 #: includes/admin/tools/class-acf-admin-tool-import.php:61
 msgid ""
-"Select the Advanced Custom Fields JSON file you would like to import. When "
+"Select the Applied Content Forms JSON file you would like to import. When "
 "you click the import button below, ACF will import the field groups."
 msgstr ""
 "Alege fișierul JSON ACF pe care dorești să-l imporți. Când vei apăsa butonul "
@@ -844,7 +844,7 @@ msgstr ""
 
 #: includes/admin/views/install-network.php:9
 #: includes/admin/views/install.php:3
-msgid "Advanced Custom Fields Database Upgrade"
+msgid "Applied Content Forms Database Upgrade"
 msgstr ""
 
 #: includes/admin/views/install-network.php:11
@@ -956,7 +956,7 @@ msgid "Installed"
 msgstr "Instalat"
 
 #: includes/admin/views/settings-info.php:3
-msgid "Welcome to Advanced Custom Fields"
+msgid "Welcome to Applied Content Forms"
 msgstr "Bine ai venit la Câmpuri Personalizate Avansate"
 
 #: includes/admin/views/settings-info.php:4
@@ -2895,7 +2895,7 @@ msgstr "%s valoarea este obligatorie"
 
 #. Plugin Name of the plugin/theme
 #: pro/acf-pro.php:28
-msgid "Advanced Custom Fields PRO"
+msgid "Applied Content Forms PRO"
 msgstr "Câmpuri Avansate Personalizate PRO"
 
 #: pro/admin/admin-options-page.php:200

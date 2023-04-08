@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Advanced Custom Fields Pro v5.8.7\n"
+"Project-Id-Version: Applied Content Forms Pro v5.8.7\n"
 "Report-Msgid-Bugs-To: http://support.advancedcustomfields.com\n"
 "POT-Creation-Date: 2020-02-13 17:09+0800\n"
 "PO-Revision-Date: 2020-03-10 13:40+0800\n"
@@ -23,8 +23,8 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
 #: acf.php:68
-msgid "Advanced Custom Fields"
-msgstr "Advanced Custom Fields"
+msgid "Applied Content Forms"
+msgstr "Applied Content Forms"
 
 #: acf.php:340 includes/admin/admin.php:52
 msgid "Field Groups"
@@ -458,10 +458,10 @@ msgstr "匯入欄位群組"
 
 #: includes/admin/tools/class-acf-admin-tool-import.php:47
 msgid ""
-"Select the Advanced Custom Fields JSON file you would like to import. When "
+"Select the Applied Content Forms JSON file you would like to import. When "
 "you click the import button below, ACF will import the field groups."
 msgstr ""
-"選取你想匯入的 Advanced Custom Fields JSON 檔案。當你點擊下方匯入按鈕時，ACF "
+"選取你想匯入的 Applied Content Forms JSON 檔案。當你點擊下方匯入按鈕時，ACF "
 "將匯入欄位群組。"
 
 #: includes/admin/tools/class-acf-admin-tool-import.php:52
@@ -918,7 +918,7 @@ msgid ""
 msgstr "請檢查所有高級項目 (%s) 均更新至最新版本。"
 
 #: includes/admin/views/settings-info.php:3
-msgid "Welcome to Advanced Custom Fields"
+msgid "Welcome to Applied Content Forms"
 msgstr "歡迎來到高級自訂欄位"
 
 #: includes/admin/views/settings-info.php:4
@@ -2875,8 +2875,8 @@ msgstr "%s 值為必填"
 
 #. Plugin Name of the plugin/theme
 #: pro/acf-pro.php:28
-msgid "Advanced Custom Fields PRO"
-msgstr "Advanced Custom Fields PRO"
+msgid "Applied Content Forms PRO"
+msgstr "Applied Content Forms PRO"
 
 #: pro/admin/admin-options-page.php:198
 msgid "Publish"
@@ -3520,12 +3520,12 @@ msgstr "Elliot Condon"
 #~ msgid "Assign one or more contact form 7 forms to a post"
 #~ msgstr "分配一個或多個contact form 7表單到文章"
 
-#~ msgid "Advanced Custom Fields Add-Ons"
+#~ msgid "Applied Content Forms Add-Ons"
 #~ msgstr "自訂欄位附加功能"
 
 #~ msgid ""
 #~ "The following Add-ons are available to increase the functionality of the "
-#~ "Advanced Custom Fields plugin."
+#~ "Applied Content Forms plugin."
 #~ msgstr "下面的附加項可以提高外掛功能。"
 
 #~ msgid ""
@@ -3619,7 +3619,7 @@ msgstr "Elliot Condon"
 #~ msgstr "包含在主題中"
 
 #~ msgid ""
-#~ "The Advanced Custom Fields plugin can be included within a theme. To do "
+#~ "The Applied Content Forms plugin can be included within a theme. To do "
 #~ "so, move the ACF plugin inside your theme and add the following code to "
 #~ "your functions.php file:"
 #~ msgstr ""
@@ -4080,7 +4080,7 @@ msgstr "Elliot Condon"
 #~ msgid "Register Field Groups"
 #~ msgstr "註冊欄位群組"
 
-#~ msgid "Advanced Custom Fields Settings"
+#~ msgid "Applied Content Forms Settings"
 #~ msgstr "高級自動設定"
 
 #~ msgid "requires a database upgrade"

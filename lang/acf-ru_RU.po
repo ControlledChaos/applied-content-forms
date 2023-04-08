@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Advanced Custom Fields Pro v5.2.9\n"
+"Project-Id-Version: Applied Content Forms Pro v5.2.9\n"
 "Report-Msgid-Bugs-To: http://support.advancedcustomfields.com\n"
 "POT-Creation-Date: 2018-08-18 18:25+0300\n"
 "PO-Revision-Date: 2019-01-05 10:08+1000\n"
@@ -24,8 +24,8 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
 #: acf.php:80
-msgid "Advanced Custom Fields"
-msgstr "Advanced Custom Fields"
+msgid "Applied Content Forms"
+msgstr "Applied Content Forms"
 
 #: acf.php:392 includes/admin/admin.php:117
 msgid "Field Groups"
@@ -498,7 +498,7 @@ msgstr "Импорт групп полей"
 
 #: includes/admin/tools/class-acf-admin-tool-import.php:61
 msgid ""
-"Select the Advanced Custom Fields JSON file you would like to import. When "
+"Select the Applied Content Forms JSON file you would like to import. When "
 "you click the import button below, ACF will import the field groups."
 msgstr "Выберите файл конфигурации в формате JSON для импорта групп полей."
 
@@ -850,8 +850,8 @@ msgstr "Обновить сайты"
 
 #: includes/admin/views/install-network.php:9
 #: includes/admin/views/install.php:3
-msgid "Advanced Custom Fields Database Upgrade"
-msgstr "Обновление базы данных Advanced Custom Fields"
+msgid "Applied Content Forms Database Upgrade"
+msgstr "Обновление базы данных Applied Content Forms"
 
 #: includes/admin/views/install-network.php:11
 #, php-format
@@ -969,8 +969,8 @@ msgid "Installed"
 msgstr "Установлено"
 
 #: includes/admin/views/settings-info.php:3
-msgid "Welcome to Advanced Custom Fields"
-msgstr "Добро пожаловать в Advanced Custom Fields"
+msgid "Welcome to Applied Content Forms"
+msgstr "Добро пожаловать в Applied Content Forms"
 
 #: includes/admin/views/settings-info.php:4
 #, php-format
@@ -2895,8 +2895,8 @@ msgstr "%s значение требуется"
 
 #. Plugin Name of the plugin/theme
 #: pro/acf-pro.php:28
-msgid "Advanced Custom Fields PRO"
-msgstr "Advanced Custom Fields PRO"
+msgid "Applied Content Forms PRO"
+msgstr "Applied Content Forms PRO"
 
 #: pro/admin/admin-options-page.php:200
 msgid "Publish"
@@ -3695,12 +3695,12 @@ msgstr "http://www.elliotcondon.com/"
 #~ msgid "Assign one or more contact form 7 forms to a post"
 #~ msgstr "Добавьте одно или больше форм \"Contact Form 7\" в запись."
 
-#~ msgid "Advanced Custom Fields Add-Ons"
+#~ msgid "Applied Content Forms Add-Ons"
 #~ msgstr "Расширенные произвольные поля. Аддоны"
 
 #~ msgid ""
 #~ "The following Add-ons are available to increase the functionality of the "
-#~ "Advanced Custom Fields plugin."
+#~ "Applied Content Forms plugin."
 #~ msgstr ""
 #~ "Следующие аддоны могут увеличить функционал плагина \"Advanced Custom "
 #~ "Fields\"."
@@ -3811,11 +3811,11 @@ msgstr "http://www.elliotcondon.com/"
 #~ msgstr "Включить в тему"
 
 #~ msgid ""
-#~ "The Advanced Custom Fields plugin can be included within a theme. To do "
+#~ "The Applied Content Forms plugin can be included within a theme. To do "
 #~ "so, move the ACF plugin inside your theme and add the following code to "
 #~ "your functions.php file:"
 #~ msgstr ""
-#~ "Плагин \"Advanced Custom Fields\" может быть включен в тему. Для этого, "
+#~ "Плагин \"Applied Content Forms\" может быть включен в тему. Для этого, "
 #~ "переместите плагин ACF в папку вашей темы, и добавьте следующий код в ваш "
 #~ "\"<em>functions.php</em>\" файл:"
 

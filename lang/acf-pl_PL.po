@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Advanced Custom Fields Pro v5.2.9\n"
+"Project-Id-Version: Applied Content Forms Pro v5.2.9\n"
 "Report-Msgid-Bugs-To: http://support.advancedcustomfields.com\n"
 "POT-Creation-Date: 2018-09-06 12:21+1000\n"
 "PO-Revision-Date: 2019-07-29 14:31+1000\n"
@@ -24,8 +24,8 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
 #: acf.php:80
-msgid "Advanced Custom Fields"
-msgstr "Advanced Custom Fields"
+msgid "Applied Content Forms"
+msgstr "Applied Content Forms"
 
 #: acf.php:385 includes/admin/admin.php:117
 msgid "Field Groups"
@@ -491,10 +491,10 @@ msgstr "Importuj grupy pól"
 
 #: includes/admin/tools/class-acf-admin-tool-import.php:61
 msgid ""
-"Select the Advanced Custom Fields JSON file you would like to import. When "
+"Select the Applied Content Forms JSON file you would like to import. When "
 "you click the import button below, ACF will import the field groups."
 msgstr ""
-"Wybierz plik JSON Advanced Custom Fields, który chcesz zaimportować. Gdy "
+"Wybierz plik JSON Applied Content Forms, który chcesz zaimportować. Gdy "
 "klikniesz przycisk importu poniżej, ACF zaimportuje grupy pól."
 
 #: includes/admin/tools/class-acf-admin-tool-import.php:66
@@ -969,8 +969,8 @@ msgid "Installed"
 msgstr "Zainstalowano"
 
 #: includes/admin/views/settings-info.php:3
-msgid "Welcome to Advanced Custom Fields"
-msgstr "Witamy w Advanced Custom Fields"
+msgid "Welcome to Applied Content Forms"
+msgstr "Witamy w Applied Content Forms"
 
 #: includes/admin/views/settings-info.php:4
 #, php-format
@@ -2909,8 +2909,8 @@ msgstr "%s wartość jest wymagana"
 
 #. Plugin Name of the plugin/theme
 #: pro/acf-pro.php:28
-msgid "Advanced Custom Fields PRO"
-msgstr "Advanced Custom Fields PRO"
+msgid "Applied Content Forms PRO"
+msgstr "Applied Content Forms PRO"
 
 #: pro/admin/admin-options-page.php:200
 msgid "Publish"
@@ -3294,8 +3294,8 @@ msgstr "http://www.elliotcondon.com/"
 #~ msgid "Error validating request"
 #~ msgstr "Błąd podczas walidacji żądania"
 
-#~ msgid "Advanced Custom Fields Database Upgrade"
-#~ msgstr "Aktualizacja bazy danych Advanced Custom Fields"
+#~ msgid "Applied Content Forms Database Upgrade"
+#~ msgstr "Aktualizacja bazy danych Applied Content Forms"
 
 #~ msgid ""
 #~ "Before you start using the new awesome features, please update your "
@@ -3588,8 +3588,8 @@ msgstr "http://www.elliotcondon.com/"
 #~ "href=\"%s\">Aktualizacje</a>. Jeśli nie posiadasz klucza proszę zobaczyć "
 #~ "<a href=\"%s\">szczegóły i ceny</a>"
 
-#~ msgid "Advanced Custom Fields Pro"
-#~ msgstr "Advanced Custom Fields Pro"
+#~ msgid "Applied Content Forms Pro"
+#~ msgstr "Applied Content Forms Pro"
 
 #~ msgid "http://www.advancedcustomfields.com/"
 #~ msgstr "http://www.advancedcustomfields.com/"
@@ -3711,7 +3711,7 @@ msgstr "http://www.elliotcondon.com/"
 #~ msgid "License key unrecognised"
 #~ msgstr "Klucz licencji nie został rozpoznany"
 
-#~ msgid "Advanced Custom Fields Settings"
+#~ msgid "Applied Content Forms Settings"
 #~ msgstr "Ustawienia zaawansowanych własnych pól"
 
 #~ msgid "Activation Code"

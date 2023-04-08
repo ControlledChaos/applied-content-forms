@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Advanced Custom Fields Pro v5.2.9\n"
+"Project-Id-Version: Applied Content Forms Pro v5.2.9\n"
 "Report-Msgid-Bugs-To: http://support.advancedcustomfields.com\n"
 "POT-Creation-Date: 2017-10-04 14:50+1000\n"
 "PO-Revision-Date: 2018-02-06 10:06+1000\n"
@@ -24,7 +24,7 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
 #: acf.php:67
-msgid "Advanced Custom Fields"
+msgid "Applied Content Forms"
 msgstr "Додаткові поля Pro"
 
 #: acf.php:369 includes/admin/admin.php:117
@@ -781,7 +781,7 @@ msgstr "Оновити сайти"
 
 #: includes/admin/views/install-network.php:9
 #: includes/admin/views/install.php:3
-msgid "Advanced Custom Fields Database Upgrade"
+msgid "Applied Content Forms Database Upgrade"
 msgstr ""
 
 #: includes/admin/views/install-network.php:11
@@ -888,8 +888,8 @@ msgid "Installed"
 msgstr "Встановлено"
 
 #: includes/admin/views/settings-info.php:3
-msgid "Welcome to Advanced Custom Fields"
-msgstr "Вітаємо у Advanced Custom Fields"
+msgid "Welcome to Applied Content Forms"
+msgstr "Вітаємо у Applied Content Forms"
 
 #: includes/admin/views/settings-info.php:4
 #, php-format
@@ -1174,7 +1174,7 @@ msgstr "Імпортувати групи полів"
 
 #: includes/admin/views/settings-tools.php:67
 msgid ""
-"Select the Advanced Custom Fields JSON file you would like to import. When "
+"Select the Applied Content Forms JSON file you would like to import. When "
 "you click the import button below, ACF will import the field groups."
 msgstr ""
 "Виберіть JSON файл, який Ви хотіли б імпортувати. При натисканні кнопки "
@@ -2827,7 +2827,7 @@ msgstr ""
 
 #. Plugin Name of the plugin/theme
 #: pro/acf-pro.php:28
-msgid "Advanced Custom Fields PRO"
+msgid "Applied Content Forms PRO"
 msgstr "Додаткові поля Pro"
 
 #: pro/admin/admin-options-page.php:200

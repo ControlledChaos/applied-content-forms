@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Advanced Custom Fields PRO 5.4\n"
+"Project-Id-Version: Applied Content Forms PRO 5.4\n"
 "Report-Msgid-Bugs-To: http://support.advancedcustomfields.com\n"
 "POT-Creation-Date: 2017-11-22 09:03-0200\n"
 "PO-Revision-Date: 2018-02-06 10:06+1000\n"
@@ -23,8 +23,8 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
 #: acf.php:67
-msgid "Advanced Custom Fields"
-msgstr "Advanced Custom Fields"
+msgid "Applied Content Forms"
+msgstr "Applied Content Forms"
 
 #: acf.php:369 includes/admin/admin.php:117
 msgid "Field Groups"
@@ -494,10 +494,10 @@ msgstr "Importar Grupos de Campos"
 
 #: includes/admin/tools/class-acf-admin-tool-import.php:61
 msgid ""
-"Select the Advanced Custom Fields JSON file you would like to import. When "
+"Select the Applied Content Forms JSON file you would like to import. When "
 "you click the import button below, ACF will import the field groups."
 msgstr ""
-"Selecione o arquivo JSON do Advanced Custom Fields que deseja importar. "
+"Selecione o arquivo JSON do Applied Content Forms que deseja importar. "
 "Depois de clicar no botão importar abaixo, o ACF fará a importação dos "
 "grupos de campos."
 
@@ -857,8 +857,8 @@ msgstr "Revisar sites e atualizar"
 
 #: includes/admin/views/install-network.php:9
 #: includes/admin/views/install.php:3
-msgid "Advanced Custom Fields Database Upgrade"
-msgstr "Atualização do Banco de Dados do Advanced Custom Fields"
+msgid "Applied Content Forms Database Upgrade"
+msgstr "Atualização do Banco de Dados do Applied Content Forms"
 
 #: includes/admin/views/install-network.php:11
 #, php-format
@@ -976,8 +976,8 @@ msgid "Installed"
 msgstr "Instalado"
 
 #: includes/admin/views/settings-info.php:3
-msgid "Welcome to Advanced Custom Fields"
-msgstr "Bem-vindo ao Advanced Custom Fields"
+msgid "Welcome to Applied Content Forms"
+msgstr "Bem-vindo ao Applied Content Forms"
 
 #: includes/admin/views/settings-info.php:4
 #, php-format
@@ -2878,8 +2878,8 @@ msgstr "É necessário preencher o campo %s"
 
 #. Plugin Name of the plugin/theme
 #: pro/acf-pro.php:28
-msgid "Advanced Custom Fields PRO"
-msgstr "Advanced Custom Fields PRO"
+msgid "Applied Content Forms PRO"
+msgstr "Applied Content Forms PRO"
 
 #: pro/admin/admin-options-page.php:200
 msgid "Publish"

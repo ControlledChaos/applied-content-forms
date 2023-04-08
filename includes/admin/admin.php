@@ -135,7 +135,7 @@ class ACF_Admin {
 				'title'   => __( 'Overview', 'acf' ),
 				'content' =>
 					'<p><strong>' . __( 'Overview', 'acf' ) . '</strong></p>' .
-					'<p>' . __( 'The Advanced Custom Fields plugin provides a visual form builder to customize WordPress edit screens with extra fields, and an intuitive API to display custom field values in any theme template file.', 'acf' ) . '</p>' .
+					'<p>' . __( 'The Applied Content Forms plugin provides a visual form builder to customize WordPress edit screens with extra fields, and an intuitive API to display custom field values in any theme template file.', 'acf' ) . '</p>' .
 					'<p>' . sprintf(
 						__( 'Before creating your first Field Group, we recommend first reading our <a href="%s" target="_blank">Getting started</a> guide to familiarize yourself with the plugin\'s philosophy and best practises.', 'acf' ),
 						'https://www.advancedcustomfields.com/resources/getting-started-with-acf/'

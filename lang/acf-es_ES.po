@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Advanced Custom Fields Pro v5.2.9\n"
+"Project-Id-Version: Applied Content Forms Pro v5.2.9\n"
 "Report-Msgid-Bugs-To: http://support.advancedcustomfields.com\n"
 "POT-Creation-Date: 2017-06-27 15:35+1000\n"
 "PO-Revision-Date: 2018-02-06 10:05+1000\n"
@@ -23,8 +23,8 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
 #: acf.php:63
-msgid "Advanced Custom Fields"
-msgstr "Advanced Custom Fields"
+msgid "Applied Content Forms"
+msgstr "Applied Content Forms"
 
 #: acf.php:355 includes/admin/admin.php:117
 msgid "Field Groups"
@@ -777,8 +777,8 @@ msgstr "Mejorar los sitios"
 
 #: includes/admin/views/install-network.php:9
 #: includes/admin/views/install.php:3
-msgid "Advanced Custom Fields Database Upgrade"
-msgstr "Actualización de Base de Datos de Advanced Custom Fields"
+msgid "Applied Content Forms Database Upgrade"
+msgstr "Actualización de Base de Datos de Applied Content Forms"
 
 #: includes/admin/views/install-network.php:11
 #, php-format
@@ -896,8 +896,8 @@ msgid "Installed"
 msgstr "Instalado"
 
 #: includes/admin/views/settings-info.php:3
-msgid "Welcome to Advanced Custom Fields"
-msgstr "Bienvenido a Advanced Custom Fields"
+msgid "Welcome to Applied Content Forms"
+msgstr "Bienvenido a Applied Content Forms"
 
 #: includes/admin/views/settings-info.php:4
 #, php-format
@@ -1227,10 +1227,10 @@ msgstr "Importar Field Group"
 
 #: includes/admin/views/settings-tools.php:67
 msgid ""
-"Select the Advanced Custom Fields JSON file you would like to import. When "
+"Select the Applied Content Forms JSON file you would like to import. When "
 "you click the import button below, ACF will import the field groups."
 msgstr ""
-"Selecciona el archivo JSON de Advanced Custom Fields que te gustaría "
+"Selecciona el archivo JSON de Applied Content Forms que te gustaría "
 "importar.  Cuando hagas click en el botón importar debajo, ACF importará los "
 "grupos de campos."
 
@@ -2815,8 +2815,8 @@ msgstr "El valor %s es requerido"
 
 #. Plugin Name of the plugin/theme
 #: pro/acf-pro.php:28
-msgid "Advanced Custom Fields PRO"
-msgstr "Advanced Custom Fields PRO"
+msgid "Applied Content Forms PRO"
+msgstr "Applied Content Forms PRO"
 
 #: pro/admin/admin-options-page.php:196
 msgid "Publish"
@@ -3315,8 +3315,8 @@ msgstr "http://www.elliotcondon.com/"
 #~ msgid "details & pricing"
 #~ msgstr "detalles y precios"
 
-#~ msgid "Advanced Custom Fields Pro"
-#~ msgstr "Advanced Custom Fields Pro"
+#~ msgid "Applied Content Forms Pro"
+#~ msgstr "Applied Content Forms Pro"
 
 #~ msgid "Validation Failed. One or more fields below are required."
 #~ msgstr "Fallo en la validación. Uno o más campos son requeridos."
@@ -3385,8 +3385,8 @@ msgstr "http://www.elliotcondon.com/"
 #~ msgid "Follow"
 #~ msgstr "Sígueme"
 
-#~ msgid "Advanced Custom Fields Settings"
-#~ msgstr "Ajustes de Advanced Custom Fields"
+#~ msgid "Applied Content Forms Settings"
+#~ msgstr "Ajustes de Applied Content Forms"
 
 #~ msgid "Activate Add-ons."
 #~ msgstr "Activar Add-ons."

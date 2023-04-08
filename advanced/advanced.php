@@ -25,7 +25,7 @@ class acf_pro {
 
 		// update setting
 		acf_update_setting( 'pro', true );
-		acf_update_setting( 'name', __('Advanced Custom Fields PRO', 'acf') );
+		acf_update_setting( 'name', __('Applied Content Forms PRO', 'acf') );
 
 
 		// includes

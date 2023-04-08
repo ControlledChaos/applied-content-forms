@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Advanced Custom Fields Pro v5.8.8\n"
+"Project-Id-Version: Applied Content Forms Pro v5.8.8\n"
 "Report-Msgid-Bugs-To: http://support.advancedcustomfields.com\n"
 "POT-Creation-Date: 2020-04-23 20:16-0400\n"
 "PO-Revision-Date: 2020-04-23 21:07-0400\n"
@@ -24,8 +24,8 @@ msgstr ""
 
 # @ acf
 #: acf.php:68
-msgid "Advanced Custom Fields"
-msgstr "Advanced Custom Fields"
+msgid "Applied Content Forms"
+msgstr "Applied Content Forms"
 
 # @ acf
 #: acf.php:349 includes/admin/admin.php:54
@@ -561,7 +561,7 @@ msgstr "Importer les groupes de champs"
 
 #: includes/admin/tools/class-acf-admin-tool-import.php:47
 msgid ""
-"Select the Advanced Custom Fields JSON file you would like to import. When "
+"Select the Applied Content Forms JSON file you would like to import. When "
 "you click the import button below, ACF will import the field groups."
 msgstr ""
 "Sélectionnez le fichier JSON ACF que vous souhaitez importer et cliquez sur "
@@ -1066,8 +1066,8 @@ msgstr ""
 
 # @ acf
 #: includes/admin/views/settings-info.php:3
-msgid "Welcome to Advanced Custom Fields"
-msgstr "Bienvenue sur Advanced Custom Fields"
+msgid "Welcome to Applied Content Forms"
+msgstr "Bienvenue sur Applied Content Forms"
 
 #: includes/admin/views/settings-info.php:4
 #, php-format
@@ -3182,8 +3182,8 @@ msgstr "La valeur %s est requise"
 # @ acf
 #. Plugin Name of the plugin/theme
 #: pro/acf-pro.php:28
-msgid "Advanced Custom Fields PRO"
-msgstr "Advanced Custom Fields PRO"
+msgid "Applied Content Forms PRO"
+msgstr "Applied Content Forms PRO"
 
 #: pro/admin/admin-options-page.php:198
 msgid "Publish"

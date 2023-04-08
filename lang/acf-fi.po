@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Advanced Custom Fields Pro\n"
+"Project-Id-Version: Applied Content Forms Pro\n"
 "Report-Msgid-Bugs-To: http://support.advancedcustomfields.com\n"
 "POT-Creation-Date: 2020-10-29 10:30+0930\n"
 "PO-Revision-Date: 2021-01-17 11:10+0200\n"
@@ -23,8 +23,8 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
 #: acf.php:68
-msgid "Advanced Custom Fields"
-msgstr "Advanced Custom Fields"
+msgid "Applied Content Forms"
+msgstr "Applied Content Forms"
 
 #: acf.php:348 includes/admin/admin.php:49
 msgid "Field Groups"
@@ -465,11 +465,11 @@ msgstr "Yleiskatsaus"
 
 #: includes/admin/admin.php:131
 msgid ""
-"The Advanced Custom Fields plugin provides a visual form builder to "
+"The Applied Content Forms plugin provides a visual form builder to "
 "customize WordPress edit screens with extra fields, and an intuitive API to "
 "display custom field values in any theme template file."
 msgstr ""
-"Advanced Custom Fields -lisäosa tarjoaa visuaalisen lomaketyökalun "
+"Applied Content Forms -lisäosa tarjoaa visuaalisen lomaketyökalun "
 "WordPressin muokkausnäyttöjen mukauttamiseksi ylimääräisillä kentillä ja "
 "intuitiivisen API:n mukautettujen kenttäarvojen näyttämiseksi missä tahansa "
 "teeman mallitiedostossa."
@@ -630,7 +630,7 @@ msgstr "Tuo kenttäryhmiä"
 
 #: includes/admin/tools/class-acf-admin-tool-import.php:47
 msgid ""
-"Select the Advanced Custom Fields JSON file you would like to import. When "
+"Select the Applied Content Forms JSON file you would like to import. When "
 "you click the import button below, ACF will import the field groups."
 msgstr ""
 "Valitse JSON-tiedosto, jonka haluat tuoda. Kenttäryhmät tuodaan, kun "
@@ -2771,8 +2771,8 @@ msgstr "%s arvo on pakollinen"
 
 #. Plugin Name of the plugin/theme
 #: pro/acf-pro.php:28
-msgid "Advanced Custom Fields PRO"
-msgstr "Advanced Custom Fields PRO"
+msgid "Applied Content Forms PRO"
+msgstr "Applied Content Forms PRO"
 
 #: pro/admin/admin-options-page.php:198
 msgid "Publish"
@@ -3238,8 +3238,8 @@ msgstr "Elliot Condon"
 #~ msgid "What's New"
 #~ msgstr "Katso mitä uutta"
 
-#~ msgid "Welcome to Advanced Custom Fields"
-#~ msgstr "Tervetuloa Advanced Custom Fields -lisäosaan"
+#~ msgid "Welcome to Applied Content Forms"
+#~ msgstr "Tervetuloa Applied Content Forms -lisäosaan"
 
 #, php-format
 #~ msgid ""
@@ -3508,8 +3508,8 @@ msgstr "Elliot Condon"
 #~ msgid "<b>Error</b>. Could not load add-ons list"
 #~ msgstr "<b>Virhe</b>. Lisäosa luetteloa ei voitu ladata"
 
-#~ msgid "Advanced Custom Fields Database Upgrade"
-#~ msgstr "Advanced Custom Fields -tietokantapäivitys"
+#~ msgid "Applied Content Forms Database Upgrade"
+#~ msgstr "Applied Content Forms -tietokantapäivitys"
 
 #~ msgid ""
 #~ "Before you start using the new awesome features, please update your "
@@ -3768,8 +3768,8 @@ msgstr "Elliot Condon"
 #~ msgid "details & pricing"
 #~ msgstr "lisätiedot & hinnoittelu"
 
-#~ msgid "Advanced Custom Fields Pro"
-#~ msgstr "Advanced Custom Fields Pro"
+#~ msgid "Applied Content Forms Pro"
+#~ msgstr "Applied Content Forms Pro"
 
 #~ msgid "Show Field Keys"
 #~ msgstr "Näytä kenttäavain"

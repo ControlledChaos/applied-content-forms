@@ -44,7 +44,7 @@ class ACF_Admin_Tool_Import extends ACF_Admin_Tool {
 	function html() {
 		
 		?>
-		<p><?php _e('Select the Advanced Custom Fields JSON file you would like to import. When you click the import button below, ACF will import the field groups.', 'acf'); ?></p>
+		<p><?php _e('Select the Applied Content Forms JSON file you would like to import. When you click the import button below, ACF will import the field groups.', 'acf'); ?></p>
 		<div class="acf-fields">
 			<?php 
 			
