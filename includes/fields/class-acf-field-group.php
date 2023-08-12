@@ -1,7 +1,7 @@
 <?php
 
 if( ! class_exists('acf_field__group') ) :
-
+#[AllowDynamicProperties]
 class acf_field__group extends acf_field {
 	
 	
