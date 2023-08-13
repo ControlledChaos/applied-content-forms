@@ -246,7 +246,6 @@ class ACFE{
         acfe_include('includes/modules/author.php');
         acfe_include('includes/modules/dev.php');
         acfe_include('includes/modules/forms.php');
-        acfe_include('includes/modules/options.php');
         acfe_include('includes/modules/options-pages.php');
         acfe_include('includes/modules/post-types.php');
         acfe_include('includes/modules/taxonomies.php');
