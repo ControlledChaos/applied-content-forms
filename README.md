@@ -2,4 +2,4 @@
 
 Content editing for WordPress and ClassicPress.
 
-A hedge of ownership change. Allowed under the GPL license.
+This is a fork of Advanced Custom Fields PRO version 5.9.6 plus a fork of Advanced Custom Fields: Extended PRO version 1.8.8.6.
