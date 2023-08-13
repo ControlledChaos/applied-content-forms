@@ -84,7 +84,7 @@ class ACF {
 		$this->define( 'ACF_MAJOR_VERSION', 5 );
 
 		// Define settings.
-		$this->settings = array(
+		$this->settings = [
 			'name'						=> __( 'Applied Content Forms', 'acf' ),
 			'slug'						=> dirname( ACF_BASENAME ),
 			'version'					=> ACF_VERSION,
@@ -98,7 +98,7 @@ class ACF {
 			'local'						=> true,
 			'json'						=> true,
 			'save_json'					=> '',
-			'load_json'					=> array(),
+			'load_json'					=> [],
 			'default_language'			=> '',
 			'current_language'			=> '',
 			'capability'				=> 'manage_options',
@@ -115,7 +115,7 @@ class ACF {
 			'select2_version'			=> 4,
 			'row_index_offset'			=> 1,
 			'remove_wp_meta_box'		=> true
-		);
+		];
 
 		// Include utility functions.
 		include_once( ACF_PATH . 'includes/acf-utility-functions.php' );
@@ -202,7 +202,7 @@ class ACF {
 		acf_include( 'extend/extend.php' );
 
 		// Include tests.
-		if( defined( 'ACF_DEV' ) && ACF_DEV ) {
+		if ( defined( 'ACF_DEV' ) && ACF_DEV ) {
 			acf_include( 'tests/tests.php' );
 		}
 
@@ -229,12 +229,12 @@ class ACF {
 	function init() {
 
 		// Bail early if called directly from functions.php or plugin file.
-		if( !did_action( 'plugins_loaded' ) ) {
+		if ( ! did_action( 'plugins_loaded' ) ) {
 			return;
 		}
 
 		// This function may be called directly from template functions. Bail early if already did this.
-		if( acf_did( 'init' ) ) {
+		if ( acf_did( 'init' ) ) {
 			return;
 		}
 
@@ -248,7 +248,7 @@ class ACF {
 		acf_include( 'includes/third-party.php' );
 
 		// Include wpml support.
-		if( defined( 'ICL_SITEPRESS_VERSION' ) ) {
+		if ( defined( 'ICL_SITEPRESS_VERSION' ) ) {
 			acf_include( 'includes/wpml.php' );
 		}
 
@@ -362,12 +362,12 @@ class ACF {
 	 */
 	function register_post_types() {
 
-		// Vars.
+		// Variables.
 		$cap = acf_get_setting( 'capability' );
 
 		// Register the Field Group post type.
-		register_post_type( 'acf-field-group', array(
-			'labels'			=> array(
+		register_post_type( 'acf-field-group', [
+			'labels' => [
 			    'name'					=> __( 'Field Groups', 'acf' ),
 				'singular_name'			=> __( 'Field Group', 'acf' ),
 			    'add_new'				=> __( 'Add New' , 'acf' ),
@@ -378,28 +378,27 @@ class ACF {
 			    'search_items'			=> __( 'Search Field Groups', 'acf' ),
 			    'not_found'				=> __( 'No Field Groups found', 'acf' ),
 			    'not_found_in_trash'	=> __( 'No Field Groups found in Trash', 'acf' ),
-			),
+			],
 			'public'			=> false,
 			'hierarchical'		=> true,
 			'show_ui'			=> true,
 			'show_in_menu'		=> 'acf',
 			'_builtin'			=> false,
 			'capability_type'	=> 'post',
-			'capabilities'		=> array(
+			'capabilities'		=> [
 				'edit_post'			=> $cap,
 				'delete_post'		=> $cap,
 				'edit_posts'		=> $cap,
 				'delete_posts'		=> $cap,
-			),
-			'supports' 			=> array( 'title' ),
+			],
+			'supports' 			=> [ 'title' ],
 			'rewrite'			=> false,
 			'query_var'			=> false,
-		));
-
+		] );
 
 		// Register the Field post type.
-		register_post_type( 'acf-field', array(
-			'labels'			=> array(
+		register_post_type( 'acf-field', [
+			'labels' => [
 			    'name'					=> __( 'Fields', 'acf' ),
 				'singular_name'			=> __( 'Field', 'acf' ),
 			    'add_new'				=> __( 'Add New' , 'acf' ),
@@ -410,23 +409,23 @@ class ACF {
 			    'search_items'			=> __( 'Search Fields', 'acf' ),
 			    'not_found'				=> __( 'No Fields found', 'acf' ),
 			    'not_found_in_trash'	=> __( 'No Fields found in Trash', 'acf' ),
-			),
+			],
 			'public'			=> false,
 			'hierarchical'		=> true,
 			'show_ui'			=> false,
 			'show_in_menu'		=> false,
 			'_builtin'			=> false,
 			'capability_type'	=> 'post',
-			'capabilities'		=> array(
+			'capabilities'		=> [
 				'edit_post'			=> $cap,
 				'delete_post'		=> $cap,
 				'edit_posts'		=> $cap,
 				'delete_posts'		=> $cap,
-			),
-			'supports' 			=> array( 'title' ),
+			],
+			'supports' 			=> [ 'title' ],
 			'rewrite'			=> false,
 			'query_var'			=> false,
-		));
+		] );
 	}
 
 	/**
@@ -443,14 +442,14 @@ class ACF {
 	function register_post_status() {
 
 		// Register the Disabled post status.
-		register_post_status( 'acf-disabled', array(
+		register_post_status( 'acf-disabled', [
 			'label'                     => _x( 'Disabled', 'post status', 'acf' ),
 			'public'                    => true,
 			'exclude_from_search'       => false,
 			'show_in_admin_all_list'    => true,
 			'show_in_admin_status_list' => true,
 			'label_count'               => _n_noop( 'Disabled <span class="count">(%s)</span>', 'Disabled <span class="count">(%s)</span>', 'acf' ),
-		));
+		] );
 	}
 
 	/**
@@ -465,24 +464,24 @@ class ACF {
 	 * @return	WP_Query $wp_query The query object.
 	 */
 	function posts_where( $where, $wp_query ) {
+
 		global $wpdb;
 
 		// Add custom "acf_field_key" arg.
-		if( $field_key = $wp_query->get( 'acf_field_key' ) ) {
+		if ( $field_key = $wp_query->get( 'acf_field_key' ) ) {
 			$where .= $wpdb->prepare(" AND {$wpdb->posts}.post_name = %s", $field_key );
 	    }
 
 	    // Add custom "acf_field_name" arg.
-	    if( $field_name = $wp_query->get( 'acf_field_name' ) ) {
+	    if ( $field_name = $wp_query->get( 'acf_field_name' ) ) {
 			$where .= $wpdb->prepare(" AND {$wpdb->posts}.post_excerpt = %s", $field_name );
 	    }
 
 	    // Add custom "acf_group_key" arg.
-		if( $group_key = $wp_query->get( 'acf_group_key' ) ) {
+		if ( $group_key = $wp_query->get( 'acf_group_key' ) ) {
 			$where .= $wpdb->prepare(" AND {$wpdb->posts}.post_name = %s", $group_key );
 	    }
 
-	    // Return.
 	    return $where;
 	}
 
@@ -499,7 +498,7 @@ class ACF {
 	 * @return	void
 	 */
 	function define( $name, $value = true ) {
-		if( !defined($name) ) {
+		if ( ! defined( $name ) ) {
 			define( $name, $value );
 		}
 	}
@@ -516,7 +515,7 @@ class ACF {
 	 * @return	boolean
 	 */
 	function has_setting( $name ) {
-		return isset($this->settings[ $name ]);
+		return isset( $this->settings[ $name ] );
 	}
 
 	/**
@@ -531,7 +530,7 @@ class ACF {
 	 * @return	mixed
 	 */
 	function get_setting( $name ) {
-		return isset($this->settings[ $name ]) ? $this->settings[ $name ] : null;
+		return isset( $this->settings[ $name ] ) ? $this->settings[ $name ] : null;
 	}
 
 	/**
@@ -563,7 +562,7 @@ class ACF {
 	 * @return	mixed
 	 */
 	function get_data( $name ) {
-		return isset($this->data[ $name ]) ? $this->data[ $name ] : null;
+		return isset( $this->data[ $name ] ) ? $this->data[ $name ] : null;
 	}
 
 	/**
@@ -594,8 +593,8 @@ class ACF {
 	 * @return	object
 	 */
 	function get_instance( $class ) {
-		$name = strtolower($class);
-		return isset($this->instances[ $name ]) ? $this->instances[ $name ] : null;
+		$name = strtolower( $class );
+		return isset( $this->instances[ $name ] ) ? $this->instances[ $name ] : null;
 	}
 
 	/**
@@ -611,7 +610,7 @@ class ACF {
 	 */
 	function new_instance( $class ) {
 		$instance = new $class();
-		$name = strtolower($class);
+		$name = strtolower( $class );
 		$this->instances[ $name ] = $instance;
 		return $instance;
 	}
@@ -626,7 +625,7 @@ class ACF {
 	 * @return	bool
 	 */
 	public function __isset( $key ) {
-		return in_array( $key, array( 'locations', 'json' ) );
+		return in_array( $key, [ 'locations', 'json' ] );
 	}
 
 	/**
@@ -639,6 +638,7 @@ class ACF {
 	 * @return	mixed
 	 */
 	public function __get( $key ) {
+
 		switch ( $key ) {
 			case 'locations':
 				return acf_get_instance( 'ACF_Legacy_Locations' );
@@ -664,10 +664,11 @@ class ACF {
  * @return	ACF
  */
 function acf() {
+
 	global $acf;
 
 	// Instantiate only once.
-	if( !isset($acf) ) {
+	if ( ! isset( $acf ) ) {
 		$acf = new ACF();
 		$acf->initialize();
 	}
