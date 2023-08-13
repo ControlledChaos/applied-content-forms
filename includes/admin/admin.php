@@ -35,19 +35,32 @@ class ACF_Admin {
 	 */
 	function admin_menu() {
 
-		// Bail early if ACF is hidden.
-		if( !acf_get_setting('show_admin') ) {
+		// Stop if ACF is hidden.
+		if ( ! acf_get_setting( 'show_admin' ) ) {
 			return;
 		}
 
-		// Vars.
-		$slug = 'edit.php?post_type=acf-field-group';
-		$cap = acf_get_setting('capability');
+		$cap  = acf_get_setting( 'capability' );
 
 		// Add menu items.
-		add_menu_page( __("Custom Fields",'acf'), __("Custom Fields",'acf'), $cap, $slug, false, 'dashicons-welcome-widgets-menus', '80.025' );
-		add_submenu_page( $slug, __('Field Groups','acf'), __('Field Groups','acf'), $cap, $slug );
-		add_submenu_page( $slug, __('Add New','acf'), __('Add New','acf'), $cap, 'post-new.php?post_type=acf-field-group' );
+		add_menu_page( __( 'Custom Content Forms', 'acf' ), __( 'Content', 'acf' ), $cap, 'acf', [ $this, 'settings_page' ], 'dashicons-edit', '59' );
+		add_submenu_page( 'acf', __( 'Field Groups', 'acf' ), __( 'Field Groups', 'acf' ), $cap, 'edit.php?post_type=acf-field-group' );
+		add_submenu_page( 'acf', __( 'Add New Field Group', 'acf' ), __( 'New Fields', 'acf' ), $cap, 'post-new.php?post_type=acf-field-group' );
+	}
+
+	/**
+	 * Settings page
+	 *
+	 * Gets the markup for the plugin's
+	 * intro/settings page; top level in
+	 * the admin menu.
+	 *
+	 * @since  6.0.0
+	 * @access public
+	 * @return void
+	 */
+	public function settings_page() {
+		include_once( ACF_PATH . 'includes/admin/views/content-settings-page.php' );
 	}
 
 	/**
