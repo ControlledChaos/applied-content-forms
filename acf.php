@@ -198,18 +198,21 @@ class ACF {
 		// Include PRO.
 		acf_include( 'advanced/advanced.php' );
 
+		// Extend original ACF.
+		acf_include( 'extend/extend.php' );
+
 		// Include tests.
 		if( defined( 'ACF_DEV' ) && ACF_DEV ) {
 			acf_include( 'tests/tests.php' );
 		}
 
 		// Add actions.
-		add_action( 'init', array($this, 'init' ), 5 );
-		add_action( 'init', array($this, 'register_post_types' ), 5 );
-		add_action( 'init', array($this, 'register_post_status' ), 5 );
+		add_action( 'init', array( $this, 'init' ), 5 );
+		add_action( 'init', array( $this, 'register_post_types' ), 5 );
+		add_action( 'init', array( $this, 'register_post_status' ), 5 );
 
 		// Add filters.
-		add_filter( 'posts_where', array($this, 'posts_where' ), 10, 2 );
+		add_filter( 'posts_where', array( $this, 'posts_where' ), 10, 2 );
 	}
 
 	/**
@@ -379,7 +382,7 @@ class ACF {
 			'public'			=> false,
 			'hierarchical'		=> true,
 			'show_ui'			=> true,
-			'show_in_menu'		=> false,
+			'show_in_menu'		=> 'acf',
 			'_builtin'			=> false,
 			'capability_type'	=> 'post',
 			'capabilities'		=> array(

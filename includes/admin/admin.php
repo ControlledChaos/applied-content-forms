@@ -18,7 +18,7 @@ class ACF_Admin {
 	function __construct() {
 
 		// Add actions.
-		add_action( 'admin_menu', 				array( $this, 'admin_menu' ) );
+		add_action( 'admin_menu', 				array( $this, 'admin_menu' ), 9 );
 		add_action( 'admin_enqueue_scripts',	array( $this, 'admin_enqueue_scripts' ) );
 		add_action( 'admin_body_class', 		array( $this, 'admin_body_class' ) );
 		add_action( 'current_screen',			array( $this, 'current_screen' ) );
@@ -44,8 +44,6 @@ class ACF_Admin {
 
 		// Add menu items.
 		add_menu_page( __( 'Custom Content Forms', 'acf' ), __( 'Content', 'acf' ), $cap, 'acf', [ $this, 'settings_page' ], 'dashicons-edit', '59' );
-		add_submenu_page( 'acf', __( 'Field Groups', 'acf' ), __( 'Field Groups', 'acf' ), $cap, 'edit.php?post_type=acf-field-group' );
-		add_submenu_page( 'acf', __( 'Add New Field Group', 'acf' ), __( 'New Fields', 'acf' ), $cap, 'post-new.php?post_type=acf-field-group' );
 	}
 
 	/**
@@ -60,7 +58,7 @@ class ACF_Admin {
 	 * @return void
 	 */
 	public function settings_page() {
-		include_once( ACF_PATH . 'includes/admin/views/content-settings-page.php' );
+		include( ACF_PATH . 'includes/admin/views/content-settings-page.php' );
 	}
 
 	/**
