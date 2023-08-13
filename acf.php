@@ -16,7 +16,7 @@
  * Author:            Elliot Condon + Controlled Chaos Design
  * Author URI:        https://github.com/ControlledChaos/
  * Text Domain:       acf
- * Domain Path:       /lang
+ * Domain Path:       /languages
  * Requires PHP:      7.4
  * Requires at least: 4.9
  * Tested up to:      6.3
