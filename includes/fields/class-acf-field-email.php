@@ -2,9 +2,10 @@
 
 if( ! class_exists('acf_field_email') ) :
 
+
 class acf_field_email extends acf_field {
-	
-	
+
+
 	/*
 	*  initialize
 	*
@@ -17,9 +18,9 @@ class acf_field_email extends acf_field {
 	*  @param	n/a
 	*  @return	n/a
 	*/
-	
+
 	function initialize() {
-		
+
 		// vars
 		$this->name = 'email';
 		$this->label = __("Email",'acf');
@@ -29,10 +30,10 @@ class acf_field_email extends acf_field {
 			'prepend'		=> '',
 			'append'		=> ''
 		);
-		
+
 	}
-		
-	
+
+
 	/*
 	*  render_field()
 	*
@@ -44,60 +45,60 @@ class acf_field_email extends acf_field {
 	*  @since	3.6
 	*  @date	23/01/13
 	*/
-	
+
 	function render_field( $field ) {
-		
+
 		// vars
 		$atts = array();
 		$keys = array( 'type', 'id', 'class', 'name', 'value', 'placeholder', 'pattern' );
 		$keys2 = array( 'readonly', 'disabled', 'required', 'multiple' );
 		$html = '';
-		
-		
+
+
 		// prepend
 		if( $field['prepend'] !== '' ) {
-		
+
 			$field['class'] .= ' acf-is-prepended';
 			$html .= '<div class="acf-input-prepend">' . acf_esc_html($field['prepend']) . '</div>';
-			
+
 		}
-		
-		
+
+
 		// append
 		if( $field['append'] !== '' ) {
-		
+
 			$field['class'] .= ' acf-is-appended';
 			$html .= '<div class="acf-input-append">' . acf_esc_html($field['append']) . '</div>';
-			
+
 		}
-		
-		
+
+
 		// atts (value="123")
 		foreach( $keys as $k ) {
 			if( isset($field[ $k ]) ) $atts[ $k ] = $field[ $k ];
 		}
-		
-		
+
+
 		// atts2 (disabled="disabled")
 		foreach( $keys2 as $k ) {
 			if( !empty($field[ $k ]) ) $atts[ $k ] = $k;
 		}
-		
-		
+
+
 		// remove empty atts
 		$atts = acf_clean_atts( $atts );
-		
-		
+
+
 		// render
 		$html .= '<div class="acf-input-wrap">' . acf_get_text_input( $atts ) . '</div>';
-		
-		
+
+
 		// return
 		echo $html;
-		
+
 	}
-	
-	
+
+
 	/*
 	*  render_field_settings()
 	*
@@ -110,9 +111,9 @@ class acf_field_email extends acf_field {
 	*
 	*  @param	$field	- an array holding all the field's data
 	*/
-	
+
 	function render_field_settings( $field ) {
-		
+
 		// default_value
 		acf_render_field_setting( $field, array(
 			'label'			=> __('Default Value','acf'),
@@ -120,8 +121,8 @@ class acf_field_email extends acf_field {
 			'type'			=> 'text',
 			'name'			=> 'default_value',
 		));
-		
-		
+
+
 		// placeholder
 		acf_render_field_setting( $field, array(
 			'label'			=> __('Placeholder Text','acf'),
@@ -129,8 +130,8 @@ class acf_field_email extends acf_field {
 			'type'			=> 'text',
 			'name'			=> 'placeholder',
 		));
-		
-		
+
+
 		// prepend
 		acf_render_field_setting( $field, array(
 			'label'			=> __('Prepend','acf'),
@@ -138,8 +139,8 @@ class acf_field_email extends acf_field {
 			'type'			=> 'text',
 			'name'			=> 'prepend',
 		));
-		
-		
+
+
 		// append
 		acf_render_field_setting( $field, array(
 			'label'			=> __('Append','acf'),

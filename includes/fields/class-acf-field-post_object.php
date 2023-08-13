@@ -2,9 +2,10 @@
 
 if( ! class_exists('acf_field_post_object') ) :
 
+
 class acf_field_post_object extends acf_field {
-	
-	
+
+
 	/*
 	*  __construct
 	*
@@ -17,9 +18,9 @@ class acf_field_post_object extends acf_field {
 	*  @param	n/a
 	*  @return	n/a
 	*/
-	
+
 	function initialize() {
-		
+
 		// vars
 		$this->name = 'post_object';
 		$this->label = __("Post Object",'acf');
@@ -32,15 +33,15 @@ class acf_field_post_object extends acf_field {
 			'return_format'	=> 'object',
 			'ui'			=> 1,
 		);
-		
-		
+
+
 		// extra
 		add_action('wp_ajax_acf/fields/post_object/query',			array($this, 'ajax_query'));
 		add_action('wp_ajax_nopriv_acf/fields/post_object/query',	array($this, 'ajax_query'));
-		
+
 	}
-	
-	
+
+
 	/*
 	*  ajax_query
 	*
@@ -53,23 +54,23 @@ class acf_field_post_object extends acf_field {
 	*  @param	$post_id (int)
 	*  @return	$post_id (int)
 	*/
-	
+
 	function ajax_query() {
-		
+
 		// validate
 		if( !acf_verify_ajax() ) die();
-		
-		
+
+
 		// get choices
 		$response = $this->get_ajax_query( $_POST );
-		
-		
+
+
 		// return
 		acf_send_ajax_results($response);
-			
+
 	}
-	
-	
+
+
 	/*
 	*  get_ajax_query
 	*
@@ -82,9 +83,9 @@ class acf_field_post_object extends acf_field {
 	*  @param	$options (array)
 	*  @return	(array)
 	*/
-	
+
 	function get_ajax_query( $options = array() ) {
-		
+
    		// defaults
    		$options = acf_parse_args($options, array(
 			'post_id'		=> 0,
@@ -92,154 +93,154 @@ class acf_field_post_object extends acf_field {
 			'field_key'		=> '',
 			'paged'			=> 1
 		));
-		
-		
+
+
 		// load field
 		$field = acf_get_field( $options['field_key'] );
 		if( !$field ) return false;
-		
-		
+
+
 		// vars
    		$results = array();
 		$args = array();
 		$s = false;
 		$is_search = false;
-		
-		
+
+
    		// paged
    		$args['posts_per_page'] = 20;
    		$args['paged'] = $options['paged'];
-   		
-   		
+
+
    		// search
 		if( $options['s'] !== '' ) {
-			
+
 			// strip slashes (search may be integer)
 			$s = wp_unslash( strval($options['s']) );
-			
-			
+
+
 			// update vars
 			$args['s'] = $s;
 			$is_search = true;
-			
+
 		}
-		
-				
+
+
 		// post_type
 		if( !empty($field['post_type']) ) {
-		
+
 			$args['post_type'] = acf_get_array( $field['post_type'] );
-			
+
 		} else {
-			
+
 			$args['post_type'] = acf_get_post_types();
-			
+
 		}
-		
-		
+
+
 		// taxonomy
 		if( !empty($field['taxonomy']) ) {
-			
+
 			// vars
 			$terms = acf_decode_taxonomy_terms( $field['taxonomy'] );
-			
-			
+
+
 			// append to $args
 			$args['tax_query'] = array();
-			
-			
+
+
 			// now create the tax queries
 			foreach( $terms as $k => $v ) {
-			
+
 				$args['tax_query'][] = array(
 					'taxonomy'	=> $k,
 					'field'		=> 'slug',
 					'terms'		=> $v,
 				);
-				
+
 			}
-			
+
 		}
-		
-		
+
+
 		// filters
 		$args = apply_filters('acf/fields/post_object/query', $args, $field, $options['post_id']);
 		$args = apply_filters('acf/fields/post_object/query/name=' . $field['name'], $args, $field, $options['post_id'] );
 		$args = apply_filters('acf/fields/post_object/query/key=' . $field['key'], $args, $field, $options['post_id'] );
-		
-		
+
+
 		// get posts grouped by post type
 		$groups = acf_get_grouped_posts( $args );
-		
-		
+
+
 		// bail early if no posts
 		if( empty($groups) ) return false;
-		
-		
+
+
 		// loop
 		foreach( array_keys($groups) as $group_title ) {
-			
+
 			// vars
 			$posts = acf_extract_var( $groups, $group_title );
-			
-			
+
+
 			// data
 			$data = array(
 				'text'		=> $group_title,
 				'children'	=> array()
 			);
-			
-			
+
+
 			// convert post objects to post titles
 			foreach( array_keys($posts) as $post_id ) {
-				
+
 				$posts[ $post_id ] = $this->get_post_title( $posts[ $post_id ], $field, $options['post_id'], $is_search );
-				
+
 			}
-			
-			
+
+
 			// order posts by search
 			if( $is_search && empty($args['orderby']) && isset($args['s']) ) {
-				
+
 				$posts = acf_order_by_search( $posts, $args['s'] );
-				
+
 			}
-			
-			
+
+
 			// append to $data
 			foreach( array_keys($posts) as $post_id ) {
-				
+
 				$data['children'][] = $this->get_post_result( $post_id, $posts[ $post_id ]);
-				
+
 			}
-			
-			
+
+
 			// append to $results
 			$results[] = $data;
-			
+
 		}
-		
-		
+
+
 		// optgroup or single
 		$post_type = acf_get_array( $args['post_type'] );
 		if( count($post_type) == 1 ) {
 			$results = $results[0]['children'];
 		}
-		
-		
+
+
 		// vars
 		$response = array(
 			'results'	=> $results,
 			'limit'		=> $args['posts_per_page']
 		);
-		
-		
+
+
 		// return
 		return $response;
-			
+
 	}
-	
-	
+
+
 	/*
 	*  get_post_result
 	*
@@ -253,34 +254,34 @@ class acf_field_post_object extends acf_field {
 	*  @param	$text (string)
 	*  @return	(array)
 	*/
-	
+
 	function get_post_result( $id, $text ) {
-		
+
 		// vars
 		$result = array(
 			'id'	=> $id,
 			'text'	=> $text
 		);
-		
-		
+
+
 		// look for parent
 		$search = '| ' . __('Parent', 'acf') . ':';
 		$pos = strpos($text, $search);
-		
+
 		if( $pos !== false ) {
-			
+
 			$result['description'] = substr($text, $pos+2);
 			$result['text'] = substr($text, 0, $pos);
-			
+
 		}
-		
-		
+
+
 		// return
 		return $result;
-			
+
 	}
-	
-	
+
+
 	/*
 	*  get_post_title
 	*
@@ -295,28 +296,28 @@ class acf_field_post_object extends acf_field {
 	*  @param	$post_id (int) the post_id to which this value is saved to
 	*  @return	(string)
 	*/
-	
+
 	function get_post_title( $post, $field, $post_id = 0, $is_search = 0 ) {
-		
+
 		// get post_id
 		if( !$post_id ) $post_id = acf_get_form_data('post_id');
-		
-		
+
+
 		// vars
 		$title = acf_get_post_title( $post, $is_search );
-			
-		
+
+
 		// filters
 		$title = apply_filters('acf/fields/post_object/result', $title, $post, $field, $post_id);
 		$title = apply_filters('acf/fields/post_object/result/name=' . $field['_name'], $title, $post, $field, $post_id);
 		$title = apply_filters('acf/fields/post_object/result/key=' . $field['key'], $title, $post, $field, $post_id);
-		
-		
+
+
 		// return
 		return $title;
 	}
-	
-	
+
+
 	/*
 	*  render_field()
 	*
@@ -328,41 +329,41 @@ class acf_field_post_object extends acf_field {
 	*  @since	3.6
 	*  @date	23/01/13
 	*/
-	
+
 	function render_field( $field ) {
-		
+
 		// Change Field into a select
 		$field['type'] = 'select';
 		$field['ui'] = 1;
 		$field['ajax'] = 1;
 		$field['choices'] = array();
-		
-		
+
+
 		// load posts
 		$posts = $this->get_posts( $field['value'], $field );
-		
+
 		if( $posts ) {
-				
+
 			foreach( array_keys($posts) as $i ) {
-				
+
 				// vars
 				$post = acf_extract_var( $posts, $i );
-				
-				
+
+
 				// append to choices
 				$field['choices'][ $post->ID ] = $this->get_post_title( $post, $field );
-				
+
 			}
-			
+
 		}
 
-		
+
 		// render
 		acf_render_field( $field );
-		
+
 	}
-	
-	
+
+
 	/*
 	*  render_field_settings()
 	*
@@ -375,9 +376,9 @@ class acf_field_post_object extends acf_field {
 	*
 	*  @param	$field	- an array holding all the field's data
 	*/
-	
+
 	function render_field_settings( $field ) {
-		
+
 		// default_value
 		acf_render_field_setting( $field, array(
 			'label'			=> __('Filter by Post Type','acf'),
@@ -390,8 +391,8 @@ class acf_field_post_object extends acf_field {
 			'allow_null'	=> 1,
 			'placeholder'	=> __("All post types",'acf'),
 		));
-		
-		
+
+
 		// default_value
 		acf_render_field_setting( $field, array(
 			'label'			=> __('Filter by Taxonomy','acf'),
@@ -404,8 +405,8 @@ class acf_field_post_object extends acf_field {
 			'allow_null'	=> 1,
 			'placeholder'	=> __("All taxonomies",'acf'),
 		));
-		
-		
+
+
 		// allow_null
 		acf_render_field_setting( $field, array(
 			'label'			=> __('Allow Null?','acf'),
@@ -414,8 +415,8 @@ class acf_field_post_object extends acf_field {
 			'type'			=> 'true_false',
 			'ui'			=> 1,
 		));
-		
-		
+
+
 		// multiple
 		acf_render_field_setting( $field, array(
 			'label'			=> __('Select multiple values?','acf'),
@@ -424,8 +425,8 @@ class acf_field_post_object extends acf_field {
 			'type'			=> 'true_false',
 			'ui'			=> 1,
 		));
-		
-		
+
+
 		// return_format
 		acf_render_field_setting( $field, array(
 			'label'			=> __('Return Format','acf'),
@@ -438,10 +439,10 @@ class acf_field_post_object extends acf_field {
 			),
 			'layout'	=>	'horizontal',
 		));
-				
+
 	}
-	
-	
+
+
 	/*
 	*  load_value()
 	*
@@ -456,19 +457,19 @@ class acf_field_post_object extends acf_field {
 	*  @param	$field (array) the field array holding all the field options
 	*  @return	$value
 	*/
-	
+
 	function load_value( $value, $post_id, $field ) {
-		
+
 		// ACF4 null
 		if( $value === 'null' ) return false;
-		
-		
+
+
 		// return
 		return $value;
-		
+
 	}
-	
-	
+
+
 	/*
 	*  format_value()
 	*
@@ -484,39 +485,39 @@ class acf_field_post_object extends acf_field {
 	*
 	*  @return	$value (mixed) the modified value
 	*/
-	
+
 	function format_value( $value, $post_id, $field ) {
-		
+
 		// numeric
 		$value = acf_get_numeric($value);
-		
-		
+
+
 		// bail early if no value
 		if( empty($value) ) return false;
-		
-		
+
+
 		// load posts if needed
 		if( $field['return_format'] == 'object' ) {
-			
+
 			$value = $this->get_posts( $value, $field );
-			
+
 		}
-		
-		
+
+
 		// convert back from array if neccessary
 		if( !$field['multiple'] && is_array($value) ) {
-		
+
 			$value = current($value);
-			
+
 		}
-		
-		
+
+
 		// return value
 		return $value;
-		
+
 	}
-	
-	
+
+
 	/*
 	*  update_value()
 	*
@@ -532,31 +533,31 @@ class acf_field_post_object extends acf_field {
 	*
 	*  @return	$value - the modified value
 	*/
-	
+
 	function update_value( $value, $post_id, $field ) {
-		
+
 		// Bail early if no value.
 		if( empty($value) ) {
 			return $value;
 		}
-		
+
 		// Format array of values.
 		// - ensure each value is an id.
 		// - Parse each id as string for SQL LIKE queries.
 		if( acf_is_sequential_array($value) ) {
 			$value = array_map('acf_idval', $value);
 			$value = array_map('strval', $value);
-		
+
 		// Parse single value for id.
 		} else {
 			$value = acf_idval( $value );
 		}
-		
+
 		// Return value.
 		return $value;
 	}
-	
-	
+
+
 	/*
 	*  get_posts
 	*
@@ -569,29 +570,29 @@ class acf_field_post_object extends acf_field {
 	*  @param	$value (array)
 	*  @return	$value
 	*/
-	
+
 	function get_posts( $value, $field ) {
-		
+
 		// numeric
 		$value = acf_get_numeric($value);
-		
-		
+
+
 		// bail early if no value
 		if( empty($value) ) return false;
-		
-		
+
+
 		// get posts
 		$posts = acf_get_posts(array(
 			'post__in'	=> $value,
 			'post_type'	=> $field['post_type']
 		));
-		
-		
+
+
 		// return
 		return $posts;
-		
+
 	}
-	
+
 }
 
 

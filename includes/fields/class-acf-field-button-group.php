@@ -3,8 +3,8 @@
 if( ! class_exists('acf_field_button_group') ) :
 
 class acf_field_button_group extends acf_field {
-	
-	
+
+
 	/**
 	*  initialize()
 	*
@@ -16,9 +16,9 @@ class acf_field_button_group extends acf_field {
 	*  @param	n/a
 	*  @return	n/a
 	*/
-	 
+
 	function initialize() {
-		
+
 		// vars
 		$this->name = 'button_group';
 		$this->label = __("Button Group",'acf');
@@ -30,10 +30,10 @@ class acf_field_button_group extends acf_field {
 			'return_format'		=> 'value',
 			'layout'			=> 'horizontal',
 		);
-		
+
 	}
-	
-	
+
+
 	/**
 	*  render_field()
 	*
@@ -45,28 +45,28 @@ class acf_field_button_group extends acf_field {
 	*  @param	array $field The field settings array
 	*  @return	n/a
 	*/
-	
+
 	function render_field( $field ) {
-		
+
 		// vars
 		$html = '';
 		$selected = null;
 		$buttons = array();
 		$value = esc_attr( $field['value'] );
-		
-		
+
+
 		// bail ealrly if no choices
 		if( empty($field['choices']) ) return;
-		
-		
+
+
 		// buttons
 		foreach( $field['choices'] as $_value => $_label ) {
-			
+
 			// checked
 			$checked = ( $value === esc_attr($_value) );
 			if( $checked ) $selected = true;
-			
-			
+
+
 			// append
 			$buttons[] = array(
 				'name'		=> $field['name'],
@@ -74,58 +74,58 @@ class acf_field_button_group extends acf_field {
 				'label'		=> $_label,
 				'checked'	=> $checked
 			);
-							
+
 		}
-		
-		
+
+
 		// maybe select initial value
 		if( !$field['allow_null'] && $selected === null ) {
 			$buttons[0]['checked'] = true;
 		}
-		
-		
+
+
 		// div
 		$div = array( 'class' => 'acf-button-group' );
-		
+
 		if( $field['layout'] == 'vertical' )	{ $div['class'] .= ' -vertical'; }
 		if( $field['class'] )					{ $div['class'] .= ' ' . $field['class']; }
 		if( $field['allow_null'] )				{ $div['data-allow_null'] = 1; }
-		
-		
+
+
 		// hdden input
 		$html .= acf_get_hidden_input( array('name' => $field['name']) );
-			
-			
+
+
 		// open
 		$html .= '<div ' . acf_esc_attr($div) . '>';
-			
+
 			// loop
 			foreach( $buttons as $button ) {
-				
+
 				// checked
 				if( $button['checked'] ) {
 					$button['checked'] = 'checked';
 				} else {
 					unset($button['checked']);
 				}
-				
-				
+
+
 				// append
 				$html .= acf_get_radio_input( $button );
-				
+
 			}
-			
-					
+
+
 		// close
 		$html .= '</div>';
-		
-		
+
+
 		// return
 		echo $html;
-		
+
 	}
-	
-	
+
+
 	/**
 	*  render_field_settings()
 	*
@@ -137,13 +137,13 @@ class acf_field_button_group extends acf_field {
 	*  @param	array $field The field settings array
 	*  @return	n/a
 	*/
-	
+
 	function render_field_settings( $field ) {
-		
+
 		// encode choices (convert from array)
 		$field['choices'] = acf_encode_choices($field['choices']);
-		
-		
+
+
 		// choices
 		acf_render_field_setting( $field, array(
 			'label'			=> __('Choices','acf'),
@@ -151,8 +151,8 @@ class acf_field_button_group extends acf_field {
 			'type'			=> 'textarea',
 			'name'			=> 'choices',
 		));
-		
-		
+
+
 		// allow_null
 		acf_render_field_setting( $field, array(
 			'label'			=> __('Allow Null?','acf'),
@@ -161,8 +161,8 @@ class acf_field_button_group extends acf_field {
 			'type'			=> 'true_false',
 			'ui'			=> 1,
 		));
-		
-		
+
+
 		// default_value
 		acf_render_field_setting( $field, array(
 			'label'			=> __('Default Value','acf'),
@@ -170,22 +170,22 @@ class acf_field_button_group extends acf_field {
 			'type'			=> 'text',
 			'name'			=> 'default_value',
 		));
-		
-		
+
+
 		// layout
 		acf_render_field_setting( $field, array(
 			'label'			=> __('Layout','acf'),
 			'instructions'	=> '',
 			'type'			=> 'radio',
 			'name'			=> 'layout',
-			'layout'		=> 'horizontal', 
+			'layout'		=> 'horizontal',
 			'choices'		=> array(
 				'horizontal'	=> __("Horizontal",'acf'),
-				'vertical'		=> __("Vertical",'acf'), 
+				'vertical'		=> __("Vertical",'acf'),
 			)
 		));
-		
-		
+
+
 		// return_format
 		acf_render_field_setting( $field, array(
 			'label'			=> __('Return Value','acf'),
@@ -199,10 +199,10 @@ class acf_field_button_group extends acf_field {
 				'array'			=> __('Both (Array)','acf')
 			)
 		));
-		
+
 	}
-	
-	
+
+
 	/*
 	*  update_field()
 	*
@@ -216,11 +216,11 @@ class acf_field_button_group extends acf_field {
 	*/
 
 	function update_field( $field ) {
-		
+
 		return acf_get_field_type('radio')->update_field( $field );
 	}
-	
-	
+
+
 	/*
 	*  load_value()
 	*
@@ -234,14 +234,14 @@ class acf_field_button_group extends acf_field {
 	*  @param	array	$field		The field array holding all the field options
 	*  @return	$value
 	*/
-	
+
 	function load_value( $value, $post_id, $field ) {
-		
+
 		return acf_get_field_type('radio')->load_value( $value, $post_id, $field );
-		
+
 	}
-	
-	
+
+
 	/*
 	*  translate_field
 	*
@@ -253,14 +253,14 @@ class acf_field_button_group extends acf_field {
 	*  @param	array $field The field array holding all the field options
 	*  @return	$field
 	*/
-	
+
 	function translate_field( $field ) {
-		
+
 		return acf_get_field_type('radio')->translate_field( $field );
-		
+
 	}
-	
-	
+
+
 	/*
 	*  format_value()
 	*
@@ -274,13 +274,13 @@ class acf_field_button_group extends acf_field {
 	*  @param	array	$field		The field array holding all the field options
 	*  @return	$value
 	*/
-	
+
 	function format_value( $value, $post_id, $field ) {
-		
+
 		return acf_get_field_type('radio')->format_value( $value, $post_id, $field );
-		
+
 	}
-	
+
 }
 
 

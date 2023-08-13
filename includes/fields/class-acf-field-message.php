@@ -2,9 +2,10 @@
 
 if( ! class_exists('acf_field_message') ) :
 
+
 class acf_field_message extends acf_field {
-	
-	
+
+
 	/*
 	*  __construct
 	*
@@ -17,9 +18,9 @@ class acf_field_message extends acf_field {
 	*  @param	n/a
 	*  @return	n/a
 	*/
-	
+
 	function initialize() {
-		
+
 		// vars
 		$this->name = 'message';
 		$this->label = __("Message",'acf');
@@ -29,10 +30,10 @@ class acf_field_message extends acf_field {
 			'esc_html'		=> 0,
 			'new_lines'		=> 'wpautop',
 		);
-		
+
 	}
-	
-	
+
+
 	/*
 	*  render_field()
 	*
@@ -44,43 +45,43 @@ class acf_field_message extends acf_field {
 	*  @since	3.6
 	*  @date	23/01/13
 	*/
-	
+
 	function render_field( $field ) {
-		
+
 		// vars
 		$m = $field['message'];
-		
-		
+
+
 		// wptexturize (improves "quotes")
 		$m = wptexturize( $m );
-		
-		
+
+
 		// esc_html
 		if( $field['esc_html'] ) {
-			
+
 			$m = esc_html( $m );
-			
+
 		}
-		
-		
+
+
 		// new lines
 		if( $field['new_lines'] == 'wpautop' ) {
-			
+
 			$m = wpautop($m);
-			
+
 		} elseif( $field['new_lines'] == 'br' ) {
-			
+
 			$m = nl2br($m);
-			
+
 		}
-		
-		
+
+
 		// return
 		echo acf_esc_html( $m );
-		
+
 	}
-	
-	
+
+
 	/*
 	*  render_field_settings()
 	*
@@ -93,9 +94,9 @@ class acf_field_message extends acf_field {
 	*  @since	3.6
 	*  @date	23/01/13
 	*/
-	
+
 	function render_field_settings( $field ) {
-		
+
 		// default_value
 		acf_render_field_setting( $field, array(
 			'label'			=> __('Message','acf'),
@@ -103,8 +104,8 @@ class acf_field_message extends acf_field {
 			'type'			=> 'textarea',
 			'name'			=> 'message',
 		));
-		
-		
+
+
 		// formatting
 		acf_render_field_setting( $field, array(
 			'label'			=> __('New Lines','acf'),
@@ -117,8 +118,8 @@ class acf_field_message extends acf_field {
 				''				=> __("No Formatting",'acf')
 			)
 		));
-		
-		
+
+
 		// HTML
 		acf_render_field_setting( $field, array(
 			'label'			=> __('Escape HTML','acf'),
@@ -127,10 +128,10 @@ class acf_field_message extends acf_field {
 			'type'			=> 'true_false',
 			'ui'			=> 1,
 		));
-		
+
 	}
-	
-	
+
+
 	/*
 	*  translate_field
 	*
@@ -143,19 +144,19 @@ class acf_field_message extends acf_field {
 	*  @param	$field (array)
 	*  @return	$field
 	*/
-	
+
 	function translate_field( $field ) {
-		
+
 		// translate
 		$field['message'] = acf_translate( $field['message'] );
-		
-		
+
+
 		// return
 		return $field;
-		
+
 	}
-	
-	
+
+
 	/*
 	*  load_field()
 	*
@@ -170,23 +171,23 @@ class acf_field_message extends acf_field {
 	*  @return	$field - the field array holding all the field options
 	*/
 	function load_field( $field ) {
-		
+
 		// remove name to avoid caching issue
 		$field['name'] = '';
-		
+
 		// remove instructions
 		$field['instructions'] = '';
-		
+
 		// remove required to avoid JS issues
 		$field['required'] = 0;
-		
+
 		// set value other than 'null' to avoid ACF loading / caching issue
 		$field['value'] = false;
-		
+
 		// return
 		return $field;
 	}
-	
+
 }
 
 

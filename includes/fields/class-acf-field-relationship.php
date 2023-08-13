@@ -2,9 +2,10 @@
 
 if( ! class_exists('acf_field_relationship') ) :
 
+
 class acf_field_relationship extends acf_field {
-	
-	
+
+
 	/*
 	*  __construct
 	*
@@ -17,9 +18,9 @@ class acf_field_relationship extends acf_field {
 	*  @param	n/a
 	*  @return	n/a
 	*/
-	
+
 	function initialize() {
-		
+
 		// vars
 		$this->name = 'relationship';
 		$this->label = __("Relationship",'acf');
@@ -33,14 +34,14 @@ class acf_field_relationship extends acf_field {
 			'elements' 			=> array(),
 			'return_format'		=> 'object'
 		);
-		
+
 		// extra
 		add_action('wp_ajax_acf/fields/relationship/query',			array($this, 'ajax_query'));
 		add_action('wp_ajax_nopriv_acf/fields/relationship/query',	array($this, 'ajax_query'));
-    	
+
 	}
-	
-	
+
+
 	/*
 	*  input_admin_enqueue_scripts
 	*
@@ -53,9 +54,9 @@ class acf_field_relationship extends acf_field {
 	*  @param	$post_id (int)
 	*  @return	$post_id (int)
 	*/
-	
+
 	function input_admin_enqueue_scripts() {
-		
+
 		// localize
 		acf_localize_text(array(
 			//'Minimum values reached ( {min} values )'	=> __('Minimum values reached ( {min} values )', 'acf'),
@@ -64,8 +65,8 @@ class acf_field_relationship extends acf_field {
 			'No matches found'							=> __('No matches found', 'acf'),
 	   	));
 	}
-	
-	
+
+
 	/*
 	*  ajax_query
 	*
@@ -78,23 +79,23 @@ class acf_field_relationship extends acf_field {
 	*  @param	$post_id (int)
 	*  @return	$post_id (int)
 	*/
-	
+
 	function ajax_query() {
-		
+
 		// validate
 		if( !acf_verify_ajax() ) die();
-		
-		
+
+
 		// get choices
 		$response = $this->get_ajax_query( $_POST );
-		
-		
+
+
 		// return
 		acf_send_ajax_results($response);
-			
+
 	}
-	
-	
+
+
 	/*
 	*  get_ajax_query
 	*
@@ -107,9 +108,9 @@ class acf_field_relationship extends acf_field {
 	*  @param	$options (array)
 	*  @return	(array)
 	*/
-	
+
 	function get_ajax_query( $options = array() ) {
-		
+
    		// defaults
    		$options = wp_parse_args($options, array(
 			'post_id'		=> 0,
@@ -119,179 +120,179 @@ class acf_field_relationship extends acf_field {
 			'post_type'		=> '',
 			'taxonomy'		=> ''
 		));
-		
-		
+
+
 		// load field
 		$field = acf_get_field( $options['field_key'] );
 		if( !$field ) return false;
-		
-		
+
+
 		// vars
    		$results = array();
 		$args = array();
 		$s = false;
 		$is_search = false;
-		
-		
+
+
    		// paged
    		$args['posts_per_page'] = 20;
    		$args['paged'] = intval($options['paged']);
-   		
-   		
+
+
    		// search
 		if( $options['s'] !== '' ) {
-			
+
 			// strip slashes (search may be integer)
 			$s = wp_unslash( strval($options['s']) );
-			
-			
+
+
 			// update vars
 			$args['s'] = $s;
 			$is_search = true;
-			
+
 		}
-		
-		
+
+
 		// post_type
 		if( !empty($options['post_type']) ) {
-			
+
 			$args['post_type'] = acf_get_array( $options['post_type'] );
-		
+
 		} elseif( !empty($field['post_type']) ) {
-		
+
 			$args['post_type'] = acf_get_array( $field['post_type'] );
-			
+
 		} else {
-			
+
 			$args['post_type'] = acf_get_post_types();
-			
+
 		}
-		
-		
+
+
 		// taxonomy
 		if( !empty($options['taxonomy']) ) {
-			
+
 			// vars
 			$term = acf_decode_taxonomy_term($options['taxonomy']);
-			
-			
+
+
 			// tax query
 			$args['tax_query'] = array();
-			
-			
+
+
 			// append
 			$args['tax_query'][] = array(
 				'taxonomy'	=> $term['taxonomy'],
 				'field'		=> 'slug',
 				'terms'		=> $term['term'],
 			);
-			
-			
+
+
 		} elseif( !empty($field['taxonomy']) ) {
-			
+
 			// vars
 			$terms = acf_decode_taxonomy_terms( $field['taxonomy'] );
-			
-			
+
+
 			// append to $args
 			$args['tax_query'] = array(
 				'relation' => 'OR',
 			);
-			
-			
+
+
 			// now create the tax queries
 			foreach( $terms as $k => $v ) {
-			
+
 				$args['tax_query'][] = array(
 					'taxonomy'	=> $k,
 					'field'		=> 'slug',
 					'terms'		=> $v,
 				);
-				
+
 			}
-			
-		}	
-		
-		
+
+		}
+
+
 		// filters
 		$args = apply_filters('acf/fields/relationship/query', $args, $field, $options['post_id']);
 		$args = apply_filters('acf/fields/relationship/query/name=' . $field['name'], $args, $field, $options['post_id'] );
 		$args = apply_filters('acf/fields/relationship/query/key=' . $field['key'], $args, $field, $options['post_id'] );
-		
-		
+
+
 		// get posts grouped by post type
 		$groups = acf_get_grouped_posts( $args );
-		
-		
+
+
 		// bail early if no posts
 		if( empty($groups) ) return false;
-		
-		
+
+
 		// loop
 		foreach( array_keys($groups) as $group_title ) {
-			
+
 			// vars
 			$posts = acf_extract_var( $groups, $group_title );
-			
-			
+
+
 			// data
 			$data = array(
 				'text'		=> $group_title,
 				'children'	=> array()
 			);
-			
-			
+
+
 			// convert post objects to post titles
 			foreach( array_keys($posts) as $post_id ) {
-				
+
 				$posts[ $post_id ] = $this->get_post_title( $posts[ $post_id ], $field, $options['post_id'] );
-				
+
 			}
-			
-			
+
+
 			// order posts by search
 			if( $is_search && empty($args['orderby']) && isset($args['s']) ) {
-				
+
 				$posts = acf_order_by_search( $posts, $args['s'] );
-				
+
 			}
-			
-			
+
+
 			// append to $data
 			foreach( array_keys($posts) as $post_id ) {
-				
+
 				$data['children'][] = $this->get_post_result( $post_id, $posts[ $post_id ]);
-				
+
 			}
-			
-			
+
+
 			// append to $results
 			$results[] = $data;
-			
+
 		}
-		
-		
+
+
 		// add as optgroup or results
 		if( count($args['post_type']) == 1 ) {
-			
+
 			$results = $results[0]['children'];
-			
+
 		}
-		
-		
+
+
 		// vars
 		$response = array(
 			'results'	=> $results,
 			'limit'		=> $args['posts_per_page']
 		);
-		
-		
+
+
 		// return
 		return $response;
-			
+
 	}
-	
-	
+
+
 	/*
 	*  get_post_result
 	*
@@ -305,22 +306,22 @@ class acf_field_relationship extends acf_field {
 	*  @param	$text (string)
 	*  @return	(array)
 	*/
-	
+
 	function get_post_result( $id, $text ) {
-		
+
 		// vars
 		$result = array(
 			'id'	=> $id,
 			'text'	=> $text
 		);
-		
-		
+
+
 		// return
 		return $result;
-			
+
 	}
-	
-	
+
+
 	/*
 	*  get_post_title
 	*
@@ -335,51 +336,51 @@ class acf_field_relationship extends acf_field {
 	*  @param	$post_id (int) the post_id to which this value is saved to
 	*  @return	(string)
 	*/
-	
+
 	function get_post_title( $post, $field, $post_id = 0, $is_search = 0 ) {
-		
+
 		// get post_id
 		if( !$post_id ) $post_id = acf_get_form_data('post_id');
-		
-		
+
+
 		// vars
 		$title = acf_get_post_title( $post, $is_search );
-		
-		
+
+
 		// featured_image
 		if( acf_in_array('featured_image', $field['elements']) ) {
-			
+
 			// vars
 			$class = 'thumbnail';
 			$thumbnail = acf_get_post_thumbnail($post->ID, array(17, 17));
-			
-			
+
+
 			// icon
 			if( $thumbnail['type'] == 'icon' ) {
-				
+
 				$class .= ' -' . $thumbnail['type'];
-				
+
 			}
-			
-			
+
+
 			// append
 			$title = '<div class="' . $class . '">' . $thumbnail['html'] . '</div>' . $title;
-			
+
 		}
-		
-		
+
+
 		// filters
 		$title = apply_filters('acf/fields/relationship/result', $title, $post, $field, $post_id);
 		$title = apply_filters('acf/fields/relationship/result/name=' . $field['_name'], $title, $post, $field, $post_id);
 		$title = apply_filters('acf/fields/relationship/result/key=' . $field['key'], $title, $post, $field, $post_id);
-		
-		
+
+
 		// return
 		return $title;
-		
+
 	}
-	
-	
+
+
 	/*
 	*  render_field()
 	*
@@ -391,43 +392,43 @@ class acf_field_relationship extends acf_field {
 	*  @since	3.6
 	*  @date	23/01/13
 	*/
-	
+
 	function render_field( $field ) {
-		
+
 		// vars
 		$post_type = acf_get_array( $field['post_type'] );
 		$taxonomy = acf_get_array( $field['taxonomy'] );
 		$filters = acf_get_array( $field['filters'] );
-		
+
 		// filters
 		$filter_count = count($filters);
 		$filter_post_type_choices = array();
 		$filter_taxonomy_choices = array();
-		
+
 		// post_type filter
 		if( in_array('post_type', $filters) ) {
-			
+
 			$filter_post_type_choices = array(
 				''	=> __('Select post type', 'acf')
 			) + acf_get_pretty_post_types( $post_type );
 		}
-		
+
 		// taxonomy filter
 		if( in_array('taxonomy', $filters) ) {
-			
+
 			$term_choices = array();
 			$filter_taxonomy_choices = array(
 				''	=> __('Select taxonomy', 'acf')
 			);
-			
+
 			// check for specific taxonomy setting
 			if( $taxonomy ) {
 				$terms = acf_get_encoded_terms( $taxonomy );
 				$term_choices = acf_get_choices_from_terms( $terms, 'slug' );
-			
+
 			// if no terms were specified, find all terms
 			} else {
-				
+
 				// restrict taxonomies by the post_type selected
 				$term_args = array();
 				if( $post_type ) {
@@ -435,17 +436,17 @@ class acf_field_relationship extends acf_field {
 						'post_type'	=> $post_type
 					));
 				}
-				
+
 				// get terms
 				$terms = acf_get_grouped_terms( $term_args );
 				$term_choices = acf_get_choices_from_grouped_terms( $terms, 'slug' );
 			}
-			
+
 			// append term choices
 			$filter_taxonomy_choices = $filter_taxonomy_choices + $term_choices;
-			
+
 		}
-		
+
 		// div attributes
 		$atts = array(
 			'id'				=> $field['id'],
@@ -457,59 +458,59 @@ class acf_field_relationship extends acf_field {
 			'data-post_type'	=> '',
 			'data-taxonomy'		=> '',
 		);
-		
+
 		?>
 <div <?php acf_esc_attr_e($atts); ?>>
-	
+
 	<?php acf_hidden_input( array('name' => $field['name'], 'value' => '') ); ?>
-	
-	<?php 
-	
-	/* filters */	
+
+	<?php
+
+	/* filters */
 	if( $filter_count ): ?>
 	<div class="filters -f<?php echo esc_attr($filter_count); ?>">
-		<?php 
-	
-		/* search */	
+		<?php
+
+		/* search */
 		if( in_array('search', $filters) ): ?>
 		<div class="filter -search">
 			<?php acf_text_input( array('placeholder' => __("Search...",'acf'), 'data-filter' => 's') ); ?>
 		</div>
-		<?php endif; 
-		
-		
-		/* post_type */	
+		<?php endif;
+
+
+		/* post_type */
 		if( in_array('post_type', $filters) ): ?>
 		<div class="filter -post_type">
 			<?php acf_select_input( array('choices' => $filter_post_type_choices, 'data-filter' => 'post_type') ); ?>
 		</div>
-		<?php endif; 
-		
-		
-		/* post_type */	
+		<?php endif;
+
+
+		/* post_type */
 		if( in_array('taxonomy', $filters) ): ?>
 		<div class="filter -taxonomy">
 			<?php acf_select_input( array('choices' => $filter_taxonomy_choices, 'data-filter' => 'taxonomy') ); ?>
 		</div>
-		<?php endif; ?>		
+		<?php endif; ?>
 	</div>
 	<?php endif; ?>
-	
+
 	<div class="selection">
 		<div class="choices">
 			<ul class="acf-bl list choices-list"></ul>
 		</div>
 		<div class="values">
 			<ul class="acf-bl list values-list">
-			<?php if( !empty($field['value']) ): 
-				
+			<?php if( !empty($field['value']) ):
+
 				// get posts
 				$posts = acf_get_posts(array(
 					'post__in' => $field['value'],
 					'post_type'	=> $field['post_type']
 				));
-				
-				
+
+
 				// loop
 				foreach( $posts as $post ): ?>
 					<li>
@@ -527,8 +528,8 @@ class acf_field_relationship extends acf_field {
 </div>
 		<?php
 	}
-	
-	
+
+
 	/*
 	*  render_field_settings()
 	*
@@ -541,14 +542,14 @@ class acf_field_relationship extends acf_field {
 	*
 	*  @param	$field	- an array holding all the field's data
 	*/
-	
+
 	function render_field_settings( $field ) {
-		
+
 		// vars
 		$field['min'] = empty($field['min']) ? '' : $field['min'];
 		$field['max'] = empty($field['max']) ? '' : $field['max'];
-		
-		
+
+
 		// post_type
 		acf_render_field_setting( $field, array(
 			'label'			=> __('Filter by Post Type','acf'),
@@ -561,8 +562,8 @@ class acf_field_relationship extends acf_field {
 			'allow_null'	=> 1,
 			'placeholder'	=> __("All post types",'acf'),
 		));
-		
-		
+
+
 		// taxonomy
 		acf_render_field_setting( $field, array(
 			'label'			=> __('Filter by Taxonomy','acf'),
@@ -575,8 +576,8 @@ class acf_field_relationship extends acf_field {
 			'allow_null'	=> 1,
 			'placeholder'	=> __("All taxonomies",'acf'),
 		));
-		
-		
+
+
 		// filters
 		acf_render_field_setting( $field, array(
 			'label'			=> __('Filters','acf'),
@@ -589,8 +590,8 @@ class acf_field_relationship extends acf_field {
 				'taxonomy'		=> __("Taxonomy",'acf'),
 			),
 		));
-		
-		
+
+
 		// filters
 		acf_render_field_setting( $field, array(
 			'label'			=> __('Elements','acf'),
@@ -601,8 +602,8 @@ class acf_field_relationship extends acf_field {
 				'featured_image'	=> __("Featured Image",'acf'),
 			),
 		));
-		
-		
+
+
 		// min
 		acf_render_field_setting( $field, array(
 			'label'			=> __('Minimum posts','acf'),
@@ -610,8 +611,8 @@ class acf_field_relationship extends acf_field {
 			'type'			=> 'number',
 			'name'			=> 'min',
 		));
-		
-		
+
+
 		// max
 		acf_render_field_setting( $field, array(
 			'label'			=> __('Maximum posts','acf'),
@@ -619,10 +620,10 @@ class acf_field_relationship extends acf_field {
 			'type'			=> 'number',
 			'name'			=> 'max',
 		));
-		
-		
-		
-		
+
+
+
+
 		// return_format
 		acf_render_field_setting( $field, array(
 			'label'			=> __('Return Format','acf'),
@@ -635,11 +636,11 @@ class acf_field_relationship extends acf_field {
 			),
 			'layout'	=>	'horizontal',
 		));
-		
-		
+
+
 	}
-	
-	
+
+
 	/*
 	*  format_value()
 	*
@@ -655,43 +656,43 @@ class acf_field_relationship extends acf_field {
 	*
 	*  @return	$value (mixed) the modified value
 	*/
-	
+
 	function format_value( $value, $post_id, $field ) {
-		
+
 		// bail early if no value
 		if( empty($value) ) {
-		
+
 			return $value;
-			
+
 		}
-		
-		
+
+
 		// force value to array
 		$value = acf_get_array( $value );
-		
-		
+
+
 		// convert to int
 		$value = array_map('intval', $value);
-		
-		
+
+
 		// load posts if needed
 		if( $field['return_format'] == 'object' ) {
-			
+
 			// get posts
 			$value = acf_get_posts(array(
 				'post__in' => $value,
 				'post_type'	=> $field['post_type']
 			));
-			
+
 		}
-		
-		
+
+
 		// return
 		return $value;
-		
+
 	}
-	
-	
+
+
 	/*
 	*  validate_value
 	*
@@ -704,32 +705,32 @@ class acf_field_relationship extends acf_field {
 	*  @param	$post_id (int)
 	*  @return	$post_id (int)
 	*/
-	
+
 	function validate_value( $valid, $value, $field, $input ){
-		
+
 		// default
 		if( empty($value) || !is_array($value) ) {
-		
+
 			$value = array();
-			
+
 		}
-		
-		
+
+
 		// min
 		if( count($value) < $field['min'] ) {
-		
+
 			$valid = _n( '%s requires at least %s selection', '%s requires at least %s selections', $field['min'], 'acf' );
 			$valid = sprintf( $valid, $field['label'], $field['min'] );
-			
+
 		}
-		
-		
-		// return		
+
+
+		// return
 		return $valid;
-		
+
 	}
-		
-	
+
+
 	/*
 	*  update_value()
 	*
@@ -745,30 +746,30 @@ class acf_field_relationship extends acf_field {
 	*
 	*  @return	$value - the modified value
 	*/
-	
+
 	function update_value( $value, $post_id, $field ) {
-		
+
 		// Bail early if no value.
 		if( empty($value) ) {
 			return $value;
 		}
-		
+
 		// Format array of values.
 		// - ensure each value is an id.
 		// - Parse each id as string for SQL LIKE queries.
 		if( acf_is_sequential_array($value) ) {
 			$value = array_map('acf_idval', $value);
 			$value = array_map('strval', $value);
-		
+
 		// Parse single value for id.
 		} else {
 			$value = acf_idval( $value );
 		}
-		
+
 		// Return value.
 		return $value;
 	}
-		
+
 }
 
 

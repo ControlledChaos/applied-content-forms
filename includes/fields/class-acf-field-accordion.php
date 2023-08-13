@@ -3,8 +3,8 @@
 if( ! class_exists('acf_field__accordion') ) :
 
 class acf_field__accordion extends acf_field {
-	
-	
+
+
 	/**
 	*  initialize
 	*
@@ -16,9 +16,9 @@ class acf_field__accordion extends acf_field {
 	*  @param	n/a
 	*  @return	n/a
 	*/
-	
+
 	function initialize() {
-		
+
 		// vars
 		$this->name = 'accordion';
 		$this->label = __("Accordion",'acf');
@@ -28,10 +28,10 @@ class acf_field__accordion extends acf_field {
 			'multi_expand'	=> 0,
 			'endpoint'		=> 0
 		);
-		
+
 	}
-	
-	
+
+
 	/**
 	*  render_field
 	*
@@ -43,9 +43,9 @@ class acf_field__accordion extends acf_field {
 	*  @param	array $field
 	*  @return	n/a
 	*/
-	
+
 	function render_field( $field ) {
-		
+
 		// vars
 		$atts = array(
 			'class'				=> 'acf-fields',
@@ -53,15 +53,15 @@ class acf_field__accordion extends acf_field {
 			'data-multi_expand'	=> $field['multi_expand'],
 			'data-endpoint'		=> $field['endpoint']
 		);
-		
+
 		?>
 		<div <?php acf_esc_attr_e($atts); ?>></div>
 		<?php
-		
+
 	}
-	
-	
-	
+
+
+
 	/*
 	*  render_field_settings()
 	*
@@ -74,16 +74,16 @@ class acf_field__accordion extends acf_field {
 	*  @since	3.6
 	*  @date	23/01/13
 	*/
-	
+
 	function render_field_settings( $field ) {
-		
+
 /*
 		// message
 		$message = '';
 		$message .= '<p>' . __( 'Accordions help you organize fields into panels that open and close.', 'acf') . '</p>';
 		$message .= '<p>' . __( 'All fields following this accordion (or until another accordion is defined) will be grouped together.','acf') . '</p>';
-		
-		
+
+
 		// default_value
 		acf_render_field_setting( $field, array(
 			'label'			=> __('Instructions','acf'),
@@ -93,7 +93,7 @@ class acf_field__accordion extends acf_field {
 			'message'		=> $message,
 		));
 */
-		
+
 		// active
 		acf_render_field_setting( $field, array(
 			'label'			=> __('Open','acf'),
@@ -102,8 +102,8 @@ class acf_field__accordion extends acf_field {
 			'type'			=> 'true_false',
 			'ui'			=> 1,
 		));
-		
-		
+
+
 		// multi_expand
 		acf_render_field_setting( $field, array(
 			'label'			=> __('Multi-expand','acf'),
@@ -112,8 +112,8 @@ class acf_field__accordion extends acf_field {
 			'type'			=> 'true_false',
 			'ui'			=> 1,
 		));
-		
-		
+
+
 		// endpoint
 		acf_render_field_setting( $field, array(
 			'label'			=> __('Endpoint','acf'),
@@ -122,10 +122,10 @@ class acf_field__accordion extends acf_field {
 			'type'			=> 'true_false',
 			'ui'			=> 1,
 		));
-					
+
 	}
-	
-	
+
+
 	/*
 	*  load_field()
 	*
@@ -139,23 +139,23 @@ class acf_field__accordion extends acf_field {
 	*
 	*  @return	$field - the field array holding all the field options
 	*/
-	
+
 	function load_field( $field ) {
-		
+
 		// remove name to avoid caching issue
 		$field['name'] = '';
-		
+
 		// remove required to avoid JS issues
 		$field['required'] = 0;
-		
+
 		// set value other than 'null' to avoid ACF loading / caching issue
 		$field['value'] = false;
-		
+
 		// return
 		return $field;
-		
+
 	}
-	
+
 }
 
 

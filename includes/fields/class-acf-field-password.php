@@ -2,9 +2,10 @@
 
 if( ! class_exists('acf_field_password') ) :
 
+
 class acf_field_password extends acf_field {
-	
-	
+
+
 	/*
 	*  initialize
 	*
@@ -17,9 +18,9 @@ class acf_field_password extends acf_field {
 	*  @param	n/a
 	*  @return	n/a
 	*/
-	
+
 	function initialize() {
-		
+
 		// vars
 		$this->name = 'password';
 		$this->label = __("Password",'acf');
@@ -28,10 +29,10 @@ class acf_field_password extends acf_field {
 			'prepend'		=> '',
 			'append'		=> '',
 		);
-		
+
 	}
-		
-	
+
+
 	/*
 	*  render_field()
 	*
@@ -43,14 +44,14 @@ class acf_field_password extends acf_field {
 	*  @since	3.6
 	*  @date	23/01/13
 	*/
-	
+
 	function render_field( $field ) {
-		
+
 		acf_get_field_type('text')->render_field( $field );
-		
+
 	}
-	
-	
+
+
 	/*
 	*  render_field_settings()
 	*
@@ -63,9 +64,9 @@ class acf_field_password extends acf_field {
 	*
 	*  @param	$field	- an array holding all the field's data
 	*/
-	
+
 	function render_field_settings( $field ) {
-		
+
 		// placeholder
 		acf_render_field_setting( $field, array(
 			'label'			=> __('Placeholder Text','acf'),
@@ -73,8 +74,8 @@ class acf_field_password extends acf_field {
 			'type'			=> 'text',
 			'name'			=> 'placeholder',
 		));
-		
-		
+
+
 		// prepend
 		acf_render_field_setting( $field, array(
 			'label'			=> __('Prepend','acf'),
@@ -82,8 +83,8 @@ class acf_field_password extends acf_field {
 			'type'			=> 'text',
 			'name'			=> 'prepend',
 		));
-		
-		
+
+
 		// append
 		acf_render_field_setting( $field, array(
 			'label'			=> __('Append','acf'),
@@ -92,7 +93,7 @@ class acf_field_password extends acf_field {
 			'name'			=> 'append',
 		));
 	}
-	
+
 }
 
 

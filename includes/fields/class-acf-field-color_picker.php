@@ -3,8 +3,8 @@
 if( ! class_exists('acf_field_color_picker') ) :
 
 class acf_field_color_picker extends acf_field {
-	
-	
+
+
 	/*
 	*  __construct
 	*
@@ -17,9 +17,9 @@ class acf_field_color_picker extends acf_field {
 	*  @param	n/a
 	*  @return	n/a
 	*/
-	
+
 	function initialize() {
-		
+
 		// vars
 		$this->name = 'color_picker';
 		$this->label = __("Color Picker",'acf');
@@ -27,10 +27,10 @@ class acf_field_color_picker extends acf_field {
 		$this->defaults = array(
 			'default_value'	=> '',
 		);
-		
+
 	}
-	
-	
+
+
 	/*
 	*  input_admin_enqueue_scripts
 	*
@@ -43,7 +43,7 @@ class acf_field_color_picker extends acf_field {
 	*  @param	$post_id (int)
 	*  @return	$post_id (int)
 	*/
-	
+
 	function input_admin_enqueue_scripts() {
 
 		// Register scripts for non-admin.
@@ -53,8 +53,8 @@ class acf_field_color_picker extends acf_field {
 			$scripts = wp_scripts();
 			$scripts->add( 'iris', '/wp-admin/js/iris.min.js', array( 'jquery-ui-draggable', 'jquery-ui-slider', 'jquery-touch-punch' ), '1.0.7', 1 );
 			$scripts->add( 'wp-color-picker', "/wp-admin/js/color-picker$suffix.js", array( 'iris' ), false, 1 );
-			
-			// Handle localisation across multiple WP versions. 
+
+			// Handle localisation across multiple WP versions.
 			// WP 5.0+
 			if( method_exists($scripts, 'set_translations') ) {
 				$scripts->set_translations( 'wp-color-picker' );
@@ -69,15 +69,15 @@ class acf_field_color_picker extends acf_field {
 					'defaultLabel'     => __( 'Color value' ),
 				));
 			}
-			
+
 		}
-		
+
 		// Enqueue.
 		wp_enqueue_style( 'wp-color-picker' );
-		wp_enqueue_script( 'wp-color-picker' );			
+		wp_enqueue_script( 'wp-color-picker' );
 	}
-	
-	
+
+
 	/*
 	*  render_field()
 	*
@@ -89,14 +89,14 @@ class acf_field_color_picker extends acf_field {
 	*  @since	3.6
 	*  @date	23/01/13
 	*/
-	
+
 	function render_field( $field ) {
-		
+
 		// vars
 		$text_input = acf_get_sub_array( $field, array('id', 'class', 'name', 'value') );
 		$hidden_input = acf_get_sub_array( $field, array('name', 'value') );
-		
-		
+
+
 		// html
 		?>
 		<div class="acf-color-picker">
@@ -105,8 +105,8 @@ class acf_field_color_picker extends acf_field {
 		</div>
 		<?php
 	}
-	
-	
+
+
 	/*
 	*  render_field_settings()
 	*
@@ -119,9 +119,9 @@ class acf_field_color_picker extends acf_field {
 	*
 	*  @param	$field	- an array holding all the field's data
 	*/
-	
+
 	function render_field_settings( $field ) {
-		
+
 		// display_format
 		acf_render_field_setting( $field, array(
 			'label'			=> __('Default Value','acf'),
@@ -130,9 +130,9 @@ class acf_field_color_picker extends acf_field {
 			'name'			=> 'default_value',
 			'placeholder'	=> '#FFFFFF'
 		));
-		
+
 	}
-	
+
 }
 
 
