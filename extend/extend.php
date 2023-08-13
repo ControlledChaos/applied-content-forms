@@ -72,9 +72,11 @@ class ACFE{
     /*
      * Load
      */
-    function load(){
+    function load() {
 
-        if(!$this->acf()) return;
+        if ( ! $this->acf() ) {
+            return;
+        }
 
         // Vars
         $theme_path = acf_get_setting('acfe/theme_path', get_stylesheet_directory());
@@ -361,9 +363,9 @@ class ACFE{
     /*
      * ACF
      */
-    function acf(){
+    function acf() {
 
-        return class_exists('ACF') && defined('ACF_VERSION') && version_compare(ACF_VERSION, '5.8', '>=');
+        return class_exists( '\ACF\ACF' ) && defined( 'ACF_VERSION' ) && version_compare( ACF_VERSION, '5.8', '>=' );
 
     }
 

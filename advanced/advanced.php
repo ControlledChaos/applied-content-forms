@@ -1,4 +1,5 @@
 <?php
+use function ACF\acf;
 
 if( !class_exists('acf_pro') ):
 

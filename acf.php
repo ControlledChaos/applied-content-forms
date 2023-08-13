@@ -1,17 +1,32 @@
 <?php
-/*
- * Plugin Name: Applied Content Forms
- * Plugin URI: https://github.com/ControlledChaos/applied-content-forms
- * Description: Content editing for WordPress and ClassicPress.
- * Version: 5.9.6
- * Author: Elliot Condon + Controlled Chaos Design
- * Author URI: https://twitter.com/elliotcondon
- * Text Domain: acf
- * Domain Path: /lang
-*/
+/**
+ * Applied Content Forms
+ *
+ * Content editing for WordPress and ClassicPress.
+ *
+ * @package  ACF
+ * @category Core
+ * @since    1.0.0
+ * @link     https://github.com/ControlledChaos/applied-content-forms
+ *
+ * Plugin Name:       Applied Content Forms
+ * Plugin URI:        https://github.com/ControlledChaos/applied-content-forms
+ * Description:       Content editing for WordPress and ClassicPress.
+ * Version:           5.9.6
+ * Author:            Elliot Condon + Controlled Chaos Design
+ * Author URI:        https://github.com/ControlledChaos/
+ * Text Domain:       acf
+ * Domain Path:       /lang
+ * Requires PHP:      7.4
+ * Requires at least: 4.9
+ * Tested up to:      6.3
+ * Network:           false
+ */
+
+namespace ACF;
 
 // Exit if accessed directly.
-if( ! defined( 'ABSPATH' ) ) {
+if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
@@ -20,11 +35,13 @@ if ( file_exists( $get_plugin ) && ! function_exists( 'is_plugin_active' ) ) {
 	include_once( $get_plugin );
 }
 
-if ( is_plugin_active( 'advanced-custom-fields-pro/acf.php' ) ) {
+// Stop if Advanced Custom Fields is active.
+if (
+	is_plugin_active( 'advanced-custom-fields/acf.php' ) ||
+	is_plugin_active( 'advanced-custom-fields-pro/acf.php' )
+) {
 	return;
 }
-
-if ( ! class_exists( 'ACF' ) ) :
 
 class ACF {
 
@@ -244,7 +261,7 @@ class ACF {
 		// Load textdomain file.
 		acf_load_textdomain();
 
-		// Include 3rd party compatiblity.
+		// Include 3rd party compatibility.
 		acf_include( 'includes/third-party.php' );
 
 		// Include wpml support.
@@ -368,63 +385,63 @@ class ACF {
 		// Register the Field Group post type.
 		register_post_type( 'acf-field-group', [
 			'labels' => [
-			    'name'					=> __( 'Field Groups', 'acf' ),
-				'singular_name'			=> __( 'Field Group', 'acf' ),
-			    'add_new'				=> __( 'Add New' , 'acf' ),
-			    'add_new_item'			=> __( 'Add New Field Group' , 'acf' ),
-			    'edit_item'				=> __( 'Edit Field Group' , 'acf' ),
-			    'new_item'				=> __( 'New Field Group' , 'acf' ),
-			    'view_item'				=> __( 'View Field Group', 'acf' ),
-			    'search_items'			=> __( 'Search Field Groups', 'acf' ),
-			    'not_found'				=> __( 'No Field Groups found', 'acf' ),
-			    'not_found_in_trash'	=> __( 'No Field Groups found in Trash', 'acf' ),
+			    'name'               => __( 'Field Groups', 'acf' ),
+				'singular_name'      => __( 'Field Group', 'acf' ),
+			    'add_new'            => __( 'Add New' , 'acf' ),
+			    'add_new_item'       => __( 'Add New Field Group' , 'acf' ),
+			    'edit_item'          => __( 'Edit Field Group' , 'acf' ),
+			    'new_item'           => __( 'New Field Group' , 'acf' ),
+			    'view_item'          => __( 'View Field Group', 'acf' ),
+			    'search_items'       => __( 'Search Field Groups', 'acf' ),
+			    'not_found'          => __( 'No Field Groups found', 'acf' ),
+			    'not_found_in_trash' => __( 'No Field Groups found in Trash', 'acf' ),
 			],
-			'public'			=> false,
-			'hierarchical'		=> true,
-			'show_ui'			=> true,
-			'show_in_menu'		=> 'acf',
-			'_builtin'			=> false,
-			'capability_type'	=> 'post',
-			'capabilities'		=> [
-				'edit_post'			=> $cap,
-				'delete_post'		=> $cap,
-				'edit_posts'		=> $cap,
-				'delete_posts'		=> $cap,
+			'public'          => false,
+			'hierarchical'    => true,
+			'show_ui'         => true,
+			'show_in_menu'    => 'acf',
+			'_builtin'        => false,
+			'capability_type' => 'post',
+			'capabilities'    => [
+				'edit_post'    => $cap,
+				'delete_post'  => $cap,
+				'edit_posts'   => $cap,
+				'delete_posts' => $cap,
 			],
-			'supports' 			=> [ 'title' ],
-			'rewrite'			=> false,
-			'query_var'			=> false,
+			'supports'  => [ 'title' ],
+			'rewrite'   => false,
+			'query_var' => false,
 		] );
 
 		// Register the Field post type.
 		register_post_type( 'acf-field', [
 			'labels' => [
-			    'name'					=> __( 'Fields', 'acf' ),
-				'singular_name'			=> __( 'Field', 'acf' ),
-			    'add_new'				=> __( 'Add New' , 'acf' ),
-			    'add_new_item'			=> __( 'Add New Field' , 'acf' ),
-			    'edit_item'				=> __( 'Edit Field' , 'acf' ),
-			    'new_item'				=> __( 'New Field' , 'acf' ),
-			    'view_item'				=> __( 'View Field', 'acf' ),
-			    'search_items'			=> __( 'Search Fields', 'acf' ),
-			    'not_found'				=> __( 'No Fields found', 'acf' ),
-			    'not_found_in_trash'	=> __( 'No Fields found in Trash', 'acf' ),
+			    'name'               => __( 'Fields', 'acf' ),
+				'singular_name'      => __( 'Field', 'acf' ),
+			    'add_new'            => __( 'Add New' , 'acf' ),
+			    'add_new_item'       => __( 'Add New Field' , 'acf' ),
+			    'edit_item'          => __( 'Edit Field' , 'acf' ),
+			    'new_item'           => __( 'New Field' , 'acf' ),
+			    'view_item'          => __( 'View Field', 'acf' ),
+			    'search_items'       => __( 'Search Fields', 'acf' ),
+			    'not_found'          => __( 'No Fields found', 'acf' ),
+			    'not_found_in_trash' => __( 'No Fields found in Trash', 'acf' ),
 			],
-			'public'			=> false,
-			'hierarchical'		=> true,
-			'show_ui'			=> false,
-			'show_in_menu'		=> false,
-			'_builtin'			=> false,
-			'capability_type'	=> 'post',
-			'capabilities'		=> [
-				'edit_post'			=> $cap,
-				'delete_post'		=> $cap,
-				'edit_posts'		=> $cap,
-				'delete_posts'		=> $cap,
+			'public'          => false,
+			'hierarchical'    => true,
+			'show_ui'         => false,
+			'show_in_menu'    => false,
+			'_builtin'        => false,
+			'capability_type' => 'post',
+			'capabilities'    => [
+				'edit_post'    => $cap,
+				'delete_post'  => $cap,
+				'edit_posts'   => $cap,
+				'delete_posts' => $cap,
 			],
-			'supports' 			=> [ 'title' ],
-			'rewrite'			=> false,
-			'query_var'			=> false,
+			'supports'  => [ 'title' ],
+			'rewrite'   => false,
+			'query_var' => false,
 		] );
 	}
 
@@ -488,7 +505,7 @@ class ACF {
 	/**
 	 * define
 	 *
-	 * Defines a constant if doesnt already exist.
+	 * Defines a constant if doesn't already exist.
 	 *
 	 * @date	3/5/17
 	 * @since	5.5.13
@@ -649,19 +666,19 @@ class ACF {
 	}
 }
 
-/*
+/**
  * acf
  *
  * The main function responsible for returning the one true acf Instance to functions everywhere.
  * Use this function like you would a global variable, except without needing to declare the global.
  *
- * Example: <?php $acf = acf(); ?>
+ * Example: <?php $acf = ACF\acf(); ?>
  *
  * @date	4/09/13
  * @since	4.3.0
  *
  * @param	void
- * @return	ACF
+ * @return	object ACF
  */
 function acf() {
 
@@ -675,7 +692,5 @@ function acf() {
 	return $acf;
 }
 
-// Instantiate.
+// Instantiate the core class.
 acf();
-
-endif; // class_exists check

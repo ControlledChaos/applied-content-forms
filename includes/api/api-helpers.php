@@ -1,22 +1,20 @@
-<?php 
-
-/*
-*  acf_is_array
-*
-*  This function will return true for a non empty array
-*
-*  @type	function
-*  @date	6/07/2016
-*  @since	5.4.0
-*
-*  @param	$array (array)
-*  @return	(boolean)
-*/
+<?php
+/**
+ *  acf_is_array
+ *
+ *  This function will return true for a non empty array
+ *
+ *  @type	function
+ *  @date	6/07/2016
+ *  @since	5.4.0
+ *
+ *  @param	$array (array)
+ *  @return	(boolean)
+ */
+use function ACF\acf;
 
 function acf_is_array( $array ) {
-	
-	return ( is_array($array) && !empty($array) );
-	
+	return ( is_array( $array ) && ! empty( $array ) );
 }
 
 /**

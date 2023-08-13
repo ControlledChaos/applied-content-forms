@@ -1,4 +1,5 @@
 <?php
+use function ACF\acf;
 
 if( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 

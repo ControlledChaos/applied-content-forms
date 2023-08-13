@@ -1,5 +1,5 @@
 <?php
-
+use function ACF\acf;
 use WPGraphQL\AppContext;
 use WPGraphQL\Model\Term;
 
