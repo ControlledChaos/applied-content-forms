@@ -13,36 +13,42 @@
  * @link       https://www.acf-extended.com
  */
 
-if(!defined('ABSPATH'))
+if ( ! defined( 'ABSPATH' ) )
     exit;
 
-if(!class_exists('ACFE')):
+// Stop if Advanced Custom Fields: Extended is active.
+if (
+	is_plugin_active( 'acf-extended/acf-extended.php' ) ||
+	is_plugin_active( 'acf-extended-pro/acf-extended.php' )
+) {
+	return;
+}
 
-class ACFE{
+if ( ! class_exists( 'ACFE' ) ) :
+
+class ACFE {
 
     // Vars
     var $version = '1.8.8.6';
 
     /*
-     * Construct
+     * Constructor method
      */
-    function __construct(){
-        // ...
-    }
+    function __construct() {}
 
     /*
-     * Initialize
+     * Initialize extended functionality
      */
-    function initialize(){
+    function initialize() {
 
         // Constants
-        $this->constants(array(
+        $this->constants( array(
             'ACFE'          => true,
             'ACFE_FILE'     => __FILE__,
             'ACFE_PATH'     => plugin_dir_path(__FILE__),
             'ACFE_VERSION'  => $this->version,
             'ACFE_BASENAME' => plugin_basename(__FILE__),
-        ));
+        ) );
 
         // Init
         include_once(ACFE_PATH . 'includes/init.php');
