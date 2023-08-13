@@ -121,8 +121,6 @@ class ACF_Admin {
 
 		// Determine if the current page being viewed is "ACF" related.
 		if( isset( $screen->post_type ) && $screen->post_type === 'acf-field-group' ) {
-			// add_action( 'in_admin_header',		array( $this, 'in_admin_header' ) );
-			// add_filter( 'admin_footer_text',	array( $this, 'admin_footer_text' ) );
 			$this->setup_help_tab();
 		}
 	}
@@ -189,33 +187,6 @@ class ACF_Admin {
 			'<p><span class="dashicons dashicons-admin-home"></span> <a href="https://www.advancedcustomfields.com/" target="_blank" target="_blank">' . __( 'Visit website', 'acf' ) . '</a></p>' .
 			''
 		);
-	}
-
-	/**
-	 * Renders the admin navigation element.
-	 *
-	 * @date	27/3/20
-	 * @since	5.9.0
-	 *
-	 * @param	void
-	 * @return	void
-	 */
-	function in_admin_header() {
-		acf_get_view( 'html-admin-navigation' );
-	}
-
-	/**
-	 * Modifies the admin footer text.
-	 *
-	 * @date	7/4/20
-	 * @since	5.9.0
-	 *
-	 * @param	string $text The admin footer text.
-	 * @return	string
-	 */
-	function admin_footer_text( $text ) {
-		// Use RegExp to append "ACF" after the <a> element allowing translations to read correctly.
-		return preg_replace( '/(<a[\S\s]+?\/a>)/', '$1 ' . __('and', 'acf') . ' <a href="https://www.advancedcustomfields.com" target="_blank">ACF</a>', $text, 1 );
 	}
 }
 

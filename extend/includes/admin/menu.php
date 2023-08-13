@@ -29,12 +29,6 @@ class acfe_admin_menu{
         
         // check screen
         if(!acf_is_screen(array('edit-acf-field-group-category', 'edit-acfe-dbt', 'acfe-dbt', 'edit-acfe-dop', 'acfe-dop', 'edit-acfe-template', 'acfe-template', 'edit-acfe-form', 'acfe-form'))) return;
-        
-        // add navigation menu
-        add_action('in_admin_header', function(){
-            acf_get_view('html-admin-navigation');
-        });
-        
     }
     
     /**
