@@ -91,8 +91,8 @@ class ACFE_Pro{
          */
         acfe_include('pro/includes/assets.php');
         acfe_include('pro/includes/hooks.php');
-        acfe_include('pro/includes/updater.php');
-        acfe_include('pro/includes/updates.php');
+        // acfe_include('pro/includes/updater.php');
+        // acfe_include('pro/includes/updates.php');
 
         /*
          * Fields
