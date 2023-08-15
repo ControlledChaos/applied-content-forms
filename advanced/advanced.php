@@ -30,17 +30,12 @@ class acf_pro {
 
 
 		// includes
-		acf_include('advanced/blocks.php');
-		acf_include('advanced/options-page.php');
-		acf_include('advanced/updates.php');
+		acf_include( 'advanced/blocks.php' );
+		acf_include( 'advanced/options-page.php' );
 
-		if( is_admin() ) {
-
-			acf_include('advanced/admin/admin-options-page.php');
-			acf_include('advanced/admin/admin-updates.php');
-
+		if ( is_admin() ) {
+			acf_include( 'advanced/admin/admin-options-page.php' );
 		}
-
 
 		// actions
 		add_action('init',										array($this, 'register_assets'));
