@@ -1,49 +1,65 @@
 <?php
+/**
+ * Admin screens
+ *
+ * Adds pages, adds help tabs,
+ * enqueues assets.
+ *
+ * @package  ACF
+ * @category Admin
+ * @since    1.0.0
+ */
 
-if( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+namespace ACF\Admin;
 
-if( ! class_exists('ACF_Admin') ) :
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
-class ACF_Admin {
+class Admin_Screens {
 
 	/**
-	 * Constructor.
+	 * Constructor method
 	 *
-	 * @date	23/06/12
-	 * @since	5.0.0
-	 *
-	 * @param	void
-	 * @return	void
+	 * @date   23/06/12
+	 * @since  5.0.0
+	 * @access public
+	 * @return self
 	 */
-	function __construct() {
+	public function __construct() {
 
-		// Add actions.
-		add_action( 'admin_menu', 				array( $this, 'admin_menu' ), 9 );
-		add_action( 'admin_enqueue_scripts',	array( $this, 'admin_enqueue_scripts' ) );
-		add_action( 'admin_body_class', 		array( $this, 'admin_body_class' ) );
-		add_action( 'current_screen',			array( $this, 'current_screen' ) );
+		add_action( 'admin_menu', array( $this, 'admin_menu' ), 9 );
+		add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
+		add_action( 'admin_body_class', array( $this, 'admin_body_class' ) );
+		add_action( 'current_screen', array( $this, 'current_screen' ) );
 	}
 
 	/**
 	 * Adds the ACF menu item.
 	 *
-	 * @date	28/09/13
-	 * @since	5.0.0
-	 *
-	 * @param	void
-	 * @return	void
+	 * @date   28/09/13
+	 * @since  5.0.0
+	 * @access public
+	 * @return void
 	 */
-	function admin_menu() {
+	public function admin_menu() {
 
 		// Stop if ACF is hidden.
 		if ( ! acf_get_setting( 'show_admin' ) ) {
 			return;
 		}
 
-		$cap  = acf_get_setting( 'capability' );
-
-		// Add menu items.
-		add_menu_page( __( 'Custom Content Forms', 'acf' ), __( 'Content', 'acf' ), $cap, 'acf', [ $this, 'settings_page' ], 'dashicons-edit', '59' );
+		// Add primary menu entry.
+		add_menu_page(
+			__( 'Custom Content Forms', 'acf' ),
+			__( 'Content', 'acf' ),
+			acf_get_setting( 'capability' ),
+			'acf',
+			[ $this, 'settings_page' ],
+			'dashicons-edit',
+			'59'
+		);
 	}
 
 	/**
@@ -64,31 +80,32 @@ class ACF_Admin {
 	/**
 	 * Enqueues global admin styling.
 	 *
-	 * @date	28/09/13
-	 * @since	5.0.0
-	 *
-	 * @param	void
-	 * @return	void
+	 * @date   28/09/13
+	 * @since  5.0.0
+	 * @access public
+	 * @return void
 	 */
-	function admin_enqueue_scripts() {
+	public function admin_enqueue_scripts() {
 		wp_enqueue_style( 'acf-global' );
 	}
 
 	/**
 	 * Appends custom admin body classes.
 	 *
-	 * @date	5/11/19
-	 * @since	5.8.7
-	 *
-	 * @param	string $classes Space-separated list of CSS classes.
-	 * @return	string
+	 * @date   5/11/19
+	 * @since  5.8.7
+	 * @access public
+	 * @param  string $classes Space-separated list of CSS classes.
+	 * @return string
 	 */
-	function admin_body_class( $classes ) {
+	public function admin_body_class( $classes ) {
+
+		// Get the platform version.
 		global $wp_version;
 
 		// Determine body class version.
 		$wp_minor_version = floatval( $wp_version );
-		if( $wp_minor_version >= 5.3 ) {
+		if ( $wp_minor_version >= 5.3 ) {
 			$classes .= ' acf-admin-5-3';
 		} else {
 			$classes .= ' acf-admin-3-8';
@@ -106,21 +123,25 @@ class ACF_Admin {
 	 *
 	 * Adds custom functionality to this plugin's admin screens.
 	 *
-	 * Navigation toolbar and footer text mod are
-	 * commented out.
-	 *
-	 * @todo Make an opt-in setting for nav toolbar.
-	 *
-	 * @date	7/4/20
-	 * @since	5.9.0
-	 *
-	 * @param	void
-	 * @return	void
+	 * @date   7/4/20
+	 * @since  5.9.0
+	 * @access public
+	 * @param  void
+	 * @return void
 	 */
-	function current_screen( $screen ) {
+	public function current_screen( $screen ) {
 
-		// Determine if the current page being viewed is "ACF" related.
-		if( isset( $screen->post_type ) && $screen->post_type === 'acf-field-group' ) {
+		global $pagenow;
+
+		// Add help tabs to the intro screen.
+		if ( isset( $_GET['page'] ) ) {
+			if ( in_array( $pagenow, array( 'admin.php' ) ) && ( $_GET['page'] == 'acf' || $_GET['page'] == 'acf' ) ) {
+				$this->setup_help_tab();
+			}
+		}
+
+		// Add help tabs to field group screens.
+		if ( isset( $screen->post_type ) && $screen->post_type === 'acf-field-group' ) {
 			$this->setup_help_tab();
 		}
 	}
@@ -128,69 +149,52 @@ class ACF_Admin {
 	/**
 	 * Sets up the admin help tab.
 	 *
-	 * @date	20/4/20
-	 * @since	5.9.0
-	 *
-	 * @param	void
-	 * @return	void
+	 * @date   20/4/20
+	 * @since  5.9.0
+	 * @access public
+	 * @return void
 	 */
 	public function setup_help_tab() {
+
 		$screen = get_current_screen();
 
 		// Overview tab.
 		$screen->add_help_tab(
-			array(
+			[
 				'id'      => 'overview',
 				'title'   => __( 'Overview', 'acf' ),
 				'content' =>
-					'<p><strong>' . __( 'Overview', 'acf' ) . '</strong></p>' .
-					'<p>' . __( 'The Applied Content Forms plugin provides a visual form builder to customize WordPress edit screens with extra fields, and an intuitive API to display custom field values in any theme template file.', 'acf' ) . '</p>' .
+					'<h4>' . __( 'Overview', 'acf' ) . '</h4>' .
+					'<p>' . __( 'The Applied Content Forms plugin provides a visual form builder to customize edit screens with extra fields, and an intuitive API to display custom field values in any theme template file. This began as a fork of Advanced Custom Fields PRO version 5.9.6, the last version developed by Eliot Condon before selling the plugin to Delicious Brains.', 'acf' ) . '</p>' .
 					'<p>' . sprintf(
-						__( 'Before creating your first Field Group, we recommend first reading our <a href="%s" target="_blank">Getting started</a> guide to familiarize yourself with the plugin\'s philosophy and best practises.', 'acf' ),
+						__( 'Before creating your first Field Group it is recommended to first read the <a href="%s" target="_blank" rel="noopener nofollow">Getting Started</a> guide at Advanced Custom Fields to familiarize yourself with the plugin\'s philosophy and best practices.', 'acf' ),
 						'https://www.advancedcustomfields.com/resources/getting-started-with-acf/'
-					) . '</p>' .
-					'<p>' . __( 'Please use the Help & Support tab to get in touch should you find yourself requiring assistance.', 'acf' ) . '</p>' .
-					''
-			)
+					) . '</p>'
+			]
 		);
 
 		// Help tab.
 		$screen->add_help_tab(
-			array(
+			[
 				'id'      => 'help',
 				'title'   => __( 'Help & Support', 'acf' ),
 				'content' =>
-					'<p><strong>' . __( 'Help & Support', 'acf' ) . '</strong></p>' .
-					'<p>' . __( 'We are fanatical about support, and want you to get the best out of your website with ACF. If you run into any difficulties, there are several places you can find help:', 'acf' ) . '</p>' .
+					'<h4>' . __( 'Help & Support', 'acf' ) . '</h4>' .
+					'<p>' . __( 'There are several places you can find help at the Advanced Custom Fields website:', 'acf' ) . '</p>' .
 					'<ul>' .
 						'<li>' . sprintf(
-							__( '<a href="%s" target="_blank">Documentation</a>. Our extensive documentation contains references and guides for most situations you may encounter.', 'acf' ),
+							__( '<a href="%s" target="_blank">Documentation</a>. Extensive documentation contains references and guides for most situations you may encounter.', 'acf' ),
 							'https://www.advancedcustomfields.com/resources/'
 						) . '</li>' .
 						'<li>' . sprintf(
-							__( '<a href="%s" target="_blank">Discussions</a>. We have an active and friendly community on our Community Forums who may be able to help you figure out the ‘how-tos’ of the ACF world.', 'acf' ),
+							__( '<a href="%s" target="_blank">Discussions</a>. An active and friendly community on the Community Forums who may be able to help you figure out the how-tos of the ACF world.', 'acf' ),
 							'https://support.advancedcustomfields.com/'
 						) . '</li>' .
-						'<li>' . sprintf(
-							__( '<a href="%s" target="_blank">Help Desk</a>. The support professionals on our Help Desk will assist with your more in depth, technical challenges.', 'acf' ),
-							'https://www.advancedcustomfields.com/support/'
-						) . '</li>' .
 					'</ul>'
-			)
-		);
-
-		// Sidebar.
-		$screen->set_help_sidebar(
-			'<p><strong>' . __( 'Information', 'acf' ) . '</strong></p>' .
-			'<p><span class="dashicons dashicons-admin-plugins"></span> ' . sprintf( __( 'Version %s', 'acf' ), ACF_VERSION ) . '</p>' .
-			'<p><span class="dashicons dashicons-wordpress"></span> <a href="https://wordpress.org/plugins/advanced-custom-fields/" target="_blank">' . __( 'View details', 'acf' ) . '</a></p>' .
-			'<p><span class="dashicons dashicons-admin-home"></span> <a href="https://www.advancedcustomfields.com/" target="_blank" target="_blank">' . __( 'Visit website', 'acf' ) . '</a></p>' .
-			''
+			]
 		);
 	}
 }
 
 // Instantiate.
-acf_new_instance('ACF_Admin');
-
-endif; // class_exists check
+acf_new_instance( 'ACF\Admin\Admin_Screens' );
