@@ -29,10 +29,10 @@ class Admin_Screens {
 	 */
 	public function __construct() {
 
-		add_action( 'admin_menu', array( $this, 'admin_menu' ), 9 );
-		add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
-		add_action( 'admin_body_class', array( $this, 'admin_body_class' ) );
-		add_action( 'current_screen', array( $this, 'current_screen' ) );
+		add_action( 'admin_menu', [ $this, 'admin_menu' ], 9 );
+		add_action( 'admin_enqueue_scripts', [ $this, 'admin_enqueue_scripts' ] );
+		add_action( 'admin_body_class', [ $this, 'admin_body_class' ] );
+		add_action( 'current_screen', [ $this, 'current_screen' ] );
 	}
 
 	/**
