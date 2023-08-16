@@ -109,12 +109,23 @@ class ACF_Admin_Tools {
 
 	function admin_menu() {
 
-		// bail early if no show_admin
-		if( !acf_get_setting('show_admin') ) return;
+		// Stop if ACF is hidden.
+		if ( ! acf_get_setting( 'show_admin' ) ) {
+			return;
+		}
 
+		// Get filtered menu options.
+		$menu = acf_admin_menu();
 
 		// add page
-		$page = add_submenu_page( 'acf', __( 'Content Tools', 'acf' ), __( 'Tools', 'acf' ), acf_get_setting( 'capability' ), 'acf-tools', [ $this, 'html' ] );
+		$page = add_submenu_page(
+			$menu['slug'],
+			__( 'Content Tools', 'acf' ),
+			__( 'Tools', 'acf' ),
+			acf_get_setting( 'capability' ),
+			'acf-tools',
+			[ $this, 'html' ]
+		);
 
 
 		// actions

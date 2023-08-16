@@ -464,10 +464,22 @@ class acfe_admin_settings_ui{
      */
     function admin_menu(){
 
-        if(!acf_get_setting('show_admin'))
-            return;
+        // Stop if ACF is hidden.
+		if ( ! acf_get_setting( 'show_admin' ) ) {
+			return;
+		}
 
-        $page = add_submenu_page( 'acf', __( 'Content Settings' ), __( 'Settings' ), acf_get_setting( 'capability' ), 'acfe-settings', array( $this, 'menu_html' ) );
+        // Get filtered menu options.
+		$menu = acf_admin_menu();
+
+        $page = add_submenu_page(
+            $menu['slug'],
+            __( 'Content Settings' ),
+            __( 'Settings' ),
+            acf_get_setting( 'capability' ),
+            'acfe-settings',
+            [ $this, 'menu_html' ]
+        );
 
         add_action("load-{$page}", array($this, 'menu_load'));
 
