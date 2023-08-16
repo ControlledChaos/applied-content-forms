@@ -15,7 +15,7 @@ class acfe_assets{
         // Hooks
         add_action('init',                              array($this, 'init'));
         add_action('admin_enqueue_scripts',             array($this, 'wp_admin_enqueue_scripts'));
-        add_action('acf/input/admin_enqueue_scripts',   array($this, 'acf_admin_enqueue_scripts'));
+        add_action('acf/input/admin_enqueue_scripts',   array($this, 'acf_admin_enqueue_scripts') );
         
     }
     
@@ -36,9 +36,9 @@ class acfe_assets{
     
         // register styles
         wp_register_style('acf-extended',               acfe_get_url("assets/css/acfe{$min}.css"),              array(),                    $version);
-        wp_register_style('acf-extended-input',         acfe_get_url("assets/css/acfe-input{$min}.css"),        array(),                    $version);
+        wp_register_style('acf-extended-input',         acfe_get_url("assets/css/acfe-input{$min}.css"),        array('acf-pro-input'),                    $version);
         wp_register_style('acf-extended-admin',         acfe_get_url("assets/css/acfe-admin{$min}.css"),        array(),                    $version);
-        wp_register_style('acf-extended-field-group',   acfe_get_url("assets/css/acfe-field-group{$min}.css"),  array(),                    $version);
+        wp_register_style('acf-extended-field-group',   acfe_get_url("assets/css/acfe-field-group{$min}.css"),  array('acf-pro-field-group'),                    $version);
         wp_register_style('acf-extended-ui',            acfe_get_url("assets/css/acfe-ui{$min}.css"),           array(),                    $version);
         
     }

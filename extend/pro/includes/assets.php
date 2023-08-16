@@ -33,9 +33,9 @@ class acfe_pro_assets{
         wp_register_script('acf-extended-pro-field-group',  acfe_get_url("pro/assets/js/acfe-pro-field-group{$min}.js"),    array('acf-field-group'),   $version);
         
         // register styles
-        wp_register_style('acf-extended-pro-input',         acfe_get_url("pro/assets/css/acfe-pro-input{$min}.css"),        array(),                    $version);
-        wp_register_style('acf-extended-pro-admin',         acfe_get_url("pro/assets/css/acfe-pro-admin{$min}.css"),        array(),                    $version);
-        wp_register_style('acf-extended-pro-field-group',   acfe_get_url("pro/assets/css/acfe-pro-field-group{$min}.css"),  array(),                    $version);
+        wp_register_style('acf-extended-pro-input',         acfe_get_url("pro/assets/css/acfe-pro-input{$min}.css"),        array('acf-extended-input'),                    $version);
+        wp_register_style('acf-extended-pro-admin',         acfe_get_url("pro/assets/css/acfe-pro-admin{$min}.css"),        array('acf-extended-admin'),                    $version);
+        wp_register_style('acf-extended-pro-field-group',   acfe_get_url("pro/assets/css/acfe-pro-field-group{$min}.css"),  array('acf-extended-field-group'),                    $version);
         
     }
     

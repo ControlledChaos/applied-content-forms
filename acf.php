@@ -180,6 +180,8 @@ class ACF {
 			'path'						=> ACF_PATH,
 			'file'						=> __FILE__,
 			'url'						=> plugin_dir_url( __FILE__ ),
+			'pro'                       => true,
+			'fork'                      => true,
 			'show_admin'				=> true,
 			'show_updates'				=> true,
 			'stripslashes'				=> false,
@@ -284,9 +286,6 @@ class ACF {
 
 		// Include legacy.
 		acf_include( 'includes/legacy/legacy-locations.php' );
-
-		// Include formerly pro version features.
-		acf_update_setting( 'pro', true );
 
 		// Extend original ACF.
 		acf_include( 'extend/extend.php' );
@@ -563,19 +562,18 @@ class ACF {
 
 	public function register_assets() {
 
-		// vars
-		$version = acf_get_setting('version');
-		$min = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
+		$version = acf_get_setting( 'version' );
+		$min     = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
 
 		// register scripts
-		wp_register_script( 'acf-pro-input', acf_get_url( "includes/assets/js/acf-pro-input{$min}.js" ), array('acf-input'), $version );
-		wp_register_script( 'acf-pro-field-group', acf_get_url( "includes/assets/js/acf-pro-field-group{$min}.js" ), array('acf-field-group'), $version );
+		wp_register_script( 'acf-pro-input', acf_get_url( "assets/js/acf-pro-input{$min}.js" ), array('acf-input'), $version );
+		wp_register_script( 'acf-pro-field-group', acf_get_url( "assets/js/acf-pro-field-group{$min}.js" ), array('acf-field-group'), $version );
 
 
 		// register styles
-		wp_register_style( 'acf-pro-input', acf_get_url( 'includes/assets/css/acf-pro-input.css' ), array('acf-input'), $version );
-		wp_register_style( 'acf-pro-field-group', acf_get_url( 'includes/assets/css/acf-pro-field-group.css' ), array('acf-input'), $version );
+		wp_register_style( 'acf-pro-input', acf_get_url( 'assets/css/acf-pro-input.css' ), array('acf-input'), $version );
+		wp_register_style( 'acf-pro-field-group', acf_get_url( 'assets/css/acf-pro-field-group.css' ), array('acf-field-group'), $version );
 
 	}
 
