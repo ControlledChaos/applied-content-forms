@@ -77,7 +77,9 @@ class ACF {
 	 * @return	void
 	 */
 	function __construct() {
-		// Do nothing.
+		add_action( 'init', [ $this, 'register_assets' ] );
+		add_action( 'acf/input/admin_enqueue_scripts', [ $this, 'input_admin_enqueue_scripts' ] );
+		add_action( 'acf/field_group/admin_enqueue_scripts', [ $this, 'field_group_admin_enqueue_scripts' ] );
 	}
 
 	/**
@@ -95,6 +97,7 @@ class ACF {
 
 		// Define constants.
 		$this->define( 'ACF', true );
+		$this->define( 'ACF_PRO', true );
 		$this->define( 'ACF_PATH', plugin_dir_path( __FILE__ ) );
 		$this->define( 'ACF_BASENAME', plugin_basename( __FILE__ ) );
 		$this->define( 'ACF_VERSION', $this->version );
@@ -176,8 +179,10 @@ class ACF {
 		acf_include( 'includes/revisions.php' );
 		acf_include( 'includes/upgrades.php' );
 		acf_include( 'includes/validation.php' );
+		acf_include( 'includes/blocks.php' );
+		acf_include( 'includes/options-page.php' );
 
-		// Include ajax.
+		// Include AJAX.
 		acf_include( 'includes/ajax/class-acf-ajax.php' );
 		acf_include( 'includes/ajax/class-acf-ajax-check-screen.php' );
 		acf_include( 'includes/ajax/class-acf-ajax-user-setting.php' );
@@ -199,20 +204,21 @@ class ACF {
 		acf_include( 'includes/forms/form-widget.php' );
 
 		// Include admin.
-		if( is_admin() ) {
+		if ( is_admin() ) {
 			acf_include( 'includes/admin/admin.php' );
 			acf_include( 'includes/admin/admin-field-group.php' );
 			acf_include( 'includes/admin/admin-field-groups.php' );
 			acf_include( 'includes/admin/admin-notices.php' );
 			acf_include( 'includes/admin/admin-tools.php' );
 			acf_include( 'includes/admin/admin-upgrade.php' );
+			acf_include( 'includes/admin/admin-options-page.php' );
 		}
 
 		// Include legacy.
 		acf_include( 'includes/legacy/legacy-locations.php' );
 
-		// Include PRO.
-		acf_include( 'advanced/advanced.php' );
+		// Include formerly pro version features.
+		acf_update_setting( 'pro', true );
 
 		// Extend original ACF.
 		acf_include( 'extend/extend.php' );
@@ -300,6 +306,10 @@ class ACF {
 		acf_include( 'includes/fields/class-acf-field-accordion.php' );
 		acf_include( 'includes/fields/class-acf-field-tab.php' );
 		acf_include( 'includes/fields/class-acf-field-group.php' );
+		acf_include( 'includes/fields/class-acf-field-repeater.php' );
+		acf_include( 'includes/fields/class-acf-field-flexible-content.php' );
+		acf_include( 'includes/fields/class-acf-field-gallery.php' );
+		acf_include( 'includes/fields/class-acf-field-clone.php' );
 
 		/**
 		 * Fires after field types have been included.
@@ -333,6 +343,8 @@ class ACF {
 		acf_include( 'includes/locations/class-acf-location-widget.php' );
 		acf_include( 'includes/locations/class-acf-location-nav-menu.php' );
 		acf_include( 'includes/locations/class-acf-location-nav-menu-item.php' );
+		acf_include( 'includes/locations/class-acf-location-block.php' );
+		acf_include( 'includes/locations/class-acf-location-options-page.php' );
 
 		/**
 		 * Fires after location types have been included.
@@ -466,6 +478,74 @@ class ACF {
 			'show_in_admin_status_list' => true,
 			'label_count'               => _n_noop( 'Disabled <span class="count">(%s)</span>', 'Disabled <span class="count">(%s)</span>', 'acf' ),
 		] );
+	}
+
+	/*
+	*  register_assets
+	*
+	*  description
+	*
+	*  @type	function
+	*  @date	4/11/2013
+	*  @since	5.0.0
+	*
+	*  @param	$post_id (int)
+	*  @return	$post_id (int)
+	*/
+
+	function register_assets() {
+
+		// vars
+		$version = acf_get_setting('version');
+		$min = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
+
+
+		// register scripts
+		wp_register_script( 'acf-pro-input', acf_get_url( "includes/assets/js/acf-pro-input{$min}.js" ), array('acf-input'), $version );
+		wp_register_script( 'acf-pro-field-group', acf_get_url( "includes/assets/js/acf-pro-field-group{$min}.js" ), array('acf-field-group'), $version );
+
+
+		// register styles
+		wp_register_style( 'acf-pro-input', acf_get_url( 'includes/assets/css/acf-pro-input.css' ), array('acf-input'), $version );
+		wp_register_style( 'acf-pro-field-group', acf_get_url( 'includes/assets/css/acf-pro-field-group.css' ), array('acf-input'), $version );
+
+	}
+
+
+	/*
+	*  input_admin_enqueue_scripts
+	*
+	*  description
+	*
+	*  @type	function
+	*  @date	4/11/2013
+	*  @since	5.0.0
+	*
+	*  @param	$post_id (int)
+	*  @return	$post_id (int)
+	*/
+
+	function input_admin_enqueue_scripts() {
+		wp_enqueue_script( 'acf-pro-input' );
+		wp_enqueue_style( 'acf-pro-input' );
+	}
+
+
+	/*
+	*  field_group_admin_enqueue_scripts
+	*
+	*  description
+	*
+	*  @type	function
+	*  @date	4/11/2013
+	*  @since	5.0.0
+	*
+	*  @param	$post_id (int)
+	*  @return	$post_id (int)
+	*/
+	function field_group_admin_enqueue_scripts() {
+		wp_enqueue_script( 'acf-pro-field-group' );
+		wp_enqueue_style( 'acf-pro-field-group' );
 	}
 
 	/**
