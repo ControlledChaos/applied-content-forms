@@ -50,15 +50,18 @@ class Admin_Screens {
 			return;
 		}
 
+		// Get filtered menu options.
+		$menu = acf_admin_menu();
+
 		// Add primary menu entry.
 		add_menu_page(
-			__( 'Custom Content Forms', 'acf' ),
-			__( 'Content', 'acf' ),
+			$menu['page'],
+			$menu['name'],
 			acf_get_setting( 'capability' ),
-			'acf',
+			$menu['slug'],
 			[ $this, 'settings_page' ],
-			'dashicons-edit',
-			'59'
+			$menu['icon'],
+			$menu['position'],
 		);
 	}
 

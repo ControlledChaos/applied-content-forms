@@ -457,8 +457,10 @@ class ACF {
 	 */
 	public function register_post_types() {
 
-		// Variables.
 		$cap = acf_get_setting( 'capability' );
+
+		// Get filtered menu options.
+		$menu = acf_admin_menu();
 
 		// Register the Field Group post type.
 		register_post_type( 'acf-field-group', [
@@ -477,7 +479,7 @@ class ACF {
 			'public'          => false,
 			'hierarchical'    => true,
 			'show_ui'         => true,
-			'show_in_menu'    => 'acf',
+			'show_in_menu'    => $menu['slug'],
 			'_builtin'        => false,
 			'capability_type' => 'post',
 			'capabilities'    => [

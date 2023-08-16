@@ -1,11 +1,19 @@
-<?php 
+<?php
+/**
+ * Utility functions
+ *
+ * @package    ACF
+ * @subpackage Functions
+ * @category   Includes
+ * @since      1.0.0
+ */
 
 // Globals.
 global $acf_stores, $acf_instances;
 
-// Initialize plaeholders.
-$acf_stores = array();
-$acf_instances = array();
+// Initialize placeholders.
+$acf_stores    = [];
+$acf_instances = [];
 
 /**
  * acf_new_instance
@@ -55,18 +63,18 @@ function acf_get_instance( $class = '' ) {
  * @return	ACF_Data
  */
 function acf_register_store( $name = '', $data = false ) {
-	 
+
 	// Create store.
 	$store = new ACF_Data( $data );
-	
+
 	// Register store.
 	global $acf_stores;
 	$acf_stores[ $name ] = $store;
-	
+
 	// Return store.
 	return $store;
  }
- 
+
 /**
  * acf_get_store
  *
@@ -96,7 +104,7 @@ function acf_get_store( $name = '' ) {
  * @return	void
  */
 function acf_switch_stores( $site_id, $prev_site_id ) {
-	
+
 	// Loop over stores and call switch_site().
 	global $acf_stores;
 	foreach( $acf_stores as $store ) {
@@ -104,6 +112,28 @@ function acf_switch_stores( $site_id, $prev_site_id ) {
 	}
 }
 add_action( 'switch_blog', 'acf_switch_stores', 10, 2 );
+
+/**
+ * Menu entry
+ *
+ * Configures the top-level entry
+ * in the admin menu.
+ *
+ * @since  1.0.0
+ * @return array Returns an array of options.
+ */
+function acf_admin_menu() {
+
+	$menu = [
+		'slug'     => 'acf',
+		'icon'     => 'dashicons-edit',
+		'position' => '59',
+		'page'     => __( 'Custom Content Forms', 'acf' ),
+		'name'     => __( 'Content', 'acf' )
+	];
+
+	return apply_filters( 'acf_admin_menu', $menu );
+}
 
 /**
  * acf_get_path

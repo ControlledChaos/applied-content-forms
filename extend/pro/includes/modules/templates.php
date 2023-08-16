@@ -63,6 +63,9 @@ class acfe_dynamic_templates extends acfe_dynamic_module{
 	 */
 	function init(){
 
+		// Get filtered menu options.
+		$menu = acf_admin_menu();
+
 		register_post_type($this->post_type, array(
 			'label'                 => __('Templates', 'acfe'),
 			'description'           => __('Templates', 'acfe'),
@@ -77,7 +80,7 @@ class acfe_dynamic_templates extends acfe_dynamic_module{
 			'hierarchical'          => false,
 			'public'                => false,
 			'show_ui'               => true,
-			'show_in_menu'          => 'acf',
+			'show_in_menu'          => $menu['slug'],
 			'menu_icon'             => 'dashicons-feedback',
 			'show_in_admin_bar'     => false,
 			'show_in_nav_menus'     => false,

@@ -86,6 +86,9 @@ class acfe_dynamic_taxonomies extends acfe_dynamic_module{
 		if(!acf_get_setting('show_admin'))
 			$capability = false;
 
+		// Get filtered menu options.
+		$menu = acf_admin_menu();
+
 		register_post_type($this->post_type, array(
 			'label'                 => 'Taxonomies',
 			'description'           => 'Taxonomies',
@@ -100,7 +103,7 @@ class acfe_dynamic_taxonomies extends acfe_dynamic_module{
 			'hierarchical'          => false,
 			'public'                => false,
 			'show_ui'               => true,
-			'show_in_menu'          => 'acf',
+			'show_in_menu'          => $menu['slug'],
 			'menu_icon'             => 'dashicons-layout',
 			'show_in_admin_bar'     => false,
 			'show_in_nav_menus'     => false,

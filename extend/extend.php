@@ -389,6 +389,9 @@ class ACFE {
 		// Look for the content settings page and set as a variable.
 		$content = get_plugin_page_hookname( 'acf', 'acf' );
 
+        // Get filtered menu options.
+		$menu = acf_admin_menu();
+
 		// Only modify dynamic post types & taxonomies.
 		if (
 			'acfe-dpt' == $post_type ||
@@ -398,12 +401,12 @@ class ACFE {
 
 			// Only show under content settings if the page exists.
 			if ( $content ) {
-                $args['show_in_menu'] = 'acf';
+                $args['show_in_menu'] = $menu['slug'];
 			}
 		}
 
 		if ( 'acfe-form' == $post_type ) {
-			$args['show_in_menu'] = 'acf';
+			$args['show_in_menu'] = $menu['slug'];
 		}
 
 		if ( 'acfe-dop' == $post_type ) {
