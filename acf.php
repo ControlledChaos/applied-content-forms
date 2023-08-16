@@ -172,40 +172,43 @@ class ACF {
 		$this->define( 'ACF_MAJOR_VERSION', 5 );
 
 		// Define settings.
-		$this->settings = [
-			'name'						=> __( 'Applied Content Forms', 'acf' ),
-			'slug'						=> dirname( ACF_BASENAME ),
-			'version'					=> ACF_VERSION,
-			'basename'					=> ACF_BASENAME,
-			'path'						=> ACF_PATH,
-			'file'						=> __FILE__,
-			'url'						=> plugin_dir_url( __FILE__ ),
-			'pro'                       => true,
-			'fork'                      => true,
-			'show_admin'				=> true,
-			'show_updates'				=> true,
-			'stripslashes'				=> false,
-			'local'						=> true,
-			'json'						=> true,
-			'save_json'					=> '',
-			'load_json'					=> [],
-			'default_language'			=> '',
-			'current_language'			=> '',
-			'capability'				=> 'manage_options',
-			'uploader'					=> 'wp',
-			'autoload'					=> false,
-			'l10n'						=> true,
-			'l10n_textdomain'			=> '',
-			'google_api_key'			=> '',
-			'google_api_client'			=> '',
-			'enqueue_google_maps'		=> true,
-			'enqueue_select2'			=> true,
-			'enqueue_datepicker'		=> true,
-			'enqueue_datetimepicker'	=> true,
-			'select2_version'			=> 4,
-			'row_index_offset'			=> 1,
-			'remove_wp_meta_box'		=> true
-		];
+		$this->settings = apply_filters(
+			'acf_settings',
+			[
+				'name'						=> __( 'Applied Content Forms', 'acf' ),
+				'slug'						=> dirname( ACF_BASENAME ),
+				'version'					=> ACF_VERSION,
+				'basename'					=> ACF_BASENAME,
+				'path'						=> ACF_PATH,
+				'file'						=> __FILE__,
+				'url'						=> plugin_dir_url( __FILE__ ),
+				'pro'                       => true,
+				'fork'                      => true,
+				'show_admin'				=> true,
+				'show_updates'				=> true,
+				'stripslashes'				=> false,
+				'local'						=> true,
+				'json'						=> true,
+				'save_json'					=> '',
+				'load_json'					=> [],
+				'default_language'			=> '',
+				'current_language'			=> '',
+				'capability'				=> 'manage_options',
+				'uploader'					=> 'wp',
+				'autoload'					=> false,
+				'l10n'						=> true,
+				'l10n_textdomain'			=> '',
+				'google_api_key'			=> '',
+				'google_api_client'			=> '',
+				'enqueue_google_maps'		=> true,
+				'enqueue_select2'			=> true,
+				'enqueue_datepicker'		=> true,
+				'enqueue_datetimepicker'	=> true,
+				'select2_version'			=> 4,
+				'row_index_offset'			=> 1,
+				'remove_wp_meta_box'		=> true
+			]
+		);
 
 		// Include utility functions.
 		include_once( ACF_PATH . 'includes/acf-utility-functions.php' );
