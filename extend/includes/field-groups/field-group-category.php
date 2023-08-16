@@ -77,7 +77,7 @@ class acfe_field_group_category{
         global $submenu_file, $current_screen, $pagenow;
         
         if($current_screen->taxonomy === 'acf-field-group-category' && ($pagenow === 'edit-tags.php' || $pagenow === 'term.php'))
-            $parent_file = 'edit.php?post_type=acf-field-group';
+            $parent_file = 'acf';
         
         return $parent_file;
         
