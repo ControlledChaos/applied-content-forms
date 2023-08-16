@@ -3,9 +3,9 @@ use function ACF\acf;
 
 if( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-if( ! class_exists('acf_form_front') ) :
+if( ! class_exists('ACF_Form_Front') ) :
 
-class acf_form_front {
+class ACF_Form_Front {
 	
 	/** @var array An array of registered form settings */
 	private $forms = array();
@@ -601,7 +601,7 @@ class acf_form_front {
 }
 
 // initialize
-acf()->form_front = new acf_form_front();
+acf()->form_front = new ACF_Form_Front();
 
 endif; // class_exists check
 

@@ -45,38 +45,106 @@ if (
 
 class ACF {
 
-	// PHP 8.1 fix for dynamic properties deprecation.
-	public $fields;
-	public $loop;
-	public $revisions;
-	public $validation;
-	public $form_front;
-	public $admin_tools;
-
-	/** @var string The plugin version number. */
-	var $version = '5.9.6';
-
-	/** @var array The plugin settings array. */
-	var $settings = array();
-
-	/** @var array The plugin data array. */
-	var $data = array();
-
-	/** @var array Storage for class instances. */
-	var $instances = array();
+	/**
+	 * Plugin version
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @var    string The plugin version number.
+	 */
+	public $version = '5.9.6';
 
 	/**
-	 * __construct
+	 * Plugin settings
 	 *
-	 * A dummy constructor to ensure ACF is only setup once.
-	 *
-	 * @date	23/06/12
-	 * @since	5.0.0
-	 *
-	 * @param	void
-	 * @return	void
+	 * @since  1.0.0
+	 * @access public
+	 * @var    array The plugin settings array.
 	 */
-	function __construct() {
+	public $settings = [];
+
+	/**
+	 * Plugin data
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @var    array The plugin data array.
+	 */
+	public $data = [];
+
+	/**
+	 * Class instances
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @var    array Storage for class instances.
+	 */
+	public $instances = [];
+
+	/**
+	 * Fields object
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @var    object ACF_Fields
+	 */
+	public $fields;
+
+	/**
+	 * Loop object
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @var    object ACF_Loop
+	 */
+	public $loop;
+
+	/**
+	 * Revisions object
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @var    object ACF_Revisions
+	 */
+	public $revisions;
+
+	/**
+	 * Validation object
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @var    object ACF_Validation
+	 */
+	public $validation;
+
+	/**
+	 * Frontend form object
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @var    object ACF_Form_Front
+	 */
+	public $form_front;
+
+	/**
+	 * Admin tools object
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @var    object ACF_Admin_Tools
+	 */
+	public $admin_tools;
+
+	/**
+	 * Constructor method
+	 *
+	 * @date   23/06/12
+	 * @since  5.0.0
+	 * @access public
+	 * @return self
+	 */
+	public function __construct() {
+
 		add_action( 'init', [ $this, 'register_assets' ] );
 		add_action( 'acf/input/admin_enqueue_scripts', [ $this, 'input_admin_enqueue_scripts' ] );
 		add_action( 'acf/field_group/admin_enqueue_scripts', [ $this, 'field_group_admin_enqueue_scripts' ] );
@@ -93,7 +161,7 @@ class ACF {
 	 * @param	void
 	 * @return	void
 	 */
-	function initialize() {
+	public function initialize() {
 
 		// Define constants.
 		$this->define( 'ACF', true );
@@ -248,7 +316,7 @@ class ACF {
 	 * @param	void
 	 * @return	void
 	 */
-	function init() {
+	public function init() {
 
 		// Bail early if called directly from functions.php or plugin file.
 		if ( ! did_action( 'plugins_loaded' ) ) {
@@ -388,7 +456,7 @@ class ACF {
 	 * @param	void
 	 * @return	void
 	 */
-	function register_post_types() {
+	public function register_post_types() {
 
 		// Variables.
 		$cap = acf_get_setting( 'capability' );
@@ -467,7 +535,7 @@ class ACF {
 	 * @param	void
 	 * @return	void
 	 */
-	function register_post_status() {
+	public function register_post_status() {
 
 		// Register the Disabled post status.
 		register_post_status( 'acf-disabled', [
@@ -493,7 +561,7 @@ class ACF {
 	*  @return	$post_id (int)
 	*/
 
-	function register_assets() {
+	public function register_assets() {
 
 		// vars
 		$version = acf_get_setting('version');
@@ -525,7 +593,7 @@ class ACF {
 	*  @return	$post_id (int)
 	*/
 
-	function input_admin_enqueue_scripts() {
+	public function input_admin_enqueue_scripts() {
 		wp_enqueue_script( 'acf-pro-input' );
 		wp_enqueue_style( 'acf-pro-input' );
 	}
@@ -543,7 +611,7 @@ class ACF {
 	*  @param	$post_id (int)
 	*  @return	$post_id (int)
 	*/
-	function field_group_admin_enqueue_scripts() {
+	public function field_group_admin_enqueue_scripts() {
 		wp_enqueue_script( 'acf-pro-field-group' );
 		wp_enqueue_style( 'acf-pro-field-group' );
 	}
@@ -559,7 +627,7 @@ class ACF {
 	 * @param	string $where The WHERE clause.
 	 * @return	WP_Query $wp_query The query object.
 	 */
-	function posts_where( $where, $wp_query ) {
+	public function posts_where( $where, $wp_query ) {
 
 		global $wpdb;
 
@@ -593,7 +661,7 @@ class ACF {
 	 * @param	mixed $value The constant value.
 	 * @return	void
 	 */
-	function define( $name, $value = true ) {
+	public function define( $name, $value = true ) {
 		if ( ! defined( $name ) ) {
 			define( $name, $value );
 		}
@@ -610,7 +678,7 @@ class ACF {
 	 * @param	string $name The setting name.
 	 * @return	boolean
 	 */
-	function has_setting( $name ) {
+	public function has_setting( $name ) {
 		return isset( $this->settings[ $name ] );
 	}
 
@@ -625,113 +693,131 @@ class ACF {
 	 * @param	string $name The setting name.
 	 * @return	mixed
 	 */
-	function get_setting( $name ) {
+	public function get_setting( $name ) {
 		return isset( $this->settings[ $name ] ) ? $this->settings[ $name ] : null;
 	}
 
 	/**
-	 * update_setting
+	 * Update setting
 	 *
 	 * Updates a setting for the given name and value.
 	 *
-	 * @date	28/09/13
-	 * @since	5.0.0
-	 *
-	 * @param	string $name The setting name.
-	 * @param	mixed $value The setting value.
-	 * @return	true
+	 * @date   28/09/13
+	 * @since  5.0.0
+	 * @access public
+	 * @param  string $name The setting name.
+	 * @param  mixed $value The setting value.
+	 * @return true
 	 */
-	function update_setting( $name, $value ) {
+	public function update_setting( $name, $value ) {
 		$this->settings[ $name ] = $value;
 		return true;
 	}
 
 	/**
-	 * get_data
+	 * Get data
 	 *
 	 * Returns data or null if doesn't exist.
 	 *
-	 * @date	28/09/13
-	 * @since	5.0.0
-	 *
-	 * @param	string $name The data name.
-	 * @return	mixed
+	 * @date   28/09/13
+	 * @since  5.0.0
+	 * @access public
+	 * @param  string $name The data name.
+	 * @return mixed
 	 */
-	function get_data( $name ) {
-		return isset( $this->data[ $name ] ) ? $this->data[ $name ] : null;
+	public function get_data( $name ) {
+
+		if ( isset( $this->data[ $name ] ) ) {
+			return isset( $this->data[ $name ] );
+		} else {
+			return null;
+		}
 	}
 
 	/**
-	 * set_data
+	 * Set data
 	 *
 	 * Sets data for the given name and value.
 	 *
-	 * @date	28/09/13
-	 * @since	5.0.0
-	 *
-	 * @param	string $name The data name.
-	 * @param	mixed $value The data value.
-	 * @return	void
+	 * @date   28/09/13
+	 * @since  5.0.0
+	 * @access public
+	 * @param  string $name The data name.
+	 * @param  mixed $value The data value.
+	 * @return void
 	 */
-	function set_data( $name, $value ) {
+	public function set_data( $name, $value ) {
 		$this->data[ $name ] = $value;
 	}
 
 	/**
-	 * get_instance
+	 * Get class instance
 	 *
 	 * Returns an instance or null if doesn't exist.
 	 *
-	 * @date	13/2/18
-	 * @since	5.6.9
-	 *
-	 * @param	string $class The instance class name.
-	 * @return	object
+	 * @date   13/2/18
+	 * @since  5.6.9
+	 * @access public
+	 * @param  string $class The instance class name.
+	 * @return object
 	 */
-	function get_instance( $class ) {
+	public function get_instance( $class ) {
+
 		$name = strtolower( $class );
-		return isset( $this->instances[ $name ] ) ? $this->instances[ $name ] : null;
+
+		if ( isset( $this->instances[ $name ] ) ) {
+			return $this->instances[ $name ];
+		} else {
+			return null;
+		}
 	}
 
 	/**
-	 * new_instance
+	 * New class instance
 	 *
 	 * Creates and stores an instance of the given class.
 	 *
-	 * @date	13/2/18
-	 * @since	5.6.9
-	 *
-	 * @param	string $class The instance class name.
-	 * @return	object
+	 * @date   13/2/18
+	 * @since  5.6.9
+	 * @access public
+	 * @param  string $class The instance class name.
+	 * @return object
 	 */
-	function new_instance( $class ) {
+	public function new_instance( $class ) {
+
 		$instance = new $class();
-		$name = strtolower( $class );
+		$name     = strtolower( $class );
+
 		$this->instances[ $name ] = $instance;
+
 		return $instance;
 	}
 
 	/**
-	 * Magic __isset method for backwards compatibility.
+	 * Magic __isset method
 	 *
-	 * @date	24/4/20
-	 * @since	5.9.0
+	 * This is for backwards compatibility.
 	 *
-	 * @param	string $key Key name.
-	 * @return	bool
+	 * @date   24/4/20
+	 * @since  5.9.0
+	 * @access public
+	 * @param  string $key Key name.
+	 * @return bool
 	 */
 	public function __isset( $key ) {
 		return in_array( $key, [ 'locations', 'json' ] );
 	}
 
 	/**
-	 * Magic __get method for backwards compatibility.
+	 * Magic __get method
 	 *
-	 * @date	24/4/20
-	 * @since	5.9.0
+	 * This is for backwards compatibility.
 	 *
-	 * @param	string $key Key name.
-	 * @return	mixed
+	 * @date  24/4/20
+	 * @since  5.9.0
+	 * @access public
+	 * @param  string $key Key name.
+	 * @return mixed
 	 */
 	public function __get( $key ) {
 
@@ -746,18 +832,16 @@ class ACF {
 }
 
 /**
- * acf
+ * Core class instance
  *
  * The main function responsible for returning the one true acf Instance to functions everywhere.
  * Use this function like you would a global variable, except without needing to declare the global.
  *
  * Example: <?php $acf = ACF\acf(); ?>
  *
- * @date	4/09/13
- * @since	4.3.0
- *
- * @param	void
- * @return	object ACF
+ * @date   4/09/13
+ * @since  4.3.0
+ * @return object ACF
  */
 function acf() {
 
@@ -773,3 +857,6 @@ function acf() {
 
 // Instantiate the core class.
 acf();
+
+// Dummy classes.
+acf_include( 'includes/class-dummy.php' );

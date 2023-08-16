@@ -3,9 +3,9 @@ use function ACF\acf;
 
 if( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-if( ! class_exists('acf_admin_tools') ) :
+if( ! class_exists('ACF_Admin_Tools') ) :
 
-class acf_admin_tools {
+class ACF_Admin_Tools {
 
 
 	/** @var array Contains an array of admin tool instances */
@@ -286,7 +286,7 @@ class acf_admin_tools {
 }
 
 // initialize
-acf()->admin_tools = new acf_admin_tools();
+acf()->admin_tools = new ACF_Admin_Tools();
 
 endif; // class_exists check
 

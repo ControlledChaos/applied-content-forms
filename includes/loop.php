@@ -3,9 +3,9 @@ use function ACF\acf;
 
 if( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-if( ! class_exists('acf_loop') ) :
+if( ! class_exists('ACF_Loop') ) :
 
-class acf_loop {
+class ACF_Loop {
 
 	/**
 	 * Loops
@@ -268,7 +268,7 @@ class acf_loop {
 }
 
 // initialize
-acf()->loop = new acf_loop();
+acf()->loop = new ACF_Loop();
 
 endif; // class_exists check
 

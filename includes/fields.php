@@ -3,9 +3,9 @@ use function ACF\acf;
 
 if( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-if( ! class_exists('acf_fields') ) :
+if( ! class_exists('ACF_Fields') ) :
 
-class acf_fields {
+class ACF_Fields {
 
 	/** @var array Contains an array of field type instances */
 	var $types = array();
@@ -134,7 +134,7 @@ class acf_fields {
 
 
 // initialize
-acf()->fields = new acf_fields();
+acf()->fields = new ACF_Fields();
 
 endif; // class_exists check
 

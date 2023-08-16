@@ -3,9 +3,9 @@ use function ACF\acf;
 
 if( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-if( ! class_exists('acf_validation') ) :
+if( ! class_exists('ACF_Validation') ) :
 
-class acf_validation {
+class ACF_Validation {
 
 	/**
 	 * Errors
@@ -213,7 +213,7 @@ class acf_validation {
 }
 
 // initialize
-acf()->validation = new acf_validation();
+acf()->validation = new ACF_Validation();
 
 endif; // class_exists check
 

@@ -11,7 +11,7 @@ if ( ! get_option( 'enable_dynamic_block_types' ) ) {
     return;
 }
 
-if(!class_exists('acfe_dynamic_block_types_export') && class_exists( 'acf_pro' )):
+if(!class_exists('acfe_dynamic_block_types_export') ):
 
 class acfe_dynamic_block_types_export extends acfe_module_export{
     

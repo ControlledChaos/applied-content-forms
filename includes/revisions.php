@@ -3,13 +3,14 @@ use function ACF\acf;
 
 if( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-if( ! class_exists('acf_revisions') ) :
+if( ! class_exists('ACF_Revisions') ) :
 
-class acf_revisions {
+class ACF_Revisions {
 
-	// vars
-	var $cache = array();
-
+	/**
+	 * Cache
+	 */
+	public $cache = [];
 
 	/**
 	 *  Constructor method
@@ -407,7 +408,7 @@ class acf_revisions {
 }
 
 // initialize
-acf()->revisions = new acf_revisions();
+acf()->revisions = new ACF_Revisions();
 
 endif; // class_exists check
 
