@@ -180,7 +180,7 @@ class acfe_dynamic_module{
             }
 
             $keys = implode('+', $keys);
-            $url = admin_url("tools.php?page=acf-tools&tool={$this->tool}&action={$tool_action}&keys={$keys}");
+            $url = admin_url("admin.php?page=acf-tools&tool={$this->tool}&action={$tool_action}&keys={$keys}");
 
             wp_redirect($url);
             exit;
@@ -220,7 +220,7 @@ class acfe_dynamic_module{
         foreach($this->tools as $action){
 
             $action_name = $action === 'php' ? 'PHP' : 'Json';
-            $tools[] = '<a href="' . admin_url("tools.php?page=acf-tools&tool={$this->tool}&action={$action}&keys={$name}") . '">' . $action_name . '</a>';
+            $tools[] = '<a href="' . admin_url("admin.php?page=acf-tools&tool={$this->tool}&action={$action}&keys={$name}") . '">' . $action_name . '</a>';
 
         }
 
@@ -350,7 +350,7 @@ class acfe_dynamic_module{
         foreach($this->tools as $action){
 
             $action_name = $action === 'php' ? 'PHP' : 'Json';
-            $actions[$action] = '<a href="' . admin_url("tools.php?page=acf-tools&tool={$this->tool}&action={$action}&keys={$name}") . '">' . $action_name . '</a>';
+            $actions[$action] = '<a href="' . admin_url("admin.php?page=acf-tools&tool={$this->tool}&action={$action}&keys={$name}") . '">' . $action_name . '</a>';
 
         }
 

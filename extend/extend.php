@@ -403,7 +403,7 @@ class ACFE {
 		}
 
 		if ( 'acfe-form' == $post_type ) {
-			$args['show_in_menu'] = 'tools.php';
+			$args['show_in_menu'] = 'acf';
 		}
 
 		if ( 'acfe-dop' == $post_type ) {

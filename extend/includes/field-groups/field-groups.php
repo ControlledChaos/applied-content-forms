@@ -612,8 +612,8 @@ class ACFE_Field_Groups{
 
         $field_group = acf_get_field_group($post->ID);
 
-        $actions['acfe-export-php'] = '<a href="' . admin_url( 'tools.php?page=acf-tools&tool=export&action=php&keys=' . $field_group['key'] ) . '">PHP</a>';
-        $actions['acfe-export-json'] = '<a href="' . admin_url( 'tools.php?page=acf-tools&tool=export&action=json&keys=' . $field_group['key'] ) . '">Json</a>';
+        $actions['acfe-export-php'] = '<a href="' . admin_url( 'admin.php?page=acf-tools&tool=export&action=php&keys=' . $field_group['key'] ) . '">PHP</a>';
+        $actions['acfe-export-json'] = '<a href="' . admin_url( 'admin.php?page=acf-tools&tool=export&action=json&keys=' . $field_group['key'] ) . '">Json</a>';
         $actions['acfe-key'] = '<code>' . $field_group['key'] . '</code>';
         //$actions['acfe-id'] = '<span style="color:#555;">ID: ' . $field_group['ID'] . '</span>';
 
@@ -749,7 +749,7 @@ class ACFE_Field_Groups{
 
             }
 
-            $url = admin_url('tools.php?page=acf-tools&tool=export&action=json&keys=' . implode('+', $post_ids));
+            $url = admin_url('admin.php?page=acf-tools&tool=export&action=json&keys=' . implode('+', $post_ids));
             wp_redirect($url);
             exit;
 
