@@ -126,7 +126,7 @@ class Admin_Screens {
 	 * @date   7/4/20
 	 * @since  5.9.0
 	 * @access public
-	 * @param  void
+	 * @global array $pagenow Array of admin screens.
 	 * @return void
 	 */
 	public function current_screen( $screen ) {
