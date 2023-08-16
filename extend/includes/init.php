@@ -66,7 +66,7 @@ function acfe_get_view($path = '', $args = array()){
     
     // allow view file name shortcut
     if(substr($path, -4) !== '.php'){
-        $path = acfe_get_path("includes/admin/views/{$path}.php");
+        $path = acfe_get_path("views/{$path}.php");
     }
     
     // include
