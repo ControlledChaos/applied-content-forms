@@ -77,7 +77,7 @@ class Admin_Screens {
 	 * @return void
 	 */
 	public function settings_page() {
-		include( ACF_PATH . 'includes/admin/views/content-settings-page.php' );
+		acf_get_view( 'content-settings-page' );
 	}
 
 	/**
