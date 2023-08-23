@@ -342,7 +342,7 @@ class acfe_pro_admin_settings{
 	 */
 	function render_fields(){
 
-		foreach ( [ 'General', 'Theme', 'AutoSync', 'Modules', 'Fields' ] as $tab ) {
+		foreach ( [ 'General', 'Features', 'Theme', 'AutoSync', 'reCaptcha' ] as $tab ) {
 
 			// Category
 			$category = sanitize_title($tab);
