@@ -971,7 +971,8 @@ body:not(.acf-admin-5-3) .acf-field .select2-container .select2-search--inline .
 
 .acf-tab-group li a .acfe-tab-badge {
     border-radius: 100px;
-    background: #ddd;
+    background: #d63638;
+    color: #ffffff;
     width: 18px;
     height: 18px;
     font-size: 12px;
@@ -985,7 +986,7 @@ body:not(.acf-admin-5-3) .acf-field .select2-container .select2-search--inline .
 
 .acf-tab-group li a:hover .acfe-tab-badge,
 .acf-tab-group li.active a .acfe-tab-badge {
-    background: #f1f1f1
+    background: #d63638;
 }
 
 .acf-field>.acf-input>.acf-input-wrap {
