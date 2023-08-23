@@ -61,48 +61,53 @@ class acfe_dynamic_templates extends acfe_dynamic_module{
 	/*
 	 * Init
 	 */
-	function init(){
+	function init() {
+
+		$capability = acf_get_setting( 'capability' );
 
 		// Get filtered menu options.
 		$menu = acf_admin_menu();
 
-		register_post_type($this->post_type, array(
-			'label'                 => __('Templates', 'acfe'),
-			'description'           => __('Templates', 'acfe'),
-			'labels'                => array(
+		if(!acf_get_setting('show_admin'))
+            $capability = false;
+
+		register_post_type( $this->post_type, array(
+			'label'       => __('Templates', 'acfe'),
+			'description' => __('Templates', 'acfe'),
+			'labels'      => array(
 				'name'          => __('Templates', 'acfe'),
 				'singular_name' => __('Template', 'acfe'),
 				'menu_name'     => __('Templates', 'acfe'),
 				'edit_item'     => __('Edit Template', 'acfe'),
 				'add_new_item'  => __('New Template', 'acfe'),
 			),
-			'supports'              => array('title'),
-			'hierarchical'          => false,
-			'public'                => false,
-			'show_ui'               => true,
-			'show_in_menu'          => $menu['slug'],
-			'menu_icon'             => 'dashicons-feedback',
-			'show_in_admin_bar'     => false,
-			'show_in_nav_menus'     => false,
-			'can_export'            => false,
-			'has_archive'           => false,
-			'rewrite'               => false,
-			'exclude_from_search'   => true,
-			'publicly_queryable'    => false,
-			'capabilities'          => array(
-				'publish_posts'         => acf_get_setting('capability'),
-				'edit_posts'            => acf_get_setting('capability'),
-				'edit_others_posts'     => acf_get_setting('capability'),
-				'delete_posts'          => acf_get_setting('capability'),
-				'delete_others_posts'   => acf_get_setting('capability'),
-				'read_private_posts'    => acf_get_setting('capability'),
-				'edit_post'             => acf_get_setting('capability'),
-				'delete_post'           => acf_get_setting('capability'),
-				'read_post'             => acf_get_setting('capability'),
-			),
-			'acfe_admin_orderby'    => 'title',
-			'acfe_admin_order'      => 'ASC',
-			'acfe_admin_ppp'        => 999,
+			'supports'            => array('title'),
+			'hierarchical'        => false,
+			'public'              => false,
+			'show_ui'             => true,
+			'show_in_menu'        => $menu['slug'],
+			'menu_icon'           => 'dashicons-feedback',
+			'show_in_admin_bar'   => false,
+			'show_in_nav_menus'   => false,
+			'can_export'          => false,
+			'has_archive'         => false,
+			'rewrite'             => false,
+			'exclude_from_search' => true,
+			'publicly_queryable'  => false,
+			'capabilities'        => [
+				'publish_posts'       => $capability,
+				'edit_posts'          => $capability,
+				'edit_others_posts'   => $capability,
+				'delete_posts'        => $capability,
+				'delete_others_posts' => $capability,
+				'read_private_posts'  => $capability,
+				'edit_post'           => $capability,
+				'delete_post'         => $capability,
+				'read_post'           => $capability,
+			],
+			'acfe_admin_orderby' => 'title',
+			'acfe_admin_order'   => 'ASC',
+			'acfe_admin_ppp'     => 999,
 		));
 
 	}

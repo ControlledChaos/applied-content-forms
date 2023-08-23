@@ -45,16 +45,11 @@ class Admin_Screens {
 	 */
 	public function admin_menu() {
 
-		// Stop if ACF is hidden.
-		if ( ! acf_get_setting( 'show_admin' ) ) {
-			return;
-		}
-
 		// Get filtered menu options.
 		$menu = acf_admin_menu();
 
 		// Add primary menu entry.
-		add_menu_page(
+		$page = add_menu_page(
 			$menu['page'],
 			$menu['name'],
 			acf_get_setting( 'capability' ),
@@ -63,7 +58,20 @@ class Admin_Screens {
 			$menu['icon'],
 			$menu['position'],
 		);
+
+		add_action( "load-{$page}", [ $this, 'page_load' ] );
 	}
+
+	/**
+     * Page Load
+	 *
+	 * @since  6.0.0
+	 * @access public
+	 * @return void
+     */
+    function page_load() {
+        do_action( 'acfe/admin_settings/load' );
+    }
 
 	/**
 	 * Settings page
@@ -77,7 +85,7 @@ class Admin_Screens {
 	 * @return void
 	 */
 	public function settings_page() {
-		acf_get_view( 'content-settings-page' );
+		acf_get_view( 'html-admin-page-intro' );
 	}
 
 	/**
@@ -136,9 +144,12 @@ class Admin_Screens {
 
 		global $pagenow;
 
+		// Get filtered menu options.
+		$menu = acf_admin_menu();
+
 		// Add help tabs to the intro screen.
 		if ( isset( $_GET['page'] ) ) {
-			if ( in_array( $pagenow, array( 'admin.php' ) ) && ( $_GET['page'] == 'acf' || $_GET['page'] == 'acf' ) ) {
+			if ( in_array( $pagenow, array( 'admin.php' ) ) && ( $_GET['page'] == $menu['slug'] || $_GET['page'] == $menu['slug'] ) ) {
 				$this->setup_help_tab();
 			}
 		}

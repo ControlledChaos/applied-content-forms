@@ -43,63 +43,63 @@ class acfe_admin_settings{
         $this->fields = array(
 
             // ACF
-            'acf' => array(
+            'general' => array(
 
                 array(
                     'label'         => 'Path',
                     'name'          => 'path',
                     'type'          => 'text',
                     'description'   => 'Absolute path to ACF plugin folder including trailing slash.<br />Defaults to plugin_dir_path',
-                    'category'      => 'acf',
+                    'category'      => 'general',
                 ),
                 array(
                     'label'         => 'URL',
                     'name'          => 'url',
                     'type'          => 'text',
                     'description'   => 'URL to ACF plugin folder including trailing slash. Defaults to plugin_dir_url',
-                    'category'      => 'acf',
+                    'category'      => 'general',
                 ),
                 array(
                     'label'         => 'Show admin',
                     'name'          => 'show_admin',
                     'type'          => 'true_false',
                     'description'   => 'Show/hide ACF menu item. Defaults to true',
-                    'category'      => 'acf',
+                    'category'      => 'general',
                 ),
                 array(
                     'label'         => 'Strip slashes',
                     'name'          => 'stripslashes',
                     'type'          => 'true_false',
                     'description'   => 'Runs the function stripslashes on all $_POST data. Some servers / WP instals may require this extra functioanlity. Defaults to false',
-                    'category'      => 'acf',
+                    'category'      => 'general',
                 ),
                 array(
                     'label'         => 'Local',
                     'name'          => 'local',
                     'type'          => 'true_false',
                     'description'   => 'Enable/Disable local (PHP/json) fields. Defaults to true',
-                    'category'      => 'acf',
+                    'category'      => 'general',
                 ),
                 array(
                     'label'         => 'Json',
                     'name'          => 'json',
                     'type'          => 'true_false',
                     'description'   => 'Enable/Disable json fields. Defaults to true',
-                    'category'      => 'acf',
+                    'category'      => 'general',
                 ),
                 array(
                     'label'         => 'Json folder (save)',
                     'name'          => 'save_json',
                     'type'          => 'text',
                     'description'   => 'Absolute path to folder where json files will be created when field groups are saved.<br />Defaults to ‘acf-json’ folder within current theme',
-                    'category'      => 'acf',
+                    'category'      => 'general',
                 ),
                 array(
                     'label'         => 'Json folder (load)',
                     'name'          => 'load_json',
                     'type'          => 'text',
                     'description'   => 'Array of absolutes paths to folders where field group json files can be read.<br />Defaults to an array containing at index 0, the ‘acf-json’ folder within current theme',
-                    'category'      => 'acf',
+                    'category'      => 'general',
                     'format'        => 'array',
                 ),
                 array(
@@ -107,140 +107,140 @@ class acfe_admin_settings{
                     'name'          => 'default_language',
                     'type'          => 'true_false',
                     'description'   => 'Language code of the default language. Defaults to ”.<br />If WPML is active, ACF will default this to the WPML default language setting',
-                    'category'      => 'acf',
+                    'category'      => 'general',
                 ),
                 array(
                     'label'         => 'Current language',
                     'name'          => 'current_language',
                     'type'          => 'true_false',
                     'description'   => 'Language code of the current post’s language. Defaults to ”.<br />If WPML is active, ACF will default this to the WPML current language',
-                    'category'      => 'acf',
+                    'category'      => 'general',
                 ),
                 array(
                     'label'         => 'Capability',
                     'name'          => 'capability',
                     'type'          => 'text',
                     'description'   => 'Capability used for ACF post types and if the current user can see the ACF menu item.<br />Defaults to ‘manage_options’.',
-                    'category'      => 'acf',
+                    'category'      => 'general',
                 ),
                 array(
                     'label'         => 'Show updates',
                     'name'          => 'show_updates',
                     'type'          => 'true_false',
                     'description'   => 'Enable/Disable updates to appear in plugin list and show/hide the ACF updates admin page.<br />Defaults to true.',
-                    'category'      => 'acf',
+                    'category'      => 'general',
                 ),
                 array(
                     'label'         => 'Auto load',
                     'name'          => 'autoload',
                     'type'          => 'true_false',
                     'description'   => 'Sets the text domain used when translating field and field group settings.<br />Defaults to ”. Strings will not be translated if this setting is empty',
-                    'category'      => 'acf',
+                    'category'      => 'general',
                 ),
                 array(
                     'label'         => 'l10n',
                     'name'          => 'l10n',
                     'type'          => 'true_false',
                     'description'   => 'Allows ACF to translate field and field group settings using the __() function.<br />Defaults to true. Useful to override translation without modifying the textdomain',
-                    'category'      => 'acf',
+                    'category'      => 'general',
                 ),
                 array(
                     'label'         => 'l10n textdomain',
                     'name'          => 'l10n_textdomain',
                     'type'          => 'true_false',
                     'description'   => 'Sets the text domain used when translating field and field group settings.<br />Defaults to ”. Strings will not be translated if this setting is empty',
-                    'category'      => 'acf',
+                    'category'      => 'general',
                 ),
                 array(
                     'label'         => 'Google API key',
                     'name'          => 'google_api_key',
                     'type'          => 'text',
                     'description'   => 'Specify a Google Maps API authentication key to prevent usage limits.<br />Defaults to ”',
-                    'category'      => 'acf',
+                    'category'      => 'general',
                 ),
                 array(
                     'label'         => 'Google API client',
                     'name'          => 'google_api_client',
                     'type'          => 'text',
                     'description'   => 'Specify a Google Maps API Client ID to prevent usage limits.<br />Not needed if using <code>google_api_key</code>. Defaults to ”',
-                    'category'      => 'acf',
+                    'category'      => 'general',
                 ),
                 array(
                     'label'         => 'Enqueue Google Maps',
                     'name'          => 'enqueue_google_maps',
                     'type'          => 'true_false',
                     'description'   => 'Allows ACF to enqueue and load the Google Maps API JS library.<br />Defaults to true',
-                    'category'      => 'acf',
+                    'category'      => 'general',
                 ),
                 array(
                     'label'         => 'Enqueue Select2',
                     'name'          => 'enqueue_select2',
                     'type'          => 'true_false',
                     'description'   => 'Allows ACF to enqueue and load the Select2 JS/CSS library.<br />Defaults to true',
-                    'category'      => 'acf',
+                    'category'      => 'general',
                 ),
                 array(
                     'label'         => 'Select2 version',
                     'name'          => 'select2_version',
                     'type'          => 'text',
                     'description'   => 'Defines which version of Select2 library to enqueue. Either 3 or 4.<br />Defaults to 4 since ACF 5.6.0',
-                    'category'      => 'acf',
+                    'category'      => 'general',
                 ),
                 array(
                     'label'         => 'Enqueue Date picker',
                     'name'          => 'enqueue_datepicker',
                     'type'          => 'true_false',
                     'description'   => 'Allows ACF to enqueue and load the WP datepicker JS/CSS library.<br />Defaults to true',
-                    'category'      => 'acf',
+                    'category'      => 'general',
                 ),
                 array(
                     'label'         => 'Enqueue Date Time picker',
                     'name'          => 'enqueue_datetimepicker',
                     'type'          => 'true_false',
                     'description'   => 'Allows ACF to enqueue and load the datetimepicker JS/CSS library.<br />Defaults to true',
-                    'category'      => 'acf',
+                    'category'      => 'general',
                 ),
                 array(
                     'label'         => 'Row index offset',
                     'name'          => 'row_index_offset',
                     'type'          => 'text',
                     'description'   => 'Defines the starting index used in all ‘loop’ and ‘row’ functions.<br />Defaults to 1 (1 is the first row), can be changed to 0 (0 is the first row)',
-                    'category'      => 'acf',
+                    'category'      => 'general',
                 ),
                 array(
                     'label'         => 'Remove WP meta box',
                     'name'          => 'remove_wp_meta_box',
                     'type'          => 'true_false',
                     'description'   => 'Allows ACF to remove the default WP custom fields metabox. Defaults to true',
-                    'category'      => 'acf',
+                    'category'      => 'general',
                 ),
 
             ),
 
 
             // ACFE
-            'acfe' => array(
+            'theme' => array(
 
                 array(
                     'label'         => 'Theme Folder',
                     'name'          => 'acfe/theme_folder',
                     'type'          => 'text',
                     'description'   => 'Detected Theme Folder',
-                    'category'      => 'acfe',
+                    'category'      => 'theme',
                 ),
                 array(
                     'label'         => 'Theme Path',
                     'name'          => 'acfe/theme_path',
                     'type'          => 'text',
                     'description'   => 'Detected Theme Path',
-                    'category'      => 'acfe',
+                    'category'      => 'theme',
                 ),
                 array(
                     'label'         => 'Theme URL',
                     'name'          => 'acfe/theme_url',
                     'type'          => 'text',
                     'description'   => 'Detected Theme URL',
-                    'category'      => 'acfe',
+                    'category'      => 'theme',
                 ),
 
             ),
@@ -451,53 +451,7 @@ class acfe_admin_settings_ui{
     public $updated = array();
     public $fields = array();
 
-    function __construct(){
-
-        add_action('admin_menu',                array($this, 'admin_menu'));
-        add_action('acfe/admin_settings/load',  array($this, 'load'));
-        add_action('acfe/admin_settings/html',  array($this, 'html'));
-
-    }
-
-    /*
-     * Admin Menu
-     */
-    function admin_menu(){
-
-        // Stop if ACF is hidden.
-		if ( ! acf_get_setting( 'show_admin' ) ) {
-			return;
-		}
-
-        // Get filtered menu options.
-		$menu = acf_admin_menu();
-
-        $page = add_submenu_page(
-            $menu['slug'],
-            __( 'Content Settings' ),
-            __( 'Settings' ),
-            acf_get_setting( 'capability' ),
-            'acfe-settings',
-            [ $this, 'menu_html' ]
-        );
-
-        add_action("load-{$page}", array($this, 'menu_load'));
-
-    }
-
-    /*
-     * Menu Load
-     */
-    function menu_load(){
-        do_action('acfe/admin_settings/load');
-    }
-
-    /*
-     * Menu HTML
-     */
-    function menu_html(){
-        do_action('acfe/admin_settings/html');
-    }
+    function __construct() {}
 
     /*
      * Load
@@ -591,56 +545,9 @@ class acfe_admin_settings_ui{
 
     }
 
-    /*
-     * HTML
-     */
-    function html(){
+    function render_fields() {
 
-        ?>
-        <div class="wrap" id="acfe-admin-settings">
-
-            <h1><?php _e( 'Content Settings' ); ?></h1>
-
-            <div id="poststuff">
-
-                <div id="post-body" class="metabox-holder">
-
-                    <!-- Metabox -->
-                    <div id="postbox-container-2" class="postbox-container">
-
-                        <div class="postbox acf-postbox">
-
-                            <div class="postbox-header">
-                                <h2 class="hndle ui-sortable-handle"><span><?php _e('Settings'); ?></span></h2>
-                            </div>
-                            <div class="inside acf-fields -left">
-
-                                <?php $this->render_fields(); ?>
-
-                                <script type="text/javascript">
-                                    if(typeof acf !== 'undefined'){
-                                        acf.newPostbox({
-                                            'id': 'acfe-settings',
-                                            'label': 'left'
-                                        });
-                                    }
-                                </script>
-                            </div>
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-        <?php
-    }
-
-    function render_fields(){
-
-        foreach(array('ACF', 'ACFE', 'AutoSync', 'Modules', 'Fields') as $tab){
+        foreach ( [ 'General', 'Theme', 'AutoSync', 'Modules', 'Fields' ] as $tab ) {
 
             // Category
             $category = sanitize_title($tab);

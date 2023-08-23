@@ -34,12 +34,18 @@ class acfe_field_group_category{
         // Get filtered menu options.
 		$menu = acf_admin_menu();
 
+        // Show in admin menu or not.
+		$show_in_menu = $menu['slug'];
+		if ( ! acf_get_setting( 'show_admin' ) ) {
+			$show_in_menu = false;
+		}
+
         register_taxonomy('acf-field-group-category', array('acf-field-group'), array(
             'hierarchical'      => true,
             'public'            => false,
             'show_ui'           => 'ACFE',
             'show_admin_column' => true,
-            'show_in_menu'      => $menu['slug'],
+            'show_in_menu'      => $show_in_menu,
             'show_in_nav_menus' => true,
             'show_tagcloud'     => false,
             'rewrite'           => false,

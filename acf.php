@@ -176,6 +176,7 @@ class ACF {
 			'acf_settings',
 			[
 				'name'						=> __( 'Applied Content Forms', 'acf' ),
+				'site'                      => 'https://github.com/ControlledChaos/applied-content-forms',
 				'slug'						=> dirname( ACF_BASENAME ),
 				'version'					=> ACF_VERSION,
 				'basename'					=> ACF_BASENAME,
@@ -465,6 +466,12 @@ class ACF {
 		// Get filtered menu options.
 		$menu = acf_admin_menu();
 
+		// Show in admin menu or not.
+		$show_in_menu = $menu['slug'];
+		if ( ! acf_get_setting( 'show_admin' ) ) {
+			$show_in_menu = false;
+		}
+
 		// Register the Field Group post type.
 		register_post_type( 'acf-field-group', [
 			'labels' => [
@@ -482,7 +489,7 @@ class ACF {
 			'public'          => false,
 			'hierarchical'    => true,
 			'show_ui'         => true,
-			'show_in_menu'    => $menu['slug'],
+			'show_in_menu'    => $show_in_menu,
 			'_builtin'        => false,
 			'capability_type' => 'post',
 			'capabilities'    => [
