@@ -8,7 +8,7 @@
  * @subpackage Includes
  * @category   Vendor
  * @version    x.x.x
- * @since      1.8.8.6
+ * @since      0.8.8.6
  * @author     ACF Extended
  * @link       https://www.acf-extended.com
  */
@@ -29,7 +29,7 @@ if ( ! class_exists( 'ACFE' ) ) :
 class ACFE {
 
     // Vars
-    var $version = '1.8.8.6';
+    var $version = '0.8.8.6';
 
     /*
      * Constructor method
