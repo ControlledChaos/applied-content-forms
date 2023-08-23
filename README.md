@@ -7,4 +7,4 @@ Content editing for WordPress and ClassicPress.
 ![WordPress tested on version 6.3.0](https://img.shields.io/badge/WordPress_tested-6.3.0-2271b1.svg?style=flat-square)
 ![ClassicPress tested on version 2.0](https://img.shields.io/badge/ClassicPress_tested-2.0-03768e.svg?style=flat-square)
 
-This is a fork of Advanced Custom Fields PRO version 5.9.6 plus a fork of Advanced Custom Fields: Extended PRO version 1.8.8.6.
+This is a fork of Advanced Custom Fields PRO version 5.9.6 plus a fork of Advanced Custom Fields: Extended PRO version 0.8.8.6.
