@@ -13,8 +13,9 @@
  * @link       https://www.acf-extended.com
  */
 
-if ( ! defined( 'ABSPATH' ) )
+if ( ! defined( 'ABSPATH' ) ) {
     exit;
+}
 
 // Stop if Advanced Custom Fields: Extended is active.
 if (
