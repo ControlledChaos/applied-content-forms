@@ -6,6 +6,9 @@ if(!defined('ABSPATH'))
 if(!class_exists('acfe_settings_export')):
 
 class acfe_settings_export extends ACF_Admin_Tool{
+
+    public $action;
+    public $data;
     
     function initialize(){
         
