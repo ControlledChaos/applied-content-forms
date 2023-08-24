@@ -186,7 +186,6 @@ class ACF {
 				'pro'                       => true,
 				'fork'                      => true,
 				'show_admin'				=> true,
-				'show_updates'				=> true,
 				'stripslashes'				=> false,
 				'local'						=> true,
 				'json'						=> true,
