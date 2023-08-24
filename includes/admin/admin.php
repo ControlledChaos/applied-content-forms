@@ -29,21 +29,22 @@ class Admin_Screens {
 	 */
 	public function __construct() {
 
-		add_action( 'admin_menu', [ $this, 'admin_menu' ], 9 );
+		add_action( 'admin_menu', [ $this, 'admin_page' ], 9 );
+		// add_action( 'admin_menu', [ $this, 'settings_link' ] );
 		add_action( 'admin_enqueue_scripts', [ $this, 'admin_enqueue_scripts' ] );
 		add_action( 'admin_body_class', [ $this, 'admin_body_class' ] );
 		add_action( 'current_screen', [ $this, 'current_screen' ] );
 	}
 
 	/**
-	 * Adds the ACF menu item.
+	 * Admin page
 	 *
 	 * @date   28/09/13
 	 * @since  5.0.0
 	 * @access public
 	 * @return void
 	 */
-	public function admin_menu() {
+	public function admin_page() {
 
 		// Get filtered menu options.
 		$menu = acf_admin_menu();
@@ -63,13 +64,37 @@ class Admin_Screens {
 	}
 
 	/**
+	 * Settings link
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @return void
+	 */
+	public function settings_link() {
+
+		$menu   = acf_admin_menu();
+		$parent = $menu['slug'];
+		$link   = admin_url( "admin.php?page={$parent}&tab=settings" );
+
+		add_submenu_page(
+			$parent,
+			__( 'Settings' ),
+			__( 'Settings' ),
+			acf_get_setting( 'capability' ),
+			$link,
+			false,
+			75
+		);
+	}
+
+	/**
      * Page Load
 	 *
 	 * @since  6.0.0
 	 * @access public
 	 * @return void
      */
-    function page_load() {
+    public function page_load() {
         do_action( 'acfe/admin_settings/load' );
     }
 
