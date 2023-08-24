@@ -55,6 +55,7 @@ $about_link = sprintf(
 		<ul>
 			<li><a href="?page=<?php echo $menu['slug']; ?>" class="nav-tab <?php if ( $tab === null ) : ?>nav-tab-active<?php endif; ?>"><?php _e( 'Content', 'acf' ); ?></a>
 			<li><a href="?page=<?php echo $menu['slug']; ?>&tab=settings" class="nav-tab <?php if ( $tab === 'settings' ) : ?>nav-tab-active<?php endif; ?>"><?php _e( 'Settings', 'acf' ); ?></a>
+			<li><a href="?page=<?php echo $menu['slug']; ?>&tab=tools" class="nav-tab <?php if ( $tab === 'tools' ) : ?>nav-tab-active<?php endif; ?>"><?php _e( 'Tools', 'acf' ); ?></a>
 			<li><a href="?page=<?php echo $menu['slug']; ?>&tab=about" class="nav-tab <?php if ( $tab === 'about' ) : ?>nav-tab-active<?php endif; ?>"><?php _e( 'About', 'acf' ); ?></a>
 		</ul>
 	</nav>
@@ -63,6 +64,9 @@ $about_link = sprintf(
 	<?php switch( $tab ) :
 		case 'settings':
 			acf_get_view_partial( 'intro-settings' );
+		break;
+		case 'tools':
+			acf_get_view_partial( 'intro-tools' );
 		break;
 		case 'about':
 			acf_get_view_partial( 'intro-about' );
