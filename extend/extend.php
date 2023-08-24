@@ -123,6 +123,7 @@ class ACFE {
             'json_found'                    => false,
 
             // Modules
+            'modules/field_groups'          => true,
             'dev'                           => false,
             'modules/author'                => true,
             'modules/categories'            => true,

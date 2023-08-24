@@ -71,7 +71,10 @@ class acfe_field_group_category{
      */
     function admin_menu(){
 
-        if ( ! acf_get_setting( 'show_admin' ) ) {
+        if (
+            ! acf_get_setting( 'show_admin' ) ||
+            ! acf_get_setting( 'acfe/modules/field_groups' )
+        ) {
             return;
         }
 

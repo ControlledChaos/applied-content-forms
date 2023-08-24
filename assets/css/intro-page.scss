@@ -47,6 +47,21 @@
 
 		h3 {
 			margin: 0;
+
+			.post-count {
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				width: 1rem;
+				height: 1rem;
+				padding: 0;
+				line-height: 1rem;
+				vertical-align: bottom;
+				border-radius: 50%;
+				font-size: 0.6875rem;
+				background: #ee7700;
+				color: #ffffff;
+			}
 		}
 
 		.acf-tab-grid-icon {
@@ -56,4 +71,14 @@
 			font-size: 2.5rem;
 		}
 	}
+}
+
+.content-types-message {
+	margin: 1rem 0;
+	padding: 1px 12px;
+	background: #ffffff;
+	border: 1px solid #c3c4c7;
+	border-left-width: 4px;
+	border-left-color: #dba617;
+	box-shadow: 0 1px 1px rgba( $color: black, $alpha: 0.04 );
 }

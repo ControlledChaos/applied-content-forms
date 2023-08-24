@@ -126,6 +126,13 @@ class acfe_admin_settings {
 					'category'    => 'features',
 				],
 				[
+					'label'       => __( 'Field Groups', 'acf' ),
+					'name'        => 'acfe/modules/field_groups',
+					'type'        => 'true_false',
+					'description' => __( 'Enable custom field groups creation. Defaults to true.', 'acf' ),
+					'category'    => 'features',
+				],
+				[
 					'label'       => __( 'Post Types', 'acf' ),
 					'name'        => 'acfe/modules/post_types',
 					'type'        => 'true_false',

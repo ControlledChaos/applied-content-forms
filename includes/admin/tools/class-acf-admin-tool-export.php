@@ -2,6 +2,10 @@
 
 if( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
+if ( ! acf_get_setting( 'acfe/modules/field_groups' ) ) {
+	return;
+}
+
 if( ! class_exists('ACF_Admin_Tool_Export') ) :
 
 class ACF_Admin_Tool_Export extends ACF_Admin_Tool {

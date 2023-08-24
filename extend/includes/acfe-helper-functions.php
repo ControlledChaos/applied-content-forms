@@ -15,13 +15,13 @@ if(!defined('ABSPATH'))
  * @return mixed|null
  */
 function acfe_maybe_get($array = array(), $key = 0, $default = null){
-    
+
     if(is_object($array)){
         return isset($array->{$key}) ? $array->{$key} : $default;
     }
-    
+
     return acf_maybe_get($array, $key, $default);
-    
+
 }
 
 /**
@@ -35,9 +35,9 @@ function acfe_maybe_get($array = array(), $key = 0, $default = null){
  * @return mixed|null
  */
 function acfe_maybe_get_REQUEST($key = '', $default = null){
-    
+
     return isset($_REQUEST[$key]) ? $_REQUEST[$key] : $default;
-    
+
 }
 
 /**
@@ -51,16 +51,16 @@ function acfe_maybe_get_REQUEST($key = '', $default = null){
  * @return bool
  */
 function acfe_is_json($string){
-    
+
     // in case string = 1 or not string
     if(is_numeric($string) || !is_string($string)){
         return false;
     }
-    
+
     json_decode($string);
-    
+
     return json_last_error() == JSON_ERROR_NONE;
-    
+
 }
 
 /**
@@ -77,15 +77,15 @@ function acfe_array_keys_r($array){
     $keys = array_keys($array);
 
     foreach($array as $i){
-        
+
         if(!is_array($i)) continue;
-        
+
         $keys = array_merge($keys, acfe_array_keys_r($i));
-        
+
     }
 
     return $keys;
-    
+
 }
 
 /**
@@ -99,7 +99,7 @@ function acfe_array_keys_r($array){
  * @return bool
  */
 function acfe_starts_with($haystack, $needle){
-        
+
     $length = strlen($needle);
     return (substr($haystack, 0, $length) === $needle);
 
@@ -116,13 +116,13 @@ function acfe_starts_with($haystack, $needle){
  * @return bool
  */
 function acfe_ends_with($haystack, $needle){
-        
+
     $length = strlen($needle);
-    
+
     if($length == 0) return true;
 
     return (substr($haystack, -$length) === $needle);
-    
+
 }
 
 /**
@@ -138,25 +138,25 @@ function acfe_ends_with($haystack, $needle){
  * @return array
  */
 function acfe_array_insert_before($key, array &$array, $new_key, $new_value){
-    
+
     if(!array_key_exists($key, $array)){
         return $array;
     }
-    
+
     $new = array();
-    
+
     foreach($array as $k => $value){
-        
+
         if($k === $key){
             $new[$new_key] = $new_value;
         }
-        
+
         $new[$k] = $value;
-        
+
     }
-    
+
     return $new;
-    
+
 }
 
 /**
@@ -172,25 +172,25 @@ function acfe_array_insert_before($key, array &$array, $new_key, $new_value){
  * @return array
  */
 function acfe_array_insert_after($key, array &$array, $new_key, $new_value){
-    
+
     if(!array_key_exists($key, $array)){
         return $array;
     }
-    
+
     $new = array();
-    
+
     foreach($array as $k => $value){
-        
+
         $new[$k] = $value;
-        
+
         if($k === $key){
             $new[$new_key] = $new_value;
         }
-        
+
     }
-    
+
     return $new;
-    
+
 }
 
 /**
@@ -203,10 +203,10 @@ function acfe_array_insert_after($key, array &$array, $new_key, $new_value){
  * @param $b
  */
 function acfe_array_move(&$array, $a, $b){
-    
+
     $out = array_splice($array, $a, 1);
     array_splice($array, $b, 0, $out);
-    
+
 }
 
 /**
@@ -220,76 +220,76 @@ function acfe_array_move(&$array, $a, $b){
  * @return mixed
  */
 function acfe_add_validation_error($selector = '', $message = ''){
-    
+
     // general error
     if(empty($selector)){
-        
+
         return acf_add_validation_error('', $message);
-        
+
     }
-    
+
     // selector is a field key
     if(acf_is_field_key($selector)){
-    
+
         return add_filter("acf/validate_value/key={$selector}", function() use($message){
             return $message;
         });
-        
+
     }
-    
+
     // get field by name
     $field = acf_get_field($selector);
-    
+
     // check form data
     if($form = acf_get_form_data('acfe/form')){
-        
+
         // vars
         $fields = array();
         $field_groups = acf_get_array($form['field_groups']);
-    
+
         // loop field groups
         foreach($field_groups as $key){
             $fields = array_merge($fields, acf_get_fields($key));
         }
-    
+
         foreach($fields as $_field){
-            
+
             // field name is different
             if($_field['name'] !== $selector) continue;
-            
+
             // assign field
             $field = $_field;
             break;
-        
+
         }
-        
+
     }
-    
+
     // check active loop
     $row = acf_get_loop();
-    
+
     // exclude acfe form actions
     if($row && acf_maybe_get($row, 'selector') !== 'acfe_form_actions'){
-        
+
         // get sub field
         $field = acf_get_sub_field($selector, $row['field']);
-        
+
     }
-    
+
     // field not found: add general error
     if(!$field){
-        
+
         return acf_add_validation_error('', $message);
-        
+
     }
-    
+
     // add validation error
     add_filter("acf/validate_value/key={$field['key']}", function() use($message){
         return $message;
     });
-    
+
     return false;
-    
+
 }
 
 /**
@@ -302,19 +302,19 @@ function acfe_add_validation_error($selector = '', $message = ''){
  * @return string
  */
 function acfe_number_suffix($num){
-    
+
     if(!in_array(($num % 100), array(11,12,13))){
-        
+
         switch($num % 10){
             case 1:  return $num . 'st';
             case 2:  return $num . 'nd';
             case 3:  return $num . 'rd';
         }
-        
+
     }
-    
+
     return $num . 'th';
-    
+
 }
 
 /**
@@ -327,39 +327,39 @@ function acfe_number_suffix($num){
  * @return array|false|mixed|string
  */
 function acfe_array_to_string($array = array()){
-    
+
     if(!is_array($array)){
         return $array;
     }
-    
+
     if(empty($array)){
         return false;
     }
-    
+
     if(acf_is_sequential_array($array)){
-        
+
         foreach($array as $k => $v){
-            
+
             if(!is_string($v)) continue;
-            
+
             return $v;
-            
+
         }
-        
+
     }elseif(acf_is_associative_array($array)){
-        
+
         foreach($array as $k => $v){
-            
+
             if(!is_string($v)) continue;
-            
+
             return $v;
-            
+
         }
-        
+
     }
-    
+
     return false;
-    
+
 }
 
 /**
@@ -370,9 +370,9 @@ function acfe_array_to_string($array = array()){
  * @return bool
  */
 function acfe_is_dev(){
-    
+
     return acf_get_setting('acfe/dev', false) || (defined('ACFE_dev') && ACFE_dev);
-    
+
 }
 
 /**
@@ -383,9 +383,9 @@ function acfe_is_dev(){
  * @return bool
  */
 function acfe_is_super_dev(){
-    
+
     return acf_get_setting('acfe/super_dev', false) || (defined('ACFE_super_dev') && ACFE_super_dev);
-    
+
 }
 
 /**
@@ -398,12 +398,12 @@ function acfe_is_super_dev(){
  * @return bool
  */
 function acfe_is_post_type_reserved($post_type){
-    
+
     // restricted post types
     $reserved = acfe_get_setting('reserved_post_types', array());
-    
+
     return in_array($post_type, $reserved);
-    
+
 }
 
 /**
@@ -416,12 +416,12 @@ function acfe_is_post_type_reserved($post_type){
  * @return bool
  */
 function acfe_is_post_type_reserved_dev($post_type){
-    
+
     // restricted post types
     $reserved = acfe_get_setting('reserved_post_types', array());
-    
+
     return !acfe_is_super_dev() && in_array($post_type, $reserved);
-    
+
 }
 
 /**
@@ -434,12 +434,12 @@ function acfe_is_post_type_reserved_dev($post_type){
  * @return bool
  */
 function acfe_is_taxonomy_reserved($taxonomy){
-    
+
     // restricted post types
     $reserved = acfe_get_setting('reserved_taxonomies', array());
-    
+
     return in_array($taxonomy, $reserved);
-    
+
 }
 
 /**
@@ -452,12 +452,12 @@ function acfe_is_taxonomy_reserved($taxonomy){
  * @return bool
  */
 function acfe_is_taxonomy_reserved_dev($taxonomy){
-    
+
     // restricted post types
     $reserved = acfe_get_setting('reserved_taxonomies', array());
-    
+
     return !acfe_is_super_dev() && in_array($taxonomy, $reserved);
-    
+
 }
 
 /**
@@ -471,9 +471,9 @@ function acfe_is_taxonomy_reserved_dev($taxonomy){
  * @return bool|true
  */
 function acfe_update_setting($name, $value){
-    
+
     return acf_update_setting("acfe/{$name}", $value);
-    
+
 }
 
 /**
@@ -487,9 +487,9 @@ function acfe_update_setting($name, $value){
  * @return bool|true
  */
 function acfe_append_setting($name, $value){
-    
+
     return acf_append_setting("acfe/{$name}", $value);
-    
+
 }
 
 /**
@@ -503,9 +503,9 @@ function acfe_append_setting($name, $value){
  * @return mixed|void
  */
 function acfe_get_setting($name, $value = null){
-    
+
     return acf_get_setting("acfe/{$name}", $value);
-    
+
 }
 
 /**
@@ -534,11 +534,11 @@ function acfe_unset(&$array, $key){
  * @return false|mixed
  */
 function acfe_unarray($val){
-    
+
     if(is_array($val)){
         return reset($val);
     }
-    
+
     return $val;
 }
 
@@ -547,39 +547,87 @@ function acfe_unarray($val){
  * @return mixed
  */
 function acfe_get_ip(){
-    
+
     $ip = false;
-    
+
     // http client
     if(!empty($_SERVER['HTTP_CLIENT_IP'])){
-        
+
         $ip = filter_var(wp_unslash($_SERVER['HTTP_CLIENT_IP']), FILTER_VALIDATE_IP);
-        
+
     // proxy pass
     }elseif(!empty( $_SERVER['HTTP_X_FORWARDED_FOR'])){
-        
+
         // can include more than 1 ip, first is the public one.
         $ips = explode(',', wp_unslash($_SERVER['HTTP_X_FORWARDED_FOR']));
-        
+
         if (is_array($ips)){
             $ip = filter_var( $ips[0], FILTER_VALIDATE_IP );
         }
-        
+
     // remote addr
     }elseif(!empty($_SERVER['REMOTE_ADDR'])){
-        
+
         $ip = filter_var(wp_unslash($_SERVER['REMOTE_ADDR']), FILTER_VALIDATE_IP);
-        
+
     }
-    
+
     // default
     $ip = $ip !== false ? $ip : '127.0.0.1';
-    
+
     // fix potential csv return
     $ip_array = explode(',', $ip);
     $ip_array = array_map('trim', $ip_array);
-    
+
     // return
     return $ip_array[0];
-    
+
+}
+
+/**
+ * Has content types
+ *
+ * Returns true if any content type modules are enabled.
+ *
+ * @since  1.0.0
+ * @return boolean
+ */
+function acf_has_content_types() {
+
+    if (
+        acf_get_setting( 'acfe/modules/field_groups' ) ||
+        acf_get_setting( 'acfe/modules/post_types' ) ||
+        acf_get_setting( 'acfe/modules/taxonomies' ) ||
+        acf_get_setting( 'acfe/modules/block_types' ) ||
+        acf_get_setting( 'acfe/modules/forms' ) ||
+        acf_get_setting( 'acfe/modules/templates' )
+    ) {
+        return true;
+    }
+    return false;
+}
+
+/**
+ * Content types (modules) message
+ *
+ * Returns a message only if no modules are enabled.
+ *
+ * @since  1.0.0
+ * @return mixed Returns a message string or null.
+ */
+function acf_content_types_message() {
+
+    $message = null;
+
+    // Get filtered menu options.
+    $menu = acf_admin_menu();
+
+    if ( ! acf_has_content_types() ) {
+        $message = sprintf(
+            __( '<div class="content-types-message"><p>No content types are enabled. Please see the <a href="%s">settings tab</a> to enable content types under Features.</p></div>', 'acf' ),
+            admin_url( 'admin.php?page=' . $menu['slug'] . '&tab=settings' )
+        );
+    }
+
+    return apply_filters( 'content_types_message', $message );
 }

@@ -68,9 +68,41 @@
   margin: 0;
 }
 
+.acf-tab-grid li h3 .post-count {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 1rem;
+  height: 1rem;
+  padding: 0;
+  line-height: 1rem;
+  vertical-align: bottom;
+  border-radius: 50%;
+  font-size: 0.6875rem;
+  background: #ee7700;
+  color: #ffffff;
+}
+
 .acf-tab-grid li .acf-tab-grid-icon {
   width: 100%;
   height: auto;
   padding: .75rem .75rem .5rem;
   font-size: 2.5rem;
+}
+
+.content-types-message {
+  margin: 1rem 0;
+  padding: 1px 12px;
+  background: #ffffff;
+  border: 1px solid #c3c4c7;
+  border-left-width: 4px;
+  border-left-color: #dba617;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
 }

@@ -466,7 +466,10 @@ class ACF {
 
 		// Show in admin menu or not.
 		$show_in_menu = $menu['slug'];
-		if ( ! acf_get_setting( 'show_admin' ) ) {
+		if (
+			! acf_get_setting( 'show_admin' ) ||
+			! acf_get_setting( 'acfe/modules/field_groups' )
+		) {
 			$show_in_menu = false;
 		}
 
