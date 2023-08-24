@@ -14,7 +14,7 @@ $desc = apply_filters(
 	'acf_page_description',
 	sprintf(
 		'<p class="description">%s</p><hr />',
-		__( 'Post types, taxonomies, post fields, front-end forms, and more.', 'acf' )
+		__( 'A suite of tools for adding and managing custom content types and user forms.', 'acf' )
 	)
 );
 
@@ -55,7 +55,7 @@ $about_link = sprintf(
 		<ul>
 			<li><a href="?page=<?php echo $menu['slug']; ?>" class="nav-tab <?php if ( $tab === null ) : ?>nav-tab-active<?php endif; ?>"><?php _e( 'Content', 'acf' ); ?></a>
 			<li><a href="?page=<?php echo $menu['slug']; ?>&tab=settings" class="nav-tab <?php if ( $tab === 'settings' ) : ?>nav-tab-active<?php endif; ?>"><?php _e( 'Settings', 'acf' ); ?></a>
-			<li><a href="?page=<?php echo $menu['slug']; ?>&tab=tools" class="nav-tab <?php if ( $tab === 'tools' ) : ?>nav-tab-active<?php endif; ?>"><?php _e( 'Tools', 'acf' ); ?></a>
+			<li><a href="<?php echo admin_url( 'admin.php?page=acf-tools' ); ?>" class="nav-tab <?php if ( $tab === 'tools' ) : ?>nav-tab-active<?php endif; ?>"><?php _e( 'Tools', 'acf' ); ?></a>
 			<li><a href="?page=<?php echo $menu['slug']; ?>&tab=about" class="nav-tab <?php if ( $tab === 'about' ) : ?>nav-tab-active<?php endif; ?>"><?php _e( 'About', 'acf' ); ?></a>
 		</ul>
 	</nav>

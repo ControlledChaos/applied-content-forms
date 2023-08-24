@@ -14,10 +14,17 @@
 
 $class = $active ? 'single' : 'grid';
 
+// Get filtered menu options.
+$menu = acf_admin_menu();
+
 ?>
 <div class="wrap" id="acf-admin-tools">
 
-	<h1><?php _e( 'Content Tools', 'acf' ); ?> <?php if( $active ): ?><a class="page-title-action" href="<?php echo acf_get_admin_tools_url(); ?>"><?php _e( 'Back to all tools', 'acf' ); ?></a><?php endif; ?></h1>
+	<h1>
+		<?php _e( 'Content Tools', 'acf' ); ?> <?php if ( $active ) : ?>
+		<a class="page-title-action" href="<?php echo acf_get_admin_tools_url(); ?>"><?php _e( 'All Tools', 'acf' ); ?></a><?php endif; ?>
+		<a class="page-title-action" href="<?php echo admin_url( "admin.php?page={$menu['slug']}" ); ?>"><?php _e( 'Content Home', 'acf' ); ?></a>
+	</h1>
 
 	<div class="acf-meta-box-wrap -<?php echo $class; ?>">
 		<?php do_meta_boxes( $screen_id, 'normal', '' ); ?>

@@ -95,7 +95,23 @@ class Admin_Screens {
 	 * @return void
      */
     public function page_load() {
+
         do_action( 'acfe/admin_settings/load' );
+
+		if ( ! isset( $_GET['tab'] ) ) {
+			add_action(
+				'admin_enqueue_scripts', function() {
+
+					$version = acf_get_setting( 'version' );
+					$suffix  = '';
+					if ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) {
+						$suffix  = '.min';
+					}
+
+					wp_enqueue_style( 'acf-intro', acf_get_url( 'assets/css/intro-page' . $suffix . '.css' ), [], $version, 'screen' );
+				}
+			);
+		}
     }
 
 	/**
@@ -206,7 +222,7 @@ class Admin_Screens {
 					'<h4>' . __( 'Overview', 'acf' ) . '</h4>' .
 					'<p>' . __( 'The Applied Content Forms plugin provides a visual form builder to customize edit screens with extra fields, and an intuitive API to display custom field values in any theme template file. This began as a fork of Advanced Custom Fields PRO version 5.9.6, the last version developed by Eliot Condon before selling the plugin to Delicious Brains.', 'acf' ) . '</p>' .
 					'<p>' . sprintf(
-						__( 'Before creating your first Field Group it is recommended to first read the <a href="%s" target="_blank" rel="noopener nofollow">Getting Started</a> guide at Advanced Custom Fields to familiarize yourself with the plugin\'s philosophy and best practices.', 'acf' ),
+						__( 'Before creating your first Field Group it is recommended to first read the <a href="%s" target="_blank" rel="noopener noreferrer">Getting Started</a> guide at Advanced Custom Fields to familiarize yourself with the plugin\'s philosophy and best practices.', 'acf' ),
 						'https://www.advancedcustomfields.com/resources/getting-started-with-acf/'
 					) . '</p>'
 			]

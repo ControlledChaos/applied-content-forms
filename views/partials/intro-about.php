@@ -20,7 +20,7 @@ $menu = acf_admin_menu();
 	<h2><?php echo __( 'About ', 'acf' ) . acf()->get_setting( 'name' ); ?></h2>
 
 	<p><?php printf(
-		__( 'The <a href="%s" target="_blank" rel="noopener nofollow">%s</a> plugin is a fork (<a href="%s" target="_blank" rel="noopener nofollow">legal copy</a>) of the <a href="%s" target="_blank" rel="noopener nofollow">Advanced Custom Fields PRO</a> plugin version %s. It includes a fork of <a href="%s" target="_blank" rel="noopener nofollow">Advanced Custom Fields: Extended PRO</a> plugin version %s for added functionality.', 'acf' ),
+		__( 'The <a href="%s" target="_blank" rel="noopener noreferrer">%s</a> plugin is a fork (<a href="%s" target="_blank" rel="noopener noreferrer">legal copy</a>) of the <a href="%s" target="_blank" rel="noopener noreferrer">Advanced Custom Fields PRO</a> plugin version %s. It includes a fork of <a href="%s" target="_blank" rel="noopener noreferrer">Advanced Custom Fields: Extended PRO</a> plugin version %s for added functionality.', 'acf' ),
 		esc_url( acf()->get_setting( 'site' ) ),
 		acf()->get_setting( 'name' ),
 		esc_url( 'https://www.gnu.org/licenses/old-licenses/gpl-2.0.html' ),
@@ -29,7 +29,26 @@ $menu = acf_admin_menu();
 		esc_url( 'https://www.acf-extended.com/pro' ),
 		acfe()->version
 	); ?></p>
+
 	<p><?php _e( 'Please follow the provided links to find documentation and code examples for ACF PRO and ACFE PRO features.', 'acf' ); ?></p>
+
+	<ul>
+		<li><?php printf(
+			'<a href="%s" target="_blank" rel="noopener noreferrer">%s</a>',
+			esc_url( 'https://www.advancedcustomfields.com/resources/' ),
+			__( 'Advanced Custom Fields documentation', 'acf' )
+		); ?></li>
+		<li><?php printf(
+			'<a href="%s" target="_blank" rel="noopener noreferrer">%s</a>',
+			esc_url( 'https://www.advancedcustomfields.com/resources/code-examples/' ),
+			__( 'Advanced Custom Fields code examples', 'acf' )
+		); ?></li>
+		<li><?php printf(
+			'<a href="%s" target="_blank" rel="noopener noreferrer">%s</a>',
+			esc_url( 'https://www.acf-extended.com/features' ),
+			__( 'Advanced Custom Fields: Extended documentation', 'acf' )
+		); ?></li>
+	</ul>
 
 	<h3><?php _e( 'Development Plan', 'acf' ); ?></h3>
 
@@ -45,7 +64,7 @@ $menu = acf_admin_menu();
 	<h3><?php _e( 'Reason for Forking ACF', 'acf' ); ?></h3>
 
 	<p><?php printf(
-		'The Advanced Custom Fields (ACF) plugin was <a href="%s" target="_blank" rel="noopener nofollow">launched in 2011</a> by Australian Eliot Condon, and it was a game changer for WordPress website development. From the moment I discovered ACF I was hooked and began to use it for all client websites.',
+		'The Advanced Custom Fields (ACF) plugin was <a href="%s" target="_blank" rel="noopener noreferrer">launched in 2011</a> by Australian Eliot Condon, and it was a game changer for WordPress website development. From the moment I discovered ACF I was hooked and began to use it for all client websites.',
 		esc_url( 'https://www.advancedcustomfields.com/blog/10-years-of-acf-a-truly-wonderful-time/' )
 	); ?></p>
 	<p><?php _e( 'One of the many things I appreciated about Eliot\'s approach to developing ACF was that while he did build a successful business from the product the plugin integrated seamlessly in the the native WordPress and ClassicPress admin screens. Branding was minimal, with a small logo in an upgrade metabox, which did not appear in the PRO version. All of the user interfaces inherited native admin styles and at no time did Eliot try to force his style onto we users.', 'acf' ); ?></p>
