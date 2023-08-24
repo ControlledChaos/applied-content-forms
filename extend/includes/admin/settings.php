@@ -206,7 +206,7 @@ class acfe_admin_settings {
 					'label'       => __( 'UI Enhancements', 'acf' ),
 					'name'        => 'acfe/modules/ui',
 					'type'        => 'true_false',
-					'description' => __( 'Enable UI enhancements. Defaults to true.', 'acf' ),
+					'description' => __( 'Enable UI enhancements. Defaults to false.', 'acf' ),
 					'category'    => 'features',
 				],
 				[

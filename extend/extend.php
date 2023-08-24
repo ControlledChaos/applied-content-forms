@@ -134,7 +134,7 @@ class ACFE {
             'modules/multilang'             => true,
             'modules/options'               => true,
             'modules/single_meta'           => false,
-            'modules/ui'                    => true,
+            'modules/ui'                    => false,
 
             // Fields
             'field/recaptcha/site_key'      => null,
