@@ -85,7 +85,7 @@ class acfe_field_group_category{
             acf_get_setting( 'capability' ),
             'edit-tags.php?taxonomy=acf-field-group-category',
             false,
-            5
+            7
         );
 
     }
