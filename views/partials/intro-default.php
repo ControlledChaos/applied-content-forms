@@ -10,8 +10,9 @@
 $menu = acf_admin_menu();
 
 // Get post type objects.
-$get_post = get_post_type_object( 'post' );
-$get_page = get_post_type_object( 'page' );
+$get_post  = get_post_type_object( 'post' );
+$get_page  = get_post_type_object( 'page' );
+$get_media = get_post_type_object( 'attachment' );
 
 // Count published pages.
 $posts_count = '';
@@ -20,7 +21,7 @@ if ( post_type_exists( 'post' ) ) {
 	if ( $posts && $posts->publish > 0 ) {
 		$posts_count = sprintf(
 			' <span class="post-count" title="%s">%s</span>',
-			$posts->publish . ' ' . __( 'published' ),
+			$posts->publish . ' ' . __( 'published', 'acf' ),
 			$posts->publish
 		);
 	}
@@ -33,8 +34,21 @@ if ( post_type_exists( 'page' ) ) {
 	if ( $pages && $pages->publish > 0 ) {
 		$pages_count = sprintf(
 			' <span class="post-count" title="%s">%s</span>',
-			$pages->publish . ' ' . __( 'published' ),
+			$pages->publish . ' ' . __( 'published', 'acf' ),
 			$pages->publish
+		);
+	}
+}
+
+// Count uploaded media.
+$media_count = '';
+if ( post_type_exists( 'attachment' ) ) {
+	$media = wp_count_posts( 'attachment', '' );
+	if ( $media && $media->inherit > 0 ) {
+		$media_count = sprintf(
+			' <span class="post-count" title="%s">%s</span>',
+			$media->inherit . ' ' . _n( 'upload', 'uploads', intval( $media->inherit ), 'acf' ),
+			$media->inherit
 		);
 	}
 }
@@ -46,7 +60,7 @@ if ( post_type_exists( 'acf-field-group' ) ) {
 	if ( $fields && $fields->publish > 0 ) {
 		$fields_count = sprintf(
 			' <span class="post-count" title="%s">%s</span>',
-			$fields->publish . ' ' . __( 'published' ),
+			$fields->publish . ' ' . __( 'published', 'acf' ),
 			$fields->publish
 		);
 	}
@@ -59,7 +73,7 @@ if ( post_type_exists( 'acfe-dpt' ) ) {
 	if ( $types && $types->publish > 0 ) {
 		$types_count = sprintf(
 			' <span class="post-count" title="%s">%s</span>',
-			$types->publish . ' ' . __( 'published' ),
+			$types->publish . ' ' . __( 'published', 'acf' ),
 			$types->publish
 		);
 	}
@@ -72,7 +86,7 @@ if ( post_type_exists( 'acfe-dt' ) ) {
 	if ( $taxes && $taxes->publish > 0 ) {
 		$taxes_count = sprintf(
 			' <span class="post-count" title="%s">%s</span>',
-			$taxes->publish . ' ' . __( 'published' ),
+			$taxes->publish . ' ' . __( 'published', 'acf' ),
 			$taxes->publish
 		);
 	}
@@ -85,7 +99,7 @@ if ( post_type_exists( 'acfe-dbt' ) ) {
 	if ( $blocks && $blocks->publish > 0 ) {
 		$blocks_count = sprintf(
 			' <span class="post-count" title="%s">%s</span>',
-			$blocks->publish . ' ' . __( 'published' ),
+			$blocks->publish . ' ' . __( 'published', 'acf' ),
 			$blocks->publish
 		);
 	}
@@ -98,7 +112,7 @@ if ( post_type_exists( 'acfe-form' ) ) {
 	if ( $forms && $forms->publish > 0 ) {
 		$forms_count = sprintf(
 			' <span class="post-count" title="%s">%s</span>',
-			$forms->publish . ' ' . __( 'published' ),
+			$forms->publish . ' ' . __( 'published', 'acf' ),
 			$forms->publish
 		);
 	}
@@ -111,7 +125,7 @@ if ( post_type_exists( 'acfe-template' ) ) {
 	if ( $templates && $templates->publish > 0 ) {
 		$templates_count = sprintf(
 			' <span class="post-count" title="%s">%s</span>',
-			$templates->publish . ' ' . __( 'published' ),
+			$templates->publish . ' ' . __( 'published', 'acf' ),
 			$templates->publish
 		);
 	}
@@ -133,7 +147,7 @@ if ( post_type_exists( 'acfe-template' ) ) {
 		<ul>
 
 			<li>
-				<h3><?php _e( 'Media', 'acf' ); ?></h3>
+				<h3><?php _e( 'Media', 'acf' ); echo $media_count; ?></h3>
 				<figure>
 					<div class="acf-tab-grid-icon dashicons dashicons-admin-media"></div>
 					<figcaption>
