@@ -128,7 +128,7 @@ function acf_admin_menu() {
 		'slug'     => 'acf',
 		'icon'     => 'dashicons-edit',
 		'position' => '59',
-		'page'     => __( 'Custom Content Forms', 'acf' ),
+		'page'     => __( 'Custom Content', 'acf' ),
 		'name'     => __( 'Content', 'acf' )
 	];
 
