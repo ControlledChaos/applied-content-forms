@@ -277,6 +277,13 @@ class acfe_admin_settings {
 					'category'    => 'options',
 				],
 				[
+					'label'       => __( 'Menu Position', 'acf' ),
+					'name'        => 'menu_position',
+					'type'        => 'number',
+					'description' => __( 'How high this content ranks in the admin menu. Default is 2. Try 59.', 'acf' ),
+					'category'    => 'options',
+				],
+				[
 					'label'       => __( 'Native Custom Fields', 'acf' ),
 					'name'        => 'remove_wp_meta_box',
 					'type'        => 'true_false',

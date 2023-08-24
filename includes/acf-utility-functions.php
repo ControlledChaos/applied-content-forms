@@ -127,7 +127,7 @@ function acf_admin_menu() {
 	$menu = [
 		'slug'     => 'acf',
 		'icon'     => 'dashicons-edit',
-		'position' => '2',
+		'position' => acf_get_setting( 'menu_position' ),
 		'page'     => __( 'Website Content', 'acf' ),
 		'name'     => __( 'Content', 'acf' )
 	];
