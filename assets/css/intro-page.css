@@ -87,6 +87,7 @@
   font-size: 0.6875rem;
   background: #ee7700;
   color: #ffffff;
+  cursor: default;
 }
 
 .acf-tab-grid li .acf-tab-grid-icon {
