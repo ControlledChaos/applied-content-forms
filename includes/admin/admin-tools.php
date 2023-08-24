@@ -3,7 +3,7 @@ use function ACF\acf;
 
 if( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-if( ! class_exists('ACF_Admin_Tools') ) :
+if( ! class_exists( 'ACF_Admin_Tools' ) ) :
 
 class ACF_Admin_Tools {
 
@@ -31,7 +31,7 @@ class ACF_Admin_Tools {
 	function __construct() {
 
 		// actions
-		add_action('admin_menu', array($this, 'admin_menu'));
+		add_action( 'admin_menu', array($this, 'admin_menu' ));
 
 	}
 
@@ -129,7 +129,7 @@ class ACF_Admin_Tools {
 
 
 		// actions
-		add_action('load-' . $page, array($this, 'load'));
+		add_action( 'load-' . $page, array($this, 'load' ));
 
 	}
 
@@ -181,13 +181,13 @@ class ACF_Admin_Tools {
 	function include_tools() {
 
 		// include
-		acf_include('includes/admin/tools/class-acf-admin-tool.php');
-		acf_include('includes/admin/tools/class-acf-admin-tool-export.php');
-		acf_include('includes/admin/tools/class-acf-admin-tool-import.php');
-
+		acf_include( 'includes/admin/tools/class-acf-admin-tool.php' );
+		acf_include( 'includes/admin/admin-content-import-export.php' );
+		acf_include( 'includes/admin/tools/class-acf-admin-tool-export.php' );
+		acf_include( 'includes/admin/tools/class-acf-admin-tool-import.php' );
 
 		// action
-		do_action('acf/include_admin_tools');
+		do_action( 'acf/include_admin_tools' );
 
 	}
 
@@ -239,7 +239,7 @@ class ACF_Admin_Tools {
 
 		// vars
 		$screen = get_current_screen();
-		$active = acf_maybe_get_GET('tool');
+		$active = acf_maybe_get_GET( 'tool' );
 
 
 		// view
@@ -256,7 +256,7 @@ class ACF_Admin_Tools {
 			if( $active && $active !== $tool->name ) continue;
 
 			// add metabox
-			add_meta_box( 'acf-admin-tool-' . $tool->name, acf_esc_html( $tool->title ), array($this, 'metabox_html'), $screen->id, 'normal', 'default', array('tool' => $tool->name) );
+			add_meta_box( 'acf-admin-tool-' . $tool->name, acf_esc_html( $tool->title ), array($this, 'metabox_html' ), $screen->id, 'normal', 'default', array( 'tool' => $tool->name) );
 
 		}
 
