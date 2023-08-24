@@ -8,3 +8,5 @@ A suite of tools for adding and managing custom content types and user forms.
 ![ClassicPress tested on version 2.0](https://img.shields.io/badge/ClassicPress_tested-2.0-03768e.svg?style=flat-square)
 
 This is a fork of Advanced Custom Fields PRO version 5.9.6 plus a fork of Advanced Custom Fields: Extended PRO version 0.8.8.6.
+
+![ACF intro page screenshot](https://raw.githubusercontent.com/ControlledChaos/applied-content-forms/main/assets/images/screenshot-01.jpg)
