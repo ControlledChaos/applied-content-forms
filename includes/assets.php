@@ -1,11 +1,11 @@
-<?php 
+<?php
 
 if( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 if( ! class_exists('ACF_Assets') ) :
 
 class ACF_Assets {
-	
+
 	/**
 	 * Storage for i18n data.
 	 *
@@ -13,7 +13,7 @@ class ACF_Assets {
 	 * @var array
 	 */
 	public $text = array();
-	
+
 	/**
 	 * Storage for l10n data.
 	 *
@@ -63,7 +63,7 @@ class ACF_Assets {
 				_doing_it_wrong( __FUNCTION__, 'The ACF_Assets class should not be accessed directly.', '5.9.0' );
 		}
     }
-	
+
 	/**
 	 * Appends an array of i18n data.
 	 *
@@ -78,7 +78,7 @@ class ACF_Assets {
 			$this->text[ $k ] = $v;
 		}
 	}
-	
+
 	/**
 	 * Appends an array of l10n data.
 	 *
@@ -93,7 +93,7 @@ class ACF_Assets {
 			$this->data[ $k ] = $v;
 		}
 	}
-	
+
 	/**
 	 * Registers the ACF scripts and styles.
 	 *
@@ -104,21 +104,25 @@ class ACF_Assets {
 	 * @return	void
 	 */
 	public function register_scripts() {
-		
+
 		// Extract vars.
 		$suffix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
 		$version = acf_get_setting('version');
-		
+
 		// Register scripts.
 		wp_register_script( 'acf', acf_get_url( 'assets/js/acf' . $suffix . '.js' ), array( 'jquery' ), $version );
 		wp_register_script( 'acf-input', acf_get_url( 'assets/js/acf-input' . $suffix . '.js' ), array( 'jquery', 'jquery-ui-sortable', 'jquery-ui-resizable', 'acf' ), $version );
 		wp_register_script( 'acf-field-group', acf_get_url( 'assets/js/acf-field-group' . $suffix . '.js' ), array( 'acf-input' ), $version );
-		
+		wp_register_script( 'acf-pro-input', acf_get_url( 'assets/js/acf-pro-input' . $suffix . '.js' ), array('acf-input'), $version );
+		wp_register_script( 'acf-pro-field-group', acf_get_url( 'assets/js/acf-pro-field-group' . $suffix . '.js' ), array('acf-field-group'), $version );
+
 		// Register styles.
-		wp_register_style( 'acf-global', acf_get_url( 'assets/css/acf-global.css' ), array( 'dashicons' ), $version );
-		wp_register_style( 'acf-input', acf_get_url( 'assets/css/acf-input.css' ), array( 'acf-global' ), $version );
-		wp_register_style( 'acf-field-group', acf_get_url( 'assets/css/acf-field-group.css' ), array( 'acf-input' ), $version );
-		
+		wp_register_style( 'acf-global', acf_get_url( 'assets/css/acf-global' . $suffix . '.css' ), array( 'dashicons' ), $version );
+		wp_register_style( 'acf-input', acf_get_url( 'assets/css/acf-input' . $suffix . '.css' ), array( 'acf-global' ), $version );
+		wp_register_style( 'acf-field-group', acf_get_url( 'assets/css/acf-field-group' . $suffix . '.css' ), array( 'acf-input' ), $version );
+		wp_register_style( 'acf-pro-input', acf_get_url( 'assets/css/acf-pro-input' . $suffix . '.css' ), array('acf-input'), $version );
+		wp_register_style( 'acf-pro-field-group', acf_get_url( 'assets/css/acf-pro-field-group' . $suffix . '.css' ), array('acf-field-group'), $version );
+
 		/**
 		 * Fires after core scripts and styles have been registered.
 		 *
@@ -156,7 +160,7 @@ class ACF_Assets {
 	public function enqueue_style( $name ) {
 		wp_enqueue_style( $name );
 	}
-	
+
 	/**
 	 * Adds the actions needed to print supporting inline scripts.
 	 *
@@ -167,18 +171,18 @@ class ACF_Assets {
 	 * @return	void
 	 */
 	private function add_actions() {
-		
+
 		// Only run once.
 		if( acf_has_done('ACF_Assets::add_actions') ) {
 			return;
 		}
-		
+
 		// Add actions.
 		$this->add_action( 'admin_enqueue_scripts', 'enqueue_scripts' , 20 );
 		$this->add_action( 'admin_print_scripts', 'print_scripts', 20 );
 		$this->add_action( 'admin_print_footer_scripts', 'print_footer_scripts', 20 );
 	}
-	
+
 	/**
 	 * Extends the add_action() function with two additional features:
 	 * 1. Renames $action depending on the current page (customizer, login, front-end).
@@ -194,7 +198,7 @@ class ACF_Assets {
 	 * @return	void
 	 */
 	public function add_action( $action, $method, $priority = 10, $accepted_args = 1 ) {
-		
+
 		// Generate an array of action replacements.
 		$replacements = array(
 			'customizer' => array(
@@ -219,23 +223,23 @@ class ACF_Assets {
 				'admin_print_footer_scripts'	=> 'wp_print_footer_scripts'
 			)
 		);
-		
+
 		// Determine the current context.
 		if( did_action('customize_controls_init') ) {
 			$context = 'customizer';
-		} elseif( did_action('login_form_register') ) { 
+		} elseif( did_action('login_form_register') ) {
 			$context = 'login';
 		} elseif( is_admin() ) {
 			$context = 'admin';
 		} else {
 			$context = 'wp';
 		}
-		
+
 		// Replace action if possible.
 		if( isset( $replacements[ $context ][ $action ] ) ) {
 			$action = $replacements[ $context ][ $action ];
 		}
-		
+
 		// Check if action is currently being or has already been run.
 		if( did_action($action) ) {
 			$doing = acf_doing_action( $action );
@@ -246,11 +250,11 @@ class ACF_Assets {
 				return call_user_func( array( $this, $method ) );
 			}
 		}
-		
+
 		// Add action.
 		add_action( $action, array( $this, $method ), $priority, $accepted_args );
 	}
-	
+
 	/**
 	 * Generic controller for enqueuing scripts and styles.
 	 *
@@ -290,12 +294,12 @@ class ACF_Assets {
 	 * @return	void
 	 */
 	public function enqueue_uploader() {
-		
+
 		// Only run once.
 		if( acf_has_done('ACF_Assets::enqueue_uploader') ) {
 			return;
 		}
-		
+
 		// Enqueue media assets.
 		if( current_user_can('upload_files') ) {
 			wp_enqueue_media();
@@ -313,7 +317,7 @@ class ACF_Assets {
 		 */
 		do_action( 'acf/enqueue_uploader' );
 	}
-	
+
 	/**
 	 * Enqueues and localizes scripts.
 	 *
@@ -324,7 +328,7 @@ class ACF_Assets {
 	 * @return	void
 	 */
 	public function enqueue_scripts() {
-		
+
 		// Enqueue input scripts.
 		if( in_array('input', $this->enqueue) ) {
 			wp_enqueue_script( 'acf-input' );
@@ -338,7 +342,7 @@ class ACF_Assets {
 
 		// Localize text.
 		acf_localize_text(array(
-			
+
 			// Tooltip
 			'Are you sure?'			=> __('Are you sure?','acf'),
 			'Yes'					=> __('Yes','acf'),
@@ -346,24 +350,24 @@ class ACF_Assets {
 			'Remove'				=> __('Remove','acf'),
 			'Cancel'				=> __('Cancel','acf'),
 		));
-		
+
 		// Localize "input" text.
 		if( wp_script_is('acf-input') ) {
 			acf_localize_text(array(
-				
+
 				// Unload
 				'The changes you made will be lost if you navigate away from this page'	=> __('The changes you made will be lost if you navigate away from this page', 'acf'),
-				
+
 				// Validation
 				'Validation successful'			=> __('Validation successful', 'acf'),
 				'Validation failed'				=> __('Validation failed', 'acf'),
 				'1 field requires attention'	=> __('1 field requires attention', 'acf'),
 				'%d fields require attention'	=> __('%d fields require attention', 'acf'),
-				
+
 				// Other
 				'Edit field group'	=> __('Edit field group', 'acf'),
 			));
-			
+
 			/**
 			 * Fires during "admin_enqueue_scripts" when ACF scripts are enqueued.
 			 *
@@ -373,7 +377,7 @@ class ACF_Assets {
 			 */
 			do_action( 'acf/input/admin_enqueue_scripts' );
 		}
-		
+
 		/**
 		 * Fires during "admin_enqueue_scripts" when ACF scripts are enqueued.
 		 *
@@ -395,7 +399,7 @@ class ACF_Assets {
 			wp_localize_script( 'acf', 'acfL10n', $text );
 		}
 	}
-	
+
 	/**
 	 * Prints scripts in head.
 	 *
@@ -407,7 +411,7 @@ class ACF_Assets {
 	 */
 	public function print_scripts() {
 		if( wp_script_is('acf-input') ) {
-			
+
 			/**
 			 * Fires during "admin_head" when ACF scripts are enqueued.
 			 *
@@ -429,7 +433,7 @@ class ACF_Assets {
 		do_action( 'acf/admin_head' );
 		do_action( 'acf/admin_print_scripts' );
 	}
-	
+
 	/**
 	 * Prints scripts in footer.
 	 *
@@ -441,12 +445,12 @@ class ACF_Assets {
 	 */
 	public function print_footer_scripts() {
 		global $wp_version;
-		
+
 		// Bail early if 'acf' script was never enqueued (fixes Elementor enqueue reset conflict).
 		if( !wp_script_is('acf') ) {
 			return;
 		}
-		
+
 		// Localize data.
 		acf_localize_data(array(
 			'admin_url'		=> admin_url(),
@@ -462,12 +466,12 @@ class ACF_Assets {
 			'validation'	=> acf_get_form_data('validation'),
 			'editor'		=> acf_is_block_editor() ? 'block' : 'classic'
 		));
-		
+
 		// Print inline script.
 		printf( "<script>\n%s\n</script>\n", 'acf.data = ' . wp_json_encode( $this->data ) . ';' );
-		
+
 		if( wp_script_is('acf-input') ) {
-			
+
 			/**
 			 * Filters an empty array for compat l10n data.
 			 *
@@ -479,7 +483,7 @@ class ACF_Assets {
 			if( $compat_l10n ) {
 				printf( "<script>\n%s\n</script>\n", 'acf.l10n = ' . wp_json_encode( $compat_l10n ) . ';' );
 			}
-			
+
 			/**
 			 * Fires during "admin_footer" when ACF scripts are enqueued.
 			 *
@@ -490,7 +494,7 @@ class ACF_Assets {
 			do_action( 'acf/input/admin_footer' );
 			do_action( 'acf/input/admin_print_footer_scripts' );
 		}
-		
+
 		/**
 		 * Fires during "admin_footer" when ACF scripts are enqueued.
 		 *
@@ -500,11 +504,11 @@ class ACF_Assets {
 		 */
 		do_action( 'acf/admin_footer' );
 		do_action( 'acf/admin_print_footer_scripts' );
-		
+
 		// Once all data is localized, trigger acf.prepare() to execute functionality before DOM ready.
 		printf( "<script>\n%s\n</script>\n", "acf.doAction( 'prepare' );" );
 	}
-	
+
 	/**
 	 * Prints uploader scripts in footer.
 	 *
