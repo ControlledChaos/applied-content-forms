@@ -20,7 +20,7 @@ if ( post_type_exists( 'post' ) ) {
 	$posts = wp_count_posts( 'post', '' );
 	if ( $posts && $posts->publish > 0 ) {
 		$posts_count = sprintf(
-			' <span class="post-count" title="%s">%s</span>',
+			' <span class="acf-js-tooltip post-count" title="%s">%s</span>',
 			$posts->publish . ' ' . __( 'published', 'acf' ),
 			$posts->publish
 		);
@@ -33,7 +33,7 @@ if ( post_type_exists( 'page' ) ) {
 	$pages = wp_count_posts( 'page', '' );
 	if ( $pages && $pages->publish > 0 ) {
 		$pages_count = sprintf(
-			' <span class="post-count" title="%s">%s</span>',
+			' <span class="acf-js-tooltip post-count" title="%s">%s</span>',
 			$pages->publish . ' ' . __( 'published', 'acf' ),
 			$pages->publish
 		);
@@ -46,7 +46,7 @@ if ( post_type_exists( 'attachment' ) ) {
 	$media = wp_count_posts( 'attachment', '' );
 	if ( $media && $media->inherit > 0 ) {
 		$media_count = sprintf(
-			' <span class="post-count" title="%s">%s</span>',
+			' <span class="acf-js-tooltip post-count" title="%s">%s</span>',
 			$media->inherit . ' ' . _n( 'upload', 'uploads', intval( $media->inherit ), 'acf' ),
 			$media->inherit
 		);
@@ -59,7 +59,7 @@ if ( post_type_exists( 'acf-field-group' ) ) {
 	$fields = wp_count_posts( 'acf-field-group', '' );
 	if ( $fields && $fields->publish > 0 ) {
 		$fields_count = sprintf(
-			' <span class="post-count" title="%s">%s</span>',
+			' <span class="acf-js-tooltip post-count" title="%s">%s</span>',
 			$fields->publish . ' ' . __( 'published', 'acf' ),
 			$fields->publish
 		);
@@ -72,7 +72,7 @@ if ( post_type_exists( 'acfe-dpt' ) ) {
 	$types = wp_count_posts( 'acfe-dpt', '' );
 	if ( $types && $types->publish > 0 ) {
 		$types_count = sprintf(
-			' <span class="post-count" title="%s">%s</span>',
+			' <span class="acf-js-tooltip post-count" title="%s">%s</span>',
 			$types->publish . ' ' . __( 'published', 'acf' ),
 			$types->publish
 		);
@@ -85,7 +85,7 @@ if ( post_type_exists( 'acfe-dt' ) ) {
 	$taxes = wp_count_posts( 'acfe-dt', '' );
 	if ( $taxes && $taxes->publish > 0 ) {
 		$taxes_count = sprintf(
-			' <span class="post-count" title="%s">%s</span>',
+			' <span class="acf-js-tooltip post-count" title="%s">%s</span>',
 			$taxes->publish . ' ' . __( 'published', 'acf' ),
 			$taxes->publish
 		);
@@ -98,7 +98,7 @@ if ( post_type_exists( 'acfe-dbt' ) ) {
 	$blocks = wp_count_posts( 'acfe-dbt', '' );
 	if ( $blocks && $blocks->publish > 0 ) {
 		$blocks_count = sprintf(
-			' <span class="post-count" title="%s">%s</span>',
+			' <span class="acf-js-tooltip post-count" title="%s">%s</span>',
 			$blocks->publish . ' ' . __( 'published', 'acf' ),
 			$blocks->publish
 		);
@@ -111,7 +111,7 @@ if ( post_type_exists( 'acfe-form' ) ) {
 	$forms = wp_count_posts( 'acfe-form', '' );
 	if ( $forms && $forms->publish > 0 ) {
 		$forms_count = sprintf(
-			' <span class="post-count" title="%s">%s</span>',
+			' <span class="acf-js-tooltip post-count" title="%s">%s</span>',
 			$forms->publish . ' ' . __( 'published', 'acf' ),
 			$forms->publish
 		);
@@ -124,7 +124,7 @@ if ( post_type_exists( 'acfe-template' ) ) {
 	$templates = wp_count_posts( 'acfe-template', '' );
 	if ( $templates && $templates->publish > 0 ) {
 		$templates_count = sprintf(
-			' <span class="post-count" title="%s">%s</span>',
+			' <span class="acf-js-tooltip post-count" title="%s">%s</span>',
 			$templates->publish . ' ' . __( 'published', 'acf' ),
 			$templates->publish
 		);
