@@ -1,6 +1,6 @@
 <?php
 /**
- * Content import/export
+ * Native content import/export
  *
  * Adds a metabox to the ACF content tools screen.
  *
@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	die;
 }
 
-class Content_Import_Export extends ACF_Admin_Tool {
+class ACF_Admin_Tool_Native_Content extends ACF_Admin_Tool {
 
 	/**
 	 * Menu icon
@@ -63,4 +63,4 @@ class Content_Import_Export extends ACF_Admin_Tool {
 	}
 }
 
-acf_register_admin_tool( 'Content_Import_Export' );
+acf_register_admin_tool( 'ACF_Admin_Tool_Native_Content' );

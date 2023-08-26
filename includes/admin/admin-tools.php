@@ -182,7 +182,7 @@ class ACF_Admin_Tools {
 
 		// include
 		acf_include( 'includes/admin/tools/class-acf-admin-tool.php' );
-		acf_include( 'includes/admin/admin-content-import-export.php' );
+		acf_include( 'includes/admin/tools/class-acf-admin-tool-native-content.php' );
 		acf_include( 'includes/admin/tools/class-acf-admin-tool-export.php' );
 		acf_include( 'includes/admin/tools/class-acf-admin-tool-import.php' );
 
