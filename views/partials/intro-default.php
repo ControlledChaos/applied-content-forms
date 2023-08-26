@@ -9,18 +9,18 @@
 // Get filtered menu options.
 $menu = acf_admin_menu();
 
-// Get post type objects.
-$get_post  = get_post_type_object( 'post' );
-$get_page  = get_post_type_object( 'page' );
-$get_media = get_post_type_object( 'attachment' );
-
 // Count published pages.
 $posts_count = '';
+$posts_cap   = '';
 if ( post_type_exists( 'post' ) ) {
-	$posts = wp_count_posts( 'post', '' );
+
+	$get_post  = get_post_type_object( 'post' );
+	$posts     = wp_count_posts( 'post', '' );
+	$posts_cap = $get_post->cap->edit_posts;
+
 	if ( $posts && $posts->publish > 0 ) {
 		$posts_count = sprintf(
-			' <span class="acf-js-tooltip post-count" title="%s">%s</span>',
+			' <span class="acf-js-tooltip post-count" role="tooltip" title="%s">%s</span>',
 			$posts->publish . ' ' . __( 'published', 'acf' ),
 			$posts->publish
 		);
@@ -30,10 +30,13 @@ if ( post_type_exists( 'post' ) ) {
 // Count published pages.
 $pages_count = '';
 if ( post_type_exists( 'page' ) ) {
-	$pages = wp_count_posts( 'page', '' );
+
+	$get_page = get_post_type_object( 'page' );
+	$pages    = wp_count_posts( 'page', '' );
+
 	if ( $pages && $pages->publish > 0 ) {
 		$pages_count = sprintf(
-			' <span class="acf-js-tooltip post-count" title="%s">%s</span>',
+			' <span class="acf-js-tooltip post-count" role="tooltip" title="%s">%s</span>',
 			$pages->publish . ' ' . __( 'published', 'acf' ),
 			$pages->publish
 		);
@@ -43,10 +46,15 @@ if ( post_type_exists( 'page' ) ) {
 // Count uploaded media.
 $media_count = '';
 if ( post_type_exists( 'attachment' ) ) {
-	$media = wp_count_posts( 'attachment', '' );
+
+	$get_media = get_post_type_object( 'attachment' );
+	$media     = wp_count_posts( 'attachment', '' );
+
 	if ( $media && $media->inherit > 0 ) {
+
+		// Needs inherit rather than publish.
 		$media_count = sprintf(
-			' <span class="acf-js-tooltip post-count" title="%s">%s</span>',
+			' <span class="acf-js-tooltip post-count" role="tooltip" title="%s">%s</span>',
 			$media->inherit . ' ' . _n( 'upload', 'uploads', intval( $media->inherit ), 'acf' ),
 			$media->inherit
 		);
@@ -56,10 +64,13 @@ if ( post_type_exists( 'attachment' ) ) {
 // Count published field groups.
 $fields_count = '';
 if ( post_type_exists( 'acf-field-group' ) ) {
-	$fields = wp_count_posts( 'acf-field-group', '' );
+
+	$get_fields = get_post_type_object( 'acf-field-group' );
+	$fields     = wp_count_posts( 'acf-field-group', '' );
+
 	if ( $fields && $fields->publish > 0 ) {
 		$fields_count = sprintf(
-			' <span class="acf-js-tooltip post-count" title="%s">%s</span>',
+			' <span class="acf-js-tooltip post-count" role="tooltip" title="%s">%s</span>',
 			$fields->publish . ' ' . __( 'published', 'acf' ),
 			$fields->publish
 		);
@@ -72,7 +83,7 @@ if ( post_type_exists( 'acfe-dpt' ) ) {
 	$types = wp_count_posts( 'acfe-dpt', '' );
 	if ( $types && $types->publish > 0 ) {
 		$types_count = sprintf(
-			' <span class="acf-js-tooltip post-count" title="%s">%s</span>',
+			' <span class="acf-js-tooltip post-count" role="tooltip" title="%s">%s</span>',
 			$types->publish . ' ' . __( 'published', 'acf' ),
 			$types->publish
 		);
@@ -85,7 +96,7 @@ if ( post_type_exists( 'acfe-dt' ) ) {
 	$taxes = wp_count_posts( 'acfe-dt', '' );
 	if ( $taxes && $taxes->publish > 0 ) {
 		$taxes_count = sprintf(
-			' <span class="acf-js-tooltip post-count" title="%s">%s</span>',
+			' <span class="acf-js-tooltip post-count" role="tooltip" title="%s">%s</span>',
 			$taxes->publish . ' ' . __( 'published', 'acf' ),
 			$taxes->publish
 		);
@@ -98,7 +109,7 @@ if ( post_type_exists( 'acfe-dbt' ) ) {
 	$blocks = wp_count_posts( 'acfe-dbt', '' );
 	if ( $blocks && $blocks->publish > 0 ) {
 		$blocks_count = sprintf(
-			' <span class="acf-js-tooltip post-count" title="%s">%s</span>',
+			' <span class="acf-js-tooltip post-count" role="tooltip" title="%s">%s</span>',
 			$blocks->publish . ' ' . __( 'published', 'acf' ),
 			$blocks->publish
 		);
@@ -111,7 +122,7 @@ if ( post_type_exists( 'acfe-form' ) ) {
 	$forms = wp_count_posts( 'acfe-form', '' );
 	if ( $forms && $forms->publish > 0 ) {
 		$forms_count = sprintf(
-			' <span class="acf-js-tooltip post-count" title="%s">%s</span>',
+			' <span class="acf-js-tooltip post-count" role="tooltip" title="%s">%s</span>',
 			$forms->publish . ' ' . __( 'published', 'acf' ),
 			$forms->publish
 		);
@@ -124,7 +135,7 @@ if ( post_type_exists( 'acfe-template' ) ) {
 	$templates = wp_count_posts( 'acfe-template', '' );
 	if ( $templates && $templates->publish > 0 ) {
 		$templates_count = sprintf(
-			' <span class="acf-js-tooltip post-count" title="%s">%s</span>',
+			' <span class="acf-js-tooltip post-count" role="tooltip" title="%s">%s</span>',
 			$templates->publish . ' ' . __( 'published', 'acf' ),
 			$templates->publish
 		);
@@ -146,6 +157,7 @@ if ( post_type_exists( 'acfe-template' ) ) {
 	<div class="acf-tab-grid">
 		<ul>
 
+			<?php if ( current_user_can( 'upload_files' ) ) : ?>
 			<li>
 				<h3><?php _e( 'Media', 'acf' ); echo $media_count; ?></h3>
 				<figure>
@@ -156,7 +168,9 @@ if ( post_type_exists( 'acfe-template' ) ) {
 					</figcaption>
 				</figure>
 			</li>
+			<?php endif; ?>
 
+			<?php if ( current_user_can( $posts_cap ) ) : ?>
 			<li>
 				<h3><?php echo $get_post->labels->menu_name; echo $posts_count; ?></h3>
 				<figure>
@@ -167,7 +181,9 @@ if ( post_type_exists( 'acfe-template' ) ) {
 					</figcaption>
 				</figure>
 			</li>
+			<?php endif; ?>
 
+			<?php if ( current_user_can( $get_page->cap->edit_posts ) ) : ?>
 			<li>
 				<h3><?php echo $get_page->labels->menu_name; echo $pages_count; ?></h3>
 				<figure>
@@ -178,8 +194,9 @@ if ( post_type_exists( 'acfe-template' ) ) {
 					</figcaption>
 				</figure>
 			</li>
+			<?php endif; ?>
 
-			<?php if ( acf_get_setting( 'acfe/modules/field_groups' ) ) : ?>
+			<?php if ( acf_get_setting( 'acfe/modules/field_groups' ) && current_user_can( $get_fields->cap->edit_posts ) ) : ?>
 			<li>
 				<h3><?php _e( 'Field Groups', 'acf' ); echo $fields_count; ?></h3>
 				<figure>
