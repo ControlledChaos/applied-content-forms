@@ -59,7 +59,7 @@
 				vertical-align: bottom;
 				border-radius: 50%;
 				font-size: 0.6875rem;
-				background: #0d99d5;
+				background: #2271b1;
 				color: #ffffff;
 				cursor: default;
 			}
@@ -82,4 +82,53 @@
 	border-left-width: 4px;
 	border-left-color: #dba617;
 	box-shadow: 0 1px 1px rgba( $color: black, $alpha: 0.04 );
+}
+
+// Color scheme compatibility.
+.admin-color-light {
+	.acf-tab-grid li h3 .post-count {
+		background: #888888;
+	}
+}
+
+.admin-color-modern {
+	.acf-tab-grid li h3 .post-count {
+		background: #3858e9;
+	}
+}
+
+.admin-color-blue {
+	.acf-tab-grid li h3 .post-count {
+		background: #2271b1;
+	}
+}
+
+.admin-color-coffee {
+	.acf-tab-grid li h3 .post-count {
+		background: #c7a589;
+	}
+}
+
+.admin-color-ectoplasm {
+	.acf-tab-grid li h3 .post-count {
+		background: #a3b745;
+	}
+}
+
+.admin-color-midnight {
+	.acf-tab-grid li h3 .post-count {
+		background: #e14d43;
+	}
+}
+
+.admin-color-ocean {
+	.acf-tab-grid li h3 .post-count {
+		background: #9ebaa0;
+	}
+}
+
+.admin-color-sunrise {
+	.acf-tab-grid li h3 .post-count {
+		background: #dd823b;
+	}
 }
