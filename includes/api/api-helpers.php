@@ -209,7 +209,7 @@ function acf_append_data( $name, $data ) {
 /*
 *  acf_init
 *
-*  alias of acf()->init()
+*  alias of acf()->setup()
 *
 *  @type	function
 *  @date	28/09/13
@@ -220,9 +220,7 @@ function acf_append_data( $name, $data ) {
 */
 
 function acf_init() {
-
-	acf()->init();
-
+	acf()->setup();
 }
 
 

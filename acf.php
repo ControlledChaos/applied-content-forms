@@ -138,7 +138,6 @@ class ACF {
 	/**
 	 * Constructor method
 	 *
-	 * @date   23/06/12
 	 * @since  5.0.0
 	 * @access public
 	 * @return self
@@ -150,15 +149,11 @@ class ACF {
 	}
 
 	/**
-	 * initialize
+	 * Initialize the plugin
 	 *
-	 * Sets up the ACF plugin.
-	 *
-	 * @date	28/09/13
-	 * @since	5.0.0
-	 *
-	 * @param	void
-	 * @return	void
+	 * @since  5.0.0
+	 * @access public
+	 * @return void
 	 */
 	public function initialize() {
 
@@ -174,39 +169,39 @@ class ACF {
 		$this->settings = apply_filters(
 			'acf_settings',
 			[
-				'name'						=> __( 'Applied Content Forms', 'acf' ),
-				'site'                      => 'https://github.com/ControlledChaos/applied-content-forms',
-				'slug'						=> dirname( ACF_BASENAME ),
-				'version'					=> ACF_VERSION,
-				'basename'					=> ACF_BASENAME,
-				'path'						=> ACF_PATH,
-				'file'						=> __FILE__,
-				'url'						=> plugin_dir_url( __FILE__ ),
-				'pro'                       => true,
-				'fork'                      => true,
-				'show_admin'				=> true,
-				'menu_position'             => 2,
-				'stripslashes'				=> false,
-				'local'						=> true,
-				'json'						=> true,
-				'save_json'					=> '',
-				'load_json'					=> [],
-				'default_language'			=> '',
-				'current_language'			=> '',
-				'capability'				=> 'manage_options',
-				'uploader'					=> 'wp',
-				'autoload'					=> false,
-				'l10n'						=> true,
-				'l10n_textdomain'			=> '',
-				'google_api_key'			=> '',
-				'google_api_client'			=> '',
-				'enqueue_google_maps'		=> true,
-				'enqueue_select2'			=> true,
-				'enqueue_datepicker'		=> true,
-				'enqueue_datetimepicker'	=> true,
-				'select2_version'			=> 4,
-				'row_index_offset'			=> 1,
-				'remove_wp_meta_box'		=> true
+				'name'                   => __( 'Applied Content Forms', 'acf' ),
+				'site'                   => 'https://github.com/ControlledChaos/applied-content-forms',
+				'slug'                   => dirname( ACF_BASENAME ),
+				'version'                => ACF_VERSION,
+				'basename'               => ACF_BASENAME,
+				'path'                   => ACF_PATH,
+				'file'                   => __FILE__,
+				'url'                    => plugin_dir_url( __FILE__ ),
+				'pro'                    => true,
+				'fork'                   => true,
+				'show_admin'             => true,
+				'menu_position'          => 2,
+				'stripslashes'           => false,
+				'local'                  => true,
+				'json'                   => true,
+				'save_json'              => '',
+				'load_json'              => [],
+				'default_language'       => '',
+				'current_language'       => '',
+				'capability'             => 'manage_options',
+				'uploader'               => 'wp',
+				'autoload'               => false,
+				'l10n'                   => true,
+				'l10n_textdomain'        => '',
+				'google_api_key'         => '',
+				'google_api_client'      => '',
+				'enqueue_google_maps'    => true,
+				'enqueue_select2'        => true,
+				'enqueue_datepicker'     => true,
+				'enqueue_datetimepicker' => true,
+				'select2_version'        => 4,
+				'row_index_offset'       => 1,
+				'remove_wp_meta_box'     => true
 			]
 		);
 
@@ -299,27 +294,21 @@ class ACF {
 			acf_include( 'tests/tests.php' );
 		}
 
-		// Add actions.
-		add_action( 'init', array( $this, 'init' ), 5 );
-		add_action( 'init', array( $this, 'register_post_types' ), 5 );
-		add_action( 'init', array( $this, 'register_post_status' ), 5 );
-
-		// Add filters.
-		add_filter( 'posts_where', array( $this, 'posts_where' ), 10, 2 );
+		// Add actions & filters.
+		add_action( 'init', [ $this, 'setup' ], 5 );
+		add_action( 'init', [ $this, 'register_post_types' ], 5 );
+		add_action( 'init', [ $this, 'register_post_status' ], 5 );
+		add_filter( 'posts_where', [ $this, 'posts_where' ], 10, 2 );
 	}
 
 	/**
-	 * init
+	 * Plugin setup
 	 *
-	 * Completes the setup process on "init" of earlier.
-	 *
-	 * @date	28/09/13
-	 * @since	5.0.0
-	 *
-	 * @param	void
-	 * @return	void
+	 * @since  5.0.0
+	 * @access public
+	 * @return void
 	 */
-	public function init() {
+	public function setup() {
 
 		// Bail early if called directly from functions.php or plugin file.
 		if ( ! did_action( 'plugins_loaded' ) ) {
@@ -385,10 +374,8 @@ class ACF {
 		/**
 		 * Fires after field types have been included.
 		 *
-		 * @date	28/09/13
-		 * @since	5.0.0
-		 *
-		 * @param	int $major_version The major version of ACF.
+		 * @since 5.0.0
+		 * @param int $major_version The major version of ACF.
 		 */
 		do_action( 'acf/include_field_types', ACF_MAJOR_VERSION );
 
@@ -420,44 +407,34 @@ class ACF {
 		/**
 		 * Fires after location types have been included.
 		 *
-		 * @date	28/09/13
-		 * @since	5.0.0
-		 *
-		 * @param	int $major_version The major version of ACF.
+		 * @since 5.0.0
+		 * @param int $major_version The major version of ACF.
 		 */
 		do_action( 'acf/include_location_rules', ACF_MAJOR_VERSION );
 
 		/**
 		 * Fires during initialization. Used to add local fields.
 		 *
-		 * @date	28/09/13
-		 * @since	5.0.0
-		 *
-		 * @param	int $major_version The major version of ACF.
+		 * @since 5.0.0
+		 * @param int $major_version The major version of ACF.
 		 */
 		do_action( 'acf/include_fields', ACF_MAJOR_VERSION );
 
 		/**
 		 * Fires after ACF is completely "initialized".
 		 *
-		 * @date	28/09/13
-		 * @since	5.0.0
-		 *
-		 * @param	int $major_version The major version of ACF.
+		 * @since .0.0
+		 * @param int $major_version The major version of ACF.
 		 */
 		do_action( 'acf/init', ACF_MAJOR_VERSION );
 	}
 
 	/**
-	 * register_post_types
+	 * Register post types
 	 *
-	 * Registers the ACF post types.
-	 *
-	 * @date	22/10/2015
-	 * @since	5.3.2
-	 *
-	 * @param	void
-	 * @return	void
+	 * @since  5.3.2
+	 * @access public
+	 * @return void
 	 */
 	public function register_post_types() {
 
@@ -540,15 +517,11 @@ class ACF {
 	}
 
 	/**
-	 * register_post_status
+	 * Register post statuses
 	 *
-	 * Registers the ACF post statuses.
-	 *
-	 * @date	22/10/2015
-	 * @since	5.3.2
-	 *
-	 * @param	void
-	 * @return	void
+	 * @since  5.3.2
+	 * @access public
+	 * @return void
 	 */
 	public function register_post_status() {
 
@@ -563,52 +536,40 @@ class ACF {
 		] );
 	}
 
-	/*
-	*  input_admin_enqueue_scripts
-	*
-	*  description
-	*
-	*  @type	function
-	*  @date	4/11/2013
-	*  @since	5.0.0
-	*
-	*  @param	$post_id (int)
-	*  @return	$post_id (int)
-	*/
-
+	/**
+	 * Enqueue input scripts
+	 *
+	 * @since  5.0.0
+	 * @access public
+	 * @return void
+	 */
 	public function input_admin_enqueue_scripts() {
 		wp_enqueue_script( 'acf-pro-input' );
 		wp_enqueue_style( 'acf-pro-input' );
 	}
 
-
-	/*
-	*  field_group_admin_enqueue_scripts
-	*
-	*  description
-	*
-	*  @type	function
-	*  @date	4/11/2013
-	*  @since	5.0.0
-	*
-	*  @param	$post_id (int)
-	*  @return	$post_id (int)
-	*/
+	/**
+	 *  Enqueue field group admin scripts
+	 *
+	 * @since  5.0.0
+	 * @access public
+	 * @return void
+	 */
 	public function field_group_admin_enqueue_scripts() {
 		wp_enqueue_script( 'acf-pro-field-group' );
 		wp_enqueue_style( 'acf-pro-field-group' );
 	}
 
 	/**
-	 * posts_where
+	 * Posts where
 	 *
 	 * Filters the $where clause allowing for custom WP_Query args.
 	 *
-	 * @date	31/8/19
 	 * @since	5.8.1
-	 *
-	 * @param	string $where The WHERE clause.
-	 * @return	WP_Query $wp_query The query object.
+	 * @access public
+	 * @param  string $where The WHERE clause.
+	 * @param  $wp_query The query object.
+	 * @return object WP_Query instance.
 	 */
 	public function posts_where( $where, $wp_query ) {
 
@@ -628,21 +589,19 @@ class ACF {
 		if ( $group_key = $wp_query->get( 'acf_group_key' ) ) {
 			$where .= $wpdb->prepare(" AND {$wpdb->posts}.post_name = %s", $group_key );
 	    }
-
 	    return $where;
 	}
 
 	/**
-	 * define
+	 * Define constant
 	 *
 	 * Defines a constant if doesn't already exist.
 	 *
-	 * @date	3/5/17
-	 * @since	5.5.13
-	 *
-	 * @param	string $name The constant name.
-	 * @param	mixed $value The constant value.
-	 * @return	void
+	 * @since  5.5.13
+	 * @access public
+	 * @param  string $name The constant name.
+	 * @param  mixed $value The constant value.
+	 * @return void
 	 */
 	public function define( $name, $value = true ) {
 		if ( ! defined( $name ) ) {
@@ -651,30 +610,28 @@ class ACF {
 	}
 
 	/**
-	 * has_setting
+	 * Has setting
 	 *
 	 * Returns true if a setting exists for this name.
 	 *
-	 * @date	2/2/18
-	 * @since	5.6.5
-	 *
-	 * @param	string $name The setting name.
-	 * @return	boolean
+	 * @since  5.6.5
+	 * @access public
+	 * @param  string $name The setting name.
+	 * @return boolean
 	 */
 	public function has_setting( $name ) {
 		return isset( $this->settings[ $name ] );
 	}
 
 	/**
-	 * get_setting
+	 * Get setting
 	 *
 	 * Returns a setting or null if doesn't exist.
 	 *
-	 * @date	28/09/13
-	 * @since	5.0.0
-	 *
-	 * @param	string $name The setting name.
-	 * @return	mixed
+	 * @since  5.0.0
+	 * @access public
+	 * @param  string $name The setting name.
+	 * @return mixed
 	 */
 	public function get_setting( $name ) {
 		return isset( $this->settings[ $name ] ) ? $this->settings[ $name ] : null;
@@ -685,7 +642,6 @@ class ACF {
 	 *
 	 * Updates a setting for the given name and value.
 	 *
-	 * @date   28/09/13
 	 * @since  5.0.0
 	 * @access public
 	 * @param  string $name The setting name.
@@ -702,7 +658,6 @@ class ACF {
 	 *
 	 * Returns data or null if doesn't exist.
 	 *
-	 * @date   28/09/13
 	 * @since  5.0.0
 	 * @access public
 	 * @param  string $name The data name.
@@ -722,7 +677,6 @@ class ACF {
 	 *
 	 * Sets data for the given name and value.
 	 *
-	 * @date   28/09/13
 	 * @since  5.0.0
 	 * @access public
 	 * @param  string $name The data name.
@@ -738,7 +692,6 @@ class ACF {
 	 *
 	 * Returns an instance or null if doesn't exist.
 	 *
-	 * @date   13/2/18
 	 * @since  5.6.9
 	 * @access public
 	 * @param  string $class The instance class name.
@@ -760,7 +713,6 @@ class ACF {
 	 *
 	 * Creates and stores an instance of the given class.
 	 *
-	 * @date   13/2/18
 	 * @since  5.6.9
 	 * @access public
 	 * @param  string $class The instance class name.
@@ -781,7 +733,6 @@ class ACF {
 	 *
 	 * This is for backwards compatibility.
 	 *
-	 * @date   24/4/20
 	 * @since  5.9.0
 	 * @access public
 	 * @param  string $key Key name.
@@ -796,7 +747,6 @@ class ACF {
 	 *
 	 * This is for backwards compatibility.
 	 *
-	 * @date  24/4/20
 	 * @since  5.9.0
 	 * @access public
 	 * @param  string $key Key name.
@@ -822,7 +772,6 @@ class ACF {
  *
  * Example: <?php $acf = ACF\acf(); ?>
  *
- * @date   4/09/13
  * @since  4.3.0
  * @return object ACF
  */
