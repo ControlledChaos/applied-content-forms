@@ -120,7 +120,7 @@
 }
 
 .admin-color-blue .acf-tab-grid li h3 .post-count {
-  background: #2271b1;
+  background: #096484;
 }
 
 .admin-color-coffee .acf-tab-grid li h3 .post-count {
@@ -141,4 +141,53 @@
 
 .admin-color-sunrise .acf-tab-grid li h3 .post-count {
   background: #dd823b;
+}
+
+.admin-color-80s-kid .acf-tab-grid li h3 .post-count {
+  background: #d13674;
+}
+
+.admin-color-adderley .acf-tab-grid li h3 .post-count {
+  background: #1730e5;
+}
+
+.admin-color-aubergine .acf-tab-grid li h3 .post-count {
+  background: #c99416;
+}
+
+.admin-color-contrast-blue .acf-tab-grid li h3 .post-count {
+  background: #dae9f3;
+  color: unset;
+}
+
+.admin-color-cruise .acf-tab-grid li h3 .post-count {
+  background: #79b591;
+}
+
+.admin-color-flat .acf-tab-grid li h3 .post-count {
+  background: #1abc9c;
+}
+
+.admin-color-kirk .acf-tab-grid li h3 .post-count {
+  background: #bd3854;
+}
+
+.admin-color-lawn .acf-tab-grid li h3 .post-count {
+  background: #a7b145;
+}
+
+.admin-color-modern-evergreen .acf-tab-grid li h3 .post-count {
+  background: #0f4232;
+}
+
+.admin-color-primary .acf-tab-grid li h3 .post-count {
+  background: #d8b230;
+}
+
+.admin-color-seashore .acf-tab-grid li h3 .post-count {
+  background: #456a7f;
+}
+
+.admin-color-vinyard .acf-tab-grid li h3 .post-count {
+  background: #cc9e14;
 }
