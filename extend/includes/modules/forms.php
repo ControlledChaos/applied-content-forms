@@ -118,7 +118,7 @@ class acfe_dynamic_forms extends acfe_dynamic_module{
             'public'                => false,
             'show_ui'               => true,
             'show_in_menu'          => $menu['slug'],
-            'menu_icon'             => 'dashicons-feedback',
+            'menu_icon'             => 'dashicons-forms',
             'show_in_admin_bar'     => false,
             'show_in_nav_menus'     => false,
             'can_export'            => false,

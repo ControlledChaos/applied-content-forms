@@ -103,7 +103,7 @@ class acfe_dynamic_options_pages extends acfe_dynamic_module{
             'public'                => false,
             'show_ui'               => true,
             'show_in_menu'          => 'options-general.php',
-            'menu_icon'             => 'dashicons-layout',
+            'menu_icon'             => 'dashicons-admin-generic',
             'show_in_admin_bar'     => false,
             'show_in_nav_menus'     => false,
             'can_export'            => false,

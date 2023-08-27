@@ -493,6 +493,7 @@ class ACF {
 			'hierarchical'    => true,
 			'show_ui'         => true,
 			'show_in_menu'    => $show_in_menu,
+			'menu_icon'       => 'dashicons-feedback',
 			'_builtin'        => false,
 			'capability_type' => 'post',
 			'capabilities'    => [

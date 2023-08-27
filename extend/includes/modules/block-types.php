@@ -103,7 +103,7 @@ class acfe_dynamic_block_types extends acfe_dynamic_module{
             'public'                => false,
             'show_ui'               => true,
             'show_in_menu'          => $menu['slug'],
-            'menu_icon'             => 'dashicons-layout',
+            'menu_icon'             => 'dashicons-block-default',
             'show_in_admin_bar'     => false,
             'show_in_nav_menus'     => false,
             'can_export'            => false,
