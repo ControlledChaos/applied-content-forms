@@ -282,6 +282,7 @@ class ACF {
 			acf_include( 'includes/admin/admin-field-group.php' );
 			acf_include( 'includes/admin/admin-field-groups.php' );
 			acf_include( 'includes/admin/admin-notices.php' );
+			acf_include( 'includes/admin/admin-intro-functions.php' );
 			acf_include( 'includes/admin/admin-tools.php' );
 			acf_include( 'includes/admin/admin-upgrade.php' );
 			acf_include( 'includes/admin/admin-options-page.php' );

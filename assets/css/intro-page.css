@@ -88,6 +88,11 @@
   cursor: default;
 }
 
+.acf-tab-grid li h3 .add-new {
+  text-decoration: none;
+  color: inherit;
+}
+
 .acf-tab-grid li .acf-tab-grid-icon {
   width: 100%;
   height: auto;
