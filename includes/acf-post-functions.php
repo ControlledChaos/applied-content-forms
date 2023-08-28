@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 /**
  * Returns available templates for each post type.
@@ -10,17 +10,17 @@
  * @return	array
  */
 function acf_get_post_templates() {
-	
+
 	// Check store.
 	$cache = acf_get_data( 'post_templates' );
 	if( $cache !== null ) {
 		return $cache;
 	}
-	
+
 	// Initialize templates with default placeholder for pages.
 	$post_templates = array();
 	$post_templates['page'] = array();
-	
+
 	// Loop over post types and append their templates.
 	if( method_exists('WP_Theme', 'get_page_templates') ) {
 		$post_types = get_post_types();
@@ -31,7 +31,7 @@ function acf_get_post_templates() {
 			}
 		}
 	}
-	
+
 	// Update store.
 	acf_set_data( 'post_templates', $post_templates );
 

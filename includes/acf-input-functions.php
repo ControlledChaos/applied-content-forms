@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 /**
  * acf_filter_attrs
@@ -12,10 +12,10 @@
  * @return	array
  */
 function acf_filter_attrs( $attrs ) {
-	
+
 	// Filter out empty attrs but allow "0" values.
 	$filtered = array_filter( $attrs, 'acf_not_empty' );
-	
+
 	// Correct specific attributes (required="required").
 	foreach( array('required', 'readonly', 'disabled', 'multiple') as $key ) {
 		unset($filtered[ $key ]);
@@ -39,27 +39,27 @@ function acf_filter_attrs( $attrs ) {
  */
 function acf_esc_attrs( $attrs ) {
 	$html = '';
-	
+
 	// Loop over attrs and validate data types.
 	foreach( $attrs as $k => $v ) {
-		
+
 		// String (but don't trim value).
 		if( is_string($v) && ($k !== 'value') ) {
 			$v = trim($v);
-			
-		// Boolean	
+
+		// Boolean
 		} elseif( is_bool($v) ) {
 			$v = $v ? 1 : 0;
-			
+
 		// Object
 		} elseif( is_array($v) || is_object($v) ) {
 			$v = json_encode($v);
 		}
-		
+
 		// Generate HTML.
 		$html .= sprintf( ' %s="%s"', esc_attr($k), esc_attr($v) );
 	}
-	
+
 	// Return trimmed.
 	return trim( $html );
 }
@@ -80,7 +80,7 @@ if ( defined('ACF_EXPERIMENTAL_ESC_HTML') && ACF_EXPERIMENTAL_ESC_HTML ) {
 	function acf_esc_html( $string = '' ) {
 		return wp_kses( (string) $string, 'acf' );
 	}
-	
+
 	/**
 	 * Private callback for the "wp_kses_allowed_html" filter used to return allowed HTML for "acf" context.
 	 *
@@ -91,20 +91,20 @@ if ( defined('ACF_EXPERIMENTAL_ESC_HTML') && ACF_EXPERIMENTAL_ESC_HTML ) {
 	 * @param	string $context The context name.
 	 * @return	array.
 	 */
-	
+
 	function _acf_kses_allowed_html( $tags, $context ) {
 		global $allowedposttags;
-		
+
 		if( $context === 'acf' ) {
 			return $allowedposttags;
 		}
 		return $tags;
 	}
-	
+
 	add_filter( 'wp_kses_allowed_html', '_acf_kses_allowed_html', 0, 2 );
 
 } else {
-	
+
 	/**
 	 * acf_esc_html
 	 *
@@ -118,7 +118,7 @@ if ( defined('ACF_EXPERIMENTAL_ESC_HTML') && ACF_EXPERIMENTAL_ESC_HTML ) {
 	 */
 	function acf_esc_html( $string = '' ) {
 		$string = strval($string);
-		
+
 		// Encode "<script" tags to invalidate DOM elements.
 		if( strpos($string, '<script') !== false ) {
 			$string = str_replace('<script', htmlspecialchars('<script'), $string);
@@ -298,19 +298,19 @@ function acf_checkbox_input( $attrs = array() ) {
  * @return	string
  */
 function acf_get_checkbox_input( $attrs = array() ) {
-	
+
 	// Allow radio or checkbox type.
 	$attrs = wp_parse_args($attrs, array(
 		'type' => 'checkbox'
 	));
-	
+
 	// Get label.
 	$label = '';
 	if( isset($attrs['label']) ) {
 		$label= $attrs['label'];
 		unset( $attrs['label'] );
 	}
-	
+
 	// Render.
 	$checked = isset($attrs['checked']);
 	return '<label' . ($checked ? ' class="selected"' : '') . '><input ' . acf_esc_attr($attrs) . '/> ' . acf_esc_html($label) . '</label>';
@@ -398,16 +398,16 @@ function acf_get_select_input( $attrs = array() ) {
  */
 function acf_walk_select_input( $choices = array(), $values = array(), $depth = 0 ) {
 	$html = '';
-	
+
 	// Sanitize values for 'selected' matching (only once).
 	if( $depth == 0 ) {
 		$values = array_map('esc_attr', $values);
 	}
-	
+
 	// Loop over choices and append to html.
 	if( $choices ) {
 		foreach( $choices as $value => $label ) {
-			
+
 			// Multiple (optgroup)
 			if( is_array($label) ){
 				$html .= sprintf(
@@ -415,13 +415,13 @@ function acf_walk_select_input( $choices = array(), $values = array(), $depth = 
 					esc_attr($value),
 					acf_walk_select_input( $label, $values, $depth+1 )
 				);
-			
-			// single (option)	
+
+			// single (option)
 			} else {
 				$attrs = array(
 					'value' => $value
 				);
-				
+
 				// If is selected.
 				$pos = array_search( esc_attr($value), $values );
 				if( $pos !== false ) {

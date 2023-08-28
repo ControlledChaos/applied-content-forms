@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 /**
  * acf_get_users
@@ -12,23 +12,23 @@
  * @return	array
  */
 function acf_get_users( $args = array() ) {
-	
+
 	// Get users.
 	$users = get_users( $args );
-	
+
 	// Maintain order.
 	if( $users && $args['include'] ) {
-		
+
 		// Generate order array.
 		$order = array();
 		foreach( $users as $i => $user ) {
 			$order[ $i ] = array_search($user->ID, $args['include']);
 		}
-		
+
 		// Sort results.
-		array_multisort($order, $users);	
+		array_multisort($order, $users);
 	}
-	
+
 	// Return
 	return $users;
 }
@@ -45,11 +45,11 @@ function acf_get_users( $args = array() ) {
  * @return	array
  */
 function acf_get_user_result( $user ) {
-	
+
 	// Vars.
 	$id = $user->ID;
 	$text = $user->user_login;
-	
+
 	// Add name.
 	if( $user->first_name && $user->last_name ) {
 		$text .= " ({$user->first_name} {$user->last_name})";
@@ -73,12 +73,12 @@ function acf_get_user_result( $user ) {
  */
 function acf_get_user_role_labels( $roles = array() ) {
 	$all_roles = wp_roles()->get_names();
-	
+
 	// Load all roles if none provided.
 	if( empty($roles) ) {
 		$roles = array_keys( $all_roles );
 	}
-	
+
 	// Loop over roles and populare labels.
 	$lables = array();
 	foreach( $roles as $role ) {
@@ -86,7 +86,7 @@ function acf_get_user_role_labels( $roles = array() ) {
 			$lables[ $role ] = translate_user_role( $all_roles[ $role ] );
 		}
 	}
-	
+
 	// Return labels.
 	return $lables;
 }
@@ -103,10 +103,10 @@ function acf_get_user_role_labels( $roles = array() ) {
  * @return	bool
  */
 function acf_allow_unfiltered_html() {
-	
+
 	// Check capability.
 	$allow_unfiltered_html = current_user_can('unfiltered_html');
-	
+
 	/**
 	 * Filters whether the current user is allowed to save unfiltered HTML.
 	 *

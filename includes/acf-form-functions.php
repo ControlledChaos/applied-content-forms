@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 // Register store for form data.
 acf_register_store( 'form' );
@@ -46,34 +46,34 @@ function acf_get_form_data( $name = '' ) {
  * @return	void
  */
 function acf_form_data( $data = array() ) {
-	
+
 	// Apply defaults.
 	$data = wp_parse_args($data, array(
-		
+
 		/** @type string The current screen (post, user, taxonomy, etc). */
 		'screen' => 'post',
-		
+
 		/** @type int|string The ID of current post being edited. */
 		'post_id' => 0,
-		
+
 		/** @type bool Enables AJAX validation. */
 		'validation' => true,
 	));
-	
+
 	// Create nonce using screen.
 	$data['nonce'] = wp_create_nonce( $data['screen'] );
-	
+
 	// Append "changed" input used within "_wp_post_revision_fields" action.
 	$data['changed'] = 0;
-	
+
 	// Set data.
 	acf_set_form_data( $data );
-	
+
 	// Render HTML.
 	?>
 	<div id="acf-form-data" class="acf-hidden">
-		<?php 
-		
+		<?php
+
 		// Create hidden inputs from $data
 		foreach( $data as $name => $value ) {
 			acf_hidden_input(array(
@@ -82,7 +82,7 @@ function acf_form_data( $data = array() ) {
 				'value'	=> $value
 			));
 		}
-		
+
 		/**
 		 * Fires within the #acf-form-data element to add extra HTML.
 		 *
@@ -93,7 +93,7 @@ function acf_form_data( $data = array() ) {
 		 */
 		do_action( 'acf/form_data', $data );
 		do_action( 'acf/input/form_data', $data );
-		
+
 		?>
 	</div>
 	<?php
@@ -113,28 +113,28 @@ function acf_form_data( $data = array() ) {
  * @return	bool True if save was successful.
  */
 function acf_save_post( $post_id = 0, $values = null ) {
-	
+
 	// Override $_POST data with $values.
 	if( $values !== null ) {
 		$_POST['acf'] = $values;
 	}
-	
+
 	// Bail early if no data to save.
 	if( empty($_POST['acf']) ) {
 		return false;
 	}
-	
+
 	// Set form data (useful in various filters/actions).
 	acf_set_form_data( 'post_id', $post_id );
-	
+
 	// Filter $_POST data for users without the 'unfiltered_html' capability.
 	if( !acf_allow_unfiltered_html() ) {
 		$_POST['acf'] = wp_kses_post_deep( $_POST['acf'] );
 	}
-	
+
 	// Do generic action.
 	do_action( 'acf/save_post', $post_id );
-	
+
 	// Return true.
 	return true;
 }
@@ -152,11 +152,11 @@ function acf_save_post( $post_id = 0, $values = null ) {
  * @return	void
  */
 function _acf_do_save_post( $post_id = 0 ) {
-	
+
 	// Check and update $_POST data.
 	if( $_POST['acf'] ) {
 		acf_update_values( $_POST['acf'], $post_id );
-	}	
+	}
 }
 
 // Run during generic action.

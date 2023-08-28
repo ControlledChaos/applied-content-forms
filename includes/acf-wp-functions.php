@@ -18,14 +18,14 @@ function acf_get_object_type( $object_type, $object_subtype = '' ) {
 		'label'		=> '',
 		'icon'		=> ''
 	);
-	
+
 	// Set unique identifier as name.
 	if( $object_subtype ) {
 		$props['name'] = "$object_type/$object_subtype";
 	} else {
 		$props['name'] = $object_type;
 	}
-	
+
 	// Set label and icon.
 	switch ( $object_type ) {
 		case 'post':
@@ -90,10 +90,10 @@ function acf_get_object_type( $object_type, $object_subtype = '' ) {
 		default:
 			return false;
 	}
-	
+
 	// Convert to object.
 	$object = (object) $props;
-	
+
 	/**
 	 * Filters the object type.
 	 *
@@ -119,12 +119,12 @@ function acf_get_object_type( $object_type, $object_subtype = '' ) {
 function acf_decode_post_id( $post_id = 0 ) {
 	$type = '';
 	$id = 0;
-	
+
 	// Interpret numeric value (123).
 	if ( is_numeric($post_id) ) {
 		$type = 'post';
 		$id = $post_id;
-		
+
 	// Interpret string value ("user_123" or "option").
 	} elseif ( is_string($post_id) ) {
 		$i = strrpos($post_id, '_');
@@ -135,12 +135,12 @@ function acf_decode_post_id( $post_id = 0 ) {
 			$type = $post_id;
 			$id = '';
 		}
-	
+
 	// Handle incorrect param type.
 	} else {
 		return compact( 'type', 'id' );
 	}
-	
+
 	// Validate props based on param format.
 	$format = $type . '_' . (is_numeric($id) ? '%d' : '%s');
 	switch ( $format ) {
@@ -198,13 +198,13 @@ function acf_decode_post_id( $post_id = 0 ) {
 				$id = absint( $id );
 				break;
 			}
-			
+
 			// Treat unknown post_id format as an option.
 			$type = 'option';
 			$id = $post_id;
 			break;
 	}
-	
+
 	/**
 	 * Filters the decoded post_id information.
 	 *
