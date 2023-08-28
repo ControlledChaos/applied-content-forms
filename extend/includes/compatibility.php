@@ -13,7 +13,6 @@ class acfe_compatibility{
     function __construct(){
     
         add_action('acf/init',                                      array($this, 'init'), 98);
-        add_action('after_plugin_row_' . ACFE_BASENAME,             array($this, 'plugin_row'), 5, 3);
         
         add_filter('acfe/form/import_args',                         array($this, 'acfe_form_import_compatibility'), 10, 3);
         add_filter('pto/posts_orderby/ignore',                      array($this, 'pto_acf_field_group'), 10, 3);
@@ -26,45 +25,6 @@ class acfe_compatibility{
         add_action('elementor/documents/register_controls',         array($this, 'elementor'));
         add_filter('wpgraphql_acf_supported_fields',                array($this, 'wpgraphql_supported_fields'));
         add_filter('wpgraphql_acf_register_graphql_field',          array($this, 'wpgraphql_register_field'), 10, 4);
-        
-    }
-    
-    function plugin_row($plugin_file, $plugin_data, $status){
-    
-        // Bail early
-        if(acfe()->acf()) return;
-    
-        // Check WP version
-        $colspan = version_compare($GLOBALS['wp_version'], '5.5', '<') ? 3 : 4;
-    
-        ?>
-        <style>
-            .plugins tr[data-plugin='<?php echo ACFE_BASENAME; ?>'] th,
-            .plugins tr[data-plugin='<?php echo ACFE_BASENAME; ?>'] td{
-                box-shadow:none;
-            }
-        
-            <?php if(isset($plugin_data['update']) && !empty($plugin_data['update'])){ ?>
-
-            .plugins tr.acfe-plugin-tr td{
-                box-shadow:none !important;
-            }
-
-            .plugins tr.acfe-plugin-tr .update-message{
-                margin-bottom:0;
-            }
-        
-            <?php } ?>
-        </style>
-    
-        <tr class="plugin-update-tr active acfe-plugin-tr">
-            <td colspan="<?php echo $colspan; ?>" class="plugin-update colspanchange">
-                <div class="update-message notice inline notice-error notice-alt">
-                    <p><?php _e('ACF Extended requires <a href="https://www.advancedcustomfields.com/pro/" target="_blank">Advanced Custom Fields PRO</a> (minimum: 5.8).', 'acfe'); ?></p>
-                </div>
-            </td>
-        </tr>
-        <?php
         
     }
     

@@ -157,13 +157,29 @@ class ACF {
 	 */
 	public function initialize() {
 
+		$define = function( $array = [] ) {
+			foreach ( $array as $name => $value ) {
+				if ( defined( $name ) ) {
+					continue;
+				}
+				define( $name, $value );
+			}
+		};
+
 		// Define constants.
-		$this->define( 'ACF', true );
-		$this->define( 'ACF_PRO', true );
-		$this->define( 'ACF_PATH', plugin_dir_path( __FILE__ ) );
-		$this->define( 'ACF_BASENAME', plugin_basename( __FILE__ ) );
-		$this->define( 'ACF_VERSION', $this->version );
-		$this->define( 'ACF_MAJOR_VERSION', 5 );
+		$define( [
+			'ACF'               => true,
+			'ACF_PRO'           => true,
+			'ACF_PATH'          => plugin_dir_path( __FILE__ ),
+			'ACF_BASENAME'      => plugin_basename( __FILE__ ),
+			'ACF_VERSION'       => $this->version,
+			'ACF_MAJOR_VERSION' => 5,
+			'ACFE'              => true,
+			'ACFE_PRO'          => true,
+			'ACFE_FILE'         => __FILE__,
+			'ACFE_PATH'         => plugin_dir_path( __FILE__ ) . 'extend/',
+			'ACFE_VERSION'      => $this->version
+		] );
 
 		// Define settings.
 		$this->settings = apply_filters(
@@ -287,6 +303,7 @@ class ACF {
 		acf_include( 'includes/legacy/legacy-locations.php' );
 
 		// Extend original ACF.
+		acf_include( 'extend/includes/init.php' );
 		acf_include( 'extend/extend.php' );
 
 		// Include tests.
@@ -590,23 +607,6 @@ class ACF {
 			$where .= $wpdb->prepare(" AND {$wpdb->posts}.post_name = %s", $group_key );
 	    }
 	    return $where;
-	}
-
-	/**
-	 * Define constant
-	 *
-	 * Defines a constant if doesn't already exist.
-	 *
-	 * @since  5.5.13
-	 * @access public
-	 * @param  string $name The constant name.
-	 * @param  mixed $value The constant value.
-	 * @return void
-	 */
-	public function define( $name, $value = true ) {
-		if ( ! defined( $name ) ) {
-			define( $name, $value );
-		}
 	}
 
 	/**

@@ -9,14 +9,6 @@ class ACFE_Pro{
 
     function __construct(){
 
-        // ACF Extended
-        $acfe = acfe();
-
-        // Constants
-        $acfe->constants(array(
-            'ACFE_PRO' => true,
-        ));
-
         // Vars
         $reserved_post_types = array_merge(acfe_get_setting('reserved_post_types', array()), array(
             'acfe-template'
@@ -32,7 +24,7 @@ class ACFE_Pro{
         ));
 
         // Settings
-        $acfe->settings(array(
+        acfe()->settings(array(
             // General
             'reserved_post_types'               => $reserved_post_types,
             'reserved_field_groups'             => $reserved_field_groups,
