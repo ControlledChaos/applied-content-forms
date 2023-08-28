@@ -199,7 +199,7 @@ function post_types_grid() {
 		// Post count bubble in grid item heading.
 		if ( $type['count'] > 0 ) {
 			$count = sprintf(
-				'<span class="acf-js-tooltip post-count" role="tooltip" title="%s">%s</span>',
+				'<span class="acf-js-tooltip post-count post-count-has-published" role="tooltip" title="%s">%s</span>',
 				$tooltip,
 				$type['count']
 			);
@@ -207,7 +207,7 @@ function post_types_grid() {
 		// Print an add new link if count is zero.
 		} else {
 			$count = sprintf(
-				'<span class="acf-js-tooltip post-count" role="tooltip" title="%s"><a href="%s" class="add-new">&plus;</a></span>',
+				'<span class="acf-js-tooltip post-count post-count-none-published" role="tooltip" title="%s"><a href="%s" class="add-new">&plus;</a></span>',
 				__( 'Add New', 'acf' ),
 				admin_url( 'post-new.php?type_type=' . $type['slug'] )
 			);
