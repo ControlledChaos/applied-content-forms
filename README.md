@@ -9,4 +9,6 @@ A suite of tools for adding and managing custom content types and user forms.
 
 This is a fork of Advanced Custom Fields PRO version 5.9.6 plus a fork of Advanced Custom Fields: Extended PRO version 0.8.8.6.
 
+Not compatible with Advanced Custom Fields or Advanced Custom Fields: Extended, basic or pro.
+
 ![ACF intro page screenshot](https://raw.githubusercontent.com/ControlledChaos/applied-content-forms/main/assets/images/screenshot-01.jpg)
