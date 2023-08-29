@@ -174,11 +174,7 @@ class ACF {
 			'ACF_BASENAME'      => plugin_basename( __FILE__ ),
 			'ACF_VERSION'       => $this->version,
 			'ACF_MAJOR_VERSION' => 5,
-			'ACFE'              => true,
-			'ACFE_PRO'          => true,
-			'ACFE_FILE'         => __FILE__,
-			'ACFE_PATH'         => plugin_dir_path( __FILE__ ) . 'extend/',
-			'ACFE_VERSION'      => $this->version
+			'ACFE_PATH'         => plugin_dir_path( __FILE__ ) . 'extend/'
 		] );
 
 		// Define settings.

@@ -43,7 +43,7 @@ class acfe_field_group_category{
         register_taxonomy('acf-field-group-category', array('acf-field-group'), array(
             'hierarchical'      => true,
             'public'            => false,
-            'show_ui'           => 'ACFE',
+            'show_ui'           => true,
             'show_admin_column' => true,
             'show_in_menu'      => $show_in_menu,
             'show_in_nav_menus' => true,

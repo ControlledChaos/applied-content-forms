@@ -12,7 +12,7 @@ class acfe_upgrades{
     );
     
     public $model = array(
-        'version' => ACFE_VERSION,
+        'version' => ACF_VERSION,
         'modules' => array(
             'block_types'   => array(),
             'options_pages' => array(),
@@ -26,7 +26,7 @@ class acfe_upgrades{
         $db_version = acfe_get_settings('version');
         
         // Bail early
-        if(acf_version_compare($db_version, '>=', ACFE_VERSION))
+        if(acf_version_compare($db_version, '>=', ACF_VERSION))
             return;
         
         // Loop upgrades
@@ -42,7 +42,7 @@ class acfe_upgrades{
         $settings = acfe_get_settings();
         
         $model = $this->parse_args_r($settings, $this->model);
-        $model['version'] = ACFE_VERSION;
+        $model['version'] = ACF_VERSION;
         
         acfe_update_settings($model);
         

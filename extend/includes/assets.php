@@ -24,7 +24,7 @@ class acfe_assets{
      */
     function init(){
     
-        $version = ACFE_VERSION;
+        $version = ACF_VERSION;
         $min = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
     
         // register scripts
@@ -89,7 +89,7 @@ class acfe_assets{
         
         acf_localize_data(array(
             'acfe' => array(
-                'version'           => ACFE_VERSION,
+                'version'           => ACF_VERSION,
                 'home_url'          => home_url(),
                 'is_admin'          => is_admin(),
                 'is_user_logged_in' => is_user_logged_in(),

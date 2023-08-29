@@ -29,9 +29,6 @@ if ( ! class_exists( 'ACFE' ) ) :
 
 class ACFE {
 
-	// Vars
-	var $version = '0.8.8.6';
-
 	/*
 	 * Constructor method
 	 */
@@ -60,8 +57,7 @@ class ACFE {
 		acfe_include( 'includes/compatibility.php' );
 
 		// Load
-		add_action( 'acf/include_field_types', array($this, 'load' ));
-
+		add_action( 'acf/include_field_types', array( $this, 'load' ) );
 	}
 
 	/*

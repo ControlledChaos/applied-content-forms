@@ -24,7 +24,7 @@ class acfe_pro_assets{
      */
     function init(){
         
-        $version = ACFE_VERSION;
+        $version = ACF_VERSION;
         $min = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
         
         // register scripts
