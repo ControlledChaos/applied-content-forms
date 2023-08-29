@@ -17,14 +17,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-// Stop if Advanced Custom Fields: Extended is active.
-if (
-	is_plugin_active( 'acf-extended/acf-extended.php' ) ||
-	is_plugin_active( 'acf-extended-pro/acf-extended.php' )
-) {
-	return;
-}
-
 if ( ! class_exists( 'ACFE' ) ) :
 
 class ACFE {

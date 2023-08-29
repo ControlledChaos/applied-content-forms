@@ -35,10 +35,12 @@ if ( file_exists( $get_plugin ) && ! function_exists( 'is_plugin_active' ) ) {
 	include_once( $get_plugin );
 }
 
-// Stop if Advanced Custom Fields is active.
+// Stop if Advanced Custom Fields/Extended are active.
 if (
 	is_plugin_active( 'advanced-custom-fields/acf.php' ) ||
-	is_plugin_active( 'advanced-custom-fields-pro/acf.php' )
+	is_plugin_active( 'advanced-custom-fields-pro/acf.php' ) ||
+	is_plugin_active( 'acf-extended/acf-extended.php' ) ||
+	is_plugin_active( 'acf-extended-pro/acf-extended.php' )
 ) {
 	return;
 }
