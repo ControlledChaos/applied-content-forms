@@ -146,6 +146,7 @@ class ACF {
 	 */
 	public function __construct() {
 
+		add_action( 'init', [ $this, 'register_assets' ] );
 		add_action( 'acf/input/admin_enqueue_scripts', [ $this, 'input_admin_enqueue_scripts' ] );
 		add_action( 'acf/field_group/admin_enqueue_scripts', [ $this, 'field_group_admin_enqueue_scripts' ] );
 	}
@@ -549,6 +550,27 @@ class ACF {
 			'show_in_admin_status_list' => true,
 			'label_count'               => _n_noop( 'Disabled <span class="count">(%s)</span>', 'Disabled <span class="count">(%s)</span>', 'acf' ),
 		] );
+	}
+
+	/**
+	 * Register assets.
+	 *
+	 * @since  5.0.0
+	 * @access public
+	 * @return void
+	 */
+	public function register_assets() {
+
+		$version = acf_get_setting( 'version' );
+		$min     = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
+
+		wp_register_script( 'acf-pro-input', acf_get_url( "advanced/assets/js/acf-pro-input{$min}.js" ), [ 'acf-input' ], $version );
+		wp_register_script( 'acf-pro-field-group', acf_get_url( "advanced/assets/js/acf-pro-field-group{$min}.js" ), [ 'acf-field-group' ], $version );
+
+
+		// register styles
+		wp_register_style( 'acf-pro-input', acf_get_url( 'advanced/assets/css/acf-pro-input.css' ), [ 'acf-input' ], $version );
+		wp_register_style( 'acf-pro-field-group', acf_get_url( 'advanced/assets/css/acf-pro-field-group.css' ), [ 'acf-input' ], $version );
 	}
 
 	/**
