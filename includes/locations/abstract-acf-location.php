@@ -170,10 +170,15 @@ abstract class ACF_Location extends ACF_Legacy_Location {
 	 * @return	bool
 	 */
 	public function compare_to_rule( $value, $rule ) {
-		$result = ( $value == $rule['value'] );
+
+		$result = '';
+		if ( array_key_exists( 'value', $rule ) ) {
+			$result = ( $value == $rule['value'] );
+		}
+		
 		
 		// Allow "all" to match any value.
-        if( $rule['value'] === 'all' ) {
+        if( array_key_exists( 'value', $rule ) && $rule['value'] === 'all' ) {
 	        $result = true;   
         }
 		
