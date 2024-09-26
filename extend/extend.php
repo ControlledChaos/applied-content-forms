@@ -4,7 +4,7 @@
  *
  * "Enhancement Suite which improves Advanced Custom Fields administration."
  *
- * @package    Site_Core
+ * @package    ACF
  * @subpackage Includes
  * @category   Vendor
  * @version    x.x.x

@@ -229,6 +229,7 @@ class ACF {
 		acf_include( 'includes/api/api-term.php' );
 
 		// Include classes.
+		acf_include( 'includes/class-editor.php' );
 		acf_include( 'includes/class-acf-data.php' );
 		acf_include( 'includes/fields/class-acf-field.php' );
 		acf_include( 'includes/locations/abstract-acf-legacy-location.php' );
