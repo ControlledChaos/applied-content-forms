@@ -134,7 +134,6 @@ class ACFE {
 		add_action( 'acf/include_admin_tools',   array($this, 'include_admin_tools_late' ), 20);
 
 		// Admin
-		acfe_include( 'includes/admin/menu.php' );
 		acfe_include( 'includes/admin/plugins.php' );
 		acfe_include( 'includes/admin/settings.php' );
 

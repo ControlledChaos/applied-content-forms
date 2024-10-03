@@ -54,7 +54,6 @@ class ACFE_Pro{
         acfe_include('pro/includes/compatibility.php');
 
         // Admin
-        acfe_include('pro/includes/admin/menu.php');
         acfe_include('pro/includes/admin/settings.php');
 
         // Modules
