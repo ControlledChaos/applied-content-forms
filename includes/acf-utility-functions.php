@@ -16,6 +16,22 @@ $acf_stores    = [];
 $acf_instances = [];
 
 /**
+ * ClassicPress compatibility
+ *
+ * Checks if the CMS is ClassicPress
+ * and not WordPress.
+ *
+ * @since  1.0.0
+ * @return boolean Returns true if ClassicPress is running.
+ */
+function acf_classicpress() {
+	if ( function_exists( 'classicpress_version' ) ) {
+		return true;
+	}
+	return false;
+}
+
+/**
  * acf_new_instance
  *
  * Creates a new instance of the given class and stores it in the instances data store.
