@@ -40,8 +40,10 @@ function acf_builtin_post_types() {
 	}
 
 	// If dynamic block types.
-	if ( acf_get_setting( 'acfe/modules/block_types' ) ) {
-		$types = array_merge( $types, [ 'acfe-dbt' ] );
+	if ( ! acf_classicpress() ) {
+		if ( acf_get_setting( 'acfe/modules/block_types' ) ) {
+			$types = array_merge( $types, [ 'acfe-dbt' ] );
+		}
 	}
 
 	// If dynamic block types.
