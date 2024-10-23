@@ -100,6 +100,7 @@ class ACFE {
 
 			// Modules
 			'modules/field_groups'          => true,
+			'modules/dashboard_widget'      => false,
 			'dev'                           => false,
 			'modules/author'                => true,
 			'modules/categories'            => true,

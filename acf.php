@@ -306,6 +306,8 @@ class ACF {
 		acf_include( 'extend/includes/init.php' );
 		acf_include( 'extend/extend.php' );
 
+		acf_include( 'includes/class-dashboard.php' );
+
 		// Include tests.
 		if ( defined( 'ACF_DEV' ) && ACF_DEV ) {
 			acf_include( 'tests/tests.php' );

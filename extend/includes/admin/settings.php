@@ -119,6 +119,13 @@ class acfe_admin_settings {
 			// Features tab.
 			'features' => [
 				[
+					'label'       => __( 'Dashboard Widget', 'acf' ),
+					'name'        => 'acfe/modules/dashboard_widget',
+					'description' => __( 'Enable the content dashboard widget.', 'acf' ),
+					'type'        => 'true_false',
+					'category'    => 'features',
+				],
+				[
 					'label'       => __( 'Classic Editor', 'acf' ),
 					'name'        => 'acfe/modules/classic_editor',
 					'description' => __( 'Enable classic editor module. Defaults to false.', 'acf' ),

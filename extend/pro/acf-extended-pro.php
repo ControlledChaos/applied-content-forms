@@ -30,6 +30,7 @@ class ACFE_Pro{
             'reserved_field_groups'             => $reserved_field_groups,
 
             // Modules
+            'modules/dashboard_widget'          => false,
             'modules/classic_editor'            => false,
             'modules/field_group_ui'            => true,
             'modules/force_sync'                => false,
