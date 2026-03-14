@@ -343,7 +343,7 @@ class ACF {
 		acf_update_setting( 'url', plugin_dir_url( __FILE__ ) );
 
 		// Load textdomain file.
-		acf_load_textdomain();
+		add_action( 'init', 'acf_load_textdomain' );
 
 		// Include 3rd party compatibility.
 		acf_include( 'includes/third-party.php' );

@@ -10,246 +10,202 @@
  * @since    1.0.0
  */
 
-namespace ACF\Admin;
-
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-class Admin_Screens {
+/**
+ * Admin screens
+ *
+ * Adds custom functionality to this plugin's admin screens.
+ *
+ * @since  5.9.0
+ * @global array $pagenow Array of admin screens.
+ * @return void
+ */
+function acf_current_screen( $screen ) {
 
-	/**
-	 * Constructor method
-	 *
-	 * @date   23/06/12
-	 * @since  5.0.0
-	 * @access public
-	 * @return self
-	 */
-	public function __construct() {
+	global $pagenow;
 
-		add_action( 'admin_menu', [ $this, 'admin_page' ], 9 );
-		// add_action( 'admin_menu', [ $this, 'settings_link' ] );
-		add_action( 'admin_enqueue_scripts', [ $this, 'admin_enqueue_scripts' ] );
-		add_action( 'admin_body_class', [ $this, 'admin_body_class' ] );
-		add_action( 'current_screen', [ $this, 'current_screen' ] );
+	// Get filtered menu options.
+	$menu = acf_admin_menu();
+
+	// Add help tabs to the intro screen.
+	if ( isset( $_GET['page'] ) ) {
+		if ( in_array( $pagenow, array( 'admin.php' ) ) && ( $_GET['page'] == $menu['slug'] || $_GET['page'] == $menu['slug'] ) ) {
+			setup_help_tab();
+		}
 	}
 
-	/**
-	 * Admin page
-	 *
-	 * @date   28/09/13
-	 * @since  5.0.0
-	 * @access public
-	 * @return void
-	 */
-	public function admin_page() {
+	// Add help tabs to field group screens.
+	if ( isset( $screen->post_type ) && $screen->post_type === 'acf-field-group' ) {
+		setup_help_tab();
+	}
+}
+add_action( 'current_screen', 'acf_current_screen' );
 
-		// Get filtered menu options.
-		$menu = acf_admin_menu();
+/**
+ * Enqueues global admin styling.
+ *
+ * @since  5.0.0
+ * @return void
+ */
+function acf_admin_enqueue_scripts() {
+	wp_enqueue_style( 'acf-global' );
+}
+add_action( 'admin_enqueue_scripts', 'acf_admin_enqueue_scripts' );
 
-		// Add primary menu entry.
-		$page = add_menu_page(
-			$menu['page'],
-			$menu['name'],
-			acf_get_setting( 'capability' ),
-			$menu['slug'],
-			[ $this, 'settings_page' ],
-			$menu['icon'],
-			$menu['position'],
-		);
+/**
+ * Appends custom admin body classes.
+ *
+ * @since  5.8.7
+ * @param  string $classes Space-separated list of CSS classes.
+ * @return string
+ */
+function acf_admin_body_class( $classes ) {
 
-		add_action( "load-{$page}", [ $this, 'page_load' ] );
+	// Get the platform version.
+	global $wp_version;
+
+	// Determine body class version.
+	$wp_minor_version = floatval( $wp_version );
+	if ( $wp_minor_version >= 5.3 ) {
+		$classes .= ' acf-admin-5-3';
+	} else {
+		$classes .= ' acf-admin-3-8';
 	}
 
-	/**
-	 * Settings link
-	 *
-	 * @since  1.0.0
-	 * @access public
-	 * @return void
-	 */
-	public function settings_link() {
+	// Add browser for specific CSS.
+	$classes .= ' acf-browser-' . acf_get_browser();
 
-		$menu   = acf_admin_menu();
-		$parent = $menu['slug'];
-		$link   = admin_url( "admin.php?page={$parent}&tab=settings" );
+	// Return classes.
+	return $classes;
+}
+add_action( 'admin_body_class', 'acf_admin_body_class' );
 
-		add_submenu_page(
-			$parent,
-			__( 'Settings' ),
-			__( 'Settings' ),
-			acf_get_setting( 'capability' ),
-			$link,
-			false,
-			75
-		);
-	}
+/**
+ * Admin page
+ *
+ * @since  5.0.0
+ * @return void
+ */
+function acf_admin_page() {
 
-	/**
-     * Page Load
-	 *
-	 * @since  6.0.0
-	 * @access public
-	 * @return void
-     */
-    public function page_load() {
+	// Get filtered menu options.
+	$menu = acf_admin_menu();
 
-        do_action( 'acfe/admin_settings/load' );
+	// Add primary menu entry.
+	$page = add_menu_page(
+		$menu['page'],
+		$menu['name'],
+		acf_get_setting( 'capability' ),
+		$menu['slug'],
+		'acf_settings_page',
+		$menu['icon'],
+		$menu['position'],
+	);
+	add_action( "load-{$page}", 'acf_page_load' );
+}
+add_action( 'admin_menu', 'acf_admin_page', 9 );
 
-		if ( ! isset( $_GET['tab'] ) ) {
-			add_action(
-				'admin_enqueue_scripts', function() {
+/**
+	* Settings page
+	*
+	* Gets the markup for the plugin's
+	* intro/settings page; top level in
+	* the admin menu.
+	*
+	* @since  6.0.0
+	* @return void
+	*/
+function acf_settings_page() {
+	acf_get_view( 'html-admin-page-intro' );
+}
 
-					$version = acf_get_setting( 'version' );
-					$suffix  = '';
-					if ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) {
-						$suffix  = '.min';
-					}
+/**
+ * Page Load
+ *
+ * @since  6.0.0
+ * @return void
+ */
+function acf_page_load() {
 
-					wp_enqueue_style( 'acf-intro', acf_get_url( 'assets/css/intro-page' . $suffix . '.css' ), [], $version, 'screen' );
+	do_action( 'acfe/admin_settings/load' );
+
+	if ( ! isset( $_GET['tab'] ) ) {
+		add_action(
+			'admin_enqueue_scripts', function() {
+
+				$version = acf_get_setting( 'version' );
+				$suffix  = '';
+				if ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) {
+					$suffix  = '.min';
 				}
-			);
-		}
-    }
 
-	/**
-	 * Settings page
-	 *
-	 * Gets the markup for the plugin's
-	 * intro/settings page; top level in
-	 * the admin menu.
-	 *
-	 * @since  6.0.0
-	 * @access public
-	 * @return void
-	 */
-	public function settings_page() {
-		acf_get_view( 'html-admin-page-intro' );
-	}
-
-	/**
-	 * Enqueues global admin styling.
-	 *
-	 * @date   28/09/13
-	 * @since  5.0.0
-	 * @access public
-	 * @return void
-	 */
-	public function admin_enqueue_scripts() {
-		wp_enqueue_style( 'acf-global' );
-	}
-
-	/**
-	 * Appends custom admin body classes.
-	 *
-	 * @date   5/11/19
-	 * @since  5.8.7
-	 * @access public
-	 * @param  string $classes Space-separated list of CSS classes.
-	 * @return string
-	 */
-	public function admin_body_class( $classes ) {
-
-		// Get the platform version.
-		global $wp_version;
-
-		// Determine body class version.
-		$wp_minor_version = floatval( $wp_version );
-		if ( $wp_minor_version >= 5.3 ) {
-			$classes .= ' acf-admin-5-3';
-		} else {
-			$classes .= ' acf-admin-3-8';
-		}
-
-		// Add browser for specific CSS.
-		$classes .= ' acf-browser-' . acf_get_browser();
-
-		// Return classes.
-		return $classes;
-	}
-
-	/**
-	 * Admin screens
-	 *
-	 * Adds custom functionality to this plugin's admin screens.
-	 *
-	 * @date   7/4/20
-	 * @since  5.9.0
-	 * @access public
-	 * @global array $pagenow Array of admin screens.
-	 * @return void
-	 */
-	public function current_screen( $screen ) {
-
-		global $pagenow;
-
-		// Get filtered menu options.
-		$menu = acf_admin_menu();
-
-		// Add help tabs to the intro screen.
-		if ( isset( $_GET['page'] ) ) {
-			if ( in_array( $pagenow, array( 'admin.php' ) ) && ( $_GET['page'] == $menu['slug'] || $_GET['page'] == $menu['slug'] ) ) {
-				$this->setup_help_tab();
+				wp_enqueue_style( 'acf-intro', acf_get_url( 'assets/css/intro-page' . $suffix . '.css' ), [], $version, 'screen' );
 			}
-		}
-
-		// Add help tabs to field group screens.
-		if ( isset( $screen->post_type ) && $screen->post_type === 'acf-field-group' ) {
-			$this->setup_help_tab();
-		}
-	}
-
-	/**
-	 * Sets up the admin help tab.
-	 *
-	 * @date   20/4/20
-	 * @since  5.9.0
-	 * @access public
-	 * @return void
-	 */
-	public function setup_help_tab() {
-
-		$screen = get_current_screen();
-
-		// Overview tab.
-		$screen->add_help_tab(
-			[
-				'id'      => 'overview',
-				'title'   => __( 'Overview', 'acf' ),
-				'content' =>
-					'<h4>' . __( 'Overview', 'acf' ) . '</h4>' .
-					'<p>' . __( 'The Applied Content Forms plugin provides a visual form builder to customize edit screens with extra fields, and an intuitive API to display custom field values in any theme template file. This began as a fork of Advanced Custom Fields PRO version 5.9.6, the last version developed by Eliot Condon before selling the plugin to Delicious Brains.', 'acf' ) . '</p>' .
-					'<p>' . sprintf(
-						__( 'Before creating your first Field Group it is recommended to first read the <a href="%s" target="_blank" rel="noopener noreferrer">Getting Started</a> guide at Advanced Custom Fields to familiarize yourself with the plugin\'s philosophy and best practices.', 'acf' ),
-						'https://www.advancedcustomfields.com/resources/getting-started-with-acf/'
-					) . '</p>'
-			]
-		);
-
-		// Help tab.
-		$screen->add_help_tab(
-			[
-				'id'      => 'help',
-				'title'   => __( 'Help & Support', 'acf' ),
-				'content' =>
-					'<h4>' . __( 'Help & Support', 'acf' ) . '</h4>' .
-					'<p>' . __( 'There are several places you can find help at the Advanced Custom Fields website:', 'acf' ) . '</p>' .
-					'<ul>' .
-						'<li>' . sprintf(
-							__( '<a href="%s" target="_blank">Documentation</a>. Extensive documentation contains references and guides for most situations you may encounter.', 'acf' ),
-							'https://www.advancedcustomfields.com/resources/'
-						) . '</li>' .
-						'<li>' . sprintf(
-							__( '<a href="%s" target="_blank">Discussions</a>. An active and friendly community on the Community Forums who may be able to help you figure out the how-tos of the ACF world.', 'acf' ),
-							'https://support.advancedcustomfields.com/'
-						) . '</li>' .
-					'</ul>'
-			]
 		);
 	}
 }
 
-// Instantiate.
-acf_new_instance( 'ACF\Admin\Admin_Screens' );
+/**
+ * Sets up the admin help tab.
+ *
+ * @since  5.9.0
+ * @return void
+ */
+function setup_help_tab() {
+
+	$screen = get_current_screen();
+
+	// Overview tab.
+	$screen->add_help_tab(
+		[
+			'id'      => 'overview',
+			'title'   => __( 'Overview', 'acf' ),
+			'content' =>
+				'<h4>' . __( 'Overview', 'acf' ) . '</h4>' .
+				'<p>' . __( 'The Applied Content Forms plugin provides a visual form builder to customize edit screens with extra fields, and an intuitive API to display custom field values in any theme template file. This began as a fork of Advanced Custom Fields PRO version 5.9.6, the last version developed by Eliot Condon before selling the plugin to Delicious Brains.', 'acf' ) . '</p>' .
+				'<p>' . sprintf(
+					__( 'Before creating your first Field Group it is recommended to first read the <a href="%s" target="_blank" rel="noopener noreferrer">Getting Started</a> guide at Advanced Custom Fields to familiarize yourself with the plugin\'s philosophy and best practices.', 'acf' ),
+					'https://www.advancedcustomfields.com/resources/getting-started-with-acf/'
+				) . '</p>'
+		]
+	);
+
+	// Help tab.
+	$screen->add_help_tab(
+		[
+			'id'      => 'help',
+			'title'   => __( 'Help & Support', 'acf' ),
+			'content' =>
+				'<h4>' . __( 'Help & Support', 'acf' ) . '</h4>' .
+				'<p>' . __( 'There are several places you can find help at the Advanced Custom Fields website:', 'acf' ) . '</p>' .
+				'<ul>' .
+					'<li>' . sprintf(
+						__( '<a href="%s" target="_blank">Documentation</a>. Extensive documentation contains references and guides for most situations you may encounter.', 'acf' ),
+						'https://www.advancedcustomfields.com/resources/'
+					) . '</li>' .
+					'<li>' . sprintf(
+						__( '<a href="%s" target="_blank">Discussions</a>. An active and friendly community on the Community Forums who may be able to help you figure out the how-tos of the ACF world.', 'acf' ),
+						'https://support.advancedcustomfields.com/'
+					) . '</li>' .
+				'</ul>'
+		]
+	);
+}
+
+function acf_add_settings_page() {
+
+	$menu = acf_admin_menu();
+	acf_add_options_page( [
+		'page_title'    => __( 'Content Settings', 'acf' ),
+		'menu_title'    => __( 'Settings', 'acf' ),
+		'menu_slug'     => 'content-settings',
+		'parent'        => $menu['slug'],
+		'capability'    => 'edit_posts',
+		'redirect'      => false
+	] );
+}
+add_action( 'acf/init', 'acf_add_settings_page' );

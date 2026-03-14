@@ -36,7 +36,6 @@ class Dashboard {
 	}
 }
 
-// @todo Fix setting error.
-// if ( acfe_get_setting( 'acfe/modules/dashboard_widget' ) ) {
+if ( acfe_get_setting( 'acf/dashboard_widget' ) ) {
 	new Dashboard();
-// }
+}
