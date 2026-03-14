@@ -1,11 +1,10 @@
 <?php 
-use function ACF\acf;
 
 if( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-if( ! class_exists('ACF_Form_Front') ) :
+if( ! class_exists('acf_form_front') ) :
 
-class ACF_Form_Front {
+class acf_form_front {
 	
 	/** @var array An array of registered form settings */
 	private $forms = array();
@@ -601,7 +600,7 @@ class ACF_Form_Front {
 }
 
 // initialize
-acf()->form_front = new ACF_Form_Front();
+acf()->form_front = new acf_form_front();
 
 endif; // class_exists check
 

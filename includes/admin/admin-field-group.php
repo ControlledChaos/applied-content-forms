@@ -603,9 +603,9 @@ class acf_admin_field_group {
 					
 					// rule 0
 					array(
-						trim( 'param' ) => 'post_type',
-						'operator'	  => '==',
-						'value'		  => 'post',
+						'param'		=>	'post_type',
+						'operator'	=>	'==',
+						'value'		=>	'post',
 					)
 				)
 				
