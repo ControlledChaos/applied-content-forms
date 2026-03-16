@@ -7,7 +7,7 @@ global $field_group;
 <div class="acf-field">
 	<div class="acf-label">
 		<label><?php _e("Rules",'acf'); ?></label>
-		<p class="description"><?php _e("Create a set of rules to determine which edit screens will use these advanced custom fields",'acf'); ?></p>
+		<p class="description"><?php _e("Create a set of rules to determine which edit screens will use these custom fields",'acf'); ?></p>
 	</div>
 	<div class="acf-input">
 		<div class="rule-groups">
