@@ -175,6 +175,7 @@ final class ACF {
 		$this->define( 'ACF_BASENAME', plugin_basename( __FILE__ ) );
 		$this->define( 'ACF_VERSION', $this->acf_version );
 		$this->define( 'ACF_MAJOR_VERSION', 5 );
+		$this->define( 'ACFE_PATH', plugin_dir_path( __FILE__ ) . 'extend/' );
 
 		// Define settings.
 		$this->settings = [
@@ -281,6 +282,10 @@ final class ACF {
 
 		acf_include( 'includes/legacy/legacy-locations.php' );
 		acf_include( 'pro/acf-pro.php' );
+
+		// Extend original ACF.
+		acf_include( 'extend/includes/init.php' );
+		acf_include( 'extend/extend.php' );
 		if ( defined( 'ACF_DEV' ) && ACF_DEV ) {
 			acf_include( 'tests/tests.php' );
 		}

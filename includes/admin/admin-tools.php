@@ -325,7 +325,7 @@ function acf_register_admin_tool( $class ) {
 
 function acf_get_admin_tools_url() {
 
-	return admin_url('edit.php?post_type=acf-field-group&page=acf-tools');
+	return admin_url('admin.php?page=acf-tools');
 
 }
 

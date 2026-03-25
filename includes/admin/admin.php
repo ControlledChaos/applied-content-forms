@@ -198,9 +198,7 @@ class ACF_Admin {
 	 * @param	void
 	 * @return	void
 	 */
-	public function in_admin_header() {
-		acf_get_view( 'html-admin-navigation' );
-	}
+	public function in_admin_header() {}
 
 	/**
 	 * Modifies the admin footer text.
