@@ -246,23 +246,23 @@ html[dir=rtl] .acfe-postbox-left>.inside>.acf-field>.acf-input {
 }
 
 .wrap .acfe-dop-admin-config,
-.wrap .acfe-dpt-admin-config,
-.wrap .acfe-dt-admin-config {
+.wrap .acf-post-type-admin-config,
+.wrap .acf-taxonomy-admin-config {
     display: inline-block;
     padding-left: 4px;
     padding-right: 4px
 }
 
 .wrap .acfe-dop-admin-config:active,
-.wrap .acfe-dpt-admin-config:active,
-.wrap .acfe-dt-admin-config:active {
+.wrap .acf-post-type-admin-config:active,
+.wrap .acf-taxonomy-admin-config:active {
     padding-left: 4px;
     padding-right: 4px
 }
 
 .wrap .acfe-dop-admin-config span,
-.wrap .acfe-dpt-admin-config span,
-.wrap .acfe-dt-admin-config span {
+.wrap .acf-post-type-admin-config span,
+.wrap .acf-taxonomy-admin-config span {
     font-size: 16px;
     vertical-align: text-top;
     height: 15px;
@@ -278,14 +278,14 @@ body.post-type-acfe-dop #minor-publishing-actions,
 body.post-type-acfe-dop #misc-publishing-actions #visibility,
 body.post-type-acfe-dop #misc-publishing-actions .edit-post-status,
 body.post-type-acfe-dop #misc-publishing-actions .edit-timestamp,
-body.post-type-acfe-dpt #minor-publishing-actions,
-body.post-type-acfe-dpt #misc-publishing-actions #visibility,
-body.post-type-acfe-dpt #misc-publishing-actions .edit-post-status,
-body.post-type-acfe-dpt #misc-publishing-actions .edit-timestamp,
-body.post-type-acfe-dt #minor-publishing-actions,
-body.post-type-acfe-dt #misc-publishing-actions #visibility,
-body.post-type-acfe-dt #misc-publishing-actions .edit-post-status,
-body.post-type-acfe-dt #misc-publishing-actions .edit-timestamp,
+body.post-type-acf-post-type #minor-publishing-actions,
+body.post-type-acf-post-type #misc-publishing-actions #visibility,
+body.post-type-acf-post-type #misc-publishing-actions .edit-post-status,
+body.post-type-acf-post-type #misc-publishing-actions .edit-timestamp,
+body.post-type-acf-taxonomy #minor-publishing-actions,
+body.post-type-acf-taxonomy #misc-publishing-actions #visibility,
+body.post-type-acf-taxonomy #misc-publishing-actions .edit-post-status,
+body.post-type-acf-taxonomy #misc-publishing-actions .edit-timestamp,
 body.post-type-acfe-form #minor-publishing-actions,
 body.post-type-acfe-form #misc-publishing-actions #visibility,
 body.post-type-acfe-form #misc-publishing-actions .edit-post-status,
@@ -299,8 +299,8 @@ body.post-type-acfe-template #misc-publishing-actions .edit-timestamp {
 
 body.post-type-acfe-dbt .acfe-misc-export,
 body.post-type-acfe-dop .acfe-misc-export,
-body.post-type-acfe-dpt .acfe-misc-export,
-body.post-type-acfe-dt .acfe-misc-export,
+body.post-type-acf-post-type .acfe-misc-export,
+body.post-type-acf-taxonomy .acfe-misc-export,
 body.post-type-acfe-form .acfe-misc-export,
 body.post-type-acfe-template .acfe-misc-export {
     padding-top: 2px
@@ -308,8 +308,8 @@ body.post-type-acfe-template .acfe-misc-export {
 
 body.post-type-acfe-dbt .acfe-misc-export span.dashicons,
 body.post-type-acfe-dop .acfe-misc-export span.dashicons,
-body.post-type-acfe-dpt .acfe-misc-export span.dashicons,
-body.post-type-acfe-dt .acfe-misc-export span.dashicons,
+body.post-type-acf-post-type .acfe-misc-export span.dashicons,
+body.post-type-acf-taxonomy .acfe-misc-export span.dashicons,
 body.post-type-acfe-form .acfe-misc-export span.dashicons,
 body.post-type-acfe-template .acfe-misc-export span.dashicons {
     font-size: 18px;
@@ -321,8 +321,8 @@ body.post-type-acfe-template .acfe-misc-export span.dashicons {
 
 body.post-type-acfe-dbt.post-new-php .acfe-misc-export,
 body.post-type-acfe-dop.post-new-php .acfe-misc-export,
-body.post-type-acfe-dpt.post-new-php .acfe-misc-export,
-body.post-type-acfe-dt.post-new-php .acfe-misc-export,
+body.post-type-acf-post-type.post-new-php .acfe-misc-export,
+body.post-type-acf-taxonomy.post-new-php .acfe-misc-export,
 body.post-type-acfe-form.post-new-php .acfe-misc-export,
 body.post-type-acfe-template.post-new-php .acfe-misc-export {
     display: none
@@ -332,10 +332,10 @@ body.post-type-acfe-dbt .status-acf-disabled .column-title a,
 body.post-type-acfe-dbt .status-acf-disabled .column-title code,
 body.post-type-acfe-dop .status-acf-disabled .column-title a,
 body.post-type-acfe-dop .status-acf-disabled .column-title code,
-body.post-type-acfe-dpt .status-acf-disabled .column-title a,
-body.post-type-acfe-dpt .status-acf-disabled .column-title code,
-body.post-type-acfe-dt .status-acf-disabled .column-title a,
-body.post-type-acfe-dt .status-acf-disabled .column-title code,
+body.post-type-acf-post-type .status-acf-disabled .column-title a,
+body.post-type-acf-post-type .status-acf-disabled .column-title code,
+body.post-type-acf-taxonomy .status-acf-disabled .column-title a,
+body.post-type-acf-taxonomy .status-acf-disabled .column-title code,
 body.post-type-acfe-form .status-acf-disabled .column-title a,
 body.post-type-acfe-form .status-acf-disabled .column-title code,
 body.post-type-acfe-template .status-acf-disabled .column-title a,
@@ -345,8 +345,8 @@ body.post-type-acfe-template .status-acf-disabled .column-title code {
 
 body.post-type-acfe-dbt .status-acf-disabled .column-title strong,
 body.post-type-acfe-dop .status-acf-disabled .column-title strong,
-body.post-type-acfe-dpt .status-acf-disabled .column-title strong,
-body.post-type-acfe-dt .status-acf-disabled .column-title strong,
+body.post-type-acf-post-type .status-acf-disabled .column-title strong,
+body.post-type-acf-taxonomy .status-acf-disabled .column-title strong,
 body.post-type-acfe-form .status-acf-disabled .column-title strong,
 body.post-type-acfe-template .status-acf-disabled .column-title strong {
     color: #a0a5aa
@@ -356,10 +356,10 @@ body.post-type-acfe-dbt .column-acfe-posts,
 body.post-type-acfe-dbt .column-acfe-terms,
 body.post-type-acfe-dop .column-acfe-posts,
 body.post-type-acfe-dop .column-acfe-terms,
-body.post-type-acfe-dpt .column-acfe-posts,
-body.post-type-acfe-dpt .column-acfe-terms,
-body.post-type-acfe-dt .column-acfe-posts,
-body.post-type-acfe-dt .column-acfe-terms,
+body.post-type-acf-post-type .column-acfe-posts,
+body.post-type-acf-post-type .column-acfe-terms,
+body.post-type-acf-taxonomy .column-acfe-posts,
+body.post-type-acf-taxonomy .column-acfe-terms,
 body.post-type-acfe-form .column-acfe-posts,
 body.post-type-acfe-form .column-acfe-terms,
 body.post-type-acfe-template .column-acfe-posts,

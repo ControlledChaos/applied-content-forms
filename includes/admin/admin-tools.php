@@ -344,10 +344,5 @@ function acf_get_admin_tools_url() {
 */
 
 function acf_get_admin_tool_url( $tool = '' ) {
-
 	return acf_get_admin_tools_url() . '&tool='.$tool;
-
 }
-
-
-?>

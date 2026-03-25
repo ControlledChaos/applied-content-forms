@@ -1,29 +1,34 @@
 <?php
 
-if(!defined('ABSPATH'))
+if ( ! defined( 'ABSPATH' ) ) {
     exit;
+}
 
-if(!class_exists('acfe_dynamic_taxonomies')):
+if ( ! class_exists( 'acfe_dynamic_taxonomies' ) ) :
+class acfe_dynamic_taxonomies extends acfe_dynamic_module {
 
-class acfe_dynamic_taxonomies extends acfe_dynamic_module{
+    public $active = false;
+
+    public $post_type = 'acf-taxonomy';
 
     /*
      * Initialize
      */
     function initialize(){
 
-        $this->active = get_field( 'acf_taxonomies', 'option' );
+        if ( acf()->taxonomies ) {
+            $this->active = true;
+        }
         $this->settings = 'modules.taxonomies';
-        $this->post_type = 'acfe-dt';
-        $this->label = 'Taxonomy Name';
-        $this->textdomain = 'ACF Extended: Taxonomies';
+        $this->label = 'Taxonomy Label';
+        $this->textdomain = 'Taxonomies';
 
         $this->tool = 'acfe_dynamic_taxonomies_export';
         $this->tools = array('php', 'json');
         $this->columns = array(
-            'acfe-name'         => __('Name', 'acf'),
-            'acfe-post-types'   => __('Post Types', 'acf'),
-            'acfe-terms'        => __('Terms', 'acf'),
+            'acf-name'         => __('Name', 'acf'),
+            'acf-post-types'   => __('Post Types', 'acf'),
+            'acf-terms'        => __('Terms', 'acf'),
         );
 
     }
@@ -86,44 +91,7 @@ class acfe_dynamic_taxonomies extends acfe_dynamic_module{
         if(!acf_get_setting('show_admin'))
             $capability = false;
 
-        register_post_type($this->post_type, array(
-            'label'                 => 'Taxonomies',
-            'description'           => 'Taxonomies',
-            'labels'                => array(
-                'name'          => 'Taxonomies',
-                'singular_name' => 'Taxonomy',
-                'menu_name'     => 'Taxonomies',
-                'edit_item'     => 'Edit Taxonomy',
-                'add_new_item'  => 'New Taxonomy',
-            ),
-            'supports'              => array('title'),
-            'hierarchical'          => false,
-            'public'                => false,
-            'show_ui'               => true,
-            'show_in_menu'          => 'acf',
-            'menu_icon'             => 'dashicons-layout',
-            'show_in_admin_bar'     => false,
-            'show_in_nav_menus'     => false,
-            'can_export'            => false,
-            'has_archive'           => false,
-            'rewrite'               => false,
-            'exclude_from_search'   => true,
-            'publicly_queryable'    => false,
-            'capabilities'          => array(
-                'publish_posts'         => $capability,
-                'edit_posts'            => $capability,
-                'edit_others_posts'     => $capability,
-                'delete_posts'          => $capability,
-                'delete_others_posts'   => $capability,
-                'read_private_posts'    => $capability,
-                'edit_post'             => $capability,
-                'delete_post'           => $capability,
-                'read_post'             => $capability,
-            ),
-            'acfe_admin_orderby'    => 'title',
-            'acfe_admin_order'      => 'ASC',
-            'acfe_admin_ppp'        => 999,
-        ));
+
 
     }
 
@@ -180,13 +148,13 @@ class acfe_dynamic_taxonomies extends acfe_dynamic_module{
         switch($column){
 
             // Name
-            case 'acfe-name':
+            case 'acf-name':
 
                 echo '<code style="font-size: 12px;">' . $this->get_name($post_id) . '</code>';
                 break;
 
             // Post Types
-            case 'acfe-post-types':
+            case 'acf-post-types':
 
                 $pt = '—';
 
@@ -221,7 +189,7 @@ class acfe_dynamic_taxonomies extends acfe_dynamic_module{
                 break;
 
             // Terms
-            case 'acfe-terms':
+            case 'acf-terms':
 
                 // vars
                 $c = '—';
@@ -291,15 +259,15 @@ class acfe_dynamic_taxonomies extends acfe_dynamic_module{
             return;
 
         ?>
-        <script type="text/html" id="tmpl-acfe-dt-title-config">
-            &nbsp;<a href="<?php echo admin_url('post.php?post=' . $acfe_dt_post_type->ID . '&action=edit'); ?>" class="page-title-action acfe-dt-admin-config"><span class="dashicons dashicons-admin-generic"></span></a>
+        <script type="text/html" id="tmpl-acf-taxonomy-title-config">
+            &nbsp;<a href="<?php echo admin_url('post.php?post=' . $acfe_dt_post_type->ID . '&action=edit'); ?>" class="page-title-action acf-taxonomy-admin-config"><span class="dashicons dashicons-admin-generic"></span></a>
         </script>
 
         <script type="text/javascript">
             (function($){
 
                 // Add button
-                $('.wrap .wp-heading-inline').after($('#tmpl-acfe-dt-title-config').html());
+                $('.wrap .wp-heading-inline').after($('#tmpl-acf-taxonomy-title-config').html());
 
             })(jQuery);
         </script>

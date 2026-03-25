@@ -14,7 +14,7 @@ class acfe_pro_dynamic_post_types{
      */
     function __construct(){
         
-        $this->post_type = 'acfe-dpt';
+        $this->post_type = 'acf-post-type';
         
         add_filter('acfe/post_type/register',       array($this, 'register'), 15, 2);
         add_filter('acfe/post_type/save_args',      array($this, 'save_args'), 15, 3);

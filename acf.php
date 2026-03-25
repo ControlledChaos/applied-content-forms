@@ -147,14 +147,32 @@ final class ACF {
 	var $instances = [];
 
 	/**
+	 * Post types feature
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @var    boolean
+	 */
+	public $post_types = false;
+
+	/**
+	 * Taxonomies feature
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @var    boolean
+	 */
+	public $taxonomies = false;
+
+	/**
 	 * Constructor method
 	 *
 	 * @since  1.0.0
 	 * @access public
-	 * @return null
+	 * @return self
 	 */
 	public function __construct() {
-		return null;
+		add_action( 'acf/init', [ $this, 'features' ] );
 	}
 
 	/**
@@ -423,6 +441,15 @@ final class ACF {
 		do_action( 'acf/init', ACF_MAJOR_VERSION );
 	}
 
+	public function features() {
+		if ( get_field( 'acf_post_types', 'option' ) ) {
+			$this->post_types = true;
+		}
+		if ( get_field( 'acf_taxonomies', 'option' ) ) {
+			$this->taxonomies = true;
+		}
+	}
+
 	/**
 	 * Register post types
 	 *
@@ -435,6 +462,88 @@ final class ACF {
 	public function register_post_types() {
 
 		$capability = acf_get_setting( 'capability' );
+
+		if ( $this->post_types ) {
+			register_post_type( 'acf-post-type', [
+				'label'       => __( 'Post Types', 'acf' ),
+				'description' => __( 'Create custom post types without code.', 'acf' ),
+				'labels'      => [
+					'name'          => __( 'Post Types', 'acf' ),
+					'singular_name' => __( 'Post Type', 'acf' ),
+					'menu_name'     => __( 'Post Types', 'acf' ),
+					'edit_item'     => __( 'Edit Post Type', 'acf' ),
+					'add_new_item'  => __( 'New Post Type', 'acf' ),
+				],
+				'supports'            => [ 'title' ],
+				'hierarchical'        => false,
+				'public'              => false,
+				'show_ui'             => true,
+				'show_in_menu'        => 'acf',
+				'menu_icon'           => 'dashicons-layout',
+				'show_in_admin_bar'   => false,
+				'show_in_nav_menus'   => false,
+				'can_export'          => false,
+				'has_archive'         => false,
+				'rewrite'             => false,
+				'exclude_from_search' => true,
+				'publicly_queryable'  => false,
+				'capabilities'        => [
+					'publish_posts'       => $capability,
+					'edit_posts'          => $capability,
+					'edit_others_posts'   => $capability,
+					'delete_posts'        => $capability,
+					'delete_others_posts' => $capability,
+					'read_private_posts'  => $capability,
+					'edit_post'           => $capability,
+					'delete_post'         => $capability,
+					'read_post'           => $capability,
+				],
+				'acfe_admin_orderby' => 'title',
+				'acfe_admin_order'   => 'ASC',
+				'acfe_admin_ppp'     => 999,
+			] );
+		}
+
+		if ( $this->taxonomies ) {
+			register_post_type( 'acf-taxonomy', [
+				'label'       => __( 'Taxonomies', 'acf' ),
+				'description' => __( 'Create custom taxonomies without code.', 'acf' ),
+				'labels'      => [
+					'name'          => __( 'Taxonomies', 'acf' ),
+					'singular_name' => __( 'Taxonomy', 'acf' ),
+					'menu_name'     => __( 'Taxonomies', 'acf' ),
+					'edit_item'     => __( 'Edit Taxonomy', 'acf' ),
+					'add_new_item'  => __( 'New Taxonomy', 'acf' ),
+				],
+				'supports'            => [ 'title' ],
+				'hierarchical'        => false,
+				'public'              => false,
+				'show_ui'             => true,
+				'show_in_menu'        => 'acf',
+				'menu_icon'           => 'dashicons-layout',
+				'show_in_admin_bar'   => false,
+				'show_in_nav_menus'   => false,
+				'can_export'          => false,
+				'has_archive'         => false,
+				'rewrite'             => false,
+				'exclude_from_search' => true,
+				'publicly_queryable'  => false,
+				'capabilities'        => [
+					'publish_posts'       => $capability,
+					'edit_posts'          => $capability,
+					'edit_others_posts'   => $capability,
+					'delete_posts'        => $capability,
+					'delete_others_posts' => $capability,
+					'read_private_posts'  => $capability,
+					'edit_post'           => $capability,
+					'delete_post'         => $capability,
+					'read_post'           => $capability,
+				],
+				'acfe_admin_orderby' => 'title',
+				'acfe_admin_order'   => 'ASC',
+				'acfe_admin_ppp'     => 999,
+			] );
+		}
 
 		register_post_type( 'acf-field-group', [
 			'labels' => [

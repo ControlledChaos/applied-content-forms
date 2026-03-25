@@ -1,29 +1,34 @@
 <?php
 
-if(!defined('ABSPATH'))
+if ( ! defined( 'ABSPATH' ) ) {
     exit;
+}
 
-if(!class_exists('acfe_dynamic_post_types')):
+if ( ! class_exists( 'acfe_dynamic_post_types' ) ) :
+class acfe_dynamic_post_types extends acfe_dynamic_module {
 
-class acfe_dynamic_post_types extends acfe_dynamic_module{
+    public $active = false;
+
+    public $post_type = 'acf-post-type';
 
     /*
      * Initialize
      */
-    function initialize(){
+    function initialize() {
 
-        $this->active = get_field( 'acf_post_types', 'option' );
+        if ( acf()->post_types ) {
+            $this->active = true;
+        }
         $this->settings = 'modules.post_types';
-        $this->post_type = 'acfe-dpt';
         $this->label = 'Post Type Label';
-        $this->textdomain = 'ACF Extended: Post Types';
+        $this->textdomain = 'Post Types';
 
         $this->tool = 'acfe_dynamic_post_types_export';
         $this->tools = array('php', 'json');
         $this->columns = array(
-            'acfe-name'         => __('Name', 'acf'),
-            'acfe-taxonomies'   => __('Taxonomies', 'acf'),
-            'acfe-posts'        => __('Posts', 'acf'),
+            'acf-name'         => __('Name', 'acf'),
+            'acf-taxonomies'   => __('Taxonomies', 'acf'),
+            'acf-posts'        => __('Posts', 'acf'),
         );
 
     }
@@ -87,44 +92,7 @@ class acfe_dynamic_post_types extends acfe_dynamic_module{
         if(!acf_get_setting('show_admin'))
             $capability = false;
 
-        register_post_type($this->post_type, array(
-            'label'                 => 'Post Types',
-            'description'           => 'Post Types',
-            'labels'                => array(
-                'name'          => 'Post Types',
-                'singular_name' => 'Post Type',
-                'menu_name'     => 'Post Types',
-                'edit_item'     => 'Edit Post Type',
-                'add_new_item'  => 'New Post Type',
-            ),
-            'supports'              => array('title'),
-            'hierarchical'          => false,
-            'public'                => false,
-            'show_ui'               => true,
-            'show_in_menu'          => 'acf',
-            'menu_icon'             => 'dashicons-layout',
-            'show_in_admin_bar'     => false,
-            'show_in_nav_menus'     => false,
-            'can_export'            => false,
-            'has_archive'           => false,
-            'rewrite'               => false,
-            'exclude_from_search'   => true,
-            'publicly_queryable'    => false,
-            'capabilities'          => array(
-                'publish_posts'         => $capability,
-                'edit_posts'            => $capability,
-                'edit_others_posts'     => $capability,
-                'delete_posts'          => $capability,
-                'delete_others_posts'   => $capability,
-                'read_private_posts'    => $capability,
-                'edit_post'             => $capability,
-                'delete_post'           => $capability,
-                'read_post'             => $capability,
-            ),
-            'acfe_admin_orderby'    => 'title',
-            'acfe_admin_order'      => 'ASC',
-            'acfe_admin_ppp'        => 999,
-        ));
+
 
     }
 
@@ -184,13 +152,13 @@ class acfe_dynamic_post_types extends acfe_dynamic_module{
         switch($column){
 
             // Name
-            case 'acfe-name':
+            case 'acf-name':
 
-                echo '<code style="font-size: 12px;">' . $this->get_name($post_id) . '</code>';
+                echo '<code>' . $this->get_name($post_id) . '</code>';
                 break;
 
             // Taxonomies
-            case 'acfe-taxonomies':
+            case 'acf-taxonomies':
 
                 $tax = '—';
 
@@ -225,7 +193,7 @@ class acfe_dynamic_post_types extends acfe_dynamic_module{
                 break;
 
             // Posts
-            case 'acfe-posts':
+            case 'acf-posts':
 
                 // vars
                 $c = '—';
@@ -270,13 +238,13 @@ class acfe_dynamic_post_types extends acfe_dynamic_module{
             return;
 
         ?>
-        <script type="text/html" id="tmpl-acfe-dpt-title-config">
-            <a href="<?php echo admin_url("post.php?post={$post->ID}&action=edit"); ?>" class="page-title-action acfe-dpt-admin-config"><span class="dashicons dashicons-admin-generic"></span></a>
+        <script type="text/html" id="tmpl-acf-post-type-title-config">
+            <a href="<?php echo admin_url("post.php?post={$post->ID}&action=edit"); ?>" class="page-title-action acf-post-type-admin-config"><span class="dashicons dashicons-admin-generic"></span></a>
         </script>
 
         <script type="text/javascript">
         (function($){
-            $('.wrap .page-title-action').before($('#tmpl-acfe-dpt-title-config').html());
+            $('.wrap .page-title-action').before($('#tmpl-acf-post-type-title-config').html());
         })(jQuery);
         </script>
         <?php
@@ -1131,7 +1099,7 @@ class acfe_dynamic_post_types extends acfe_dynamic_module{
                     'label' => 'Name',
                     'name' => 'acfe_dpt_name',
                     'type' => 'acfe_slug',
-                    'instructions' => 'Post type name. Max. 20 characters, cannot contain capital letters or spaces',
+                    'instructions' => 'Post type name. Maximum 20 characters, cannot contain capital letters or spaces.',
                     'required' => 1,
                     'conditional_logic' => 0,
                     'wrapper' => array(
@@ -1153,7 +1121,7 @@ class acfe_dynamic_post_types extends acfe_dynamic_module{
                     'label' => 'Description',
                     'name' => 'description',
                     'type' => 'text',
-                    'instructions' => 'A short descriptive summary of the post type',
+                    'instructions' => 'A short descriptive summary of the post type.',
                     'required' => 0,
                     'conditional_logic' => 0,
                     'wrapper' => array(
@@ -1197,7 +1165,7 @@ class acfe_dynamic_post_types extends acfe_dynamic_module{
                     'label' => 'Supports',
                     'name' => 'supports',
                     'type' => 'checkbox',
-                    'instructions' => 'An alias for calling add_post_type_support() directly. As of 3.5, boolean false can be passed as value instead of an array to prevent default (title and editor) behavior.',
+                    'instructions' => 'An alias for calling add_post_type_support() directly. A boolean false can be passed as value instead of an array to prevent default (title and editor) behavior.',
                     'required' => 0,
                     'conditional_logic' => 0,
                     'wrapper' => array(
@@ -1211,22 +1179,23 @@ class acfe_dynamic_post_types extends acfe_dynamic_module{
                     'choices' => array(
                         'title' => 'Title',
                         'editor' => 'Editor',
-                        'author' => 'Author',
-                        'thumbnail' => 'Thumbnail',
                         'excerpt' => 'Excerpt',
-                        'trackbacks' => 'Trackbacks',
-                        'custom-fields' => 'Custom fields',
+                        'thumbnail' => 'Thumbnail',
+                        'author' => 'Author',
                         'comments' => 'Comments',
+                        'page-attributes' => 'Page Attributes',
+                        'post-formats' => 'Post Formats',
+                        'trackbacks' => 'Trackbacks',
                         'revisions' => 'Revisions',
-                        'page-attributes' => 'Page attributes',
-                        'post-formats' => 'Post formats',
+                        'custom-fields' => 'Custom Fields'
                     ),
                     'allow_custom' => 1,
                     'save_custom' => 1,
                     'default_value' => array(
                         0 => 'title',
-                        1 => 'thumbnail',
-                        2 => 'custom-fields',
+                        1 => 'editor',
+                        2 => 'excerpt',
+                        3 => 'thumbnail'
                     ),
                     'layout' => 'vertical',
                     'toggle' => 0,
@@ -1237,7 +1206,7 @@ class acfe_dynamic_post_types extends acfe_dynamic_module{
                     'label' => 'Taxonomies',
                     'name' => 'taxonomies',
                     'type' => 'acfe_taxonomies',
-                    'instructions' => 'An array of registered taxonomies like category or post_tag that will be used with this post type. This can be used in lieu of calling register_taxonomy_for_object_type() directly. Custom taxonomies still need to be registered with register_taxonomy()',
+                    'instructions' => 'An array of registered taxonomies like category or post_tag that will be used with this post type. This can be used in lieu of calling register_taxonomy_for_object_type() directly. Custom taxonomies still need to be registered with register_taxonomy().',
                     'required' => 0,
                     'conditional_logic' => 0,
                     'wrapper' => array(

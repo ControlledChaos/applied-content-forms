@@ -66,7 +66,7 @@ class ACFE{
         // Vars
         $theme_path = acf_get_setting('acfe/theme_path', get_stylesheet_directory());
         $theme_url = acf_get_setting('acfe/theme_url', get_stylesheet_directory_uri());
-        $reserved_post_types = array('acf-field', 'acf-field-group', 'acfe-dbt', 'acfe-form', 'acfe-dop', 'acfe-dpt', 'acfe-dt');
+        $reserved_post_types = array('acf-field', 'acf-field-group', 'acfe-dbt', 'acfe-form', 'acfe-dop', 'acf-post-type', 'acf-taxonomy');
         $reserved_taxonomies = array('acf-field-group-category');
         $reserved_field_groups = array(
             'group_acfe_dynamic_post_type',

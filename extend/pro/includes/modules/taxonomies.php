@@ -14,7 +14,7 @@ class acfe_pro_dynamic_taxonomies{
      */
     function __construct(){
         
-        $this->post_type = 'acfe-dt';
+        $this->post_type = 'acf-taxonomy';
         
         add_filter('acfe/taxonomy/register',        array($this, 'register'), 15, 2);
         add_filter('acfe/taxonomy/save_args',       array($this, 'save_args'), 15, 3);
