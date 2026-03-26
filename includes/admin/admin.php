@@ -310,6 +310,25 @@ function post_types_grid() {
 		$html .= '</li>';
 	}
 
+	// Field group categories.
+	$html .= '<li>';
+	$html .= sprintf(
+		'<h3>%s</h3>',
+		__( 'Field Categories', 'acf' )
+	);
+	$html .= '<figure>';
+	$html .= sprintf(
+		'<div class="acf-tab-grid-icon dashicons %s"></div>',
+		'dashicons-category'
+	);
+	$html .= sprintf(
+		'<figcaption><a href="%s">%s</a></figcaption>',
+		admin_url( 'edit-tags.php?taxonomy=acf-field-group-category' ),
+		__( 'Manage', 'acf' )
+	);
+	$html .= '</figure>';
+	$html .= '</li>';
+
 	// End list and wrapping element.
 	$html .= '</ul></div>';
 
