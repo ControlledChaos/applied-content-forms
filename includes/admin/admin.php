@@ -89,8 +89,6 @@ class ACF_Admin {
 	/**
 	 * Current screen
 	 *
-	 * Adds custom functionality to "ACF" admin pages.
-	 *
 	 * @since  1.0.0
 	 * @access public
 	 * @param  string $screen
@@ -98,11 +96,19 @@ class ACF_Admin {
 	 */
 	public function current_screen( $screen ) {
 
-		// Determine if the current page being viewed is "ACF" related.
-		if( isset( $screen->post_type ) && $screen->post_type === 'acf-field-group' ) {
-			add_action( 'in_admin_header',		array( $this, 'in_admin_header' ) );
-			add_filter( 'admin_footer_text',	array( $this, 'admin_footer_text' ) );
-			$this->setup_help_tab();
+		if ( isset( $screen->base ) && $screen->base === 'toplevel_page_acf' ) {
+			add_action(
+				'admin_enqueue_scripts', function() {
+
+					$version = acf_get_setting( 'version' );
+					$suffix  = '';
+					if ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) {
+						$suffix  = '.min';
+					}
+
+					wp_enqueue_style( 'acf-intro', acf_get_url( 'assets/css/intro-page' . $suffix . '.css' ), [], $version, 'screen' );
+				}
+			);
 		}
 	}
 
@@ -116,6 +122,7 @@ class ACF_Admin {
 	 * @return	void
 	 */
 	public function setup_help_tab() {
+
 		$screen = get_current_screen();
 
 		// Overview tab.
@@ -168,31 +175,6 @@ class ACF_Admin {
 			'<p><span class="dashicons dashicons-admin-home"></span> <a href="https://www.advancedcustomfields.com/" target="_blank" target="_blank">' . __( 'Visit website', 'acf' ) . '</a></p>' .
 			''
 		);
-	}
-
-	/**
-	 * Renders the admin navigation element.
-	 *
-	 * @date	27/3/20
-	 * @since	5.9.0
-	 *
-	 * @param	void
-	 * @return	void
-	 */
-	public function in_admin_header() {}
-
-	/**
-	 * Modifies the admin footer text.
-	 *
-	 * @date	7/4/20
-	 * @since	5.9.0
-	 *
-	 * @param	string $text The admin footer text.
-	 * @return	string
-	 */
-	public function admin_footer_text( $text ) {
-		// Use RegExp to append "ACF" after the <a> element allowing translations to read correctly.
-		return preg_replace( '/(<a[\S\s]+?\/a>)/', '$1 ' . __('and', 'acf') . ' <a href="https://www.advancedcustomfields.com" target="_blank">ACF</a>', $text, 1 );
 	}
 }
 
@@ -248,6 +230,95 @@ function acf_admin_page() {
 add_action( 'admin_menu', 'acf_admin_page', 9 );
 
 /**
+ * Post types grid
+ *
+ * The HTML markup for the grid of post types
+ * on the first, default tab of the content screen.
+ *
+ * @since  1.0.0
+ * @return void
+ */
+function post_types_grid() {
+
+	// Array of data from relevant post types.
+	$types = get_post_type_data();
+
+	// Begin grid wrapping element and list.
+	$html = '<div class="acf-tab-grid"><ul>';
+
+	foreach ( $types as $type ) {
+
+		// Post count bubble tooltip.
+		$tooltip = $type['count'] . ' ' . __( 'published', 'acf' );
+		if ( 'attachment' === $type['slug'] ) {
+			$tooltip = $type['count'] . ' ' . __( 'uploads', 'acf' );
+		}
+
+		// Post count bubble in grid item heading.
+		if ( $type['count'] > 0 ) {
+			$count = sprintf(
+				'<span class="acf-js-tooltip post-count post-count-has-published" role="tooltip" title="%s">%s</span>',
+				$tooltip,
+				$type['count']
+			);
+
+		// Print an add new link if count is zero.
+		} else {
+			$count = sprintf(
+				'<span class="acf-js-tooltip post-count post-count-none-published" role="tooltip" title="%s"><a href="%s" class="add-new">&plus;</a></span>',
+				__( 'Add New', 'acf' ),
+				admin_url( 'post-new.php?post_type=' . $type['slug'] )
+			);
+		}
+
+		// Add new post link, different for `post` and `attachment`.
+		$add_new = admin_url( 'post-new.php?post_type=' . $type['slug'] );
+		if ( 'post' === $type['slug'] ) {
+			$add_new = admin_url( 'post-new.php' );
+		} elseif ( 'attachment' === $type['slug'] ) {
+			$add_new = admin_url( 'media-new.php' );
+		}
+
+		// Manage posts link, different for `post` and `attachment`.
+		$manage = admin_url( 'edit.php?post_type=' . $type['slug'] );
+		if ( 'post' === $type['slug'] ) {
+			$manage = admin_url( 'edit.php' );
+		} elseif ( 'attachment' === $type['slug'] ) {
+			$manage = admin_url( 'upload.php' );
+		}
+
+		// List item markup.
+		$html .= '<li>';
+		$html .= sprintf(
+			'<h3>%s %s</h3>',
+			$type['name'],
+			$count
+		);
+		$html .= '<figure>';
+		$html .= sprintf(
+			'<div class="acf-tab-grid-icon dashicons %s"></div>',
+			$type['icon']
+		);
+		$html .= sprintf(
+			'<figcaption><a href="%s">%s</a><a href="%s">%s</a></figcaption>',
+			$add_new,
+			__( 'Add New', 'acf' ),
+			$manage,
+			__( 'Manage', 'acf' )
+		);
+		$html .= '</figure>';
+		$html .= '</li>';
+	}
+
+	// End list and wrapping element.
+	$html .= '</ul></div>';
+
+	// Print the markup.
+	echo $html;
+}
+add_action( 'acf/post_types_grid', 'post_types_grid' );
+
+/**
  * ACF content page
  *
  * @since  1.0.0
@@ -271,3 +342,168 @@ function acf_add_settings_page() {
 	] );
 }
 add_action( 'acf/init', 'acf_add_settings_page' );
+
+/**
+ * ACF post types
+ *
+ * Post types registered by ACF and
+ * enabled by website options.
+ *
+ * @since  1.0.0
+ * @return array
+ */
+function acf_builtin_post_types() {
+
+	// Begin array of post types.
+	$types = [];
+
+	// If dynamic post types.
+	if ( get_field( 'acf_post_types', 'option' ) ) {
+		$types = array_merge( $types, [ 'acf-post-type' ] );
+	}
+
+	// If dynamic taxonomies.
+	if ( get_field( 'acf_taxonomies', 'option' ) ) {
+		$types = array_merge( $types, [ 'acf-taxonomy' ] );
+	}
+
+	// If dynamic block types.
+	if ( ! function_exists( 'classicpress_version' ) ) {
+		if ( get_field( 'acf_block_types', 'option' ) ) {
+			$types = array_merge( $types, [ 'acf-block-type' ] );
+		}
+	}
+
+	// If dynamic forms.
+	if ( get_field( 'acf_forms', 'option' ) ) {
+		$types = array_merge( $types, [ 'acf-form' ] );
+	}
+
+	// If dynamic templates.
+	if ( get_field( 'acf_templates', 'option' ) ) {
+		$types = array_merge( $types, [ 'acf-template' ] );
+	}
+
+	// If dynamic options pages.
+	if ( get_field( 'acf_options_pages', 'option' ) ) {
+		$types = array_merge( $types, [ 'acfe-dop' ] );
+	}
+
+	$types = array_merge( $types, [ 'acf-field-group' ] );
+
+	return apply_filters( 'acf_builtin_post_types', $types );
+}
+
+/**
+ * Custom post types query
+ *
+ * @since  1.0.0
+ * @return array Returns an array of queried post types.
+ */
+function custom_post_types() {
+
+	// Query public post types not built into the CMS.
+	$query = [
+		'public'   => true,
+		'_builtin' => false
+	];
+
+	/**
+	 * Return post types query.
+	 * Escape namespace for native function.
+	 */
+	return \get_post_types( $query, 'names', 'and' );
+}
+
+/**
+ * Get post type
+ *
+ * Gets registered post types for grid display.
+ *
+ * @since  1.0.0
+ * @return array
+ */
+function acf_get_all_post_types() {
+
+	// Get built-in and enabled ACF types
+	$acf_types  = acf_builtin_post_types();
+
+	/**
+	 * Native post types
+	 *
+	 * This array has the opinion that users should
+	 * upload and manage media to be published prior
+	 * to creating the post or page where the media
+	 * file will be used. Thus the `attachment` post
+	 * type is first, also placing it first in the
+	 * intro page grid.
+	 *
+	 * If you don't like this, a filter is applied.
+	 */
+	$native = [ 'attachment', 'post', 'page' ];
+
+	// Get custom post types.
+	$custom = custom_post_types();
+
+	// Merge custom post with native types.
+	$registered = array_merge( $native, $custom );
+
+	// Merge plugin post types with native and custom types.
+	$types = array_merge( $registered, $acf_types );
+
+	return apply_filters( 'acf_get_post_types', $types );
+}
+
+/**
+ * Get post type data
+ *
+ * Gets data from the registered post types for grid display.
+ *
+ * @since  1.0.0
+ * @return array
+ */
+function get_post_type_data() {
+
+	// Get queried post types and set up return fallback.
+	$types = acf_get_all_post_types();
+	$data  = null;
+
+	// Loop through post types, if any found in custom query.
+	if ( $types ) {
+		foreach ( $types as $key => $type ) {
+
+			/**
+			 * Set up variables.
+			 *
+			 * $object  Get the post type object
+			 * $count   Count the posts of the type.
+			 * $publish Number of post with publish status.
+			 * $cap     User capability for the post type.
+			 * $icon    The default menu if not set.
+			 */
+			$object  = get_post_type_object( $type );
+			$count   = wp_count_posts( $type, '' );
+			$publish = $count->publish;
+			$cap     = $object->cap->edit_posts;
+			$icon    = 'dashicons-admin-post';
+
+			// Override default icon if set for the type.
+			if ( $object->menu_icon ) {
+				$icon = $object->menu_icon;
+			}
+
+			// The attachment post type doesn't use `publish` status.
+			if ( 'attachment' === $type ) {
+				$publish = $count->inherit;
+			}
+
+			// Set return array keys and values.
+			$data[$key]['slug']  = $object->name;
+			$data[$key]['cap']   = $cap;
+			$data[$key]['name']  = $object->labels->menu_name;
+			$data[$key]['icon']  = $icon;
+			$data[$key]['count'] = intval( $publish );
+		}
+	}
+	return $data;
+}
