@@ -185,7 +185,7 @@ class acfe_upgrades{
     function do_0_8_6(){
         
         $get_options = get_posts(array(
-            'post_type'         => 'acfe-dop',
+            'post_type'         => 'acf-options-page',
             'posts_per_page'    => -1,
             'fields'            => 'ids'
         ));

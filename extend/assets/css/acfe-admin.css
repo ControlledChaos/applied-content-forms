@@ -245,7 +245,7 @@ html[dir=rtl] .acfe-postbox-left>.inside>.acf-field>.acf-input {
     }
 }
 
-.wrap .acfe-dop-admin-config,
+.wrap .acf-options-page-admin-config,
 .wrap .acf-post-type-admin-config,
 .wrap .acf-taxonomy-admin-config {
     display: inline-block;
@@ -253,14 +253,14 @@ html[dir=rtl] .acfe-postbox-left>.inside>.acf-field>.acf-input {
     padding-right: 4px
 }
 
-.wrap .acfe-dop-admin-config:active,
+.wrap .acf-options-page-admin-config:active,
 .wrap .acf-post-type-admin-config:active,
 .wrap .acf-taxonomy-admin-config:active {
     padding-left: 4px;
     padding-right: 4px
 }
 
-.wrap .acfe-dop-admin-config span,
+.wrap .acf-options-page-admin-config span,
 .wrap .acf-post-type-admin-config span,
 .wrap .acf-taxonomy-admin-config span {
     font-size: 16px;
@@ -274,10 +274,10 @@ body.post-type-acf-block-type #minor-publishing-actions,
 body.post-type-acf-block-type #misc-publishing-actions #visibility,
 body.post-type-acf-block-type #misc-publishing-actions .edit-post-status,
 body.post-type-acf-block-type #misc-publishing-actions .edit-timestamp,
-body.post-type-acfe-dop #minor-publishing-actions,
-body.post-type-acfe-dop #misc-publishing-actions #visibility,
-body.post-type-acfe-dop #misc-publishing-actions .edit-post-status,
-body.post-type-acfe-dop #misc-publishing-actions .edit-timestamp,
+body.post-type-acf-options-page #minor-publishing-actions,
+body.post-type-acf-options-page #misc-publishing-actions #visibility,
+body.post-type-acf-options-page #misc-publishing-actions .edit-post-status,
+body.post-type-acf-options-page #misc-publishing-actions .edit-timestamp,
 body.post-type-acf-post-type #minor-publishing-actions,
 body.post-type-acf-post-type #misc-publishing-actions #visibility,
 body.post-type-acf-post-type #misc-publishing-actions .edit-post-status,
@@ -298,7 +298,7 @@ body.post-type-acf-template #misc-publishing-actions .edit-timestamp {
 }
 
 body.post-type-acf-block-type .acfe-misc-export,
-body.post-type-acfe-dop .acfe-misc-export,
+body.post-type-acf-options-page .acfe-misc-export,
 body.post-type-acf-post-type .acfe-misc-export,
 body.post-type-acf-taxonomy .acfe-misc-export,
 body.post-type-acfe-form .acfe-misc-export,
@@ -307,7 +307,7 @@ body.post-type-acf-template .acfe-misc-export {
 }
 
 body.post-type-acf-block-type .acfe-misc-export span.dashicons,
-body.post-type-acfe-dop .acfe-misc-export span.dashicons,
+body.post-type-acf-options-page .acfe-misc-export span.dashicons,
 body.post-type-acf-post-type .acfe-misc-export span.dashicons,
 body.post-type-acf-taxonomy .acfe-misc-export span.dashicons,
 body.post-type-acfe-form .acfe-misc-export span.dashicons,
@@ -320,7 +320,7 @@ body.post-type-acf-template .acfe-misc-export span.dashicons {
 }
 
 body.post-type-acf-block-type.post-new-php .acfe-misc-export,
-body.post-type-acfe-dop.post-new-php .acfe-misc-export,
+body.post-type-acf-options-page.post-new-php .acfe-misc-export,
 body.post-type-acf-post-type.post-new-php .acfe-misc-export,
 body.post-type-acf-taxonomy.post-new-php .acfe-misc-export,
 body.post-type-acfe-form.post-new-php .acfe-misc-export,
@@ -330,8 +330,8 @@ body.post-type-acf-template.post-new-php .acfe-misc-export {
 
 body.post-type-acf-block-type .status-acf-disabled .column-title a,
 body.post-type-acf-block-type .status-acf-disabled .column-title code,
-body.post-type-acfe-dop .status-acf-disabled .column-title a,
-body.post-type-acfe-dop .status-acf-disabled .column-title code,
+body.post-type-acf-options-page .status-acf-disabled .column-title a,
+body.post-type-acf-options-page .status-acf-disabled .column-title code,
 body.post-type-acf-post-type .status-acf-disabled .column-title a,
 body.post-type-acf-post-type .status-acf-disabled .column-title code,
 body.post-type-acf-taxonomy .status-acf-disabled .column-title a,
@@ -344,7 +344,7 @@ body.post-type-acf-template .status-acf-disabled .column-title code {
 }
 
 body.post-type-acf-block-type .status-acf-disabled .column-title strong,
-body.post-type-acfe-dop .status-acf-disabled .column-title strong,
+body.post-type-acf-options-page .status-acf-disabled .column-title strong,
 body.post-type-acf-post-type .status-acf-disabled .column-title strong,
 body.post-type-acf-taxonomy .status-acf-disabled .column-title strong,
 body.post-type-acfe-form .status-acf-disabled .column-title strong,
@@ -354,8 +354,8 @@ body.post-type-acf-template .status-acf-disabled .column-title strong {
 
 body.post-type-acf-block-type .column-acfe-posts,
 body.post-type-acf-block-type .column-acfe-terms,
-body.post-type-acfe-dop .column-acfe-posts,
-body.post-type-acfe-dop .column-acfe-terms,
+body.post-type-acf-options-page .column-acfe-posts,
+body.post-type-acf-options-page .column-acfe-terms,
 body.post-type-acf-post-type .column-acfe-posts,
 body.post-type-acf-post-type .column-acfe-terms,
 body.post-type-acf-taxonomy .column-acfe-posts,

@@ -14,7 +14,7 @@ class acfe_pro_dynamic_options_pages{
      */
     function __construct(){
         
-        $this->post_type = 'acfe-dop';
+        $this->post_type = 'acf-options-page';
         
         add_filter('acfe/options_page/register',        array($this, 'register'), 15, 2);
         add_filter('acfe/options_page/save_args',       array($this, 'save_args'), 15, 3);

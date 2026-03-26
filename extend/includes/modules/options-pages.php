@@ -14,7 +14,7 @@ class acfe_dynamic_options_pages extends acfe_dynamic_module{
 
         $this->active = get_field( 'acf_options_pages', 'option' );
         $this->settings = 'modules.options_pages';
-        $this->post_type = 'acfe-dop';
+        $this->post_type = 'acf-options-page';
         $this->label = 'Options Page Title';
         $this->textdomain = 'ACF Extended: Options Pages';
 
@@ -175,7 +175,7 @@ class acfe_dynamic_options_pages extends acfe_dynamic_module{
 
         if($field_groups){
 
-            add_meta_box( 'acfe-dop-field-groups', __('Field Groups', 'acf'), array($this, 'metabox_render'), $this->post_type, 'normal', 'default', $field_groups);
+            add_meta_box( 'acf-options-page-field-groups', __('Field Groups', 'acf'), array($this, 'metabox_render'), $this->post_type, 'normal', 'default', $field_groups);
 
         }
 
@@ -254,7 +254,7 @@ class acfe_dynamic_options_pages extends acfe_dynamic_module{
                 return;
 
             acf.newPostbox(<?php echo wp_json_encode(array(
-                'id'    => 'acfe-dop-field-groups',
+                'id'    => 'acf-options-page-field-groups',
                 'key'   => '',
                 'style' => 'default',
                 'label' => 'left',
@@ -347,15 +347,15 @@ class acfe_dynamic_options_pages extends acfe_dynamic_module{
         $acfe_dop_options_page = $acfe_dop_options_page[0];
 
         ?>
-        <script type="text/html" id="tmpl-acfe-dop-title-config">
-            <a href="<?php echo admin_url('post.php?post=' . $acfe_dop_options_page->ID . '&action=edit'); ?>" class="page-title-action acfe-dop-admin-config"><span class="dashicons dashicons-admin-generic"></span></a>
+        <script type="text/html" id="tmpl-acf-options-page-title-config">
+            <a href="<?php echo admin_url('post.php?post=' . $acfe_dop_options_page->ID . '&action=edit'); ?>" class="page-title-action acf-options-page-admin-config"><span class="dashicons dashicons-admin-generic"></span></a>
         </script>
 
         <script type="text/javascript">
         (function($){
 
             // Add button
-            $('.wrap > h1').append($('#tmpl-acfe-dop-title-config').html());
+            $('.wrap > h1').append($('#tmpl-acf-options-page-title-config').html());
 
         })(jQuery);
         </script>

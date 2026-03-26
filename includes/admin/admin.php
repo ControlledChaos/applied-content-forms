@@ -386,7 +386,7 @@ function acf_builtin_post_types() {
 
 	// If dynamic options pages.
 	if ( get_field( 'acf_options_pages', 'option' ) ) {
-		$types = array_merge( $types, [ 'acfe-dop' ] );
+		$types = array_merge( $types, [ 'acf-options-page' ] );
 	}
 
 	$types = array_merge( $types, [ 'acf-field-group' ] );
