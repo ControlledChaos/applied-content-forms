@@ -54,7 +54,7 @@ final class ACF {
 	 * @access public
 	 * @var    string
 	 */
-	var $version = '1.0.0';
+	public $version = '1.0.0';
 
 	/**
 	 * Original plugin version.
@@ -63,7 +63,7 @@ final class ACF {
 	 * @access public
 	 * @var    string
 	 */
-	var $acf_version = '5.9.6';
+	public $acf_version = '5.9.6';
 
 	/**
 	 * Fields class.
@@ -72,7 +72,7 @@ final class ACF {
 	 * @access public
 	 * @var    object The acf_fields class.
 	 */
-	var $fields;
+	public $fields;
 
 	/**
 	 * Loop class.
@@ -81,7 +81,7 @@ final class ACF {
 	 * @access public
 	 * @var    object The acf_loop class.
 	 */
-	var $loop;
+	public $loop;
 
 	/**
 	 * Revisions class.
@@ -90,7 +90,7 @@ final class ACF {
 	 * @access public
 	 * @var    object The acf_revisions class.
 	 */
-	var $revisions;
+	public $revisions;
 
 	/**
 	 * Validation class.
@@ -99,7 +99,7 @@ final class ACF {
 	 * @access public
 	 * @var    object The acf_validation class.
 	 */
-	var $validation;
+	public $validation;
 
 	/**
 	 * Form front class.
@@ -108,7 +108,7 @@ final class ACF {
 	 * @access public
 	 * @var    object The acf_form_front class.
 	 */
-	var $form_front;
+	public $form_front;
 
 	/**
 	 * Admin tools class.
@@ -117,7 +117,7 @@ final class ACF {
 	 * @access public
 	 * @var    object The acf_admin_tools class.
 	 */
-	var $admin_tools;
+	public $admin_tools;
 
 	/**
 	 * Settings
@@ -126,7 +126,7 @@ final class ACF {
 	 * @access public
 	 * @var    array
 	 */
-	var $settings = [];
+	public $settings = [];
 
 	/**
 	 * Plugin data
@@ -135,7 +135,7 @@ final class ACF {
 	 * @access public
 	 * @var    array
 	 */
-	var $data = [];
+	public $data = [];
 
 	/**
 	 * Instances
@@ -144,7 +144,7 @@ final class ACF {
 	 * @access public
 	 * @var    array
 	 */
-	var $instances = [];
+	public $instances = [];
 
 	/**
 	 * Admin page slug
@@ -242,7 +242,7 @@ final class ACF {
 			'file'                   => __FILE__,
 			'url'                    => plugin_dir_url( __FILE__ ),
 			'show_admin'             => true,
-			'menu_position'          => 2,
+			'menu_position'          => '70',
 			'show_updates'           => true,
 			'stripslashes'           => false,
 			'local'                  => true,
@@ -774,6 +774,32 @@ final class ACF {
 			'rewrite'   => false,
 			'query_var' => false,
 		] );
+
+		register_taxonomy( 'acf-field-group-category',
+			[ 'acf-field-group' ],
+			[
+				'hierarchical'      => true,
+				'public'            => false,
+				'show_ui'           => 'ACFE',
+				'show_admin_column' => true,
+				'show_in_menu'      => 'acf',
+				'show_in_nav_menus' => true,
+				'show_tagcloud'     => false,
+				'rewrite'           => false,
+				'labels'            => [
+					'name'              => _x( 'Field Group Categories', 'Field Group Category', 'acf' ),
+					'singular_name'     => _x( 'Field Group Categories', 'Field Group Category', 'acf' ),
+					'search_items'      => __( 'Search Categories', 'acf' ),
+					'all_items'         => __( 'All Categories', 'acf' ),
+					'parent_item'       => __( 'Parent Category', 'acf' ),
+					'parent_item_colon' => __( 'Parent Category:', 'acf' ),
+					'edit_item'         => __( 'Edit Category', 'acf' ),
+					'update_item'       => __( 'Update Category', 'acf' ),
+					'add_new_item'      => __( 'New Category', 'acf' ),
+					'new_item_name'     => __( 'New Category Name', 'acf' ),
+					'menu_name'         => __( 'Category', 'acf' ),
+				],
+			] );
 	}
 
 	/**

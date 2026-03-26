@@ -23,13 +23,12 @@ class ACFE{
     function initialize(){
 
         // Constants
-        $this->constants(array(
+        $this->constants( array(
             'ACFE'          => true,
             'ACFE_FILE'     => __FILE__,
             'ACFE_PATH'     => plugin_dir_path(__FILE__),
-            'ACFE_VERSION'  => $this->version,
-            'ACFE_BASENAME' => plugin_basename(__FILE__),
-        ));
+            'ACFE_VERSION'  => $this->version
+        ) );
 
         // Init
         include_once(ACFE_PATH . 'includes/init.php');

@@ -17,7 +17,7 @@ class ACF_Admin {
 	 */
 	public function __construct() {
 
-		// add_action( 'admin_menu', [ $this, 'admin_menu' ] );
+		add_action( 'admin_menu', [ $this, 'admin_menu' ] );
 		add_action( 'admin_enqueue_scripts', [ $this, 'admin_enqueue_scripts' ] );
 		add_action( 'admin_body_class', [ $this, 'admin_body_class' ] );
 		add_action( 'current_screen', [ $this, 'current_screen' ] );
@@ -39,31 +39,12 @@ class ACF_Admin {
 			return;
 		}
 
-		$slug = 'edit.php?post_type=acf-field-group';
-		$cap  = acf_get_setting( 'capability' );
-
-		// Add menu items.
-		add_menu_page(
-			__( 'Custom Fields','acf' ),
-			__( 'Custom Fields','acf' ),
-			$cap,
-			$slug,
-			false,
-			'dashicons-welcome-widgets-menus',
-			'80.025'
-		);
 		add_submenu_page(
-			$slug,
-			__( 'Field Groups','acf' ),
-			__( 'Field Groups','acf' ),
-			$cap,
-			$slug
-		);
-		add_submenu_page(
-			$slug, __( 'Add New','acf' ),
-			__( 'Add New','acf' ),
-			$cap,
-			'post-new.php?post_type=acf-field-group'
+			'acf',
+			__( 'Field Categories', 'acf' ),
+			__( 'Field Categories', 'acf' ),
+			acf_get_setting( 'capability' ),
+			'edit-tags.php?taxonomy=acf-field-group-category'
 		);
 	}
 
@@ -234,7 +215,7 @@ function acf_admin_menu() {
 	$menu = [
 		'slug'     => 'acf',
 		'icon'     => 'dashicons-edit',
-		'position' => acf_get_setting( 'menu_position' ),
+		'position' => get_field( 'acf_menu_position', 'option' ),
 		'title'    => __( 'Website Content', 'acf' ),
 		'menu'     => __( 'Content', 'acf' )
 	];
