@@ -1,11 +1,15 @@
 <?php
 
-if(!defined('ABSPATH'))
-    exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
-if(!class_exists('acfe_dynamic_forms')):
-
+if ( ! class_exists( 'acfe_dynamic_forms' ) ) :
 class acfe_dynamic_forms extends acfe_dynamic_module{
+
+    public $active = false;
+
+	public $post_type = 'acf-form';
 
     // vars
     public $field_groups = array();
@@ -15,8 +19,9 @@ class acfe_dynamic_forms extends acfe_dynamic_module{
      */
     function initialize(){
 
-        $this->active = get_field( 'acf_forms', 'option' );
-        $this->post_type = 'acfe-form';
+        if ( acf()->forms ) {
+			$this->active = true;
+		}
         $this->label = 'Form Title';
 
         $this->tool = 'acfe_dynamic_forms_export';
@@ -96,44 +101,7 @@ class acfe_dynamic_forms extends acfe_dynamic_module{
         if(!acf_get_setting('show_admin'))
             $capability = false;
 
-        register_post_type($this->post_type, array(
-            'label'                 => __('Forms', 'acf'),
-            'description'           => __('Forms', 'acf'),
-            'labels'                => array(
-                'name'          => __('Forms', 'acf'),
-                'singular_name' => __('Form', 'acf'),
-                'menu_name'     => __('Forms', 'acf'),
-                'edit_item'     => 'Edit Form',
-                'add_new_item'  => 'New Form',
-            ),
-            'supports'              => array('title'),
-            'hierarchical'          => false,
-            'public'                => false,
-            'show_ui'               => true,
-            'show_in_menu'          => 'acf',
-            'menu_icon'             => 'dashicons-feedback',
-            'show_in_admin_bar'     => false,
-            'show_in_nav_menus'     => false,
-            'can_export'            => false,
-            'has_archive'           => false,
-            'rewrite'               => false,
-            'exclude_from_search'   => true,
-            'publicly_queryable'    => false,
-            'capabilities'          => array(
-                'publish_posts'         => $capability,
-                'edit_posts'            => $capability,
-                'edit_others_posts'     => $capability,
-                'delete_posts'          => $capability,
-                'delete_others_posts'   => $capability,
-                'read_private_posts'    => $capability,
-                'edit_post'             => $capability,
-                'delete_post'           => $capability,
-                'read_post'             => $capability,
-            ),
-            'acfe_admin_ppp'        => 999,
-            'acfe_admin_orderby'    => 'title',
-            'acfe_admin_order'      => 'ASC',
-        ));
+
 
     }
 

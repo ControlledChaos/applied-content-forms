@@ -61,7 +61,7 @@ class acfe_field_flexible_content_layout_locations{
         if(!$screen) return $field;
         
         // show all layouts on templates module
-        if(acf_maybe_get($screen, 'post_type') === 'acfe-template'){
+        if(acf_maybe_get($screen, 'post_type') === 'acf-template'){
             return $field;
         }
         

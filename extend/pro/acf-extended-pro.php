@@ -19,7 +19,7 @@ class ACFE_Pro{
         
         // Vars
         $reserved_post_types = array_merge(acfe_get_setting('reserved_post_types', array()), array(
-            'acfe-template'
+            'acf-template'
         ));
         
         $reserved_field_groups = array_merge(acfe_get_setting('reserved_field_groups', array()), array(
@@ -53,7 +53,7 @@ class ACFE_Pro{
         // Functions
         acfe_include('pro/includes/acfe-helper-functions.php');
         acfe_include('pro/includes/acfe-script-functions.php');
-        acfe_include('pro/includes/acfe-template-functions.php');
+        acfe_include('pro/includes/acf-template-functions.php');
         acfe_include('pro/includes/acfe-world-functions.php');
         acfe_include('pro/includes/payment.php');
         acfe_include('pro/includes/world.php');

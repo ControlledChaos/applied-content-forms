@@ -1,21 +1,25 @@
 <?php
 
-if(!defined('ABSPATH'))
-    exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
-if(!class_exists('acfe_dynamic_templates')):
+if ( ! class_exists( 'acfe_dynamic_templates' ) ) :
+class acfe_dynamic_templates extends acfe_dynamic_module {
 
-class acfe_dynamic_templates extends acfe_dynamic_module{
+    public $active = false;
+
+	public $post_type = 'acf-template';
 
     /*
      * Initialize
      */
     function initialize(){
 
-        $this->active = get_field( 'acf_templates', 'option' );
-        $this->post_type = 'acfe-template';
+        if ( acf()->templates ) {
+			$this->active = true;
+		}
         $this->label = 'Template Title';
-
         $this->tool = 'acfe_dynamic_templates_export';
         $this->tools = array('php', 'json');
         $this->columns = array(
@@ -61,48 +65,7 @@ class acfe_dynamic_templates extends acfe_dynamic_module{
     /*
      * Init
      */
-    function init(){
-
-        register_post_type($this->post_type, array(
-            'label'                 => __('Templates', 'acfe'),
-            'description'           => __('Templates', 'acfe'),
-            'labels'                => array(
-                'name'          => __('Templates', 'acfe'),
-                'singular_name' => __('Template', 'acfe'),
-                'menu_name'     => __('Templates', 'acfe'),
-                'edit_item'     => __('Edit Template', 'acfe'),
-                'add_new_item'  => __('New Template', 'acfe'),
-            ),
-            'supports'              => array('title'),
-            'hierarchical'          => false,
-            'public'                => false,
-            'show_ui'               => true,
-            'show_in_menu'          => 'acf',
-            'menu_icon'             => 'dashicons-feedback',
-            'show_in_admin_bar'     => false,
-            'show_in_nav_menus'     => false,
-            'can_export'            => false,
-            'has_archive'           => false,
-            'rewrite'               => false,
-            'exclude_from_search'   => true,
-            'publicly_queryable'    => false,
-            'capabilities'          => array(
-                'publish_posts'         => acf_get_setting('capability'),
-                'edit_posts'            => acf_get_setting('capability'),
-                'edit_others_posts'     => acf_get_setting('capability'),
-                'delete_posts'          => acf_get_setting('capability'),
-                'delete_others_posts'   => acf_get_setting('capability'),
-                'read_private_posts'    => acf_get_setting('capability'),
-                'edit_post'             => acf_get_setting('capability'),
-                'delete_post'           => acf_get_setting('capability'),
-                'read_post'             => acf_get_setting('capability'),
-            ),
-            'acfe_admin_orderby'    => 'title',
-            'acfe_admin_order'      => 'ASC',
-            'acfe_admin_ppp'        => 999,
-        ));
-
-    }
+    function init() {}
 
     /*
      * Validate Values
@@ -191,7 +154,7 @@ class acfe_dynamic_templates extends acfe_dynamic_module{
         if(empty($field_groups)){
 
             // vars
-            $id = 'acfe-template-no-field-group';
+            $id = 'acf-template-no-field-group';
             $title = __('Instructions', 'acfe');
             $context = 'normal';
             $priority = 'default';
@@ -213,7 +176,7 @@ class acfe_dynamic_templates extends acfe_dynamic_module{
             foreach($field_groups as $field_group){
 
                 // vars
-                $id = "acfe-template-rules-{$field_group['key']}";
+                $id = "acf-template-rules-{$field_group['key']}";
                 $title = $field_group['title'];
 
                 // Rules
@@ -539,7 +502,7 @@ class acfe_dynamic_templates extends acfe_dynamic_module{
         $choices = array();
 
         $get_posts = get_posts(array(
-            'post_type'         => 'acfe-template',
+            'post_type'         => 'acf-template',
             'posts_per_page'    => -1,
             'fields'            => 'ids',
             'post_status'       => 'any'

@@ -29,7 +29,7 @@ class acfe_pro_admin_menu{
         foreach($array as $k => $item){
             
             // Forms
-            if($item[2] === 'edit.php?post_type=acfe-template'){
+            if($item[2] === 'edit.php?post_type=acf-template'){
                 
                 acfe_array_move($submenu['edit.php?post_type=acf-field-group'], $k, 7);
                 

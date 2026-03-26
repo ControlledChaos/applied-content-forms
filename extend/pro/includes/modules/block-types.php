@@ -14,7 +14,7 @@ class acfe_pro_dynamic_block_types{
      */
     function __construct(){
         
-        $this->post_type = 'acfe-dbt';
+        $this->post_type = 'acf-block-type';
         
         add_filter('acfe/block_type/register',      array($this, 'register'), 15, 2);
         add_filter('acfe/block_type/save_args',     array($this, 'save_args'), 15, 3);

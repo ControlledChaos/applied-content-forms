@@ -36,7 +36,7 @@ class acfe_templates extends acf_field{
     function get_pretty_templates($allowed = array()){
     
         $templates = get_posts(array(
-            'post_type'         => 'acfe-template',
+            'post_type'         => 'acf-template',
             'posts_per_page'    => -1,
             'fields'            => 'ids',
             'orderby'           => 'title',

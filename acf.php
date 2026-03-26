@@ -147,6 +147,15 @@ final class ACF {
 	var $instances = [];
 
 	/**
+	 * Admin page slug
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @var    string
+	 */
+	public $admin_slug = 'acf';
+
+	/**
 	 * Post types feature
 	 *
 	 * @since  1.0.0
@@ -163,6 +172,33 @@ final class ACF {
 	 * @var    boolean
 	 */
 	public $taxonomies = false;
+
+	/**
+	 * Block types feature
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @var    boolean
+	 */
+	public $block_types = false;
+
+	/**
+	 * Forms feature
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @var    boolean
+	 */
+	public $forms = false;
+
+	/**
+	 * Templates feature
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @var    boolean
+	 */
+	public $templates = false;
 
 	/**
 	 * Constructor method
@@ -448,6 +484,15 @@ final class ACF {
 		if ( get_field( 'acf_taxonomies', 'option' ) ) {
 			$this->taxonomies = true;
 		}
+		if ( get_field( 'acf_block_types', 'option' ) ) {
+			$this->block_types = true;
+		}
+		if ( get_field( 'acf_forms', 'option' ) ) {
+			$this->forms = true;
+		}
+		if ( get_field( 'acf_templates', 'option' ) ) {
+			$this->templates = true;
+		}
 	}
 
 	/**
@@ -461,7 +506,7 @@ final class ACF {
 	 */
 	public function register_post_types() {
 
-		$capability = acf_get_setting( 'capability' );
+		$cap = acf_get_setting( 'capability' );
 
 		if ( $this->post_types ) {
 			register_post_type( 'acf-post-type', [
@@ -478,8 +523,8 @@ final class ACF {
 				'hierarchical'        => false,
 				'public'              => false,
 				'show_ui'             => true,
-				'show_in_menu'        => 'acf',
-				'menu_icon'           => 'dashicons-layout',
+				'show_in_menu'        => $this->admin_slug,
+				'menu_icon'           => 'dashicons-sticky',
 				'show_in_admin_bar'   => false,
 				'show_in_nav_menus'   => false,
 				'can_export'          => false,
@@ -488,15 +533,15 @@ final class ACF {
 				'exclude_from_search' => true,
 				'publicly_queryable'  => false,
 				'capabilities'        => [
-					'publish_posts'       => $capability,
-					'edit_posts'          => $capability,
-					'edit_others_posts'   => $capability,
-					'delete_posts'        => $capability,
-					'delete_others_posts' => $capability,
-					'read_private_posts'  => $capability,
-					'edit_post'           => $capability,
-					'delete_post'         => $capability,
-					'read_post'           => $capability,
+					'publish_posts'       => $cap,
+					'edit_posts'          => $cap,
+					'edit_others_posts'   => $cap,
+					'delete_posts'        => $cap,
+					'delete_others_posts' => $cap,
+					'read_private_posts'  => $cap,
+					'edit_post'           => $cap,
+					'delete_post'         => $cap,
+					'read_post'           => $cap,
 				],
 				'acfe_admin_orderby' => 'title',
 				'acfe_admin_order'   => 'ASC',
@@ -519,8 +564,8 @@ final class ACF {
 				'hierarchical'        => false,
 				'public'              => false,
 				'show_ui'             => true,
-				'show_in_menu'        => 'acf',
-				'menu_icon'           => 'dashicons-layout',
+				'show_in_menu'        => $this->admin_slug,
+				'menu_icon'           => 'dashicons-tag',
 				'show_in_admin_bar'   => false,
 				'show_in_nav_menus'   => false,
 				'can_export'          => false,
@@ -529,15 +574,138 @@ final class ACF {
 				'exclude_from_search' => true,
 				'publicly_queryable'  => false,
 				'capabilities'        => [
-					'publish_posts'       => $capability,
-					'edit_posts'          => $capability,
-					'edit_others_posts'   => $capability,
-					'delete_posts'        => $capability,
-					'delete_others_posts' => $capability,
-					'read_private_posts'  => $capability,
-					'edit_post'           => $capability,
-					'delete_post'         => $capability,
-					'read_post'           => $capability,
+					'publish_posts'       => $cap,
+					'edit_posts'          => $cap,
+					'edit_others_posts'   => $cap,
+					'delete_posts'        => $cap,
+					'delete_others_posts' => $cap,
+					'read_private_posts'  => $cap,
+					'edit_post'           => $cap,
+					'delete_post'         => $cap,
+					'read_post'           => $cap,
+				],
+				'acfe_admin_orderby' => 'title',
+				'acfe_admin_order'   => 'ASC',
+				'acfe_admin_ppp'     => 999,
+			] );
+		}
+
+		if ( $this->block_types ) {
+			register_post_type( 'acf-block-type', [
+				'label'       => __( 'Block Type', 'acf' ),
+				'description' => __( 'Create custom block types without code.', 'acf' ),
+				'labels'      => [
+					'name'          => __( 'Block Types', 'acf' ),
+					'singular_name' => __( 'Block Type', 'acf' ),
+					'menu_name'     => __( 'Block Types', 'acf' ),
+					'edit_item'     => __( 'Edit Block Type', 'acf' ),
+					'add_new_item'  => __( 'New Block Type', 'acf' ),
+				],
+				'supports'            => [ 'title' ],
+				'hierarchical'        => false,
+				'public'              => false,
+				'show_ui'             => true,
+				'show_in_menu'        => $this->admin_slug,
+				'menu_icon'           => 'dashicons-block-default',
+				'show_in_admin_bar'   => false,
+				'show_in_nav_menus'   => false,
+				'can_export'          => false,
+				'has_archive'         => false,
+				'rewrite'             => false,
+				'exclude_from_search' => true,
+				'publicly_queryable'  => false,
+				'capabilities'        => [
+					'publish_posts'       => $cap,
+					'edit_posts'          => $cap,
+					'edit_others_posts'   => $cap,
+					'delete_posts'        => $cap,
+					'delete_others_posts' => $cap,
+					'read_private_posts'  => $cap,
+					'edit_post'           => $cap,
+					'delete_post'         => $cap,
+					'read_post'           => $cap,
+				],
+				'acfe_admin_orderby' => 'title',
+				'acfe_admin_order'   => 'ASC',
+				'acfe_admin_ppp'     => 999,
+			] );
+		}
+
+		if ( $this->forms ) {
+			register_post_type( 'acf-form', [
+				'label'                 => __( 'Forms', 'acf' ),
+				'description'           => __( 'Forms', 'acf' ),
+				'labels'                => [
+					'name'          => __( 'Forms', 'acf' ),
+					'singular_name' => __( 'Form', 'acf' ),
+					'menu_name'     => __( 'Forms', 'acf' ),
+					'edit_item'     => __( 'Edit Form', 'acf' ),
+					'add_new_item'  => __( 'New Form', 'acf' ),
+				],
+				'supports'            => [ 'title' ],
+				'hierarchical'        => false,
+				'public'              => false,
+				'show_ui'             => true,
+				'show_in_menu'        => $this->admin_slug,
+				'menu_icon'           => 'dashicons-editor-table',
+				'show_in_admin_bar'   => false,
+				'show_in_nav_menus'   => false,
+				'can_export'          => false,
+				'has_archive'         => false,
+				'rewrite'             => false,
+				'exclude_from_search' => true,
+				'publicly_queryable'  => false,
+				'capabilities'        => [
+					'publish_posts'       => $cap,
+					'edit_posts'          => $cap,
+					'edit_others_posts'   => $cap,
+					'delete_posts'        => $cap,
+					'delete_others_posts' => $cap,
+					'read_private_posts'  => $cap,
+					'edit_post'           => $cap,
+					'delete_post'         => $cap,
+					'read_post'           => $cap,
+				],
+				'acfe_admin_ppp'     => 999,
+				'acfe_admin_orderby' => 'title',
+				'acfe_admin_order'   => 'ASC',
+			] );
+		}
+
+		if ( $this->templates ) {
+			register_post_type( 'acf-template', [
+				'label'       => __( 'Templates', 'acf' ),
+				'description' => __( 'Templates', 'acf' ),
+				'labels'      => [
+					'name'          => __( 'Templates', 'acf' ),
+					'singular_name' => __( 'Template', 'acf' ),
+					'menu_name'     => __( 'Templates', 'acf' ),
+					'edit_item'     => __( 'Edit Template', 'acf' ),
+					'add_new_item'  => __( 'New Template', 'acf' ),
+				],
+				'supports'            => [ 'title' ],
+				'hierarchical'        => false,
+				'public'              => false,
+				'show_ui'             => true,
+				'show_in_menu'        => $this->admin_slug,
+				'menu_icon'           => 'dashicons-schedule',
+				'show_in_admin_bar'   => false,
+				'show_in_nav_menus'   => false,
+				'can_export'          => false,
+				'has_archive'         => false,
+				'rewrite'             => false,
+				'exclude_from_search' => true,
+				'publicly_queryable'  => false,
+				'capabilities'        => [
+					'publish_posts'       => $cap,
+					'edit_posts'          => $cap,
+					'edit_others_posts'   => $cap,
+					'delete_posts'        => $cap,
+					'delete_others_posts' => $cap,
+					'read_private_posts'  => $cap,
+					'edit_post'           => $cap,
+					'delete_post'         => $cap,
+					'read_post'           => $cap,
 				],
 				'acfe_admin_orderby' => 'title',
 				'acfe_admin_order'   => 'ASC',
@@ -561,14 +729,15 @@ final class ACF {
 			'public'          => false,
 			'hierarchical'    => true,
 			'show_ui'         => true,
-			'show_in_menu'    => 'acf',
+			'show_in_menu'    => $this->admin_slug,
+			'menu_icon'       => 'dashicons-screenoptions',
 			'_builtin'        => false,
 			'capability_type' => 'post',
 			'capabilities'    => [
-				'edit_post'    => $capability,
-				'delete_post'  => $capability,
-				'edit_posts'   => $capability,
-				'delete_posts' => $capability,
+				'edit_post'    => $cap,
+				'delete_post'  => $cap,
+				'edit_posts'   => $cap,
+				'delete_posts' => $cap,
 			],
 			'supports'  => [ 'title' ],
 			'rewrite'   => false,
@@ -592,13 +761,14 @@ final class ACF {
 			'hierarchical'    => true,
 			'show_ui'         => false,
 			'show_in_menu'    => false,
+			'menu_icon'       => 'dashicons-list-view',
 			'_builtin'        => false,
 			'capability_type' => 'post',
 			'capabilities'    => [
-				'edit_post'    => $capability,
-				'delete_post'  => $capability,
-				'edit_posts'   => $capability,
-				'delete_posts' => $capability,
+				'edit_post'    => $cap,
+				'delete_post'  => $cap,
+				'edit_posts'   => $cap,
+				'delete_posts' => $cap,
 			],
 			'supports'  => [ 'title' ],
 			'rewrite'   => false,
@@ -845,4 +1015,4 @@ function acf() {
 }
 acf();
 
-endif; // Class_exists check.
+endif; // Class exists check.
