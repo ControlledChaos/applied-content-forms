@@ -313,8 +313,9 @@ function post_types_grid() {
 	// Field group categories.
 	$html .= '<li>';
 	$html .= sprintf(
-		'<h3>%s</h3>',
-		__( 'Field Categories', 'acf' )
+		'<h3>%s <span class="tax-count">%s</span></h3>',
+		__( 'Field Categories', 'acf' ),
+		wp_count_terms( 'acf-field-group-category' )
 	);
 	$html .= '<figure>';
 	$html .= sprintf(

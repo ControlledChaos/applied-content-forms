@@ -730,7 +730,7 @@ final class ACF {
 			'hierarchical'    => true,
 			'show_ui'         => true,
 			'show_in_menu'    => $this->admin_slug,
-			'menu_icon'       => 'dashicons-screenoptions',
+			'menu_icon'       => 'dashicons-list-view',
 			'_builtin'        => false,
 			'capability_type' => 'post',
 			'capabilities'    => [
