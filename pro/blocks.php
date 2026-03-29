@@ -1,7 +1,17 @@
 <?php
+/**
+ * ACF blocks
+ *
+ * @package    Applied Content Forms
+ * @subpackage Pro
+ * @category   Core
+ * @since      1.0.0
+ */
 
 // Exit if accessed directly.
-defined( 'ABSPATH' ) || exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 // Register store.
 acf_register_store( 'block-types' );
