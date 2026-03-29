@@ -76,16 +76,16 @@ final class ACF_PRO {
 	 */
 	public function register_assets() {
 
-		$version = acf_get_setting( 'version' );
-		$min     = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
+		$ver = acf_get_setting( 'version' );
+		$min = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
 		// Register scripts.
-		wp_register_script( 'acf-pro-input', acf_get_url( "assets/js/acf-pro-input{$min}.js" ), [ 'acf-input' ], $version );
-		wp_register_script( 'acf-pro-field-group', acf_get_url( "assets/js/acf-pro-field-group{$min}.js" ), [ 'acf-field-group' ], $version );
+		wp_register_script( 'acf-pro-input', acf_get_url( "assets/js/acf-pro-input{$min}.js" ), [ 'acf-input' ], $ver );
+		wp_register_script( 'acf-pro-field-group', acf_get_url( "assets/js/acf-pro-field-group{$min}.js" ), [ 'acf-field-group' ], $ver );
 
 		// Register styles.
-		wp_register_style( 'acf-pro-input', acf_get_url( 'assets/css/acf-pro-input.css' ), [ 'acf-input' ], $version );
-		wp_register_style( 'acf-pro-field-group', acf_get_url( 'assets/css/acf-pro-field-group.css' ), [ 'acf-input' ], $version );
+		wp_register_style( 'acf-pro-input', acf_get_url( "assets/css/acf-pro-input{$min}.css" ), [ 'acf-input' ], $ver );
+		wp_register_style( 'acf-pro-field-group', acf_get_url( "assets/css/acf-pro-field-group{$min}.css" ), [ 'acf-input' ], $ver );
 	}
 
 	/**
