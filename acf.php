@@ -43,8 +43,6 @@ if (
 	return;
 }
 
-if ( ! class_exists( 'ACF' ) ) :
-
 final class ACF {
 
 	/**
@@ -212,9 +210,25 @@ final class ACF {
 	}
 
 	/**
-	 * Initialize
+	 * Set constants
 	 *
-	 * Sets up the ACF plugin.
+	 * @param  array $array
+	 * @return void
+	 */
+    function constants( $array = [] ) {
+
+        foreach ( $array as $name => $value ) {
+            if ( defined( $name ) ) {
+				continue;
+			}
+            define( $name, $value );
+        }
+    }
+
+	/**
+	 * Initialize the class
+	 *
+	 * Sets up the ACF functionality.
 	 *
 	 * @since  1.0.0
 	 * @access public
@@ -223,13 +237,18 @@ final class ACF {
 	public function initialize() {
 
 		// Define constants.
-		$this->define( 'ACF', true );
-		$this->define( 'ACF_PRO', true );
-		$this->define( 'ACF_PATH', plugin_dir_path( __FILE__ ) );
-		$this->define( 'ACF_BASENAME', plugin_basename( __FILE__ ) );
-		$this->define( 'ACF_VERSION', $this->acf_version );
-		$this->define( 'ACF_MAJOR_VERSION', 5 );
-		$this->define( 'ACFE_PATH', plugin_dir_path( __FILE__ ) . 'extend/' );
+		$this->constants( [
+            'ACF'          => true,
+			'ACF_PRO'      => true,
+			'ACFE'         => true,
+			'ACF_BASENAME' => plugin_basename( __FILE__ ),
+			'ACF_PATH'     => plugin_dir_path( __FILE__ ),
+            'ACFE_FILE'    => __FILE__,
+            'ACFE_PATH'    => plugin_dir_path( __FILE__ ) . 'extend/',
+			'ACF_VERSION'  => $this->acf_version,
+            'ACFE_VERSION' => $this->version,
+			'ACF_MAJOR_VERSION' => 5
+        ] );
 
 		// Define settings.
 		$this->settings = [
@@ -268,7 +287,7 @@ final class ACF {
 			'remove_wp_meta_box'     => true
 		];
 
-		include_once( ACF_PATH . 'includes/acf-utility-functions.php' );
+		include_once( ACF_PATH . 'includes/utility-functions.php' );
 
 		acf_include( 'includes/api/api-helpers.php' );
 		acf_include( 'includes/api/api-template.php' );
@@ -339,7 +358,6 @@ final class ACF {
 		acf_include( 'pro/acf-pro.php' );
 
 		// Extend original ACF.
-		acf_include( 'extend/includes/init.php' );
 		acf_include( 'extend/extend.php' );
 		if ( defined( 'ACF_DEV' ) && ACF_DEV ) {
 			acf_include( 'tests/tests.php' );
@@ -1018,7 +1036,7 @@ final class ACF {
  * Instantiate the ACF class.
  *
  * The main function responsible for returning the one true
- * acf instance to functions everywhere.
+ * ACF instance to functions everywhere.
  * Use this function like you would a global variable,
  * except without needing to declare the global.
  *
@@ -1030,7 +1048,7 @@ final class ACF {
  */
 function acf() {
 
-	// Access global variables.
+	// Set a global variable.
 	global $acf;
 
 	// Instantiate only once.
@@ -1041,5 +1059,3 @@ function acf() {
 	return $acf;
 }
 acf();
-
-endif; // Class exists check.
