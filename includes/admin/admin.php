@@ -109,6 +109,7 @@ class ACF_Admin {
 					wp_enqueue_style( 'acf-intro', acf_get_url( 'assets/css/intro-page' . $suffix . '.css' ), [], $version, 'screen' );
 				}
 			);
+			$this->setup_help_tab();
 		}
 	}
 
@@ -131,14 +132,8 @@ class ACF_Admin {
 				'id'      => 'overview',
 				'title'   => __( 'Overview', 'acf' ),
 				'content' =>
-					'<p><strong>' . __( 'Overview', 'acf' ) . '</strong></p>' .
-					'<p>' . __( 'The Applied Content Forms plugin provides a visual form builder to customize WordPress edit screens with extra fields, and an intuitive API to display custom field values in any theme template file.', 'acf' ) . '</p>' .
-					'<p>' . sprintf(
-						__( 'Before creating your first Field Group, we recommend first reading our <a href="%s" target="_blank">Getting started</a> guide to familiarize yourself with the plugin\'s philosophy and best practises.', 'acf' ),
-						'https://www.advancedcustomfields.com/resources/getting-started-with-acf/'
-					) . '</p>' .
-					'<p>' . __( 'Please use the Help & Support tab to get in touch should you find yourself requiring assistance.', 'acf' ) . '</p>' .
-					''
+					'<h4>' . acf_get_setting( 'name' ) . '</h4>' .
+					'<p>' . __( 'The Applied Content Forms plugin provides a visual form builder to customize edit screens with extra fields, and an intuitive API to display custom field values in any theme template file. This began as a fork of Advanced Custom Fields PRO version 5.9.6, the last version developed by Eliot Condon before selling the plugin to Delicious Brains.', 'acf' ) . '</p>'
 			)
 		);
 
@@ -148,7 +143,7 @@ class ACF_Admin {
 				'id'      => 'help',
 				'title'   => __( 'Help & Support', 'acf' ),
 				'content' =>
-					'<p><strong>' . __( 'Help & Support', 'acf' ) . '</strong></p>' .
+					'<h4>' . __( 'Help & Support', 'acf' ) . '</h4>' .
 					'<p>' . __( 'We are fanatical about support, and want you to get the best out of your website with ACF. If you run into any difficulties, there are several places you can find help:', 'acf' ) . '</p>' .
 					'<ul>' .
 						'<li>' . sprintf(
@@ -159,22 +154,43 @@ class ACF_Admin {
 							__( '<a href="%s" target="_blank">Discussions</a>. We have an active and friendly community on our Community Forums who may be able to help you figure out the ‘how-tos’ of the ACF world.', 'acf' ),
 							'https://support.advancedcustomfields.com/'
 						) . '</li>' .
-						'<li>' . sprintf(
-							__( '<a href="%s" target="_blank">Help Desk</a>. The support professionals on our Help Desk will assist with your more in depth, technical challenges.', 'acf' ),
-							'https://www.advancedcustomfields.com/support/'
-						) . '</li>' .
 					'</ul>'
 			)
 		);
 
 		// Sidebar.
-		$screen->set_help_sidebar(
-			'<p><strong>' . __( 'Information', 'acf' ) . '</strong></p>' .
-			'<p><span class="dashicons dashicons-admin-plugins"></span> ' . sprintf( __( 'Version %s', 'acf' ), ACF_VERSION ) . '</p>' .
-			'<p><span class="dashicons dashicons-wordpress"></span> <a href="https://wordpress.org/plugins/advanced-custom-fields/" target="_blank">' . __( 'View details', 'acf' ) . '</a></p>' .
-			'<p><span class="dashicons dashicons-admin-home"></span> <a href="https://www.advancedcustomfields.com/" target="_blank" target="_blank">' . __( 'Visit website', 'acf' ) . '</a></p>' .
-			''
+		$screen->set_help_sidebar( $this->help_sidebar() );
+	}
+
+	/**
+	 * Help sidebar
+	 *
+	 * Content of the intro screen help tab sidebar.
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @return string
+	 */
+	public function help_sidebar() {
+
+		$html = sprintf(
+			'<h5>%s</h5>',
+			__( 'Information', 'acf' )
 		);
+		$html .= '<ul>';
+		$html .= sprintf(
+			'<li>%s %s</li>',
+			__( 'Plugin version', 'acf' ),
+			acf_get_setting( 'version' )
+		);
+		$html .= sprintf(
+			'<li><a href="%s" target="_blank" rel="noopener noreferrer">%s</a></li>',
+			acf_get_setting( 'website' ),
+			__( 'Visit the website', 'acf' )
+		);
+		$html .= '</ul>';
+
+		return $html;
 	}
 }
 
@@ -184,27 +200,6 @@ acf_new_instance( 'ACF_Admin' );
 endif; // class_exists check.
 
 /**
- * Menu entry
- *
- * Configures the top-level entry
- * in the admin menu.
- *
- * @since  1.0.0
- * @return array Returns an array of options.
- */
-function acf_admin_menu() {
-
-	$menu = [
-		'slug'     => 'acf',
-		'icon'     => 'dashicons-edit',
-		'position' => get_field( 'acf_menu_position', 'option' ),
-		'title'    => __( 'Website Content', 'acf' ),
-		'menu'     => __( 'Content', 'acf' )
-	];
-	return apply_filters( 'acf_admin_menu', $menu );
-}
-
-/**
  * Admin page
  *
  * @since  1.0.0
@@ -212,20 +207,16 @@ function acf_admin_menu() {
  */
 function acf_admin_page() {
 
-	// Get filtered menu options.
-	$menu = acf_admin_menu();
-
 	// Add primary menu entry.
 	$page = add_menu_page(
-		$menu['title'],
-		$menu['menu'],
+		__( 'Website Content', 'acf' ),
+		__( 'Content', 'acf' ),
 		acf_get_setting( 'capability' ),
-		$menu['slug'],
+		acf()->admin_slug,
 		'acf_content_page',
-		$menu['icon'],
-		$menu['position'],
+		'dashicons-edit',
+		get_field( 'acf_menu_position', 'option' ),
 	);
-	// add_action( "load-{$page}", 'acf_page_load' );
 }
 add_action( 'admin_menu', 'acf_admin_page', 9 );
 
@@ -244,7 +235,7 @@ function post_types_grid() {
 	$types = get_post_type_data();
 
 	// Begin grid wrapping element and list.
-	$html = '<div class="acf-tab-grid"><ul>';
+	$html = '<div class="acf-content-grid"><ul>';
 
 	foreach ( $types as $type ) {
 
@@ -296,7 +287,7 @@ function post_types_grid() {
 		);
 		$html .= '<figure>';
 		$html .= sprintf(
-			'<div class="acf-tab-grid-icon dashicons %s"></div>',
+			'<div class="acf-grid-icon dashicons %s"></div>',
 			$type['icon']
 		);
 		$html .= sprintf(
@@ -313,13 +304,15 @@ function post_types_grid() {
 	// Field group categories.
 	$html .= '<li>';
 	$html .= sprintf(
-		'<h3>%s <span class="tax-count">%s</span></h3>',
+		'<h3>%s <span class="post-count tax-count" title="%s %s">%s</span></h3>',
 		__( 'Field Categories', 'acf' ),
+		wp_count_terms( 'acf-field-group-category' ),
+		_n( 'Category', 'Categories', intval( wp_count_terms( 'acf-field-group-category' ) ), 'acf' ),
 		wp_count_terms( 'acf-field-group-category' )
 	);
 	$html .= '<figure>';
 	$html .= sprintf(
-		'<div class="acf-tab-grid-icon dashicons %s"></div>',
+		'<div class="acf-grid-icon dashicons %s"></div>',
 		'dashicons-category'
 	);
 	$html .= sprintf(
@@ -350,13 +343,12 @@ function acf_content_page() {
 
 function acf_add_settings_page() {
 
-	$menu = acf_admin_menu();
 	acf_add_options_page( [
 		'page_title'    => __( 'Content Settings', 'acf' ),
 		'page_desc'     => __( 'Choose which content features to use and how to use them.', 'acf' ),
 		'menu_title'    => __( 'Settings', 'acf' ),
 		'menu_slug'     => 'content-settings',
-		'parent'        => $menu['slug'],
+		'parent'        => acf()->admin_slug,
 		'capability'    => 'manage_options',
 		'redirect'      => false
 	] );

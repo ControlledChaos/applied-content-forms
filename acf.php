@@ -235,8 +235,9 @@ final class ACF {
 		$this->settings = [
 			'name'                   => __( 'Applied Content Forms', 'acf' ),
 			'desc'                   => __( 'A suite of tools for adding and managing custom content types and user forms.', 'acf' ),
+			'website'                => 'https://github.com/ControlledChaos/applied-content-forms',
 			'slug'                   => dirname( ACF_BASENAME ),
-			'version'                => ACF_VERSION,
+			'version'                => $this->version,
 			'basename'               => ACF_BASENAME,
 			'path'                   => ACF_PATH,
 			'file'                   => __FILE__,
