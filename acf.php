@@ -19,8 +19,8 @@
  * Text Domain:       acf
  * Domain Path:       /languages
  * Requires PHP:      7.4
- * Requires at least: 4.9
- * Tested up to:      6.3
+ * Requires at least: 5.3
+ * Tested up to:      6.9
  * Network:           false
  */
 
