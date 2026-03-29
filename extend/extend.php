@@ -320,7 +320,7 @@ final class ACFE {
  * Use this function like you would a global variable,
  * except without needing to declare the global.
  *
- * Example: <?php $acf = acfe(); ?>
+ * Example: <?php $acfe = acfe(); ?>
  *
  * @since  1.0.0
  * @global object $acfe
