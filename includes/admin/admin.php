@@ -17,22 +17,54 @@ class ACF_Admin {
 	 */
 	public function __construct() {
 
-		add_action( 'admin_menu', [ $this, 'admin_menu' ] );
 		add_action( 'admin_enqueue_scripts', [ $this, 'admin_enqueue_scripts' ] );
 		add_action( 'admin_body_class', [ $this, 'admin_body_class' ] );
 		add_action( 'current_screen', [ $this, 'current_screen' ] );
+		add_action( 'admin_menu', [ $this, 'admin_page' ], 9 );
+		add_action( 'admin_menu', [ $this, 'categories_screen' ] );
+		add_action( 'acf/init', [ $this, 'settings_page' ] );
 	}
 
 	/**
-	 * Admin pages
+	 * Admin page
 	 *
-	 * Adds the ACF pages & menu items.
+	 * @since  1.0.0
+	 * @access public
+	 * @return void
+	 */
+	public function admin_page() {
+
+		$page = add_menu_page(
+			__( 'Website Content', 'acf' ),
+			__( 'Content', 'acf' ),
+			acf_get_setting( 'capability' ),
+			acf()->admin_slug,
+			[ $this, 'page_content' ],
+			'dashicons-edit',
+			get_field( 'acf_menu_position', 'option' ),
+		);
+	}
+
+
+	/**
+	 * Admin page content
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @return void
+	 */
+	public function page_content() {
+		acf_get_view( 'acf-content-page' );
+	}
+
+	/**
+	 * Categories screen
 	 *
 	 * @since 1.0.0
 	 * @access public
 	 * @return void
 	 */
-	public function admin_menu() {
+	public function categories_screen() {
 
 		// Bail early if ACF is hidden.
 		if ( ! acf_get_setting( 'show_admin' ) ) {
@@ -40,12 +72,25 @@ class ACF_Admin {
 		}
 
 		add_submenu_page(
-			'acf',
+			acf()->admin_slug,
 			__( 'Field Categories', 'acf' ),
 			__( 'Field Categories', 'acf' ),
 			acf_get_setting( 'capability' ),
 			'edit-tags.php?taxonomy=acf-field-group-category'
 		);
+	}
+
+	public function settings_page() {
+
+		acf_add_options_page( [
+			'page_title'    => __( 'Content Settings', 'acf' ),
+			'page_desc'     => __( 'Choose which content features to use and how to use them.', 'acf' ),
+			'menu_title'    => __( 'Settings', 'acf' ),
+			'menu_slug'     => 'content-settings',
+			'parent'        => acf()->admin_slug,
+			'capability'    => 'manage_options',
+			'redirect'      => false
+		] );
 	}
 
 	/**
@@ -200,27 +245,6 @@ acf_new_instance( 'ACF_Admin' );
 endif; // class_exists check.
 
 /**
- * Admin page
- *
- * @since  1.0.0
- * @return void
- */
-function acf_admin_page() {
-
-	// Add primary menu entry.
-	$page = add_menu_page(
-		__( 'Website Content', 'acf' ),
-		__( 'Content', 'acf' ),
-		acf_get_setting( 'capability' ),
-		acf()->admin_slug,
-		'acf_content_page',
-		'dashicons-edit',
-		get_field( 'acf_menu_position', 'option' ),
-	);
-}
-add_action( 'admin_menu', 'acf_admin_page', 9 );
-
-/**
  * Post types grid
  *
  * The HTML markup for the grid of post types
@@ -330,30 +354,6 @@ function post_types_grid() {
 	echo $html;
 }
 add_action( 'acf/post_types_grid', 'post_types_grid' );
-
-/**
- * ACF content page
- *
- * @since  1.0.0
- * @return void
- */
-function acf_content_page() {
-	acf_get_view( 'acf-content-page' );
-}
-
-function acf_add_settings_page() {
-
-	acf_add_options_page( [
-		'page_title'    => __( 'Content Settings', 'acf' ),
-		'page_desc'     => __( 'Choose which content features to use and how to use them.', 'acf' ),
-		'menu_title'    => __( 'Settings', 'acf' ),
-		'menu_slug'     => 'content-settings',
-		'parent'        => acf()->admin_slug,
-		'capability'    => 'manage_options',
-		'redirect'      => false
-	] );
-}
-add_action( 'acf/init', 'acf_add_settings_page' );
 
 /**
  * ACF post types
