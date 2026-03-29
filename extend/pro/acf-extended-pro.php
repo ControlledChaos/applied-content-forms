@@ -33,7 +33,6 @@ class ACFE_Pro{
             'reserved_field_groups'             => $reserved_field_groups,
 
             // Modules
-            'modules/classic_editor'            => false,
             'modules/field_group_ui'            => true,
             'modules/force_sync'                => false,
             'modules/force_sync/delete'         => false,
@@ -142,7 +141,6 @@ class ACFE_Pro{
         /*
          * Modules
          */
-        acfe_include('pro/includes/modules/classic-editor.php');
         acfe_include('pro/includes/modules/dev.php');
         acfe_include('pro/includes/modules/force-sync.php');
         acfe_include('pro/includes/modules/global-field-condition.php');

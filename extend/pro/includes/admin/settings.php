@@ -467,23 +467,7 @@ class acfe_pro_admin_settings{
     /*
      * Register Fields
      */
-    function register_fields(){
-
-        $this->fields['modules'][] = array(
-            'label'         => 'Classic Editor',
-            'name'          => 'acfe/modules/classic_editor',
-            'description'   => 'Enable the Classic Editor module. Defaults to false',
-            'type'          => 'true_false',
-            'category'      => 'modules',
-        );
-
-        $this->fields['modules'][] = array(
-            'label'         => 'Field Group UI',
-            'name'          => 'acfe/modules/field_group_ui',
-            'description'   => 'Enable the enhanced Field Group UI module. Defaults to true',
-            'type'          => 'true_false',
-            'category'      => 'modules',
-        );
+    function register_fields() {
 
         $this->fields['modules'][] = array(
             'label'         => 'Force Sync',
