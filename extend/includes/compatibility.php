@@ -47,13 +47,7 @@ class acfe_compatibility{
     /**
      * ACF Extended: Settings
      */
-    function update_settings(){
-
-        // ACF Extended: 0.8.8 - 'acfe/modules/taxonomies' is now used for the old 'acfe/modules/dynamic_taxonomies'
-        // ACF Extended: 0.8.6.3 - Renamed 'acfe/modules/taxonomies' to 'acfe/modules/ui'
-        //if(acf_get_setting('acfe/modules/taxonomies') !== null){
-        //    acf_update_setting('acfe/modules/ui', acf_get_setting('acfe/modules/taxonomies'));
-        //}
+    function update_settings() {
 
         // ACF Extended: 0.8 - Renamed 'acfe_php*' to 'acfe/php*'
         if(acf_get_setting('acfe_php') !== null){

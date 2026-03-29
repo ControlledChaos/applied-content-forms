@@ -238,11 +238,6 @@ class ACFE{
         acfe_include('includes/modules/options.php');
         acfe_include('includes/modules/options-pages.php');
         acfe_include('includes/modules/single-meta.php');
-        acfe_include('includes/modules/ui.php');
-        acfe_include('includes/modules/ui-settings.php');
-        acfe_include('includes/modules/ui-term.php');
-        acfe_include('includes/modules/ui-user.php');
-
     }
 
     /*
