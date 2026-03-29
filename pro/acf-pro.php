@@ -1,169 +1,141 @@
 <?php
+/**
+ * ACF admin screen
+ *
+ * @package    Applied Content Forms
+ * @subpackage Pro
+ * @category   Core
+ * @since      1.0.0
+ */
 
-if( !class_exists('acf_pro') ):
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
-class acf_pro {
+final class ACF_PRO {
 
-	/*
-	*  __construct
-	*
-	*
-	*
-	*  @type	function
-	*  @date	23/06/12
-	*  @since	5.0.0
-	*
-	*  @param	N/A
-	*  @return	N/A
-	*/
-
-	function __construct() {
+	/**
+	 * Constructor method
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @return self
+	 */
+	public function __construct() {
 
 		acf_update_setting( 'pro', true );
 
-		acf_include('pro/blocks.php');
-		acf_include('pro/options-page.php');
+		acf_include( 'pro/blocks.php' );
+		acf_include( 'pro/options-page.php' );
 
-		if( is_admin() ) {
-			acf_include('pro/admin/admin-options-page.php');
+		if ( is_admin() ) {
+			acf_include( 'pro/admin/admin-options-page.php' );
 		}
 
-
-		// actions
-		add_action('init',										array($this, 'register_assets'));
-		add_action('acf/include_field_types',					array($this, 'include_field_types'), 5);
-		add_action('acf/include_location_rules',				array($this, 'include_location_rules'), 5);
-		add_action('acf/input/admin_enqueue_scripts',			array($this, 'input_admin_enqueue_scripts'));
-		add_action('acf/field_group/admin_enqueue_scripts',		array($this, 'field_group_admin_enqueue_scripts'));
-
+		add_action( 'init', [ $this, 'register_assets' ] );
+		add_action( 'acf/include_field_types', [ $this, 'include_field_types' ], 5 );
+		add_action( 'acf/include_location_rules', [ $this, 'include_location_rules' ], 5 );
+		add_action( 'acf/input/admin_enqueue_scripts', [ $this, 'input_admin_enqueue_scripts' ] );
+		add_action( 'acf/field_group/admin_enqueue_scripts', [ $this, 'field_group_admin_enqueue_scripts' ] );
 	}
 
+	/**
+	 * Include field types
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @return void
+	 */
+	public function include_field_types() {
 
-	/*
-	*  include_field_types
-	*
-	*  description
-	*
-	*  @type	function
-	*  @date	21/10/2015
-	*  @since	5.2.3
-	*
-	*  @param	$post_id (int)
-	*  @return	$post_id (int)
-	*/
-
-	function include_field_types() {
-
-		acf_include('pro/fields/class-acf-field-repeater.php');
-		acf_include('pro/fields/class-acf-field-flexible-content.php');
-		acf_include('pro/fields/class-acf-field-gallery.php');
-		acf_include('pro/fields/class-acf-field-clone.php');
-
+		acf_include( 'pro/fields/class-acf-field-repeater.php' );
+		acf_include( 'pro/fields/class-acf-field-flexible-content.php' );
+		acf_include( 'pro/fields/class-acf-field-gallery.php' );
+		acf_include( 'pro/fields/class-acf-field-clone.php' );
 	}
 
-
-	/*
-	*  include_location_rules
-	*
-	*  description
-	*
-	*  @type	function
-	*  @date	10/6/17
-	*  @since	5.6.0
-	*
-	*  @param	$post_id (int)
-	*  @return	$post_id (int)
-	*/
-
-	function include_location_rules() {
-
-		acf_include('pro/locations/class-acf-location-block.php');
-		acf_include('pro/locations/class-acf-location-options-page.php');
-
+	/**
+	 * Include location rules
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @return void
+	 */
+	public function include_location_rules() {
+		acf_include( 'pro/locations/class-acf-location-block.php' );
+		acf_include( 'pro/locations/class-acf-location-options-page.php' );
 	}
 
+	/**
+	 * Register assets
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @return void
+	 */
+	public function register_assets() {
 
-	/*
-	*  register_assets
-	*
-	*  description
-	*
-	*  @type	function
-	*  @date	4/11/2013
-	*  @since	5.0.0
-	*
-	*  @param	$post_id (int)
-	*  @return	$post_id (int)
-	*/
+		$version = acf_get_setting( 'version' );
+		$min     = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
-	function register_assets() {
+		// Register scripts.
+		wp_register_script( 'acf-pro-input', acf_get_url( "assets/js/acf-pro-input{$min}.js" ), [ 'acf-input' ], $version );
+		wp_register_script( 'acf-pro-field-group', acf_get_url( "assets/js/acf-pro-field-group{$min}.js" ), [ 'acf-field-group' ], $version );
 
-		// vars
-		$version = acf_get_setting('version');
-		$min = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
-
-
-		// register scripts
-		wp_register_script( 'acf-pro-input', acf_get_url( "pro/assets/js/acf-pro-input{$min}.js" ), array('acf-input'), $version );
-		wp_register_script( 'acf-pro-field-group', acf_get_url( "pro/assets/js/acf-pro-field-group{$min}.js" ), array('acf-field-group'), $version );
-
-
-		// register styles
-		wp_register_style( 'acf-pro-input', acf_get_url( 'pro/assets/css/acf-pro-input.css' ), array('acf-input'), $version );
-		wp_register_style( 'acf-pro-field-group', acf_get_url( 'pro/assets/css/acf-pro-field-group.css' ), array('acf-input'), $version );
-
+		// Register styles.
+		wp_register_style( 'acf-pro-input', acf_get_url( 'assets/css/acf-pro-input.css' ), [ 'acf-input' ], $version );
+		wp_register_style( 'acf-pro-field-group', acf_get_url( 'assets/css/acf-pro-field-group.css' ), [ 'acf-input' ], $version );
 	}
 
-
-	/*
-	*  input_admin_enqueue_scripts
-	*
-	*  description
-	*
-	*  @type	function
-	*  @date	4/11/2013
-	*  @since	5.0.0
-	*
-	*  @param	$post_id (int)
-	*  @return	$post_id (int)
-	*/
-
-	function input_admin_enqueue_scripts() {
-
-		wp_enqueue_script('acf-pro-input');
-		wp_enqueue_style('acf-pro-input');
-
+	/**
+	 * Enqueue admin input scripts
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @return void
+	 */
+	public function input_admin_enqueue_scripts() {
+		wp_enqueue_script( 'acf-pro-input' );
+		wp_enqueue_style( 'acf-pro-input' );
 	}
 
-
-	/*
-	*  field_group_admin_enqueue_scripts
-	*
-	*  description
-	*
-	*  @type	function
-	*  @date	4/11/2013
-	*  @since	5.0.0
-	*
-	*  @param	$post_id (int)
-	*  @return	$post_id (int)
-	*/
-
-	function field_group_admin_enqueue_scripts() {
-
-		wp_enqueue_script('acf-pro-field-group');
-		wp_enqueue_style('acf-pro-field-group');
-
+	/**
+	 * Enqueue admin group scripts
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @return void
+	 */
+	public function field_group_admin_enqueue_scripts() {
+		wp_enqueue_script( 'acf-pro-field-group' );
+		wp_enqueue_style( 'acf-pro-field-group' );
 	}
-
 }
 
+/*
+ * Instantiate the ACF_PRO class.
+ *
+ * The main function responsible for returning the one true
+ * ACF_PRO instance to functions everywhere.
+ * Use this function like you would a global variable,
+ * except without needing to declare the global.
+ *
+ * Example: <?php $acf_pro = acf_pro(); ?>
+ *
+ * @since  1.0.0
+ * @global object $acf_pro
+ * @return object Returns an instance of the ACF_PRO class.
+ */
+function acf_pro() {
 
-// instantiate
-new acf_pro();
+	// Set a global variable.
+	global $acf_pro;
 
-
-// end class
-endif;
-
-?>
+	// Instantiate only once.
+	if ( ! isset( $acf_pro ) ) {
+		$acf_pro = new ACF_PRO();
+	}
+	return $acf_pro;
+}
+acf_pro();
