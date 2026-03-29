@@ -246,8 +246,7 @@ final class ACF {
             'ACFE_FILE'    => __FILE__,
             'ACFE_PATH'    => plugin_dir_path( __FILE__ ) . 'extend/',
 			'ACF_VERSION'  => $this->acf_version,
-            'ACFE_VERSION' => $this->version,
-			'ACF_MAJOR_VERSION' => 5
+            'ACFE_VERSION' => $this->version
         ] );
 
 		// Define settings.
@@ -444,9 +443,8 @@ final class ACF {
 		 * Fires after field types have been included.
 		 *
 		 * @since 1.0.0
-		 * @param integer $major_version The major version of ACF.
 		 */
-		do_action( 'acf/include_field_types', ACF_MAJOR_VERSION );
+		do_action( 'acf/include_field_types' );
 
 		// Include locations.
 		acf_include( 'includes/locations/class-acf-location-post-type.php' );
@@ -475,25 +473,22 @@ final class ACF {
 		 * Fires after location types have been included.
 		 *
 		 * @since 1.0.0
-		 * @param integer $major_version The major version of ACF.
 		 */
-		do_action( 'acf/include_location_rules', ACF_MAJOR_VERSION );
+		do_action( 'acf/include_location_rules' );
 
 		/**
 		 * Fires during initialization. Used to add local fields.
 		 *
 		 * @since 1.0.0
-		 * @param integer $major_version The major version of ACF.
 		 */
-		do_action( 'acf/include_fields', ACF_MAJOR_VERSION );
+		do_action( 'acf/include_fields' );
 
 		/**
 		 * Fires after ACF is completely "initialized".
 		 *
 		 * @since 1.0.0
-		 * @param integer $major_version The major version of ACF.
 		 */
-		do_action( 'acf/init', ACF_MAJOR_VERSION );
+		do_action( 'acf/init' );
 	}
 
 	public function features() {
