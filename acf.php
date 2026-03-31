@@ -437,6 +437,8 @@ final class ACF {
 		acf_include( 'includes/fields/class-acf-field-message.php' );
 		acf_include( 'includes/fields/class-acf-field-accordion.php' );
 		acf_include( 'includes/fields/class-acf-field-tab.php' );
+		acf_include( 'includes/fields/class-acf-field-separator.php' );
+		acf_include( 'includes/fields/class-acf-field-horz-rule.php' );
 		acf_include( 'includes/fields/class-acf-field-group.php' );
 
 		/**
