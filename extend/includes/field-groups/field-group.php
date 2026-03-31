@@ -203,7 +203,7 @@ class ACFE_Field_Group{
          */
         $choices = array(
             'php' => 'PHP',
-            'json' => 'Json',
+            'json' => 'JSON',
         );
 
         global $pagenow;
@@ -249,7 +249,7 @@ class ACFE_Field_Group{
          * AutoSync
          */
         acf_render_field_wrap(array(
-            'label'         => __('Auto Sync'),
+            'label'         => __( 'Auto Sync to Theme' ),
             'instructions'  => '',
             'type'          => 'checkbox',
             'name'          => 'acfe_autosync',
