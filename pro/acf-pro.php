@@ -24,8 +24,6 @@ final class ACF_PRO {
 	 */
 	public function __construct() {
 
-		acf_update_setting( 'pro', true );
-
 		acf_include( 'pro/blocks.php' );
 		acf_include( 'pro/options-page.php' );
 

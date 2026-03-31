@@ -256,6 +256,7 @@ final class ACF {
 			'website'                => 'https://github.com/ControlledChaos/applied-content-forms',
 			'slug'                   => dirname( ACF_BASENAME ),
 			'version'                => $this->version,
+			'pro'                    => true,
 			'basename'               => ACF_BASENAME,
 			'path'                   => ACF_PATH,
 			'file'                   => __FILE__,
