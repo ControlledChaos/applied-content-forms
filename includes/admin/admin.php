@@ -302,21 +302,11 @@ class ACF_Admin {
 			}
 
 			// Post count bubble in grid item heading.
-			if ( $type['count'] > 0 ) {
-				$count = sprintf(
-					'<span class="acf-js-tooltip post-count post-count-has-published" role="tooltip" title="%s">%s</span>',
-					$tooltip,
-					$type['count']
-				);
-
-			// Print an add new link if count is zero.
-			} else {
-				$count = sprintf(
-					'<span class="acf-js-tooltip post-count post-count-none-published" role="tooltip" title="%s"><a href="%s" class="add-new">&plus;</a></span>',
-					__( 'Add New', 'acf' ),
-					admin_url( 'post-new.php?post_type=' . $type['slug'] )
-				);
-			}
+			$count = sprintf(
+				'<span class="acf-js-tooltip post-count post-count-has-published" role="tooltip" title="%s">%s</span>',
+				$tooltip,
+				$type['count']
+			);
 
 			// Add new post link, different for `post` and `attachment`.
 			$add_new = admin_url( 'post-new.php?post_type=' . $type['slug'] );
