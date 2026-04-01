@@ -35,13 +35,7 @@ if ( file_exists( $get_plugin ) && ! function_exists( 'is_plugin_active' ) ) {
 	include_once( $get_plugin );
 }
 
-// Stop if Advanced Custom Fields is active.
-if (
-	is_plugin_active( 'advanced-custom-fields/acf.php' ) ||
-	is_plugin_active( 'advanced-custom-fields-pro/acf.php' )
-) {
-	return;
-}
+if ( ! class_exists( 'ACF' ) ) :
 
 final class ACF {
 
@@ -1057,3 +1051,46 @@ function acf() {
 	return $acf;
 }
 acf();
+
+endif; // Check for ACF class.
+
+/**
+ * Add row notice
+ *
+ * Adds a notice to this plugin's row on the
+ * Plugins screen if Advanced Custom Fields or
+ * Advanced Custom Fields PRO are active.
+ *
+ * @since  1.0.0
+ * @param  $plugin_file This plugin's file path.
+ * @param  $plugin_data This plugin's header data.
+ * @param  $status Tne plugin screen filtered list.
+ * @return void
+ */
+if (
+	is_plugin_active( 'advanced-custom-fields/acf.php' ) ||
+	is_plugin_active( 'advanced-custom-fields-pro/acf.php' )
+) {
+	add_action( 'after_plugin_row_' . plugin_basename( __FILE__ ), function(  $plugin_file, $plugin_data, $status ) {
+		?>
+		<style>
+			.plugins tr[data-plugin='<?php echo $plugin_file; ?>'] th,
+			.plugins tr[data-plugin='<?php echo $plugin_file; ?>'] td {
+				box-shadow: none;
+			}
+		</style>
+
+		<tr id="acf-deactivate-notice" class="active">
+			<th class="check-column"><span class="screen-reader-text"><?php _e( 'Notice', 'acf' ); ?></span></th>
+			<td colspan="3" class="plugin-update colspanchange">
+				<div class="notice inline notice-error notice-alt">
+				<?php printf(
+					__( '<p>Functionality of the %s plugin has been disabled. Please first deactivate Advanced Custom Fields.</p>', 'acf' ),
+					$plugin_data['Name']
+				); ?>
+				</div>
+			</td>
+		</tr>
+		<?php
+	}, 5, 3 );
+}
