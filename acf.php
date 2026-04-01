@@ -46,7 +46,7 @@ final class ACF {
 	 * @access public
 	 * @var    string
 	 */
-	public $version = '1.0.0';
+	public $plugin = '1.0.0';
 
 	/**
 	 * Original plugin version.
@@ -55,7 +55,7 @@ final class ACF {
 	 * @access public
 	 * @var    string
 	 */
-	public $acf_version = '5.9.6';
+	public $version = '5.9.6';
 
 	/**
 	 * Fields class.
@@ -239,8 +239,8 @@ final class ACF {
 			'ACF_PATH'     => plugin_dir_path( __FILE__ ),
             'ACFE_FILE'    => __FILE__,
             'ACFE_PATH'    => plugin_dir_path( __FILE__ ) . 'extend/',
-			'ACF_VERSION'  => $this->acf_version,
-            'ACFE_VERSION' => $this->version
+			'ACF_VERSION'  => $this->version,
+            'ACFE_VERSION' => $this->plugin
         ] );
 
 		// Define settings.
@@ -249,6 +249,7 @@ final class ACF {
 			'desc'                   => __( 'A suite of tools for adding and managing custom content types and user forms.', 'acf' ),
 			'website'                => 'https://github.com/ControlledChaos/applied-content-forms',
 			'slug'                   => dirname( ACF_BASENAME ),
+			'plugin'                 => $this->plugin,
 			'version'                => $this->version,
 			'pro'                    => true,
 			'basename'               => ACF_BASENAME,
