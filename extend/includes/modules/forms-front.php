@@ -298,7 +298,7 @@ class acfe_form_front{
             'hide_revalidation'     => get_field('acfe_form_hide_revalidation',     $form_id),
             'errors_position'       => get_field('acfe_form_errors_position',       $form_id),
             'errors_class'          => get_field('acfe_form_errors_class',          $form_id),
-            'updated_message'       => get_field('acfe_form_updated_message',       $form_id),
+            'update_message'       => get_field('acfe_form_updated_message',       $form_id),
             'html_updated_message'  => get_field('acfe_form_html_updated_message',  $form_id),
             'updated_hide_form'     => get_field('acfe_form_updated_hide_form',     $form_id),
             'return'                => get_field('acfe_form_return',                $form_id), // deprecated
@@ -472,7 +472,7 @@ class acfe_form_front{
         echo "<div {$atts}></div>";
         
         // assign message
-        $message = $args['updated_message'];
+        $message = $args['update_message'];
     
         // no success message
         if(!$message){

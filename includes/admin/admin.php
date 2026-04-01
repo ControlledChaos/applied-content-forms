@@ -100,13 +100,19 @@ class ACF_Admin {
 	public function settings_page() {
 
 		acf_add_options_page( [
-			'page_title'    => __( 'Content Settings', 'acf' ),
-			'page_desc'     => __( 'Choose which content features to use and how to use them.', 'acf' ),
-			'menu_title'    => __( 'Settings', 'acf' ),
-			'menu_slug'     => 'content-settings',
-			'parent'        => acf()->admin_slug,
-			'capability'    => 'manage_options',
-			'redirect'      => false
+			'page_title'      => __( 'Content Settings', 'acf' ),
+			'page_desc'       => __( 'Choose which content features to use and how to use them.', 'acf' ),
+			'menu_title'      => __( 'Settings', 'acf' ),
+			'menu_slug'       => 'content-settings',
+			'parent'          => acf()->admin_slug,
+			'capability'      => 'manage_options',
+			'redirect'        => false,
+			'update_location' => 'bottom',
+			'update_title'    => __( 'Update Settings','acf' ),
+			'update_button'   => __( 'Save Changes', 'acf' ),
+			'update_message'  => __( 'Settings Updated', 'acf' ),
+			'before_form'     => false,
+			'after_form'      => false
 		] );
 	}
 

@@ -199,13 +199,21 @@ class acf_admin_options_page {
 
 		// notices
 		if( !empty($_GET['message']) && $_GET['message'] == '1' ) {
-			acf_add_admin_notice( $this->page['updated_message'], 'success' );
+			acf_add_admin_notice( $this->page['update_message'], 'success' );
 		}
 
 
-		// add submit div
-		add_meta_box('submitdiv', __('Publish','acf'), array($this, 'postbox_submitdiv'), 'acf_options_page', 'side', 'high');
-
+		// Add submit div
+		if ( 'side' === $this->page['update_location'] ) :
+		add_meta_box(
+			'submitdiv',
+			$this->page['update_title'],
+			[ $this, 'postbox_submitdiv' ],
+			'acf_options_page',
+			'side',
+			'high'
+		);
+		endif;
 
 
 		if( empty($field_groups) ) {

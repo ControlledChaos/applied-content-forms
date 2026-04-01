@@ -56,7 +56,7 @@ class acfe_location_post_type_archive{
                 'capability'                => $capability,
                 'redirect'                  => false,
                 'parent_slug'               => $parent,
-                'updated_message'           => $object->label . ' Archive Saved.',
+                'update_message'           => $object->label . ' Archive Saved.',
                 'acfe_post_type_archive'    => true
             ));
             

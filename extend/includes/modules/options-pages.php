@@ -529,7 +529,7 @@ class acfe_dynamic_options_pages extends acfe_dynamic_module{
         $p_id = get_field('post_id', $post_id);
         $autoload = get_field('autoload', $post_id);
         $update_button = get_field('update_button', $post_id);
-        $updated_message = get_field('updated_message', $post_id);
+        $update_message = get_field('update_message', $post_id);
 
         // Register: Args
         $args = array(
@@ -544,7 +544,7 @@ class acfe_dynamic_options_pages extends acfe_dynamic_module{
             'post_id'           => $p_id,
             'autoload'          => $autoload,
             'update_button'     => $update_button,
-            'updated_message'   => $updated_message,
+            'update_message'    => $update_message,
         );
 
         // Redirect
@@ -705,7 +705,7 @@ class acfe_dynamic_options_pages extends acfe_dynamic_module{
         update_field('post_id', $args['post_id'], $post_id);
         update_field('autoload', $args['autoload'], $post_id);
         update_field('update_button', $args['update_button'], $post_id);
-        update_field('updated_message', $args['updated_message'], $post_id);
+        update_field('update_message', $args['update_message'], $post_id);
 
     }
 
@@ -840,7 +840,7 @@ class acfe_dynamic_options_pages extends acfe_dynamic_module{
                 $args['page_title'] = acf_translate($args['page_title']);
                 $args['menu_title'] = acf_translate($args['menu_title']);
                 $args['update_button'] = acf_translate($args['update_button']);
-                $args['updated_message'] = acf_translate($args['updated_message']);
+                $args['update_message'] = acf_translate($args['update_message']);
 
             }
 
@@ -918,8 +918,8 @@ class acfe_dynamic_options_pages extends acfe_dynamic_module{
         }
 
         // Translate: Updated message
-        if(isset($args['updated_message'])){
-            do_action('wpml_register_single_string', $this->textdomain, 'Updated_message', $args['updated_message']);
+        if(isset($args['update_message'])){
+            do_action('wpml_register_single_string', $this->textdomain, 'Updated_message', $args['update_message']);
         }
 
     }
@@ -945,8 +945,8 @@ class acfe_dynamic_options_pages extends acfe_dynamic_module{
         }
 
         // Translate: Updated message
-        if(isset($args['updated_message'])){
-            $args['updated_message'] = acfe_translate($args['updated_message'], 'Updated_message', $this->textdomain);
+        if(isset($args['update_message'])){
+            $args['update_message'] = acfe_translate($args['update_message'], 'Updated_message', $this->textdomain);
         }
 
         return $args;
@@ -1218,7 +1218,7 @@ Defaults to false.',
                 array(
                     'key' => 'field_acfe_dop_updated_message',
                     'label' => 'Updated Message',
-                    'name' => 'updated_message',
+                    'name' => 'update_message',
                     'type' => 'text',
                     'instructions' => '(string) The message shown above the form on submit.',
                     'required' => 0,

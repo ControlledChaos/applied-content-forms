@@ -1,3 +1,18 @@
+<?php
+/**
+ * Options page template
+ *
+ * @package    Applied Content Forms
+ * @subpackage Admin
+ * @category   Views
+ * @since      1.0.0
+ */
+
+$field_groups = acf_get_field_groups( [
+	'options_page' => $menu_slug
+] );
+
+?>
 <div class="wrap acf-settings-wrap">
 
 	<h1><?php echo $page_title; ?></h1>
@@ -25,6 +40,12 @@
 				</div>
 			</div>
 			<br class="clear" />
+			<?php if ( ! empty( $field_groups ) && 'bottom' === $update_location ) : ?>
+			<p class="submit">
+				<input type="submit" accesskey="p" value="<?php echo $update_button; ?>" class="button button-primary button-large" id="publish" name="publish" />
+				<span class="spinner"></span>
+			</p>
+			<?php endif; ?>
 		</div>
 	</form>
 	<?php do_action( 'acf/options_page/after_form' ); ?>

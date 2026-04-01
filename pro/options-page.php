@@ -78,11 +78,16 @@ class acf_options_page {
 			'redirect'        => true,
 			'post_id'         => 'options',
 			'autoload'        => false,
+			'update_location' => 'side', // `side` or `bottom`
+			'update_title'    => __( 'Publish','acf' ),
 			'update_button'   => __( 'Update', 'acf' ),
-			'updated_message' => __( 'Options Updated', 'acf' ),
+			'update_message'  => __( 'Options Updated', 'acf' ),
 			'before_form'     => false,
 			'after_form'      => false
 		] );
+		$menu_slug       = $page['menu_slug'];
+		$update_location = $page['update_location'];
+		$update_button   = $page['update_button'];
 
 		// Allow compatibility for changed settings.
 		$migrate = [
