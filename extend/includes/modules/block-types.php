@@ -17,7 +17,7 @@ class acfe_dynamic_block_types extends acfe_dynamic_module {
 	 */
 	function initialize(){
 
-		if ( acf()->block_types ) {
+		if ( acf_get_setting( 'block_types' ) ) {
 			$this->active = true;
 		}
 		$this->settings = 'modules.block_types';

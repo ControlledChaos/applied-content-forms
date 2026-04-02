@@ -3,9 +3,9 @@
 if(!defined('ABSPATH'))
     exit;
 
-// Check setting
-if(!acf_get_setting('modules/post_types'))
-    return;
+if ( ! acf_get_setting( 'post_types' ) ) {
+	return;
+}
 
 if(!class_exists('acfe_dynamic_post_types_export')):
 

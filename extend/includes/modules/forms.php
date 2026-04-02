@@ -19,7 +19,7 @@ class acfe_dynamic_forms extends acfe_dynamic_module{
      */
     function initialize(){
 
-        if ( acf()->forms ) {
+        if ( acf_get_setting( 'forms' ) ) {
 			$this->active = true;
 		}
         $this->label = 'Form Title';

@@ -148,51 +148,6 @@ final class ACF {
 	public $admin_slug = 'acf';
 
 	/**
-	 * Post types feature
-	 *
-	 * @since  1.0.0
-	 * @access public
-	 * @var    boolean
-	 */
-	public $post_types = false;
-
-	/**
-	 * Taxonomies feature
-	 *
-	 * @since  1.0.0
-	 * @access public
-	 * @var    boolean
-	 */
-	public $taxonomies = false;
-
-	/**
-	 * Block types feature
-	 *
-	 * @since  1.0.0
-	 * @access public
-	 * @var    boolean
-	 */
-	public $block_types = false;
-
-	/**
-	 * Forms feature
-	 *
-	 * @since  1.0.0
-	 * @access public
-	 * @var    boolean
-	 */
-	public $forms = false;
-
-	/**
-	 * Templates feature
-	 *
-	 * @since  1.0.0
-	 * @access public
-	 * @var    boolean
-	 */
-	public $templates = false;
-
-	/**
 	 * Constructor method
 	 *
 	 * @since  1.0.0
@@ -281,13 +236,13 @@ final class ACF {
 			'select2_version'        => 4,
 			'row_index_offset'       => 1,
 			'remove_wp_meta_box'     => true,
-			'modules/post_types'     => true,
-			'modules/taxonomies'     => true,
-			'modules/block_types'    => true,
-			'modules/forms'          => true,
-			'modules/templates'      => true,
-			'modules/options_pages'  => true,
-			'modules/author'         => true
+			'post_types'             => true,
+			'taxonomies'             => true,
+			'block_types'            => true,
+			'forms'                  => true,
+			'templates'              => true,
+			'options_pages'          => true,
+			'author_ajax'            => true
 		];
 
 		include_once( ACF_PATH . 'includes/utility-functions.php' );
@@ -476,6 +431,9 @@ final class ACF {
 		acf_include( 'includes/locations/class-acf-location-nav-menu.php' );
 		acf_include( 'includes/locations/class-acf-location-nav-menu-item.php' );
 
+		// Settings update.
+		acf_include( 'includes/settings-update.php' );
+
 		/**
 		 * Fires after location types have been included.
 		 *
@@ -499,15 +457,6 @@ final class ACF {
 	}
 
 	public function features() {
-		if ( get_field( 'acf_post_types', 'option' ) ) {
-			$this->post_types = true;
-		}
-		if ( get_field( 'acf_taxonomies', 'option' ) ) {
-			$this->taxonomies = true;
-		}
-		if ( get_field( 'acf_block_types', 'option' ) ) {
-			$this->block_types = true;
-		}
 		if ( get_field( 'acf_forms', 'option' ) ) {
 			$this->forms = true;
 		}
@@ -529,7 +478,7 @@ final class ACF {
 
 		$cap = acf_get_setting( 'capability' );
 
-		if ( $this->post_types ) {
+		if ( acf_get_setting( 'post_types' ) ) {
 			register_post_type( 'acf-post-type', [
 				'label'       => __( 'Post Types', 'acf' ),
 				'description' => __( 'Create custom post types without code.', 'acf' ),
@@ -570,7 +519,7 @@ final class ACF {
 			] );
 		}
 
-		if ( $this->taxonomies ) {
+		if ( acf_get_setting( 'taxonomies' ) ) {
 			register_post_type( 'acf-taxonomy', [
 				'label'       => __( 'Taxonomies', 'acf' ),
 				'description' => __( 'Create custom taxonomies without code.', 'acf' ),
@@ -611,7 +560,7 @@ final class ACF {
 			] );
 		}
 
-		if ( $this->block_types ) {
+		if ( acf_get_setting( 'block_types' ) ) {
 			register_post_type( 'acf-block-type', [
 				'label'       => __( 'Block Type', 'acf' ),
 				'description' => __( 'Create custom block types without code.', 'acf' ),
@@ -652,7 +601,7 @@ final class ACF {
 			] );
 		}
 
-		if ( $this->forms ) {
+		if ( acf_get_setting( 'forms' ) ) {
 			register_post_type( 'acf-form', [
 				'label'                 => __( 'Forms', 'acf' ),
 				'description'           => __( 'Forms', 'acf' ),
@@ -693,7 +642,7 @@ final class ACF {
 			] );
 		}
 
-		if ( $this->templates ) {
+		if ( acf_get_setting( 'templates' ) ) {
 			register_post_type( 'acf-template', [
 				'label'       => __( 'Templates', 'acf' ),
 				'description' => __( 'Templates', 'acf' ),

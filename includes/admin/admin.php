@@ -398,29 +398,29 @@ class ACF_Admin {
 		$types = [];
 
 		// If dynamic post types.
-		if ( get_field( 'acf_post_types', 'option' ) ) {
+		if ( acf_get_setting( 'post_types' ) ) {
 			$types = array_merge( $types, [ 'acf-post-type' ] );
 		}
 
 		// If dynamic taxonomies.
-		if ( get_field( 'acf_taxonomies', 'option' ) ) {
+		if ( acf_get_setting( 'taxonomies' ) ) {
 			$types = array_merge( $types, [ 'acf-taxonomy' ] );
 		}
 
 		// If dynamic block types.
 		if ( ! function_exists( 'classicpress_version' ) ) {
-			if ( get_field( 'acf_block_types', 'option' ) ) {
+			if ( acf_get_setting( 'block_types' ) ) {
 				$types = array_merge( $types, [ 'acf-block-type' ] );
 			}
 		}
 
 		// If dynamic forms.
-		if ( get_field( 'acf_forms', 'option' ) ) {
+		if ( acf_get_setting( 'forms' ) ) {
 			$types = array_merge( $types, [ 'acf-form' ] );
 		}
 
 		// If dynamic templates.
-		if ( get_field( 'acf_templates', 'option' ) ) {
+		if ( acf_get_setting( 'templates' ) ) {
 			$types = array_merge( $types, [ 'acf-template' ] );
 		}
 

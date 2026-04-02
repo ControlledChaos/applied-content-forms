@@ -16,7 +16,7 @@ class acfe_dynamic_taxonomies extends acfe_dynamic_module {
 	 */
 	function initialize(){
 
-		if ( acf()->taxonomies ) {
+		if ( acf_get_setting( 'taxonomies' ) ) {
 			$this->active = true;
 		}
 		$this->settings = 'modules.taxonomies';

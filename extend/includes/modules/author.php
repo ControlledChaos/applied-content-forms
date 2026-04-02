@@ -4,7 +4,7 @@ if(!defined('ABSPATH'))
     exit;
 
 // Check setting
-if(!acf_get_setting('modules/author'))
+if(!acf_get_setting('author_ajax'))
     return;
 
 if(!class_exists('acfe_author')):

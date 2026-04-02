@@ -16,7 +16,7 @@ class acfe_dynamic_templates extends acfe_dynamic_module {
      */
     function initialize(){
 
-        if ( acf()->templates ) {
+        if ( acf_get_setting( 'templates' ) ) {
 			$this->active = true;
 		}
         $this->label = 'Template Title';

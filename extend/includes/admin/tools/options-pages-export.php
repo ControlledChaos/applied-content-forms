@@ -4,7 +4,7 @@ if(!defined('ABSPATH'))
     exit;
 
 // Check setting
-if(!acf_get_setting('modules/options_pages'))
+if(!acf_get_setting('options_pages'))
     return;
 
 if(!class_exists('acfe_dynamic_options_pages_export')):

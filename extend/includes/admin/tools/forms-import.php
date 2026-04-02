@@ -4,7 +4,7 @@ if(!defined('ABSPATH'))
     exit;
 
 // Check setting
-if(!acf_get_setting('modules/forms'))
+if ( ! acf_get_setting( 'forms' ) )
     return;
 
 if(!class_exists('acfe_dynamic_forms_import')):

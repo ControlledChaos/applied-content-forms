@@ -16,7 +16,7 @@ class acfe_dynamic_post_types extends acfe_dynamic_module {
 	 */
 	function initialize() {
 
-		if ( acf()->post_types ) {
+		if ( acf_get_setting( 'post_types' ) ) {
 			$this->active = true;
 		}
 		$this->settings = 'modules.post_types';

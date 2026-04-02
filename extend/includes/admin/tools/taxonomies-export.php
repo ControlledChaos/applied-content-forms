@@ -4,7 +4,7 @@ if(!defined('ABSPATH'))
     exit;
 
 // Check setting
-if(!acf_get_setting('modules/taxonomies'))
+if(!acf_get_setting('taxonomies'))
     return;
 
 if(!class_exists('acfe_dynamic_taxonomies_export')):

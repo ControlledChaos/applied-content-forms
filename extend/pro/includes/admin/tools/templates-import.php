@@ -4,7 +4,7 @@ if(!defined('ABSPATH'))
     exit;
 
 // Check setting
-if(!acf_get_setting('modules/templates'))
+if ( ! acf_get_setting( 'templates' ) )
     return;
 
 if(!class_exists('acfe_dynamic_templates_import')):

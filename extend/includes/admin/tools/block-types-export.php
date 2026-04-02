@@ -1,18 +1,18 @@
-<?php 
+<?php
 
 if(!defined('ABSPATH'))
     exit;
 
 // Check setting
-if(!acf_get_setting('modules/block_types'))
+if ( ! acf_get_setting( 'block_types' ) )
     return;
 
 if(!class_exists('acfe_dynamic_block_types_export')):
 
 class acfe_dynamic_block_types_export extends acfe_module_export{
-    
+
     function initialize(){
-        
+
         // vars
         $this->name = 'acfe_dynamic_block_types_export';
         $this->title = __('Export Block Types');
@@ -29,9 +29,9 @@ class acfe_dynamic_block_types_export extends acfe_module_export{
             'success_single'    => '1 block type exported',
             'success_multiple'  => '%s block types exported',
         );
-        
+
     }
-    
+
 }
 
 acf_register_admin_tool('acfe_dynamic_block_types_export');

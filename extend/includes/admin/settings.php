@@ -298,13 +298,6 @@ class acfe_admin_settings{
             'modules' => array(
 
                 array(
-                    'label'         => 'Author',
-                    'name'          => 'acfe/modules/author',
-                    'type'          => 'true_false',
-                    'description'   => 'Show/hide the Author module. Defaults to true',
-                    'category'      => 'modules',
-                ),
-                array(
                     'label'         => 'Multilangual',
                     'name'          => 'acfe/modules/multilang',
                     'type'          => 'true_false',
@@ -316,13 +309,6 @@ class acfe_admin_settings{
                     'name'          => 'acfe/modules/options',
                     'type'          => 'true_false',
                     'description'   => 'Show/hide the Options module. Defaults to true',
-                    'category'      => 'modules',
-                ),
-                array(
-                    'label'         => 'Options Pages',
-                    'name'          => 'acfe/modules/options_pages',
-                    'type'          => 'true_false',
-                    'description'   => 'Show/hide the Options Pages module. Defaults to true',
                     'category'      => 'modules',
                 ),
                 array(
