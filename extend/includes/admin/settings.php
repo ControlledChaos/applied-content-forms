@@ -305,13 +305,6 @@ class acfe_admin_settings{
                     'category'      => 'modules',
                 ),
                 array(
-                    'label'         => 'Developer mode',
-                    'name'          => 'acfe/dev',
-                    'type'          => 'true_false',
-                    'description'   => 'Show/hide the advanced WP post meta box. Defaults to false',
-                    'category'      => 'modules',
-                ),
-                array(
                     'label'         => 'Multilangual',
                     'name'          => 'acfe/modules/multilang',
                     'type'          => 'true_false',

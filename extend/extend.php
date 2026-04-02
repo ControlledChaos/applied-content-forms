@@ -104,7 +104,6 @@ final class ACFE {
 			'json_found' => false,
 
 			// Modules
-			'dev'                   => true,
 			'modules/multilang'     => true,
 			'modules/options'       => true,
 			'modules/single_meta'   => false,

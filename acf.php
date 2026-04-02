@@ -257,6 +257,7 @@ final class ACF {
 			'file'                   => __FILE__,
 			'url'                    => plugin_dir_url( __FILE__ ),
 			'show_admin'             => true,
+			'dev_mode'               => false,
 			'menu_position'          => '70',
 			'show_updates'           => true,
 			'stripslashes'           => false,
