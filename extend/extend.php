@@ -37,9 +37,6 @@ final class ACFE {
 	 */
 	public function initialize() {
 
-		acfe_include( 'includes/acfe-field-functions.php' );
-		acfe_include( 'includes/acfe-field-group-functions.php' );
-		acfe_include( 'includes/acfe-file-functions.php' );
 		acfe_include( 'includes/acfe-form-functions.php' );
 		acfe_include( 'includes/acfe-helper-functions.php' );
 		acfe_include( 'includes/acfe-meta-functions.php' );

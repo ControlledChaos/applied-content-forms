@@ -297,6 +297,7 @@ final class ACF {
 		acf_include( 'includes/acf-hook-functions.php' );
 		acf_include( 'includes/acf-field-functions.php' );
 		acf_include( 'includes/acf-field-group-functions.php' );
+		acf_include( 'includes/acf-file-functions.php' );
 		acf_include( 'includes/acf-form-functions.php' );
 		acf_include( 'includes/acf-meta-functions.php' );
 		acf_include( 'includes/acf-post-functions.php' );
