@@ -1,18 +1,18 @@
-<?php 
+<?php
 
 if(!defined('ABSPATH'))
     exit;
 
 // Check setting
-if(!acf_get_setting('acfe/modules/options_pages'))
+if(!acf_get_setting('modules/options_pages'))
     return;
 
 if(!class_exists('acfe_dynamic_options_pages_import')):
-    
+
 class acfe_dynamic_options_pages_import extends acfe_module_import{
-    
+
     function initialize(){
-        
+
         // vars
         $this->hook = 'options_page';
         $this->name = 'acfe_dynamic_options_pages_import';
@@ -23,9 +23,9 @@ class acfe_dynamic_options_pages_import extends acfe_module_import{
             'success_single'    => '1 options page imported',
             'success_multiple'  => '%s options pages imported',
         );
-        
+
     }
-    
+
 }
 
 acf_register_admin_tool('acfe_dynamic_options_pages_import');

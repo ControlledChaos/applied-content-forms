@@ -526,14 +526,6 @@ class acfe_pro_admin_settings{
             'category'      => 'modules',
         );
 
-        $this->fields['modules'][] = array(
-            'label'         => 'Templates',
-            'name'          => 'acfe/modules/templates',
-            'description'   => 'Enable the Templates module. Defaults to true',
-            'type'          => 'true_false',
-            'category'      => 'modules',
-        );
-
         usort($this->fields['modules'], function($a, $b){
             return strcmp($a['label'], $b['label']);
         });

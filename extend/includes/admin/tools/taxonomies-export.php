@@ -1,18 +1,18 @@
-<?php 
+<?php
 
 if(!defined('ABSPATH'))
     exit;
 
 // Check setting
-if(!acf_get_setting('acfe/modules/taxonomies'))
+if(!acf_get_setting('modules/taxonomies'))
     return;
 
 if(!class_exists('acfe_dynamic_taxonomies_export')):
 
 class acfe_dynamic_taxonomies_export extends acfe_module_export{
-    
+
     function initialize(){
-        
+
         // vars
         $this->name = 'acfe_dynamic_taxonomies_export';
         $this->title = __('Export Taxonomies');
@@ -29,9 +29,9 @@ class acfe_dynamic_taxonomies_export extends acfe_module_export{
             'success_single'    => '1 taxonomy exported',
             'success_multiple'  => '%s taxonomies exported',
         );
-        
+
     }
-    
+
 }
 
 acf_register_admin_tool('acfe_dynamic_taxonomies_export');

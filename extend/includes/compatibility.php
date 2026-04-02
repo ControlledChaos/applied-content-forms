@@ -68,23 +68,23 @@ class acfe_compatibility{
 
         // ACF Extended: 0.8.8 - renamed modules
         if(acf_get_setting('acfe/modules/dynamic_block_types') !== null){
-            acf_update_setting('acfe/modules/block_types', acf_get_setting('acfe/modules/dynamic_block_types'));
+            acf_update_setting('modules/block_types', acf_get_setting('acfe/modules/dynamic_block_types'));
         }
 
         if(acf_get_setting('acfe/modules/dynamic_forms') !== null){
-            acf_update_setting('acfe/modules/forms', acf_get_setting('acfe/modules/dynamic_forms'));
+            acf_update_setting('modules/forms', acf_get_setting('acfe/modules/dynamic_forms'));
         }
 
         if(acf_get_setting('acfe/modules/dynamic_options_pages') !== null){
-            acf_update_setting('acfe/modules/options_pages', acf_get_setting('acfe/modules/dynamic_options_pages'));
+            acf_update_setting('modules/options_pages', acf_get_setting('acfe/modules/dynamic_options_pages'));
         }
 
         if(acf_get_setting('acfe/modules/dynamic_post_types') !== null){
-            acf_update_setting('acfe/modules/post_types', acf_get_setting('acfe/modules/dynamic_post_types'));
+            acf_update_setting('modules/post_types', acf_get_setting('acfe/modules/dynamic_post_types'));
         }
 
         if(acf_get_setting('acfe/modules/dynamic_taxonomies') !== null){
-            acf_update_setting('acfe/modules/taxonomies', acf_get_setting('acfe/modules/dynamic_taxonomies'));
+            acf_update_setting('modules/taxonomies', acf_get_setting('acfe/modules/dynamic_taxonomies'));
         }
 
     }

@@ -279,7 +279,14 @@ final class ACF {
 			'enqueue_datetimepicker' => true,
 			'select2_version'        => 4,
 			'row_index_offset'       => 1,
-			'remove_wp_meta_box'     => true
+			'remove_wp_meta_box'     => true,
+			'modules/post_types'     => true,
+			'modules/taxonomies'     => true,
+			'modules/block_types'    => true,
+			'modules/forms'          => true,
+			'modules/templates'      => true,
+			'modules/options_pages'  => true,
+			'modules/author'         => true
 		];
 
 		include_once( ACF_PATH . 'includes/utility-functions.php' );

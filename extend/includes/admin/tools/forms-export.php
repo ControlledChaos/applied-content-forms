@@ -1,18 +1,18 @@
-<?php 
+<?php
 
 if(!defined('ABSPATH'))
     exit;
 
 // Check setting
-if(!acf_get_setting('acfe/modules/forms'))
+if(!acf_get_setting('modules/forms'))
     return;
 
 if(!class_exists('acfe_dynamic_forms_export')):
 
 class acfe_dynamic_forms_export extends acfe_module_export{
-    
+
     function initialize(){
-        
+
         // vars
         $this->name = 'acfe_dynamic_forms_export';
         $this->title = __('Export Forms');
@@ -29,9 +29,9 @@ class acfe_dynamic_forms_export extends acfe_module_export{
             'success_single'    => '1 form exported',
             'success_multiple'  => '%s forms exported',
         );
-        
+
     }
-    
+
 }
 
 acf_register_admin_tool('acfe_dynamic_forms_export');

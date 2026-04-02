@@ -41,7 +41,7 @@ class ACFE_Pro{
             'modules/rewrite_rules'             => true,
             'modules/screen_layouts'            => true,
             'modules/scripts'                   => true,
-            'modules/templates'                 => true,
+
         ));
 
         // Functions

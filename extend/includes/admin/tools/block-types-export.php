@@ -4,7 +4,7 @@ if(!defined('ABSPATH'))
     exit;
 
 // Check setting
-if(!acf_get_setting('acfe/modules/block_types'))
+if(!acf_get_setting('modules/block_types'))
     return;
 
 if(!class_exists('acfe_dynamic_block_types_export')):

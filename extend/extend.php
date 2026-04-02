@@ -37,7 +37,6 @@ final class ACFE {
 	 */
 	public function initialize() {
 
-		acfe_include( 'includes/acfe-form-functions.php' );
 		acfe_include( 'includes/acfe-helper-functions.php' );
 		acfe_include( 'includes/acfe-meta-functions.php' );
 		acfe_include( 'includes/acfe-post-functions.php' );
@@ -105,18 +104,10 @@ final class ACFE {
 			'json_found' => false,
 
 			// Modules
-			'dev'                   => false,
-			'modules/author'        => true,
-			'modules/categories'    => true,
-			'modules/post_types'    => true,
-			'modules/taxonomies'    => true,
-			'modules/block_types'   => true,
-			'modules/forms'         => true,
-			'modules/options_pages' => true,
+			'dev'                   => true,
 			'modules/multilang'     => true,
 			'modules/options'       => true,
 			'modules/single_meta'   => false,
-			'modules/ui'            => true,
 
 			// Fields
 			'field/recaptcha/site_key'     => null,
