@@ -1100,7 +1100,7 @@ class acfe_dynamic_taxonomies extends acfe_dynamic_module {
 
 			'menu_order' => 0,
 			'position' => 'normal',
-			'style' => 'default',
+			'style' => 'seamless',
 			'label_placement' => 'left',
 			'instruction_placement' => 'label',
 			'hide_on_screen' => '',

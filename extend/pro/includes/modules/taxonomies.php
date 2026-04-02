@@ -6,80 +6,80 @@ if(!defined('ABSPATH'))
 if(!class_exists('acfe_pro_dynamic_taxonomies')):
 
 class acfe_pro_dynamic_taxonomies{
-    
+
     public $post_type;
-    
+
     /*
      * Construct
      */
     function __construct(){
-        
+
         $this->post_type = 'acf-taxonomy';
-        
+
         add_filter('acfe/taxonomy/register',        array($this, 'register'), 15, 2);
         add_filter('acfe/taxonomy/save_args',       array($this, 'save_args'), 15, 3);
         add_action('acfe/taxonomy/save',            array($this, 'save'), 15, 3);
         add_action('acfe/taxonomy/import_fields',   array($this, 'import_fields'), 15, 3);
-        
+
         $this->add_local_field_group();
-        
+
     }
-    
+
     /*
      * Register
      */
     function register($args, $name){
-    
+
         // Check Active
         if(!acf_maybe_get($args, 'active', true))
             return false;
-        
+
         return $args;
-        
+
     }
-    
+
     /*
      * Save Args
      */
     function save_args($args, $name, $post_id){
-    
+
         // Active
         $active = get_field('acfe_dt_active', $post_id);
         $active = $active === null ? true : $active;
-    
+
         $args['active'] = $active;
-        
+
         return $args;
-        
+
     }
-    
+
     /*
      * Save
      */
     function save($name, $args, $post_id){
-    
+
         // Update post
         wp_update_post(array(
             'ID'            => $post_id,
             'post_status'   => $args['active'] ? 'publish' : 'acf-disabled',
         ));
-        
+
     }
-    
+
     /*
      * Import Fields
      */
     function import_fields($name, $args, $post_id){
-        
+
         update_field('acfe_dt_active', $args['active'], $post_id);
-        
+
     }
-    
+
     /*
      * Add Local Field Group
      */
     function add_local_field_group(){
-    
+
         acf_add_local_field_group(array(
             'key' => 'group_acfe_dynamic_taxonomy_side',
             'title' => 'Taxonomy: Side',
@@ -123,9 +123,9 @@ class acfe_pro_dynamic_taxonomies{
             'active' => true,
             'description' => '',
         ));
-        
+
     }
-    
+
 }
 
 acf_new_instance('acfe_pro_dynamic_taxonomies');

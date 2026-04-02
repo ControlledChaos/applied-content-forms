@@ -1785,7 +1785,7 @@ If used, you have to include the following code <code>%s</code> to print the act
             ),
             'menu_order' => 0,
             'position' => 'acf_after_title',
-            'style' => 'default',
+            'style' => 'seamless',
             'label_placement' => 'left',
             'instruction_placement' => 'label',
             'hide_on_screen' => '',

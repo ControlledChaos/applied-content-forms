@@ -163,7 +163,7 @@ class acfe_dynamic_templates extends acfe_dynamic_module {
             $postboxes[] = array(
                 'id'    => $id,
                 'key'   => '',
-                'style' => 'default',
+                'style' => 'seamless',
                 'label' => 'left'
             );
 
@@ -183,7 +183,7 @@ class acfe_dynamic_templates extends acfe_dynamic_module {
                 $postboxes[] = array(
                     'id'    => $id,
                     'key'   => '',
-                    'style' => 'default',
+                    'style' => 'seamless',
                     'label' => 'top',
                     'edit'  => acf_get_field_group_edit_link($field_group['ID'])
                 );

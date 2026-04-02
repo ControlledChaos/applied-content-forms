@@ -1005,7 +1005,7 @@ class acfe_dynamic_block_types extends acfe_dynamic_module {
 
 			'menu_order' => 0,
 			'position' => 'normal',
-			'style' => 'default',
+			'style' => 'seamless',
 			'label_placement' => 'left',
 			'instruction_placement' => 'label',
 			'hide_on_screen' => '',
