@@ -4,7 +4,7 @@ if(!defined('ABSPATH'))
     exit;
 
 // Check setting
-if(!acf_get_setting('acfe/modules/options'))
+if(!acf_get_setting('options_editor'))
     return;
 
 if(!class_exists('acfe_module_options')):

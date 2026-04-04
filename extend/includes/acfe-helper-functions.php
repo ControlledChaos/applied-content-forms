@@ -369,10 +369,8 @@ function acfe_array_to_string($array = array()){
  *
  * @return bool
  */
-function acfe_is_dev(){
-
-    return acf_get_setting('dev_mode', false) || (defined('ACFE_dev') && ACFE_dev);
-
+function acfe_is_dev() {
+    return acf_get_setting( 'dev_mode', false ) || ( defined( 'ACF_DEV' ) && ACF_DEV );
 }
 
 /**

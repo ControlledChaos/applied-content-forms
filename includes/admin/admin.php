@@ -58,7 +58,7 @@ class ACF_Admin {
 			acf()->admin_slug,
 			[ $this, 'page_content' ],
 			'dashicons-edit',
-			get_field( 'acf_menu_position', 'option' ),
+			acf_get_setting( 'menu_position' ),
 		);
 	}
 

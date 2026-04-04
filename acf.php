@@ -154,9 +154,7 @@ final class ACF {
 	 * @access public
 	 * @return self
 	 */
-	public function __construct() {
-		add_action( 'acf/init', [ $this, 'features' ] );
-	}
+	public function __construct() {}
 
 	/**
 	 * Set constants
@@ -213,7 +211,7 @@ final class ACF {
 			'url'                    => plugin_dir_url( __FILE__ ),
 			'show_admin'             => true,
 			'dev_mode'               => false,
-			'menu_position'          => '70',
+			'menu_position'          => '2',
 			'show_updates'           => true,
 			'stripslashes'           => false,
 			'local'                  => true,
@@ -242,7 +240,8 @@ final class ACF {
 			'forms'                  => true,
 			'templates'              => true,
 			'options_pages'          => true,
-			'author_ajax'            => true
+			'author_ajax'            => true,
+			'options_editor'         => false
 		];
 
 		include_once( ACF_PATH . 'includes/utility-functions.php' );
@@ -454,15 +453,6 @@ final class ACF {
 		 * @since 1.0.0
 		 */
 		do_action( 'acf/init' );
-	}
-
-	public function features() {
-		if ( get_field( 'acf_forms', 'option' ) ) {
-			$this->forms = true;
-		}
-		if ( get_field( 'acf_templates', 'option' ) ) {
-			$this->templates = true;
-		}
 	}
 
 	/**
