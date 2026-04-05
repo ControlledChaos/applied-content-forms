@@ -408,7 +408,7 @@ class ACFE_Field_Group{
         // AutoSync
         $acfe_autosync = array();
 
-        if(acf_get_setting('acfe/json_found', false)){
+        if(acf_get_setting('json_found', false)){
             $acfe_autosync[] = 'json';
         }
 

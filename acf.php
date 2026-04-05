@@ -218,6 +218,7 @@ final class ACF {
 			'json'                   => true,
 			'save_json'              => '',
 			'load_json'              => [],
+			'json_found'             => false,
 			'default_language'       => '',
 			'current_language'       => '',
 			'capability'             => 'manage_options',

@@ -101,7 +101,6 @@ final class ACFE {
 			'json'       => acf_get_setting( 'json' ),
 			'json_save'  => acf_get_setting( 'save_json' ),
 			'json_load'  => acf_get_setting( 'load_json' ),
-			'json_found' => false,
 
 			// Modules
 			'modules/multilang'     => true,
@@ -117,9 +116,6 @@ final class ACFE {
 			'field/recaptcha/v3/hide_logo' => null,
 
 		] );
-
-		// Load textdomain file.
-		acfe_load_textdomain();
 
 		add_action( 'acf/init', [ $this, 'init' ], 99 );
 		add_action( 'acf/include_fields', [ $this, 'include_fields' ], 5 );

@@ -239,27 +239,3 @@ function acfe_get_view($path = '', $args = array()){
     }
 
 }
-
-/**
- * acfe_load_textdomain
- *
- * Load textdomain files based on acf_load_textdomain()
- *
- * @param string $domain
- *
- * @return bool
- */
-function acfe_load_textdomain($domain = 'acfe'){
-
-    $locale = apply_filters('plugin_locale', acf_get_locale(), $domain);
-    $mofile = $domain . '-' . $locale . '.mo';
-
-    // Try to load from the languages directory first.
-    if(load_textdomain($domain, WP_LANG_DIR . '/plugins/' . $mofile)){
-        return true;
-    }
-
-    // Load from plugin lang folder.
-    return load_textdomain($domain, acfe_get_path('lang/' . $mofile));
-
-}
