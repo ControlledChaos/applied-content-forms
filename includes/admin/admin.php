@@ -43,6 +43,28 @@ class ACF_Admin {
 	}
 
 	/**
+	 * Admin page title text
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @return void
+	 */
+	public function admin_page_title() {
+		return apply_filters( 'acf/acf_admin_page_title', __( 'Website Content', 'acf' ) );
+	}
+
+	/**
+	 * Admin page menu text
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @return void
+	 */
+	public function admin_page_menu() {
+		return apply_filters( 'acf/acf_admin_page_menu', __( 'Content', 'acf' ) );
+	}
+
+	/**
 	 * Admin page
 	 *
 	 * @since  1.0.0
@@ -51,9 +73,12 @@ class ACF_Admin {
 	 */
 	public function admin_page() {
 
+		$title = $this->admin_page_title();
+		$menu  = $this->admin_page_menu();
+
 		add_menu_page(
-			__( 'Website Content', 'acf' ),
-			__( 'Content', 'acf' ),
+			$title,
+			$menu,
 			acf_get_setting( 'capability' ),
 			acf()->admin_slug,
 			[ $this, 'page_content' ],
@@ -61,7 +86,6 @@ class ACF_Admin {
 			acf_get_setting( 'menu_position' ),
 		);
 	}
-
 
 	/**
 	 * Admin page content
