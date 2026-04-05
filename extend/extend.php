@@ -103,8 +103,6 @@ final class ACFE {
 			'json_load'  => acf_get_setting( 'load_json' ),
 
 			// Modules
-			'modules/multilang'     => true,
-			'modules/options'       => true,
 			'modules/single_meta'   => false,
 
 			// Fields

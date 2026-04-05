@@ -226,6 +226,7 @@ final class ACF {
 			'autoload'               => false,
 			'l10n'                   => true,
 			'l10n_textdomain'        => '',
+			'multilang'              => false,
 			'google_api_key'         => '',
 			'google_api_client'      => '',
 			'enqueue_google_maps'    => true,

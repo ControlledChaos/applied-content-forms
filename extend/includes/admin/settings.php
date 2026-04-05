@@ -298,20 +298,6 @@ class acfe_admin_settings{
             'modules' => array(
 
                 array(
-                    'label'         => 'Multilangual',
-                    'name'          => 'acfe/modules/multilang',
-                    'type'          => 'true_false',
-                    'description'   => 'Enable/disable Multilang compatibility module for WPML & Polylang. Defaults to true',
-                    'category'      => 'modules',
-                ),
-                array(
-                    'label'         => 'Options',
-                    'name'          => 'acfe/modules/options',
-                    'type'          => 'true_false',
-                    'description'   => 'Show/hide the Options module. Defaults to true',
-                    'category'      => 'modules',
-                ),
-                array(
                     'label'         => 'Single Meta',
                     'name'          => 'acfe/modules/single_meta',
                     'type'          => 'true_false',
