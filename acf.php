@@ -268,7 +268,7 @@ final class ACF {
 		acf_include( 'includes/acf-user-functions.php' );
 		acf_include( 'includes/acf-value-functions.php' );
 		acf_include( 'includes/acf-input-functions.php' );
-		acf_include( 'includes/acf-wp-functions.php' );
+		acf_include( 'includes/acf-cms-functions.php' );
 
 		acf_include( 'includes/fields.php' );
 		acf_include( 'includes/locations.php' );

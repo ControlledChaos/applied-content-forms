@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 acf_register_store( 'fields' )->prop( 'multisite', true );
 
 /**
- * acf_get_field
+ * Get field
  *
  * Retrieves a field for the given identifier.
  *
@@ -68,7 +68,7 @@ function acf_get_field( $id = 0 ) {
 acf_add_filter_variations( 'acf/load_field', [ 'type', 'name', 'key' ], 0 );
 
 /**
- * acf_get_raw_field
+ * Get raw field
  *
  * Retrieves raw field data for the given identifier.
  *
@@ -105,15 +105,13 @@ function acf_get_raw_field( $id = 0 ) {
 }
 
 /**
- * acf_get_field_post
+ * Get field post
  *
  * Retrieves the field's WP_Post object.
  *
- * @date	18/1/19
- * @since	5.7.10
- *
- * @param	(int|string) $id The field ID, key or name.
- * @return	(array|false) The field array.
+ * @since  1.0.0
+ * @param  mixed $id The field ID, key or name.
+ * @return mixed The field array.
  */
 function acf_get_field_post( $id = 0 ) {
 
@@ -163,45 +161,30 @@ function acf_get_field_post( $id = 0 ) {
 }
 
 /**
- * acf_is_field_key
+ * Is field key
  *
  * Returns true if the given identifier is a field key.
  *
- * @date	6/12/2013
- * @since	5.0.0
- *
- * @param	string $id The identifier.
- * @return	bool
+ * @since  1.0.0
+ * @param  string $id The identifier.
+ * @return boolean
  */
 function acf_is_field_key( $id = '' ) {
 
-	// Check if $id is a string starting with "field_".
+	// Check if $id is a string starting with `field_`.
 	if ( is_string( $id ) && substr( $id, 0, 6 ) === 'field_' ) {
 		return true;
 	}
-
-	/**
-	 * Filters whether the $id is a field key.
-	 *
-	 * @date	23/1/19
-	 * @since	5.7.10
-	 *
-	 * @param	bool $bool The result.
-	 * @param	string $id The identifier.
-	 */
 	return apply_filters( 'acf/is_field_key', false, $id );
 }
 
 /**
- * acf_validate_field
+ * Validate field
  *
  * Ensures the given field valid.
  *
- * @date	18/1/19
- * @since	5.7.10
- *
- * @param	array $field The field array.
- * @return	array
+ * @since  array $field The field array.
+ * @return array
  */
 function acf_validate_field( $field = [] ) {
 
@@ -236,7 +219,7 @@ function acf_validate_field( $field = [] ) {
 	$field['menu_order'] = (int) $field['menu_order'];
 
 	// Add backwards compatibility for wrapper attributes.
-	// Todo: Remove need for this.
+	// @todo: Remove need for this.
 	$field['wrapper'] = wp_parse_args( $field['wrapper'], [
 		'width' => '',
 		'class' => '',
@@ -256,15 +239,13 @@ function acf_validate_field( $field = [] ) {
 acf_add_filter_variations( 'acf/validate_field', [ 'type' ], 0 );
 
 /**
- * acf_get_valid_field
+ * Get valid field
  *
  * Ensures the given field valid.
  *
- * @date		28/09/13
- * @since		5.0.0
- *
- * @param	array $field The field array.
- * @return	array
+ * @since  1.0.0
+ * @param  array $field The field array.
+ * @return array
  */
 function acf_get_valid_field( $field = false ) {
 	return acf_validate_field( $field );
