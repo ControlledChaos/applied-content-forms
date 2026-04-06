@@ -1369,7 +1369,7 @@ class acfe_dynamic_post_types extends acfe_dynamic_module {
 					'label' => 'Menu icon',
 					'name' => 'menu_icon',
 					'type' => 'text',
-					'instructions' => 'The url to the icon to be used for this menu or the name of the icon from the iconfont (<a href="https://developer.wordpress.org/resource/dashicons/" target="_blank">Dashicons</a>)',
+					'instructions' => 'The url to the icon to be used for this menu or the name of the icon from the <a href="https://developer.wordpress.org/resource/dashicons/" target="_blank">Dashicons</a> icon font',
 					'required' => 0,
 					'conditional_logic' => 0,
 					'wrapper' => array(
@@ -1410,10 +1410,10 @@ class acfe_dynamic_post_types extends acfe_dynamic_module {
 				),
 				array(
 					'key' => 'field_acfe_dpt_show_in_menu',
-					'label' => 'Show in menu',
+					'label' => 'Show in Menu',
 					'name' => 'show_in_menu',
 					'type' => 'true_false',
-					'instructions' => 'Where to show the post type in the admin menu. show_ui must be true',
+					'instructions' => 'Whether to show the post type in the admin menu. Show UI must be true',
 					'required' => 0,
 					'conditional_logic' => 0,
 					'wrapper' => array(
@@ -1432,7 +1432,7 @@ class acfe_dynamic_post_types extends acfe_dynamic_module {
 				),
 				array(
 					'key' => 'field_acfe_dpt_show_in_menu_text',
-					'label' => 'Show in menu (text)',
+					'label' => 'Menu Parent',
 					'name' => 'show_in_menu_text',
 					'type' => 'text',
 					'instructions' => 'If an existing top level page such as \'tools.php\' or \'edit.php?post_type=page\', the post type will be placed as a sub menu of that page',
