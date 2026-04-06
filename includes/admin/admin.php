@@ -47,7 +47,7 @@ class ACF_Admin {
 	 *
 	 * @since  1.0.0
 	 * @access public
-	 * @return void
+	 * @return string
 	 */
 	public function admin_page_title() {
 		return apply_filters( 'acf/acf_admin_page_title', __( 'Website Content', 'acf' ) );
@@ -58,10 +58,21 @@ class ACF_Admin {
 	 *
 	 * @since  1.0.0
 	 * @access public
-	 * @return void
+	 * @return string
 	 */
 	public function admin_page_menu() {
 		return apply_filters( 'acf/acf_admin_page_menu', __( 'Content', 'acf' ) );
+	}
+
+	/**
+	 * Admin page menu icon
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @return string
+	 */
+	public function admin_page_icon() {
+		return apply_filters( 'acf/acf_admin_page_icon', 'dashicons-edit' );
 	}
 
 	/**
@@ -75,6 +86,7 @@ class ACF_Admin {
 
 		$title = $this->admin_page_title();
 		$menu  = $this->admin_page_menu();
+		$icon  = $this->admin_page_icon();
 
 		add_menu_page(
 			$title,
@@ -82,7 +94,7 @@ class ACF_Admin {
 			acf_get_setting( 'capability' ),
 			acf()->admin_slug,
 			[ $this, 'page_content' ],
-			'dashicons-edit',
+			$icon,
 			acf_get_setting( 'menu_position' ),
 		);
 	}
