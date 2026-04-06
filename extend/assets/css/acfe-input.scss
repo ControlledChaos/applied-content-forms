@@ -1199,15 +1199,15 @@ tr.acf-field.acf-field-group[data-acfe-group-modal="1"]>.acf-input>.acfe-modal>.
     color: #aaa
 }
 
-form.acfe-form.is-valid[data-hide-revalidation="1"]>.acf-notice.-success {
+form.acf-form.is-valid[data-hide-revalidation="1"]>.acf-notice.-success {
     display: none
 }
 
-form.acfe-form.is-invalid[data-hide-error="1"]>.acf-error-message.-dismiss {
+form.acf-form.is-invalid[data-hide-error="1"]>.acf-error-message.-dismiss {
     display: none
 }
 
-form.acfe-form.is-invalid[data-errors-position=below] .acf-field .acf-notice {
+form.acf-form.is-invalid[data-errors-position=below] .acf-field .acf-notice {
     margin: 15px 0 0
 }
 

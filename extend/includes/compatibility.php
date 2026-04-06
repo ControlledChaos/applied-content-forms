@@ -533,12 +533,12 @@ class acfe_compatibility{
 
         if($is_settings){
 
-            unset($post_types['acfe-form']);
+            unset($post_types['acf-form']);
             unset($post_types['acf-template']);
 
         }else{
 
-            $post_types['acfe-form'] = 'acfe-form';
+            $post_types['acf-form'] = 'acf-form';
             $post_types['acf-template'] = 'acf-template';
 
         }

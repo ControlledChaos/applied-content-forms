@@ -3272,11 +3272,11 @@
 
             }
 
-            if ($('.acfe-form[data-hide-unload="1"]').length) {
+            if ($('.acf-form[data-hide-unload="1"]').length) {
                 acf.unload.disable();
             }
 
-            var $form_success = $('.acfe-form-success');
+            var $form_success = $('.acf-form-success');
 
             if ($form_success.length) {
 
@@ -3299,7 +3299,7 @@
             }
 
             // Prevent form submission click spam
-            $('.acf-form .button, .acf-form [type="submit"], .acfe-form .button, .acfe-form [type="submit"]').click(function(e) {
+            $('.acf-form .button, .acf-form [type="submit"], .acf-form .button, .acf-form [type="submit"]').click(function(e) {
 
                 if (!$(this).hasClass('disabled')) return;
 
@@ -3314,7 +3314,7 @@
 
             if (acfe.get('is_admin')) return;
 
-            var $form = field.$el.closest('.acfe-form');
+            var $form = field.$el.closest('.acf-form');
 
             if (!$form.length) return;
 
@@ -3331,7 +3331,7 @@
 
             if (acfe.get('is_admin')) return;
 
-            var $form = field.$el.closest('.acfe-form');
+            var $form = field.$el.closest('.acf-form');
 
             if (!$form.length) return;
 
@@ -3348,7 +3348,7 @@
 
             if (acfe.get('is_admin')) return;
 
-            var $form = field.$el.closest('.acfe-form');
+            var $form = field.$el.closest('.acf-form');
 
             if (!$form.length) return;
 
@@ -3415,10 +3415,10 @@
                     message = field.get('name') + ': ' + message;
                 }
 
-                var $form_error = $form.find('> .acfe-form-error')
+                var $form_error = $form.find('> .acf-form-error')
 
                 if (!$form_error.length) {
-                    $form_error = $('<div class="acf-notice -error acf-error-message acfe-form-error" />').prependTo($form);
+                    $form_error = $('<div class="acf-notice -error acf-error-message acf-form-error" />').prependTo($form);
                 }
 
                 $form_error.append('<p>' + message + '</p>');

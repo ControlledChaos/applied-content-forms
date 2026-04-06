@@ -76,7 +76,7 @@ class acfe_dynamic_forms extends acfe_dynamic_module{
 
         $suffix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
 
-        $plugins['acfe_form'] = acfe_get_url('assets/inc/tinymce/acfe-form' . $suffix . '.js');
+        $plugins['acfe_form'] = acfe_get_url('assets/inc/tinymce/acf-form' . $suffix . '.js');
 
         return $plugins;
 
@@ -118,10 +118,10 @@ class acfe_dynamic_forms extends acfe_dynamic_module{
         $this->field_groups = acf_get_instance('acfe_dynamic_forms_helpers')->get_field_groups();
 
         // Add Instructions
-        add_meta_box('acfe-form-integration', 'Integration', array($this, 'meta_box_side'), $this->post_type,'side', 'core');
+        add_meta_box('acf-form-integration', 'Integration', array($this, 'meta_box_side'), $this->post_type,'side', 'core');
 
         if($this->field_groups){
-            add_meta_box('acfe-form-details', __('Fields', 'acf'), array($this, 'meta_box_field_groups'), $this->post_type, 'normal');
+            add_meta_box('acf-form-details', __('Fields', 'acf'), array($this, 'meta_box_field_groups'), $this->post_type, 'normal');
         }
 
     }
@@ -193,7 +193,7 @@ class acfe_dynamic_forms extends acfe_dynamic_module{
             if(typeof acf !== 'undefined'){
 
                 acf.newPostbox(<?php echo wp_json_encode(array(
-                    'id'    => 'acfe-form-integration',
+                    'id'    => 'acf-form-integration',
                     'key'   => '',
                     'style' => 'default',
                     'label' => 'top',
@@ -272,7 +272,7 @@ class acfe_dynamic_forms extends acfe_dynamic_module{
             if(typeof acf !== 'undefined'){
 
                 acf.newPostbox(<?php echo wp_json_encode(array(
-                    'id'    => 'acfe-form-details',
+                    'id'    => 'acf-form-details',
                     'key'   => '',
                     'style' => 'default',
                     'label' => 'left',
@@ -583,7 +583,7 @@ class acfe_dynamic_forms extends acfe_dynamic_module{
         $choices = array();
 
         $get_posts = get_posts(array(
-            'post_type'         => 'acfe-form',
+            'post_type'         => 'acf-form',
             'posts_per_page'    => -1,
             'fields'            => 'ids'
         ));

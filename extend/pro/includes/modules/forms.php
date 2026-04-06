@@ -14,7 +14,7 @@ class acfe_pro_dynamic_forms{
      */
     function __construct(){
 
-        $this->post_type = 'acfe-form';
+        $this->post_type = 'acf-form';
 
         add_filter('mce_css',                               array($this, 'mce_css'));
         add_filter('acfe/form/register',                    array($this, 'register'), 15, 3);

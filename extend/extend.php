@@ -65,7 +65,7 @@ final class ACFE {
 			'acf-field',
 			'acf-field-group',
 			'acf-block-type',
-			'acfe-form',
+			'acf-form',
 			'acf-options-page',
 			'acf-post-type',
 			'acf-taxonomy'

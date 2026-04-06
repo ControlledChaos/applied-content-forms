@@ -176,7 +176,7 @@ function acfe_get_pretty_forms($forms = array()){
     if(empty($forms)){
 
         $forms = get_posts(array(
-            'post_type'         => 'acfe-form',
+            'post_type'         => 'acf-form',
             'posts_per_page'    => -1,
             'fields'            => 'ids',
             'orderby'           => 'title',

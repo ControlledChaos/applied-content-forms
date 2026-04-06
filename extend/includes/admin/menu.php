@@ -28,7 +28,7 @@ class acfe_admin_menu{
         if(acf_version_compare(acf_get_setting('version'),  '<', '5.9')) return;
 
         // check screen
-        if(!acf_is_screen(array('edit-acf-field-group-category', 'edit-acf-block-type', 'acf-block-type', 'edit-acf-options-page', 'acf-options-page', 'edit-acf-template', 'acf-template', 'edit-acfe-form', 'acfe-form'))) return;
+        if(!acf_is_screen(array('edit-acf-field-group-category', 'edit-acf-block-type', 'acf-block-type', 'edit-acf-options-page', 'acf-options-page', 'edit-acf-template', 'acf-template', 'edit-acf-form', 'acf-form'))) return;
     }
 
     /**
@@ -81,7 +81,7 @@ class acfe_admin_menu{
             }
 
             // Forms
-            elseif($item[2] === 'edit.php?post_type=acfe-form'){
+            elseif($item[2] === 'edit.php?post_type=acf-form'){
 
                 $array[4] = $item;
                 unset($_submenu[$k]);
