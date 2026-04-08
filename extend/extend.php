@@ -102,9 +102,6 @@ final class ACFE {
 			'json_save'  => acf_get_setting( 'save_json' ),
 			'json_load'  => acf_get_setting( 'load_json' ),
 
-			// Modules
-			'modules/single_meta'   => false,
-
 			// Fields
 			'field/recaptcha/site_key'     => null,
 			'field/recaptcha/secret_key'   => null,

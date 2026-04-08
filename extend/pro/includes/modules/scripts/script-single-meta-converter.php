@@ -149,7 +149,7 @@ class acfe_script_single_meta_converter extends acfe_script{
                             
                             ?>
                             
-                            <?php if(acf_get_setting('acfe/modules/single_meta')): ?>
+                            <?php if(acf_get_setting('single_meta')): ?>
                                 <span style="color:#468847;"><span class="dashicons dashicons-yes"></span> Enabled</span>
                             <?php else: ?>
                                 <span style="color:#B94835;"><span class="dashicons dashicons-no-alt"></span> Disabled</span>

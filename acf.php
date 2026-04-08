@@ -243,7 +243,8 @@ final class ACF {
 			'templates'              => true,
 			'options_pages'          => true,
 			'author_ajax'            => true,
-			'options_editor'         => false
+			'options_editor'         => false,
+			'single_meta'            => false,
 		];
 
 		include_once( ACF_PATH . 'includes/utility-functions.php' );
