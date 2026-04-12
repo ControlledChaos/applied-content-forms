@@ -245,6 +245,7 @@ final class ACF {
 			'author_ajax'            => true,
 			'options_editor'         => false,
 			'single_meta'            => false,
+			'field_group_ui'         => true
 		];
 
 		include_once( ACF_PATH . 'includes/utility-functions.php' );

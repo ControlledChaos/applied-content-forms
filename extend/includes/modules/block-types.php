@@ -990,7 +990,7 @@ class acfe_dynamic_block_types extends acfe_dynamic_module {
 		 * Add Local Field Group
 		 */
 		acf_add_local_field_group(array(
-			'key' => 'group_acfe_dynamic_block_type',
+			'key' => 'group_acf_block_type',
 			'title' => __('Dynamic Block Type', 'acfe'),
 
 			'location' => array(

@@ -81,7 +81,7 @@ class acfe_pro_dynamic_taxonomies{
     function add_local_field_group(){
 
         acf_add_local_field_group(array(
-            'key' => 'group_acfe_dynamic_taxonomy_side',
+            'key' => 'group_acf_taxonomy_side',
             'title' => 'Taxonomy: Side',
             'acfe_display_title' => 'Active',
             'fields' => array(

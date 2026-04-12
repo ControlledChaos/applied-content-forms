@@ -1085,7 +1085,7 @@ class acfe_dynamic_taxonomies extends acfe_dynamic_module {
 	function add_local_field_group(){
 
 		acf_add_local_field_group(array(
-			'key' => 'group_acfe_dynamic_taxonomy',
+			'key' => 'group_acf_taxonomy',
 			'title' => __('Dynamic Taxonomy', 'acfe'),
 
 			'location' => array(

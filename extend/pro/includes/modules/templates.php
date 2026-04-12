@@ -140,7 +140,7 @@ class acfe_dynamic_templates extends acfe_dynamic_module {
         // Bypass Sidebar Settings
         foreach($field_groups as $k => $field_group){
 
-            if($field_group['key'] !== 'group_acfe_dynamic_template_side')
+            if($field_group['key'] !== 'group_acf_template_side')
                 continue;
 
             unset($field_groups[$k]);
@@ -262,31 +262,46 @@ class acfe_dynamic_templates extends acfe_dynamic_module {
     /*
      * Render Metabox Instructions
      */
-    function render_meta_box_instructions($post, $metabox){
+    function render_meta_box_instructions( $post, $metabox ) {
 
         ?>
+        <style>
+        .wp-caption {
+            width: 100%;
+            margin: 0;
+        }
+        .wp-caption-image {
+            width:100%;
+            height:auto;
+        }
+        .wp-caption-text {
+            text-align: center;
+        }
+        </style>
         <div class="acf-field">
             <div class="acf-label">
-                <label>How it works</label>
+                <label><?php _e( 'How it Works', 'acf' ); ?></label>
             </div>
             <div class="acf-input">
 
-                <p style="margin-top:0;">The Dynamic Templates module let you manage default ACF values in an advanced way. In order to start, you need to connect a field group to a specific template. Head over the Field Groups administration, select the field group of your choice and scroll down to the location settings. To connect a field group to a template, choose a classic location (like Post Type = Post) and add a new rule using the “AND” operator. Select the rule "Dynamic Template" under "Forms", then choose your template and save the field group.</p>
+                <p><?php _e( 'The Dynamic Templates module let you manage default ACF values in an advanced way. In order to start, you need to connect a field group to a specific template. Head over the Field Groups administration, select the field group of your choice and scroll down to the location settings. To connect a field group to a template, choose a classic location (like Post Type = Post) and add a new rule using the “AND” operator. Select the rule "Dynamic Template" under "Forms", then choose your template and save the field group.', 'acf' ); ?></p>
 
-                <p>You can now fill up the template page, values will be automatically loaded for the location it is tied to if the user never saved anything. In this screenshot, there is a different template for the "Post Type: Page" & the "Post Type: Post" while using the same field group.</p>
+                <p><?php _e( 'You can now fill up the template page, values will be automatically loaded for the location it is tied to if the user never saved anything. In this screenshot, there is a different template for the "Post Type: Page" & the "Post Type: Post" while using the same field group.', 'acf' ); ?></p>
 
-                <p>The Dynamic Template design is smart enough to fulfill complex scenarios. For example, one single template can be used in conjunction with as many field group location as needed. It is also possible to add multiple field groups into a single template to keep things organized.</p>
+                <p><?php _e( 'The Dynamic Template design is smart enough to fulfill complex scenarios. For example, one single template can be used in conjunction with as many field group location as needed. It is also possible to add multiple field groups into a single template to keep things organized.', 'acf' ); ?></p>
 
-                <p><u>Note:</u> Template values will be loaded when the user haven't saved any data related to the said values. Typically in a "New Post" situation. If the user save a value, even an empty one, the template won't be loaded.</p>
+                <p><?php _e( "Template values will be loaded when the user haven't saved any data related to the said values. Typically in a new post situation. If the user save a value, even an empty one, the template won't be loaded.", 'acf' ); ?></p>
 
-                <div style="margin-top:25px;">
-                    <img src="<?php echo acfe_get_url('pro/assets/images/dynamic-template-instructions.jpg'); ?>" style="width:100%; height:auto;" />
-                </div>
+                <p>
+                    <figure class="wp-caption aligncenter">
+                        <img class="wp-caption-image" src="<?php echo acfe_get_url( 'pro/assets/images/dynamic-template-instructions.jpg' ); ?>" />
+                        <figcaption class="wp-caption-text"><?php _e( 'Field group settings example', 'acf' ); ?></figcaption>
+                    </figure>
+                </p>
 
             </div>
         </div>
         <?php
-
     }
 
     /*
@@ -719,7 +734,7 @@ class acfe_dynamic_templates extends acfe_dynamic_module {
         $template_id = acf_maybe_get($screen, 'post_id');
         $template_id = $this->validate_post_id($template_id);
 
-        if(!$template_id || $post_type !== $this->post_type || !$field_group || $field_group['key'] === 'group_acfe_dynamic_template_side')
+        if(!$template_id || $post_type !== $this->post_type || !$field_group || $field_group['key'] === 'group_acf_template_side')
             return $match;
 
         // Check if active.
@@ -954,7 +969,7 @@ class acfe_dynamic_templates extends acfe_dynamic_module {
     function add_local_field_group(){
 
         acf_add_local_field_group(array(
-            'key' => 'group_acfe_dynamic_template_side',
+            'key' => 'group_acf_template_side',
             'title' => 'Templates: Side',
             'acfe_display_title' => 'Active',
             'fields' => array(

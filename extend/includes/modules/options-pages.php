@@ -959,7 +959,7 @@ class acfe_dynamic_options_pages extends acfe_dynamic_module{
     function add_local_field_group(){
 
         acf_add_local_field_group(array(
-            'key' => 'group_acfe_dynamic_options_page',
+            'key' => 'group_acf_options_page',
             'title' => __('Options Page', 'acfe'),
 
             'location' => array(

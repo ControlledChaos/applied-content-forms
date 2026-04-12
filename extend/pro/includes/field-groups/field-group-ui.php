@@ -4,48 +4,49 @@ if(!defined('ABSPATH'))
     exit;
 
 // Check setting
-if(!acfe_get_setting('modules/field_group_ui'))
+if ( ! acf_get_setting( 'field_group_ui' ) ) {
     return;
+}
 
 if(!class_exists('acfe_field_group_ui')):
 
 class acfe_field_group_ui{
-    
+
     function __construct(){
-    
+
         add_action('acf/field_group/admin_head',        array($this, 'admin_head'), 5);
         add_action('acf/field_group/admin_head',        array($this, 'prepare_data'));
         add_action('acf/field_group/admin_head',        array($this, 'prepare_meta'));
         add_action('acf/render_field_group_settings',   array($this, 'render_settings'));
-        
+
     }
-    
+
     /*
      * Admin Head
      */
     function admin_head(){
-    
+
         global $field_group;
-    
+
         if(!acf_maybe_get($field_group, 'acfe_form')){
             return;
         }
-        
+
         acf_enable_filter('acfe/field_group/advanced');
-        
+
     }
-    
+
     function prepare_data(){
-    
+
         add_action('acf/render_field/name=acfe_data', array($this, 'render_data'));
-        
+
     }
-    
+
     /*
      * Render Settings
      */
     function render_settings($field_group){
-    
+
         // General
         acf_render_field_wrap(array(
             'label' => 'General',
@@ -56,7 +57,7 @@ class acfe_field_group_ui{
                 'data-before' => 'active'
             )
         ));
-        
+
         // Form settings
         acf_render_field_wrap(array(
             'label'         => __('Advanced settings', 'acfe'),
@@ -71,7 +72,7 @@ class acfe_field_group_ui{
                 'data-after' => 'active'
             )
         ));
-    
+
         /*
          * Display Title
          */
@@ -89,7 +90,7 @@ class acfe_field_group_ui{
                 'data-before' => 'menu_order'
             )
         ));
-    
+
         // Hide on screen
         acf_render_field_wrap(array(
             'label' => 'Screen',
@@ -99,16 +100,16 @@ class acfe_field_group_ui{
                 'data-before' => 'acfe_display_title'
             )
         ));
-    
+
         if(acf_maybe_get($field_group, 'acfe_permissions') || acf_is_filter_enabled('acfe/field_group/advanced')){
-    
+
             // Permission
             acf_render_field_wrap(array(
                 'label' => 'Permissions',
                 'type'  => 'tab',
                 'key'   => 'permissions'
             ));
-    
+
             /*
              * Permissions
              */
@@ -124,16 +125,16 @@ class acfe_field_group_ui{
                 'value'         => acf_maybe_get($field_group, 'acfe_permissions', array()),
                 'layout'        => 'vertical'
             ));
-            
+
         }
-    
+
         // Advanced
         acf_render_field_wrap(array(
             'label' => 'Data',
             'type'  => 'tab',
             'key'   => 'advanced'
         ));
-    
+
         // Meta
         acf_render_field_wrap(array(
             'label'         => __('Custom meta data'),
@@ -186,7 +187,7 @@ class acfe_field_group_ui{
                 ),
             )
         ));
-    
+
         // Data
         acf_render_field_wrap(array(
             'label'         => __('Field group data'),
@@ -196,14 +197,14 @@ class acfe_field_group_ui{
             'prefix'        => 'acf_field_group',
             'value'         => $field_group['key'],
         ));
-    
+
         // Note
         acf_render_field_wrap(array(
             'label' => 'Note',
             'type'  => 'tab',
             'key'   => 'note'
         ));
-    
+
         // Note
         acf_render_field_wrap(array(
             'label'         => __('Note'),
@@ -214,25 +215,25 @@ class acfe_field_group_ui{
             'value'         => (isset($field_group['acfe_note'])) ? $field_group['acfe_note'] : '',
             'required'      => false
         ));
-        
+
     }
-    
+
     /*
      * Render: Data button
      */
     function render_data($field){
-        
+
         $field_group = acf_get_field_group($field['value']);
-        
+
         if(!$field_group){
-            
+
             echo '<a href="#" class="button disabled" disabled>' . __('Data') . '</a>';
             return;
-            
+
         }
-    
+
         $raw_field_group = get_post($field_group['ID']);
-    
+
         ?>
         <a href="#" class="acf-button button" data-acfe-modal data-acfe-modal-title="<?php echo $field_group['title']; ?>" data-acfe-modal-footer="<?php _e('Close', 'acfe'); ?>"><?php _e('Data', 'acfe'); ?></a>
         <div class="acfe-modal">
@@ -242,31 +243,31 @@ class acfe_field_group_ui{
             </div>
         </div>
         <?php
-        
+
     }
-    
+
     /*
      * Prepare Meta
      */
     function prepare_meta(){
-        
+
         $names = array('acfe_meta', 'acfe_meta_key', 'acfe_meta_value');
-        
+
         foreach($names as $name){
-            
+
             add_filter("acf/prepare_field/name={$name}", function($field){
-                
+
                 $field['prefix'] = str_replace('row-', '', $field['prefix']);
                 $field['name'] = str_replace('row-', '', $field['name']);
-                
+
                 return $field;
-                
+
             });
-            
+
         }
-        
+
     }
-    
+
 }
 
 // initialize

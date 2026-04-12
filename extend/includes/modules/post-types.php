@@ -1036,7 +1036,7 @@ class acfe_dynamic_post_types extends acfe_dynamic_module {
 	function add_local_field_group(){
 
 		acf_add_local_field_group(array(
-			'key' => 'group_acfe_dynamic_post_type',
+			'key' => 'group_acf_post_type',
 			'title' => __('Dynamic Post Type', 'acfe'),
 
 			'location' => array(

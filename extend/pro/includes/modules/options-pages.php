@@ -81,7 +81,7 @@ class acfe_pro_dynamic_options_pages{
     function add_local_field_group(){
 
         acf_add_local_field_group(array(
-            'key' => 'group_acfe_dynamic_options_page_side',
+            'key' => 'group_acf_options_page_side',
             'title' => 'Options Page: Side',
             'acfe_display_title' => 'Active',
             'fields' => array(

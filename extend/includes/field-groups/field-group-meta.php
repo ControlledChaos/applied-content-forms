@@ -4,38 +4,39 @@ if(!defined('ABSPATH'))
     exit;
 
 // Check setting
-if(acfe_get_setting('modules/field_group_ui'))
+if ( acf_get_setting( 'field_group_ui' ) ) {
     return;
+}
 
 if(!class_exists('acfe_field_group_meta')):
 
 class acfe_field_group_meta{
- 
+
     function __construct(){
-        
+
         add_action('acf/field_group/admin_head', array($this, 'admin_head'));
         add_action('acf/field_group/admin_head', array($this, 'prepare_meta'));
-        
+
     }
-    
+
     /**
      * Admin Head
      */
     function admin_head(){
-        
+
         add_action('acf/render_field/name=acfe_data', array($this, 'render_data'));
-        
+
         add_meta_box('acf-field-group-acfe', __('Field group', 'acf'), array($this, 'render_metabox'), 'acf-field-group', 'normal');
-        
+
     }
-    
+
     /*
      * Render Metabox
      */
     function render_metabox(){
-        
+
         global $field_group;
-        
+
         // Meta
         acf_render_field_wrap(array(
             'label'         => __('Custom meta data'),
@@ -88,7 +89,7 @@ class acfe_field_group_meta{
                 ),
             )
         ));
-    
+
         // Note
         acf_render_field_wrap(array(
             'label'         => __('Note'),
@@ -102,7 +103,7 @@ class acfe_field_group_meta{
                 'data-enable-switch' => true
             ),
         ));
-        
+
         // Data
         acf_render_field_wrap(array(
             'label'         => __('Field group data'),
@@ -112,7 +113,7 @@ class acfe_field_group_meta{
             'prefix'        => 'acf_field_group',
             'value'         => $field_group['key'],
         ));
-        
+
         ?>
         <script type="text/javascript">
             if(typeof acf !== 'undefined'){
@@ -124,23 +125,23 @@ class acfe_field_group_meta{
         </script>
         <?php
     }
-    
+
     /*
      * Render: Data button
      */
     function render_data($field){
-        
+
         $field_group = acf_get_field_group($field['value']);
-        
+
         if(!$field_group){
-            
+
             echo '<a href="#" class="button disabled" disabled>' . __('Data') . '</a>';
             return;
-            
+
         }
-        
+
         $raw_field_group = get_post($field_group['ID']);
-        
+
         ?>
         <a href="#" class="acf-button button" data-acfe-modal data-acfe-modal-title="<?php echo $field_group['title']; ?>" data-acfe-modal-footer="<?php _e('Close', 'acfe'); ?>"><?php _e('Data', 'acfe'); ?></a>
         <div class="acfe-modal">
@@ -150,31 +151,31 @@ class acfe_field_group_meta{
             </div>
         </div>
         <?php
-        
+
     }
-    
+
     /*
      * Prepare Meta
      */
     function prepare_meta(){
-        
+
         $names = array('acfe_meta', 'acfe_meta_key', 'acfe_meta_value');
-        
+
         foreach($names as $name){
-            
+
             add_filter("acf/prepare_field/name={$name}", function($field){
-                
+
                 $field['prefix'] = str_replace('row-', '', $field['prefix']);
                 $field['name'] = str_replace('row-', '', $field['name']);
-                
+
                 return $field;
-                
+
             });
-            
+
         }
-        
+
     }
-    
+
 }
 
 // initialize

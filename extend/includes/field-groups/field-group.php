@@ -91,7 +91,7 @@ class ACFE_Field_Group{
         global $field_group;
 
         // Setting
-        $has_enhanced_ui = acfe_get_setting('modules/field_group_ui') ? true : false;
+        $has_enhanced_ui = acf_get_setting( 'field_group_ui' ) ? true : false;
 
 
         /*

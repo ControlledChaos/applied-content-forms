@@ -146,7 +146,7 @@ class acfe_pro_dynamic_forms{
     function add_local_field_group(){
 
         acf_add_local_field_group(array(
-            'key' => 'group_acfe_dynamic_form_side',
+            'key' => 'group_acf_form_side',
             'title' => 'Form: Side',
             'acfe_display_title' => 'Active',
             'fields' => array(

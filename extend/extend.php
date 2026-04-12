@@ -64,19 +64,26 @@ final class ACFE {
 		$reserved_post_types = [
 			'acf-field',
 			'acf-field-group',
+			'acf-post-type',
+			'acf-taxonomy',
 			'acf-block-type',
 			'acf-form',
-			'acf-options-page',
-			'acf-post-type',
-			'acf-taxonomy'
+			'acf-template',
+			'acf-options-page'
 		];
-		$reserved_taxonomies = [ 'acf-field-group-category' ];
+		$reserved_taxonomies   = [ 'acf-field-group-category' ];
 		$reserved_field_groups = [
-			'group_acfe_dynamic_post_type',
-			'group_acfe_dynamic_taxonomy',
-			'group_acfe_dynamic_block_type',
-			'group_acfe_dynamic_form',
-			'group_acfe_dynamic_options_page'
+			'group_acf_post_type',
+			'group_acf_post_type_side',
+			'group_acf_taxonomy',
+			'group_acf_taxonomy_side',
+			'group_acf_block_type',
+			'group_acf_block_type_side',
+			'group_acf_form',
+			'group_acf_form_side',
+			'group_acf_template_side',
+			'group_acf_options_page',
+			'group_acf_options_page_side',
 		];
 
 		// Settings.

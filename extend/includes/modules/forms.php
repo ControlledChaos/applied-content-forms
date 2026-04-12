@@ -633,7 +633,7 @@ class acfe_dynamic_forms extends acfe_dynamic_module{
         ksort($actions_layouts);
 
         acf_add_local_field_group(array(
-            'key' => 'group_acfe_dynamic_form',
+            'key' => 'group_acf_form',
             'title' => 'Dynamic Form',
             'acfe_display_title' => '',
             'fields' => array(

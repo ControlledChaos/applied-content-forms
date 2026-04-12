@@ -81,7 +81,7 @@ class acfe_pro_dynamic_block_types{
     function add_local_field_group(){
 
         acf_add_local_field_group(array(
-            'key' => 'group_acfe_dynamic_block_type_side',
+            'key' => 'group_acf_block_type_side',
             'title' => 'Block Type: Side',
             'acfe_display_title' => 'Active',
             'fields' => array(

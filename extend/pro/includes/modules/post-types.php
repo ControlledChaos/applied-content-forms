@@ -81,7 +81,7 @@ class acfe_pro_dynamic_post_types{
     function add_local_field_group(){
 
         acf_add_local_field_group(array(
-            'key' => 'group_acfe_dynamic_post_type_side',
+            'key' => 'group_acf_post_type_side',
             'title' => 'Post Type: Side',
             'acfe_display_title' => 'Active',
             'fields' => array(
