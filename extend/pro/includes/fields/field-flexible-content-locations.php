@@ -272,7 +272,7 @@ class acfe_field_flexible_content_layout_locations{
         if(empty($layout['acfe_layout_locations'])){
             
             // get field group
-            $field_group = acfe_get_field_group_from_field($flexible);
+            $field_group = acf_get_field_group_from_field($flexible);
             
             // apply field group locations as default location
             $layout['acfe_layout_locations'] = $field_group['location'];

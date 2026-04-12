@@ -368,7 +368,7 @@ class acfe_pro_field_fc_grid{
             return $layout;
         
         // Sub field
-        $sub_field = acfe_extract_sub_field($layout, 'acfe_layout_col', $value);
+        $sub_field = acf_extract_sub_field($layout, 'acfe_layout_col', $value);
         if(!$sub_field)
             return $layout;
         
@@ -401,7 +401,7 @@ class acfe_pro_field_fc_grid{
             return $div;
     
         // Sub field
-        $sub_field = acfe_extract_sub_field($layout, 'acfe_layout_col', $value);
+        $sub_field = acf_extract_sub_field($layout, 'acfe_layout_col', $value);
         if(!$sub_field)
             return $div;
         

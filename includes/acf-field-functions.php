@@ -1293,15 +1293,15 @@ function acf_prepare_field_for_import( $field ) {
 acf_add_filter_variations( 'acf/prepare_field_for_import', [ 'type' ], 0 );
 
 /**
- * acfe_get_field_group_from_field
+ * Get field group from field
  *
- * Retrieve the Field Group, starting from any field or sub field
+ * Retrieve the field group, starting from any field or subfield.
  *
- * @param $field
- *
- * @return array|false|mixed|void|null
+ * @since  1.0.0
+ * @param  $field
+ * @return mixed
  */
-function acfe_get_field_group_from_field( $field ) {
+function acf_get_field_group_from_field( $field ) {
 
     if ( ! acf_maybe_get( $field, 'parent' ) ) {
 		return false;
@@ -1313,9 +1313,8 @@ function acfe_get_field_group_from_field( $field ) {
 		return acf_get_field_group( $field_parent );
 	}
 
-    // Reverse for DESC order (Top field first)
-    $field_ancestors = array_reverse( $field_ancestors );
-
+    // Reverse for DESC order (Top field first).
+    $field_ancestors    = array_reverse( $field_ancestors );
     $field_top_ancestor = $field_ancestors[0];
     $field_top_ancestor = acf_get_field( $field_top_ancestor );
 
@@ -1323,20 +1322,19 @@ function acfe_get_field_group_from_field( $field ) {
 }
 
 /**
- * acfe_extract_sub_field
+ * Extract subfield
  *
- * Extract Sub Field form Layout & Set Value
+ * Extract subfield from layout and set value.
  *
- * @param $layout
- * @param $name
- * @param $value
- *
- * @return false|mixed
+ * @since  1.0.0
+ * @param  $layout
+ * @param  $name
+ * @param  $value
+ * @return mixed
  */
-function acfe_extract_sub_field(&$layout, $name, $value){
+function acf_extract_sub_field( &$layout, $name, $value ) {
 
     $sub_field = false;
-
     foreach ( $layout['sub_fields'] as $k => $row ) {
 
         if ( $row['name'] !== $name ) {
@@ -1351,10 +1349,10 @@ function acfe_extract_sub_field(&$layout, $name, $value){
 		return false;
 	}
 
-    // Reset keys
+    // Reset keys.
     $layout['sub_fields'] = array_values( $layout['sub_fields'] );
 
-    // Add value
+    // Add value.
     if ( isset( $value[ $sub_field['key'] ] ) ) {
         $sub_field['value'] = $value[$sub_field['key']];
     } elseif ( isset( $sub_field['default_value'] ) ) {

@@ -280,7 +280,7 @@ class acfe_payment_selector extends acf_field{
         }
         
         // retrieve payment field in the same field group
-        $field_group = acfe_get_field_group_from_field($field);
+        $field_group = acf_get_field_group_from_field($field);
         
         // get fields
         $fields = acf_get_fields($field_group['key']);

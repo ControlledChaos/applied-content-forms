@@ -720,7 +720,7 @@ class acfe_dev{
                 $field_type = acfe_maybe_get($field_type, 'label', '<em>Undefined</em>');
 
                 // Field Group
-                $field_group = acfe_get_field_group_from_field($field);
+                $field_group = acf_get_field_group_from_field($field);
 
                 if($field_group){
 

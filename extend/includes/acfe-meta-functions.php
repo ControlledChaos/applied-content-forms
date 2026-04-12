@@ -119,7 +119,7 @@ function acfe_get_meta($post_id = false){
         }
         
         // Get field group
-        $field_group = $field ? acfe_get_field_group_from_field($field) : false;
+        $field_group = $field ? acf_get_field_group_from_field($field) : false;
         
         // construct
         $data[] = array(
@@ -338,7 +338,7 @@ function acfe_get_orphan_meta($post_id = 0){
             $field = $clones[$i];
             
             // get field group
-            $field_group = acfe_get_field_group_from_field($field);
+            $field_group = acf_get_field_group_from_field($field);
             
             // conditions
             $is_allowed_field = $field && in_array($field['key'], $allowed_fields);

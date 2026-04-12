@@ -347,7 +347,7 @@ class acfe_bidirectional{
                         acf_update_field($r_field);
                         
                         // Update field group (json/php sync)
-                        $field_group = acfe_get_field_group_from_field($r_field);
+                        $field_group = acf_get_field_group_from_field($r_field);
                         acf_update_field_group($field_group);
                     
                     acf_disable_filter('acfe/bidirectional_setting');
@@ -390,7 +390,7 @@ class acfe_bidirectional{
                     acf_update_field($r_field);
         
                     // Update field group (json/php sync)
-                    $field_group = acfe_get_field_group_from_field($r_field);
+                    $field_group = acf_get_field_group_from_field($r_field);
                     acf_update_field_group($field_group);
                 
                 acf_disable_filter('acfe/bidirectional_setting');
@@ -445,7 +445,7 @@ class acfe_bidirectional{
                 acf_update_field($r_field);
     
                 // Update field group (json/php sync)
-                $field_group = acfe_get_field_group_from_field($r_field);
+                $field_group = acf_get_field_group_from_field($r_field);
                 acf_update_field_group($field_group);
                 
             }

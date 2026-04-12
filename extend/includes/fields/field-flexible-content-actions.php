@@ -247,7 +247,7 @@ class acfe_field_flexible_content_actions{
         // Title
         if(in_array('title', $actions)){
             
-            $sub_field = acfe_extract_sub_field($layout, 'acfe_flexible_layout_title', $value);
+            $sub_field = acf_extract_sub_field($layout, 'acfe_flexible_layout_title', $value);
             
             if($sub_field){
     
@@ -278,7 +278,7 @@ class acfe_field_flexible_content_actions{
         // Toggle
         if(in_array('toggle', $actions)){
             
-            $sub_field = acfe_extract_sub_field($layout, 'acfe_flexible_toggle', $value);
+            $sub_field = acf_extract_sub_field($layout, 'acfe_flexible_toggle', $value);
     
             if($sub_field){
     

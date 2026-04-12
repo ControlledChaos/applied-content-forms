@@ -200,7 +200,7 @@ class acfe_field_flexible_content_settings{
             return $layout;
     
         // Sub field
-        $sub_field = acfe_extract_sub_field($layout, 'layout_settings', $value);
+        $sub_field = acf_extract_sub_field($layout, 'layout_settings', $value);
     
         if(!$sub_field)
             return $layout;
