@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-final class ACFE {
+final class Extend_ACF {
 
 	/**
 	 * Constructor method
@@ -48,8 +48,12 @@ final class ACFE {
 		acfe_include( 'includes/compatibility.php' );
 	}
 
-	/*
-	 * Load
+	/**
+	 * Load extended
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @return void
 	 */
 	public function load() {
 
@@ -117,6 +121,15 @@ final class ACFE {
 			'field/recaptcha/v2/size'      => null,
 			'field/recaptcha/v3/hide_logo' => null,
 
+			// Modules.
+			'modules/force_sync'              => false,
+			'modules/force_sync/delete'       => false,
+			'modules/forms/shortcode_preview' => false,
+			'modules/global_field_condition'  => true,
+			'modules/rewrite_rules'           => true,
+			'modules/screen_layouts'          => true,
+			'modules/scripts'                 => false
+
 		] );
 
 		add_action( 'acf/init', [ $this, 'init' ], 99 );
@@ -141,8 +154,7 @@ final class ACFE {
 		acfe_include( 'includes/forms/form-taxonomy.php' );
 		acfe_include( 'includes/forms/form-user.php' );
 
-		acfe_include( 'pro/acf-extended-pro.php' );
-
+		acfe_include( 'pro/class-extend-acf-pro.php' );
 	}
 
 	/**
@@ -156,7 +168,7 @@ final class ACFE {
 
 		do_action( 'acfe/init' );
 
-		acfe_include( 'includes/assets.php' );
+		acfe_include( 'includes/class-extend-assets.php' );
 		acfe_include( 'includes/hooks.php' );
 
 		acfe_include( 'includes/admin/admin.php' );
@@ -318,7 +330,7 @@ function acfe() {
 
 	// Instantiate only once.
 	if ( ! isset( $acfe ) ) {
-		$acfe = new ACFE();
+		$acfe = new Extend_ACF();
 		$acfe->initialize();
 	}
 	return $acfe;

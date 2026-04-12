@@ -274,7 +274,7 @@ final class ACF {
 
 		acf_include( 'includes/fields.php' );
 		acf_include( 'includes/locations.php' );
-		acf_include( 'includes/assets.php' );
+		acf_include( 'includes/class-assets.php' );
 		acf_include( 'includes/compatibility.php' );
 		acf_include( 'includes/deprecated.php' );
 		acf_include( 'includes/l10n.php' );
@@ -320,7 +320,7 @@ final class ACF {
 		acf_include( 'pro/acf-pro.php' );
 
 		// Extend original ACF.
-		acf_include( 'extend/extend.php' );
+		acf_include( 'extend/class-extend-acf.php' );
 		if ( defined( 'ACF_DEV' ) && ACF_DEV ) {
 			acf_include( 'tests/tests.php' );
 		}
