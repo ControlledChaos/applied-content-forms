@@ -317,11 +317,11 @@ final class ACF {
 		}
 
 		acf_include( 'includes/legacy/legacy-locations.php' );
-		acf_include( 'pro/blocks.php' );
-		acf_include( 'pro/options-page.php' );
+		acf_include( 'includes/blocks.php' );
+		acf_include( 'includes/options-page.php' );
 
 		if ( is_admin() ) {
-			acf_include( 'pro/admin/admin-options-page.php' );
+			acf_include( 'includes/admin/admin-options-page.php' );
 		}
 
 		// Extend original ACF.
@@ -408,10 +408,10 @@ final class ACF {
 		acf_include( 'includes/fields/class-acf-field-separator.php' );
 		acf_include( 'includes/fields/class-acf-field-horz-rule.php' );
 		acf_include( 'includes/fields/class-acf-field-group.php' );
-		acf_include( 'pro/fields/class-acf-field-repeater.php' );
-		acf_include( 'pro/fields/class-acf-field-flexible-content.php' );
-		acf_include( 'pro/fields/class-acf-field-gallery.php' );
-		acf_include( 'pro/fields/class-acf-field-clone.php' );
+		acf_include( 'includes/fields/class-acf-field-repeater.php' );
+		acf_include( 'includes/fields/class-acf-field-flexible-content.php' );
+		acf_include( 'includes/fields/class-acf-field-gallery.php' );
+		acf_include( 'includes/fields/class-acf-field-clone.php' );
 
 		/**
 		 * Fires after field types have been included.
@@ -442,8 +442,8 @@ final class ACF {
 		acf_include( 'includes/locations/class-acf-location-widget.php' );
 		acf_include( 'includes/locations/class-acf-location-nav-menu.php' );
 		acf_include( 'includes/locations/class-acf-location-nav-menu-item.php' );
-		acf_include( 'pro/locations/class-acf-location-block.php' );
-		acf_include( 'pro/locations/class-acf-location-options-page.php' );
+		acf_include( 'includes/locations/class-acf-location-block.php' );
+		acf_include( 'includes/locations/class-acf-location-options-page.php' );
 
 		/**
 		 * Fires after location types have been included.
