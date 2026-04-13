@@ -6,33 +6,33 @@ if(!defined('ABSPATH'))
 if(!class_exists('acfe_field_wysiwyg')):
 
 class acfe_field_wysiwyg{
-    
+
     function __construct(){
-        
+
         // Actions
         add_action('acf/field_group/admin_head',                        array($this, 'prepare_toolbars'));
-        
+
         // Field
         add_action('acf/render_field_settings/type=wysiwyg',            array($this, 'field_settings'));
         add_filter('acfe/field_wrapper_attributes/type=wysiwyg',        array($this, 'field_wrapper'), 10, 2);
         add_filter('acf/fields/wysiwyg/toolbars',                       array($this, 'toolbars'));
-        
+
         // ACF Editor
         add_filter('mce_external_plugins',                              array($this, 'mce_plugins'));
         add_action('template_redirect',                                 array($this, 'source_code_iframe'));
-        
+
         // WP TinyMCE
         //add_filter('mce_buttons',                                       array($this, 'mce_buttons'));
         //add_filter('tiny_mce_before_init',                              array($this, 'mce_init'), 10, 2);
         //add_filter('wp_editor_settings',                                array($this, 'mce_settings'));
-        
+
     }
-    
+
     /*
      * Field Settings
      */
     function field_settings($field){
-        
+
         // Height
         acf_render_field_setting($field, array(
             'label'             => __('Height'),
@@ -52,7 +52,7 @@ class acfe_field_wysiwyg{
                 )
             )
         ));
-    
+
         // Min Height (Autoresize)
         acf_render_field_setting($field, array(
             'label'             => __('Height'),
@@ -74,7 +74,7 @@ class acfe_field_wysiwyg{
                 )
             )
         ));
-        
+
         // Max Height (Autoresize)
         acf_render_field_setting($field, array(
             'label'             => __('Height'),
@@ -97,7 +97,7 @@ class acfe_field_wysiwyg{
                 )
             )
         ));
-    
+
         // Valid Elements
         acf_render_field_setting($field, array(
             'label'             => __('Valid Elements'),
@@ -110,15 +110,15 @@ class acfe_field_wysiwyg{
                 'data-enable-switch' => true
             )
         ));
-    
+
         // Prepend
         $prepend = acfe_get_setting('theme_folder') ? trailingslashit(acfe_get_setting('theme_folder')) : '';
-    
+
         // Style
         $prepend = apply_filters("acfe/wysiwyg/prepend/style",                         $prepend, $field);
         $prepend = apply_filters("acfe/wysiwyg/prepend/style/name={$field['name']}",   $prepend, $field);
         $prepend = apply_filters("acfe/wysiwyg/prepend/style/key={$field['key']}",     $prepend, $field);
-        
+
         // Custom Style
         acf_render_field_setting($field, array(
             'label'             => __('Custom Style'),
@@ -132,7 +132,7 @@ class acfe_field_wysiwyg{
                 'data-enable-switch' => true
             )
         ));
-    
+
         // Disable WP Style
         acf_render_field_setting($field, array(
             'label'             => __('Disable WP Style'),
@@ -144,7 +144,7 @@ class acfe_field_wysiwyg{
             'default_value'     => false,
             'ui'                => true,
         ));
-    
+
         // Auto Resize
         acf_render_field_setting($field, array(
             'label'             => __('Autoresize'),
@@ -156,7 +156,7 @@ class acfe_field_wysiwyg{
             'default_value'     => false,
             'ui'                => true,
         ));
-        
+
         // Disable resize
         acf_render_field_setting($field, array(
             'label'             => __('Disable Resize'),
@@ -168,7 +168,7 @@ class acfe_field_wysiwyg{
             'default_value'     => false,
             'ui'                => true,
         ));
-    
+
         // Disable Path
         acf_render_field_setting($field, array(
             'label'             => __('Disable Path'),
@@ -180,7 +180,7 @@ class acfe_field_wysiwyg{
             'default_value'     => false,
             'ui'                => true,
         ));
-        
+
         // Menu Bar
         acf_render_field_setting($field, array(
             'label'             => __('Menu Bar'),
@@ -192,7 +192,7 @@ class acfe_field_wysiwyg{
             'default_value'     => false,
             'ui'                => true,
         ));
-        
+
         // Transparent Editor
         acf_render_field_setting($field, array(
             'label'             => __('Transparent Editor'),
@@ -204,7 +204,7 @@ class acfe_field_wysiwyg{
             'default_value'     => false,
             'ui'                => true,
         ));
-        
+
         // Merge Toolbars
         acf_render_field_setting($field, array(
             'label'             => __('Merge Toolbars'),
@@ -216,7 +216,7 @@ class acfe_field_wysiwyg{
             'default_value'     => false,
             'ui'                => true,
         ));
-        
+
         // Customize Toolbar
         acf_render_field_setting($field, array(
             'label'             => __('Customize Toolbar'),
@@ -228,59 +228,59 @@ class acfe_field_wysiwyg{
             'default_value'     => false,
             'ui'                => true,
         ));
-        
+
         $wysiwyg = acf_get_field_type('wysiwyg');
-        
+
         $toolbars = $wysiwyg->get_toolbars();
         $toolbar_label = false;
         $toolbars_default = array();
-        
+
         // Get selected toolbar label
         foreach($toolbars as $label => $value){
-            
+
             $name = sanitize_title($label);
             $name = str_replace('-', '_', $name);
-            
+
             if($field['toolbar'] !== $name)
                 continue;
-            
+
             $toolbar_label = $label;
-            
+
         }
-        
+
         // Construct default toolbars
         if(isset($toolbars[$toolbar_label])){
-    
+
             foreach($toolbars[$toolbar_label] as $key => $rows){
-        
+
                 foreach($rows as $i => $value){
-            
+
                     $toolbars_default[$key]["row-$i"]['acfe_wysiwyg_toolbar_row'] = $value;
-            
+
                 }
-        
+
             }
-            
+
         }
-        
-        
+
+
         // Add missing toolbars (in case there is less than 4)
         $count = count($toolbars_default);
-        
+
         if($count < 4){
-            
+
             for($i=$count; $i < 4; $i++){
-                
+
                 $toolbars_default[] = array();
-                
+
             }
-            
+
         }
-        
+
         $toolbars = array();
-        
+
         foreach($toolbars_default as $key => $rows){
-            
+
             $toolbars[] = array(
                 'label'         => '',
                 'name'          => 'acfe_wysiwyg_toolbar_' . $key,
@@ -317,9 +317,9 @@ class acfe_field_wysiwyg{
                     ),
                 ),
             );
-            
+
         }
-        
+
         ob_start();
         ?>
         <br />
@@ -378,9 +378,9 @@ class acfe_field_wysiwyg{
             </tr>
         </table>
         <?php
-        
+
         $instructions = ob_get_clean();
-        
+
         // Toolbar buttons
         acf_render_field_setting($field, array(
             'label'                 => __('Custom Toolbar Buttons'),
@@ -400,206 +400,206 @@ class acfe_field_wysiwyg{
                 ),
             )
         ));
-        
+
     }
-    
+
     /*
      * Field Wrapper
      */
     function field_wrapper($wrapper, $field){
-    
+
         // Autoresize
         if(acf_maybe_get($field, 'acfe_wysiwyg_autoresize')){
-        
+
             $wrapper['data-acfe-wysiwyg-autoresize'] = 1;
-    
+
             // Min Height
             if(is_numeric(acf_maybe_get($field, 'acfe_wysiwyg_min_height'))){
-        
+
                 $wrapper['data-acfe-wysiwyg-min-height'] = $field['acfe_wysiwyg_min_height'];
-        
+
             }
-    
+
             // Max Height
             if(is_numeric(acf_maybe_get($field, 'acfe_wysiwyg_max_height'))){
-        
+
                 $wrapper['data-acfe-wysiwyg-max-height'] = $field['acfe_wysiwyg_max_height'];
-        
+
             }
-        
+
         }elseif(is_numeric(acf_maybe_get($field, 'acfe_wysiwyg_height'))){
-    
+
             $wrapper['data-acfe-wysiwyg-height'] = $field['acfe_wysiwyg_height'];
-            
+
         }
-        
+
         // Custom Style
         if(acf_maybe_get($field, 'acfe_wysiwyg_custom_style')){
-            
+
             $custom_styles = array();
-            
+
             $styles = acf_maybe_get($field, 'acfe_wysiwyg_custom_style');
             $styles = explode(',', $styles);
-            
+
             foreach($styles as $style){
-                
+
                 // URL starting with current domain
                 if(stripos($style, home_url()) === 0){
-                    
+
                     $style = str_replace(home_url(), '', $style);
-                    
+
                 }
-                
+
                 // Locate
                 $located = acfe_locate_file_url($style);
-                
+
                 if(!empty($located)){
-    
+
                     // URL starting with current domain
                     if(stripos($located, home_url()) === 0){
-    
+
                         $located = str_replace(home_url(), '', $located);
-        
+
                     }
-    
+
                     $custom_styles[] = $located;
-                    
+
                 }
-                
+
             }
-            
+
             $wrapper['data-acfe-wysiwyg-custom-style'] = $custom_styles;
-            
+
         }
-    
+
         // Valid Elements
         if(acf_maybe_get($field, 'acfe_wysiwyg_valid_elements')){
-        
+
             $wrapper['data-acfe-wysiwyg-valid-elements'] = $field['acfe_wysiwyg_valid_elements'];
-        
+
         }
-        
+
         // Disable WP Style
         if(acf_maybe_get($field, 'acfe_wysiwyg_disable_wp_style')){
-        
+
             $wrapper['data-acfe-wysiwyg-disable-wp-style'] = 1;
-        
+
         }
-        
+
         // Disable Resize
         if(acf_maybe_get($field, 'acfe_wysiwyg_disable_resize')){
-            
+
             $wrapper['data-acfe-wysiwyg-disable-resize'] = 1;
-            
+
         }
-    
+
         // Disable Path
         if(acf_maybe_get($field, 'acfe_wysiwyg_remove_path')){
-        
+
             $wrapper['data-acfe-wysiwyg-remove-path'] = 1;
-        
+
         }
-        
+
         // Menu Bar
         if(acf_maybe_get($field, 'acfe_wysiwyg_menubar')){
-            
+
             $wrapper['data-acfe-wysiwyg-menubar'] = 1;
-            
+
         }
-        
+
         // Transparent Editor
         if(acf_maybe_get($field, 'acfe_wysiwyg_transparent')){
-            
+
             $wrapper['data-acfe-wysiwyg-transparent'] = 1;
-            
+
         }
-        
+
         // Merge Toolbar
         if(acf_maybe_get($field, 'acfe_wysiwyg_merge_toolbar')){
-            
+
             $wrapper['data-acfe-wysiwyg-merge-toolbar'] = 1;
-            
+
         }
-        
+
         // Custom Toolbar
         if(acf_maybe_get($field, 'acfe_wysiwyg_custom_toolbar')){
-        
+
             $buttons = acf_maybe_get($field, 'acfe_wysiwyg_toolbar_buttons');
-            
+
             if($buttons){
-                
+
                 $wrapper['data-acfe-wysiwyg-custom-toolbar'] = 1;
-                
+
                 $toolbars = array();
-                
+
                 for($i=1; $i <= 4; $i++){
-                    
+
                     $values = array();
-                    
+
                     if(acf_maybe_get($buttons, 'acfe_wysiwyg_toolbar_' . $i)){
-                        
+
                         foreach($buttons['acfe_wysiwyg_toolbar_' . $i] as $row => $value){
-                            
+
                             $values[] = $value['acfe_wysiwyg_toolbar_row'];
-                            
+
                         }
-                        
+
                     }
-                    
+
                     $toolbars[$i] = $values;
-                    
+
                 }
-                
+
                 $wrapper['data-acfe-wysiwyg-custom-toolbar-buttons'] = $toolbars;
-            
+
             }
-            
+
         }
-        
+
         return $wrapper;
-        
+
     }
-    
+
     /*
      * Add Basic Enhanced Toolbar
      */
     function toolbars($toolbars){
-    
+
         $toolbars['Basic Enhanced'] = array(
             1 => array('formatselect', 'link', 'bold', 'italic', 'underline', 'blockquote', '|', 'bullist', 'numlist', 'alignleft', 'aligncenter', 'alignright', 'alignjustify', '|', 'source_code', 'wp_add_media')
         );
-        
+
         return $toolbars;
-        
+
     }
-    
+
     /*
      * WP Editor: Load Source Code plugin
      */
     function mce_plugins($plugins){
-        
+
         $suffix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
-        
-        $plugins['source_code'] = acfe_get_url('pro/assets/inc/tinymce/source-code' . $suffix . '.js');
-        
+
+        $plugins['source_code'] = acf_get_url('assets/inc/tinymce/source-code' . $suffix . '.js');
+
         return $plugins;
-        
+
     }
-    
+
     /*
      * Source Code iFrame
      */
     function source_code_iframe(){
-        
+
         if(!acf_maybe_get_GET('acfe_wysiwyg_source_code'))
             return;
-    
+
         wp_enqueue_script('code-editor');
         wp_enqueue_style('code-editor');
-        
+
         ?><!DOCTYPE html>
         <html lang="en-US">
-    
+
         <head>
             <meta charset="UTF-8">
             <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -611,17 +611,17 @@ class acfe_field_wysiwyg{
                 * html body{
                     margin-top:0 !important;
                 }
-                
+
                 @media screen and (max-width:782px){
-                    
+
                     html,
                     * html body{
                         margin-top:0 !important;
                     }
-                    
+
                 }
             </style>
-        
+
             <script>
                 var pjQuery = parent.jQuery;
                 var tinymce = parent.tinymce;
@@ -699,9 +699,9 @@ class acfe_field_wysiwyg{
                     parent.window.switchEditors.go(editor.id);
 
                 }
-        
+
             </script>
-        
+
             <style type="text/css">
                 html,
                 body{
@@ -729,80 +729,80 @@ class acfe_field_wysiwyg{
                     background:#f9f9f9;
                 }
             </style>
-    
+
         </head>
-    
+
         <body>
         <textarea style="border:0; visibility:hidden;"></textarea>
         </body>
-    
+
         </html>
         <?php
         exit;
-        
+
     }
-    
+
     /*
      * WP TinyMCE: Force Buttons
      */
     function mce_buttons($buttons){
-        
+
         array_push($buttons, '|', 'source_code', 'wp_add_media');
-        
+
         return $buttons;
-        
+
     }
-    
+
     /*
      * WP TinyMCE: Force Save onChange
      * This allow the source code button to correctly get latest value
      */
     function mce_init($init, $editor_id){
-        
+
         if($editor_id !== 'content') return $init;
-        
+
         $init['setup'] = ''
                          . 'function(editor){'
                          . '   editor.on("change", function(e){'
                          . '       editor.save();'
                          . '   });'
                          . '}';
-        
+
         return $init;
-        
+
     }
-    
+
     /*
      * WP TinyMCE: Disable Tab / Add Media
      */
     function mce_settings($settings){
-        
+
         // Disable "Text" Tab
         $settings['quicktags'] = false;
-        
+
         // Disable "Add Media" Tab
         $settings['media_buttons'] = false;
-        
+
         return $settings;
-        
+
     }
-    
+
     /*
      * Prepare Toolsbars
      */
     function prepare_toolbars(){
-        
+
         add_filter('acf/prepare_field/name=acfe_wysiwyg_toolbar_row', function($field){
-    
+
             $field['prefix'] = str_replace('row-', '', $field['prefix']);
             $field['name'] = str_replace('row-', '', $field['name']);
-    
+
             return $field;
-    
+
         });
-        
+
     }
-    
+
 }
 
 new acfe_field_wysiwyg();

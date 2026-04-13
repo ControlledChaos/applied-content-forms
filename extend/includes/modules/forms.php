@@ -76,7 +76,7 @@ class acfe_dynamic_forms extends acfe_dynamic_module{
 
         $suffix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
 
-        $plugins['acfe_form'] = acfe_get_url('assets/inc/tinymce/acf-form' . $suffix . '.js');
+        $plugins['acfe_form'] = acf_get_url('assets/inc/tinymce/acf-form' . $suffix . '.js');
 
         return $plugins;
 

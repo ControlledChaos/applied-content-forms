@@ -294,7 +294,7 @@ class acfe_dynamic_templates extends acfe_dynamic_module {
 
                 <p>
                     <figure class="wp-caption aligncenter">
-                        <img class="wp-caption-image" src="<?php echo acfe_get_url( 'pro/assets/images/dynamic-template-instructions.jpg' ); ?>" />
+                        <img class="wp-caption-image" src="<?php echo acf_get_url( 'assets/images/dynamic-template-instructions.jpg' ); ?>" />
                         <figcaption class="wp-caption-text"><?php _e( 'Field group settings example', 'acf' ); ?></figcaption>
                     </figure>
                 </p>
