@@ -121,11 +121,15 @@ class ACF_Assets {
 		wp_register_script( 'acf', acf_get_url( "assets/js/acf{$min}.js" ), [ 'jquery' ], $ver );
 		wp_register_script( 'acf-input', acf_get_url( "assets/js/acf-input{$min}.js" ), [ 'jquery', 'jquery-ui-sortable', 'jquery-ui-resizable', 'acf' ], $ver );
 		wp_register_script( 'acf-field-group', acf_get_url( "assets/js/acf-field-group{$min}.js" ), [ 'acf-input' ], $ver );
+		wp_register_script( 'acf-pro-input', acf_get_url( "assets/js/acf-pro-input{$min}.js" ), [ 'acf-input' ], $ver );
+		wp_register_script( 'acf-pro-field-group', acf_get_url( "assets/js/acf-pro-field-group{$min}.js" ), [ 'acf-field-group' ], $ver );
 
 		// Register styles.
 		wp_register_style( 'acf-global', acf_get_url( 'assets/css/acf-global.css' ), [ 'dashicons' ], $ver );
 		wp_register_style( 'acf-input', acf_get_url( 'assets/css/acf-input.css' ), [ 'acf-global' ], $ver );
 		wp_register_style( 'acf-field-group', acf_get_url( 'assets/css/acf-field-group.css' ), [ 'acf-input' ], $ver );
+		wp_register_style( 'acf-pro-input', acf_get_url( "assets/css/acf-pro-input{$min}.css" ), [ 'acf-input' ], $ver );
+		wp_register_style( 'acf-pro-field-group', acf_get_url( "assets/css/acf-pro-field-group{$min}.css" ), [ 'acf-input' ], $ver );
 
 		// Fires after core scripts and styles have been registered.
 		do_action( 'acf/register_scripts', $ver, $min );
@@ -329,6 +333,8 @@ class ACF_Assets {
 		if ( in_array( 'input', $this->enqueue ) ) {
 			wp_enqueue_script( 'acf-input' );
 			wp_enqueue_style( 'acf-input' );
+			wp_enqueue_script( 'acf-pro-input' );
+			wp_enqueue_style( 'acf-pro-input' );
 		}
 
 		// Enqueue media scripts.

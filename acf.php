@@ -317,7 +317,12 @@ final class ACF {
 		}
 
 		acf_include( 'includes/legacy/legacy-locations.php' );
-		acf_include( 'pro/acf-pro.php' );
+		acf_include( 'pro/blocks.php' );
+		acf_include( 'pro/options-page.php' );
+
+		if ( is_admin() ) {
+			acf_include( 'pro/admin/admin-options-page.php' );
+		}
 
 		// Extend original ACF.
 		acf_include( 'extend/class-extend-acf.php' );
@@ -403,6 +408,10 @@ final class ACF {
 		acf_include( 'includes/fields/class-acf-field-separator.php' );
 		acf_include( 'includes/fields/class-acf-field-horz-rule.php' );
 		acf_include( 'includes/fields/class-acf-field-group.php' );
+		acf_include( 'pro/fields/class-acf-field-repeater.php' );
+		acf_include( 'pro/fields/class-acf-field-flexible-content.php' );
+		acf_include( 'pro/fields/class-acf-field-gallery.php' );
+		acf_include( 'pro/fields/class-acf-field-clone.php' );
 
 		/**
 		 * Fires after field types have been included.
@@ -433,9 +442,8 @@ final class ACF {
 		acf_include( 'includes/locations/class-acf-location-widget.php' );
 		acf_include( 'includes/locations/class-acf-location-nav-menu.php' );
 		acf_include( 'includes/locations/class-acf-location-nav-menu-item.php' );
-
-		// Settings update.
-		acf_include( 'includes/settings-update.php' );
+		acf_include( 'pro/locations/class-acf-location-block.php' );
+		acf_include( 'pro/locations/class-acf-location-options-page.php' );
 
 		/**
 		 * Fires after location types have been included.
@@ -450,6 +458,9 @@ final class ACF {
 		 * @since 1.0.0
 		 */
 		do_action( 'acf/include_fields' );
+
+		// Settings update.
+		acf_include( 'includes/settings-update.php' );
 
 		/**
 		 * Fires after ACF is completely "initialized".
