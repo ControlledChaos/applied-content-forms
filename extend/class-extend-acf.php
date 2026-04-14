@@ -135,11 +135,7 @@ final class Extend_ACF {
 		acfe_include( 'includes/payment.php' );
 		acfe_include( 'includes/world.php' );
 
-		// Compatibility.
-		acfe_include( 'pro/includes/compatibility.php' );
-
 		// Admin.
-		acfe_include( 'pro/includes/admin/menu.php' );
 		acfe_include( 'pro/includes/admin/settings.php' );
 
 		// Modules.
