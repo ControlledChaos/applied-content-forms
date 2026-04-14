@@ -102,7 +102,7 @@ final class Extend_ACF {
 			'modules/global_field_condition'  => true,
 			'modules/rewrite_rules'           => true,
 			'modules/screen_layouts'          => true,
-			'modules/scripts'                 => false
+			'modules/scripts'                 => true,
 
 		] );
 
@@ -128,7 +128,27 @@ final class Extend_ACF {
 		acfe_include( 'includes/forms/form-taxonomy.php' );
 		acfe_include( 'includes/forms/form-user.php' );
 
-		acfe_include( 'pro/class-extend-acf-pro.php' );
+		// Functions.
+		acfe_include( 'includes/acfe-script-functions.php' );
+		acfe_include( 'includes/acfe-template-functions.php' );
+		acfe_include( 'includes/acfe-world-functions.php' );
+		acfe_include( 'includes/payment.php' );
+		acfe_include( 'includes/world.php' );
+
+		// Compatibility.
+		acfe_include( 'pro/includes/compatibility.php' );
+
+		// Admin.
+		acfe_include( 'pro/includes/admin/menu.php' );
+		acfe_include( 'pro/includes/admin/settings.php' );
+
+		// Modules.
+		acfe_include( 'pro/includes/modules/block-types.php' );
+		acfe_include( 'pro/includes/modules/forms.php' );
+		acfe_include( 'pro/includes/modules/options-pages.php' );
+		acfe_include( 'pro/includes/modules/post-types.php' );
+		acfe_include( 'pro/includes/modules/taxonomies.php' );
+		acfe_include( 'pro/includes/modules/scripts-class.php' );
 	}
 
 	/**
