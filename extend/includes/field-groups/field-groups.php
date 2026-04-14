@@ -250,7 +250,7 @@ class ACFE_Field_Groups{
         $source = __('Theme/Plugin', 'acf');
 
         // ACF Extended
-        if(in_array($field_group['key'], acfe_get_setting('reserved_field_groups', array()))){
+        if(in_array($field_group['key'], acf_get_setting('reserved_field_groups', array()))){
 
             $source = 'ACF Extended';
 

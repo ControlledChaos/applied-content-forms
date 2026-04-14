@@ -390,7 +390,7 @@ class acfe_dynamic_post_types extends acfe_dynamic_module {
 			'theme',
 		);
 
-		$exclude = array_merge($exclude, acfe_get_setting('reserved_post_types', array()));
+		$exclude = array_merge($exclude, acf_get_setting('reserved_post_types', array()));
 
 		// Reserved Names
 		if(in_array($value, $exclude))

@@ -36,7 +36,7 @@ class acfe_field_groups_field extends acf_field{
     function get_pretty_field_groups($allowed = array()){
     
         $field_groups = acf_get_field_groups();
-        $hidden = acfe_get_setting('reserved_field_groups', array());
+        $hidden = acf_get_setting('reserved_field_groups', array());
         
         $choices = array();
         

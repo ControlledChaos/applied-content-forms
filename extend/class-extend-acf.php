@@ -65,30 +65,6 @@ final class Extend_ACF {
 			'acfe/theme_url',
 			get_stylesheet_directory_uri()
 		);
-		$reserved_post_types = [
-			'acf-field',
-			'acf-field-group',
-			'acf-post-type',
-			'acf-taxonomy',
-			'acf-block-type',
-			'acf-form',
-			'acf-template',
-			'acf-options-page'
-		];
-		$reserved_taxonomies   = [ 'acf-field-group-category' ];
-		$reserved_field_groups = [
-			'group_acf_post_type',
-			'group_acf_post_type_side',
-			'group_acf_taxonomy',
-			'group_acf_taxonomy_side',
-			'group_acf_block_type',
-			'group_acf_block_type_side',
-			'group_acf_form',
-			'group_acf_form_side',
-			'group_acf_template_side',
-			'group_acf_options_page',
-			'group_acf_options_page_side',
-		];
 
 		// Settings.
 		$this->settings( [
@@ -98,9 +74,6 @@ final class Extend_ACF {
 			'theme_path'            => $theme_path,
 			'theme_url'             => $theme_url,
 			'theme_folder'          => parse_url( $theme_url, PHP_URL_PATH ),
-			'reserved_post_types'   => $reserved_post_types,
-			'reserved_taxonomies'   => $reserved_taxonomies,
-			'reserved_field_groups' => $reserved_field_groups,
 
 			// PHP
 			'php'       => true,

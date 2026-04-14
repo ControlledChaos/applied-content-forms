@@ -63,7 +63,7 @@ class acfe_dynamic_forms_hooks{
         
         // Vars
         $field_groups = acf_get_field_groups();
-        $hidden = acfe_get_setting('reserved_field_groups', array());
+        $hidden = acf_get_setting('reserved_field_groups', array());
         
         foreach($field_groups as $field_group){
             

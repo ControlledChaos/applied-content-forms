@@ -87,7 +87,7 @@ function acfe_is_admin_screen($modules = false){
     if($modules){
         
         // Reserved
-        $post_types = array_merge($post_types, acfe_get_setting('reserved_post_types', array()));
+        $post_types = array_merge($post_types, acf_get_setting('reserved_post_types', array()));
         
         // Field Group Category
         $field_group_category = $screen->post_type === 'post' && $screen->taxonomy === 'acf-field-group-category';

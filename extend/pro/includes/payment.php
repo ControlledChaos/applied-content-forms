@@ -109,7 +109,7 @@ class acfe_payment_hooks{
     function ajax_get_payment_field_results($options){
         
         // vars
-        $hidden = acfe_get_setting('reserved_field_groups', array());
+        $hidden = acf_get_setting('reserved_field_groups', array());
         $choices = array();
         
         // loop field groups

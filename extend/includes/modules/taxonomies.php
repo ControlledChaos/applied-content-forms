@@ -464,7 +464,7 @@ class acfe_dynamic_taxonomies extends acfe_dynamic_module {
 			'year',
 		);
 
-		$exclude = array_merge($exclude, acfe_get_setting('reserved_taxonomies', array()));
+		$exclude = array_merge($exclude, acf_get_setting('reserved_taxonomies', array()));
 
 		// Reserved Names
 		if(in_array($value, $exclude))

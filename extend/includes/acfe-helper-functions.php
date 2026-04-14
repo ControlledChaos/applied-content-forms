@@ -398,7 +398,7 @@ function acfe_is_super_dev(){
 function acfe_is_post_type_reserved($post_type){
 
     // restricted post types
-    $reserved = acfe_get_setting('reserved_post_types', array());
+    $reserved = acf_get_setting('reserved_post_types', array());
 
     return in_array($post_type, $reserved);
 
@@ -416,7 +416,7 @@ function acfe_is_post_type_reserved($post_type){
 function acfe_is_post_type_reserved_dev($post_type){
 
     // restricted post types
-    $reserved = acfe_get_setting('reserved_post_types', array());
+    $reserved = acf_get_setting('reserved_post_types', array());
 
     return !acfe_is_super_dev() && in_array($post_type, $reserved);
 
@@ -434,7 +434,7 @@ function acfe_is_post_type_reserved_dev($post_type){
 function acfe_is_taxonomy_reserved($taxonomy){
 
     // restricted post types
-    $reserved = acfe_get_setting('reserved_taxonomies', array());
+    $reserved = acf_get_setting('reserved_taxonomies', array());
 
     return in_array($taxonomy, $reserved);
 
@@ -452,7 +452,7 @@ function acfe_is_taxonomy_reserved($taxonomy){
 function acfe_is_taxonomy_reserved_dev($taxonomy){
 
     // restricted post types
-    $reserved = acfe_get_setting('reserved_taxonomies', array());
+    $reserved = acf_get_setting('reserved_taxonomies', array());
 
     return !acfe_is_super_dev() && in_array($taxonomy, $reserved);
 

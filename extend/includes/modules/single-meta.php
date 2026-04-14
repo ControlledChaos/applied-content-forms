@@ -19,7 +19,7 @@ class acfe_single_meta{
     function __construct(){
 
         // Vars
-        $this->restricted = acfe_get_setting('reserved_post_types', array());
+        $this->restricted = acf_get_setting('reserved_post_types', array());
         $this->post_types = apply_filters('acfe/modules/single_meta/post_types', array());
         $this->taxonomies = apply_filters('acfe/modules/single_meta/taxonomies', array());
         $this->users = apply_filters('acfe/modules/single_meta/users', false);

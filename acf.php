@@ -236,6 +236,9 @@ final class ACF {
 			'select2_version'        => 4,
 			'row_index_offset'       => 1,
 			'remove_wp_meta_box'     => true,
+			'reserved_post_types'    => $this->reserved_post_types(),
+			'reserved_taxonomies'    => $this->reserved_taxonomies(),
+			'reserved_field_groups'  => $this->reserved_field_groups(),
 			'post_types'             => true,
 			'taxonomies'             => true,
 			'block_types'            => true,
@@ -468,6 +471,66 @@ final class ACF {
 		 * @since 1.0.0
 		 */
 		do_action( 'acf/init' );
+	}
+
+	/**
+	 * Reserved post types
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @return array
+	 */
+	public function reserved_post_types() {
+		$reserved = [
+			'acf-field',
+			'acf-field-group',
+			'acf-post-type',
+			'acf-taxonomy',
+			'acf-block-type',
+			'acf-form',
+			'acf-template',
+			'acf-options-page'
+		];
+		return apply_filters( 'acf/reserved_post_types', $reserved );
+	}
+
+	/**
+	 * Reserved taxonomies
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @return array
+	 */
+	public function reserved_taxonomies() {
+		$reserved = [ 'acf-field-group-category' ];
+		return apply_filters( 'acf/reserved_taxonomies', $reserved );
+	}
+
+	/**
+	 * Reserved field groups
+	 *
+	 * @todo Uncomment settings group when hard coded.
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @return array
+	 */
+	public function reserved_field_groups() {
+		$reserved = [
+			// 'group_acf_settings',
+			'group_acf_post_type',
+			'group_acf_post_type_side',
+			'group_acf_taxonomy',
+			'group_acf_taxonomy_side',
+			'group_acf_block_type',
+			'group_acf_block_type_side',
+			'group_acf_form',
+			'group_acf_form_side',
+			'group_acf_template_side',
+			'group_acf_options_page',
+			'group_acf_options_page_side',
+		];
+		return apply_filters( 'acf/reserved_field_groups', $reserved );
 	}
 
 	/**

@@ -209,7 +209,7 @@ class acfe_field_clone{
     function load_field_groups($field_groups){
     
         // Hidden Local Field Groups
-        $hidden = acfe_get_setting('reserved_field_groups', array());
+        $hidden = acf_get_setting('reserved_field_groups', array());
         
         foreach($field_groups as $i => $field_group){
         

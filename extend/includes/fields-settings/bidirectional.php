@@ -142,7 +142,7 @@ class acfe_bidirectional{
             return false;
     
         // Vars
-        $hidden = acfe_get_setting('reserved_field_groups', array());
+        $hidden = acf_get_setting('reserved_field_groups', array());
         $choices = array();
         
         foreach($r_field_groups as $r_field_group){
