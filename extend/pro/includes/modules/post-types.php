@@ -17,7 +17,6 @@ class acfe_pro_dynamic_post_types{
         $this->post_type = 'acf-post-type';
 
         add_filter('acfe/post_type/register',       array($this, 'register'), 15, 2);
-        add_filter('acfe/post_type/save_args',      array($this, 'save_args'), 15, 3);
         add_action('acfe/post_type/save',           array($this, 'save'), 15, 3);
         add_action('acfe/post_type/import_fields',  array($this, 'import_fields'), 15, 3);
 
@@ -33,21 +32,6 @@ class acfe_pro_dynamic_post_types{
         // Check Active
         if(!acf_maybe_get($args, 'active', true))
             return false;
-
-        return $args;
-
-    }
-
-    /*
-     * Save Args
-     */
-    function save_args($args, $name, $post_id){
-
-        // Active
-        $active = get_field('acfe_dpt_active', $post_id);
-        $active = $active === null ? true : $active;
-
-        $args['active'] = $active;
 
         return $args;
 

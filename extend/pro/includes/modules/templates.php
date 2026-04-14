@@ -115,20 +115,8 @@ class acfe_dynamic_templates extends acfe_dynamic_module {
      */
     function add_post_metaboxes(){
 
-        // After Title
-        add_action('edit_form_after_title', array($this, 'edit_form_after_title'));
-
         // Metaboxes
         add_action('acf/add_meta_boxes', array($this, 'add_metaboxes'), 10, 3);
-
-    }
-
-    /*
-     * Edit Form After Title
-     */
-    function edit_form_after_title(){
-
-        echo '<div class="notice notice-warning inline"><p>' . __('You are currently editing a Dynamic Template.', 'acfe') . '</p></div>';
 
     }
 
@@ -284,11 +272,11 @@ class acfe_dynamic_templates extends acfe_dynamic_module {
             </div>
             <div class="acf-input">
 
-                <p><?php _e( 'The Dynamic Templates module let you manage default ACF values in an advanced way. In order to start, you need to connect a field group to a specific template. Head over the Field Groups administration, select the field group of your choice and scroll down to the location settings. To connect a field group to a template, choose a classic location (like Post Type = Post) and add a new rule using the “AND” operator. Select the rule "Dynamic Template" under "Forms", then choose your template and save the field group.', 'acf' ); ?></p>
+                <p><?php _e( 'Templates allow you to manage default custom field values in an advanced way. In order to start, you need to connect a field group to a specific template. Head over the Field Groups administration, select the field group of your choice and scroll down to the location settings. To connect a field group to a template, choose a classic location (like Post Type = Post) and add a new rule using the “AND” operator. Select the rule "Template" under "Forms", then choose your template and save the field group.', 'acf' ); ?></p>
 
                 <p><?php _e( 'You can now fill up the template page, values will be automatically loaded for the location it is tied to if the user never saved anything. In this screenshot, there is a different template for the "Post Type: Page" & the "Post Type: Post" while using the same field group.', 'acf' ); ?></p>
 
-                <p><?php _e( 'The Dynamic Template design is smart enough to fulfill complex scenarios. For example, one single template can be used in conjunction with as many field group location as needed. It is also possible to add multiple field groups into a single template to keep things organized.', 'acf' ); ?></p>
+                <p><?php _e( 'The template design is smart enough to fulfill complex scenarios. For example, one single template can be used in conjunction with as many field group location as needed. It is also possible to add multiple field groups into a single template to keep things organized.', 'acf' ); ?></p>
 
                 <p><?php _e( "Template values will be loaded when the user haven't saved any data related to the said values. Typically in a new post situation. If the user save a value, even an empty one, the template won't be loaded.", 'acf' ); ?></p>
 
@@ -635,7 +623,7 @@ class acfe_dynamic_templates extends acfe_dynamic_module {
     function location_types($choices){
 
         $name = __('Forms', 'acf');
-        $choices[$name] = acfe_array_insert_after('options_page', $choices[$name], 'acfe_template', __('Dynamic Template', 'acfe'));
+        $choices[$name] = acfe_array_insert_after('options_page', $choices[$name], 'acfe_template', __('Template', 'acfe'));
 
         return $choices;
 

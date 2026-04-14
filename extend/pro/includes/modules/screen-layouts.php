@@ -4,7 +4,7 @@ if(!defined('ABSPATH'))
     exit;
 
 // Check setting
-if(!acf_get_setting('acfe/modules/screen_layouts'))
+if(!acf_get_setting('screen_layouts'))
     return;
 
 if(!class_exists('acfe_pro_screen_layouts')):

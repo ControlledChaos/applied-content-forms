@@ -510,22 +510,6 @@ class acfe_pro_admin_settings{
             'category'      => 'modules',
         );
 
-        $this->fields['modules'][] = array(
-            'label'         => 'Screen Layouts',
-            'name'          => 'acfe/modules/screen_layouts',
-            'description'   => 'Enable the Columns Screen Layouts. Defaults to true',
-            'type'          => 'true_false',
-            'category'      => 'modules',
-        );
-
-        $this->fields['modules'][] = array(
-            'label'         => 'Scripts',
-            'name'          => 'acfe/modules/scripts',
-            'description'   => 'Enable the Scripts UI. Defaults to true',
-            'type'          => 'true_false',
-            'category'      => 'modules',
-        );
-
         usort($this->fields['modules'], function($a, $b){
             return strcmp($a['label'], $b['label']);
         });

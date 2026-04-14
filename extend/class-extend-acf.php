@@ -100,10 +100,7 @@ final class Extend_ACF {
 			'modules/force_sync/delete'       => false,
 			'modules/forms/shortcode_preview' => false,
 			'modules/global_field_condition'  => true,
-			'modules/rewrite_rules'           => true,
-			'modules/screen_layouts'          => true,
-			'modules/scripts'                 => true,
-
+			'modules/rewrite_rules'           => true
 		] );
 
 		add_action( 'acf/init', [ $this, 'init' ], 99 );
@@ -134,9 +131,6 @@ final class Extend_ACF {
 		acfe_include( 'includes/acfe-world-functions.php' );
 		acfe_include( 'includes/payment.php' );
 		acfe_include( 'includes/world.php' );
-
-		// Admin.
-		acfe_include( 'pro/includes/admin/settings.php' );
 
 		// Modules.
 		acfe_include( 'pro/includes/modules/block-types.php' );

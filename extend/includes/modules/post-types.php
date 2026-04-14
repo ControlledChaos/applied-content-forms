@@ -474,6 +474,8 @@ class acfe_dynamic_post_types extends acfe_dynamic_module {
 	 */
 	function save_args($args, $name, $post_id){
 
+		$active = get_field('acfe_dpt_active', $post_id);
+        $active = $active === null ? true : $active;
 		$label = get_post_field('post_title', $post_id);
 		$name = get_field('acfe_dpt_name', $post_id);
 		$description = get_field('description', $post_id);
@@ -584,6 +586,8 @@ class acfe_dynamic_post_types extends acfe_dynamic_module {
 			'acfe_admin_orderby'    => $admin_orderby,
 			'acfe_admin_order'      => $admin_order,
 		);
+
+		$args['active'] = $active;
 
 		// Menu Position
 		if(!acf_is_empty($menu_position))

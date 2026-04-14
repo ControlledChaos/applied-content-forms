@@ -34,6 +34,7 @@ function acf_settings_update() {
 
 	// Tools.
 	acf_update_setting( 'menu_position', get_field( 'acf_menu_position', 'option' ) );
+	acf_update_setting( 'screen_layouts', get_field( 'acf_screen_layouts', 'option' ) );
 	acf_update_setting( 'field_group_ui', get_field( 'acf_group_settings_tabbed', 'option' ) );
 	acf_update_setting( 'options_editor', get_field( 'acf_options_editor', 'option' ) );
 	acf_update_setting( 'multilang', get_field( 'acf_multilang_compat', 'option' ) );
