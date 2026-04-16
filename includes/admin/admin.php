@@ -84,6 +84,11 @@ class ACF_Admin {
 	 */
 	public function admin_page() {
 
+		// Stop if ACF is hidden.
+		if ( ! acf_get_setting( 'show_admin' ) ) {
+			return;
+		}
+
 		$title = $this->admin_page_title();
 		$menu  = $this->admin_page_menu();
 		$icon  = $this->admin_page_icon();
@@ -119,7 +124,7 @@ class ACF_Admin {
 	 */
 	public function categories_screen() {
 
-		// Bail early if ACF is hidden.
+		// Stop if ACF is hidden.
 		if ( ! acf_get_setting( 'show_admin' ) ) {
 			return;
 		}

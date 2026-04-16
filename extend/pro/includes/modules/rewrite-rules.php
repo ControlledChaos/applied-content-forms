@@ -4,7 +4,7 @@ if(!defined('ABSPATH'))
     exit;
 
 // Check setting
-if(!acf_get_setting('acfe/modules/rewrite_rules'))
+if(!acf_get_setting('rewrite_rules'))
     return;
 
 if(!class_exists('acfe_pro_rewrite_rules')):

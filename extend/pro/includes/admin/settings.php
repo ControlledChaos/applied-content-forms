@@ -470,42 +470,9 @@ class acfe_pro_admin_settings{
     function register_fields() {
 
         $this->fields['modules'][] = array(
-            'label'         => 'Force Sync',
-            'name'          => 'acfe/modules/force_sync',
-            'description'   => 'Enable the Force Sync module. Defaults to false',
-            'type'          => 'true_false',
-            'category'      => 'modules',
-        );
-
-        $this->fields['modules'][] = array(
-            'label'         => 'Force Sync: Delete',
-            'name'          => 'acfe/modules/force_sync/delete',
-            'description'   => 'Sync deleted field groups files. Force Sync must be enabled. Defaults to false',
-            'type'          => 'true_false',
-            'category'      => 'modules',
-        );
-
-        $this->fields['modules'][] = array(
-            'label'         => 'Forms: Shortcode Preview',
-            'name'          => 'acfe/modules/forms/shortcode_preview',
-            'type'          => 'text',
-            'description'   => 'Display <code>[acfe_form]</code> shortcode preview in editors. Defaults to false',
-            'category'      => 'modules',
-            'format'        => 'array',
-        );
-
-        $this->fields['modules'][] = array(
             'label'         => 'Global Field Condition',
             'name'          => 'acfe/modules/global_field_condition',
             'description'   => 'Enable the Global Field Condition module. Defaults to true',
-            'type'          => 'true_false',
-            'category'      => 'modules',
-        );
-
-        $this->fields['modules'][] = array(
-            'label'         => 'Rewrite Rules',
-            'name'          => 'acfe/modules/rewrite_rules',
-            'description'   => 'Enable the Rewrite Rules UI. Defaults to true',
             'type'          => 'true_false',
             'category'      => 'modules',
         );

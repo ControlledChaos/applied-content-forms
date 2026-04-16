@@ -246,11 +246,16 @@ final class ACF {
 			'templates'              => true,
 			'options_pages'          => true,
 			'author_ajax'            => true,
+			'global_field_condition' => true,
+			'field_group_ui'         => true,
+			'screen_layouts'         => true,
 			'options_editor'         => false,
 			'single_meta'            => false,
 			'meta_tools'             => true,
-			'field_group_ui'         => true,
-			'screen_layouts'         => true
+			'force_sync'             => false,
+			'force_sync_delete'      => false,
+			'form_shortcode_preview' => true,
+			'rewrite_rules'          => true
 		];
 
 		include_once( ACF_PATH . 'includes/utility-functions.php' );

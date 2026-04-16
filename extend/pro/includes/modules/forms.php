@@ -34,7 +34,7 @@ class acfe_pro_dynamic_forms{
     function mce_css($css){
 
         // shortcode preview setting
-        $preview = acfe_get_setting('modules/forms/shortcode_preview');
+        $preview = acf_get_setting('form_shortcode_preview');
 
         // bail early
         if($preview === false){
@@ -81,7 +81,7 @@ class acfe_pro_dynamic_forms{
         // vars
         $args = acf_maybe_get_POST('args', array());
         $form = $instance->get_form($args);
-        $preview = acfe_get_setting('modules/forms/shortcode_preview');
+        $preview = acf_get_setting('form_shortcode_preview');
 
         // no preview
         if(!$form || $preview === false){

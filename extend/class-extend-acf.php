@@ -71,7 +71,6 @@ final class Extend_ACF {
 		$this->settings( [
 
 			// General
-			'url'                   => plugin_dir_url( __FILE__ ),
 			'theme_path'            => $theme_path,
 			'theme_url'             => $theme_url,
 			'theme_folder'          => parse_url( $theme_url, PHP_URL_PATH ),
@@ -82,25 +81,13 @@ final class Extend_ACF {
 			'php_load'  => [ "{$theme_path}/acfe-php" ],
 			'php_found' => false,
 
-			// JSON
-			'json'       => acf_get_setting( 'json' ),
-			'json_save'  => acf_get_setting( 'save_json' ),
-			'json_load'  => acf_get_setting( 'load_json' ),
-
 			// Fields
 			'field/recaptcha/site_key'     => null,
 			'field/recaptcha/secret_key'   => null,
 			'field/recaptcha/version'      => null,
 			'field/recaptcha/v2/theme'     => null,
 			'field/recaptcha/v2/size'      => null,
-			'field/recaptcha/v3/hide_logo' => null,
-
-			// Modules.
-			'modules/force_sync'              => false,
-			'modules/force_sync/delete'       => false,
-			'modules/forms/shortcode_preview' => false,
-			'modules/global_field_condition'  => true,
-			'modules/rewrite_rules'           => true
+			'field/recaptcha/v3/hide_logo' => null
 		] );
 
 		add_action( 'acf/init', [ $this, 'init' ], 99 );

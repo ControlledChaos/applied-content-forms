@@ -38,6 +38,9 @@ function acf_settings_update() {
 	acf_update_setting( 'field_group_ui', get_field( 'acf_group_settings_tabbed', 'option' ) );
 	acf_update_setting( 'options_editor', get_field( 'acf_options_editor', 'option' ) );
 	acf_update_setting( 'multilang', get_field( 'acf_multilang_compat', 'option' ) );
+	acf_update_setting( 'rewrite_rules', get_field( 'acf_rewrite_rules', 'option' ) );
+	acf_update_setting( 'force_sync', get_field( 'acf_force_sync', 'option' ) );
+	acf_update_setting( 'force_sync_delete', get_field( 'acf_force_deleted_sync', 'option' ) );
 	acf_update_setting( 'dev_mode', get_field( 'acf_dev_mode', 'option' ) );
 }
 add_action( 'acf/init', 'acf_settings_update' );
