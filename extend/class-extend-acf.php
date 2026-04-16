@@ -166,9 +166,7 @@ final class Extend_ACF {
 		acfe_include( 'includes/field-groups/field-groups.php' );
 		acfe_include( 'includes/field-groups/field-groups-local.php' );
 
-		acfe_include( 'includes/locations/post-type-all.php' );
-		acfe_include( 'includes/locations/post-type-archive.php' );
-		acfe_include( 'includes/locations/post-type-list.php' );
+
 
 		acfe_include( 'includes/modules/module.php' );
 		acfe_include( 'includes/modules/author.php' );
@@ -201,27 +199,6 @@ final class Extend_ACF {
 
 		acfe_include( 'pro/includes/field-groups/field-group-hide-on-screen.php' );
 		acfe_include( 'pro/includes/field-groups/field-group-ui.php' );
-
-		acfe_include( 'pro/includes/locations/attachment-list.php' );
-		acfe_include( 'pro/includes/locations/location.php' );
-		acfe_include( 'pro/includes/locations/menu-item-depth.php' );
-		acfe_include( 'pro/includes/locations/menu-item-type.php' );
-		acfe_include( 'pro/includes/locations/post-author.php' );
-		acfe_include( 'pro/includes/locations/post-author-role.php' );
-		acfe_include( 'pro/includes/locations/post-date.php' );
-		acfe_include( 'pro/includes/locations/post-date-time.php' );
-		acfe_include( 'pro/includes/locations/post-path.php' );
-		acfe_include( 'pro/includes/locations/post-screen.php' );
-		acfe_include( 'pro/includes/locations/post-slug.php' );
-		acfe_include( 'pro/includes/locations/post-time.php' );
-		acfe_include( 'pro/includes/locations/post-title.php' );
-		acfe_include( 'pro/includes/locations/settings.php' );
-		acfe_include( 'pro/includes/locations/taxonomy-term.php' );
-		acfe_include( 'pro/includes/locations/taxonomy-term-name.php' );
-		acfe_include( 'pro/includes/locations/taxonomy-term-parent.php' );
-		acfe_include( 'pro/includes/locations/taxonomy-term-slug.php' );
-		acfe_include( 'pro/includes/locations/taxonomy-term-type.php' );
-		acfe_include( 'pro/includes/locations/user-list.php' );
 
 		acfe_include( 'pro/includes/modules/dev.php' );
 		acfe_include( 'pro/includes/modules/force-sync.php' );

@@ -451,7 +451,7 @@ final class ACF {
 
 		// Include locations.
 		acf_include( 'includes/locations/class-acf-location-post-type.php' );
-		acf_include( 'includes/locations/class-acf-location-post-template.php' );
+		acf_include( 'includes/locations/class-acf-location-post-template. php' );
 		acf_include( 'includes/locations/class-acf-location-post-status.php' );
 		acf_include( 'includes/locations/class-acf-location-post-format.php' );
 		acf_include( 'includes/locations/class-acf-location-post-category.php' );
@@ -473,6 +473,30 @@ final class ACF {
 		acf_include( 'includes/locations/class-acf-location-nav-menu-item.php' );
 		acf_include( 'includes/locations/class-acf-location-block.php' );
 		acf_include( 'includes/locations/class-acf-location-options-page.php' );
+		acf_include( 'includes/locations/post-type-all.php' );
+		acf_include( 'includes/locations/post-type-archive.php' );
+		acf_include( 'includes/locations/post-type-list.php' );
+		acf_include( 'includes/locations/taxonomy-list.php' );
+		acf_include( 'includes/locations/class-attachment-list.php' );
+		acf_include( 'includes/locations/class-acf-location-location.php' );
+		acf_include( 'includes/locations/class-acf-location-menu-item-depth.php' );
+		acf_include( 'includes/locations/class-acf-location-menu-item-type.php' );
+		acf_include( 'includes/locations/class-acf-location-post-author.php' );
+		acf_include( 'includes/locations/class-acf-location-post-author-role.php' );
+		acf_include( 'includes/locations/class-acf-location-post-date.php' );
+		acf_include( 'includes/locations/class-acf-location-post-date-time.php' );
+		acf_include( 'includes/locations/class-acf-location-post-path.php' );
+		acf_include( 'includes/locations/class-acf-location-post-screen.php' );
+		acf_include( 'includes/locations/class-acf-location-post-slug.php' );
+		acf_include( 'includes/locations/class-acf-location-post-time.php' );
+		acf_include( 'includes/locations/class-acf-location-post-title.php' );
+		acf_include( 'includes/locations/settings.php' );
+		acf_include( 'includes/locations/class-acf-location-taxonomy-term.php' );
+		acf_include( 'includes/locations/class-acf-location-taxonomy-term-name.php' );
+		acf_include( 'includes/locations/class-acf-location-taxonomy-term-parent.php' );
+		acf_include( 'includes/locations/class-acf-location-taxonomy-term-slug.php' );
+		acf_include( 'includes/locations/class-acf-location-taxonomy-term-type.php' );
+		acf_include( 'includes/locations/user-list.php' );
 
 		/**
 		 * Fires after location types have been included.
