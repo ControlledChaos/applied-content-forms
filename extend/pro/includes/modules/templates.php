@@ -769,6 +769,10 @@ class acfe_dynamic_templates extends acfe_dynamic_module {
      */
     function local_template_load_target(){
 
+        if ( ! acf_get_setting( 'local' ) ) {
+            return;
+        }
+
         // Globals
         global $pagenow, $post;
 
