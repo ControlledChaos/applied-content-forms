@@ -313,7 +313,6 @@ final class ACF {
 		acf_include( 'includes/loop.php' );
 		acf_include( 'includes/media.php' );
 		acf_include( 'includes/revisions.php' );
-		acf_include( 'includes/updates.php' );
 		acf_include( 'includes/upgrades.php' );
 		acf_include( 'includes/validation.php' );
 
