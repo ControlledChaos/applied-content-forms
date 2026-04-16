@@ -79,15 +79,7 @@ final class Extend_ACF {
 			'php'       => true,
 			'php_save'  => "{$theme_path}/acfe-php",
 			'php_load'  => [ "{$theme_path}/acfe-php" ],
-			'php_found' => false,
-
-			// Fields
-			'field/recaptcha/site_key'     => null,
-			'field/recaptcha/secret_key'   => null,
-			'field/recaptcha/version'      => null,
-			'field/recaptcha/v2/theme'     => null,
-			'field/recaptcha/v2/size'      => null,
-			'field/recaptcha/v3/hide_logo' => null
+			'php_found' => false
 		] );
 
 		add_action( 'acf/init', [ $this, 'init' ], 99 );

@@ -196,6 +196,9 @@ final class ACF {
             'ACFE_VERSION' => $this->plugin
         ] );
 
+		$theme_path = get_stylesheet_directory();
+		$theme_url  = get_stylesheet_directory_uri();
+
 		// Define settings.
 		$this->settings = [
 			'name'                   => __( 'Applied Content Forms', 'acf' ),
@@ -255,7 +258,23 @@ final class ACF {
 			'force_sync'             => false,
 			'force_sync_delete'      => false,
 			'form_shortcode_preview' => true,
-			'rewrite_rules'          => true
+			'rewrite_rules'          => true,
+
+			'theme_path'             => $theme_path,
+			'theme_url'              => $theme_url,
+			'theme_folder'           => parse_url( $theme_url, PHP_URL_PATH ),
+
+			'php'                    => true,
+			'php_save'               => "{$theme_path}/acf-php",
+			'php_load'               => [ "{$theme_path}/acf-php" ],
+			'php_found'              => false,
+
+			'recaptcha_site_key'     => null,
+			'recaptcha_secret_key'   => null,
+			'recaptcha_version'      => null,
+			'recaptcha_v2_theme'     => null,
+			'recaptcha_v2_size'      => null,
+			'recaptcha_v3_hide_logo' => null
 		];
 
 		include_once( ACF_PATH . 'includes/utility-functions.php' );
