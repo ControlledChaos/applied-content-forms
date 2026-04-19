@@ -88,10 +88,6 @@ final class Extend_ACF {
 		add_action( 'acf/include_admin_tools', [ $this, 'include_admin_tools' ] );
 		add_action( 'acf/include_admin_tools', [ $this, 'include_admin_tools_late' ], 20 );
 
-		acfe_include( 'includes/admin/menu.php' );
-		acfe_include( 'includes/admin/plugins.php' );
-		acfe_include( 'includes/admin/settings.php' );
-
 		acfe_include( 'includes/local-meta.php' );
 		acfe_include( 'includes/multilang.php' );
 		acfe_include( 'includes/settings.php' );
