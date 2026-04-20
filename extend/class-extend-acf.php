@@ -38,15 +38,15 @@ final class Extend_ACF {
 	 */
 	public function initialize() {
 
-		acfe_include( 'includes/acfe-helper-functions.php' );
-		acfe_include( 'includes/acfe-meta-functions.php' );
-		acfe_include( 'includes/acfe-post-functions.php' );
-		acfe_include( 'includes/acfe-screen-functions.php' );
-		acfe_include( 'includes/acfe-template-functions.php' );
-		acfe_include( 'includes/acfe-term-functions.php' );
-		acfe_include( 'includes/acfe-user-functions.php' );
-		acfe_include( 'includes/acfe-wp-functions.php' );
-		acfe_include( 'includes/compatibility.php' );
+		acf_include( 'extend/includes/acfe-helper-functions.php' );
+		acf_include( 'extend/includes/acfe-meta-functions.php' );
+		acf_include( 'extend/includes/acfe-post-functions.php' );
+		acf_include( 'extend/includes/acfe-screen-functions.php' );
+		acf_include( 'extend/includes/acfe-template-functions.php' );
+		acf_include( 'extend/includes/acfe-term-functions.php' );
+		acf_include( 'extend/includes/acfe-user-functions.php' );
+		acf_include( 'extend/includes/acfe-wp-functions.php' );
+		acf_include( 'extend/includes/compatibility.php' );
 	}
 
 	/**
@@ -88,27 +88,27 @@ final class Extend_ACF {
 		add_action( 'acf/include_admin_tools', [ $this, 'include_admin_tools' ] );
 		add_action( 'acf/include_admin_tools', [ $this, 'include_admin_tools_late' ], 20 );
 
-		acfe_include( 'includes/local-meta.php' );
-		acfe_include( 'includes/multilang.php' );
-		acfe_include( 'includes/settings.php' );
-		acfe_include( 'includes/upgrades.php' );
+		acf_include( 'extend/includes/local-meta.php' );
+		acf_include( 'extend/includes/multilang.php' );
+		acf_include( 'extend/includes/settings.php' );
+		acf_include( 'extend/includes/upgrades.php' );
 
-		acfe_include( 'includes/forms/form-attachment.php' );
-		acfe_include( 'includes/forms/form-options-page.php' );
-		acfe_include( 'includes/forms/form-post.php' );
-		acfe_include( 'includes/forms/form-settings.php' );
-		acfe_include( 'includes/forms/form-taxonomy.php' );
-		acfe_include( 'includes/forms/form-user.php' );
+		acf_include( 'extend/includes/forms/form-attachment.php' );
+		acf_include( 'extend/includes/forms/form-options-page.php' );
+		acf_include( 'extend/includes/forms/form-post.php' );
+		acf_include( 'extend/includes/forms/form-settings.php' );
+		acf_include( 'extend/includes/forms/form-taxonomy.php' );
+		acf_include( 'extend/includes/forms/form-user.php' );
 
 		// Functions.
-		acfe_include( 'includes/acfe-script-functions.php' );
-		acfe_include( 'includes/acfe-template-functions.php' );
-		acfe_include( 'includes/acfe-world-functions.php' );
-		acfe_include( 'includes/payment.php' );
-		acfe_include( 'includes/world.php' );
+		acf_include( 'extend/includes/acfe-script-functions.php' );
+		acf_include( 'extend/includes/acfe-template-functions.php' );
+		acf_include( 'extend/includes/acfe-world-functions.php' );
+		acf_include( 'extend/includes/payment.php' );
+		acf_include( 'extend/includes/world.php' );
 
 		// Modules.
-		acfe_include( 'includes/modules/scripts-class.php' );
+		acf_include( 'extend/includes/modules/scripts-class.php' );
 	}
 
 	/**
@@ -122,83 +122,81 @@ final class Extend_ACF {
 
 		do_action( 'acfe/init' );
 
-		acfe_include( 'includes/class-extend-assets.php' );
-		acfe_include( 'includes/hooks.php' );
+		acf_include( 'extend/includes/class-extend-assets.php' );
+		acf_include( 'extend/includes/hooks.php' );
 
-		acfe_include( 'includes/admin/admin.php' );
-		acfe_include( 'includes/admin/plugins.php' );
+		acf_include( 'extend/includes/admin/admin.php' );
+		acf_include( 'extend/includes/admin/plugins.php' );
 
-		acfe_include( 'includes/fields/field-checkbox.php' );
-		acfe_include( 'includes/fields/field-clone.php' );
-		acfe_include( 'includes/fields/field-file.php' );
-		acfe_include( 'includes/fields/field-flexible-content.php' );
-		acfe_include( 'includes/fields/field-group.php' );
-		acfe_include( 'includes/fields/field-image.php' );
-		acfe_include( 'includes/fields/field-post-object.php' );
-		acfe_include( 'includes/fields/field-repeater.php' );
-		acfe_include( 'includes/fields/field-select.php' );
-		acfe_include( 'includes/fields/field-textarea.php' );
+		acf_include( 'extend/includes/fields/field-checkbox.php' );
+		acf_include( 'extend/includes/fields/field-clone.php' );
+		acf_include( 'extend/includes/fields/field-file.php' );
+		acf_include( 'extend/includes/fields/field-flexible-content.php' );
+		acf_include( 'extend/includes/fields/field-group.php' );
+		acf_include( 'extend/includes/fields/field-image.php' );
+		acf_include( 'extend/includes/fields/field-post-object.php' );
+		acf_include( 'extend/includes/fields/field-repeater.php' );
+		acf_include( 'extend/includes/fields/field-select.php' );
+		acf_include( 'extend/includes/fields/field-textarea.php' );
 
-		acfe_include( 'includes/fields-settings/bidirectional.php' );
-		acfe_include( 'includes/fields-settings/data.php' );
-		acfe_include( 'includes/fields-settings/instructions.php' );
-		acfe_include( 'includes/fields-settings/permissions.php' );
-		acfe_include( 'includes/fields-settings/settings.php' );
-		acfe_include( 'includes/fields-settings/validation.php' );
+		acf_include( 'extend/includes/fields-settings/bidirectional.php' );
+		acf_include( 'extend/includes/fields-settings/data.php' );
+		acf_include( 'extend/includes/fields-settings/instructions.php' );
+		acf_include( 'extend/includes/fields-settings/permissions.php' );
+		acf_include( 'extend/includes/fields-settings/settings.php' );
+		acf_include( 'extend/includes/fields-settings/validation.php' );
 
-		acfe_include( 'includes/field-groups/field-group.php' );
-		acfe_include( 'includes/field-groups/field-group-advanced.php' );
-		acfe_include( 'includes/field-groups/field-group-category.php' );
-		acfe_include( 'includes/field-groups/field-group-display-title.php' );
-		acfe_include( 'includes/field-groups/field-group-hide-on-screen.php' );
-		acfe_include( 'includes/field-groups/field-group-instruction-placement.php' );
-		acfe_include( 'includes/field-groups/field-group-meta.php' );
-		acfe_include( 'includes/field-groups/field-group-permissions.php' );
-		acfe_include( 'includes/field-groups/field-groups.php' );
-		acfe_include( 'includes/field-groups/field-groups-local.php' );
+		acf_include( 'extend/includes/field-groups/field-group.php' );
+		acf_include( 'extend/includes/field-groups/field-group-advanced.php' );
+		acf_include( 'extend/includes/field-groups/field-group-category.php' );
+		acf_include( 'extend/includes/field-groups/field-group-display-title.php' );
+		acf_include( 'extend/includes/field-groups/field-group-hide-on-screen.php' );
+		acf_include( 'extend/includes/field-groups/field-group-instruction-placement.php' );
+		acf_include( 'extend/includes/field-groups/field-group-meta.php' );
+		acf_include( 'extend/includes/field-groups/field-group-permissions.php' );
+		acf_include( 'extend/includes/field-groups/field-groups.php' );
+		acf_include( 'extend/includes/field-groups/field-groups-local.php' );
 
+		acf_include( 'extend/includes/modules/module.php' );
+		acf_include( 'extend/includes/modules/author.php' );
+		acf_include( 'extend/includes/modules/dev.php' );
+		acf_include( 'extend/includes/modules/post-types.php' );
+		acf_include( 'extend/includes/modules/taxonomies.php' );
+		acf_include( 'extend/includes/modules/block-types.php' );
+		acf_include( 'extend/includes/modules/forms.php' );
+		acf_include( 'extend/includes/modules/options.php' );
+		acf_include( 'extend/includes/modules/options-pages.php' );
+		acf_include( 'extend/includes/modules/single-meta.php' );
 
+		acf_include( 'extend/pro/includes/hooks.php' );
 
-		acfe_include( 'includes/modules/module.php' );
-		acfe_include( 'includes/modules/author.php' );
-		acfe_include( 'includes/modules/dev.php' );
-		acfe_include( 'includes/modules/post-types.php' );
-		acfe_include( 'includes/modules/taxonomies.php' );
-		acfe_include( 'includes/modules/block-types.php' );
-		acfe_include( 'includes/modules/forms.php' );
-		acfe_include( 'includes/modules/options.php' );
-		acfe_include( 'includes/modules/options-pages.php' );
-		acfe_include( 'includes/modules/single-meta.php' );
+		acf_include( 'extend/pro/includes/fields/field-checkbox.php' );
+		acf_include( 'extend/pro/includes/fields/field-column.php' );
+		acf_include( 'extend/pro/includes/fields/field-color-picker.php' );
+		acf_include( 'extend/pro/includes/fields/field-date-picker.php' );
+		acf_include( 'extend/pro/includes/fields/field-flexible-content-grid.php' );
+		acf_include( 'extend/pro/includes/fields/field-flexible-content-locations.php' );
+		acf_include( 'extend/pro/includes/fields/field-file.php' );
+		acf_include( 'extend/pro/includes/fields/field-radio.php' );
+		acf_include( 'extend/pro/includes/fields/field-select.php' );
+		acf_include( 'extend/pro/includes/fields/field-tab.php' );
 
-		acfe_include( 'pro/includes/hooks.php' );
+		acf_include( 'extend/pro/includes/fields-settings/instructions.php' );
+		acf_include( 'extend/pro/includes/fields-settings/min-max.php' );
+		acf_include( 'extend/pro/includes/fields-settings/required.php' );
+		acf_include( 'extend/pro/includes/fields-settings/visibility.php' );
 
-		acfe_include( 'pro/includes/fields/field-checkbox.php' );
-		acfe_include( 'pro/includes/fields/field-column.php' );
-		acfe_include( 'pro/includes/fields/field-color-picker.php' );
-		acfe_include( 'pro/includes/fields/field-date-picker.php' );
-		acfe_include( 'pro/includes/fields/field-flexible-content-grid.php' );
-		acfe_include( 'pro/includes/fields/field-flexible-content-locations.php' );
-		acfe_include( 'pro/includes/fields/field-file.php' );
-		acfe_include( 'pro/includes/fields/field-radio.php' );
-		acfe_include( 'pro/includes/fields/field-select.php' );
-		acfe_include( 'pro/includes/fields/field-tab.php' );
+		acf_include( 'extend/pro/includes/field-groups/field-group-hide-on-screen.php' );
+		acf_include( 'extend/pro/includes/field-groups/field-group-ui.php' );
 
-		acfe_include( 'pro/includes/fields-settings/instructions.php' );
-		acfe_include( 'pro/includes/fields-settings/min-max.php' );
-		acfe_include( 'pro/includes/fields-settings/required.php' );
-		acfe_include( 'pro/includes/fields-settings/visibility.php' );
-
-		acfe_include( 'pro/includes/field-groups/field-group-hide-on-screen.php' );
-		acfe_include( 'pro/includes/field-groups/field-group-ui.php' );
-
-		acfe_include( 'pro/includes/modules/dev.php' );
-		acfe_include( 'pro/includes/modules/force-sync.php' );
-		acfe_include( 'pro/includes/modules/global-field-condition.php' );
-		acfe_include( 'pro/includes/modules/rewrite-rules.php' );
-		acfe_include( 'pro/includes/modules/scripts.php' );
-		acfe_include( 'pro/includes/modules/scripts-list.php' );
-		acfe_include( 'pro/includes/modules/screen-layouts.php' );
-		acfe_include( 'pro/includes/modules/templates.php' );
+		acf_include( 'extend/pro/includes/modules/dev.php' );
+		acf_include( 'extend/pro/includes/modules/force-sync.php' );
+		acf_include( 'extend/pro/includes/modules/global-field-condition.php' );
+		acf_include( 'extend/pro/includes/modules/rewrite-rules.php' );
+		acf_include( 'extend/pro/includes/modules/scripts.php' );
+		acf_include( 'extend/pro/includes/modules/scripts-list.php' );
+		acf_include( 'extend/pro/includes/modules/screen-layouts.php' );
+		acf_include( 'extend/pro/includes/modules/templates.php' );
 	}
 
 	/**
@@ -209,7 +207,7 @@ final class Extend_ACF {
 	 * @return void
 	 */
 	public function include_fields() {
-		acfe_include( 'includes/modules/autosync.php' );
+		acf_include( 'extend/includes/modules/autosync.php' );
 	}
 
 	/**
@@ -220,7 +218,7 @@ final class Extend_ACF {
 	 * @return void
 	 */
 	function include_form_actions() {
-		acfe_include( 'pro/includes/modules/forms-action-option.php' );
+		acf_include( 'extend/pro/includes/modules/forms-action-option.php' );
 	}
 
 	/**
@@ -232,44 +230,44 @@ final class Extend_ACF {
 	 */
 	public function include_field_types(){
 
-		acfe_include( 'includes/fields/field-advanced-link.php' );
-		acfe_include( 'includes/fields/field-button.php' );
-		acfe_include( 'includes/fields/field-code-editor.php' );
-		acfe_include( 'includes/fields/field-column.php' );
-		acfe_include( 'includes/fields/field-dynamic-render.php' );
-		acfe_include( 'includes/fields/field-forms.php' );
-		acfe_include( 'includes/fields/field-hidden.php' );
-		acfe_include( 'includes/fields/field-post-statuses.php' );
-		acfe_include( 'includes/fields/field-post-types.php' );
-		acfe_include( 'includes/fields/field-recaptcha.php' );
-		acfe_include( 'includes/fields/field-slug.php' );
-		acfe_include( 'includes/fields/field-taxonomies.php' );
-		acfe_include( 'includes/fields/field-taxonomy-terms.php' );
-		acfe_include( 'includes/fields/field-user-roles.php' );
+		acf_include( 'extend/includes/fields/field-advanced-link.php' );
+		acf_include( 'extend/includes/fields/field-button.php' );
+		acf_include( 'extend/includes/fields/field-code-editor.php' );
+		acf_include( 'extend/includes/fields/field-column.php' );
+		acf_include( 'extend/includes/fields/field-dynamic-render.php' );
+		acf_include( 'extend/includes/fields/field-forms.php' );
+		acf_include( 'extend/includes/fields/field-hidden.php' );
+		acf_include( 'extend/includes/fields/field-post-statuses.php' );
+		acf_include( 'extend/includes/fields/field-post-types.php' );
+		acf_include( 'extend/includes/fields/field-recaptcha.php' );
+		acf_include( 'extend/includes/fields/field-slug.php' );
+		acf_include( 'extend/includes/fields/field-taxonomies.php' );
+		acf_include( 'extend/includes/fields/field-taxonomy-terms.php' );
+		acf_include( 'extend/includes/fields/field-user-roles.php' );
 
-		acfe_include( 'pro/includes/fields/field-block-types.php' );
-		acfe_include( 'pro/includes/fields/field-countries.php' );
-		acfe_include( 'pro/includes/fields/field-currencies.php' );
-		acfe_include( 'pro/includes/fields/field-date-range-picker.php' );
-		acfe_include( 'pro/includes/fields/field-field-groups.php' );
-		acfe_include( 'pro/includes/fields/field-field-types.php' );
-		acfe_include( 'pro/includes/fields/field-fields.php' );
-		acfe_include( 'pro/includes/fields/field-google-map.php' );
-		acfe_include( 'pro/includes/fields/field-image-selector.php' );
-		acfe_include( 'pro/includes/fields/field-image-sizes.php' );
-		acfe_include( 'pro/includes/fields/field-languages.php' );
-		acfe_include( 'pro/includes/fields/field-menus.php' );
-		acfe_include( 'pro/includes/fields/field-menu-locations.php' );
-		acfe_include( 'pro/includes/fields/field-options-pages.php' );
-		acfe_include( 'pro/includes/fields/field-payment.php' );
-		acfe_include( 'pro/includes/fields/field-payment-cart.php' );
-		acfe_include( 'pro/includes/fields/field-payment-selector.php' );
-		acfe_include( 'pro/includes/fields/field-phone-number.php' );
-		acfe_include( 'pro/includes/fields/field-post-field.php' );
-		acfe_include( 'pro/includes/fields/field-post-formats.php' );
-		acfe_include( 'pro/includes/fields/field-relationship.php' );
-		acfe_include( 'pro/includes/fields/field-templates.php' );
-		acfe_include( 'pro/includes/fields/field-wysiwyg.php' );
+		acf_include( 'extend/pro/includes/fields/field-block-types.php' );
+		acf_include( 'extend/pro/includes/fields/field-countries.php' );
+		acf_include( 'extend/pro/includes/fields/field-currencies.php' );
+		acf_include( 'extend/pro/includes/fields/field-date-range-picker.php' );
+		acf_include( 'extend/pro/includes/fields/field-field-groups.php' );
+		acf_include( 'extend/pro/includes/fields/field-field-types.php' );
+		acf_include( 'extend/pro/includes/fields/field-fields.php' );
+		acf_include( 'extend/pro/includes/fields/field-google-map.php' );
+		acf_include( 'extend/pro/includes/fields/field-image-selector.php' );
+		acf_include( 'extend/pro/includes/fields/field-image-sizes.php' );
+		acf_include( 'extend/pro/includes/fields/field-languages.php' );
+		acf_include( 'extend/pro/includes/fields/field-menus.php' );
+		acf_include( 'extend/pro/includes/fields/field-menu-locations.php' );
+		acf_include( 'extend/pro/includes/fields/field-options-pages.php' );
+		acf_include( 'extend/pro/includes/fields/field-payment.php' );
+		acf_include( 'extend/pro/includes/fields/field-payment-cart.php' );
+		acf_include( 'extend/pro/includes/fields/field-payment-selector.php' );
+		acf_include( 'extend/pro/includes/fields/field-phone-number.php' );
+		acf_include( 'extend/pro/includes/fields/field-post-field.php' );
+		acf_include( 'extend/pro/includes/fields/field-post-formats.php' );
+		acf_include( 'extend/pro/includes/fields/field-relationship.php' );
+		acf_include( 'extend/pro/includes/fields/field-templates.php' );
+		acf_include( 'extend/pro/includes/fields/field-wysiwyg.php' );
 	}
 
 	/**
@@ -281,24 +279,50 @@ final class Extend_ACF {
 	 */
 	public function include_admin_tools(){
 
-		acfe_include( 'includes/admin/tools/module-export.php' );
-		acfe_include( 'includes/admin/tools/module-import.php' );
-		acfe_include( 'includes/admin/tools/post-types-export.php' );
-		acfe_include( 'includes/admin/tools/post-types-import.php' );
-		acfe_include( 'includes/admin/tools/taxonomies-export.php' );
-		acfe_include( 'includes/admin/tools/taxonomies-import.php' );
-		acfe_include( 'includes/admin/tools/options-pages-export.php' );
-		acfe_include( 'includes/admin/tools/options-pages-import.php' );
-		acfe_include( 'includes/admin/tools/block-types-export.php' );
-		acfe_include( 'includes/admin/tools/block-types-import.php' );
-		acfe_include( 'includes/admin/tools/forms-export.php' );
-		acfe_include( 'includes/admin/tools/forms-import.php' );
-
-		acfe_include( 'pro/includes/admin/tools/rewrite-rules-export.php' );
-		acfe_include( 'pro/includes/admin/tools/settings-export.php' );
-		acfe_include( 'pro/includes/admin/tools/settings-import.php' );
-		acfe_include( 'pro/includes/admin/tools/templates-export.php' );
-		acfe_include( 'pro/includes/admin/tools/templates-import.php' );
+		acf_include( 'extend/includes/admin/tools/module-export.php' );
+		acf_include( 'extend/includes/admin/tools/module-import.php' );
+		acf_include( 'extend/includes/admin/tools/module-import.php' );
+		acf_include( 'extend/includes/admin/tools/module-import.php' );
+		acf_include( 'extend/includes/admin/tools/module-import.php' );
+		acf_include( 'extend/includes/admin/tools/module-import.php' );
+		acf_include( 'extend/includes/admin/tools/module-import.php' );
+		acf_include( 'extend/includes/admin/tools/module-import.php' );
+		acf_include( 'extend/includes/admin/tools/module-import.php' );
+		acf_include( 'extend/includes/admin/tools/module-import.php' );
+		acf_include( 'extend/includes/admin/tools/module-import.php' );
+		acf_include( 'extend/includes/admin/tools/module-import.php' );
+		acf_include( 'extend/includes/admin/tools/module-import.php' );
+		acf_include( 'extend/includes/admin/tools/module-import.php' );
+		acf_include( 'extend/includes/admin/tools/module-import.php' );
+		acf_include( 'extend/includes/admin/tools/module-import.php' );
+		acf_include( 'extend/includes/admin/tools/module-import.php' );
+		acf_include( 'extend/includes/admin/tools/module-import.php' );
+		acf_include( 'extend/includes/admin/tools/module-import.php' );
+		acf_include( 'extend/includes/admin/tools/module-import.php' );
+		acf_include( 'extend/includes/admin/tools/module-import.php' );
+		acf_include( 'extend/includes/admin/tools/module-import.php' );
+		acf_include( 'extend/includes/admin/tools/module-import.php' );
+		acf_include( 'extend/includes/admin/tools/module-import.php' );
+		acf_include( 'extend/includes/admin/tools/module-import.php' );
+		acf_include( 'extend/includes/admin/tools/module-import.php' );
+		acf_include( 'extend/includes/admin/tools/module-import.php' );
+		acf_include( 'extend/includes/admin/tools/module-import.php' );
+		acf_include( 'extend/includes/admin/tools/module-import.php' );
+		acf_include( 'extend/includes/admin/tools/post-types-export.php' );
+		acf_include( 'extend/includes/admin/tools/post-types-import.php' );
+		acf_include( 'extend/includes/admin/tools/taxonomies-export.php' );
+		acf_include( 'extend/includes/admin/tools/taxonomies-import.php' );
+		acf_include( 'extend/includes/admin/tools/block-types-export.php' );
+		acf_include( 'extend/includes/admin/tools/block-types-import.php' );
+		acf_include( 'extend/includes/admin/tools/forms-export.php' );
+		acf_include( 'extend/includes/admin/tools/forms-import.php' );
+		acf_include( 'extend/includes/admin/tools/options-pages-export.php' );
+		acf_include( 'extend/includes/admin/tools/options-pages-import.php' );
+		acf_include( 'extend/includes/admin/tools/templates-export.php' );
+		acf_include( 'extend/includes/admin/tools/templates-import.php' );
+		acf_include( 'extend/includes/admin/tools/rewrite-rules-export.php' );
+		acf_include( 'extend/includes/admin/tools/settings-export.php' );
+		acf_include( 'extend/includes/admin/tools/settings-import.php' );
 	}
 
 	/**
@@ -309,8 +333,8 @@ final class Extend_ACF {
 	 * @return void
 	 */
 	public function include_admin_tools_late() {
-		acfe_include( 'includes/admin/tools/field-groups-local.php' );
-		acfe_include( 'includes/admin/tools/field-groups-export.php' );
+		acf_include( 'extend/includes/admin/tools/field-groups-local.php' );
+		acf_include( 'extend/includes/admin/tools/field-groups-export.php' );
 	}
 
 	/**

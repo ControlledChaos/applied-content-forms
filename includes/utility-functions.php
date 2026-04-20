@@ -165,25 +165,6 @@ function acf_include( $filename = '' ) {
 }
 
 /**
- * acfe_include
- *
- * Includes a file within the plugin
- *
- * @param string $filename
- */
-function acfe_include($filename = ''){
-
-    $file_path = ACFE_PATH . ltrim($filename, '/');
-
-    if(file_exists($file_path)){
-        return include_once($file_path);
-    }
-
-    return false;
-
-}
-
-/**
  * acfe_get_path
  *
  * Returns the plugin path

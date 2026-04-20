@@ -26,15 +26,15 @@ class acfe_pro_scripts{
         add_action('acf/validate_save_post',    array($this, 'validate_save_post'), 1);
 
         // scripts
-        acfe_include('pro/includes/modules/scripts/script-orphan-meta-cleaner.php');
-        acfe_include('pro/includes/modules/scripts/script-single-meta-converter.php');
+        acf_include('extend/pro/includes/modules/scripts/script-orphan-meta-cleaner.php');
+        acf_include('extend/pro/includes/modules/scripts/script-single-meta-converter.php');
 
         // scripts demo
         if(acfe_get_setting('modules/scripts/demo')){
 
-            acfe_include('pro/includes/modules/scripts/script-count-posts.php');
-            acfe_include('pro/includes/modules/scripts/script-export-posts.php');
-            acfe_include('pro/includes/modules/scripts/script-import-posts.php');
+            acf_include('extend/pro/includes/modules/scripts/script-count-posts.php');
+            acf_include('extend/pro/includes/modules/scripts/script-export-posts.php');
+            acf_include('extend/pro/includes/modules/scripts/script-import-posts.php');
 
         }
 

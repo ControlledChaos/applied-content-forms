@@ -18,7 +18,7 @@ class acfe_module_options{
      */
     function __construct(){
 
-        acfe_include( 'includes/modules/options.class.php' );
+        acf_include( 'extend/includes/modules/options.class.php' );
         add_filter( 'set-screen-option', array( $this, 'acfe_options_screen' ), 10, 3 );
         add_action( 'admin_menu', array( $this, 'admin_menu' ), 25 );
         add_action( 'acf/save_post', array( $this, 'save_post' ), 5 );
