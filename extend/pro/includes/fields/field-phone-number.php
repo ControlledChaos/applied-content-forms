@@ -6,12 +6,12 @@ if(!defined('ABSPATH'))
 if(!class_exists('acfe_field_phone_number')):
 
 class acfe_field_phone_number extends acf_field{
-    
+
     /*
      * Construct
      */
     function __construct(){
-        
+
         $this->name = 'acfe_phone_number';
         $this->label = __('Phone Number', 'acfe');
         $this->category = 'jquery';
@@ -28,16 +28,16 @@ class acfe_field_phone_number extends acf_field{
             'placeholder'           => '',
             'return_format'         => 'number',
         );
-        
+
         parent::__construct();
-        
+
     }
-    
+
     /*
      * Render Field Settings
      */
     function render_field_settings($field){
-        
+
         // Countries
         acf_render_field_setting($field, array(
             'label'         => __('Allow Countries', 'acf'),
@@ -50,7 +50,7 @@ class acfe_field_phone_number extends acf_field{
             'ui'            => true,
             'multiple'      => true,
         ));
-        
+
         // Preferred Countries
         acf_render_field_setting($field, array(
             'label'         => __('Preferred Countries','acf'),
@@ -63,7 +63,7 @@ class acfe_field_phone_number extends acf_field{
             'ui'            => true,
             'multiple'      => true,
         ));
-    
+
         // Default Country
         acf_render_field_setting($field, array(
             'label'         => __('Default Country', 'acf'),
@@ -84,7 +84,7 @@ class acfe_field_phone_number extends acf_field{
                 ),
             )
         ));
-    
+
         // Geolocation
         acf_render_field_setting($field, array(
             'label'         => __('Geolocation','acf'),
@@ -93,7 +93,7 @@ class acfe_field_phone_number extends acf_field{
             'type'          => 'true_false',
             'ui'            => 1,
         ));
-    
+
         // Native Names
         acf_render_field_setting($field, array(
             'label'         => __('Native Names','acf'),
@@ -102,7 +102,7 @@ class acfe_field_phone_number extends acf_field{
             'type'          => 'true_false',
             'ui'            => 1,
         ));
-    
+
         // National Mode
         acf_render_field_setting($field, array(
             'label'         => __('National Mode','acf'),
@@ -120,7 +120,7 @@ class acfe_field_phone_number extends acf_field{
                 ),
             )
         ));
-    
+
         // Dropdown
         acf_render_field_setting($field, array(
             'label'         => __('Allow Dropdown','acf'),
@@ -129,7 +129,7 @@ class acfe_field_phone_number extends acf_field{
             'type'          => 'true_false',
             'ui'            => 1,
         ));
-    
+
         // Separate Dial Code
         acf_render_field_setting($field, array(
             'label'         => __('Separate Dial Code','acf'),
@@ -138,7 +138,7 @@ class acfe_field_phone_number extends acf_field{
             'type'          => 'true_false',
             'ui'            => 1,
         ));
-        
+
         // Default Value
         acf_render_field_setting($field, array(
             'label'         => __('Default Value','acf'),
@@ -146,7 +146,7 @@ class acfe_field_phone_number extends acf_field{
             'name'          => 'default_value',
             'type'          => 'text',
         ));
-        
+
         // Placeholder
         acf_render_field_setting($field, array(
             'label'         => __('Placeholder','acf'),
@@ -154,7 +154,7 @@ class acfe_field_phone_number extends acf_field{
             'name'          => 'placeholder',
             'type'          => 'text',
         ));
-        
+
         // return_format
         acf_render_field_setting($field, array(
             'label'         => __('Return Value', 'acf'),
@@ -167,10 +167,10 @@ class acfe_field_phone_number extends acf_field{
                 'number'        => __('Phone Number', 'acf'),
             ),
         ));
-        
+
         // Server Validation
         if(!class_exists('libphonenumber\PhoneNumberUtil')){
-        
+
             acf_render_field_setting($field, array(
                 'label'         => __('Server Validation', 'acf'),
                 'instructions'  => '',
@@ -178,21 +178,21 @@ class acfe_field_phone_number extends acf_field{
                 'new_lines'     => 'br',
                 'message'       => '<a href="https://github.com/giggsey/libphonenumber-for-php" target="_blank">Libphonenumber for PHP</a> was not found on your WordPress website.<br />In order to enable the server validation you must manually include the library or install the <a href="https://www.acf-extended.com/addons/acf-extended-pro-libphonenumber.zip" target="_blank">ACF Extended: Phone Number Library Addon</a>.',
             ));
-        
+
         }
-        
+
     }
-    
+
     /*
      * Register Scripts
      */
     function input_admin_enqueue_scripts(){
-        
+
         $suffix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
-        
-        wp_register_script('acfe-intl-tel-input', acfe_get_url('pro/assets/inc/intl-tel-input/intl-tel-input' . $suffix . '.js'), array('acf-input'), '17.0.0');
-        wp_register_style('acfe-intl-tel-input', acfe_get_url('pro/assets/inc/intl-tel-input/intl-tel-input' . $suffix . '.css'), array(), '17.0.0');
-        
+
+        wp_register_script('acfe-intl-tel-input', acf_get_url('assets/inc/intl-tel-input/intl-tel-input' . $suffix . '.js'), array('acf-input'), '17.0.0');
+        wp_register_style('acfe-intl-tel-input', acf_get_url('assets/inc/intl-tel-input/intl-tel-input' . $suffix . '.css'), array(), '17.0.0');
+
         // localize
         acf_localize_data(array(
             'phoneNumberL10n' => array(
@@ -202,18 +202,18 @@ class acfe_field_phone_number extends acf_field{
                 'phoneNumberTooLong'    => _x('Phone Number is too long',   'Phone Number JS phoneNumberTooLong',   'acfe'),
             )
         ));
-        
+
     }
-    
+
     /*
      * Render Field
      */
     function render_field($field){
-        
+
         // Enqueue
         wp_enqueue_script('acfe-intl-tel-input');
         wp_enqueue_style('acfe-intl-tel-input');
-        
+
         // Div
         $div = array(
             'class'                     => "acfe-phone-number {$field['class']}",
@@ -227,24 +227,24 @@ class acfe_field_phone_number extends acf_field{
             'data-national'             => $field['national'],
             'data-placeholder'          => $field['placeholder'],
         );
-        
+
         $value = $field['value'] === false ? '' : $field['value'];
         $hidden_value = is_array($value) ? $value : '';
         $text_value = is_array($value) ? acf_maybe_get($field['value'], 'number') : $value;
-        
+
         // Hidden
         $hidden_input = array(
             'name'  => $field['name'],
             'value' => $hidden_value,
         );
-        
+
         // Text
         $text_input = array(
             'type'  => 'tel',
             'class' => 'input',
             'value' => $text_value,
         );
-        
+
         // Render
         ?>
         <div <?php echo acf_esc_attrs($div); ?>>
@@ -252,106 +252,106 @@ class acfe_field_phone_number extends acf_field{
             <?php acf_text_input($text_input); ?>
         </div>
         <?php
-        
+
     }
-    
+
     function validate_value($valid, $value, $field, $input){
-        
+
         if(!$value)
             return $valid;
-        
+
         // Check library
         if(!class_exists('libphonenumber\PhoneNumberUtil'))
             return $valid;
-        
+
         // Check string
         if(!is_string($value))
             return __('Invalid Phone Number', 'acfe');
-        
+
         // Decode JSON
         $value = json_decode(wp_unslash($value), true);
-        
+
         if(!$value)
             return __('Invalid Phone Number', 'acfe');
-        
+
         // Ensure value is an array
         $value = acf_get_array($value);
-        
+
         // Format array
         $value = wp_parse_args($value, array(
             'number' => '',
             'country' => '',
         ));
-        
+
         // Bail early
         if(empty($value['number']) || empty($value['country']))
             $valid = __('Invalid Phone Number', 'acfe');
-        
+
         // Get libphonenumber instance
         $libphonenumber = libphonenumber\PhoneNumberUtil::getInstance();
-        
+
         // Validate
         try{
-        
+
             $number_data = $libphonenumber->parse($value['number'], $value['country']);
-        
+
             if(!$libphonenumber->isValidNumber($number_data))
                 $valid = __('Invalid Phone Number', 'acfe');
-        
+
         }catch(libphonenumber\NumberParseException $e){
-            
+
             $valid = __('Invalid Phone Number', 'acfe');
-            
+
         }
-        
+
         return $valid;
-        
+
     }
-    
+
     function update_value($value, $post_id, $field){
-        
+
         // Decode JSON string
         if(is_string($value)){
             $value = json_decode(wp_unslash($value), true);
         }
-    
+
         // Ensure value is an array.
         if($value){
-    
+
             $value = acf_get_array($value);
-            
+
             return wp_parse_args($value, array(
                 'number' => '',
                 'country' => '',
             ));
-            
+
         }
-        
+
         // Return
         return false;
-        
+
     }
-    
+
     /*
      * Format Value
      */
     function format_value($value, $post_id, $field){
-    
+
         // Decode JSON string
         if(acfe_is_json($value)){
             $value = json_decode(wp_unslash($value), true);
         }
-        
+
         // Number
         if($field['return_format'] === 'number'){
             $value = acf_maybe_get($value, 'number');
         }
-    
+
         // Return
         return $value;
-        
+
     }
-    
+
 }
 
 // initialize
