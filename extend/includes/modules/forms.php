@@ -1865,7 +1865,7 @@ If used, you have to include the following code <code>%s</code> to print the act
 		acf_add_local_field_group(array(
             'key' => 'group_acf_form_side',
             'title' => 'Form: Side',
-            'acfe_display_title' => 'Active',
+            'acfe_display_title' => 'Status',
             'fields' => array(
                 array(
                     'key' => 'field_acfe_form_active',
@@ -1883,8 +1883,8 @@ If used, you have to include the following code <code>%s</code> to print the act
                     'message' => '',
                     'default_value' => 1,
                     'ui' => 1,
-                    'ui_on_text' => '',
-                    'ui_off_text' => '',
+                    'ui_on_text' => 'Active',
+                    'ui_off_text' => 'Inactive',
                 ),
             ),
             'location' => array(

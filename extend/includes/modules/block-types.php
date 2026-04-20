@@ -1690,7 +1690,7 @@ full',
 		acf_add_local_field_group(array(
 			'key' => 'group_acf_block_type_side',
 			'title' => 'Block Type: Side',
-			'acfe_display_title' => 'Active',
+			'acfe_display_title' => 'Status',
 			'fields' => array(
 				array(
 					'key' => 'field_acfe_dbt_active',
@@ -1708,8 +1708,8 @@ full',
 					'message' => '',
 					'default_value' => 1,
 					'ui' => 1,
-					'ui_on_text' => '',
-					'ui_off_text' => '',
+					'ui_on_text' => 'Active',
+					'ui_off_text' => 'Inactive',
 				),
 			),
 			'location' => array(

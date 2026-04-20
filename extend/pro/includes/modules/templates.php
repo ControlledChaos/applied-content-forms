@@ -963,7 +963,7 @@ class acfe_dynamic_templates extends acfe_dynamic_module {
         acf_add_local_field_group(array(
             'key' => 'group_acf_template_side',
             'title' => 'Templates: Side',
-            'acfe_display_title' => 'Active',
+            'acfe_display_title' => 'Status',
             'fields' => array(
                 array(
                     'key' => 'field_acfe_template_active',
@@ -981,8 +981,8 @@ class acfe_dynamic_templates extends acfe_dynamic_module {
                     'message' => '',
                     'default_value' => 1,
                     'ui' => 1,
-                    'ui_on_text' => '',
-                    'ui_off_text' => '',
+                    'ui_on_text' => 'Active',
+                    'ui_off_text' => 'Inactive',
                 ),
             ),
             'location' => array(

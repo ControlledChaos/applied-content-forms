@@ -2,19 +2,19 @@
 
 // global
 global $field_group;
-		
-		
+
+
 // active
 acf_render_field_wrap(array(
-	'label'			=> __('Active','acf'),
+	'label'			=> __('Status','acf'),
 	'instructions'	=> '',
 	'type'			=> 'true_false',
 	'name'			=> 'active',
 	'prefix'		=> 'acf_field_group',
 	'value'			=> $field_group['active'],
 	'ui'			=> 1,
-	//'ui_on_text'	=> __('Active', 'acf'),
-	//'ui_off_text'	=> __('Inactive', 'acf'),
+	'ui_on_text'	=> __('Active', 'acf'),
+	'ui_off_text'	=> __('Inactive', 'acf'),
 ));
 
 
@@ -121,7 +121,7 @@ $choices = array(
 	'send-trackbacks'	=>	__("Send Trackbacks", 'acf'),
 );
 if( acf_get_setting('remove_wp_meta_box') ) {
-	unset( $choices['custom_fields'] );	
+	unset( $choices['custom_fields'] );
 }
 
 acf_render_field_wrap(array(
@@ -138,18 +138,18 @@ acf_render_field_wrap(array(
 
 // 3rd party settings
 do_action('acf/render_field_group_settings', $field_group);
-		
+
 ?>
 <div class="acf-hidden">
 	<input type="hidden" name="acf_field_group[key]" value="<?php echo $field_group['key']; ?>" />
 </div>
 <script type="text/javascript">
 if( typeof acf !== 'undefined' ) {
-		
+
 	acf.newPostbox({
 		'id': 'acf-field-group-options',
 		'label': 'left'
-	});	
+	});
 
 }
 </script>

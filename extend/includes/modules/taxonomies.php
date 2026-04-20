@@ -2460,7 +2460,7 @@ assign_terms : edit_posts',
 		acf_add_local_field_group(array(
             'key' => 'group_acf_taxonomy_side',
             'title' => 'Taxonomy: Side',
-            'acfe_display_title' => 'Active',
+            'acfe_display_title' => 'Status',
             'fields' => array(
                 array(
                     'key' => 'field_acfe_dt_active',
@@ -2478,8 +2478,8 @@ assign_terms : edit_posts',
                     'message' => '',
                     'default_value' => 1,
                     'ui' => 1,
-                    'ui_on_text' => '',
-                    'ui_off_text' => '',
+                    'ui_on_text' => 'Active',
+                    'ui_off_text' => 'Inactive',
                 ),
             ),
             'location' => array(

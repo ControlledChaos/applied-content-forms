@@ -1261,7 +1261,7 @@ Defaults to false.',
 		acf_add_local_field_group(array(
 			'key' => 'group_acf_options_page_side',
 			'title' => 'Options Page: Side',
-			'acfe_display_title' => 'Active',
+			'acfe_display_title' => 'Status',
 			'fields' => array(
 				array(
 					'key' => 'field_acfe_dop_active',
@@ -1279,8 +1279,8 @@ Defaults to false.',
 					'message' => '',
 					'default_value' => 1,
 					'ui' => 1,
-					'ui_on_text' => '',
-					'ui_off_text' => '',
+					'ui_on_text' => 'Active',
+					'ui_off_text' => 'Inactive',
 				),
 			),
 			'location' => array(
