@@ -1,1246 +1,1308 @@
 <?php
 
 if(!defined('ABSPATH'))
-    exit;
+	exit;
 
 if(!class_exists('acfe_dynamic_options_pages')):
 
 class acfe_dynamic_options_pages extends acfe_dynamic_module{
 
-    /*
-     * Initialize
-     */
-    function initialize(){
-
-        $this->active = get_field( 'acf_options_pages', 'option' );
-        $this->settings = 'modules.options_pages';
-        $this->post_type = 'acf-options-page';
-        $this->label = 'Options Page Title';
-        $this->textdomain = 'ACF Extended: Options Pages';
-
-        $this->tool = 'acfe_dynamic_options_pages_export';
-        $this->tools = array('php', 'json');
-        $this->columns = array(
-            'name'      => __('Menu slug', 'acf'),
-            'post_id'   => __('Post ID', 'acf'),
-            'autoload'  => __('Autoload', 'acf'),
-        );
-
-    }
-
-    /*
-     * Actions
-     */
-    function actions(){
-
-        // Features
-        add_action('admin_footer',                                      array($this, 'admin_config'));
-        add_action('pre_get_posts',                                     array($this, 'admin_archive_posts'), 15);
-
-        // Validate
-        add_filter('acf/validate_value/key=field_acfe_dop_menu_slug',   array($this, 'validate_name'), 10, 4);
-        add_filter('acf/update_value/key=field_acfe_dop_menu_slug',     array($this, 'update_name'), 10, 3);
-
-        // Register
-        add_filter('acfe/options_page/prepare_register',                array($this, 'prepare_register'));
-
-        // Save
-        add_filter('acfe/options_page/save_args',                       array($this, 'save_args'), 10, 3);
-        add_action('acfe/options_page/save',                            array($this, 'save'), 10, 3);
-
-        // Import
-        add_action('acfe/options_page/import_fields',                   array($this, 'import_fields'), 10, 3);
-        add_action('acfe/options_page/import',                          array($this, 'after_import'), 10, 2);
-
-        // Multilang
-        add_action('acfe/options_page/save',                            array($this, 'l10n_save'), 10, 3);
-        add_filter('acfe/options_page/register',                        array($this, 'l10n_register'), 10, 2);
-
-        $this->register_user_options_pages();
-
-    }
-
-    /*
-     * Get Name
-     */
-    function get_name($post_id){
-
-        return get_field('menu_slug', $post_id);
-
-    }
-
-    /*
-     * Init
-     */
-    function init(){
-
-        $this->register_post_type();
-
-    }
-
-    /*
-     * Register Post Type
-     */
-    function register_post_type(){
-
-        $capability = acf_get_setting('capability');
-
-        if(!acf_get_setting('show_admin'))
-            $capability = false;
-
-        register_post_type($this->post_type, array(
-            'label'                 => 'Options Page',
-            'description'           => 'Options Page',
-            'labels'                => array(
-                'name'          => 'Options Pages',
-                'singular_name' => 'Options Page',
-                'menu_name'     => 'Options Pages',
-                'edit_item'     => 'Edit Options Page',
-                'add_new_item'  => 'New Options Page',
-            ),
-            'supports'              => array('title'),
-            'hierarchical'          => true,
-            'public'                => false,
-            'show_ui'               => true,
-            'show_in_menu'          => 'options-general.php',
-            'menu_icon'             => 'dashicons-admin-generic',
-            'show_in_admin_bar'     => false,
-            'show_in_nav_menus'     => false,
-            'can_export'            => false,
-            'has_archive'           => false,
-            'rewrite'               => false,
-            'exclude_from_search'   => true,
-            'publicly_queryable'    => false,
-            'capabilities'          => array(
-                'publish_posts'         => $capability,
-                'edit_posts'            => $capability,
-                'edit_others_posts'     => $capability,
-                'delete_posts'          => $capability,
-                'delete_others_posts'   => $capability,
-                'read_private_posts'    => $capability,
-                'edit_post'             => $capability,
-                'delete_post'           => $capability,
-                'read_post'             => $capability,
-            ),
-            'acfe_admin_orderby'    => 'title',
-            'acfe_admin_order'      => 'ASC',
-            'acfe_admin_ppp'        => 999,
-        ));
+	/*
+	 * Initialize
+	 */
+	function initialize(){
 
-    }
+		$this->active = get_field( 'acf_options_pages', 'option' );
+		$this->settings = 'modules.options_pages';
+		$this->post_type = 'acf-options-page';
+		$this->label = 'Options Page Title';
+		$this->textdomain = 'ACF Extended: Options Pages';
+
+		$this->tool = 'acfe_dynamic_options_pages_export';
+		$this->tools = array('php', 'json');
+		$this->columns = array(
+			'name'      => __('Menu slug', 'acf'),
+			'post_id'   => __('Post ID', 'acf'),
+			'autoload'  => __('Autoload', 'acf'),
+		);
+
+	}
+
+	/*
+	 * Actions
+	 */
+	function actions(){
+
+		// Features
+		add_action('admin_footer',                                      array($this, 'admin_config'));
+		add_action('pre_get_posts',                                     array($this, 'admin_archive_posts'), 15);
+
+		// Validate
+		add_filter('acf/validate_value/key=field_acfe_dop_menu_slug',   array($this, 'validate_name'), 10, 4);
+		add_filter('acf/update_value/key=field_acfe_dop_menu_slug',     array($this, 'update_name'), 10, 3);
+
+		// Register
+		add_filter('acfe/options_page/prepare_register',                array($this, 'prepare_register'));
+		add_filter('acfe/options_page/register',        array($this, 'register'), 15, 2);
+
+		// Save
+		add_filter('acfe/options_page/save_args',                       array($this, 'save_args'), 10, 3);
+		add_action('acfe/options_page/save',                            array($this, 'save'), 10, 3);
+
+		// Import
+		add_action('acfe/options_page/import_fields',                   array($this, 'import_fields'), 10, 3);
+		add_action('acfe/options_page/import',                          array($this, 'after_import'), 10, 2);
+
+		// Multilang
+		add_action('acfe/options_page/save',                            array($this, 'l10n_save'), 10, 3);
+		add_filter('acfe/options_page/register',                        array($this, 'l10n_register'), 10, 2);
+
+		$this->register_user_options_pages();
+
+	}
+
+	/*
+	 * Register
+	 */
+	function register($args, $name){
+
+		// Check Active
+		if(!acf_maybe_get($args, 'active', true))
+			return false;
+
+		return $args;
+
+	}
+
+	/*
+	 * Get Name
+	 */
+	function get_name($post_id){
+
+		return get_field('menu_slug', $post_id);
+
+	}
+
+	/*
+	 * Init
+	 */
+	function init(){
+
+		$this->register_post_type();
+
+	}
+
+	/*
+	 * Register Post Type
+	 */
+	function register_post_type(){
+
+		$capability = acf_get_setting('capability');
+
+		if(!acf_get_setting('show_admin'))
+			$capability = false;
+
+		register_post_type($this->post_type, array(
+			'label'                 => 'Options Page',
+			'description'           => 'Options Page',
+			'labels'                => array(
+				'name'          => 'Options Pages',
+				'singular_name' => 'Options Page',
+				'menu_name'     => 'Options Pages',
+				'edit_item'     => 'Edit Options Page',
+				'add_new_item'  => 'New Options Page',
+			),
+			'supports'              => array('title'),
+			'hierarchical'          => true,
+			'public'                => false,
+			'show_ui'               => true,
+			'show_in_menu'          => 'options-general.php',
+			'menu_icon'             => 'dashicons-admin-generic',
+			'show_in_admin_bar'     => false,
+			'show_in_nav_menus'     => false,
+			'can_export'            => false,
+			'has_archive'           => false,
+			'rewrite'               => false,
+			'exclude_from_search'   => true,
+			'publicly_queryable'    => false,
+			'capabilities'          => array(
+				'publish_posts'         => $capability,
+				'edit_posts'            => $capability,
+				'edit_others_posts'     => $capability,
+				'delete_posts'          => $capability,
+				'delete_others_posts'   => $capability,
+				'read_private_posts'    => $capability,
+				'edit_post'             => $capability,
+				'delete_post'           => $capability,
+				'read_post'             => $capability,
+			),
+			'acfe_admin_orderby'    => 'title',
+			'acfe_admin_order'      => 'ASC',
+			'acfe_admin_ppp'        => 999,
+		));
+
+	}
+
+	/*
+	 * Register User Options Pages
+	 */
+	function register_user_options_pages(){
+
+		$settings = apply_filters('acfe/options_page/prepare_register', acfe_get_settings($this->settings));
+
+		if(empty($settings))
+			return;
+
+		foreach($settings as $name => $args){
+
+			// Bail early
+			if(empty($name) || acf_get_options_page($name))
+				continue;
+
+			// Filters
+			$args = apply_filters("acfe/options_page/register",                 $args, $name);
+			$args = apply_filters("acfe/options_page/register/name={$name}",    $args, $name);
 
-    /*
-     * Register User Options Pages
-     */
-    function register_user_options_pages(){
+			if($args === false)
+				continue;
 
-        $settings = apply_filters('acfe/options_page/prepare_register', acfe_get_settings($this->settings));
+			// Register
+			acf_add_options_page($args);
 
-        if(empty($settings))
-            return;
+		}
 
-        foreach($settings as $name => $args){
+	}
+
+	/*
+	 * Post Head
+	 */
+	function post_head(){
+
+		global $post;
 
-            // Bail early
-            if(empty($name) || acf_get_options_page($name))
-                continue;
+		$post_id = $post->ID;
+		$name = $this->get_name($post_id);
 
-            // Filters
-            $args = apply_filters("acfe/options_page/register",                 $args, $name);
-            $args = apply_filters("acfe/options_page/register/name={$name}",    $args, $name);
+		$field_groups = acf_get_field_groups(array(
+			'options_page' => $name
+		));
 
-            if($args === false)
-                continue;
+		if($field_groups){
 
-            // Register
-            acf_add_options_page($args);
+			add_meta_box( 'acf-options-page-field-groups', __('Field Groups', 'acf'), array($this, 'metabox_render'), $this->post_type, 'normal', 'default', $field_groups);
 
-        }
+		}
 
-    }
+	}
 
-    /*
-     * Post Head
-     */
-    function post_head(){
+	/*
+	 * Metabox Render
+	 */
+	function metabox_render($array, $data){
 
-        global $post;
+		$data = $data['args'];
 
-        $post_id = $post->ID;
-        $name = $this->get_name($post_id);
+		foreach($data as $field_group){ ?>
 
-        $field_groups = acf_get_field_groups(array(
-            'options_page' => $name
-        ));
+			<div class="acf-field">
 
-        if($field_groups){
+				<div class="acf-label">
+					<label for="acf-_post_title"><a href="<?php echo admin_url('post.php?post=' . $field_group['ID'] . '&action=edit'); ?>"><?php echo $field_group['title']; ?></a></label>
+					<p class="description"><?php echo $field_group['key']; ?></p>
+				</div>
 
-            add_meta_box( 'acf-options-page-field-groups', __('Field Groups', 'acf'), array($this, 'metabox_render'), $this->post_type, 'normal', 'default', $field_groups);
+				<div class="acf-input">
+					<?php $fields = acf_get_fields($field_group); ?>
 
-        }
+					<?php if(!empty($fields)){ ?>
 
-    }
+						<table class="acf-table">
+							<thead>
+							<th class="acf-th" width="25%"><strong>Label</strong></th>
+							<th class="acf-th" width="25%"><strong>Name</strong></th>
+							<th class="acf-th" width="25%"><strong>Key</strong></th>
+							<th class="acf-th" width="25%"><strong>Type</strong></th>
+							</thead>
 
-    /*
-     * Metabox Render
-     */
-    function metabox_render($array, $data){
+							<tbody>
+							<?php
 
-        $data = $data['args'];
+							$array = array();
+							foreach($fields as $field){
 
-        foreach($data as $field_group){ ?>
+								$this->get_fields_labels_recursive($array, $field);
 
-            <div class="acf-field">
+							}
 
-                <div class="acf-label">
-                    <label for="acf-_post_title"><a href="<?php echo admin_url('post.php?post=' . $field_group['ID'] . '&action=edit'); ?>"><?php echo $field_group['title']; ?></a></label>
-                    <p class="description"><?php echo $field_group['key']; ?></p>
-                </div>
+							foreach($array as $field_key => $field_label){
 
-                <div class="acf-input">
-                    <?php $fields = acf_get_fields($field_group); ?>
+								$field = acf_get_field($field_key);
+								$type = acf_get_field_type($field['type']);
+								$type_label = '-';
+								if(isset($type->label))
+									$type_label = $type->label;
+								?>
 
-                    <?php if(!empty($fields)){ ?>
+								<tr class="acf-row">
+									<td width="25%"><?php echo $field_label; ?></td>
+									<td width="25%"><?php echo $field['name']; ?></td>
+									<td width="25%"><code><?php echo $field_key; ?></code></td>
+									<td width="25%"><?php echo $type_label; ?></td>
+								</tr>
 
-                        <table class="acf-table">
-                            <thead>
-                            <th class="acf-th" width="25%"><strong>Label</strong></th>
-                            <th class="acf-th" width="25%"><strong>Name</strong></th>
-                            <th class="acf-th" width="25%"><strong>Key</strong></th>
-                            <th class="acf-th" width="25%"><strong>Type</strong></th>
-                            </thead>
+							<?php } ?>
+							</tbody>
+						</table>
 
-                            <tbody>
-                            <?php
+					<?php } ?>
+				</div>
 
-                            $array = array();
-                            foreach($fields as $field){
+			</div>
 
-                                $this->get_fields_labels_recursive($array, $field);
+		<?php } ?>
 
-                            }
+		<script type="text/javascript">
+		(function($){
 
-                            foreach($array as $field_key => $field_label){
+			if(typeof acf === 'undefined')
+				return;
 
-                                $field = acf_get_field($field_key);
-                                $type = acf_get_field_type($field['type']);
-                                $type_label = '-';
-                                if(isset($type->label))
-                                    $type_label = $type->label;
-                                ?>
+			acf.newPostbox(<?php echo wp_json_encode(array(
+				'id'    => 'acf-options-page-field-groups',
+				'key'   => '',
+				'style' => 'default',
+				'label' => 'left',
+				'edit'  => false
+			)); ?>);
 
-                                <tr class="acf-row">
-                                    <td width="25%"><?php echo $field_label; ?></td>
-                                    <td width="25%"><?php echo $field['name']; ?></td>
-                                    <td width="25%"><code><?php echo $field_key; ?></code></td>
-                                    <td width="25%"><?php echo $type_label; ?></td>
-                                </tr>
+		})(jQuery);
+		</script>
+		<?php
 
-                            <?php } ?>
-                            </tbody>
-                        </table>
+	}
 
-                    <?php } ?>
-                </div>
+	/*
+	 * Edit Columns HTML
+	 */
+	function edit_columns_html($column, $post_id){
 
-            </div>
+		switch($column){
 
-        <?php } ?>
+			// Name
+			case 'name':
 
-        <script type="text/javascript">
-        (function($){
+				echo '<code style="font-size: 12px;">' . $this->get_name($post_id) . '</code>';
+				break;
 
-            if(typeof acf === 'undefined')
-                return;
+			// Post ID
+			case 'post_id':
 
-            acf.newPostbox(<?php echo wp_json_encode(array(
-                'id'    => 'acf-options-page-field-groups',
-                'key'   => '',
-                'style' => 'default',
-                'label' => 'left',
-                'edit'  => false
-            )); ?>);
+				$p_id = get_field('post_id', $post_id);
 
-        })(jQuery);
-        </script>
-        <?php
+				if(empty($p_id))
+					$p_id = 'options';
 
-    }
+				echo '<code style="font-size: 12px;">' . $p_id. '</code>';
+				break;
 
-    /*
-     * Edit Columns HTML
-     */
-    function edit_columns_html($column, $post_id){
+			// Autoload
+			case 'autoload':
 
-        switch($column){
+				$al = __('No');
+				$autoload = get_field('autoload', $post_id);
 
-            // Name
-            case 'name':
+				if(!empty($autoload))
+					$al = __('Yes');
 
-                echo '<code style="font-size: 12px;">' . $this->get_name($post_id) . '</code>';
-                break;
+				echo $al;
+				break;
 
-            // Post ID
-            case 'post_id':
+		}
 
-                $p_id = get_field('post_id', $post_id);
+	}
 
-                if(empty($p_id))
-                    $p_id = 'options';
+	/*
+	 * Edit Row Actions View
+	 */
+	function edit_row_actions_view($post, $name){
 
-                echo '<code style="font-size: 12px;">' . $p_id. '</code>';
-                break;
+		return '<a href="' . admin_url("admin.php?page={$name}") . '">' . __('View') . '</a>';
 
-            // Autoload
-            case 'autoload':
+	}
 
-                $al = __('No');
-                $autoload = get_field('autoload', $post_id);
+	/*
+	 * Admin Config Button
+	 */
+	function admin_config(){
 
-                if(!empty($autoload))
-                    $al = __('Yes');
+		if(!acf_current_user_can_admin())
+			return;
 
-                echo $al;
-                break;
+		global $plugin_page;
 
-        }
+		if(!$plugin_page)
+			return;
 
-    }
+		$page = acf_get_options_page($plugin_page);
 
-    /*
-     * Edit Row Actions View
-     */
-    function edit_row_actions_view($post, $name){
+		if(!acf_maybe_get($page, 'menu_slug'))
+			return;
 
-        return '<a href="' . admin_url("admin.php?page={$name}") . '">' . __('View') . '</a>';
+		// Get Dynamic Options Page
+		$acfe_dop_options_page = get_posts(array(
+			'post_type'         => $this->post_type,
+			'posts_per_page'    => 1,
+			'name'              => $page['menu_slug']
+		));
 
-    }
+		if(empty($acfe_dop_options_page))
+			return;
 
-    /*
-     * Admin Config Button
-     */
-    function admin_config(){
+		$acfe_dop_options_page = $acfe_dop_options_page[0];
 
-        if(!acf_current_user_can_admin())
-            return;
+		?>
+		<script type="text/html" id="tmpl-acf-options-page-title-config">
+			<a href="<?php echo admin_url('post.php?post=' . $acfe_dop_options_page->ID . '&action=edit'); ?>" class="page-title-action acf-options-page-admin-config"><span class="dashicons dashicons-admin-generic"></span></a>
+		</script>
 
-        global $plugin_page;
+		<script type="text/javascript">
+		(function($){
 
-        if(!$plugin_page)
-            return;
+			// Add button
+			$('.wrap > h1').append($('#tmpl-acf-options-page-title-config').html());
 
-        $page = acf_get_options_page($plugin_page);
+		})(jQuery);
+		</script>
+		<?php
 
-        if(!acf_maybe_get($page, 'menu_slug'))
-            return;
+	}
 
-        // Get Dynamic Options Page
-        $acfe_dop_options_page = get_posts(array(
-            'post_type'         => $this->post_type,
-            'posts_per_page'    => 1,
-            'name'              => $page['menu_slug']
-        ));
+	/*
+	 * Admin: Archive Posts
+	 */
+	function admin_archive_posts($query){
 
-        if(empty($acfe_dop_options_page))
-            return;
+		global $pagenow;
 
-        $acfe_dop_options_page = $acfe_dop_options_page[0];
+		if (!is_admin() || !$query->is_main_query() || $pagenow !== 'edit.php' || $query->get('post_type') !== $this->post_type)
+			return;
 
-        ?>
-        <script type="text/html" id="tmpl-acf-options-page-title-config">
-            <a href="<?php echo admin_url('post.php?post=' . $acfe_dop_options_page->ID . '&action=edit'); ?>" class="page-title-action acf-options-page-admin-config"><span class="dashicons dashicons-admin-generic"></span></a>
-        </script>
+		$query->set('meta_key', 'position');
+		$query->set('orderby', 'meta_value_num title');
+		$query->set('order', 'ASC');
 
-        <script type="text/javascript">
-        (function($){
+	}
 
-            // Add button
-            $('.wrap > h1').append($('#tmpl-acf-options-page-title-config').html());
+	/*
+	 * Validate Name
+	 */
+	function validate_name($valid, $value, $field, $input){
 
-        })(jQuery);
-        </script>
-        <?php
+		if(!$valid)
+			return $valid;
 
-    }
+		// Editing Current Block Type
+		$current_post_id = acf_maybe_get_POST('post_ID');
 
-    /*
-     * Admin: Archive Posts
-     */
-    function admin_archive_posts($query){
+		if(!empty($current_post_id)){
 
-        global $pagenow;
+			$current_name = get_field($field['name'], $current_post_id);
 
-        if (!is_admin() || !$query->is_main_query() || $pagenow !== 'edit.php' || $query->get('post_type') !== $this->post_type)
-            return;
+			if($value === $current_name)
+				return $valid;
 
-        $query->set('meta_key', 'position');
-        $query->set('orderby', 'meta_value_num title');
-        $query->set('order', 'ASC');
+		}
 
-    }
+		// Check existing ACF Options Pages
+		$pages = acf_get_options_pages();
 
-    /*
-     * Validate Name
-     */
-    function validate_name($valid, $value, $field, $input){
+		if(!empty($pages)){
 
-        if(!$valid)
-            return $valid;
+			foreach($pages as $slug => $page){
 
-        // Editing Current Block Type
-        $current_post_id = acf_maybe_get_POST('post_ID');
+				if($slug !== $value)
+					continue;
 
-        if(!empty($current_post_id)){
+				$valid = __('This options page slug already exists');
 
-            $current_name = get_field($field['name'], $current_post_id);
+			}
 
-            if($value === $current_name)
-                return $valid;
+		}
 
-        }
+		return $valid;
 
-        // Check existing ACF Options Pages
-        $pages = acf_get_options_pages();
+	}
 
-        if(!empty($pages)){
+	/*
+	 * Update Name
+	 */
+	function update_name($value, $post_id, $field){
 
-            foreach($pages as $slug => $page){
+		// Previous value
+		$_value = get_field($field['name'], $post_id);
 
-                if($slug !== $value)
-                    continue;
+		// Value Changed. Delete option
+		if($_value !== $value){
+			acfe_delete_settings("{$this->settings}.{$_value}");
+		}
 
-                $valid = __('This options page slug already exists');
+		return $value;
 
-            }
+	}
 
-        }
+	/*
+	 * Prepare Register
+	 */
+	function prepare_register($settings){
 
-        return $valid;
+		if(empty($settings))
+			return $settings;
 
-    }
+		// Init re-order
+		$top_pages = $sub_pages = array();
 
-    /*
-     * Update Name
-     */
-    function update_name($value, $post_id, $field){
+		foreach($settings as $name => $args){
 
-        // Previous value
-        $_value = get_field($field['name'], $post_id);
+			// Sub pages
+			if(acf_maybe_get($args, 'parent_slug')){
 
-        // Value Changed. Delete option
-        if($_value !== $value){
-            acfe_delete_settings("{$this->settings}.{$_value}");
-        }
+				// force int position
+				$args['position'] = (int) $args['position'];
 
-        return $value;
+				// save sub page
+				$sub_pages[$name] = $args;
 
-    }
+				continue;
 
-    /*
-     * Prepare Register
-     */
-    function prepare_register($settings){
+			}
 
-        if(empty($settings))
-            return $settings;
+			// Top pages
+			$top_pages[$name] = $args;
 
-        // Init re-order
-        $top_pages = $sub_pages = array();
+		}
 
-        foreach($settings as $name => $args){
+		// Re-order sub pages
+		if(!empty($sub_pages)){
 
-            // Sub pages
-            if(acf_maybe_get($args, 'parent_slug')){
+			uasort($sub_pages, function($a, $b){
+				return (int) $a['position'] - (int) $b['position'];
+			});
 
-                // force int position
-                $args['position'] = (int) $args['position'];
+		}
 
-                // save sub page
-                $sub_pages[$name] = $args;
+		// Merge
+		$settings = array_merge($top_pages, $sub_pages);
 
-                continue;
+		return $settings;
 
-            }
+	}
 
-            // Top pages
-            $top_pages[$name] = $args;
+	/*
+	 * ACF Save post
+	 */
+	function save_post($post_id){
 
-        }
+		// vars
+		$args = array();
+		$name = $this->get_name($post_id);
 
-        // Re-order sub pages
-        if(!empty($sub_pages)){
+		// Filters
+		$args = apply_filters("acfe/options_page/save_args",                $args, $name, $post_id);
+		$args = apply_filters("acfe/options_page/save_args/name={$name}",   $args, $name, $post_id);
+		$args = apply_filters("acfe/options_page/save_args/id={$post_id}",  $args, $name, $post_id);
 
-            uasort($sub_pages, function($a, $b){
-                return (int) $a['position'] - (int) $b['position'];
-            });
+		if($args === false)
+			return;
 
-        }
+		// Actions
+		do_action("acfe/options_page/save",                 $name, $args, $post_id);
+		do_action("acfe/options_page/save/name={$name}",    $name, $args, $post_id);
+		do_action("acfe/options_page/save/id={$post_id}",   $name, $args, $post_id);
 
-        // Merge
-        $settings = array_merge($top_pages, $sub_pages);
+	}
 
-        return $settings;
+	/*
+	 * Save Args
+	 */
+	function save_args($args, $name, $post_id){
 
-    }
+		$active = get_field('acfe_dop_active', $post_id);
+		$active = $active === null ? true : $active;
+		$page_title = get_post_field('post_title', $post_id);
+		$name = get_field('menu_slug', $post_id);
 
-    /*
-     * ACF Save post
-     */
-    function save_post($post_id){
+		// Menu Title
+		$menu_title = get_field('menu_title', $post_id);
+		if(empty($menu_title))
+			$menu_title = $page_title;
 
-        // vars
-        $args = array();
-        $name = $this->get_name($post_id);
+		// Register Args
+		$parent_slug = get_field('parent_slug', $post_id);
+		$capability = get_field('capability', $post_id);
+		$position = get_field('position', $post_id);
+		$icon_url = get_field('icon_url', $post_id);
+		$redirect = get_field('redirect', $post_id);
+		$p_id = get_field('post_id', $post_id);
+		$autoload = get_field('autoload', $post_id);
+		$update_button = get_field('update_button', $post_id);
+		$update_message = get_field('update_message', $post_id);
 
-        // Filters
-        $args = apply_filters("acfe/options_page/save_args",                $args, $name, $post_id);
-        $args = apply_filters("acfe/options_page/save_args/name={$name}",   $args, $name, $post_id);
-        $args = apply_filters("acfe/options_page/save_args/id={$post_id}",  $args, $name, $post_id);
+		// Register: Args
+		$args = array(
+			'active'            => $active,
+			'page_title'        => $page_title,
+			'menu_slug'         => $name,
+			'menu_title'        => $menu_title,
+			'capability'        => $capability,
+			'position'          => $position,
+			'parent_slug'       => $parent_slug,
+			'icon_url'          => $icon_url,
+			'redirect'          => $redirect,
+			'post_id'           => $p_id,
+			'autoload'          => $autoload,
+			'update_button'     => $update_button,
+			'update_message'    => $update_message,
+		);
 
-        if($args === false)
-            return;
+		// Redirect
+		$args['redirect'] = true;
+		if(empty($redirect))
+			$args['redirect'] = false;
 
-        // Actions
-        do_action("acfe/options_page/save",                 $name, $args, $post_id);
-        do_action("acfe/options_page/save/name={$name}",    $name, $args, $post_id);
-        do_action("acfe/options_page/save/id={$post_id}",   $name, $args, $post_id);
+		// Autoload
+		$args['autoload'] = true;
+		if(empty($autoload))
+			$args['autoload'] = false;
 
-    }
+		// Post ID
+		if(empty($p_id))
+			$args['post_id'] = 'options';
 
-    /*
-     * Save Args
-     */
-    function save_args($args, $name, $post_id){
+		return $args;
 
-        $page_title = get_post_field('post_title', $post_id);
-        $name = get_field('menu_slug', $post_id);
+	}
 
-        // Menu Title
-        $menu_title = get_field('menu_title', $post_id);
-        if(empty($menu_title))
-            $menu_title = $page_title;
+	/*
+	 * Save
+	 */
+	function save($name, $args, $post_id){
 
-        // Register Args
-        $parent_slug = get_field('parent_slug', $post_id);
-        $capability = get_field('capability', $post_id);
-        $position = get_field('position', $post_id);
-        $icon_url = get_field('icon_url', $post_id);
-        $redirect = get_field('redirect', $post_id);
-        $p_id = get_field('post_id', $post_id);
-        $autoload = get_field('autoload', $post_id);
-        $update_button = get_field('update_button', $post_id);
-        $update_message = get_field('update_message', $post_id);
+		// Parent
+		$parent = 0;
+		$parent_slug = $args['parent_slug'];
 
-        // Register: Args
-        $args = array(
-            'page_title'        => $page_title,
-            'menu_slug'         => $name,
-            'menu_title'        => $menu_title,
-            'capability'        => $capability,
-            'position'          => $position,
-            'parent_slug'       => $parent_slug,
-            'icon_url'          => $icon_url,
-            'redirect'          => $redirect,
-            'post_id'           => $p_id,
-            'autoload'          => $autoload,
-            'update_button'     => $update_button,
-            'update_message'    => $update_message,
-        );
+		if(!empty($parent_slug)){
 
-        // Redirect
-        $args['redirect'] = true;
-        if(empty($redirect))
-            $args['redirect'] = false;
+			$get_dop_parent = get_posts(array(
+				'post_type'         => $this->post_type,
+				'posts_per_page'    => 1,
+				'fields'            => 'ids',
+				'meta_query'        => array(
+					array(
+						'key'   => 'menu_slug',
+						'value' => $parent_slug
+					)
+				)
+			));
 
-        // Autoload
-        $args['autoload'] = true;
-        if(empty($autoload))
-            $args['autoload'] = false;
+			if(!empty($get_dop_parent)){
+				$parent = $get_dop_parent[0];
+			}
 
-        // Post ID
-        if(empty($p_id))
-            $args['post_id'] = 'options';
+		}
 
-        return $args;
+		// Get ACFE option
+		$settings = acfe_get_settings($this->settings);
 
-    }
+		// Create ACFE option
+		$settings[$name] = $args;
 
-    /*
-     * Save
-     */
-    function save($name, $args, $post_id){
+		// Sort keys ASC
+		ksort($settings);
 
-        // Parent
-        $parent = 0;
-        $parent_slug = $args['parent_slug'];
+		// Update ACFE option
+		acfe_update_settings($this->settings, $settings);
 
-        if(!empty($parent_slug)){
+		// Update post
+		wp_update_post(array(
+			'ID'            => $post_id,
+			'post_name'     => $name,
+			'post_parent'   => $parent,
+			'post_status'   => $args['active'] ? 'publish' : 'acf-disabled',
+		));
 
-            $get_dop_parent = get_posts(array(
-                'post_type'         => $this->post_type,
-                'posts_per_page'    => 1,
-                'fields'            => 'ids',
-                'meta_query'        => array(
-                    array(
-                        'key'   => 'menu_slug',
-                        'value' => $parent_slug
-                    )
-                )
-            ));
+	}
 
-            if(!empty($get_dop_parent)){
-                $parent = $get_dop_parent[0];
-            }
+	/*
+	 * Trashed Post Type
+	 */
+	function trashed_post($post_id){
 
-        }
+		$name = $this->get_name($post_id);
 
-        // Get ACFE option
-        $settings = acfe_get_settings($this->settings);
+		// Get ACFE option
+		$settings = acfe_get_settings($this->settings);
 
-        // Create ACFE option
-        $settings[$name] = $args;
+		// Unset ACFE option
+		acfe_unset($settings, $name);
 
-        // Sort keys ASC
-        ksort($settings);
+		// Update ACFE option
+		acfe_update_settings($this->settings, $settings);
 
-        // Update ACFE option
-        acfe_update_settings($this->settings, $settings);
+	}
 
-        // Update post
-        wp_update_post(array(
-            'ID'            => $post_id,
-            'post_name'     => $name,
-            'post_parent'   => $parent,
-            'post_status'   => 'publish',
-        ));
+	/*
+	 * Import
+	 */
+	function import($name, $args){
 
-    }
+		// Vars
+		$settings = acfe_get_settings($this->settings);
+		$title = $args['page_title'];
 
-    /*
-     * Trashed Post Type
-     */
-    function trashed_post($post_id){
+		// Already exists
+		if(isset($settings[$name])){
+			return new WP_Error('acfe_dop_import_already_exists', __("Options page \"{$title}\" already exists. Import aborted."));
+		}
 
-        $name = $this->get_name($post_id);
+		// Import Post
+		$post_id = false;
 
-        // Get ACFE option
-        $settings = acfe_get_settings($this->settings);
+		$post = array(
+			'post_title'    => $title,
+			'post_name'     => $name,
+			'post_type'     => $this->post_type,
+			'post_status'   => 'publish'
+		);
 
-        // Unset ACFE option
-        acfe_unset($settings, $name);
+		$post = apply_filters("acfe/options_page/import_post",                 $post, $name);
+		$post = apply_filters("acfe/options_page/import_post/name={$name}",    $post, $name);
 
-        // Update ACFE option
-        acfe_update_settings($this->settings, $settings);
+		if($post !== false){
+			$post_id = wp_insert_post($post);
+		}
 
-    }
+		if(!$post_id || is_wp_error($post_id)){
+			return new WP_Error('acfe_dop_import_error', __("Something went wrong with the options page \"{$title}\". Import aborted."));
+		}
 
-    /*
-     * Import
-     */
-    function import($name, $args){
+		// Import Args
+		$args = apply_filters("acfe/options_page/import_args",                 $args, $name, $post_id);
+		$args = apply_filters("acfe/options_page/import_args/name={$name}",    $args, $name, $post_id);
+		$args = apply_filters("acfe/options_page/import_args/name={$post_id}", $args, $name, $post_id);
 
-        // Vars
-        $settings = acfe_get_settings($this->settings);
-        $title = $args['page_title'];
+		if($args === false)
+			return $post_id;
 
-        // Already exists
-        if(isset($settings[$name])){
-            return new WP_Error('acfe_dop_import_already_exists', __("Options page \"{$title}\" already exists. Import aborted."));
-        }
+		// Import Fields
+		acf_enable_filter('local');
 
-        // Import Post
-        $post_id = false;
+		do_action("acfe/options_page/import_fields",                  $name, $args, $post_id);
+		do_action("acfe/options_page/import_fields/name={$name}",     $name, $args, $post_id);
+		do_action("acfe/options_page/import_fields/id={$post_id}",    $name, $args, $post_id);
 
-        $post = array(
-            'post_title'    => $title,
-            'post_name'     => $name,
-            'post_type'     => $this->post_type,
-            'post_status'   => 'publish'
-        );
+		acf_disable_filter('local');
 
-        $post = apply_filters("acfe/options_page/import_post",                 $post, $name);
-        $post = apply_filters("acfe/options_page/import_post/name={$name}",    $post, $name);
+		// Save
+		$this->save_post($post_id);
 
-        if($post !== false){
-            $post_id = wp_insert_post($post);
-        }
+		return $post_id;
 
-        if(!$post_id || is_wp_error($post_id)){
-            return new WP_Error('acfe_dop_import_error', __("Something went wrong with the options page \"{$title}\". Import aborted."));
-        }
+	}
 
-        // Import Args
-        $args = apply_filters("acfe/options_page/import_args",                 $args, $name, $post_id);
-        $args = apply_filters("acfe/options_page/import_args/name={$name}",    $args, $name, $post_id);
-        $args = apply_filters("acfe/options_page/import_args/name={$post_id}", $args, $name, $post_id);
+	function import_fields($name, $args, $post_id){
 
-        if($args === false)
-            return $post_id;
+		update_field('acfe_dop_active', $args['active'], $post_id);
+		update_field('menu_title', $args['menu_title'], $post_id);
+		update_field('menu_slug', $args['menu_slug'], $post_id);
+		update_field('capability', $args['capability'], $post_id);
+		update_field('position', $args['position'], $post_id);
+		update_field('parent_slug', $args['parent_slug'], $post_id);
+		update_field('icon_url', $args['icon_url'], $post_id);
+		update_field('redirect', $args['redirect'], $post_id);
+		update_field('post_id', $args['post_id'], $post_id);
+		update_field('autoload', $args['autoload'], $post_id);
+		update_field('update_button', $args['update_button'], $post_id);
+		update_field('update_message', $args['update_message'], $post_id);
 
-        // Import Fields
-        acf_enable_filter('local');
+	}
 
-        do_action("acfe/options_page/import_fields",                  $name, $args, $post_id);
-        do_action("acfe/options_page/import_fields/name={$name}",     $name, $args, $post_id);
-        do_action("acfe/options_page/import_fields/id={$post_id}",    $name, $args, $post_id);
+	/*
+	 * After Import
+	 */
+	function after_import($ids, $data){
 
-        acf_disable_filter('local');
+		$sub_pages = array();
 
-        // Save
-        $this->save_post($post_id);
+		// Loop over json
+		foreach($ids as $post_id){
 
-        return $post_id;
+			$parent_slug = get_field('parent_slug', $post_id);
 
-    }
+			if(empty($parent_slug))
+				continue;
 
-    function import_fields($name, $args, $post_id){
+			$sub_pages[$post_id] = $parent_slug;
 
-        update_field('menu_title', $args['menu_title'], $post_id);
-        update_field('menu_slug', $args['menu_slug'], $post_id);
-        update_field('capability', $args['capability'], $post_id);
-        update_field('position', $args['position'], $post_id);
-        update_field('parent_slug', $args['parent_slug'], $post_id);
-        update_field('icon_url', $args['icon_url'], $post_id);
-        update_field('redirect', $args['redirect'], $post_id);
-        update_field('post_id', $args['post_id'], $post_id);
-        update_field('autoload', $args['autoload'], $post_id);
-        update_field('update_button', $args['update_button'], $post_id);
-        update_field('update_message', $args['update_message'], $post_id);
+		}
 
-    }
+		// Update Options Sub Pages
+		if(!empty($sub_pages)){
 
-    /*
-     * After Import
-     */
-    function after_import($ids, $data){
+			foreach($sub_pages as $post_id => $parent_slug){
 
-        $sub_pages = array();
+				// Get possible parent options pages
+				$get_parent = get_posts(array(
+					'post_type'         => $this->post_type,
+					'posts_per_page'    => 1,
+					'fields'            => 'ids',
+					'meta_query'        => array(
+						array(
+							'key'   => 'menu_slug',
+							'value' => $parent_slug
+						)
+					)
+				));
 
-        // Loop over json
-        foreach($ids as $post_id){
+				if(empty($get_parent))
+					continue;
 
-            $parent_slug = get_field('parent_slug', $post_id);
+				// Update sub page post
+				wp_update_post(array(
+					'ID'            => $post_id,
+					'post_parent'   => $get_parent[0],
+				));
 
-            if(empty($parent_slug))
-                continue;
+			}
 
-            $sub_pages[$post_id] = $parent_slug;
+		}
 
-        }
+	}
 
-        // Update Options Sub Pages
-        if(!empty($sub_pages)){
+	/*
+	 * Export: Choices
+	 */
+	function export_choices(){
 
-            foreach($sub_pages as $post_id => $parent_slug){
+		$choices = array();
+		$settings = acfe_get_settings($this->settings);
 
-                // Get possible parent options pages
-                $get_parent = get_posts(array(
-                    'post_type'         => $this->post_type,
-                    'posts_per_page'    => 1,
-                    'fields'            => 'ids',
-                    'meta_query'        => array(
-                        array(
-                            'key'   => 'menu_slug',
-                            'value' => $parent_slug
-                        )
-                    )
-                ));
+		if(!$settings)
+			return $choices;
 
-                if(empty($get_parent))
-                    continue;
+		foreach($settings as $name => $args){
 
-                // Update sub page post
-                wp_update_post(array(
-                    'ID'            => $post_id,
-                    'post_parent'   => $get_parent[0],
-                ));
+			$choices[$name] = esc_html($args['page_title']);
 
-            }
+		}
 
-        }
+		return $choices;
 
-    }
+	}
 
-    /*
-     * Export: Choices
-     */
-    function export_choices(){
+	/*
+	 * Export: Data
+	 */
+	function export_data($name){
 
-        $choices = array();
-        $settings = acfe_get_settings($this->settings);
+		// Settings
+		$settings = acfe_get_settings($this->settings);
 
-        if(!$settings)
-            return $choices;
+		// Doesn't exist
+		if(!isset($settings[$name]))
+			return false;
 
-        foreach($settings as $name => $args){
+		$args = $settings[$name];
 
-            $choices[$name] = esc_html($args['page_title']);
+		// Filters
+		$args = apply_filters("acfe/options_page/export_args",                 $args, $name);
+		$args = apply_filters("acfe/options_page/export_args/name={$name}",    $args, $name);
 
-        }
+		// Return
+		return $args;
 
-        return $choices;
+	}
 
-    }
+	/*
+	 * Export: PHP
+	 */
+	function export_php($data){
 
-    /*
-     * Export: Data
-     */
-    function export_data($name){
+		// prevent default translation and fake __() within string
+		acf_update_setting('l10n_var_export', true);
 
-        // Settings
-        $settings = acfe_get_settings($this->settings);
+		$str_replace = array(
+			"  "            => "\t",
+			"'!!__(!!\'"    => "__('",
+			"!!\', !!\'"    => "', '",
+			"!!\')!!'"      => "')",
+			"array ("       => "array("
+		);
 
-        // Doesn't exist
-        if(!isset($settings[$name]))
-            return false;
+		$preg_replace = array(
+			'/([\t\r\n]+?)array/'   => 'array',
+			'/[0-9]+ => array/'     => 'array'
+		);
 
-        $args = $settings[$name];
+		// Get settings.
+		$l10n = acf_get_setting('l10n');
+		$l10n_textdomain = acf_get_setting('l10n_textdomain');
 
-        // Filters
-        $args = apply_filters("acfe/options_page/export_args",                 $args, $name);
-        $args = apply_filters("acfe/options_page/export_args/name={$name}",    $args, $name);
+		echo "if( function_exists('acf_add_options_page') ):" . "\r\n" . "\r\n";
 
-        // Return
-        return $args;
+		foreach($data as $args){
 
-    }
+			// Translate settings if textdomain is set.
+			if($l10n && $l10n_textdomain){
 
-    /*
-     * Export: PHP
-     */
-    function export_php($data){
+				$args['page_title'] = acf_translate($args['page_title']);
+				$args['menu_title'] = acf_translate($args['menu_title']);
+				$args['update_button'] = acf_translate($args['update_button']);
+				$args['update_message'] = acf_translate($args['update_message']);
 
-        // prevent default translation and fake __() within string
-        acf_update_setting('l10n_var_export', true);
+			}
 
-        $str_replace = array(
-            "  "            => "\t",
-            "'!!__(!!\'"    => "__('",
-            "!!\', !!\'"    => "', '",
-            "!!\')!!'"      => "')",
-            "array ("       => "array("
-        );
+			// code
+			$code = var_export($args, true);
 
-        $preg_replace = array(
-            '/([\t\r\n]+?)array/'   => 'array',
-            '/[0-9]+ => array/'     => 'array'
-        );
+			// change double spaces to tabs
+			$code = str_replace(array_keys($str_replace), array_values($str_replace), $code);
 
-        // Get settings.
-        $l10n = acf_get_setting('l10n');
-        $l10n_textdomain = acf_get_setting('l10n_textdomain');
+			// correctly formats "=> array("
+			$code = preg_replace(array_keys($preg_replace), array_values($preg_replace), $code);
 
-        echo "if( function_exists('acf_add_options_page') ):" . "\r\n" . "\r\n";
+			// esc_textarea
+			$code = esc_textarea($code);
 
-        foreach($data as $args){
+			// echo
+			echo "acf_add_options_page({$code});" . "\r\n" . "\r\n";
 
-            // Translate settings if textdomain is set.
-            if($l10n && $l10n_textdomain){
+		}
 
-                $args['page_title'] = acf_translate($args['page_title']);
-                $args['menu_title'] = acf_translate($args['menu_title']);
-                $args['update_button'] = acf_translate($args['update_button']);
-                $args['update_message'] = acf_translate($args['update_message']);
+		echo "endif;";
 
-            }
+	}
 
-            // code
-            $code = var_export($args, true);
+	/*
+	 * Reset
+	 */
+	function reset(){
 
-            // change double spaces to tabs
-            $code = str_replace(array_keys($str_replace), array_values($str_replace), $code);
+		$args = apply_filters("acfe/options_page/reset_args", array(
+			'post_type'         => $this->post_type,
+			'posts_per_page'    => -1,
+			'fields'            => 'ids',
+			'post_status'       => array('publish', 'acf-disabled'),
+		));
 
-            // correctly formats "=> array("
-            $code = preg_replace(array_keys($preg_replace), array_values($preg_replace), $code);
+		$posts = get_posts($args);
 
-            // esc_textarea
-            $code = esc_textarea($code);
+		if(empty($posts))
+			return false;
 
-            // echo
-            echo "acf_add_options_page({$code});" . "\r\n" . "\r\n";
+		foreach($posts as $post_id){
+			$this->save_post($post_id);
+		}
 
-        }
+		// Log
+		acf_log('[ACF Extended] Reset: Options Pages');
 
-        echo "endif;";
+		return true;
 
-    }
+	}
 
-    /*
-     * Reset
-     */
-    function reset(){
+	/*
+	 * Multilang Save
+	 */
+	function l10n_save($name, $args, $post_id){
 
-        $args = apply_filters("acfe/options_page/reset_args", array(
-            'post_type'         => $this->post_type,
-            'posts_per_page'    => -1,
-            'fields'            => 'ids',
-            'post_status'       => array('publish', 'acf-disabled'),
-        ));
+		// Bail early
+		if(!acfe_is_wpml())
+			return;
 
-        $posts = get_posts($args);
+		// Translate: Page Title
+		if(isset($args['page_title'])){
+			do_action('wpml_register_single_string', $this->textdomain, 'Page_title', $args['page_title']);
+		}
 
-        if(empty($posts))
-            return false;
+		// Translate: Menu Title
+		if(isset($args['menu_title'])){
+			do_action('wpml_register_single_string', $this->textdomain, 'Menu_title', $args['menu_title']);
+		}
 
-        foreach($posts as $post_id){
-            $this->save_post($post_id);
-        }
+		// Translate: Update button
+		if(isset($args['update_button'])){
+			do_action('wpml_register_single_string', $this->textdomain, 'Update_button', $args['update_button']);
+		}
 
-        // Log
-        acf_log('[ACF Extended] Reset: Options Pages');
+		// Translate: Updated message
+		if(isset($args['update_message'])){
+			do_action('wpml_register_single_string', $this->textdomain, 'Updated_message', $args['update_message']);
+		}
 
-        return true;
+	}
 
-    }
+	/*
+	 * Multilang Register
+	 */
+	function l10n_register($args, $name){
 
-    /*
-     * Multilang Save
-     */
-    function l10n_save($name, $args, $post_id){
+		// Translate: Page Title
+		if(isset($args['page_title'])){
+			$args['page_title'] = acfe_translate($args['page_title'], 'Page_title', $this->textdomain);
+		}
 
-        // Bail early
-        if(!acfe_is_wpml())
-            return;
+		// Translate: Menu Title
+		if(isset($args['menu_title'])){
+			$args['menu_title'] = acfe_translate($args['menu_title'], 'Menu_title', $this->textdomain);
+		}
 
-        // Translate: Page Title
-        if(isset($args['page_title'])){
-            do_action('wpml_register_single_string', $this->textdomain, 'Page_title', $args['page_title']);
-        }
+		// Translate: Update button
+		if(isset($args['update_button'])){
+			$args['update_button'] = acfe_translate($args['update_button'], 'Update_button', $this->textdomain);
+		}
 
-        // Translate: Menu Title
-        if(isset($args['menu_title'])){
-            do_action('wpml_register_single_string', $this->textdomain, 'Menu_title', $args['menu_title']);
-        }
+		// Translate: Updated message
+		if(isset($args['update_message'])){
+			$args['update_message'] = acfe_translate($args['update_message'], 'Updated_message', $this->textdomain);
+		}
 
-        // Translate: Update button
-        if(isset($args['update_button'])){
-            do_action('wpml_register_single_string', $this->textdomain, 'Update_button', $args['update_button']);
-        }
+		return $args;
 
-        // Translate: Updated message
-        if(isset($args['update_message'])){
-            do_action('wpml_register_single_string', $this->textdomain, 'Updated_message', $args['update_message']);
-        }
+	}
 
-    }
+	/*
+	 * Add Local Field Group
+	 */
+	function add_local_field_group(){
 
-    /*
-     * Multilang Register
-     */
-    function l10n_register($args, $name){
+		acf_add_local_field_group(array(
+			'key' => 'group_acf_options_page',
+			'title' => __('Options Page', 'acfe'),
 
-        // Translate: Page Title
-        if(isset($args['page_title'])){
-            $args['page_title'] = acfe_translate($args['page_title'], 'Page_title', $this->textdomain);
-        }
+			'location' => array(
+				array(
+					array(
+						'param' => 'post_type',
+						'operator' => '==',
+						'value' => $this->post_type,
+					),
+				),
+			),
 
-        // Translate: Menu Title
-        if(isset($args['menu_title'])){
-            $args['menu_title'] = acfe_translate($args['menu_title'], 'Menu_title', $this->textdomain);
-        }
+			'menu_order' => 0,
+			'position' => 'normal',
+			'style' => 'seamless',
+			'label_placement' => 'left',
+			'instruction_placement' => 'label',
+			'hide_on_screen' => '',
+			'active' => 1,
+			'description' => '',
 
-        // Translate: Update button
-        if(isset($args['update_button'])){
-            $args['update_button'] = acfe_translate($args['update_button'], 'Update_button', $this->textdomain);
-        }
-
-        // Translate: Updated message
-        if(isset($args['update_message'])){
-            $args['update_message'] = acfe_translate($args['update_message'], 'Updated_message', $this->textdomain);
-        }
-
-        return $args;
-
-    }
-
-    /*
-     * Add Local Field Group
-     */
-    function add_local_field_group(){
-
-        acf_add_local_field_group(array(
-            'key' => 'group_acf_options_page',
-            'title' => __('Options Page', 'acfe'),
-
-            'location' => array(
-                array(
-                    array(
-                        'param' => 'post_type',
-                        'operator' => '==',
-                        'value' => $this->post_type,
-                    ),
-                ),
-            ),
-
-            'menu_order' => 0,
-            'position' => 'normal',
-            'style' => 'seamless',
-            'label_placement' => 'left',
-            'instruction_placement' => 'label',
-            'hide_on_screen' => '',
-            'active' => 1,
-            'description' => '',
-
-            'fields' => array(
-                array(
-                    'key' => 'field_acfe_dop_menu_slug',
-                    'label' => 'Menu slug',
-                    'name' => 'menu_slug',
-                    'type' => 'acfe_slug',
-                    'instructions' => '(string) The URL slug used to uniquely identify this options page. Defaults to a url friendly version of Menu Title',
-                    'required' => 1,
-                    'conditional_logic' => 0,
-                    'wrapper' => array(
-                        'width' => '',
-                        'class' => '',
-                        'id' => '',
-                    ),
-                    'acfe_validate' => '',
-                    'acfe_update' => array(
-                        '5cd2a4d60fbf2' => array(
-                            'acfe_update_function' => 'sanitize_title',
-                        ),
-                    ),
-                    'acfe_permissions' => '',
-                    'default_value' => '',
-                    'placeholder' => '',
-                    'prepend' => '',
-                    'append' => '',
-                    'maxlength' => '',
-                ),
-                array(
-                    'key' => 'field_acfe_dop_menu_title',
-                    'label' => 'Menu title',
-                    'name' => 'menu_title',
-                    'type' => 'text',
-                    'instructions' => '(string) The title displayed in the wp-admin sidebar. Defaults to Page Title',
-                    'required' => 0,
-                    'conditional_logic' => 0,
-                    'wrapper' => array(
-                        'width' => '',
-                        'class' => '',
-                        'id' => '',
-                    ),
-                    'acfe_validate' => '',
-                    'acfe_update' => '',
-                    'acfe_permissions' => '',
-                    'default_value' => '',
-                    'placeholder' => '',
-                    'prepend' => '',
-                    'append' => '',
-                    'maxlength' => '',
-                ),
-                array(
-                    'key' => 'field_acfe_dop_capability',
-                    'label' => 'Capability',
-                    'name' => 'capability',
-                    'type' => 'text',
-                    'instructions' => '(string) The capability required for this menu to be displayed to the user. Defaults to edit_posts.<br /><br />
+			'fields' => array(
+				array(
+					'key' => 'field_acfe_dop_menu_slug',
+					'label' => 'Menu slug',
+					'name' => 'menu_slug',
+					'type' => 'acfe_slug',
+					'instructions' => '(string) The URL slug used to uniquely identify this options page. Defaults to a url friendly version of Menu Title',
+					'required' => 1,
+					'conditional_logic' => 0,
+					'wrapper' => array(
+						'width' => '',
+						'class' => '',
+						'id' => '',
+					),
+					'acfe_validate' => '',
+					'acfe_update' => array(
+						'5cd2a4d60fbf2' => array(
+							'acfe_update_function' => 'sanitize_title',
+						),
+					),
+					'acfe_permissions' => '',
+					'default_value' => '',
+					'placeholder' => '',
+					'prepend' => '',
+					'append' => '',
+					'maxlength' => '',
+				),
+				array(
+					'key' => 'field_acfe_dop_menu_title',
+					'label' => 'Menu title',
+					'name' => 'menu_title',
+					'type' => 'text',
+					'instructions' => '(string) The title displayed in the wp-admin sidebar. Defaults to Page Title',
+					'required' => 0,
+					'conditional_logic' => 0,
+					'wrapper' => array(
+						'width' => '',
+						'class' => '',
+						'id' => '',
+					),
+					'acfe_validate' => '',
+					'acfe_update' => '',
+					'acfe_permissions' => '',
+					'default_value' => '',
+					'placeholder' => '',
+					'prepend' => '',
+					'append' => '',
+					'maxlength' => '',
+				),
+				array(
+					'key' => 'field_acfe_dop_capability',
+					'label' => 'Capability',
+					'name' => 'capability',
+					'type' => 'text',
+					'instructions' => '(string) The capability required for this menu to be displayed to the user. Defaults to edit_posts.<br /><br />
 
 Read more about capability here: <a href="https://wordpress.org/support/article/roles-and-capabilities/">https://wordpress.org/support/article/roles-and-capabilities/</a>',
-                    'required' => 0,
-                    'conditional_logic' => 0,
-                    'wrapper' => array(
-                        'width' => '',
-                        'class' => '',
-                        'id' => '',
-                    ),
-                    'acfe_validate' => '',
-                    'acfe_update' => '',
-                    'acfe_permissions' => '',
-                    'default_value' => 'edit_posts',
-                    'placeholder' => '',
-                    'prepend' => '',
-                    'append' => '',
-                    'maxlength' => '',
-                ),
-                array(
-                    'key' => 'field_acfe_dop_position',
-                    'label' => 'Position',
-                    'name' => 'position',
-                    'type' => 'text',
-                    'instructions' => '(int|string) The position in the menu order this menu should appear. Defaults to bottom of utility menu items.<br /><br />
+					'required' => 0,
+					'conditional_logic' => 0,
+					'wrapper' => array(
+						'width' => '',
+						'class' => '',
+						'id' => '',
+					),
+					'acfe_validate' => '',
+					'acfe_update' => '',
+					'acfe_permissions' => '',
+					'default_value' => 'edit_posts',
+					'placeholder' => '',
+					'prepend' => '',
+					'append' => '',
+					'maxlength' => '',
+				),
+				array(
+					'key' => 'field_acfe_dop_position',
+					'label' => 'Position',
+					'name' => 'position',
+					'type' => 'text',
+					'instructions' => '(int|string) The position in the menu order this menu should appear. Defaults to bottom of utility menu items.<br /><br />
 
 WARNING: if two menu items use the same position attribute, one of the items may be overwritten so that only one item displays!<br />
 Risk of conflict can be reduced by using decimal instead of integer values, e.g. \'63.3\' instead of 63 (must use quotes).',
-                    'required' => 0,
-                    'conditional_logic' => 0,
-                    'wrapper' => array(
-                        'width' => '',
-                        'class' => '',
-                        'id' => '',
-                    ),
-                    'acfe_validate' => '',
-                    'acfe_update' => '',
-                    'acfe_permissions' => '',
-                    'default_value' => '',
-                    'placeholder' => '',
-                    'prepend' => '',
-                    'append' => '',
-                    'maxlength' => '',
-                ),
-                array(
-                    'key' => 'field_acfe_dop_parent_slug',
-                    'label' => 'Parent slug',
-                    'name' => 'parent_slug',
-                    'type' => 'text',
-                    'instructions' => '(string) The slug of another WP admin page. if set, this will become a child page.',
-                    'required' => 0,
-                    'conditional_logic' => 0,
-                    'wrapper' => array(
-                        'width' => '',
-                        'class' => '',
-                        'id' => '',
-                    ),
-                    'acfe_validate' => '',
-                    'acfe_update' => '',
-                    'acfe_permissions' => '',
-                    'default_value' => '',
-                    'placeholder' => '',
-                    'prepend' => '',
-                    'append' => '',
-                    'maxlength' => '',
-                ),
-                array(
-                    'key' => 'field_acfe_dop_icon_url',
-                    'label' => 'Icon url',
-                    'name' => 'icon_url',
-                    'type' => 'text',
-                    'instructions' => '(string) The icon class for this menu. Defaults to default WordPress gear.<br /><br />
+					'required' => 0,
+					'conditional_logic' => 0,
+					'wrapper' => array(
+						'width' => '',
+						'class' => '',
+						'id' => '',
+					),
+					'acfe_validate' => '',
+					'acfe_update' => '',
+					'acfe_permissions' => '',
+					'default_value' => '',
+					'placeholder' => '',
+					'prepend' => '',
+					'append' => '',
+					'maxlength' => '',
+				),
+				array(
+					'key' => 'field_acfe_dop_parent_slug',
+					'label' => 'Parent slug',
+					'name' => 'parent_slug',
+					'type' => 'text',
+					'instructions' => '(string) The slug of another WP admin page. if set, this will become a child page.',
+					'required' => 0,
+					'conditional_logic' => 0,
+					'wrapper' => array(
+						'width' => '',
+						'class' => '',
+						'id' => '',
+					),
+					'acfe_validate' => '',
+					'acfe_update' => '',
+					'acfe_permissions' => '',
+					'default_value' => '',
+					'placeholder' => '',
+					'prepend' => '',
+					'append' => '',
+					'maxlength' => '',
+				),
+				array(
+					'key' => 'field_acfe_dop_icon_url',
+					'label' => 'Icon url',
+					'name' => 'icon_url',
+					'type' => 'text',
+					'instructions' => '(string) The icon class for this menu. Defaults to default WordPress gear.<br /><br />
 Read more about dashicons here: <a href="https://developer.wordpress.org/resource/dashicons/">https://developer.wordpress.org/resource/dashicons/</a>',
-                    'required' => 0,
-                    'conditional_logic' => 0,
-                    'wrapper' => array(
-                        'width' => '',
-                        'class' => '',
-                        'id' => '',
-                    ),
-                    'acfe_validate' => '',
-                    'acfe_update' => '',
-                    'acfe_permissions' => '',
-                    'default_value' => '',
-                    'placeholder' => '',
-                    'prepend' => '',
-                    'append' => '',
-                    'maxlength' => '',
-                ),
-                array(
-                    'key' => 'field_acfe_dop_redirect',
-                    'label' => 'Redirect',
-                    'name' => 'redirect',
-                    'type' => 'true_false',
-                    'instructions' => '(boolean) If set to true, this options page will redirect to the first child page (if a child page exists).
+					'required' => 0,
+					'conditional_logic' => 0,
+					'wrapper' => array(
+						'width' => '',
+						'class' => '',
+						'id' => '',
+					),
+					'acfe_validate' => '',
+					'acfe_update' => '',
+					'acfe_permissions' => '',
+					'default_value' => '',
+					'placeholder' => '',
+					'prepend' => '',
+					'append' => '',
+					'maxlength' => '',
+				),
+				array(
+					'key' => 'field_acfe_dop_redirect',
+					'label' => 'Redirect',
+					'name' => 'redirect',
+					'type' => 'true_false',
+					'instructions' => '(boolean) If set to true, this options page will redirect to the first child page (if a child page exists).
 If set to false, this parent page will appear alongside any child pages. Defaults to true',
-                    'required' => 0,
-                    'conditional_logic' => 0,
-                    'wrapper' => array(
-                        'width' => '',
-                        'class' => '',
-                        'id' => '',
-                    ),
-                    'acfe_validate' => '',
-                    'acfe_update' => '',
-                    'acfe_permissions' => '',
-                    'message' => '',
-                    'default_value' => 1,
-                    'ui' => 1,
-                    'ui_on_text' => 'True',
-                    'ui_off_text' => 'False',
-                ),
-                array(
-                    'key' => 'field_acfe_dop_post_id',
-                    'label' => 'Post ID',
-                    'name' => 'post_id',
-                    'type' => 'text',
-                    'instructions' => '(int|string) The \'$post_id\' to save/load data to/from. Can be set to a numeric post ID (123), or a string (\'user_2\').
+					'required' => 0,
+					'conditional_logic' => 0,
+					'wrapper' => array(
+						'width' => '',
+						'class' => '',
+						'id' => '',
+					),
+					'acfe_validate' => '',
+					'acfe_update' => '',
+					'acfe_permissions' => '',
+					'message' => '',
+					'default_value' => 1,
+					'ui' => 1,
+					'ui_on_text' => 'True',
+					'ui_off_text' => 'False',
+				),
+				array(
+					'key' => 'field_acfe_dop_post_id',
+					'label' => 'Post ID',
+					'name' => 'post_id',
+					'type' => 'text',
+					'instructions' => '(int|string) The \'$post_id\' to save/load data to/from. Can be set to a numeric post ID (123), or a string (\'user_2\').
 Defaults to \'options\'.',
-                    'required' => 0,
-                    'conditional_logic' => 0,
-                    'wrapper' => array(
-                        'width' => '',
-                        'class' => '',
-                        'id' => '',
-                    ),
-                    'acfe_validate' => '',
-                    'acfe_update' => '',
-                    'acfe_permissions' => '',
-                    'default_value' => 'options',
-                    'placeholder' => '',
-                    'prepend' => '',
-                    'append' => '',
-                    'maxlength' => '',
-                ),
-                array(
-                    'key' => 'field_acfe_dop_autoload',
-                    'label' => 'Autoload',
-                    'name' => 'autoload',
-                    'type' => 'true_false',
-                    'instructions' => '(boolean) Whether to load the option (values saved from this options page) when WordPress starts up.
+					'required' => 0,
+					'conditional_logic' => 0,
+					'wrapper' => array(
+						'width' => '',
+						'class' => '',
+						'id' => '',
+					),
+					'acfe_validate' => '',
+					'acfe_update' => '',
+					'acfe_permissions' => '',
+					'default_value' => 'options',
+					'placeholder' => '',
+					'prepend' => '',
+					'append' => '',
+					'maxlength' => '',
+				),
+				array(
+					'key' => 'field_acfe_dop_autoload',
+					'label' => 'Autoload',
+					'name' => 'autoload',
+					'type' => 'true_false',
+					'instructions' => '(boolean) Whether to load the option (values saved from this options page) when WordPress starts up.
 Defaults to false.',
-                    'required' => 0,
-                    'conditional_logic' => 0,
-                    'wrapper' => array(
-                        'width' => '',
-                        'class' => '',
-                        'id' => '',
-                    ),
-                    'acfe_validate' => '',
-                    'acfe_update' => '',
-                    'acfe_permissions' => '',
-                    'message' => '',
-                    'default_value' => 0,
-                    'ui' => 1,
-                    'ui_on_text' => 'True',
-                    'ui_off_text' => 'False',
-                ),
-                array(
-                    'key' => 'field_acfe_dop_update_button',
-                    'label' => 'Update button',
-                    'name' => 'update_button',
-                    'type' => 'text',
-                    'instructions' => '(string) The update button text.',
-                    'required' => 0,
-                    'conditional_logic' => 0,
-                    'wrapper' => array(
-                        'width' => '',
-                        'class' => '',
-                        'id' => '',
-                    ),
-                    'acfe_validate' => '',
-                    'acfe_update' => '',
-                    'acfe_permissions' => '',
-                    'default_value' => 'Update',
-                    'placeholder' => '',
-                    'prepend' => '',
-                    'append' => '',
-                    'maxlength' => '',
-                ),
-                array(
-                    'key' => 'field_acfe_dop_updated_message',
-                    'label' => 'Updated Message',
-                    'name' => 'update_message',
-                    'type' => 'text',
-                    'instructions' => '(string) The message shown above the form on submit.',
-                    'required' => 0,
-                    'conditional_logic' => 0,
-                    'wrapper' => array(
-                        'width' => '',
-                        'class' => '',
-                        'id' => '',
-                    ),
-                    'acfe_validate' => '',
-                    'acfe_update' => '',
-                    'acfe_permissions' => '',
-                    'default_value' => 'Options Updated',
-                    'placeholder' => '',
-                    'prepend' => '',
-                    'append' => '',
-                    'maxlength' => '',
-                ),
-            ),
-        ));
+					'required' => 0,
+					'conditional_logic' => 0,
+					'wrapper' => array(
+						'width' => '',
+						'class' => '',
+						'id' => '',
+					),
+					'acfe_validate' => '',
+					'acfe_update' => '',
+					'acfe_permissions' => '',
+					'message' => '',
+					'default_value' => 0,
+					'ui' => 1,
+					'ui_on_text' => 'True',
+					'ui_off_text' => 'False',
+				),
+				array(
+					'key' => 'field_acfe_dop_update_button',
+					'label' => 'Update button',
+					'name' => 'update_button',
+					'type' => 'text',
+					'instructions' => '(string) The update button text.',
+					'required' => 0,
+					'conditional_logic' => 0,
+					'wrapper' => array(
+						'width' => '',
+						'class' => '',
+						'id' => '',
+					),
+					'acfe_validate' => '',
+					'acfe_update' => '',
+					'acfe_permissions' => '',
+					'default_value' => 'Update',
+					'placeholder' => '',
+					'prepend' => '',
+					'append' => '',
+					'maxlength' => '',
+				),
+				array(
+					'key' => 'field_acfe_dop_updated_message',
+					'label' => 'Updated Message',
+					'name' => 'update_message',
+					'type' => 'text',
+					'instructions' => '(string) The message shown above the form on submit.',
+					'required' => 0,
+					'conditional_logic' => 0,
+					'wrapper' => array(
+						'width' => '',
+						'class' => '',
+						'id' => '',
+					),
+					'acfe_validate' => '',
+					'acfe_update' => '',
+					'acfe_permissions' => '',
+					'default_value' => 'Options Updated',
+					'placeholder' => '',
+					'prepend' => '',
+					'append' => '',
+					'maxlength' => '',
+				),
+			),
+		));
 
-    }
+		acf_add_local_field_group(array(
+			'key' => 'group_acf_options_page_side',
+			'title' => 'Options Page: Side',
+			'acfe_display_title' => 'Active',
+			'fields' => array(
+				array(
+					'key' => 'field_acfe_dop_active',
+					'label' => '',
+					'name' => 'acfe_dop_active',
+					'type' => 'true_false',
+					'instructions' => '',
+					'required' => 0,
+					'conditional_logic' => 0,
+					'wrapper' => array(
+						'width' => '',
+						'class' => '',
+						'id' => '',
+					),
+					'message' => '',
+					'default_value' => 1,
+					'ui' => 1,
+					'ui_on_text' => '',
+					'ui_off_text' => '',
+				),
+			),
+			'location' => array(
+				array(
+					array(
+						'param' => 'post_type',
+						'operator' => '==',
+						'value' => $this->post_type,
+					),
+				),
+			),
+			'menu_order' => 0,
+			'position' => 'side',
+			'style' => 'default',
+			'label_placement' => 'top',
+			'instruction_placement' => 'label',
+			'hide_on_screen' => '',
+			'active' => true,
+			'description' => '',
+		));
+
+	}
 
 }
 

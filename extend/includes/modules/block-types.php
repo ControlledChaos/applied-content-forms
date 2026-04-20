@@ -383,6 +383,11 @@ class acfe_dynamic_block_types extends acfe_dynamic_module {
 	 */
 	function register($args, $name){
 
+		// Check Active
+        if ( ! acf_maybe_get( $args, 'active', true ) ) {
+			return false;
+		}
+
 		// Template
 		if(acf_maybe_get($args, 'render_template')){
 			$template = acfe_locate_file_path($args['render_template']);
@@ -443,6 +448,8 @@ class acfe_dynamic_block_types extends acfe_dynamic_module {
 	 */
 	function save_args($args, $name, $post_id){
 
+		$active = get_field('acfe_dbt_active', $post_id);
+        $active = $active === null ? true : $active;
 		$label = get_post_field('post_title', $post_id);
 		$name = get_field('name', $post_id);
 		$description = get_field('description', $post_id);
@@ -460,6 +467,7 @@ class acfe_dynamic_block_types extends acfe_dynamic_module {
 
 		// Register: Args
 		$args = array(
+			'active'            => $active,
 			'name'              => $name,
 			'title'             => $label,
 			'description'       => $description,
@@ -580,7 +588,7 @@ class acfe_dynamic_block_types extends acfe_dynamic_module {
 		wp_update_post(array(
 			'ID'            => $post_id,
 			'post_name'     => $name,
-			'post_status'   => 'publish',
+			'post_status'   => $args['active'] ? 'publish' : 'acf-disabled'
 		));
 
 	}
@@ -667,6 +675,7 @@ class acfe_dynamic_block_types extends acfe_dynamic_module {
 	 */
 	function import_fields($name, $args, $post_id){
 
+		update_field('acfe_dbt_active', $args['active'], $post_id);
 		update_field('name',            $name, $post_id);
 		update_field('description',     $args['description'], $post_id);
 		update_field('category',        $args['category'], $post_id);
@@ -1676,6 +1685,50 @@ full',
 					'ui_off_text' => 'False',
 				),
 			),
+		));
+
+		acf_add_local_field_group(array(
+			'key' => 'group_acf_block_type_side',
+			'title' => 'Block Type: Side',
+			'acfe_display_title' => 'Active',
+			'fields' => array(
+				array(
+					'key' => 'field_acfe_dbt_active',
+					'label' => '',
+					'name' => 'acfe_dbt_active',
+					'type' => 'true_false',
+					'instructions' => '',
+					'required' => 0,
+					'conditional_logic' => 0,
+					'wrapper' => array(
+						'width' => '',
+						'class' => '',
+						'id' => '',
+					),
+					'message' => '',
+					'default_value' => 1,
+					'ui' => 1,
+					'ui_on_text' => '',
+					'ui_off_text' => '',
+				),
+			),
+			'location' => array(
+				array(
+					array(
+						'param' => 'post_type',
+						'operator' => '==',
+						'value' => $this->post_type,
+					),
+				),
+			),
+			'menu_order' => 0,
+			'position' => 'side',
+			'style' => 'default',
+			'label_placement' => 'top',
+			'instruction_placement' => 'label',
+			'hide_on_screen' => '',
+			'active' => true,
+			'description' => '',
 		));
 
 	}

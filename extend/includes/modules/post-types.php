@@ -746,6 +746,7 @@ class acfe_dynamic_post_types extends acfe_dynamic_module {
 	function import_fields($name, $args, $post_id){
 
 		// Register Args
+		update_field('acfe_dpt_active', $args['active'], $post_id);
 		update_field('acfe_dpt_name', $name, $post_id);
 		update_field('description', $args['description'], $post_id);
 		update_field('hierarchical', $args['hierarchical'], $post_id);
@@ -2947,6 +2948,50 @@ etc...',
 					'maxlength' => '',
 				),
 			),
+		));
+
+		acf_add_local_field_group(array(
+			'key' => 'group_acf_post_type_side',
+			'title' => 'Post Type: Side',
+			'acfe_display_title' => 'Active',
+			'fields' => array(
+				array(
+					'key' => 'field_acfe_dpt_active',
+					'label' => '',
+					'name' => 'acfe_dpt_active',
+					'type' => 'true_false',
+					'instructions' => '',
+					'required' => 0,
+					'conditional_logic' => 0,
+					'wrapper' => array(
+						'width' => '',
+						'class' => '',
+						'id' => '',
+					),
+					'message' => '',
+					'default_value' => 1,
+					'ui' => 1,
+					'ui_on_text' => '',
+					'ui_off_text' => '',
+				),
+			),
+			'location' => array(
+				array(
+					array(
+						'param' => 'post_type',
+						'operator' => '==',
+						'value' => $this->post_type,
+					),
+				),
+			),
+			'menu_order' => 0,
+			'position' => 'side',
+			'style' => 'default',
+			'label_placement' => 'top',
+			'instruction_placement' => 'label',
+			'hide_on_screen' => '',
+			'active' => true,
+			'description' => '',
 		));
 
 	}

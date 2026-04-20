@@ -108,12 +108,7 @@ final class Extend_ACF {
 		acfe_include( 'includes/world.php' );
 
 		// Modules.
-		acfe_include( 'pro/includes/modules/block-types.php' );
-		acfe_include( 'pro/includes/modules/forms.php' );
-		acfe_include( 'pro/includes/modules/options-pages.php' );
-		acfe_include( 'pro/includes/modules/post-types.php' );
-		acfe_include( 'pro/includes/modules/taxonomies.php' );
-		acfe_include( 'pro/includes/modules/scripts-class.php' );
+		acfe_include( 'includes/modules/scripts-class.php' );
 	}
 
 	/**
