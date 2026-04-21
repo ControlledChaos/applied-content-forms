@@ -441,6 +441,10 @@ final class ACF {
 		acf_include( 'includes/fields/class-acf-field-gallery.php' );
 		acf_include( 'includes/fields/class-acf-field-clone.php' );
 
+		acf_include( 'includes/fields/class-acf-field-advanced-link.php' );
+		acf_include( 'includes/fields/class-acf-field-block-types.php' );
+		acf_include( 'includes/fields/class-acf-field-code-editor.php' );
+
 		/**
 		 * Fires after field types have been included.
 		 *

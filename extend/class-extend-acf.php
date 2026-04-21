@@ -226,9 +226,8 @@ final class Extend_ACF {
 	 */
 	public function include_field_types(){
 
-		acf_include( 'extend/includes/fields/field-advanced-link.php' );
 		acf_include( 'extend/includes/fields/field-button.php' );
-		acf_include( 'extend/includes/fields/field-code-editor.php' );
+
 		acf_include( 'extend/includes/fields/field-column.php' );
 		acf_include( 'extend/includes/fields/field-dynamic-render.php' );
 		acf_include( 'extend/includes/fields/field-forms.php' );
@@ -241,7 +240,6 @@ final class Extend_ACF {
 		acf_include( 'extend/includes/fields/field-taxonomy-terms.php' );
 		acf_include( 'extend/includes/fields/field-user-roles.php' );
 
-		acf_include( 'extend/pro/includes/fields/field-block-types.php' );
 		acf_include( 'extend/pro/includes/fields/field-countries.php' );
 		acf_include( 'extend/pro/includes/fields/field-currencies.php' );
 		acf_include( 'extend/pro/includes/fields/field-date-range-picker.php' );
@@ -263,7 +261,6 @@ final class Extend_ACF {
 		acf_include( 'extend/pro/includes/fields/field-post-formats.php' );
 		acf_include( 'extend/pro/includes/fields/field-relationship.php' );
 		acf_include( 'extend/pro/includes/fields/field-templates.php' );
-		acf_include( 'extend/pro/includes/fields/field-wysiwyg.php' );
 	}
 
 	/**

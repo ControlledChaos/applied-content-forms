@@ -9,9 +9,9 @@ if(acf_version_compare($GLOBALS['wp_version'],  '<', '4.9'))
 if(!class_exists('acfe_field_code_editor')):
 
 class acfe_field_code_editor extends acf_field{
-    
+
     function __construct(){
-        
+
         $this->name = 'acfe_code_editor';
         $this->label = __('Code Editor', 'acfe');
         $this->category = 'content';
@@ -26,15 +26,15 @@ class acfe_field_code_editor extends acf_field{
             'max_rows'      => '',
             'return_entities' => false
         );
-        
+
         $this->textarea = acf_get_field_type('textarea');
-        
+
         parent::__construct();
-        
+
     }
 
     function render_field($field){
-        
+
         $wrapper = array(
             'class'             => 'acf-input-wrap acfe-field-code-editor',
             'data-mode'         => $field['mode'],
@@ -43,19 +43,19 @@ class acfe_field_code_editor extends acf_field{
             'data-rows'         => $field['rows'],
             'data-max-rows'     => $field['max_rows'],
         );
-        
+
         $field['type'] = 'textarea';
-        
+
         ?>
         <div <?php acf_esc_attr_e($wrapper); ?>>
             <?php $this->textarea->render_field($field); ?>
         </div>
         <?php
-        
+
     }
-    
+
     function render_field_settings($field){
-        
+
         // default_value
         acf_render_field_setting($field, array(
             'label'         => __('Default Value','acf'),
@@ -64,7 +64,7 @@ class acfe_field_code_editor extends acf_field{
             'name'          => 'default_value',
             'rows'          => 4
         ));
-        
+
         // placeholder
         acf_render_field_setting($field, array(
             'label'         => __('Placeholder','acf'),
@@ -73,7 +73,7 @@ class acfe_field_code_editor extends acf_field{
             'name'          => 'placeholder',
             'rows'          => 4
         ));
-        
+
         // Mode
         acf_render_field_setting($field, array(
             'label'         => __('Editor mode','acf'),
@@ -89,7 +89,7 @@ class acfe_field_code_editor extends acf_field{
                 'text/x-php'                => __('PHP (plain)', 'acf'),
             )
         ));
-        
+
         // Lines
         acf_render_field_setting($field, array(
             'label'         => __('Show Lines', 'acf'),
@@ -98,7 +98,7 @@ class acfe_field_code_editor extends acf_field{
             'name'          => 'lines',
             'ui'            => true,
         ));
-        
+
         // Indent Unit
         acf_render_field_setting($field, array(
             'label'         => __('Indent Unit', 'acf'),
@@ -107,7 +107,7 @@ class acfe_field_code_editor extends acf_field{
             'min'           => 0,
             'name'          => 'indent_unit',
         ));
-        
+
         // maxlength
         acf_render_field_setting($field, array(
             'label'         => __('Character Limit','acf'),
@@ -115,7 +115,7 @@ class acfe_field_code_editor extends acf_field{
             'type'          => 'number',
             'name'          => 'maxlength',
         ));
-        
+
         // rows
         acf_render_field_setting($field, array(
             'label'         => __('Rows','acf'),
@@ -124,7 +124,7 @@ class acfe_field_code_editor extends acf_field{
             'name'          => 'rows',
             'placeholder'   => ''
         ));
-        
+
         // max rows
         acf_render_field_setting($field, array(
             'label'         => __('Max rows','acf'),
@@ -133,7 +133,7 @@ class acfe_field_code_editor extends acf_field{
             'name'          => 'max_rows',
             'placeholder'   => ''
         ));
-    
+
         // return entities
         acf_render_field_setting($field, array(
             'label'         => __('Return HTML Entities', 'acf'),
@@ -142,28 +142,28 @@ class acfe_field_code_editor extends acf_field{
             'name'          => 'return_entities',
             'ui'            => true,
         ));
-        
+
     }
-    
+
     function input_admin_enqueue_scripts(){
-    
+
         wp_enqueue_script('code-editor');
         wp_enqueue_style('code-editor');
-        
+
     }
-    
+
     function validate_value($valid, $value, $field, $input){
-        
+
         return $this->textarea->validate_value($valid, $value, $field, $input);
-        
+
     }
-    
+
     function format_value($value, $post_id, $field){
-        
+
         if(!$field['return_entities']) return $value;
-        
+
         return htmlentities($value);
-        
+
     }
 
 }

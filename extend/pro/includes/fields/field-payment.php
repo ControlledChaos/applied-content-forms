@@ -1195,7 +1195,7 @@ class acfe_payment extends acf_field{
     function include_stripe($field){
 
         // Lib
-        acf_include('extend/pro/includes/libraries/stripe/init.php');
+        acf_include('includes/libraries/stripe/init.php');
 
         // API Key
         \Stripe\Stripe::setApiKey($this->get_gateway_api($field, 'stripe', 'secret_key'));
@@ -1205,7 +1205,7 @@ class acfe_payment extends acf_field{
     function include_paypal(){
 
         // Lib
-        acf_include('extend/pro/includes/libraries/paypal/paypal-express.php');
+        acf_include('includes/libraries/paypal/paypal-express.php');
 
     }
 
