@@ -145,6 +145,9 @@ final class Extend_ACF {
 		acf_include( 'extend/includes/fields-settings/permissions.php' );
 		acf_include( 'extend/includes/fields-settings/settings.php' );
 		acf_include( 'extend/includes/fields-settings/validation.php' );
+		acf_include( 'extend/includes/fields-settings/min-max.php' );
+		acf_include( 'extend/includes/fields-settings/required.php' );
+		acf_include( 'extend/includes/fields-settings/visibility.php' );
 
 		acf_include( 'extend/includes/field-groups/field-group.php' );
 		acf_include( 'extend/includes/field-groups/field-group-advanced.php' );
@@ -156,6 +159,7 @@ final class Extend_ACF {
 		acf_include( 'extend/includes/field-groups/field-group-permissions.php' );
 		acf_include( 'extend/includes/field-groups/field-groups.php' );
 		acf_include( 'extend/includes/field-groups/field-groups-local.php' );
+		acf_include( 'extend/includes/field-groups/field-group-ui.php' );
 
 		acf_include( 'extend/includes/modules/module.php' );
 		acf_include( 'extend/includes/modules/author.php' );
@@ -184,13 +188,6 @@ final class Extend_ACF {
 		acf_include( 'extend/pro/includes/fields/field-radio.php' );
 		acf_include( 'extend/pro/includes/fields/field-select.php' );
 		acf_include( 'extend/pro/includes/fields/field-tab.php' );
-
-		acf_include( 'extend/pro/includes/fields-settings/instructions.php' );
-		acf_include( 'extend/pro/includes/fields-settings/min-max.php' );
-		acf_include( 'extend/pro/includes/fields-settings/required.php' );
-		acf_include( 'extend/pro/includes/fields-settings/visibility.php' );
-
-		acf_include( 'extend/includes/field-groups/field-group-ui.php' );
 
 		acf_include( 'extend/includes/modules/dev.php' );
 		acf_include( 'extend/includes/modules/force-sync.php' );
