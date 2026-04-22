@@ -3,9 +3,9 @@
 if(!defined('ABSPATH'))
     exit;
 
-if(!class_exists('acfe_payment')):
+if(!class_exists('acf_payment')):
 
-class acfe_payment extends acf_field{
+class acf_payment extends acf_field{
 
     var $sub_fields;
 
@@ -1323,6 +1323,6 @@ class acfe_payment extends acf_field{
 }
 
 // initialize
-acf_register_field_type('acfe_payment');
+acf_register_field_type('acf_payment');
 
 endif;

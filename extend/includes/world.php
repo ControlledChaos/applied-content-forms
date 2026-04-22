@@ -88,6 +88,10 @@ class ACFE_World_Query{
         $args = $this->args;
         $data = $this->data;
 
+        if ( ! is_array( $data ) ) {
+            return;
+        }
+
         // generate rules
         $_args = array_keys($args);
         $rules = array();

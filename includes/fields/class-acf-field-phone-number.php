@@ -3,9 +3,9 @@
 if(!defined('ABSPATH'))
     exit;
 
-if(!class_exists('acfe_field_phone_number')):
+if(!class_exists('acf_field_phone_number')):
 
-class acfe_field_phone_number extends acf_field{
+class acf_field_phone_number extends acf_field{
 
     /*
      * Construct
@@ -355,6 +355,6 @@ class acfe_field_phone_number extends acf_field{
 }
 
 // initialize
-acf_register_field_type('acfe_field_phone_number');
+acf_register_field_type('acf_field_phone_number');
 
 endif;

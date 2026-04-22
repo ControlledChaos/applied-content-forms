@@ -444,6 +444,11 @@ final class ACF {
 		acf_include( 'includes/fields/class-acf-field-advanced-link.php' );
 		acf_include( 'includes/fields/class-acf-field-block-types.php' );
 		acf_include( 'includes/fields/class-acf-field-code-editor.php' );
+		acf_include( 'includes/fields/class-acf-field-payment.php' );
+		acf_include( 'includes/fields/class-acf-field-payment-cart.php' );
+		acf_include( 'includes/fields/class-acf-field-payment-selector.php' );
+		acf_include( 'includes/fields/class-acf-field-phone-number.php' );
+		acf_include( 'includes/fields/class-acf-field-templates.php' );
 
 		/**
 		 * Fires after field types have been included.

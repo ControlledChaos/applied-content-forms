@@ -3,115 +3,113 @@
 if(!defined('ABSPATH'))
     exit;
 
-if(!class_exists('acfe_templates')):
+if(!class_exists('acf_payment_cart')):
 
-class acfe_templates extends acf_field{
-    
-    function __construct(){
-        
-        $this->name = 'acfe_templates';
-        $this->label = __('Templates', 'acfe');
-        $this->category = 'ACF';
+class acf_payment_cart extends acf_field{
+
+    public $payment_field = false;
+
+    function initialize(){
+
+        $this->name = 'acfe_payment_cart';
+        $this->label = __('Payment Cart', 'acfe');
+        $this->category = 'E-Commerce';
         $this->defaults = array(
-            'templates'             => array(),
-            'field_type'            => 'checkbox',
-            'multiple'              => 0,
-            'allow_null'            => 0,
+            'payment_field'         => '',
             'choices'               => array(),
             'default_value'         => '',
+            'display_format'        => '{item} - {currency}{price}',
+            'field_type'            => 'checkbox',
+            'allow_null'            => 0,
+            'multiple'              => 0,
             'ui'                    => 0,
-            'ajax'                  => 0,
             'placeholder'           => '',
             'search_placeholder'    => '',
             'layout'                => '',
             'toggle'                => 0,
-            'allow_custom'          => 0,
-            'return_format'         => 'name',
         );
-        
-        parent::__construct();
-        
+
     }
-    
-    function get_pretty_templates($allowed = array()){
-    
-        $templates = get_posts(array(
-            'post_type'         => 'acf-template',
-            'posts_per_page'    => -1,
-            'fields'            => 'ids',
-            'orderby'           => 'title',
-            'order'             => 'ASC',
-        ));
-        
-        $choices = array();
-        
-        foreach($templates as $template_id){
-            
-            $template = get_post($template_id);
-            
-            if(!empty($allowed) && !in_array($template_id, $allowed))
-                continue;
-    
-            $choices[$template_id] = get_the_title($template);
-            
-        }
-        
-        return $choices;
-    
-    }
-    
+
     function render_field_settings($field){
-        
+
+        // Choices
+        $field['choices'] = acf_encode_choices($field['choices']);
+
+        // Default Value
         $field['default_value'] = acf_encode_choices($field['default_value'], false);
-        
-        // Allow Templates
+
+        // enable local
+        acf_enable_filter('local');
+
+        $payment_field = acf_get_field($field['payment_field']);
+
+        acf_disable_filter('local');
+
+        $choices = array();
+
+        // add choices
+        if($payment_field){
+            $choices[ $field['payment_field'] ] = $this->get_field_label($payment_field);
+        }
+
+        // Payment Field
         acf_render_field_setting($field, array(
-            'label'         => __('Allow Templates','acf'),
+            'label'         => __('Payment Field', 'acfe'),
             'instructions'  => '',
+            'name'          => 'payment_field',
             'type'          => 'select',
-            'name'          => 'templates',
-            'choices'       => $this->get_pretty_templates(),
-            'multiple'      => 1,
             'ui'            => 1,
+            'ajax'          => 1,
             'allow_null'    => 1,
-            'placeholder'   => __("All templates",'acf'),
+            'ajax_action'   => 'acfe/get_payment_field',
+            'placeholder'   => __('Select the payment field', 'acfe'),
+            'choices'       => $choices
         ));
-        
-        // field_type
+
+        // Items
         acf_render_field_setting($field, array(
-            'label'         => __('Appearance','acf'),
-            'instructions'  => __('Select the appearance of this field', 'acf'),
-            'type'          => 'select',
-            'name'          => 'field_type',
-            'optgroup'      => true,
-            'choices'       => array(
-                'checkbox'      => __('Checkbox', 'acf'),
-                'radio'         => __('Radio Buttons', 'acf'),
-                'select'        => _x('Select', 'noun', 'acf')
-            )
+            'label'         => __('items', 'acfe'),
+            'instructions'  => __('Enter each choice on a new line with the item price. For example:','acf') . '<br /><br />' . __('Item 1 : 29<br/>Item 2 : 49','acf'),
+            'name'          => 'choices',
+            'type'          => 'textarea',
         ));
-        
-        // default_value
+
+        // Default Value
         acf_render_field_setting($field, array(
             'label'         => __('Default Value','acf'),
             'instructions'  => __('Enter each default value on a new line','acf'),
             'name'          => 'default_value',
             'type'          => 'textarea',
         ));
-        
-        // return_format
+
+        // display format
         acf_render_field_setting($field, array(
-            'label'         => __('Return Value', 'acf'),
-            'instructions'  => '',
+            'label'         => __('Display Format','acf'),
+            'instructions'  => __('The format displayed when editing a post','acf'),
             'type'          => 'radio',
-            'name'          => 'return_format',
+            'name'          => 'display_format',
+            'other_choice'  => 1,
             'choices'       => array(
-                'id'    => __('Template ID', 'acfe'),
-                'name'  => __('Template name', 'acfe'),
-            ),
-            'layout'        => 'horizontal',
+                '{item} - {currency}{price}'    => '<span>Item A - $29</span><code>{item} - {currency}{price}</code>',
+                '{currency}{price} - {item}'    => '<span>$29 - Item A</span><code>{currency}{price} - {item}</code>',
+                'other'                         => '<span>' . __('Custom:', 'acf') . '</span>',
+            )
         ));
-        
+
+        // Field Type
+        acf_render_field_setting($field, array(
+            'label'         => __('Field Type', 'acfe'),
+            'instructions'  => __('Field Type', 'acfe'),
+            'name'          => 'field_type',
+            'type'          => 'select',
+            'choices'       => array(
+                'checkbox'  => __('Checkbox', 'acf'),
+                'radio'     => __('Radio Button', 'acf'),
+                'select'    => __('Select', 'acfe'),
+            ),
+        ));
+
         // Select + Radio: allow_null
         acf_render_field_setting($field, array(
             'label'         => __('Allow Null?','acf'),
@@ -136,7 +134,7 @@ class acfe_templates extends acf_field{
                 ),
             )
         ));
-        
+
         // Select: multiple
         acf_render_field_setting($field, array(
             'label'         => __('Select multiple values?','acf'),
@@ -154,7 +152,7 @@ class acfe_templates extends acf_field{
                 ),
             )
         ));
-        
+
         // Select: ui
         acf_render_field_setting($field, array(
             'label'         => __('Stylised UI','acf'),
@@ -172,31 +170,7 @@ class acfe_templates extends acf_field{
                 ),
             )
         ));
-                
-        
-        // Select: ajax
-        acf_render_field_setting($field, array(
-            'label'         => __('Use AJAX to lazy load choices?','acf'),
-            'instructions'  => '',
-            'name'          => 'ajax',
-            'type'          => 'true_false',
-            'ui'            => 1,
-            'conditions'    => array(
-                array(
-                    array(
-                        'field'     => 'field_type',
-                        'operator'  => '==',
-                        'value'     => 'select',
-                    ),
-                    array(
-                        'field'     => 'ui',
-                        'operator'  => '==',
-                        'value'     => 1,
-                    ),
-                ),
-            )
-        ));
-    
+
         // Select: Placeholder
         acf_render_field_setting($field, array(
             'label'             => __('Placeholder','acf'),
@@ -263,7 +237,7 @@ class acfe_templates extends acf_field{
                 ),
             )
         ));
-    
+
         // Select: Search Placeholder
         acf_render_field_setting($field, array(
             'label'             => __('Search Input Placeholder','acf'),
@@ -291,33 +265,14 @@ class acfe_templates extends acf_field{
                 ),
             )
         ));
-        
-        // Radio: other_choice
-        acf_render_field_setting($field, array(
-            'label'         => __('Other','acf'),
-            'instructions'  => '',
-            'name'          => 'other_choice',
-            'type'          => 'true_false',
-            'ui'            => 1,
-            'message'       => __("Add 'other' choice to allow for custom values", 'acf'),
-            'conditions'    => array(
-                array(
-                    array(
-                        'field'     => 'field_type',
-                        'operator'  => '==',
-                        'value'     => 'radio',
-                    ),
-                ),
-            )
-        ));
-        
+
         // Checkbox: layout
         acf_render_field_setting($field, array(
             'label'         => __('Layout','acf'),
             'instructions'  => '',
             'type'          => 'radio',
             'name'          => 'layout',
-            'layout'        => 'horizontal', 
+            'layout'        => 'horizontal',
             'choices'       => array(
                 'vertical'      => __("Vertical",'acf'),
                 'horizontal'    => __("Horizontal",'acf')
@@ -339,7 +294,7 @@ class acfe_templates extends acf_field{
                 ),
             )
         ));
-        
+
         // Checkbox: toggle
         acf_render_field_setting($field, array(
             'label'         => __('Toggle','acf'),
@@ -357,125 +312,279 @@ class acfe_templates extends acf_field{
                 ),
             )
         ));
-        
-        // Checkbox: other_choice
-        acf_render_field_setting($field, array(
-            'label'         => __('Allow Custom','acf'),
-            'instructions'  => '',
-            'name'          => 'allow_custom',
-            'type'          => 'true_false',
-            'ui'            => 1,
-            'message'       => __("Allow 'custom' values to be added", 'acf'),
-            'conditions'    => array(
-                array(
-                    array(
-                        'field'     => 'field_type',
-                        'operator'  => '==',
-                        'value'     => 'checkbox',
-                    ),
-                ),
-                array(
-                    array(
-                        'field'     => 'field_type',
-                        'operator'  => '==',
-                        'value'     => 'select',
-                    ),
-                    array(
-                        'field'     => 'ui',
-                        'operator'  => '==',
-                        'value'     => '1',
-                    ),
-                )
-            )
-        ));
-        
+
     }
-    
-    function update_field($field){
-        
-        $field['default_value'] = acf_decode_choices($field['default_value'], true);
-        
-        if($field['field_type'] === 'radio')
-            $field['default_value'] = acfe_unarray($field['default_value']);
-        
-        return $field;
-        
-    }
-    
+
     function prepare_field($field){
-        
-        // Set Field Type
-        $field['type'] = $field['field_type'];
-        
-        // Choices
-        $field['choices'] = $this->get_pretty_templates($field['templates']);
-        
-        // Allow Custom
-        if(acf_maybe_get($field, 'allow_custom')){
-            
-            if($value = acf_maybe_get($field, 'value')){
-                
-                $value = acf_get_array($value);
-                
-                foreach($value as $v){
-                    
-                    if(isset($field['choices'][$v]))
-                        continue;
-                    
-                    $field['choices'][$v] = $v;
-                    
-                }
-                
-            }
-            
+
+        // payment field
+        $this->payment_field = $this->get_payment_field($field);
+
+        // no payment field found
+        if(!$this->payment_field){
+            return false;
         }
-        
+
+        // get meta
+        $meta = acf_get_meta(acfe_get_post_id());
+
+        // loop meta
+        foreach($meta as $key => $val){
+
+            // find the payment field in meta
+            if($val !== $this->payment_field['key']) continue;
+
+            // hide field if payment value is set on current post
+            return false;
+
+        }
+
+        // type
+        $field['wrapper']['data-type'] = $field['field_type'];
+
         // return
         return $field;
-        
+
     }
-    
-    function format_value($value, $post_id, $field){
-    
-        // Bail early
-        if(empty($value))
+
+    function render_field($field){
+
+        // settings
+        $field['type'] = $field['field_type'];
+        $field['other_choice'] = 0;
+        $field['ajax'] = 0;
+        $field['allow_custom'] = 0;
+
+        // currency
+        $currency = acf_maybe_get($this->payment_field, 'currency', 'USD');
+        $currency = acfe_get_currency($currency, 'symbol');
+
+        // loop choices
+        foreach(array_keys($field['choices']) as $item){
+
+            // display format
+            $label = $field['display_format'];
+
+            // parse template tags
+            $label = str_replace('{item}', $item, $label);
+            $label = str_replace('{price}', $this->get_item_price($item, $field), $label);
+            $label = str_replace('{currency}', $currency, $label);
+
+            // set choice
+            $field['choices'][ $item ] = $label;
+
+        }
+
+        // render
+        acf_get_field_type($field['type'])->render_field($field);
+
+    }
+
+    /*
+     * Update Field
+     */
+    function update_field($field){
+
+        // choices
+        $field['choices'] = acf_decode_choices($field['choices']);
+
+        // default value
+        $field['default_value'] = acf_decode_choices($field['default_value'], true);
+
+        // single line
+        if(!$field['multiple'] && $field['field_type'] !== 'checkbox'){
+            $field['default_value'] = acfe_unarray($field['default_value']);
+        }
+
+        return $field;
+
+    }
+
+    /*
+     * Validate Value
+     */
+    function validate_value($valid, $value, $field, $input){
+
+        // empty value
+        if(empty($value)){
+            return $valid;
+        }
+
+        // force array
+        $items = acf_get_array($value);
+
+        // loop items
+        foreach($items as $item){
+
+            // validate item
+            if($this->validate_item($item, $field)) continue;
+
+            // return error
+            return __("This item doesn't exists. Please try again", 'acfe');
+
+        }
+
+        return $valid;
+
+    }
+
+    /*
+     * Update Value
+     */
+    function update_value($value, $post_id, $field){
+
+        // set cart data
+        $this->set_cart_data($value, $field);
+
+        // return value for local meta
+        if(acfe_is_local_post_id($post_id)){
             return $value;
-    
-        // Vars
-        $is_array = is_array($value);
-        $value = acf_get_array($value);
-    
-        // Loop
-        foreach($value as &$v){
-        
-            // Retrieve Object
-            $object = get_post($v);
-        
-            if(!$object || is_wp_error($object))
-                continue;
-        
-            // Return: Name
-            if($field['return_format'] === 'name'){
-    
-                $v = $object->post_name;
-            
-            }
-        
         }
-    
-        // Do not return array
-        if(!$is_array){
-            $value = acfe_unarray($value);
+
+        // do not save in admin
+        if(is_admin()){
+            return null;
         }
-    
-        // Return
-        return $value;
-        
+
+        // do not save
+        return null;
+
     }
-    
+
+    function set_cart_data($value, $field){
+
+        // items
+        $items = acf_get_array($value);
+
+        // get existing cart
+        $cart = acf_get_form_data('acfe/payment_cart');
+        $cart = acf_get_array($cart);
+
+        // parse default cart
+        $cart = wp_parse_args($cart, array(
+            'fields' => array(),
+            'items'  => array(),
+            'amount' => 0,
+        ));
+
+        // avoid processing the same cart field twice
+        if(in_array($field['key'], $cart['fields'])){
+            return;
+        }
+
+        // add current field
+        $cart['fields'][] = $field['key'];
+
+        // loop items
+        foreach($items as $item){
+
+            // validate item
+            if(!$this->validate_item($item, $field)) continue;
+
+            // vars
+            $name = wp_strip_all_tags($item);
+            $price = $this->get_item_price($item, $field);
+
+            // generate item
+            $cart['items'][] = array(
+                'item'  => $name,
+                'price' => $price
+            );
+
+            // add to amount
+            $cart['amount'] += $price;
+
+        }
+
+        // set form data for payment process update
+        acf_set_form_data('acfe/payment_cart', $cart);
+
+    }
+
+    function validate_item($item, $field){
+
+        $choices = array_keys($field['choices']);
+
+        return in_array($item, $choices);
+
+    }
+
+    function get_item_price($item, $field){
+
+        $price = 0;
+
+        foreach(array_keys($field['choices']) as $key){
+
+            if($key !== $item) continue;
+
+            $price = $field['choices'][ $key ];
+
+        }
+
+        return $price;
+
+    }
+
+    function get_payment_field($field){
+
+        // payment field already set in field
+        if($field['payment_field']){
+
+            // get field
+            $payment_field = acf_get_field($field['payment_field']);
+
+            // found field
+            if($payment_field){
+                return $payment_field;
+            }
+
+        }
+
+        // retrieve payment field in the same field group
+        $field_group = acf_get_field_group_from_field($field);
+
+        // get fields
+        $fields = acf_get_fields($field_group['key']);
+
+        // return
+        return $this->find_payment_field($fields);
+
+    }
+
+    function find_payment_field($fields){
+
+        // loop
+        foreach($fields as $field){
+
+            // Recursive search for sub_fields (groups & clones)
+            if(acf_maybe_get($field, 'sub_fields')){
+                return $this->find_payment_field($field['sub_fields']);
+            }
+
+            // allow only payment field
+            if($field['type'] !== 'acfe_payment') continue;
+
+            // return field
+            return $field;
+
+        }
+
+        // nothing found
+        return false;
+
+    }
+
+    function get_field_label($field){
+
+        $label = acf_maybe_get($field, 'label', $field['name']);
+
+        return "{$label} ({$field['key']})";
+
+    }
+
 }
 
 // initialize
-acf_register_field_type('acfe_templates');
+acf_register_field_type('acf_payment_cart');
 
 endif;

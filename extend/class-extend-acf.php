@@ -180,8 +180,8 @@ final class Extend_ACF {
 
 		acf_include( 'extend/pro/includes/fields/field-checkbox.php' );
 		acf_include( 'extend/pro/includes/fields/field-column.php' );
-		acf_include( 'extend/pro/includes/fields/field-color-picker.php' );
-		acf_include( 'extend/pro/includes/fields/field-date-picker.php' );
+		acf_include( 'extend/includes/fields/field-color-picker.php' );
+		acf_include( 'extend/includes/fields/field-date-picker.php' );
 		acf_include( 'extend/pro/includes/fields/field-flexible-content-grid.php' );
 		acf_include( 'extend/pro/includes/fields/field-flexible-content-locations.php' );
 		acf_include( 'extend/pro/includes/fields/field-file.php' );
@@ -240,27 +240,22 @@ final class Extend_ACF {
 		acf_include( 'extend/includes/fields/field-taxonomy-terms.php' );
 		acf_include( 'extend/includes/fields/field-user-roles.php' );
 
-		acf_include( 'extend/pro/includes/fields/field-countries.php' );
-		acf_include( 'extend/pro/includes/fields/field-currencies.php' );
-		acf_include( 'extend/pro/includes/fields/field-date-range-picker.php' );
-		acf_include( 'extend/pro/includes/fields/field-field-groups.php' );
-		acf_include( 'extend/pro/includes/fields/field-field-types.php' );
-		acf_include( 'extend/pro/includes/fields/field-fields.php' );
-		acf_include( 'extend/pro/includes/fields/field-google-map.php' );
-		acf_include( 'extend/pro/includes/fields/field-image-selector.php' );
-		acf_include( 'extend/pro/includes/fields/field-image-sizes.php' );
-		acf_include( 'extend/pro/includes/fields/field-languages.php' );
-		acf_include( 'extend/pro/includes/fields/field-menus.php' );
-		acf_include( 'extend/pro/includes/fields/field-menu-locations.php' );
-		acf_include( 'extend/pro/includes/fields/field-options-pages.php' );
-		acf_include( 'extend/pro/includes/fields/field-payment.php' );
-		acf_include( 'extend/pro/includes/fields/field-payment-cart.php' );
-		acf_include( 'extend/pro/includes/fields/field-payment-selector.php' );
-		acf_include( 'extend/pro/includes/fields/field-phone-number.php' );
-		acf_include( 'extend/pro/includes/fields/field-post-field.php' );
-		acf_include( 'extend/pro/includes/fields/field-post-formats.php' );
-		acf_include( 'extend/pro/includes/fields/field-relationship.php' );
-		acf_include( 'extend/pro/includes/fields/field-templates.php' );
+		acf_include( 'extend/includes/fields/field-countries.php' );
+		acf_include( 'extend/includes/fields/field-currencies.php' );
+		acf_include( 'extend/includes/fields/field-date-range-picker.php' );
+		acf_include( 'extend/includes/fields/field-field-groups.php' );
+		acf_include( 'extend/includes/fields/field-field-types.php' );
+		acf_include( 'extend/includes/fields/field-fields.php' );
+		acf_include( 'extend/includes/fields/field-google-map.php' );
+		acf_include( 'extend/includes/fields/field-image-selector.php' );
+		acf_include( 'extend/includes/fields/field-image-sizes.php' );
+		acf_include( 'extend/includes/fields/field-languages.php' );
+		acf_include( 'extend/includes/fields/field-menus.php' );
+		acf_include( 'extend/includes/fields/field-menu-locations.php' );
+		acf_include( 'extend/includes/fields/field-options-pages.php' );
+		acf_include( 'extend/includes/fields/field-post-field.php' );
+		acf_include( 'extend/includes/fields/field-post-formats.php' );
+		acf_include( 'extend/includes/fields/field-relationship.php' );
 	}
 
 	/**
