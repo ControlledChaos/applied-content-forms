@@ -526,6 +526,7 @@ class ACF_Admin {
 
 		// Get custom post types.
 		$custom = $this->custom_post_types();
+		asort( $custom );
 
 		// Merge custom post with native types.
 		$registered = array_merge( $native, $custom );
