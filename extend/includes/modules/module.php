@@ -87,6 +87,7 @@ class acfe_dynamic_module{
             add_action('load-post.php',                                 array($this, 'post_load'));
             add_action('load-post-new.php',                             array($this, 'post_new_load'));
             add_filter('submenu_file',                                  array($this, 'submenu_file'));
+            add_action( "load-post.php", [ $this, 'help_tabs_post' ] );
 
             $this->post_screen();
 
@@ -105,6 +106,7 @@ class acfe_dynamic_module{
             add_action('load-edit.php',                                 array($this, 'edit_load'));
             add_filter("bulk_actions-edit-{$this->post_type}",          array($this, 'bulk_actions'));
             add_filter("handle_bulk_actions-edit-{$this->post_type}",   array($this, 'handle_bulk_actions'), 10, 3);
+            add_action( "load-edit.php", [ $this, 'help_tabs_edit' ] );
 
             $this->edit_screen();
 
@@ -137,6 +139,14 @@ class acfe_dynamic_module{
     }
 
     function edit_load(){
+        // ...
+    }
+
+    public function help_tabs_post() {
+        // ...
+    }
+
+    public function help_tabs_edit() {
         // ...
     }
 
