@@ -6,7 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 if ( ! class_exists( 'acfe_dynamic_block_types' ) ) :
 
-class acfe_dynamic_block_types extends acfe_dynamic_module {
+class acfe_dynamic_block_types extends acf_module {
 
 	public $active = false;
 

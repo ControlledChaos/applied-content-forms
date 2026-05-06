@@ -5,7 +5,7 @@ if(!defined('ABSPATH'))
 
 if(!class_exists('acfe_dynamic_options_pages')):
 
-class acfe_dynamic_options_pages extends acfe_dynamic_module{
+class acfe_dynamic_options_pages extends acf_module{
 
 	/*
 	 * Initialize

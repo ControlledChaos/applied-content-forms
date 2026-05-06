@@ -5,7 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 if ( ! class_exists( 'acfe_dynamic_forms' ) ) :
-class acfe_dynamic_forms extends acfe_dynamic_module{
+class acfe_dynamic_forms extends acf_module{
 
 	public $active = false;
 

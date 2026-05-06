@@ -5,7 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 if ( ! class_exists( 'acfe_dynamic_taxonomies' ) ) :
-class acfe_dynamic_taxonomies extends acfe_dynamic_module {
+class acfe_dynamic_taxonomies extends acf_module {
 
 	public $active = false;
 

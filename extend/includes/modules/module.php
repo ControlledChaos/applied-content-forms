@@ -3,9 +3,9 @@
 if(!defined('ABSPATH'))
     exit;
 
-if(!class_exists('acfe_dynamic_module')):
+if(!class_exists('acf_module')):
 
-class acfe_dynamic_module{
+class acf_module{
 
     // vars
     public  $active = false,
