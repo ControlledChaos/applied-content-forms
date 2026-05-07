@@ -18,7 +18,7 @@ class acfe_dynamic_post_types_import extends acfe_module_import{
         $this->name = 'acfe_dynamic_post_types_import';
         $this->title = __('Import Post Types');
         $this->description = __('Import Post Types');
-        $this->instance = acf_get_instance('acfe_dynamic_post_types');
+        $this->instance = acf_get_instance('acf_dynamic_post_types');
         $this->messages = array(
             'success_single'    => '1 post type imported',
             'success_multiple'  => '%s post types imported',

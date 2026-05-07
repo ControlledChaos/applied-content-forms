@@ -56,7 +56,7 @@ class acfe_upgrades{
         // Modules
         acf_get_instance('acfe_dynamic_block_types')->reset();
         acf_get_instance('acfe_dynamic_options_pages')->reset();
-        acf_get_instance('acfe_dynamic_post_types')->reset();
+        acf_get_instance('acf_dynamic_post_types')->reset();
         acf_get_instance('acfe_dynamic_taxonomies')->reset();
 
     }

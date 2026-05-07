@@ -20,7 +20,7 @@ class acfe_dynamic_post_types_export extends acfe_module_export{
         $this->select = __('Select Post Types');
         $this->default_action = 'json';
         $this->allowed_actions = array('json', 'php');
-        $this->instance = acf_get_instance('acfe_dynamic_post_types');
+        $this->instance = acf_get_instance('acf_dynamic_post_types');
         $this->file = 'post-type';
         $this->files = 'post-types';
         $this->messages = array(
