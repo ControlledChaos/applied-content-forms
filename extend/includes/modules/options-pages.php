@@ -88,14 +88,14 @@ class acfe_dynamic_options_pages extends acf_module{
 	 */
 	function init(){
 
-		$this->register_post_type();
+		$this->register_post_types();
 
 	}
 
 	/*
 	 * Register Post Type
 	 */
-	function register_post_type(){
+	function register_post_types(){
 
 		$capability = acf_get_setting('capability');
 

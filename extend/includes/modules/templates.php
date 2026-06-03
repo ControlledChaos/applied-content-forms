@@ -33,7 +33,7 @@ class acfe_dynamic_templates extends acf_module {
     /*
      * Actions
      */
-    function actions(){
+    function actions() {
 
         // Actions
         add_action('acfe/template/save',                        array($this, 'save'), 10, 2);
@@ -53,6 +53,59 @@ class acfe_dynamic_templates extends acf_module {
 
     }
 
+    /**
+	 * Register post types
+	 *
+	 * Registers the ACF post types.
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @return void
+	 */
+	public function register_post_types() {
+
+		$cap = acf_get_setting( 'capability' );
+
+        register_post_type( $this->post_type, [
+            'label'       => __( 'Templates', 'acf' ),
+            'description' => __( 'Templates', 'acf' ),
+            'labels'      => [
+                'name'          => __( 'Templates', 'acf' ),
+                'singular_name' => __( 'Template', 'acf' ),
+                'menu_name'     => __( 'Templates', 'acf' ),
+                'edit_item'     => __( 'Edit Template', 'acf' ),
+                'add_new_item'  => __( 'New Template', 'acf' ),
+            ],
+            'supports'            => [ 'title' ],
+            'hierarchical'        => false,
+            'public'              => false,
+            'show_ui'             => true,
+            'show_in_menu'        => acf()->admin_slug,
+            'menu_icon'           => 'dashicons-schedule',
+            'show_in_admin_bar'   => false,
+            'show_in_nav_menus'   => false,
+            'can_export'          => false,
+            'has_archive'         => false,
+            'rewrite'             => false,
+            'exclude_from_search' => true,
+            'publicly_queryable'  => false,
+            'capabilities'        => [
+                'publish_posts'       => $cap,
+                'edit_posts'          => $cap,
+                'edit_others_posts'   => $cap,
+                'delete_posts'        => $cap,
+                'delete_others_posts' => $cap,
+                'read_private_posts'  => $cap,
+                'edit_post'           => $cap,
+                'delete_post'         => $cap,
+                'read_post'           => $cap,
+            ],
+            'acfe_admin_orderby' => 'title',
+            'acfe_admin_order'   => 'ASC',
+            'acfe_admin_ppp'     => 999,
+        ] );
+    }
+
     /*
      * Get Name
      */
@@ -65,7 +118,9 @@ class acfe_dynamic_templates extends acf_module {
     /*
      * Init
      */
-    function init() {}
+    function init() {
+        $this->register_post_types();
+    }
 
     /*
      * Validate Values

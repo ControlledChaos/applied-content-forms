@@ -38,7 +38,7 @@ class acfe_dynamic_block_types extends acf_module {
 	/*
 	 * Actions
 	 */
-	function actions(){
+	function actions() {
 
 		// Validate
 		add_filter('acf/validate_value/key=field_acfe_dbt_name',    array($this, 'validate_name'), 10, 4);
@@ -63,6 +63,59 @@ class acfe_dynamic_block_types extends acf_module {
 
 	}
 
+	/**
+	 * Register post types
+	 *
+	 * Registers the ACF post types.
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @return void
+	 */
+	public function register_post_types() {
+
+		$cap = acf_get_setting( 'capability' );
+
+		register_post_type( $this->post_type, [
+			'label'       => __( 'Block Type', 'acf' ),
+			'description' => __( 'Create custom block types without code.', 'acf' ),
+			'labels'      => [
+				'name'          => __( 'Block Types', 'acf' ),
+				'singular_name' => __( 'Block Type', 'acf' ),
+				'menu_name'     => __( 'Block Types', 'acf' ),
+				'edit_item'     => __( 'Edit Block Type', 'acf' ),
+				'add_new_item'  => __( 'New Block Type', 'acf' ),
+			],
+			'supports'            => [ 'title' ],
+			'hierarchical'        => false,
+			'public'              => false,
+			'show_ui'             => true,
+			'show_in_menu'        => acf()->admin_slug,
+			'menu_icon'           => 'dashicons-block-default',
+			'show_in_admin_bar'   => false,
+			'show_in_nav_menus'   => false,
+			'can_export'          => false,
+			'has_archive'         => false,
+			'rewrite'             => false,
+			'exclude_from_search' => true,
+			'publicly_queryable'  => false,
+			'capabilities'        => [
+				'publish_posts'       => $cap,
+				'edit_posts'          => $cap,
+				'edit_others_posts'   => $cap,
+				'delete_posts'        => $cap,
+				'delete_others_posts' => $cap,
+				'read_private_posts'  => $cap,
+				'edit_post'           => $cap,
+				'delete_post'         => $cap,
+				'read_post'           => $cap,
+			],
+			'acfe_admin_orderby' => 'title',
+			'acfe_admin_order'   => 'ASC',
+			'acfe_admin_ppp'     => 999,
+		] );
+	}
+
 	/*
 	 * Get Name
 	 */
@@ -75,7 +128,9 @@ class acfe_dynamic_block_types extends acf_module {
 	/*
 	 * Init
 	 */
-	function init() {}
+	function init() {
+		$this->register_post_types();
+	}
 
 	/*
 	 * Register User Block Types

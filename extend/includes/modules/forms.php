@@ -38,7 +38,7 @@ class acfe_dynamic_forms extends acf_module{
 	/*
 	 * Actions
 	 */
-	function actions(){
+	function actions() {
 
 		// TinyMCE
 		add_filter('mce_external_plugins',                      array($this, 'mce_plugins'));
@@ -74,6 +74,59 @@ class acfe_dynamic_forms extends acf_module{
 
 		do_action('acfe/include_form_actions');
 
+	}
+
+	/**
+	 * Register post types
+	 *
+	 * Registers the ACF post types.
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @return void
+	 */
+	public function register_post_types() {
+
+		$cap = acf_get_setting( 'capability' );
+
+		register_post_type( $this->post_type, [
+			'label'                 => __( 'Forms', 'acf' ),
+			'description'           => __( 'Forms', 'acf' ),
+			'labels'                => [
+				'name'          => __( 'Forms', 'acf' ),
+				'singular_name' => __( 'Form', 'acf' ),
+				'menu_name'     => __( 'Forms', 'acf' ),
+				'edit_item'     => __( 'Edit Form', 'acf' ),
+				'add_new_item'  => __( 'New Form', 'acf' ),
+			],
+			'supports'            => [ 'title' ],
+			'hierarchical'        => false,
+			'public'              => false,
+			'show_ui'             => true,
+			'show_in_menu'        => acf()->admin_slug,
+			'menu_icon'           => 'dashicons-editor-table',
+			'show_in_admin_bar'   => false,
+			'show_in_nav_menus'   => false,
+			'can_export'          => false,
+			'has_archive'         => false,
+			'rewrite'             => false,
+			'exclude_from_search' => true,
+			'publicly_queryable'  => false,
+			'capabilities'        => [
+				'publish_posts'       => $cap,
+				'edit_posts'          => $cap,
+				'edit_others_posts'   => $cap,
+				'delete_posts'        => $cap,
+				'delete_others_posts' => $cap,
+				'read_private_posts'  => $cap,
+				'edit_post'           => $cap,
+				'delete_post'         => $cap,
+				'read_post'           => $cap,
+			],
+			'acfe_admin_ppp'     => 999,
+			'acfe_admin_orderby' => 'title',
+			'acfe_admin_order'   => 'ASC',
+		] );
 	}
 
 	/*
@@ -156,15 +209,14 @@ class acfe_dynamic_forms extends acf_module{
 	/*
 	 * Init
 	 */
-	function init(){
+	function init() {
 
 		$capability = acf_get_setting('capability');
 
 		if(!acf_get_setting('show_admin'))
 			$capability = false;
 
-
-
+		$this->register_post_types();
 	}
 
 	/*

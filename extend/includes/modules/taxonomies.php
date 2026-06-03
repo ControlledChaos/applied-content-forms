@@ -36,9 +36,9 @@ class acfe_dynamic_taxonomies extends acf_module {
 	/*
 	 * Actions
 	 */
-	function actions(){
+	function actions() {
 
-		// Features
+		// Features.
 		add_action('admin_footer-edit-tags.php',            array($this, 'admin_config'));
 		add_filter('get_terms_args',                        array($this, 'admin_archive_posts'), 10, 2);
 		add_action('pre_get_posts',                         array($this, 'front_archive_posts'));
@@ -63,7 +63,58 @@ class acfe_dynamic_taxonomies extends acf_module {
 
 	}
 
+	/**
+	 * Register post types
+	 *
+	 * Registers the ACF taxonomies.
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @return void
+	 */
+	public function register_post_types() {
 
+		$cap = acf_get_setting( 'capability' );
+
+		register_post_type( $this->post_type, [
+			'label'       => __( 'Taxonomies', 'acf' ),
+			'description' => __( 'Create custom taxonomies without code.', 'acf' ),
+			'labels'      => [
+				'name'          => __( 'Taxonomies', 'acf' ),
+				'singular_name' => __( 'Taxonomy', 'acf' ),
+				'menu_name'     => __( 'Taxonomies', 'acf' ),
+				'edit_item'     => __( 'Edit Taxonomy', 'acf' ),
+				'add_new_item'  => __( 'New Taxonomy', 'acf' ),
+			],
+			'supports'            => [ 'title' ],
+			'hierarchical'        => false,
+			'public'              => false,
+			'show_ui'             => true,
+			'show_in_menu'        => acf()->admin_slug,
+			'menu_icon'           => 'dashicons-tag',
+			'show_in_admin_bar'   => false,
+			'show_in_nav_menus'   => false,
+			'can_export'          => false,
+			'has_archive'         => false,
+			'rewrite'             => false,
+			'exclude_from_search' => true,
+			'publicly_queryable'  => false,
+			'capabilities'        => [
+				'publish_posts'       => $cap,
+				'edit_posts'          => $cap,
+				'edit_others_posts'   => $cap,
+				'delete_posts'        => $cap,
+				'delete_others_posts' => $cap,
+				'read_private_posts'  => $cap,
+				'edit_post'           => $cap,
+				'delete_post'         => $cap,
+				'read_post'           => $cap,
+			],
+			'acfe_admin_orderby' => 'title',
+			'acfe_admin_order'   => 'ASC',
+			'acfe_admin_ppp'     => 999,
+		] );
+	}
 
     /*
      * Register
@@ -90,7 +141,8 @@ class acfe_dynamic_taxonomies extends acf_module {
 	/*
 	 * Init
 	 */
-	function init(){
+	function init() {
+		$this->register_post_types();
 		$this->register_user_taxonomies();
 	}
 

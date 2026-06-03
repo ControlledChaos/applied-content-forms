@@ -88,6 +88,59 @@ class acf_dynamic_post_types extends acf_module {
 	}
 
 	/**
+	 * Register post types
+	 *
+	 * Registers the ACF post types.
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @return void
+	 */
+	public function register_post_types() {
+
+		$cap = acf_get_setting( 'capability' );
+
+		register_post_type( $this->post_type, [
+			'label'       => __( 'Post Types', 'acf' ),
+			'description' => __( 'Create custom post types without code.', 'acf' ),
+			'labels'      => [
+				'name'          => __( 'Post Types', 'acf' ),
+				'singular_name' => __( 'Post Type', 'acf' ),
+				'menu_name'     => __( 'Post Types', 'acf' ),
+				'edit_item'     => __( 'Edit Post Type', 'acf' ),
+				'add_new_item'  => __( 'New Post Type', 'acf' ),
+			],
+			'supports'            => [ 'title' ],
+			'hierarchical'        => false,
+			'public'              => false,
+			'show_ui'             => true,
+			'show_in_menu'        => acf()->admin_slug,
+			'menu_icon'           => 'dashicons-sticky',
+			'show_in_admin_bar'   => false,
+			'show_in_nav_menus'   => false,
+			'can_export'          => false,
+			'has_archive'         => false,
+			'rewrite'             => false,
+			'exclude_from_search' => true,
+			'publicly_queryable'  => false,
+			'capabilities'        => [
+				'publish_posts'       => $cap,
+				'edit_posts'          => $cap,
+				'edit_others_posts'   => $cap,
+				'delete_posts'        => $cap,
+				'delete_others_posts' => $cap,
+				'read_private_posts'  => $cap,
+				'edit_post'           => $cap,
+				'delete_post'         => $cap,
+				'read_post'           => $cap,
+			],
+			'acfe_admin_orderby' => 'title',
+			'acfe_admin_order'   => 'ASC',
+			'acfe_admin_ppp'     => 999,
+		] );
+	}
+
+	/**
 	 * Get name
 	 *
 	 * @since  1.0.0
@@ -275,6 +328,7 @@ class acf_dynamic_post_types extends acf_module {
 	 * @return void
 	 */
 	public function init() {
+		$this->register_post_types();
 		$this->register_acf_post_types();
 	}
 
