@@ -186,8 +186,8 @@
 }
 
 .acf-field-object.open > .handle {
-  background: #2a9bd9;
-  border: #2696d3 solid 1px;
+  background: var( --acf--switch-on--bg-color, var( --wp-admin-theme-color ) );
+  border: var( --acf--switch-on--border-color, var( --wp-admin-theme-color ) ) solid 1px;
   text-shadow: #268FBB 0 1px 0;
   color: #fff;
   position: relative;
