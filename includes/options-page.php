@@ -215,16 +215,19 @@ class acf_options_page {
 }
 
 /**
- *  Instantiate the class
+ * Instantiate the class
  *
- *  This function will return the options page instance.
+ * This function will return the options page instance.
  *
- *  @since	1.0.0
- *  @return object
+ * @since	1.0.0
+ * @global object $acf_options_page
+ * @return object
  */
  function acf_options_page() {
 
+	// Access global variables.
 	global $acf_options_page;
+
 	if ( ! isset( $acf_options_page ) ) {
 		$acf_options_page = new acf_options_page();
 	}

@@ -1,254 +1,264 @@
 <?php
+/**
+ * Local meta functions
+ *
+ * @package    Applied Content Forms
+ * @subpackage Includes
+ * @category   Functions
+ * @since      1.0.0
+ */
 
-if( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
-
-if( ! class_exists('ACF_Local_Meta') ) :
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 class ACF_Local_Meta {
-	
-	/** @var array Storage for meta data. */
-	var $meta = array();
-	
-	/** @var mixed Storage for the current post_id. */
-	var $post_id = 0;
-	
+
 	/**
-	 * __construct
+	 * Metadata
 	 *
-	 * Sets up the class functionality.
-	 *
-	 * @date	8/10/18
-	 * @since	5.8.0
-	 *
-	 * @param	void
-	 * @return	void
+	 * @since  1.0.0
+	 * @access public
+	 * @var    array
 	 */
-	function __construct() {
-		
-		// add filters
-		add_filter( 'acf/pre_load_post_id', 	array($this, 'pre_load_post_id'), 	1, 2 );
-		add_filter( 'acf/pre_load_meta', 		array($this, 'pre_load_meta'), 		1, 2 );
-		add_filter( 'acf/pre_load_metadata', 	array($this, 'pre_load_metadata'), 	1, 4 );
-	}
-	
+	public $meta = [];
+
 	/**
-	 * add
+	 * Post ID
 	 *
-	 * Adds postmeta to storage.
+	 * @since  1.0.0
+	 * @access public
+	 * @var    mixed
+	 */
+	public $post_id = 0;
+
+	/**
+	 * Constructor method
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @return self
+	 */
+	public function __construct() {
+
+		// Add filters.
+		add_filter( 'acf/pre_load_post_id', [ $this, 'pre_load_post_id' ], 1, 2 );
+		add_filter( 'acf/pre_load_meta', [ $this, 'pre_load_meta' ], 1, 2 );
+		add_filter( 'acf/pre_load_metadata', [ $this, 'pre_load_metadata' ], 1, 4 );
+	}
+
+	/**
+	 * Add postmeta to storage
+	 *
 	 * Accepts data in either raw or request format.
 	 *
-	 * @date	8/10/18
-	 * @since	5.8.0
-	 *
-	 * @param	array $meta An array of metdata to store.
-	 * @param	mixed $post_id The post_id for this data.
-	 * @param	bool $is_main Makes this postmeta visible to get_field() without a $post_id value.
-	 * @return	array
+	 * @since  1.0.0
+	 * @access public
+	 * @param  array $meta An array of metdata to store.
+	 * @param  mixed $post_id The post_id for this data.
+	 * @param  bool $is_main Makes this postmeta visible to get_field() without a $post_id value.
+	 * @return array
 	 */
-	function add( $meta = array(), $post_id = 0, $is_main = false ) {
-		
+	public function add( $meta = [], $post_id = 0, $is_main = false ) {
+
 		// Capture meta if supplied meta is from a REQUEST.
-		if( $this->is_request($meta) ) {
+		if ( $this->is_request( $meta ) ) {
 			$meta = $this->capture( $meta, $post_id );
 		}
-		
+
 		// Add to storage.
 		$this->meta[ $post_id ] = $meta;
-		
+
 		// Set $post_id reference when is the "main" postmeta.
-		if( $is_main ) {
+		if ( $is_main ) {
 			$this->post_id = $post_id;
 		}
-		
-		// Return meta.
 		return $meta;
 	}
-	
+
 	/**
-	 * is_request
+	 * Is a request
 	 *
 	 * Returns true if the supplied $meta is from a REQUEST (serialized <form> data).
 	 *
-	 * @date	11/3/19
-	 * @since	5.7.14
-	 *
-	 * @param	array $meta An array of metdata to check.
-	 * @return	bool
+	 * @since  1.0.0
+	 * @access public
+	 * @param  array $meta An array of metdata to check.
+	 * @return boolean
 	 */
-	function is_request( $meta = array() ) {
+	public function is_request( $meta = [] ) {
 		return acf_is_field_key( key( $meta ) );
 	}
-	
+
 	/**
-	 * capture
+	 * Capture
 	 *
 	 * Returns a flattened array of meta for the given postdata.
 	 * This is achieved by simulating a save whilst capturing all meta changes.
 	 *
-	 * @date	26/2/19
-	 * @since	5.7.13
-	 *
-	 * @param	array $values An array of raw values.
-	 * @param	mixed $post_id The post_id for this data.
-	 * @return	array
+	 * @since  1.0.0
+	 * @access public
+	 * @param  array $values An array of raw values.
+	 * @param  mixed $post_id The post_id for this data.
+	 * @return array
 	 */
-	function capture( $values = array(), $post_id = 0 ) {
-		
+	public function capture( $values = [], $post_id = 0 ) {
+
 		// Reset meta.
-		$this->meta[ $post_id ] = array();
-		
+		$this->meta[ $post_id ] = [];
+
 		// Listen for any added meta.
-		add_filter('acf/pre_update_metadata', array($this, 'capture_update_metadata'), 1, 5);
-		
+		add_filter( 'acf/pre_update_metadata', [ $this, 'capture_update_metadata' ], 1, 5 );
+
 		// Simulate update.
-		if( $values ) {
+		if ( $values ) {
 			acf_update_values( $values, $post_id );
 		}
-		
+
 		// Remove listener filter.
-		remove_filter('acf/pre_update_metadata', array($this, 'capture_update_metadata'), 1, 5);
-		
+		remove_filter( 'acf/pre_update_metadata', [ $this, 'capture_update_metadata' ], 1, 5 );
+
 		// Return meta.
 		return $this->meta[ $post_id ];
 	}
-	
+
 	/**
-	 * capture_update_metadata
+	 * Capture update metadata
 	 *
-	 * Records all meta activity and returns a non null value to bypass DB updates.
+	 * Records all meta activity and returns a non null
+	 * value to bypass database updates.
 	 *
-	 * @date	26/2/19
-	 * @since	5.7.13
-	 *
-	 * @param	null $null .
-	 * @param	(int|string) $post_id The post id.
-	 * @param	string $name The meta name.
-	 * @param	mixed $value The meta value.
-	 * @param	bool $hidden If the meta is hidden (starts with an underscore).
-	 * @return	false.
+	 * @since  1.0.0
+	 * @access public
+	 * @param  null $null
+	 * @param  mixed $post_id The post id.
+	 * @param  string $name The meta name.
+	 * @param  mixed $value The meta value.
+	 * @param  boolean $hidden If the meta is hidden (starts with an underscore).
+	 * @return boolean
 	 */
-	function capture_update_metadata( $null, $post_id, $name, $value, $hidden ) {
+	public function capture_update_metadata( $null, $post_id, $name, $value, $hidden ) {
 		$name = ($hidden ? '_' : '') . $name;
 		$this->meta[ $post_id ][ $name ] = $value;
-		
+
 		// Return non null value to escape update process.
 		return true;
 	}
-	
+
 	/**
-	 * remove
+	 * Remove
 	 *
 	 * Removes postmeta from storage.
 	 *
-	 * @date	8/10/18
-	 * @since	5.8.0
-	 *
-	 * @param	mixed $post_id The post_id for this data.
-	 * @return	void
+	 * @since  1.0.0
+	 * @access public
+	 * @param  mixed $post_id The post_id for this data.
+	 * @return void
 	 */
-	function remove( $post_id = 0 ) {
-		
-		// unset meta
+	public function remove( $post_id = 0 ) {
+
+		// Unset meta.
 		unset( $this->meta[ $post_id ] );
-		
-		// reset post_id
-		if( $post_id === $this->post_id ) {
+
+		// Reset post_id.
+		if ( $post_id === $this->post_id ) {
 			$this->post_id = 0;
 		}
 	}
-	
+
 	/**
-	 * pre_load_meta
+	 * Preload meta
 	 *
 	 * Injects the local meta.
 	 *
-	 * @date	8/10/18
-	 * @since	5.8.0
-	 *
-	 * @param	null $null An empty parameter. Return a non null value to short-circuit the function.
-	 * @param	mixed $post_id The post_id for this data.
-	 * @return	mixed
+	 * @since  1.0.0
+	 * @access public
+	 * @param  null $null An empty parameter. Return a non null
+	 *                    value to short-circuit the function.
+	 * @param  mixed $post_id The post_id for this data.
+	 * @return mixed
 	 */
-	function pre_load_meta( $null, $post_id ) {
-		if( isset($this->meta[ $post_id ]) ) {
+	public function pre_load_meta( $null, $post_id ) {
+		if ( isset( $this->meta[ $post_id ] ) ) {
 			return $this->meta[ $post_id ];
 		}
 		return $null;
 	}
-	
+
 	/**
-	 * pre_load_metadata
+	 * Preload metadata
 	 *
 	 * Injects the local meta.
 	 *
-	 * @date	8/10/18
-	 * @since	5.8.0
-	 *
-	 * @param	null $null An empty parameter. Return a non null value to short-circuit the function.
-	 * @param	(int|string) $post_id The post id.
-	 * @param	string $name The meta name.
-	 * @param	bool $hidden If the meta is hidden (starts with an underscore).
-	 * @return	mixed
+	 * @since  1.0.0
+	 * @access public
+	 * @param  null $null An empty parameter. Return a non null value to short-circuit the function.
+	 * @param  mixed $post_id The post id.
+	 * @param  string $name The meta name.
+	 * @param  boolean $hidden If the meta is hidden (starts with an underscore).
+	 * @return mixed
 	 */
-	function pre_load_metadata( $null, $post_id, $name, $hidden ) {
-		$name = ($hidden ? '_' : '') . $name;
-		if( isset($this->meta[ $post_id ]) ) {
-			if( isset($this->meta[ $post_id ][ $name ]) ) {
+	public function pre_load_metadata( $null, $post_id, $name, $hidden ) {
+
+		$name = ( $hidden ? '_' : '' ) . $name;
+		if ( isset( $this->meta[ $post_id ] ) ) {
+			if ( isset( $this->meta[ $post_id ][ $name ] ) ) {
 				return $this->meta[ $post_id ][ $name ];
 			}
 			return '__return_null';
 		}
 		return $null;
 	}
-		
+
 	/**
-	 * pre_load_post_id
+	 * Preload post_id
 	 *
 	 * Injects the local post_id.
 	 *
-	 * @date	8/10/18
-	 * @since	5.8.0
-	 *
-	 * @param	null $null An empty parameter. Return a non null value to short-circuit the function.
-	 * @param	mixed $post_id The post_id for this data.
-	 * @return	mixed
+	 * @since  1.0.0
+	 * @access public
+	 * @param  null $null An empty parameter. Return a non null
+	 *                    value to short-circuit the function.
+	 * @param  mixed $post_id The post_id for this data.
+	 * @return mixed
 	 */
-	function pre_load_post_id( $null, $post_id ) {
-		if( !$post_id && $this->post_id ) {
+	public function pre_load_post_id( $null, $post_id ) {
+		if ( ! $post_id && $this->post_id ) {
 			return $this->post_id;
 		}
 		return $null;
 	}
 }
 
-endif; // class_exists check
-
 /**
- * acf_setup_meta
+ * ACF setup meta
  *
  * Adds postmeta to storage.
  *
- * @date	8/10/18
- * @since	5.8.0
- * @see		ACF_Local_Meta::add() for list of parameters.
+ * @see ACF_Local_Meta::add() for list of parameters.
  *
- * @return	array
+ * @since  1.0.0
+ * @param  array $meta
+ * @param  integer $post_id
+ * @param  boolean $is_main
+ * @return array
  */
-function acf_setup_meta( $meta = array(), $post_id = 0, $is_main = false ) {
-	return acf_get_instance('ACF_Local_Meta')->add( $meta, $post_id, $is_main );
+function acf_setup_meta( $meta = [], $post_id = 0, $is_main = false ) {
+	return acf_get_instance( 'ACF_Local_Meta' )->add( $meta, $post_id, $is_main );
 }
 
 /**
- * acf_reset_meta
+ * ACF reset meta
  *
  * Removes postmeta to storage.
  *
- * @date	8/10/18
- * @since	5.8.0
- * @see		ACF_Local_Meta::remove() for list of parameters.
+ * @see ACF_Local_Meta::remove() for list of parameters.
  *
- * @return	void
+ * @since  1.0.0
+ * @param  integer $post_id
+ * @return void
  */
 function acf_reset_meta( $post_id = 0 ) {
-	return acf_get_instance('ACF_Local_Meta')->remove( $post_id );
+	return acf_get_instance( 'ACF_Local_Meta' )->remove( $post_id );
 }

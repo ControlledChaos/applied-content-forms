@@ -93,22 +93,20 @@ function acf_get_raw_field_group( $id = 0 ) {
 	$field_group['title']      = $post->post_title;
 	$field_group['key']        = $post->post_name;
 	$field_group['menu_order'] = $post->menu_order;
-	$field_group['active']     = in_array($post->post_status, array('publish', 'auto-draft'));
+	$field_group['active']     = in_array( $post->post_status, [ 'publish', 'auto-draft' ] );
 
 	// Return field.
 	return $field_group;
 }
 
 /**
- * acf_get_field_group_post
+ * Get field group post
  *
  * Retrieves the field group's WP_Post object.
  *
- * @date	18/1/19
- * @since	5.7.10
- *
- * @param	(int|string) $id The field group's ID, key or name.
- * @return	(array|false) The field group's array.
+ * @since  1.0.0
+ * @param  mixed $id The field group's ID, key or name.
+ * @return mixed The field group's array.
  */
 function acf_get_field_group_post( $id = 0 ) {
 
@@ -126,14 +124,14 @@ function acf_get_field_group_post( $id = 0 ) {
 
 			// Query posts.
 			$posts = get_posts( [
-				'posts_per_page'         => 1,
-				'post_type'              => 'acf-field-group',
-				'post_status'            => [
+				'posts_per_page' => 1,
+				'post_type'      => 'acf-field-group',
+				'post_status'    => [
 					'publish',
 					'acf-disabled',
 					'trash'
 				],
-				'orderby'                => 'menu_order title',
+				'orderby'                => 'menu_order',
 				'order'                  => 'ASC',
 				'suppress_filters'       => false,
 				'cache_results'          => true,
@@ -154,21 +152,17 @@ function acf_get_field_group_post( $id = 0 ) {
 			return get_post( $post_id );
 		}
 	}
-
-	// Return false by default.
 	return false;
 }
 
 /**
- * acf_is_field_group_key
+ * Is field group key
  *
  * Returns true if the given identifier is a field group key.
  *
- * @date	6/12/2013
- * @since	5.0.0
- *
- * @param	string $id The identifier.
- * @return	bool
+ * @since  1.0.0
+ * @param  string $id The identifier.
+ * @return boolean
  */
 function acf_is_field_group_key( $id = '' ) {
 
@@ -176,29 +170,17 @@ function acf_is_field_group_key( $id = '' ) {
 	if ( is_string( $id ) && substr( $id, 0, 6 ) === 'group_' ) {
 		return true;
 	}
-
-	/**
-	 * Filters whether the $id is a field group key.
-	 *
-	 * @date	23/1/19
-	 * @since	5.7.10
-	 *
-	 * @param	bool $bool The result.
-	 * @param	string $id The identifier.
-	 */
 	return apply_filters( 'acf/is_field_group_key', false, $id );
 }
 
 /**
- * acf_validate_field_group
+ * Validate field group
  *
  * Ensures the given field group is valid.
  *
- * @date	18/1/19
- * @since	5.7.10
- *
- * @param	array $field The field group array.
- * @return	array
+ * @since  1.0.0
+ * @param  array $field The field group array.
+ * @return array
  */
 function acf_validate_field_group( $field_group = [] ) {
 
@@ -231,46 +213,31 @@ function acf_validate_field_group( $field_group = [] ) {
 
 	// Field group is now valid.
 	$field_group['_valid'] = true;
-
-	/**
-	 * Filters the $field_group array to validate settings.
-	 *
-	 * @date	12/02/2014
-	 * @since	5.0.0
-	 *
-	 * @param	array $field_group The field group array.
-	 */
 	$field_group = apply_filters( 'acf/validate_field_group', $field_group );
-
-	// return
 	return $field_group;
 }
 
 /**
- * acf_get_valid_field_group
+ * Get valid field group
  *
  * Ensures the given field group is valid.
  *
- * @date		28/09/13
- * @since		5.0.0
- *
- * @param	array $field_group The field group array.
- * @return	array
+ * @since  1.0.0
+ * @param  mixed $field_group The field group array.
+ * @return mixed
  */
 function acf_get_valid_field_group( $field_group = false ) {
 	return acf_validate_field_group( $field_group );
 }
 
 /**
- * acf_translate_field_group
+ * Translate field group
  *
  * Translates a field group's settings.
  *
- * @date	8/03/2016
- * @since	5.3.2
- *
- * @param	array $field_group The field group array.
- * @return	array
+ * @since  1.0.0
+ * @param  array $field_group The field group array.
+ * @return array
  */
 function acf_translate_field_group( $field_group = [] ) {
 
@@ -282,19 +249,8 @@ function acf_translate_field_group( $field_group = [] ) {
 	if ( $l10n && $l10n_textdomain ) {
 
 		$field_group['title'] = acf_translate( $field_group['title'] );
-
-		/**
-		 * Filters the $field group array to translate strings.
-		 *
-		 * @date	12/02/2014
-		 * @since	5.0.0
-		 *
-		 * @param	array $field_group The field group array.
-		 */
 		$field_group = apply_filters( 'acf/translate_field_group', $field_group );
 	}
-
-	// Return field.
 	return $field_group;
 }
 
@@ -303,19 +259,16 @@ add_action( 'acf/validate_field_group', 'acf_translate_field_group' );
 
 
 /**
- * acf_get_field_groups
+ * Get field groups
  *
  * Returns and array of field_groups for the given $filter.
  *
- * @date	30/09/13
- * @since	5.0.0
- *
- * @param	array $filter An array of args to filter results by.
- * @return	array
+ * @since  1.0.0
+ * @param  array $filter An array of args to filter results by.
+ * @return array
  */
 function acf_get_field_groups( $filter = [] ) {
 
-	// Vars.
 	$field_groups = [];
 
 	// Check database.
@@ -326,35 +279,22 @@ function acf_get_field_groups( $filter = [] ) {
 		}
 	}
 
-	/**
-	 * Filters the $field_groups array.
-	 *
-	 * @date	12/02/2014
-	 * @since	5.0.0
-	 *
-	 * @param	array $field_groups The array of field_groups.
-	 */
 	$field_groups = apply_filters( 'acf/load_field_groups', $field_groups );
 
 	// Filter results.
 	if ( $filter ) {
 		return acf_filter_field_groups( $field_groups, $filter );
 	}
-
-	// Return field groups.
 	return $field_groups;
 }
 
 /**
- * acf_get_raw_field_groups
+ * Get raw field groups
  *
  * Returns and array of raw field_group data.
  *
- * @date	18/1/19
- * @since	5.7.10
- *
- * @param	void
- * @return	array
+ * @since  1.0.0
+ * @return array
  */
 function acf_get_raw_field_groups() {
 
@@ -397,16 +337,14 @@ function acf_get_raw_field_groups() {
 }
 
 /**
- * acf_filter_field_groups
+ * Filter field groups
  *
- * Returns a filtered aray of field groups based on the given $args.
+ * Returns a filtered array of field groups based on the given $args.
  *
- * @date	29/11/2013
- * @since	5.0.0
- *
- * @param	array $field_groups An array of field groups.
- * @param	array $args An array of location args.
- * @return	array
+ * @since  1.0.0
+ * @param  array $field_groups An array of field groups.
+ * @param  array $args An array of location args.
+ * @return array
  */
 function acf_filter_field_groups( $field_groups, $args = [] ) {
 
@@ -419,22 +357,18 @@ function acf_filter_field_groups( $field_groups, $args = [] ) {
 			}
 		}
 	}
-
-	// Return filtered.
 	return $filtered;
 }
 
 /**
- * acf_get_field_group_visibility
+ * Get field group visibility
  *
  * Returns true if the given field group's location rules match the given $args.
  *
- * @date	7/10/13
- * @since	5.0.0
- *
- * @param	array $field_groups An array of field groups.
- * @param	array $args An array of location args.
- * @return	bool
+ * @since  1.0.0
+ * @param  array $field_groups An array of field groups.
+ * @param  array $args An array of location args.
+ * @return boolean
  */
 function acf_get_field_group_visibility( $field_group, $args = [] ) {
 
@@ -472,21 +406,17 @@ function acf_get_field_group_visibility( $field_group, $args = [] ) {
 			}
 		}
 	}
-
-	// Return default.
 	return false;
 }
 
 /**
- * acf_update_field_group
+ * Update field group
  *
  * Updates a field group in the database.
  *
- * @date	21/1/19
- * @since	5.7.10
- *
- * @param	array $field_group The field group array.
- * @return	array
+ * @since  1.0.0
+ * @param  array $field_group The field group array.
+ * @return array
  */
 function acf_update_field_group( $field_group ) {
 
@@ -524,25 +454,25 @@ function acf_update_field_group( $field_group ) {
 	// Create array of data to save.
 	$save = [
 		'ID'             => $field_group['ID'],
-    	'post_status'    => $field_group['active'] ? 'publish' : 'acf-disabled',
-    	'post_type'      => 'acf-field-group',
-    	'post_title'     => $field_group['title'],
-    	'post_name'      => $field_group['key'],
-    	'post_excerpt'   => sanitize_title( $field_group['title'] ),
-    	'post_content'   => maybe_serialize( $_field_group ),
-    	'menu_order'     => $field_group['menu_order'],
-    	'comment_status' => 'closed',
-    	'ping_status'    => 'closed',
+		'post_status'    => $field_group['active'] ? 'publish' : 'acf-disabled',
+		'post_type'      => 'acf-field-group',
+		'post_title'     => $field_group['title'],
+		'post_name'      => $field_group['key'],
+		'post_excerpt'   => sanitize_title( $field_group['title'] ),
+		'post_content'   => maybe_serialize( $_field_group ),
+		'menu_order'     => $field_group['menu_order'],
+		'comment_status' => 'closed',
+		'ping_status'    => 'closed'
 	];
 
 	// Unhook wp_targeted_link_rel() filter from WP 5.1 corrupting serialized data.
 	remove_filter( 'content_save_pre', 'wp_targeted_link_rel' );
 
 	// Slash data.
-	// WP expects all data to be slashed and will unslash it (fixes '\' character issues).
+	// CMS expects all data to be slashed and will unslash it (fixes '\' character issues).
 	$save = wp_slash( $save );
 
-	// Update or Insert.
+	// Update or insert.
 	if ( $field_group['ID'] ) {
 		wp_update_post( $save );
 	} else {
@@ -552,34 +482,23 @@ function acf_update_field_group( $field_group ) {
 	// Flush field group cache.
 	acf_flush_field_group_cache( $field_group );
 
-	/**
-	 * Fires immediately after a field group has been updated.
-	 *
-	 * @date	12/02/2014
-	 * @since	5.0.0
-	 *
-	 * @param	array $field_group The field group array.
-	 */
 	do_action( 'acf/update_field_group', $field_group );
-
-	// Return field group.
 	return $field_group;
 }
 
 /**
- * _acf_apply_unique_field_group_slug
+ * Apply unique field group slug
  *
  * Allows full control over 'acf-field-group' slugs.
  *
- * @date	21/1/19
- * @since	5.7.10
- *
- * @param string $slug          The post slug.
- * @param int    $post_ID       Post ID.
- * @param string $post_status   The post status.
- * @param string $post_type     Post type.
- * @param int    $post_parent   Post parent ID
- * @param string $original_slug The original post slug.
+ * @since  1.0.0
+ * @param  string $slug The post slug.
+ * @param  integer $post_ID Post ID.
+ * @param  string $post_status The post status.
+ * @param  string $post_type Post type.
+ * @param  integer $post_parent Post parent ID
+ * @param  string $original_slug The original post slug.
+ * @return string
  */
 function _acf_apply_unique_field_group_slug( $slug, $post_ID, $post_status, $post_type, $post_parent, $original_slug ) {
 
@@ -587,24 +506,18 @@ function _acf_apply_unique_field_group_slug( $slug, $post_ID, $post_status, $pos
 	if ( 'acf-field-group' === $post_type ) {
 		return $original_slug;
 	}
-
-	// Return slug.
 	return $slug;
 }
-
-// Hook into filter.
 add_filter( 'wp_unique_post_slug', '_acf_apply_unique_field_group_slug', 999, 6 );
 
 /**
- * acf_flush_field_group_cache
+ * Flush field group cache
  *
  * Deletes all caches for this field group.
  *
- * @date	22/1/19
- * @since	5.7.10
- *
- * @param	array $field_group The field group array.
- * @return	void
+ * @since  1.0.0
+ * @param  array $field_group The field group array.
+ * @return void
  */
 function acf_flush_field_group_cache( $field_group ) {
 
@@ -619,15 +532,13 @@ function acf_flush_field_group_cache( $field_group ) {
 }
 
 /**
- * acf_delete_field_group
+ * Delete_ field group
  *
  * Deletes a field group from the database.
  *
- * @date	21/1/19
- * @since	5.7.10
- *
- * @param	(int|string) $id The field group ID, key or name.
- * @return	bool True if field group was deleted.
+ * @since  1.0.0
+ * @param  mixed $id The field group ID, key or name.
+ * @return boolean True if field group was deleted.
  */
 function acf_delete_field_group( $id = 0 ) {
 
@@ -656,30 +567,18 @@ function acf_delete_field_group( $id = 0 ) {
 	// Flush field group cache.
 	acf_flush_field_group_cache( $field_group );
 
-	/**
-	 * Fires immediately after a field group has been deleted.
-	 *
-	 * @date	12/02/2014
-	 * @since	5.0.0
-	 *
-	 * @param	array $field_group The field group array.
-	 */
 	do_action( 'acf/delete_field_group', $field_group );
-
-	// Return true.
 	return true;
 }
 
 /**
- * acf_trash_field_group
+ * Trash field group
  *
  * Trashes a field group from the database.
  *
- * @date	2/10/13
- * @since	5.0.0
- *
- * @param	(int|string) $id The field group ID, key or name.
- * @return	bool True if field group was trashed.
+ * @since  1.0.0
+ * @param  mixed $id The field group ID, key or name.
+ * @return boolean True if field group was trashed.
  */
 function acf_trash_field_group( $id = 0 ) {
 
@@ -708,30 +607,18 @@ function acf_trash_field_group( $id = 0 ) {
 	// Flush field group cache.
 	acf_flush_field_group_cache( $field_group );
 
-	/**
-	 * Fires immediately after a field_group has been trashed.
-	 *
-	 * @date	12/02/2014
-	 * @since	5.0.0
-	 *
-	 * @param	array $field_group The field_group array.
-	 */
 	do_action( 'acf/trash_field_group', $field_group );
-
-	// Return true.
 	return true;
 }
 
 /**
- * acf_untrash_field_group
+ * Untrash field group
  *
  * Restores a field_group from the trash.
  *
- * @date	2/10/13
- * @since	5.0.0
- *
- * @param	(int|string) $id The field_group ID, key or name.
- * @return	bool True if field_group was trashed.
+ * @since  1.0.0
+ * @param  mixed $id The field_group ID, key or name.
+ * @return boolean True if field_group was trashed.
  */
 function acf_untrash_field_group( $id = 0 ) {
 
@@ -760,17 +647,7 @@ function acf_untrash_field_group( $id = 0 ) {
 	// Flush field group cache.
 	acf_flush_field_group_cache( $field_group );
 
-	/**
-	 * Fires immediately after a field_group has been trashed.
-	 *
-	 * @date	12/02/2014
-	 * @since	5.0.0
-	 *
-	 * @param	array $field_group The field_group array.
-	 */
 	do_action( 'acf/untrash_field_group', $field_group );
-
-	// Return true.
 	return true;
 }
 
@@ -793,16 +670,14 @@ function _acf_untrash_field_group_post_status( $new_status, $post_id, $previous_
 add_action( 'wp_untrash_post_status', '_acf_untrash_field_group_post_status', 10, 3 );
 
 /**
- * acf_is_field_group
+ * Is field group
  *
  * Returns true if the given params match a field group.
  *
- * @date	21/1/19
- * @since	5.7.10
- *
- * @param	array $field_group The field group array.
- * @param	mixed $id An optional identifier to search for.
- * @return	bool
+ * @since  1.0.0
+ * @param  array $field_group The field group array.
+ * @param  mixed $id An optional identifier to search for.
+ * @return boolean
  */
 function acf_is_field_group( $field_group = false ) {
 	return (
@@ -813,16 +688,14 @@ function acf_is_field_group( $field_group = false ) {
 }
 
 /**
- * acf_duplicate_field_group
+ * Duplicate field group
  *
  * Duplicates a field group.
  *
- * @date	16/06/2014
- * @since	5.0.0
- *
- * @param	(int|string) $id The field_group ID, key or name.
- * @param	int $new_post_id Optional post ID to override.
- * @return	array The new field group.
+ * @since  1.0.0
+ * @param  mixed $id The field_group ID, key or name.
+ * @param  integer $new_post_id Optional post ID to override.
+ * @return array The new field group.
  */
 function acf_duplicate_field_group( $id = 0, $new_post_id = 0 ){
 
@@ -844,7 +717,7 @@ function acf_duplicate_field_group( $id = 0, $new_post_id = 0 ){
 	$field_group['ID']  = $new_post_id;
 	$field_group['key'] = uniqid( 'group_' );
 
-	// Add (copy) to title when apropriate.
+	// Add (copy) to title when appropriate.
 	if ( ! $new_post_id ) {
 		$field_group['title'] .= ' (' . __( 'copy', 'acf' ) . ')';
 	}
@@ -861,34 +734,21 @@ function acf_duplicate_field_group( $id = 0, $new_post_id = 0 ){
 	// Save field group.
 	$field_group = acf_update_field_group( $field_group );
 
-	/**
-	 * Fires immediately after a field_group has been duplicated.
-	 *
-	 * @date	12/02/2014
-	 * @since	5.0.0
-	 *
-	 * @param	array $field_group The field_group array.
-	 */
 	do_action( 'acf/duplicate_field_group', $field_group );
-
-	// return
 	return $field_group;
 }
 
 /**
- * acf_get_field_group_style
+ * Get field group style
  *
  * Returns the CSS styles generated from field group settings.
  *
- * @date	20/10/13
- * @since	5.0.0
- *
- * @param	array $field_group The field group array.
- * @return	string.
+ * @since  1.0.0
+ * @param  array $field_group The field group array.
+ * @return string.
  */
 function acf_get_field_group_style( $field_group ) {
 
-	// Vars.
 	$style    = '';
 	$elements = [
 		'permalink'       => '#edit-slug-box',
@@ -920,29 +780,17 @@ function acf_get_field_group_style( $field_group ) {
 		}
 		$style = implode( ', ', $hide ) . ' {display: none;}';
 	}
-
-	/**
-	 * Filters the generated CSS styles.
-	 *
-	 * @date	12/02/2014
-	 * @since	5.0.0
-	 *
-	 * @param	string $style The CSS styles.
-	 * @param	array $field_group The field group array.
-	 */
 	return apply_filters( 'acf/get_field_group_style', $style, $field_group );
 }
 
 /**
- * acf_get_field_group_edit_link
+ * Get field group edit link
  *
  * Checks if the current user can edit the field group and returns the edit url.
  *
- * @date	23/9/18
- * @since	5.7.7
- *
- * @param	int $post_id The field group ID.
- * @return	string
+ * @since  1.0.0
+ * @param  integer $post_id The field group ID.
+ * @return string
  */
 function acf_get_field_group_edit_link( $post_id ) {
 	if ( $post_id && acf_current_user_can_admin() ) {
@@ -952,15 +800,13 @@ function acf_get_field_group_edit_link( $post_id ) {
 }
 
 /**
- * acf_prepare_field_group_for_export
+ * Prepare field group for export
  *
  * Returns a modified field group ready for export.
  *
- * @date	11/03/2014
- * @since	5.0.0
- *
- * @param	array $field_group The field group array.
- * @return	array
+ * @since  1.0.0
+ * @param  array $field_group The field group array.
+ * @return array
  */
 function acf_prepare_field_group_for_export( $field_group = [] ) {
 
@@ -970,27 +816,17 @@ function acf_prepare_field_group_for_export( $field_group = [] ) {
 	// Prepare fields.
 	$field_group['fields'] = acf_prepare_fields_for_export( $field_group['fields'] );
 
-	/**
-	 * Filters the $field_group array before being returned to the export tool.
-	 *
-	 * @date	12/02/2014
-	 * @since	5.0.0
-	 *
-	 * @param	array $field_group The $field group array.
-	 */
 	return apply_filters( 'acf/prepare_field_group_for_export', $field_group );
 }
 
 /**
- * acf_prepare_field_group_for_import
+ * Prepare field group for import
  *
  * Prepares a field group for the import process.
  *
- * @date	21/11/19
- * @since	5.8.8
- *
- * @param	array $field_group The field group array.
- * @return	array
+ * @since  1.0.0
+ * @param  array $field_group The field group array.
+ * @return array
  */
 function acf_prepare_field_group_for_import( $field_group ) {
 
@@ -1001,28 +837,17 @@ function acf_prepare_field_group_for_import( $field_group ) {
 			$field['menu_order'] = $i;
 		}
 	}
-
-	/**
-	 * Filters the $field_group array before being returned to the import tool.
-	 *
-	 * @date	21/11/19
-	 * @since	5.8.8
-	 *
-	 * @param	array $field_group The field group array.
-	 */
 	return apply_filters( 'acf/prepare_field_group_for_import', $field_group );
 }
 
 /**
- * acf_import_field_group
+ * Import field group
  *
- * Imports a field group into the databse.
+ * Imports a field group into the database.
  *
- * @date	11/03/2014
- * @since	5.0.0
- *
- * @param	array $field_group The field group array.
- * @return	array The new field group.
+ * @since  1.0.0
+ * @param  array $field_group The field group array.
+ * @return array The new field group.
  */
 function acf_import_field_group( $field_group ) {
 
@@ -1098,463 +923,374 @@ function acf_import_field_group( $field_group ) {
 	// Enable filters again.
 	acf_enable_filters( $filters );
 
-	/**
-	 * Fires immediately after a field_group has been imported.
-	 *
-	 * @date	12/02/2014
-	 * @since	5.0.0
-	 *
-	 * @param	array $field_group The field_group array.
-	 */
 	do_action( 'acf/import_field_group', $field_group );
-
-	// return new field group.
 	return $field_group;
 }
 
 /**
- * acfe_get_post_id_field_groups
+ * Get post ID field groups
  *
- * Get all field groups for a specific Post ID
+ * Get all field groups for a specific post ID.
  *
- * @param int $post_id
- *
+ * @since  1.0.0
+ * @param  integer $post_id
  * @return array
  */
-function acfe_get_post_id_field_groups($post_id = 0){
+function acfe_get_post_id_field_groups( $post_id = 0 ) {
+
+	$post_id = acf_get_valid_post_id( $post_id );
+	extract( acf_decode_post_id( $post_id ) );
+
+	$field_groups = [];
+	$post_type    = '';
+	$taxonomy     = '';
+
+	// Override attachment.
+	if ( 'post' === $type && acfe_starts_with( $post_id, 'attachment_' ) ) {
+		$type = 'attachment';
+
+	// Override menu.
+	} elseif ( 'term' === $type && acfe_starts_with( $post_id, 'menu_' ) ) {
+		$type = 'menu';
+
+	// Override user list.
+	} elseif ( 'user_options' === $post_id ) {
+		$type = 'user_list';
+
+	// Override attachment list.
+	} elseif ( 'attachment_options' === $post_id ) {
+		$type = 'attachment_list';
+
+	// Override post type list.
+	} elseif ( 'option' === $type && strpos( $post_id, 'tax_' ) === false && strpos( $post_id, '_options') !== false ) {
+
+		// Check post types for post_type_list.
+		$post_types = acf_get_post_types();
+		$found      = false;
+
+		foreach ( $post_types as $_post_type ) {
+			if ( $post_id !== "{$_post_type}_options" ) {
+				continue;
+			}
+			$found = $_post_type;
+			break;
+		}
+
+		if ( $found ) {
+			$post_type = $found;
+			$type = 'post_type_list';
+		}
+
+	// Override taxonomy list.
+	} elseif ( 'option' === $type && strpos( $post_id, 'tax_' ) === 0 && strpos( $post_id, '_options' ) !== false ) {
+
+		// Check taxonomies for taxonomy_list.
+		$taxonomies = acf_get_taxonomies();
+		$found = false;
+
+		foreach ( $taxonomies as $_taxonomy ) {
+			if ( $post_id !== "tax_{$_taxonomy}_options" ) {
+				continue;
+			}
+			$found = $_taxonomy;
+			break;
+		}
+
+		if ( $found ) {
+			$taxonomy = $found;
+			$type = 'taxonomy_list';
+		}
+
+	// Override settings page.
+	} elseif ( 'option' === $type && in_array( $post_id, [ 'options-general', 'options-writing', 'options-reading', 'options-discussion', 'options-media', 'options-permalink' ] ) ) {
+		$type = 'settings_page';
+	}
+
+	if ( 'user' === $type ) {
 
-    /*
-     * @string  $post_id  12   | term_46 | user_22 | my-option | comment_89 | widget_56 | menu_74 | menu_item_96 | block_my-block | blog_55 | site_36 | attachment_24
-     * @string  $id       12   | 46      | 22      | my-option | 89         | widget_56 | 74      | 96           | block_my-block | 55      | 36      | 24
-     * @string  $type     post | term    | user    | option    | comment    | option    | term    | post         | block          | blog    | blog    | post
-     */
-    $post_id = acf_get_valid_post_id($post_id);
+		$keys = [];
+		foreach ( [ 'edit', 'new' ] as $user_form ) {
 
-    // extract
-    extract(acf_decode_post_id($post_id));
+			$_field_groups = acf_get_field_groups( [
+				'user_id'   => $id,
+				'user_form' => $user_form
+			] );
+			foreach ( $_field_groups as $_field_group ) {
 
-    /** @var $type */
-    /** @var $id */
+				if ( in_array( $_field_group['key'], $keys ) ) {
+					continue;
+				}
+				$keys[] = $_field_group['key'];
+				$field_groups[] = $_field_group;
+			}
+		}
 
-    // vars
-    $field_groups = array();
-    $post_type = '';
-    $taxonomy = '';
+	} elseif ( 'attachment' === $type ) {
 
-    // override attachment
-    if($type === 'post' && acfe_starts_with($post_id, 'attachment_')){
+		$field_groups = acf_get_field_groups( [
+			'attachment_id' => $id,
+			'attachment'    => $id
+		] );
 
-        $type = 'attachment';
+	} elseif ( 'term' === $type ) {
 
-    // override menu
-    }elseif($type === 'term' && acfe_starts_with($post_id, 'menu_')){
+		$term = get_term( $id );
+		if ( $term && ! is_wp_error( $term ) ) {
 
-        $type = 'menu';
+			$taxonomy     = $term->taxonomy;
+			$field_groups = acf_get_field_groups( [
+				'taxonomy' => $taxonomy,
+				'term_id'  => $id
+			] );
+		}
 
-    // override user list
-    }elseif($post_id === 'user_options'){
+	} elseif ( 'post' === $type ) {
 
-        $type = 'user_list';
+		$post_type    = get_post_type( $post_id );
+		$field_groups = acf_get_field_groups( [
+			'post_id'   => $post_id,
+			'post_type' => $post_type
+		] );
 
-    // override attachment list
-    }elseif($post_id === 'attachment_options'){
+	} elseif ( 'option' === $type ) {
 
-        $type = 'attachment_list';
+		$keys = [];
+		$options_pages = [];
 
-    // override post type list
-    }elseif($type === 'option' && strpos($post_id, 'tax_') === false && strpos($post_id, '_options') !== false){
+		// Get all options pages using the post ID.
+		foreach ( acf_get_options_pages() as $page ) {
 
-        // check post types for post_type_list
-        $post_types = acf_get_post_types();
-        $found = false;
+			if ( $page['post_id'] !== $id ) {
+				continue;
+			}
+			$options_pages[] = $page;
+		}
 
-        // loop
-        foreach($post_types as $_post_type){
+		foreach ( $options_pages as $page ) {
 
-            if($post_id !== "{$_post_type}_options") continue;
+			$_field_groups = acf_get_field_groups( [
+				'options_page' => $page['menu_slug']
+			] );
+			foreach ( $_field_groups as $_field_group ) {
 
-            $found = $_post_type;
-            break;
+				if ( in_array( $_field_group['key'], $keys ) ) {
+					continue;
+				}
 
-        }
+				$keys[] = $_field_group['key'];
+				$field_groups[] = $_field_group;
+			}
+		}
 
-        if($found){
+	} elseif ( 'menu' === $type ) {
 
-            $post_type = $found;
-            $type = 'post_type_list';
+		$field_groups = acf_get_field_groups( [
+			'screen'  => 'nav_menu',
+			'post_id' => $id
+		] );
 
-        }
+	} elseif ( 'user_list' === $type ) {
 
-    // override taxonomy list
-    }elseif($type === 'option' && strpos($post_id, 'tax_') === 0 && strpos($post_id, '_options') !== false){
+		$field_groups = acf_get_field_groups( [
+			'user_list' => 1
+		] );
 
-        // check taxonomies for taxonomy_list
-        $taxonomies = acf_get_taxonomies();
-        $found = false;
+	} elseif ( 'attachment_list' === $type ) {
 
-        // loop
-        foreach($taxonomies as $_taxonomy){
+		$field_groups = acf_get_field_groups( [
+			'attachment_list' => 1
+		] );
 
-            if($post_id !== "tax_{$_taxonomy}_options") continue;
+	} elseif ( 'post_type_list' === $type ) {
 
-            $found = $_taxonomy;
-            break;
+		$field_groups = acf_get_field_groups( [
+			'post_type_list' => $post_type
+		] );
 
-        }
+	} elseif ( 'taxonomy_list' === $type ) {
 
-        if($found){
+		$field_groups = acf_get_field_groups( [
+			'taxonomy_list' => $taxonomy
+		] );
 
-            $taxonomy = $found;
-            $type = 'taxonomy_list';
+	} elseif ( 'settings_page' === $type ) {
 
-        }
-
-    // override settings page
-    }elseif($type === 'option' && in_array($post_id, array('options-general', 'options-writing', 'options-reading', 'options-discussion', 'options-media', 'options-permalink'))){
-
-        $type = 'settings_page';
-
-    }
-
-    // user
-    if($type === 'user'){
-
-        $keys = array();
-
-        foreach(array('edit', 'new') as $user_form){
-
-            $_field_groups = acf_get_field_groups(array(
-                'user_id'   => $id,
-                'user_form' => $user_form,
-            ));
-
-            foreach($_field_groups as $_field_group){
-
-                if(in_array($_field_group['key'], $keys)) continue;
-
-                $keys[] = $_field_group['key'];
-                $field_groups[] = $_field_group;
-
-            }
-
-        }
-
-    // attachment
-    }elseif($type === 'attachment'){
-
-        $field_groups = acf_get_field_groups(array(
-            'attachment_id' => $id,
-            'attachment'    => $id,
-        ));
-
-    // taxonomy
-    }elseif($type === 'term'){
-
-        $term = get_term($id);
-
-        if($term && !is_wp_error($term)){
-
-            $taxonomy = $term->taxonomy;
-
-            $field_groups = acf_get_field_groups(array(
-                'taxonomy' => $taxonomy,
-                'term_id' => $id,
-            ));
-
-        }
-
-    // post type
-    }elseif($type === 'post'){
-
-        $post_type = get_post_type($post_id);
-
-        $field_groups = acf_get_field_groups(array(
-            'post_id'   => $post_id,
-            'post_type' => $post_type,
-        ));
-
-    // options page
-    }elseif($type === 'option'){
-
-        // vars
-        $keys = array();
-        $options_pages = array();
-
-        // get all options pages using the post id
-        foreach(acf_get_options_pages() as $page){
-
-            if($page['post_id'] !== $id) continue;
-
-            $options_pages[] = $page;
-
-        }
-
-        foreach($options_pages as $page){
-
-            $_field_groups = acf_get_field_groups(array(
-                'options_page' => $page['menu_slug'],
-            ));
-
-            foreach($_field_groups as $_field_group){
-
-                if(in_array($_field_group['key'], $keys)) continue;
-
-                $keys[] = $_field_group['key'];
-                $field_groups[] = $_field_group;
-
-            }
-
-        }
-
-    // nav menu
-    }elseif($type === 'menu'){
-
-        $field_groups = acf_get_field_groups(array(
-            'screen'  => 'nav_menu',
-            'post_id' => $id,
-        ));
-
-    // user list
-    }elseif($type === 'user_list'){
-
-        $field_groups = acf_get_field_groups(array(
-            'user_list' => 1,
-        ));
-
-    // attachment list
-    }elseif($type === 'attachment_list'){
-
-        $field_groups = acf_get_field_groups(array(
-            'attachment_list' => 1,
-        ));
-
-    // post type list
-    }elseif($type === 'post_type_list'){
-
-        $field_groups = acf_get_field_groups(array(
-            'post_type_list' => $post_type,
-        ));
-
-    // taxonomy list
-    }elseif($type === 'taxonomy_list'){
-
-        $field_groups = acf_get_field_groups(array(
-            'taxonomy_list' => $taxonomy,
-        ));
-
-    // settings page
-    }elseif($type === 'settings_page'){
-
-        $field_groups = acf_get_field_groups(array(
-            'wp_settings' => $post_id
-        ));
-
-    }
-
-    return $field_groups;
-
+		$field_groups = acf_get_field_groups( [
+			'wp_settings' => $post_id
+		] );
+	}
+	return $field_groups;
 }
 
 /**
- * acfe_get_locations_array
+ * Get locations array
  *
- * Legacy way to retrieve Field Groups Locations data in ACF 5.8
+ * Legacy way to retrieve Field Groups Locations data in ACF 5.8.
  *
- * @param $locations
- *
+ * @since  1.0.0
+ * @param  array $locations
  * @return array
  */
-function acfe_get_locations_array($locations){
+function acfe_get_locations_array( $locations ) {
 
-    $return = array();
-    $types = acf_get_location_rule_types();
+	$return = [];
+	$types  = acf_get_location_rule_types();
 
-    if(!$locations || !$types)
-        return $return;
+	if ( ! $locations || ! $types ) {
+		return $return;
+	}
 
-    $icon_default = 'admin-generic';
+	$icon_default = 'admin-generic';
+	$icons = [
+		'edit' => [
+			'post_type',
+			'post_template',
+			'post_status',
+			'post_format',
+			'post'
+		],
+		'media-default' => [
+			'page_template',
+			'page_type',
+			'page_parent',
+			'page'
+		],
+		'admin-users' => [
+			'current_user',
+			'user_form'
+		],
+		'welcome-widgets-menus' => [
+			'widget',
+			'nav_menu',
+			'nav_menu_item'
+		],
+		'category' => [
+			'taxonomy',
+			'post_category',
+			'post_taxonomy'
+		],
+		'admin-comments' => [
+			'comment'
+		],
+		'paperclip' => [
+			'attachment'
+		],
+		'admin-settings' => [
+			'options_page'
+		],
+		'businessman' => [
+			'current_user_role',
+			'user_role'
+		],
+		'admin-appearance' => [
+			'acfe_template'
+		]
+	];
+	$rules = [];
 
-    $icons = array(
-        'edit' => array(
-            'post_type',
-            'post_template',
-            'post_status',
-            'post_format',
-            'post',
-        ),
-        'media-default' => array(
-            'page_template',
-            'page_type',
-            'page_parent',
-            'page',
-        ),
-        'admin-users' => array(
-            'current_user',
-            'user_form',
-        ),
-        'welcome-widgets-menus' => array(
-            'widget',
-            'nav_menu',
-            'nav_menu_item',
-        ),
-        'category' => array(
-            'taxonomy',
-            'post_category',
-            'post_taxonomy',
-        ),
-        'admin-comments' => array(
-            'comment',
-        ),
-        'paperclip' => array(
-            'attachment',
-        ),
-        'admin-settings' => array(
-            'options_page',
-        ),
-        'businessman' => array(
-            'current_user_role',
-            'user_role',
-        ),
-        'admin-appearance' => array(
-            'acfe_template'
-        )
-    );
+	foreach ( $types as $key => $type ) {
+		foreach ( $type as $slug => $name ) {
 
-    $rules = array();
+			$icon = $icon_default;
+			foreach ( $icons as $_icon => $icon_slugs) {
 
-    foreach($types as $key => $type){
+				if ( ! in_array( $slug, $icon_slugs ) ) {
+					continue;
+				}
+				$icon = $_icon;
+				break;
+			}
+			$rules[$slug] = [
+				'name'  => $slug,
+				'label' => $name,
+				'icon'  => $icon
+			];
+		}
+	}
 
-        foreach($type as $slug => $name){
+	foreach ( $locations as $group ) {
 
-            $icon = $icon_default;
+		if ( ! acf_maybe_get( $rules, $group['param'] ) || ! acf_maybe_get( $group, 'value' ) ) {
+			continue;
+		}
 
-            foreach($icons as $_icon => $icon_slugs){
+		$rule     = $rules[$group['param']];
+		$icon     = $rule['icon'];
+		$name     = $rule['name'];
+		$label    = $rule['label'];
+		$operator = $group['operator'] === '==' ? '=' : $group['operator'];
+		$value    = $group['value'];
 
-                if(!in_array($slug, $icon_slugs))
-                    continue;
+		// Exception for post/page/page_parent ID.
+		if ( in_array( $group['param'], [ 'post', 'page', 'page_parent' ] ) ) {
+			$value = get_the_title( (int)$value );
+		} else {
 
-                $icon = $_icon;
-                break;
+			$values = acf_get_location_rule_values( $group );
+			if ( ! empty( $values ) && is_array( $values ) ) {
 
-            }
+				foreach ( $values as $value_slug => $value_name ) {
 
-            $rules[$slug] = array(
-                'name'  => $slug,
-                'label' => $name,
-                'icon'  => $icon
-            );
+					if ( $value != $value_slug ) {
+						continue;
+					}
 
-        }
+					$value = $value_name;
+					if ( is_array( $value_name ) && isset( $value_name[$value_slug] ) ) {
+						$value = $value_name[$value_slug];
+					}
+					break;
+				}
+			}
+		}
 
-    }
+		// HTML.
+		$title = $label . ' ' . $operator . ' ' . $value;
+		$atts  = [
+			'class' => 'acf-js-tooltip dashicons dashicons-' . $icon,
+			'title' => $title
+		];
 
-    foreach($locations as $group){
+		if ( '!=' === $operator ) {
+			$atts['style'] = 'color: var( --acf--admin--location-icon-color, #cccccc );';
+		}
 
-        if(!acf_maybe_get($rules, $group['param']) || !acf_maybe_get($group, 'value'))
-            continue;
-
-        // init
-        $rule = $rules[$group['param']];
-
-        // vars
-        $icon = $rule['icon'];
-        $name = $rule['name'];
-        $label = $rule['label'];
-        $operator = $group['operator'] === '==' ? '=' : $group['operator'];
-        $value = $group['value'];
-
-        // Exception for Post/Page/page Parent ID
-        if(in_array($group['param'], array('post', 'page', 'page_parent'))){
-
-            $value = get_the_title((int) $value);
-
-        }else{
-
-            // Validate value
-            $values = acf_get_location_rule_values($group);
-
-            if(!empty($values) && is_array($values)){
-
-                foreach($values as $value_slug => $value_name){
-
-                    if($value != $value_slug)
-                        continue;
-
-                    $value = $value_name;
-
-                    if(is_array($value_name) && isset($value_name[$value_slug])){
-
-                        $value = $value_name[$value_slug];
-
-                    }
-
-                    break;
-
-                }
-
-            }
-
-        }
-
-        // html
-        $title = $label . ' ' . $operator . ' ' . $value;
-
-        $atts = array(
-            'class' => 'acf-js-tooltip dashicons dashicons-' . $icon,
-            'title' => $title
-        );
-
-        if($operator === '!='){
-
-            $atts['style'] = 'color: #ccc;';
-
-        }
-
-        $html = '<span ' . acf_esc_attr($atts) . '></span>';
-
-        $return[] = array(
-            'html'              => $html,
-            'icon'              => $icon,
-            'title'             => $title,
-            'name'              => $name,
-            'label'             => $label,
-            'operator'          => $operator,
-            'value'             => $value,
-        );
-
-    }
-
-    return $return;
-
+		$html = '<span ' . acf_esc_attr( $atts ) . '></span>';
+		$return[] = [
+			'html'     => $html,
+			'icon'     => $icon,
+			'title'    => $title,
+			'name'     => $name,
+			'label'    => $label,
+			'operator' => $operator,
+			'value'    => $value,
+		];
+	}
+	return $return;
 }
 
 /**
- * acfe_render_field_group_locations_html
+ * Render field group locations HTML
  *
- * Legacy way to display Field Groups Locations in ACF 5.8
+ * Legacy way to display Field Groups Locations in ACF 5.8.
  *
- * @param $field_group
+ * @since  1.0.0
+ * @param  array $field_group
+ * @return void
  */
-function acfe_render_field_group_locations_html($field_group){
+function acfe_render_field_group_locations_html( $field_group ) {
 
-    foreach($field_group['location'] as $groups){
+	foreach ( $field_group['location'] as $groups ) {
 
-        $html = acfe_get_locations_array($groups);
+		$html = acfe_get_locations_array( $groups );
 
-        if($html){
+		if ( $html ) {
+			$array = [];
 
-            $array = array();
-
-            foreach($html as $location){
-
-                $array[] = $location['html'];
-
-            }
-
-            echo implode(' ', $array);
-
-        }
-
-    }
-
+			foreach ( $html as $location ) {
+				$array[] = $location['html'];
+			}
+			echo implode( ' ', $array );
+		}
+	}
 }

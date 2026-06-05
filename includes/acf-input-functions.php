@@ -1,4 +1,17 @@
-<?php 
+<?php
+/**
+ * Input functions
+ *
+ * @package    Applied Content Forms
+ * @subpackage Includes
+ * @category   Functions
+ * @since      1.0.0
+ */
+
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * acf_filter_attrs

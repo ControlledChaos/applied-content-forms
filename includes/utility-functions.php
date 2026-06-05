@@ -165,58 +165,28 @@ function acf_include( $filename = '' ) {
 }
 
 /**
- * acfe_get_path
- *
- * Returns the plugin path
- *
- * @param string $filename
- *
- * @return string
- */
-function acfe_get_path($filename = ''){
-    return ACFE_PATH . ltrim($filename, '/');
-}
-
-/**
- * acfe_get_url
- *
- * Returns the plugin url
- *
- * @param string $filename
- *
- * @return string
- */
-function acfe_get_url($filename = ''){
-
-    if(!defined('ACFE_URL')){
-        define('ACFE_URL', acf_get_setting('acfe/url'));
-    }
-
-    return ACFE_URL . ltrim($filename, '/');
-}
-
-/**
  * acfe_get_view
+ *
+ * @todo Eliminate this function.
  *
  * Load in a file from the 'admin/views' folder and allow variables to be passed through
  * Based on acf_get_view()
  *
- * @param string $path
- * @param array  $args
+ * @since  1.0.0
+ * @param  string $path
+ * @param  array $args
+ * @return void
  */
-function acfe_get_view($path = '', $args = array()){
+function acfe_get_view( $path = '', $args = [] ) {
 
-    // allow view file name shortcut
-    if(substr($path, -4) !== '.php'){
-        $path = acfe_get_path("includes/admin/views/{$path}.php");
+    // Allow view file name shortcut.
+    if ( substr( $path, -4 ) !== '.php' ) {
+        $path = acf_get_path( "extend/includes/admin/views/{$path}.php" );
     }
 
-    // include
-    if(file_exists($path)){
-
-        extract($args);
-        include($path);
-
+    // Include.
+    if ( file_exists( $path ) ) {
+        extract( $args );
+        include( $path );
     }
-
 }

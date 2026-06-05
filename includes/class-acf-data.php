@@ -1,354 +1,373 @@
-<?php 
+<?php
+/**
+ * ACF data functions
+ *
+ * @package    Applied Content Forms
+ * @subpackage Includes
+ * @category   Functions
+ * @since      1.0.0
+ */
 
-if( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly.
-
-if( ! class_exists('ACF_Data') ) :
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 class ACF_Data {
-	
-	/** @var string Unique identifier. */
-	var $cid = '';
-	
-	/** @var array Storage for data. */
-	var $data = array();
-	
-	/** @var array Storage for data aliases. */
-	var $aliases = array();
-	
-	/** @var bool Enables unique data per site. */
-	var $multisite = false;
-	
+
 	/**
-	 * __construct
+	 * CID
 	 *
-	 * Sets up the class functionality.
+	 * A unique identifier.
 	 *
-	 * @date	9/1/19
-	 * @since	5.7.10
-	 *
-	 * @param	array $data Optional data to set.
-	 * @return	void
+	 * @since  1.0.0
+	 * @access public
+	 * @var    string
 	 */
-	function __construct( $data = false ) {
-		
+	public $cid = '';
+
+	/**
+	 * Data
+	 *
+	 * Storage for data.
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @var    array
+	 */
+	public $data = [];
+
+	/**
+	 * Aliases
+	 *
+	 * Storage for data aliases.
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @var    array
+	 */
+	public $aliases = [];
+
+	/**
+	 * Multisite
+	 *
+	 * Enables unique data per site.
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @var    boolean
+	 */
+	public $multisite = false;
+
+	/**
+	 * Constructor method
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @param  mixed $data
+	 * @return self
+	 */
+	public function __construct( $data = false ) {
+
 		// Set cid.
 		$this->cid = acf_uniqid();
-		
+
 		// Set data.
-		if( $data ) {
+		if ( $data ) {
 			$this->set( $data );
 		}
-		
-		// Initialize.
 		$this->initialize();
 	}
-	
+
 	/**
-	 * initialize
+	 * Initialize
 	 *
 	 * Called during constructor to setup class functionality.
 	 *
-	 * @date	9/1/19
-	 * @since	5.7.10
-	 *
-	 * @param	void
-	 * @return	void
+	 * @since  1.0.0
+	 * @access public
+	 * @param  void
+	 * @return void
 	 */
-	function initialize() {
-		// Do nothing.
+	public function initialize() {
+		// Use in child class.
 	}
-	
+
 	/**
-	 * prop
+	 * Prop
 	 *
 	 * Sets a property for the given name and returns $this for chaining.
 	 *
-	 * @date	9/1/19
-	 * @since	5.7.10
-	 *
-	 * @param	(string|array) $name The data name or an array of data.
-	 * @param	mixed $value The data value.
-	 * @return	ACF_Data
+	 * @since  1.0.0
+	 * @access public
+	 * @param  mixed $name The data name or an array of data.
+	 * @param  mixed $value The data value.
+	 * @return self
 	 */
-	function prop( $name = '', $value = null ) {
-		
+	public function prop( $name = '', $value = null ) {
+
 		// Update property.
 		$this->{$name} = $value;
-		
+
 		// Return this for chaining.
 		return $this;
 	}
-	
+
 	/**
-	 * _key
+	 * Key
 	 *
-	 * Returns a key for the given name allowing aliasses to work.
+	 * Returns a key for the given name allowing alias to work.
 	 *
-	 * @date	18/1/19
-	 * @since	5.7.10
-	 *
-	 * @param	type $var Description. Default.
-	 * @return	type Description.
+	 * @since  1.0.0
+	 * @access public
+	 * @param  string $name
+	 * @return string
 	 */
-	function _key( $name = '' ) {
-		return isset($this->aliases[ $name ]) ? $this->aliases[ $name ] : $name;
+	public function _key( $name = '' ) {
+		return isset( $this->aliases[ $name ] ) ? $this->aliases[ $name ] : $name;
 	}
-	
+
 	/**
-	 * has
+	 * Has
 	 *
 	 * Returns true if this has data for the given name.
 	 *
-	 * @date	9/1/19
-	 * @since	5.7.10
-	 *
-	 * @param	string $name The data name.
-	 * @return	boolean
+	 * @since  1.0.0
+	 * @access public
+	 * @param  string $name The data name.
+	 * @return boolean
 	 */
-	function has( $name = '' ) {
-		$key = $this->_key($name);
-		return isset($this->data[ $key ]);
+	public function has( $name = '' ) {
+		$key = $this->_key( $name );
+		return isset( $this->data[ $key ] );
 	}
-	
+
 	/**
-	 * is
+	 * Is
 	 *
 	 * Similar to has() but does not check aliases.
 	 *
-	 * @date	7/2/19
-	 * @since	5.7.11
-	 *
-	 * @param	type $var Description. Default.
-	 * @return	type Description.
+	 * @since  1.0.0
+	 * @access public
+	 * @param  string $key
+	 * @return boolean
 	 */
-	function is( $key = '' ) {
-		return isset($this->data[ $key ]);
+	public function is( $key = '' ) {
+		return isset( $this->data[ $key ] );
 	}
-	
+
 	/**
-	 * get
+	 * Get
 	 *
 	 * Returns data for the given name of null if doesn't exist.
 	 *
-	 * @date	9/1/19
-	 * @since	5.7.10
-	 *
-	 * @param	string $name The data name.
-	 * @return	mixed
+	 * @since  1.0.0
+	 * @access public
+	 * @param  mixed $name The data name.
+	 * @return mixed
 	 */
-	function get( $name = false ) {
-		
+	public function get( $name = false ) {
+
 		// Get all.
-		if( $name === false ) {
+		if ( false === $name ) {
 			return $this->data;
-		
+
 		// Get specific.
 		} else {
-			$key = $this->_key($name);
-			return isset($this->data[ $key ]) ? $this->data[ $key ] : null;
+			$key = $this->_key( $name );
+			return isset( $this->data[ $key ] ) ? $this->data[ $key ] : null;
 		}
 	}
-	
+
 	/**
-	 * get_data
+	 * Get data
 	 *
 	 * Returns an array of all data.
 	 *
-	 * @date	9/1/19
-	 * @since	5.7.10
-	 *
-	 * @param	void
-	 * @return	array
+	 * @since  1.0.0
+	 * @access public
+	 * @return array
 	 */
-	function get_data() {
+	public function get_data() {
 		return $this->data;
 	}
-	
+
 	/**
-	 * set
+	 * Set
 	 *
 	 * Sets data for the given name and returns $this for chaining.
 	 *
-	 * @date	9/1/19
-	 * @since	5.7.10
-	 *
-	 * @param	(string|array) $name The data name or an array of data.
-	 * @param	mixed $value The data value.
-	 * @return	ACF_Data
+	 * @since  1.0.0
+	 * @access public
+	 * @param  mixed $name The data name or an array of data.
+	 * @param  mixed $value The data value.
+	 * @return self
 	 */
-	function set( $name = '', $value = null ) {
-		
+	public function set( $name = '', $value = null ) {
+
 		// Set multiple.
-		if( is_array($name) ) {
-			$this->data = array_merge($this->data, $name);
-			
-		// Set single.	
+		if ( is_array( $name ) ) {
+			$this->data = array_merge( $this->data, $name );
+
+		// Set single.
 		} else {
 			$this->data[ $name ] = $value;
 		}
-		
+
 		// Return this for chaining.
 		return $this;
 	}
-	
+
 	/**
-	 * append
+	 * Append
 	 *
 	 * Appends data for the given name and returns $this for chaining.
 	 *
-	 * @date	9/1/19
-	 * @since	5.7.10
-	 *
-	 * @param	mixed $value The data value.
-	 * @return	ACF_Data
+	 * @since  1.0.0
+	 * @access public
+	 * @param  mixed $value The data value.
+	 * @return self
 	 */
-	function append( $value = null ) {
-		
+	public function append( $value = null ) {
+
 		// Append.
 		$this->data[] = $value;
-		
+
 		// Return this for chaining.
 		return $this;
 	}
-	
+
 	/**
-	 * remove
+	 * Remove
 	 *
 	 * Removes data for the given name.
 	 *
-	 * @date	9/1/19
-	 * @since	5.7.10
-	 *
-	 * @param	string $name The data name.
-	 * @return	ACF_Data
+	 * @since  1.0.0
+	 * @access public
+	 * @param  string $name The data name.
+	 * @return self
 	 */
-	function remove( $name = '' ) {
-		
+	public function remove( $name = '' ) {
+
 		// Remove data.
 		unset( $this->data[ $name ] );
-		
+
 		// Return this for chaining.
 		return $this;
 	}
-	
+
 	/**
-	 * reset
+	 * Reset
 	 *
 	 * Resets the data.
 	 *
-	 * @date	22/1/19
-	 * @since	5.7.10
-	 *
-	 * @param	void
-	 * @return	void
+	 * @since  1.0.0
+	 * @access public
+	 * @return void
 	 */
-	function reset() {
-		$this->data = array();
-		$this->aliases = array();
+	public function reset() {
+		$this->data    = [];
+		$this->aliases = [];
 	}
-	
+
 	/**
-	 * count
+	 * Count
 	 *
 	 * Returns the data count.
 	 *
-	 * @date	23/1/19
-	 * @since	5.7.10
-	 *
-	 * @param	void
-	 * @return	int
+	 * @since  1.0.0
+	 * @access public
+	 * @return integer
 	 */
-	function count() {
+	public function count() {
 		return count( $this->data );
 	}
-	
+
 	/**
-	 * query
+	 * Query
 	 *
 	 * Returns a filtered array of data based on the set of key => value arguments.
 	 *
-	 * @date	23/1/19
-	 * @since	5.7.10
-	 *
-	 * @param	void
-	 * @return	int
+	 * @since  1.0.0
+	 * @access public
+	 * @param  array $args
+	 * @param string $operator
+	 * @return array
 	 */
-	function query( $args, $operator = 'AND' ) {
+	public function query( $args, $operator = 'AND' ) {
 		return wp_list_filter( $this->data, $args, $operator );
 	}
-	
+
 	/**
-	 * alias
+	 * Alias
 	 *
 	 * Sets an alias for the given name allowing data to be found via multiple identifiers.
 	 *
-	 * @date	18/1/19
-	 * @since	5.7.10
-	 *
-	 * @param	type $var Description. Default.
-	 * @return	type Description.
+	 * @since  1.0.0
+	 * @access public
+	 * @param  string $name
+	 * @return self
 	 */
-	function alias( $name = '' /*, $alias, $alias2, etc */ ) {
-		
+	public function alias( $name = '' ) {
+
 		// Get all aliases.
 		$args = func_get_args();
 		array_shift( $args );
-		
+
 		// Loop over aliases and add to data.
-		foreach( $args as $alias ) {
+		foreach ( $args as $alias ) {
 			$this->aliases[ $alias ] = $name;
 		}
-		
+
 		// Return this for chaining.
 		return $this;
 	}
-	
+
 	/**
-	 * switch_site
+	 * Switch site
 	 *
 	 * Triggered when switching between sites on a multisite installation.
 	 *
-	 * @date	13/2/19
-	 * @since	5.7.11
-	 *
-	 * @param	int $site_id New blog ID.
-	 * @param	int prev_blog_id Prev blog ID.
-	 * @return	void
+	 * @since  1.0.0
+	 * @access public
+	 * @param  integer $site_id New blog ID.
+	 * @param  integer prev_blog_id Prev blog ID.
+	 * @return void
 	 */
-	function switch_site( $site_id, $prev_site_id ) {
-		
-		// Bail early if not multisite compatible.
-		if( !$this->multisite ) {
+	public function switch_site( $site_id, $prev_site_id ) {
+
+		// Stop if not multisite compatible.
+		if ( ! $this->multisite ) {
 			return;
 		}
-		
-		// Bail early if no change in blog ID.
-		if( $site_id === $prev_site_id ) {
+
+		// Stop if no change in blog ID.
+		if ( $site_id === $prev_site_id ) {
 			return;
 		}
-		
+
 		// Create storage.
-		if( !isset($this->site_data) ) {
-			$this->site_data = array();
-			$this->site_aliases = array();
+		if ( ! isset( $this->site_data ) ) {
+			$this->site_data    = [];
+			$this->site_aliases = [];
 		}
-		
+
 		// Save state.
-		$this->site_data[ $prev_site_id ] = $this->data;
+		$this->site_data[ $prev_site_id ]    = $this->data;
 		$this->site_aliases[ $prev_site_id ] = $this->aliases;
-		
+
 		// Reset state.
-		$this->data = array();
-		$this->aliases = array();
-		
+		$this->data    = [];
+		$this->aliases = [];
+
 		// Load state.
-		if( isset($this->site_data[ $site_id ]) ) {
-			$this->data = $this->site_data[ $site_id ];
+		if ( isset( $this->site_data[ $site_id ] ) ) {
+
+			$this->data    = $this->site_data[ $site_id ];
 			$this->aliases = $this->site_aliases[ $site_id ];
+
 			unset( $this->site_data[ $site_id ] );
 			unset( $this->site_aliases[ $site_id ] );
 		}
 	}
 }
-
-endif; // class_exists check

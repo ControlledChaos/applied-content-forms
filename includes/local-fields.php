@@ -1,4 +1,17 @@
 <?php
+/**
+ * Local fields functions
+ *
+ * @package    Applied Content Forms
+ * @subpackage Includes
+ * @category   Functions
+ * @since      1.0.0
+ */
+
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 // Register notices stores.
 acf_register_store( 'local-fields' );

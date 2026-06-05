@@ -191,7 +191,6 @@ final class ACF {
 			'ACF_BASENAME' => plugin_basename( __FILE__ ),
 			'ACF_PATH'     => plugin_dir_path( __FILE__ ),
             'ACFE_FILE'    => __FILE__,
-            'ACFE_PATH'    => plugin_dir_path( __FILE__ ) . 'extend/',
 			'ACF_VERSION'  => $this->version,
             'ACFE_VERSION' => $this->plugin
         ] );
