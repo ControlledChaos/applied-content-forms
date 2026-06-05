@@ -1,105 +1,127 @@
 <?php 
+/**
+ * CMS functions
+ *
+ * @package    Applied Content Forms
+ * @subpackage Includes
+ * @category   Walkers
+ * @since      1.0.0
+ */
 
-if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
-
-if ( ! class_exists('ACF_Taxonomy_Field_Walker') ) :
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 class ACF_Taxonomy_Field_Walker extends Walker {
 	
 	/**
-	 * What the class handles.
+	 * Tree type
 	 *
-	 * @since 2.1.0
-	 * @var string
+	 * @since  1.0.0
+	 * @access public
+	 * @var    string
 	 */
 	public $tree_type = 'category';
 	
 	/**
-	 * DB fields to use.
+	 * DB fields
 	 *
-	 * @since 2.1.0
-	 * @var array
+	 * @since  1.0.0
+	 * @access public
+	 * @var    array
 	 */
-	public $db_fields = array(
+	public $db_fields = [
 		'parent' => 'parent',
-		'id'     => 'term_id',
-	);
+		'id'     => 'term_id'
+	];
 	
 	/**
-	 * The field being rendered.
+	 * The field being rendered
 	 *
-	 * @since 1.0.0
-	 * @var array
+	 * @since  1.0.0
+	 * @access public
+	 * @var    array
 	 */
 	public $field;
 	
 	/**
-	 * Constructor
+	 * Constructor method
 	 *
-	 * @date	20/4/21
-	 * @since 	1.0.0
-	 *
-	 * @param	array $field The field being rendered.
-	 * @return	void
+	 * @since  1.0.0
+	 * @access public
+	 * @param  array $field The field being rendered.
+	 * @return self
 	 */
-	function __construct( $field ) {
+	public function __construct( $field ) {
 		$this->field = $field;
 	}
 	
 	/**
+	 * Start level
+	 *
 	 * Starts the list before the elements are added.
 	 *
 	 * @see Walker:start_lvl()
 	 *
-	 * @since 1.0.0
-	 *
-	 * @param string $output Used to append additional content (passed by reference).
-	 * @param int    $depth  Depth of category. Used for tab indentation.
-	 * @param array  $args   An array of arguments. @see wp_terms_checklist()
+	 * @since  1.0.0
+	 * @access public
+	 * @param  string $output Used to append additional content
+	 *                        (passed by reference).
+	 * @param  integer $depth Depth of category. Used for tab indentation.
+	 * @param  array  $args An array of arguments. @see wp_terms_checklist()
+	 * @return void
 	 */
-	public function start_lvl( &$output, $depth = 0, $args = array() ) {
+	public function start_lvl( &$output, $depth = 0, $args = [] ) {
 		$indent  = str_repeat( "\t", $depth );
 		$output .= "$indent<ul class='children acf-bl'>\n";
 	}
 	
 	/**
+	 * End level
+	 *
 	 * Ends the list of after the elements are added.
 	 *
 	 * @see Walker::end_lvl()
 	 *
-	 * @since 1.0.0
-	 *
-	 * @param string $output Used to append additional content (passed by reference).
-	 * @param int    $depth  Depth of category. Used for tab indentation.
-	 * @param array  $args   An array of arguments. @see wp_terms_checklist()
+	 * @since  1.0.0
+	 * @access public
+	 * @param  string $output Used to append additional content (passed by reference).
+	 * @param  integer $depth Depth of category. Used for tab indentation.
+	 * @param  array $args An array of arguments. @see wp_terms_checklist()
+	 * @return void
 	 */
-	public function end_lvl( &$output, $depth = 0, $args = array() ) {
+	public function end_lvl( &$output, $depth = 0, $args = [] ) {
 		$indent  = str_repeat( "\t", $depth );
 		$output .= "$indent</ul>\n";
 	}
 	
 	/**
-	 * Start the element output.
+	 * Start the element output
 	 *
 	 * @see Walker::start_el()
 	 *
-	 * @since 1.0.0
-	 *
-	 * @param string  $output   Used to append additional content (passed by reference).
-	 * @param WP_Term $term 	The current term object.
-	 * @param int     $depth    Depth of the term in reference to parents. Default 0.
-	 * @param array   $args     An array of arguments. @see wp_terms_checklist()
-	 * @param int     $id       ID of the current term.
+	 * @since  1.0.0
+	 * @access public
+	 * @param  string $output Used to append additional content
+	 *                       (passed by reference).
+	 * @param  object $term The current term object.
+	 * @param  integer $depth Depth of the term in reference to parents.
+	 *                        Default 0.
+	 * @param  array $args An array of arguments. @see wp_terms_checklist()
+	 * @param  integer $id ID of the current term.
+	 * @return void
 	 */
-	public function start_el( &$output, $term, $depth = 0, $args = array(), $id = 0 ) {
+	public function start_el( &$output, $term, $depth = 0, $args = [], $id = 0 ) {
+		
 		$is_selected = in_array( $term->term_id, $this->field['value'] );
 		
 		// Generate array of checkbox input attributes.
-		$input_attrs = array(
+		$input_attrs = [
 			'type'	=> $this->field['field_type'],
 			'name'	=> $this->field['name'],
 			'value' => $term->term_id
-		);
+		];
 		if ( $is_selected ) {
 			$input_attrs['checked'] = true;
 		}
@@ -112,20 +134,20 @@ class ACF_Taxonomy_Field_Walker extends Walker {
 	}
 	
 	/**
-	 * Ends the element output, if needed.
+	 * Ends the element output
 	 *
 	 * @see Walker::end_el()
 	 *
-	 * @since 1.0.0
-	 *
-	 * @param string  $output   Used to append additional content (passed by reference).
-	 * @param WP_Term $category The current term object.
-	 * @param int     $depth    Depth of the term in reference to parents. Default 0.
-	 * @param array   $args     An array of arguments. @see wp_terms_checklist()
+	 * @since  1.0.0
+	 * @access public
+	 * @param  string $output Used to append additional content
+	 *                        (passed by reference).
+	 * @param  object $category The current term object.
+	 * @param  integer $depth Depth of the term in reference to parents. Default 0.
+	 * @param  array $args An array of arguments. @see wp_terms_checklist()
+	 * @return void
 	 */
-	public function end_el( &$output, $category, $depth = 0, $args = array() ) {
+	public function end_el( &$output, $category, $depth = 0, $args = [] ) {
 		$output .= "</li>\n";
 	}
 }
-
-endif;

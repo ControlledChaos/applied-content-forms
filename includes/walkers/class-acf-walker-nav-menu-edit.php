@@ -1,74 +1,76 @@
 <?php 
+/**
+ * CMS functions
+ *
+ * @package    Applied Content Forms
+ * @subpackage Includes
+ * @category   Walkers
+ * @since      1.0.0
+ */
 
-if( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
-
-if( ! class_exists('ACF_Walker_Nav_Menu_Edit') ) :
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 class ACF_Walker_Nav_Menu_Edit extends Walker_Nav_Menu_Edit {
 
     /**
-     * Starts the element output.
+     * Start the element output
      *
      * Calls the Walker_Nav_Menu_Edit start_el function and then injects the custom field HTML  
      *
-	 * @since 5.0.0
-	 * @since 5.7.2 Added preg_replace based on https://github.com/ineagu/wp-menu-item-custom-fields
-     *
-     * @param string   $output Used to append additional content (passed by reference).
-     * @param WP_Post  $item   Menu item data object.
-     * @param int      $depth  Depth of menu item. Used for padding.
-     * @param stdClass $args   An object of wp_nav_menu() arguments.
-     * @param int      $id     Current item ID.
+	 * @since  1.0.0
+	 * @access public
+     * @param  string $output Used to append additional content
+	 *                        (passed by reference).
+     * @param  object $item Menu item data object.
+     * @param  integer $depth Depth of menu item. Used for padding.
+     * @param  object $args An object of wp_nav_menu() arguments.
+     * @param  integer $id Current item ID.
+	 * @return void
      */
-	function start_el( &$output, $item, $depth = 0, $args = array(), $id = 0 ) {
+	public function start_el( &$output, $item, $depth = 0, $args = [], $id = 0 ) {
 		
-		// vars
 		$item_output = '';
 		
-		// call parent function
-		parent::start_el( $item_output, $item, $depth, $args, $id );
+		// Call parent function.
+		parent :: start_el( $item_output, $item, $depth, $args, $id );
 		
-		// inject custom field HTML
+		// Inject custom field HTML.
 		$output .= preg_replace(
 			// NOTE: Check this regex from time to time!
-			'/(?=<(fieldset|p)[^>]+class="[^"]*field-move)/',
+			'@/(?=<(fieldset|p)[^>]+class="[^"]*field-move)/',
 			$this->get_fields( $item, $depth, $args, $id ),
 			$item_output
 		);
 	}
 
-
 	/**
 	 * Get custom fields HTML
 	 *
-	 * @since 5.0.0
-	 * @since 5.7.2 Added action based on https://github.com/ineagu/wp-menu-item-custom-fields
-	 *
-	 * @param object $item   Menu item data object.
-	 * @param int    $depth  Depth of menu item. Used for padding.
-	 * @param array  $args   Menu item args.
-	 * @param int    $id     Nav menu ID.
+	 * @since  1.0.0
+	 * @access public
+	 * @param  object $item Menu item data object.
+	 * @param  integer $depth Depth of menu item. Used for padding.
+	 * @param  array $args Menu item args.
+	 * @param  integer $id Nav menu ID.
 	 * @return string
 	 */
-	function get_fields( $item, $depth, $args = array(), $id = 0 ) {
+	public function get_fields( $item, $depth, $args = [], $id = 0 ) {
+		
 		ob_start();
 		
 		/**
          * Get menu item custom fields from plugins/themes
          *
-         * @since 5.7.2
-         *
-         * @param int    $item_id	post ID of menu
-         * @param object $item		Menu item data object.
-         * @param int    $depth		Depth of menu item. Used for padding.
-         * @param array  $args		Menu item args.
-         * @param int    $id		Nav menu ID.
+         * @param integer $item_id post ID of menu
+         * @param object $item Menu item data object.
+         * @param integer $depth Depth of menu item. Used for padding.
+         * @param array $args Menu item args.
+         * @param integer $id Nav menu ID.
          */
 		do_action( 'wp_nav_menu_item_custom_fields', $item->ID, $item, $depth, $args, $id );
 		return ob_get_clean();
 	}		
 }
-
-endif;
-
-?>

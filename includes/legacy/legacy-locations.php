@@ -1,21 +1,32 @@
 <?php 
+/**
+ * Legacy locations
+ *
+ * @package    Applied Content Forms
+ * @subpackage Includes
+ * @category   Legacy
+ * @since      1.0.0
+ */
 
-if( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
-
-if( ! class_exists('ACF_Legacy_Locations') ) :
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 class ACF_Legacy_Locations {
 	
 	/**
-	 * Magic __isset method for backwards compatibility.
+	 * Magic __isset method
 	 *
-	 * @date	10/4/20
-	 * @since	5.9.0
+	 * For backwards compatibility.
 	 *
-	 * @param	string $key Key name.
-	 * @return	bool
+	 * @since  1.0.0
+	 * @access public
+	 * @param  string $key Key name.
+	 * @return boolean
 	 */
 	public function __isset( $key ) {
+
 		//_doing_it_wrong( __FUNCTION__, __( 'The ACF_Locations class should not be accessed directly.', 'acf' ), '5.9.0' );
 		
 		return (
@@ -24,15 +35,17 @@ class ACF_Legacy_Locations {
 	}
 	
 	/**
-	 * Magic __get method for backwards compatibility.
+	 * Magic __get method
 	 *
-	 * @date	10/4/20
-	 * @since	5.9.0
+	 * For backwards compatibility.
 	 *
-	 * @param	string $key Key name.
-	 * @return	mixed
+	 * @since  1.0.0
+	 * @access public
+	 * @param  string $key Key name.
+	 * @return mixed
 	 */
 	public function __get( $key ) {
+
 		//_doing_it_wrong( __FUNCTION__, __( 'The ACF_Locations class should not be accessed directly.', 'acf' ), '5.9.0' );
 		
 		switch ( $key ) {
@@ -43,16 +56,18 @@ class ACF_Legacy_Locations {
 	}
 	
 	/**
-	 * Magic __call method for backwards compatibility.
+	 * Magic __call method
 	 *
-	 * @date	10/4/20
-	 * @since	5.9.0
+	 * For backwards compatibility.
 	 *
-	 * @param	string $name The method name.
-	 * @param	array $arguments The array of arguments.
-	 * @return	mixed
+	 * @since  1.0.0
+	 * @access public
+	 * @param  string $name The method name.
+	 * @param  array $arguments The array of arguments.
+	 * @return mixed
 	 */
 	public function __call( $name, $arguments ) {
+
 		//_doing_it_wrong( __FUNCTION__, __( 'The ACF_Locations class should not be accessed directly.', 'acf' ), '5.9.0' );
 		
 		switch ( $name ) {
@@ -61,10 +76,7 @@ class ACF_Legacy_Locations {
 			case 'get_location':
 				return call_user_func_array( 'acf_get_location_type', $arguments );
 			case 'get_locations':
-				return call_user_func_array( 'acf_get_location_rule_types', $arguments );
-				
+				return call_user_func_array( 'acf_get_location_rule_types', $arguments );				
 		}
     }
 }
-
-endif; // class_exists check

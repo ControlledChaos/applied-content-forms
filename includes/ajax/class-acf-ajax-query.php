@@ -1,47 +1,112 @@
 <?php
+/**
+ * AJAX query
+ *
+ * @package    Applied Content Forms
+ * @subpackage Includes
+ * @category   AJAX
+ * @since      1.0.0
+ */
 
-if( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
-
-if( ! class_exists('ACF_Ajax_Query') ) :
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 class ACF_Ajax_Query extends ACF_Ajax {
 	
-	/** @var bool Prevents access for non-logged in users. */
-	var $public = true;
-	
-	/** @var int The page of results to return. */
-	var $page = 1;
-	
-	/** @var int The number of results per page. */
-	var $per_page = 20;
-	
-	/** @var bool Signifies whether or not this AJAX query has more pages to load. */
-	var $more = false;
-	
-	/** @var string The searched term. */
-	var $search = '';
-	
-	/** @var bool Signifies whether the current query is a search. */
-	var $is_search = false;
-	
-	/** @var (int|string) The post_id being edited. */
-	var $post_id = 0;
-	
-	/** @var array The ACF field related to this query. */
-	var $field = false;
+	/**
+	 * Privacy
+	 *
+	 * Prevents access for non-logged in users.
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @var    boolean
+	 */
+	public $public = true;
 	
 	/**
-	 * get_response
+	 * Page of results to return
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @var    integer
+	 */
+	public $page = 1;
+	
+	/**
+	 * Results per page
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @var    integer
+	 */
+	public $per_page = 20;
+	
+	/**
+	 * More pages
+	 *
+	 * Signifies whether or not this AJAX query
+	 * has more pages to load.
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @var    boolean
+	 */
+	public $more = false;
+	
+	/**
+	 * Searched term
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @var    string
+	 */
+	public $search = '';
+	
+	/**
+	 * Is search
+	 *
+	 * Signifies whether the current query is a search.
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @var    boolean
+	 */
+	public $is_search = false;
+	
+	/**
+	 * Post ID being edited
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @var    integer
+	 */
+	public $post_id = 0;
+	
+	/**
+	 * Field
+	 *
+	 * The ACF field related to this query.
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @var    boolean
+	 */
+	public $field = false;
+	
+	/**
+	 * Get response
 	 *
 	 * Returns the response data to sent back.
 	 *
-	 * @date	31/7/18
-	 * @since	5.7.2
-	 *
-	 * @param	array $request The request args.
-	 * @return	(array|WP_Error) The response data or WP_Error.
+	 * @since  1.0.0
+	 * @access public
+	 * @param  array $request The request args.
+	 * @return mixed The response data or WP_Error.
 	 */
-	function get_response( $request ) {
+	public function get_response( $request ) {
 		
 		// Init request.
 		$this->init_request( $request );
@@ -51,100 +116,94 @@ class ACF_Ajax_Query extends ACF_Ajax {
 		
 		// Get query results.
 		$results = $this->get_results( $args );
-		if( is_wp_error($results) ) {
+		if ( is_wp_error( $results ) ) {
 			return $results;
 		}
 		
 		// Return response.
-		return array(
-			'results'	=> $results,
-			'more'		=> $this->more
-		);
+		return [
+			'results' => $results,
+			'more'    => $this->more
+		];
 	}
 	
 	/**
-	 * init_request
+	 * Init request
 	 *
 	 * Called at the beginning of a request to setup properties.
 	 *
-	 * @date	23/5/19
-	 * @since	5.8.1
-	 *
-	 * @param	array $request The request args.
-	 * @return	void
+	 * @since  1.0.0
+	 * @access public
+	 * @param  array $request The request args.
+	 * @return void
 	 */
-	function init_request( $request ) {
+	public function init_request( $request ) {
 		
 		// Get field for this query.
-		if( isset($request['field_key']) ) {
+		if ( isset( $request['field_key'] ) ) {
 			$this->field = acf_get_field( $request['field_key'] );
 		}
 		
 		// Update query properties.
-		if( isset($request['page']) ) {
-			$this->page = intval($request['page']);
+		if ( isset( $request['page'] ) ) {
+			$this->page = intval( $request['page'] );
 		}
-		if( isset($request['per_page']) ) {
-			$this->per_page = intval($request['per_page']);
+		if ( isset( $request['per_page'] ) ) {
+			$this->per_page = intval( $request['per_page'] );
 		}
-		if( isset($request['search']) && acf_not_empty($request['search']) ) {
-			$this->search = sanitize_text_field($request['search']);
+		if ( isset( $request['search'] ) && acf_not_empty( $request['search'] ) ) {
+			$this->search    = sanitize_text_field( $request['search'] );
 			$this->is_search = true;
 		}
-		if( isset($request['post_id']) ) {
+		if ( isset( $request['post_id'] ) ) {
 			$this->post_id = $request['post_id'];
 		}
 	}
 	
 	/**
-	 * get_args
+	 * Get args
 	 *
 	 * Returns an array of args for this query.
 	 *
-	 * @date	31/7/18
-	 * @since	5.7.2
-	 *
-	 * @param	array $request The request args.
-	 * @return	array
+	 * @since  1.0.0
+	 * @access public
+	 * @param  array $request The request args.
+	 * @return array
 	 */
-	function get_args( $request ) {
+	public function get_args( $request ) {
 		
 		// Allow for custom "query" arg.
-		if( isset($request['query']) ) {
+		if ( isset( $request['query'] ) ) {
 			return (array) $request['query'];
 		}
-		return array();
+		return [];
 	}
 	
 	/**
-	 * get_items
+	 * Get items
 	 *
 	 * Returns an array of results for the given args.
 	 *
-	 * @date	31/7/18
-	 * @since	5.7.2
-	 *
-	 * @param	array args The query args.
-	 * @return	array
+	 * @since  1.0.0
+	 * @access public
+	 * @param  array args The query args.
+	 * @return array
 	 */
-	function get_results( $args ) {
-		return array();
+	public function get_results( $args ) {
+		return [];
 	}
 	
 	/**
-	 * get_item
+	 * Get item
 	 *
 	 * Returns a single result for the given item object.
 	 *
-	 * @date	31/7/18
-	 * @since	5.7.2
-	 *
-	 * @param	mixed $item A single item from the queried results.
-	 * @return	array An array containing "id" and "text".
+	 * @since  1.0.0
+	 * @access public
+	 * @param  mixed $item A single item from the queried results.
+	 * @return array An array containing "id" and "text".
 	 */
-	function get_result( $item ) {
+	public function get_result( $item ) {
 		return false;
 	}
 }
-
-endif; // class_exists check

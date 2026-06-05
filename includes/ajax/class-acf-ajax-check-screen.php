@@ -1,79 +1,97 @@
 <?php
+/**
+ * AJAX check screen
+ *
+ * @package    Applied Content Forms
+ * @subpackage Includes
+ * @category   AJAX
+ * @since      1.0.0
+ */
 
-if( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
-
-if( ! class_exists('ACF_Ajax_Check_Screen') ) :
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 class ACF_Ajax_Check_Screen extends ACF_Ajax {
 	
-	/** @var string The AJAX action name. */
-	var $action = 'acf/ajax/check_screen';
-	
-	/** @var bool Prevents access for non-logged in users. */
-	var $public = false;
+	/**
+	 * AJAX action name
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @var    string
+	 */
+	public $action = 'acf/ajax/check_screen';
 	
 	/**
-	 * get_response
+	 * Privacy
+	 *
+	 * Prevents access for non-logged in users.
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @var    boolean
+	 */
+	public $public = false;
+	
+	/**
+	 * Get response
 	 *
 	 * Returns the response data to sent back.
 	 *
-	 * @date	31/7/18
-	 * @since	5.7.2
-	 *
-	 * @param	array $request The request args.
-	 * @return	mixed The response data or WP_Error.
+	 * @since  1.0.0
+	 * @access public
+	 * @param  array $request The request args.
+	 * @return mixed The response data or WP_Error.
 	 */
-	function get_response( $request ) {
+	public function get_response( $request ) {
 		
-		// vars
-		$args = wp_parse_args($this->request, array(
-			'screen'	=> '',
-			'post_id'	=> 0,
-			'ajax'		=> true,
-			'exists'	=> array()
-		));
+		$args = wp_parse_args( $this->request, [
+			'screen'  => '',
+			'post_id' => 0,
+			'ajax'    => true,
+			'exists'  => []
+		] );
+		$response = [
+			'results' => [],
+			'style'   => ''
+		];
 		
-		// vars
-		$response = array(
-			'results'	=> array(),
-			'style'		=> ''
-		);
-		
-		// get field groups
+		// Get field groups.
 		$field_groups = acf_get_field_groups( $args );
 		
-		// loop through field groups
-		if( $field_groups ) {
-			foreach( $field_groups as $i => $field_group ) {
+		// Loop through field groups.
+		if ( $field_groups ) {
+			foreach ( $field_groups as $i => $field_group ) {
+
+				$item = [
+					'id'       => 'acf-' . $field_group['key'],
+					'key'      => $field_group['key'],
+					'title'    => $field_group['title'],
+					'position' => $field_group['position'],
+					'style'    => $field_group['style'],
+					'label'    => $field_group['label_placement'],
+					'edit'     => acf_get_field_group_edit_link( $field_group['ID'] ),
+					'html'     => ''
+				];
 				
-				// vars
-				$item = array(
-					'id'		=> 'acf-' . $field_group['key'],
-					'key'		=> $field_group['key'],
-					'title'		=> $field_group['title'],
-					'position'	=> $field_group['position'],
-					'style'		=> $field_group['style'],
-					'label'		=> $field_group['label_placement'],
-					'edit'		=> acf_get_field_group_edit_link( $field_group['ID'] ),
-					'html'		=> ''
-				);
-				
-				// append html if doesnt already exist on page
-				if( !in_array($field_group['key'], $args['exists']) ) {
+				// Append HTML if doesn't already exist on page.
+				if ( ! in_array( $field_group['key'], $args['exists'] ) ) {
 					
-					// load fields
+					// Load fields.
 					$fields = acf_get_fields( $field_group );
 	
-					// get field HTML
+					// Get field HTML.
 					ob_start();
 					
-					// render
+					// Render.
 					acf_render_fields( $fields, $args['post_id'], 'div', $field_group['instruction_placement'] );
 					
 					$item['html'] = ob_get_clean();
 				}
 				
-				// append
+				// Append.
 				$response['results'][] = $item;
 			}
 			
@@ -82,17 +100,10 @@ class ACF_Ajax_Check_Screen extends ACF_Ajax {
 		}
 		
 		// Custom metabox order.
-		if( $this->get('screen') == 'post' ) {
-			$response['sorted'] = get_user_option('meta-box-order_' . $this->get('post_type'));
+		if ( 'post' == $this->get( 'screen' ) ) {
+			$response['sorted'] = get_user_option( 'meta-box-order_' . $this->get('post_type') );
 		}
-		
-		// return
 		return $response;
 	}
 }
-
-acf_new_instance('ACF_Ajax_Check_Screen');
-
-endif; // class_exists check
-
-?>
+acf_new_instance( 'ACF_Ajax_Check_Screen' );

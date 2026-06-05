@@ -1,137 +1,155 @@
 <?php
+/**
+ * AJAX handler
+ *
+ * @package    Applied Content Forms
+ * @subpackage Includes
+ * @category   AJAX
+ * @since      1.0.0
+ */
 
-if( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
-
-if( ! class_exists('ACF_Ajax') ) :
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 class ACF_Ajax {
 	
-	/** @var string The AJAX action name. */
-	var $action = '';
-	
-	/** @var array The $_REQUEST data. */
-	var $request;
-	
-	/** @var bool Prevents access for non-logged in users. */
-	var $public = false;
+	/**
+	 * AJAX action name
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @var    string
+	 */
+	public $action = '';
 	
 	/**
-	 * __construct
+	 * The $_REQUEST data
 	 *
-	 * Sets up the class functionality.
-	 *
-	 * @date	31/7/18
-	 * @since	5.7.2
-	 *
-	 * @param	void
-	 * @return	void
+	 * @since  1.0.0
+	 * @access public
+	 * @var    array
 	 */
-	function __construct() {
+	public $request;
+	
+	/**
+	 * Privacy
+	 *
+	 * Prevents access for non-logged in users.
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @var    boolean
+	 */
+	public $public = false;
+	
+	/**
+	 * Constructor method
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @return self
+	 */
+	public function __construct() {
 		$this->initialize();
 		$this->add_actions();
 	}
 	
 	/**
-	 * has
+	 * Has
 	 *
 	 * Returns true if the request has data for the given key.
 	 *
-	 * @date	31/7/18
-	 * @since	5.7.2
-	 *
-	 * @param	string $key The data key.
-	 * @return	boolean
+	 * @since  1.0.0
+	 * @access public
+	 * @param  string $key The data key.
+	 * @return boolean
 	 */
-	function has( $key = '' ) {
-		return isset($this->request[$key]);
+	public function has( $key = '' ) {
+		return isset( $this->request[$key] );
 	}
 	
 	/**
-	 * get
+	 * Get
 	 *
 	 * Returns request data for the given key.
 	 *
-	 * @date	31/7/18
-	 * @since	5.7.2
-	 *
-	 * @param	string $key The data key.
-	 * @return	mixed
+	 * @since  1.0.0
+	 * @access public
+	 * @param  string $key The data key.
+	 * @return mixed
 	 */
-	function get( $key = '' ) {
-		return isset($this->request[$key]) ? $this->request[$key] : null;
+	public function get( $key = '' ) {
+		return isset( $this->request[$key] ) ? $this->request[$key] : null;
 	}
 	
 	/**
+	 * Set
+	 *
 	 * Sets request data for the given key.
 	 *
-	 * @date	31/7/18
-	 * @since	5.7.2
-	 *
-	 * @param	string $key The data key.
-	 * @param	mixed $value The data value.
-	 * @return	ACF_Ajax
+	 * @since  1.0.0
+	 * @access public
+	 * @param  string $key The data key.
+	 * @param  mixed $value The data value.
+	 * @return object ACF_Ajax
 	 */
-	function set( $key = '', $value = null ) {
+	public function set( $key = '', $value = null ) {
 		$this->request[$key] = $value;
 		return $this;
 	}
 	
 	/**
-	 * initialize
+	 * Initialize
 	 *
 	 * Allows easy access to modifying properties without changing constructor.
 	 *
-	 * @date	31/7/18
-	 * @since	5.7.2
-	 *
-	 * @param	void
-	 * @return	void
+	 * @since  1.0.0
+	 * @access public
+	 * @return void
 	 */
-	function initialize() {
-		/* do nothing */
+	public function initialize() {
+		// For child class.
 	}
 	
 	/**
-	 * add_actions
+	 * Add actions
 	 *
-	 * Adds the ajax actions for this response.
+	 * Adds the AJAX actions for this response.
 	 *
-	 * @date	31/7/18
-	 * @since	5.7.2
-	 *
-	 * @param	void
-	 * @return	void
+	 * @since  1.0.0
+	 * @access public
+	 * @return void
 	 */
-	function add_actions() {
+	public function add_actions() {
 		
-		// add action for logged-in users
-		add_action( "wp_ajax_{$this->action}", array($this, 'request') );
+		// Add action for logged-in users.
+		add_action( "wp_ajax_{$this->action}", [ $this, 'request' ] );
 		
-		// add action for non logged-in users
-		if( $this->public ) {
-			add_action( "wp_ajax_nopriv_{$this->action}", array($this, 'request') );
+		// Add action for non logged-in users.
+		if ( $this->public ) {
+			add_action( "wp_ajax_nopriv_{$this->action}", [ $this, 'request' ] );
 		}
 	}
 	
 	/**
-	 * request
+	 * Request
 	 *
-	 * Callback for ajax action. Sets up properties and calls the get_response() function.
+	 * Callback for AJAX action. Sets up properties and calls the get_response() function.
 	 *
-	 * @date	1/8/18
-	 * @since	5.7.2
-	 *
-	 * @param	void
-	 * @return	void
+	 * @since  1.0.0
+	 * @access public
+	 * @return void
 	 */
-	function request() {
+	public function request() {
 		
 		// Store data for has() and get() functions.
-		$this->request = wp_unslash($_REQUEST);
+		$this->request = wp_unslash( $_REQUEST );
 		
 		// Verify request and handle error.
 		$error = $this->verify_request( $this->request );
-		if( is_wp_error( $error ) ) {
+		if ( is_wp_error( $error ) ) {
 			$this->send( $error );
 		}
 		
@@ -140,53 +158,50 @@ class ACF_Ajax {
 	}
 	
 	/**
-	 * Verifies the request.
+	 * Verify request
 	 *
-	 * @date	9/3/20
-	 * @since	5.8.8
-	 *
-	 * @param	array $request The request args.
-	 * @return	(bool|WP_Error) True on success, WP_Error on fail.
+	 * @since  1.0.0
+	 * @access public
+	 * @param  array $request The request args.
+	 * @return mixed True on success, WP_Error on fail.
 	 */
-	function verify_request( $request ) {
+	public function verify_request( $request ) {
 		
 		// Verify nonce.
-		if( !acf_verify_ajax() ) {
-			return new WP_Error( 'acf_invalid_nonce', __( 'Invalid nonce.', 'acf' ), array( 'status' => 404 ) );
+		if ( ! acf_verify_ajax() ) {
+			return new WP_Error( 'acf_invalid_nonce', __( 'Invalid nonce.', 'acf' ), [ 'status' => 404 ] );
 		}
 		return true;
 	}
 	
 	/**
-	 * get_response
+	 * Get response
 	 *
 	 * Returns the response data to sent back.
 	 *
-	 * @date	31/7/18
-	 * @since	5.7.2
-	 *
-	 * @param	array $request The request args.
-	 * @return	mixed The response data or WP_Error.
+	 * @since  1.0.0
+	 * @access public
+	 * @param  array $request The request args.
+	 * @return mixed The response data or WP_Error.
 	 */
-	function get_response( $request ) {
+	public function get_response( $request ) {
 		return true;
 	}
 	
 	/**
-	 * send
+	 * Send
 	 *
 	 * Sends back JSON based on the $response as either success or failure.
 	 *
-	 * @date	31/7/18
-	 * @since	5.7.2
-	 *
-	 * @param	mixed $response The response to send back.
-	 * @return	void
+	 * @since  1.0.0
+	 * @access public
+	 * @param  mixed $response The response to send back.
+	 * @return void
 	 */
-	function send( $response ) {
+	public function send( $response ) {
 		
 		// Return error.
-		if( is_wp_error($response) ) {
+		if ( is_wp_error( $response ) ) {
 			$this->send_error( $response );
 		
 		// Return success.
@@ -196,32 +211,29 @@ class ACF_Ajax {
 	}
 	
 	/**
+	 * Send error
+	 *
 	 * Sends a JSON response for the given WP_Error object.
 	 *
-	 * @date	8/3/20
-	 * @since	5.8.8
-	 *
-	 * @param	WP_Error error The error object.
-	 * @return	void
+	 * @since  1.0.0
+	 * @access public
+	 * @param  object error The error object.
+	 * @return void
 	 */
-	function send_error( $error ) {
+	public function send_error( $error ) {
 		
-		// Get error status
+		// Get error status.
 		$error_data = $error->get_error_data();
-		if( is_array($error_data) && isset($error_data['status']) ) {
+		if ( is_array( $error_data ) && isset( $error_data['status'] ) ) {
 			$status_code = $error_data['status'];
 		} else {
 			$status_code = 500;
 		}
 		
-		wp_send_json(array(
-			'code'		=> $error->get_error_code(),
-			'message'	=> $error->get_error_message(),
-			'data'		=> $error->get_error_data()
-		), $status_code);
+		wp_send_json( [
+			'code'    => $error->get_error_code(),
+			'message' => $error->get_error_message(),
+			'data'    => $error->get_error_data()
+		], $status_code );
 	}
 }
-
-endif; // class_exists check
-
-?>
