@@ -88,15 +88,62 @@ class acf_dynamic_post_types extends acf_module {
 	}
 
 	/**
-	 * Register post types
+	 * Get name
 	 *
-	 * Registers the ACF post types.
+	 * @since  1.0.0
+	 * @access public
+	 * @param  integer $post_id
+	 * @return string Returns the post type name.
+	 */
+	public function get_name( $post_id ) {
+		return get_field( 'acfe_dpt_name', $post_id );
+	}
+
+	/**
+	 * Get ACF post types
+	 *
+	 * And array of all ACF dynamic post types data,
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @return array
+	 */
+	public function get_acf_post_types() {
+
+		$query = [
+			'public'     => true,
+			'_builtin'   => false,
+			'is_acf_dpt' => true
+		];
+
+		$get_types = get_post_types( $query, 'names', 'and' );
+		$acf_types = [];
+
+		foreach ( $get_types as $type ) {
+			$acf_types[] = get_object_vars( get_post_type_object( $type ) );
+		}
+		return $acf_types;
+	}
+
+	/**
+	 * Init
 	 *
 	 * @since  1.0.0
 	 * @access public
 	 * @return void
 	 */
-	public function register_post_types() {
+	public function init() {
+		$this->register_acf_post_types();
+	}
+
+	/**
+	 * Register ACF post types
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @return void
+	 */
+	public function register_acf_post_types() {
 
 		$cap = acf_get_setting( 'capability' );
 
@@ -138,208 +185,6 @@ class acf_dynamic_post_types extends acf_module {
 			'acfe_admin_order'   => 'ASC',
 			'acfe_admin_ppp'     => 999,
 		] );
-	}
-
-	/**
-	 * Get name
-	 *
-	 * @since  1.0.0
-	 * @access public
-	 * @param  integer $post_id
-	 * @return string Returns the post type name.
-	 */
-	public function get_name( $post_id ) {
-		return get_field( 'acfe_dpt_name', $post_id );
-	}
-
-	/**
-	 * Help heading allowed HTML
-	 *
-	 * Returns an array of HTML elements allowed in
-	 * post type contextual help headings.
-	 *
-	 * @since  1.0.0
-	 * @access public
-	 * @return array
-	 */
-	public function help_tabs_heading_allowed_html() {
-		return [
-			'h3' => [
-				'style' => []
-			],
-			'h4' => [
-				'style' => []
-			],
-			'h5' => [
-				'style' => []
-			],
-			'p'  => [
-				'style' => []
-			],
-			'a'  => [
-				'href'  => [],
-				'title' => [],
-				'style' => []
-			],
-			'hr'     => [],
-			'br'     => [],
-			'em'     => [],
-			'strong' => [],
-			'b'      => [],
-			'i'      => [],
-			'code'   => [],
-			'style'  => []
-		];
-	}
-
-	/**
-	 * Edit screen help tabs
-	 *
-	 * Contextual help tabs that appear on
-	 * the post type lists screen.
-	 *
-	 * @since  1.0.0
-	 * @access public
-	 * @return void
-	 */
-	public function help_tabs_type_edit() {
-
-		$types  = $this->get_acf_post_types();
-		$screen = get_current_screen();
-
-		foreach ( $types as $type ) {
-
-			if ( $_GET['post_type'] !== $type['name'] ) {
-				continue;
-			}
-
-			if ( $type['edit_help_tabs'] ) {
-				$tabs = $type['edit_help_tabs'];
-
-				foreach ( $tabs as $tab ) {
-					$id = random_int( 1000, 9999 );
-					$screen->add_help_tab( [
-						'id'       => $id,
-						'title'    => $tab['acf_dpt_edit_help_tab_heading'],
-						'content'  => $tab['acf_dpt_edit_help_tab_content'],
-						'callback' => null
-					] );
-				}
-			}
-			if ( $type['edit_help_sidebar'] ) {
-
-				$sidebar = '';
-				if ( $type['edit_sidebar_heading'] ) {
-					$sidebar .= wp_kses( $type['edit_sidebar_heading'], $this->help_tabs_heading_allowed_html() );
-				}
-				$sidebar .= $type['edit_sidebar_content'];
-				$screen->set_help_sidebar( $sidebar );
-			}
-		}
-	}
-
-	/**
-	 * Post screen help tabs
-	 *
-	 * Contextual help tabs that appear on
-	 * the post type new & edit screens.
-	 *
-	 * @since  1.0.0
-	 * @access public
-	 * @return void
-	 */
-	public function help_tabs_type_post() {
-
-		if ( isset( $_GET['post_type'] ) ) {
-			$post_type = $_GET['post_type'];
-		} elseif ( isset( $_GET['post'] ) ) {
-			$post_type = get_post_type( $_GET['post'] );
-		} else {
-			return;
-		}
-
-		$types  = $this->get_acf_post_types();
-		$screen = get_current_screen();
-
-		foreach ( $types as $type ) {
-
-			if ( $post_type !== $type['name'] ) {
-				continue;
-			}
-
-			if ( $type['post_help_tabs'] ) {
-				$tabs = $type['post_help_tabs'];
-
-				foreach ( $tabs as $tab ) {
-					$id = random_int( 1000, 9999 );
-					$screen->add_help_tab( [
-						'id'       => $id,
-						'title'    => $tab['acf_dpt_post_help_tab_heading'],
-						'content'  => $tab['acf_dpt_post_help_tab_content'],
-						'callback' => null
-					] );
-				}
-			}
-			if ( $type['post_help_sidebar'] ) {
-
-				$sidebar = '';
-				if ( $type['post_sidebar_heading'] ) {
-					$sidebar .= wp_kses(
-						$type['post_sidebar_heading'], $this->help_tabs_heading_allowed_html()
-					);
-				}
-				$sidebar .= $type['post_sidebar_content'];
-				$screen->set_help_sidebar( $sidebar );
-			}
-		}
-	}
-
-	/**
-	 * Get ACF post types
-	 *
-	 * And array of all ACF dynamic post types data,
-	 *
-	 * @since  1.0.0
-	 * @access public
-	 * @return array
-	 */
-	public function get_acf_post_types() {
-
-		$query = [
-			'public'     => true,
-			'_builtin'   => false,
-			'is_acf_dpt' => true
-		];
-
-		$get_types = get_post_types( $query, 'names', 'and' );
-		$acf_types = [];
-
-		foreach ( $get_types as $type ) {
-			$acf_types[] = get_object_vars( get_post_type_object( $type ) );
-		}
-		return $acf_types;
-	}
-
-	/**
-	 * Init
-	 *
-	 * @since  1.0.0
-	 * @access public
-	 * @return void
-	 */
-	public function init() {
-		$this->register_post_types();
-		$this->register_acf_post_types();
-	}
-
-	/**
-	 * Register ACF post types
-	 *
-	 * @since  1.0.0
-	 * @access public
-	 * @return void
-	 */
-	public function register_acf_post_types(){
 
 		$settings = apply_filters( 'acfe/post_type/prepare_register', acfe_get_settings( $this->settings ) );
 
@@ -3729,6 +3574,108 @@ etc...', 'acf' ),
 			'description'     => '',
 			'instruction_placement' => 'label'
 		] );
+	}
+
+	/**
+	 * Edit screen help tabs
+	 *
+	 * Contextual help tabs that appear on
+	 * the post type lists screen.
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @return void
+	 */
+	public function help_tabs_type_edit() {
+
+		$types  = $this->get_acf_post_types();
+		$screen = get_current_screen();
+
+		foreach ( $types as $type ) {
+
+			if ( $_GET['post_type'] !== $type['name'] ) {
+				continue;
+			}
+
+			if ( $type['edit_help_tabs'] ) {
+				$tabs = $type['edit_help_tabs'];
+
+				foreach ( $tabs as $tab ) {
+					$id = random_int( 1000, 9999 );
+					$screen->add_help_tab( [
+						'id'       => $id,
+						'title'    => $tab['acf_dpt_edit_help_tab_heading'],
+						'content'  => $tab['acf_dpt_edit_help_tab_content'],
+						'callback' => null
+					] );
+				}
+			}
+			if ( $type['edit_help_sidebar'] ) {
+
+				$sidebar = '';
+				if ( $type['edit_sidebar_heading'] ) {
+					$sidebar .= wp_kses( $type['edit_sidebar_heading'], acf_help_heading_allowed() );
+				}
+				$sidebar .= $type['edit_sidebar_content'];
+				$screen->set_help_sidebar( $sidebar );
+			}
+		}
+	}
+
+	/**
+	 * Post screen help tabs
+	 *
+	 * Contextual help tabs that appear on
+	 * the post type new & edit screens.
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @return void
+	 */
+	public function help_tabs_type_post() {
+
+		if ( isset( $_GET['post_type'] ) ) {
+			$post_type = $_GET['post_type'];
+		} elseif ( isset( $_GET['post'] ) ) {
+			$post_type = get_post_type( $_GET['post'] );
+		} else {
+			return;
+		}
+
+		$types  = $this->get_acf_post_types();
+		$screen = get_current_screen();
+
+		foreach ( $types as $type ) {
+
+			if ( $post_type !== $type['name'] ) {
+				continue;
+			}
+
+			if ( $type['post_help_tabs'] ) {
+				$tabs = $type['post_help_tabs'];
+
+				foreach ( $tabs as $tab ) {
+					$id = random_int( 1000, 9999 );
+					$screen->add_help_tab( [
+						'id'       => $id,
+						'title'    => $tab['acf_dpt_post_help_tab_heading'],
+						'content'  => $tab['acf_dpt_post_help_tab_content'],
+						'callback' => null
+					] );
+				}
+			}
+			if ( $type['post_help_sidebar'] ) {
+
+				$sidebar = '';
+				if ( $type['post_sidebar_heading'] ) {
+					$sidebar .= wp_kses(
+						$type['post_sidebar_heading'], acf_help_heading_allowed()
+					);
+				}
+				$sidebar .= $type['post_sidebar_content'];
+				$screen->set_help_sidebar( $sidebar );
+			}
+		}
 	}
 }
 acf_new_instance( 'acf_dynamic_post_types' );
