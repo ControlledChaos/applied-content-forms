@@ -72,7 +72,7 @@ class ACF_Admin {
 	 * @return string
 	 */
 	public function admin_page_icon() {
-		return apply_filters( 'acf/acf_admin_page_icon', 'dashicons-edit' );
+		return apply_filters( 'acf/acf_admin_page_icon', 'dashicons-edit-large' );
 	}
 
 	/**
