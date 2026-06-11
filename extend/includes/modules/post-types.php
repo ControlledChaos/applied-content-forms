@@ -666,7 +666,7 @@ class acf_dynamic_post_types extends acf_module {
 
 		// Menu.
 		$menu_position = get_field( 'menu_position', $post_id );
-		$menu_icon     = get_field( 'menu_icon', $post_id );
+		$menu_icon     = 'dashicons-' . get_field( 'menu_icon', $post_id );
 		$show_ui       = get_field( 'show_ui', $post_id );
 		$show_in_menu  = get_field( 'show_in_menu', $post_id );
 		$show_in_menu_text = get_field( 'show_in_menu_text', $post_id );
@@ -795,6 +795,10 @@ class acf_dynamic_post_types extends acf_module {
 		// Show in menu (text).
 		if ( $show_in_menu && ! empty( $show_in_menu_text ) ) {
 			$args['show_in_menu'] = $show_in_menu_text;
+		}
+
+		if ( empty( $menu_icon ) ) {
+			$args['menu_icon'] = 'dashicons-admin-post';
 		}
 
 		// Capability type.
@@ -1260,6 +1264,393 @@ class acf_dynamic_post_types extends acf_module {
 		return $args;
 	}
 
+	public function dashicon_icons() {
+
+		return [
+			'## suggested'  => '##' . __( 'General', 'acf' ),
+			'admin-post'    => __( 'Pin 1', 'acf' ),
+			'sticky'        => __( 'Pin 2', 'acf' ),
+			'edit'          => __( 'Pencil', 'acf' ),
+			'edit-large'    => __( 'Pencil Large', 'acf' ),
+			'edit-page'     => __( 'Edit Page', 'acf' ),
+			'admin-page'    => __( 'Pages', 'acf' ),
+			'text-page'     => __( 'Text on Page', 'acf' ),
+			'admin-generic' => __( 'Gear', 'acf' ),
+
+			'## admin'         => '##' . __( 'CMS Admin', 'acf' ),
+			'admin-appearance' => __( 'Appearance', 'acf' ),
+			'admin-collapse'   => __( 'Collapse', 'acf' ),
+			'admin-comments'   => __( 'Comments', 'acf' ),
+			'admin-customizer' => __( 'Customizer', 'acf' ),
+			'dashboard'        => __( 'Dashboard', 'acf' ),
+			'filter'           => __( 'Filter', 'acf' ),
+			'admin-home'       => __( 'Home', 'acf' ),
+			'admin-links'      => __( 'Links', 'acf' ),
+			'admin-media'      => __( 'Media', 'acf' ),
+			'menu'             => __( 'Menu 1', 'acf' ),
+			'menu-alt'         => __( 'Menu 2', 'acf' ),
+			'menu-alt2'        => __( 'Menu 3', 'acf' ),
+			'menu-alt3'        => __( 'Menu 4', 'acf' ),
+			'admin-multisite'  => __( 'Multisite', 'acf' ),
+			'admin-network'    => __( 'Network', 'acf' ),
+			'admin-plugins'    => __( 'Plugins', 'acf' ),
+			'plugins-checked'  => __( 'Plugins Checked', 'acf' ),
+			'admin-settings'   => __( 'Settings', 'acf' ),
+			'admin-site'       => __( 'Site 1', 'acf' ),
+			'admin-site-alt'   => __( 'Site 2', 'acf' ),
+			'admin-site-alt2'  => __( 'Site 3', 'acf' ),
+			'admin-site-alt3'  => __( 'Site 4', 'acf' ),
+			'admin-tools'      => __( 'Tools', 'acf' ),
+			'admin-users'      => __( 'Users', 'acf' ),
+			'welcome-add-page'      => __( 'Welcome Add Page', 'acf' ),
+			'welcome-comments'      => __( 'Welcome Comments', 'acf' ),
+			'welcome-edit-page'     => __( 'Welcome Edit Page', 'acf' ),
+			'welcome-learn-more'    => __( 'Welcome Learn more', 'acf' ),
+			'welcome-view-site'     => __( 'Welcome View Site', 'acf' ),
+			'welcome-widgets-menus' => __( 'Welcome Widgets Menus', 'acf' ),
+			'welcome-write-blog'    => __( 'Welcome Write Blog', 'acf' ),
+
+			'## media'   => '##' . __( 'Media', 'acf' ),
+			'book'       => __( 'Book 1', 'acf' ),
+			'book-alt'   => __( 'Book 2', 'acf' ),
+			'camera'     => __( 'Camera 1', 'acf' ),
+			'camera-alt' => __( 'Camera 2', 'acf' ),
+			'controls-back'        => __( 'Controls: Back', 'acf' ),
+			'controls-forward'     => __( 'Controls: Forward', 'acf' ),
+			'controls-pause'       => __( 'Controls: Pause', 'acf' ),
+			'controls-play'        => __( 'Controls: Play', 'acf' ),
+			'controls-repeat'      => __( 'Controls: Repeat', 'acf' ),
+			'controls-skipback'    => __( 'Controls: Skip Back', 'acf' ),
+			'controls-skipforward' => __( 'Controls: Skip Forward', 'acf' ),
+			'controls-volumeoff'   => __( 'Controls: Volume Off', 'acf' ),
+			'controls-volumeon'    => __( 'Controls: Volume On', 'acf' ),
+			'images-alt'  => __( 'Images 1', 'acf' ),
+			'images-alt2' => __( 'Images 2', 'acf' ),
+			'megaphone'   => __( 'Megaphone', 'acf' ),
+			'microphone'  => __( 'Microphone', 'acf' ),
+			'playlist-audio' => __( 'Playlist: Audio', 'acf' ),
+			'playlist-video' => __( 'Playlist: Video', 'acf' ),
+			'slides'      => __( 'Slides', 'acf' ),
+			'video-alt'   => __( 'Video 1', 'acf' ),
+			'video-alt2'  => __( 'Video 2', 'acf' ),
+			'video-alt3'  => __( 'Video 3', 'acf' ),
+
+			'## notifications' => '##' . __( 'Notifications', 'acf' ),
+			'bell'        => __( 'Bell', 'acf' ),
+			'dismiss'     => __( 'Dismiss', 'acf' ),
+			'flag'        => __( 'Flag', 'acf' ),
+			'minus'       => __( 'Minus', 'acf' ),
+			'marker'      => __( 'Marker', 'acf' ),
+			'no'          => __( 'No 1', 'acf' ),
+			'no-alt'      => __( 'No 2', 'acf' ),
+			'plus'        => __( 'Plus 1', 'acf' ),
+			'plus-alt'    => __( 'Plus 2', 'acf' ),
+			'plus-alt2'   => __( 'Plus 3', 'acf' ),
+			'star-empty'  => __( 'Star Empty', 'acf' ),
+			'star-filled' => __( 'Star Filled', 'acf' ),
+			'star-half'   => __( 'Star Half', 'acf' ),
+			'warning'     => __( 'Warning', 'acf' ),
+			'yes'         => __( 'Yes 1', 'acf' ),
+			'yes-alt'     => __( 'Yes 2', 'acf' ),
+
+			'## misc'   => '##' . __( 'Miscellaneous', 'acf' ),
+			'airplane'  => __( 'Airplane', 'acf' ),
+			'album'     => __( 'Album', 'acf' ),
+			'analytics' => __( 'Analytics', 'acf' ),
+			'art'       => __( 'Art', 'acf' ),
+			'awards'    => __( 'Awards', 'acf' ),
+			'backup'    => __( 'Backup', 'acf' ),
+			'bank'      => __( 'Bank', 'acf' ),
+			'beer'      => __( 'Beer', 'acf' ),
+			'building'  => __( 'Building', 'acf' ),
+			'businessman'    => __( 'Businessman', 'acf' ),
+			'businesswoman'  => __( 'Businesswoman', 'acf' ),
+			'businessperson' => __( 'Businessperson', 'acf' ),
+			'calculator'     => __( 'Calculator', 'acf' ),
+			'calendar'       => __( 'Calendar 1', 'acf' ),
+			'calendar-alt'   => __( 'Calendar 2', 'acf' ),
+			'car'    => __( 'Car', 'acf' ),
+			'carrot' => __( 'Carrot', 'acf' ),
+			'cart'   => __( 'Cart', 'acf' ),
+			'category'   => __( 'Category', 'acf' ),
+			'chart-area' => __( 'Chart Area', 'acf' ),
+			'chart-bar'  => __( 'Chart Bar', 'acf' ),
+			'chart-line' => __( 'Chart Line', 'acf' ),
+			'chart-pie'  => __( 'Chart Pie', 'acf' ),
+			'clipboard'  => __( 'Clipboard', 'acf' ),
+			'clock'      => __( 'Clock', 'acf' ),
+			'code-standards' => __( 'Code Standards', 'acf' ),
+			'coffee'         => __( 'Coffee', 'acf' ),
+			'color-picker'   => __( 'Color Picker', 'acf' ),
+			'database'         => __( 'Database', 'acf' ),
+			'database-add'     => __( 'Database Add', 'acf' ),
+			'database-export'  => __( 'Database Export', 'acf' ),
+			'database-import'  => __( 'Database Import', 'acf' ),
+			'database-remove'  => __( 'Database Remove', 'acf' ),
+			'database-view'    => __( 'Database View', 'acf' ),
+			'desktop'    => __( 'Desktop', 'acf' ),
+			'archive'    => __( 'Document Archive', 'acf' ),
+			'download'   => __( 'Download', 'acf' ),
+			'drumstick'  => __( 'Drumbstick', 'acf' ),
+			'email'      => __( 'Email 1', 'acf' ),
+			'email-alt'  => __( 'Email 2', 'acf' ),
+			'email-alt2' => __( 'Email 3', 'acf' ),
+			'external'     => __( 'External', 'acf' ),
+			'feedback'     => __( 'Feedback', 'acf' ),
+			'food'   => __( 'Food', 'acf' ),
+			'forms'  => __( 'Forms', 'acf' ),
+			'fullscreen-alt'      => __( 'Full Screen', 'acf' ),
+			'fullscreen-exit-alt' => __( 'Full Screen Exit', 'acf' ),
+			'games'      => __( 'Games', 'acf' ),
+			'groups'     => __( 'Groups', 'acf' ),
+			'hammer'     => __( 'Hammer', 'acf' ),
+			'heart'      => __( 'Heart', 'acf' ),
+			'hidden'     => __( 'Hidden', 'acf' ),
+			'hourglass'  => __( 'Hourglass', 'acf' ),
+			'id'         => __( 'ID 1', 'acf' ),
+			'id-alt'     => __( 'ID 2', 'acf' ),
+			'image-crop'   => __( 'Image: Crop', 'acf' ),
+			'image-filter' => __( 'Image: Filter', 'acf' ),
+			'image-flip-horizontal' => __( 'Image: Flip Horizontal', 'acf' ),
+			'image-flip-vertical'   => __( 'Image: Flip Vertical', 'acf' ),
+			'image-rotate'          => __( 'Image: Rotate', 'acf' ),
+			'image-rotate-left'     => __( 'Image: Rotate Left', 'acf' ),
+			'image-rotate-right'    => __( 'Image: Rotate Right', 'acf' ),
+			'index-card'   => __( 'Index Card', 'acf' ),
+			'info'         => __( 'Info', 'acf' ),
+			'laptop'       => __( 'Laptop', 'acf' ),
+			'layout'       => __( 'Layout', 'acf' ),
+			'lightbulb'    => __( 'Light Bulb', 'acf' ),
+			'location'     => __( 'Location 1', 'acf' ),
+			'location-alt' => __( 'Location 2', 'acf' ),
+			'lock'   => __( 'Lock', 'acf' ),
+			'migrate'     => __( 'Migrate', 'acf' ),
+			'money'       => __( 'Money', 'acf' ),
+			'money-alt'   => __( 'Dollar Sign', 'acf' ),
+			'nametag'     => __( 'Name Tag', 'acf' ),
+			'networking'  => __( 'Networking', 'acf' ),
+			'open-folder' => __( 'Open Folder', 'acf' ),
+			'palmtree'    => __( 'Palm Tree', 'acf' ),
+			'paperclip'   => __( 'Paper Clip', 'acf' ),
+			'performance' => __( 'Performance', 'acf' ),
+			'pets'        => __( 'Pets', 'acf' ),
+			'phone'       => __( 'Phone', 'acf' ),
+			'portfolio'     => __( 'Portfolio', 'acf' ),
+			'post-status'   => __( 'Post-status', 'acf' ),
+			'pressthis'     => __( 'Pressthis', 'acf' ),
+			'printer'       => __( 'Printer', 'acf' ),
+			'privacy'       => __( 'Privacy', 'acf' ),
+			'products'      => __( 'Products', 'acf' ),
+			'redo'          => __( 'Redo', 'acf' ),
+			'rest-api'      => __( 'Rest API', 'acf' ),
+			'rss'           => __( 'RSS', 'acf' ),
+			'schedule'      => __( 'Schedule', 'acf' ),
+			'search'        => __( 'Search', 'acf' ),
+			'shield'        => __( 'Shield 1', 'acf' ),
+			'shield-alt'    => __( 'Shield 2', 'acf' ),
+			'smartphone'    => __( 'Smartphone', 'acf' ),
+			'smiley'        => __( 'Smiley', 'acf' ),
+			'post-trash'    => __( 'Trash', 'acf' ),
+			'sos'           => __( 'SOS', 'acf' ),
+			'store'         => __( 'Store Front', 'acf' ),
+			'superhero'     => __( 'Superhero 1', 'acf' ),
+			'superhero-alt' => __( 'Superhero 2', 'acf' ),
+			'tablet'        => __( 'Tablet', 'acf' ),
+			'tag'           => __( 'Tag', 'acf' ),
+			'tagcloud'      => __( 'Tag Cloud', 'acf' ),
+			'testimonial'   => __( 'Testimonial', 'acf' ),
+			'text'          => __( 'Text', 'acf' ),
+			'thumbs-down'   => __( 'Thumbs down', 'acf' ),
+			'thumbs-up'     => __( 'Thumbs up', 'acf' ),
+			'tickets'       => __( 'Tickets 1', 'acf' ),
+			'tickets-alt'   => __( 'Tickets 2', 'acf' ),
+			'translation'   => __( 'Translation', 'acf' ),
+			'trash'         => __( 'Trash', 'acf' ),
+			'undo'          => __( 'Undo', 'acf' ),
+			'universal-access'     => __( 'Universal Access 1', 'acf' ),
+			'universal-access-alt' => __( 'Universal Access 2', 'acf' ),
+			'unlock'     => __( 'Unlock', 'acf' ),
+			'update'     => __( 'Update 1', 'acf' ),
+			'update-alt' => __( 'Update 2', 'acf' ),
+			'upload'     => __( 'Upload', 'acf' ),
+			'vault'      => __( 'Vault', 'acf' ),
+			'visibility' => __( 'Visibility', 'acf' ),
+
+			'## editor'          => '##' . __( 'Content Editor', 'acf' ),
+			'editor-break'       => __( 'Editor Break', 'acf' ),
+			'editor-code'        => __( 'Editor Code', 'acf' ),
+			'editor-contract'    => __( 'Editor Contract', 'acf' ),
+			'editor-customchar'  => __( 'Editor Custom Character', 'acf' ),
+			'editor-distractionfree' => __( 'Editor Full Screen', 'acf' ),
+			'editor-expand'      => __( 'Editor Expand', 'acf' ),
+			'editor-help'        => __( 'Editor Help', 'acf' ),
+			'editor-insertmore'  => __( 'Editor Insert More', 'acf' ),
+			'editor-kitchensink' => __( 'Editor Kitchen Sink', 'acf' ),
+			'editor-ltr'         => __( 'Editor Left-to-Right', 'acf' ),
+			'editor-ol-rtl'      => __( 'Editor Ordered List Left-to-Right', 'acf' ),
+			'editor-paragraph'   => __( 'Editor Paragraph', 'acf' ),
+			'editor-paste-text'  => __( 'Editor Paste Text', 'acf' ),
+			'editor-paste-word'  => __( 'Editor Paste Word', 'acf' ),
+			'editor-quote'       => __( 'Editor Quote', 'acf' ),
+			'editor-removeformatting' => __( 'Editor Remove Formatting', 'acf' ),
+			'editor-rtl'           => __( 'Editor Right-to-Left', 'acf' ),
+			'editor-spellcheck'    => __( 'Editor Spell Check', 'acf' ),
+			'editor-table'         => __( 'Editor Table', 'acf' ),
+			'editor-textcolor'     => __( 'Editor Text Color', 'acf' ),
+			'editor-video'         => __( 'Editor Video', 'acf' ),
+			'align-center'         => __( 'Image Align Center', 'acf' ),
+			'align-left'           => __( 'Image Align Left', 'acf' ),
+			'align-none'           => __( 'Image Align None', 'acf' ),
+			'align-right'          => __( 'Image Align Right', 'acf' ),
+			'editor-aligncenter'   => __( 'Text Align Center', 'acf' ),
+			'editor-justify'       => __( 'Text Align Justify', 'acf' ),
+			'editor-alignleft'     => __( 'Text Align Left', 'acf' ),
+			'editor-alignright'    => __( 'Text Align Right', 'acf' ),
+			'editor-bold'          => __( 'Text Bold', 'acf' ),
+			'editor-indent'        => __( 'Text Indent', 'acf' ),
+			'editor-italic'        => __( 'Text Italic', 'acf' ),
+			'editor-ol'            => __( 'Text Ordered List', 'acf' ),
+			'editor-outdent'       => __( 'Text Outdent', 'acf' ),
+			'editor-strikethrough' => __( 'Text Strike Through', 'acf' ),
+			'editor-ul'            => __( 'Text Unordered List', 'acf' ),
+			'editor-underline'     => __( 'Text Underline', 'acf' ),
+			'editor-unlink'        => __( 'Text Unlink', 'acf' ),
+
+			'## g-editor' => '##' . __( 'Block Editor', 'acf' ),
+			'align-full-width' => __( 'Align Full Width', 'acf' ),
+			'align-pull-left'  => __( 'Align Pull Left', 'acf' ),
+			'align-pull-right' => __( 'Align Pull Right', 'acf' ),
+			'align-wide'       => __( 'Align Wide', 'acf' ),
+			'button'           => __( 'Button', 'acf' ),
+			'cover-image'      => __( 'Cover Image', 'acf' ),
+			'cloud'            => __( 'Cloud', 'acf' ),
+			'cloud-saved'      => __( 'Cloud Saved', 'acf' ),
+			'cloud-upload'     => __( 'Cloud Upload', 'acf' ),
+			'columns'          => __( 'Columns', 'acf' ),
+			'block-default'    => __( 'Default Block', 'acf' ),
+			'ellipsis'      => __( 'Ellipsis', 'acf' ),
+			'embed-audio'   => __( 'Embed Audio', 'acf' ),
+			'embed-generic' => __( 'Embed Generic', 'acf' ),
+			'embed-photo'   => __( 'Embed Photo', 'acf' ),
+			'embed-post'    => __( 'Embed Post', 'acf' ),
+			'embed-video'   => __( 'Embed Video', 'acf' ),
+			'exit'          => __( 'Exit', 'acf' ),
+			'heading'       => __( 'Heading', 'acf' ),
+			'html'          => __( 'HTML', 'acf' ),
+			'info-outline'  => __( 'Info Outline', 'acf' ),
+			'insert'        => __( 'Insert', 'acf' ),
+			'insert-after'  => __( 'Insert After', 'acf' ),
+			'insert-before' => __( 'Insert Before', 'acf' ),
+			'remove'        => __( 'Remove', 'acf' ),
+			'saved'         => __( 'Saved', 'acf' ),
+			'shortcode'     => __( 'Shortcode', 'acf' ),
+			'table-col-after'  => __( 'Table Column After', 'acf' ),
+			'table-col-before' => __( 'Table Column Before', 'acf' ),
+			'table-col-delete' => __( 'Table Column Delete', 'acf' ),
+			'table-row-after'  => __( 'Table Row After', 'acf' ),
+			'table-row-before' => __( 'Table Row Before', 'acf' ),
+			'table-row-delete' => __( 'Table Row Delete', 'acf' ),
+
+			'## sorting'       => '##' . __( 'Sorting', 'acf' ),
+			'arrow-up'         => __( 'Arrow Up 1', 'acf' ),
+			'arrow-up-alt'     => __( 'Arrow Up 2', 'acf' ),
+			'arrow-up-alt2'    => __( 'Arrow Up 3', 'acf' ),
+			'arrow-down'       => __( 'Arrow Down 1', 'acf' ),
+			'arrow-down-alt'   => __( 'Arrow Down 2', 'acf' ),
+			'arrow-down-alt2'  => __( 'Arrow Down 3', 'acf' ),
+			'arrow-left'       => __( 'Arrow Left 1', 'acf' ),
+			'arrow-left-alt'   => __( 'Arrow Left 2', 'acf' ),
+			'arrow-left-alt2'  => __( 'Arrow Left 3', 'acf' ),
+			'arrow-right'      => __( 'Arrow Right 1', 'acf' ),
+			'arrow-right-alt'  => __( 'Arrow Right 2', 'acf' ),
+			'arrow-right-alt2' => __( 'Arrow Right 3', 'acf' ),
+			'leftright'     => __( 'Left-Right', 'acf' ),
+			'move'          => __( 'Move', 'acf' ),
+			'randomize'     => __( 'Randomize', 'acf' ),
+			'screenoptions' => __( 'Screen Options', 'acf' ),
+			'sort'          => __( 'Sort', 'acf' ),
+			'excerpt-view'  => __( 'View: Excerpt', 'acf' ),
+			'grid-view'     => __( 'View: Grid', 'acf' ),
+			'list-view'     => __( 'View: List', 'acf' ),
+
+			'## format' => '##' . __( 'Post Formats', 'acf' ),
+			'format-aside'    => __( 'Format: Aside', 'acf' ),
+			'format-audio'    => __( 'Format: Audio', 'acf' ),
+			'format-chat'     => __( 'Format: Chat', 'acf' ),
+			'format-gallery'  => __( 'Format: Gallery', 'acf' ),
+			'format-image'    => __( 'Format: Image', 'acf' ),
+			'format-links'    => __( 'Format: Links', 'acf' ),
+			'format-quote'    => __( 'Format: Quote', 'acf' ),
+			'format-standard' => __( 'Format: Standard', 'acf' ),
+			'format-status'   => __( 'Format: Status', 'acf' ),
+			'format-video'    => __( 'Format: Video', 'acf' ),
+
+			'## files' => '##' . __( 'File Types', 'acf' ),
+			'media-archive'  => __( 'File: Archive', 'acf' ),
+			'media-audio'    => __( 'File: Audio', 'acf' ),
+			'media-code'     => __( 'File: Code', 'acf' ),
+			'media-default'  => __( 'File: Default', 'acf' ),
+			'media-document' => __( 'File: Document', 'acf' ),
+			'media-interactive' => __( 'File: Interactive', 'acf' ),
+			'pdf'               => __( 'File: PDF', 'acf' ),
+			'media-spreadsheet' => __( 'File: Spreadsheet', 'acf' ),
+			'media-text'  => __( 'File: Text', 'acf' ),
+			'media-video' => __( 'File: Video', 'acf' ),
+
+			'## social'  => '##' . __( 'Social Content', 'acf' ),
+			'share'      => __( 'Share 1', 'acf' ),
+			'share-alt'  => __( 'Share 2', 'acf' ),
+			'share-alt2' => __( 'Share 3', 'acf' ),
+			'buddicons-bbpress-logo'    => __( 'bbPress Logo', 'acf' ),
+			'buddicons-buddypress-logo' => __( 'BuddyPress Logo', 'acf' ),
+			'buddicons-activity'  => __( 'Buddicons Activity', 'acf' ),
+			'buddicons-community' => __( 'Buddicons Community', 'acf' ),
+			'buddicons-forums'    => __( 'bbPress Forums', 'acf' ),
+			'buddicons-friends'   => __( 'Buddicons Friends', 'acf' ),
+			'buddicons-groups'    => __( 'Buddicons Groups', 'acf' ),
+			'buddicons-pm'        => __( 'Buddicons PM', 'acf' ),
+			'buddicons-replies'   => __( 'Buddicons Replies', 'acf' ),
+			'buddicons-topics'    => __( 'Buddicons Topics', 'acf' ),
+			'buddicons-tracking'  => __( 'Buddicons Tracking', 'acf' ),
+			'amazon'       => __( 'Amazon', 'acf' ),
+			'facebook'     => __( 'Facebook 1', 'acf' ),
+			'facebook-alt' => __( 'Facebook 2', 'acf' ),
+			'google'       => __( 'Google', 'acf' ),
+			'googleplus'   => __( 'Google+', 'acf' ),
+			'instagram'    => __( 'Instagram', 'acf' ),
+			'linkedin'     => __( 'LinkedIn', 'acf' ),
+			'pinterest'    => __( 'Pinterest', 'acf' ),
+			'podio'        => __( 'Podio', 'acf' ),
+			'reddit'       => __( 'Reddit', 'acf' ),
+			'twitch'       => __( 'Twitch', 'acf' ),
+			'twitter'      => __( 'Twitter', 'acf' ),
+			'spotify'      => __( 'Spotify', 'acf' ),
+			'whatsapp'     => __( 'WhatsApp', 'acf' ),
+			'xing'         => __( 'Xing', 'acf' ),
+			'youtube'      => __( 'YouTube', 'acf' )
+		];
+	}
+
+	public function menu_icon_preview() {
+
+		$icons = $this->dashicon_icons();
+		$list  = [];
+
+		foreach ( $icons as $css => $name ) {
+
+			if ( str_contains( $css, '##' ) ) {
+				continue;
+			}
+
+			$list[] = sprintf(
+				'<span class="icon-preview dashicons dashicons-%s"><span class="screen-reader-text">%s</span></span>',
+				$css,
+				$name
+			);
+		}
+		return implode( '', $list );
+	}
+
 	/**
 	 * Add local field groups
 	 *
@@ -1598,6 +1989,7 @@ class acf_dynamic_post_types extends acf_module {
 					'max'     => '',
 					'step'    => ''
 				],
+				/*
 				[
 					'key'   => 'field_acfe_dpt_menu_icon',
 					'label' => __( 'Menu Icon', 'acf' ),
@@ -1615,10 +2007,38 @@ class acf_dynamic_post_types extends acf_module {
 					'acfe_update'       => '',
 					'acfe_permissions'  => '',
 					'default_value'     => 'dashicons-admin-post',
-					'placeholder'       => '',
+					'placeholder'       => 'dashicons-admin-post',
 					'prepend'   => '',
 					'append'    => '',
 					'maxlength' => ''
+				],
+				*/
+				[
+					'key'   => 'field_acf_dpt_menu_icon',
+					'label' => 'Select Menu Icon',
+					'name'  => 'menu_icon',
+					'type'  => 'select',
+					'required'     => 0,
+					'instructions' => 'Preview of the selected icon.<br />' . $this->menu_icon_preview(),
+					'wrapper' => [
+						'width' => '',
+						'class' => '',
+						'id'    => 'dpt-menu-icon-preview'
+					],
+					'choices' => $this->dashicon_icons(),
+					'aria-label'        => '',
+					'conditional_logic' => 0,
+					'default_value'     => 'admin-post',
+					'allow_null' => 0,
+					'multiple'   => 0,
+					'max' => '',
+					'ui'  => 0,
+					'return_format' => 'value',
+					'prepend' => '',
+					'append'  => '',
+					'acfe_field_group_condition' => 0,
+					'ajax'        => 0,
+					'placeholder' => '',
 				],
 				[
 					'key'   => 'field_acfe_dpt_show_ui',
@@ -3593,11 +4013,15 @@ etc...', 'acf' ),
 
 		foreach ( $types as $type ) {
 
-			if ( $_GET['post_type'] !== $type['name'] ) {
+			if ( ! isset( $_GET['post_type'] ) ) {
 				continue;
 			}
 
-			if ( $type['edit_help_tabs'] ) {
+			if ( isset( $_GET['post_type'] ) && $_GET['post_type'] !== $type['name'] ) {
+				continue;
+			}
+
+			if ( isset( $type['edit_help_tabs'] ) ) {
 				$tabs = $type['edit_help_tabs'];
 
 				foreach ( $tabs as $tab ) {
@@ -3610,7 +4034,7 @@ etc...', 'acf' ),
 					] );
 				}
 			}
-			if ( $type['edit_help_sidebar'] ) {
+			if ( isset( $type['edit_help_sidebar'] ) ) {
 
 				$sidebar = '';
 				if ( $type['edit_sidebar_heading'] ) {
