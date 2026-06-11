@@ -200,8 +200,8 @@ class ACF_Compatibility {
 	 *
 	 * @since  1.0.0
 	 * @access public
-	 * @param  array $field 
-	 * @return array          
+	 * @param  array $field
+	 * @return array
 	 */
 	public function validate_wysiwyg_field( $field ) {
 
@@ -221,8 +221,8 @@ class ACF_Compatibility {
 	 *
 	 * @since  1.0.0
 	 * @access public
-	 * @param  array $field 
-	 * @return array          
+	 * @param  array $field
+	 * @return array
 	 */
 	public function validate_date_picker_field( $field ) {
 
@@ -249,8 +249,8 @@ class ACF_Compatibility {
 	 *
 	 * @since  1.0.0
 	 * @access public
-	 * @param  array $field 
-	 * @return array          
+	 * @param  array $field
+	 * @return array
 	 */
 	public function validate_taxonomy_field( $field ) {
 
@@ -268,8 +268,8 @@ class ACF_Compatibility {
 	 *
 	 * @since  1.0.0
 	 * @access public
-	 * @param  array $field 
-	 * @return array          
+	 * @param  array $field
+	 * @return array
 	 */
 	public function validate_date_time_picker_field( $field ) {
 
@@ -304,8 +304,8 @@ class ACF_Compatibility {
 	 *
 	 * @since  1.0.0
 	 * @access public
-	 * @param  array $field 
-	 * @return array          
+	 * @param  array $field
+	 * @return array
 	 */
 	public function validate_user_field( $field ) {
 
@@ -332,8 +332,8 @@ class ACF_Compatibility {
 	 *
 	 * @since  1.0.0
 	 * @access public
-	 * @param  array $field_group 
-	 * @return array                
+	 * @param  array $field_group
+	 * @return array
 	 */
 	public function validate_field_group( $field_group ) {
 
@@ -399,8 +399,8 @@ class ACF_Compatibility {
 	 *
 	 * @since  1.0.0
 	 * @access public
-	 * @param  array $rule 
-	 * @return array         
+	 * @param  array $rule
+	 * @return array
 	 */
 	public function validate_post_taxonomy_location_rule( $rule ) {
 
