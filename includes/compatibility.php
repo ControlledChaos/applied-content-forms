@@ -24,6 +24,9 @@ class ACF_Compatibility {
 	 */
 	public function __construct() {
 
+		// Deactivate the megalomattic fork of ACF.
+		deactivate_plugins( 'secure-custom-fields/secure-custom-fields.php' );
+
 		// Filters.
 		add_filter( 'acf/validate_field', [ $this, 'validate_field' ], 20, 1 );
 		add_filter( 'acf/validate_field/type=textarea', [ $this, 'validate_textarea_field' ], 20, 1 );
