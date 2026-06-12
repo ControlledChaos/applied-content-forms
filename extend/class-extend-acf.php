@@ -71,9 +71,9 @@ final class Extend_ACF {
 		$this->settings( [
 
 			// General
-			'theme_path'            => $theme_path,
-			'theme_url'             => $theme_url,
-			'theme_folder'          => parse_url( $theme_url, PHP_URL_PATH ),
+			'theme_path'   => $theme_path,
+			'theme_url'    => $theme_url,
+			'theme_folder' => parse_url( $theme_url, PHP_URL_PATH ),
 
 			// PHP
 			'php'       => true,

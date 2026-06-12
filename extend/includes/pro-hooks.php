@@ -9,7 +9,7 @@ class acfe_pro_hooks{
 
 	function __construct(){
 
-		// add_filter('acf/load_field',    array($this, 'load_field'), 15);
+		add_filter('acf/load_field',    array($this, 'load_field'), 15);
 
 
 		add_action('acf/render_field',  array($this, 'replace_render_field'), 9);
