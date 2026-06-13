@@ -938,25 +938,6 @@ body.post-type-acf-template .column-acfe-terms {
   border-radius: 0 !important;
 }
 
-.acf-tab-group li a .acfe-tab-badge {
-  border-radius: 100px;
-  background: #ddd;
-  width: 18px;
-  height: 18px;
-  font-size: 12px;
-  display: inline-block;
-  vertical-align: text-bottom;
-  padding: 0;
-  text-align: center;
-  margin-left: 5px;
-  line-height: 18px;
-}
-
-.acf-tab-group li a:hover .acfe-tab-badge,
-.acf-tab-group li.active a .acfe-tab-badge {
-  background: #f1f1f1;
-}
-
 .acf-field > .acf-input > .acf-input-wrap {
   overflow: initial;
 }

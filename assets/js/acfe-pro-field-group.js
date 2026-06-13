@@ -214,12 +214,12 @@
             var tabTitle = $tab.text();
 
             var val = field.val();
-            $tab.html(tabTitle + (val.length ? ' <span class="acfe-tab-badge">' + val.length + '</span>' : ''));
+            $tab.html(tabTitle + (val.length ? ' <span class="acf-badge">' + val.length + '</span>' : ''));
 
             field.on('change', function() {
 
                 var val = field.val();
-                $tab.html(tabTitle + (val.length ? ' <span class="acfe-tab-badge">' + val.length + '</span>' : ''));
+                $tab.html(tabTitle + (val.length ? ' <span class="acf-badge">' + val.length + '</span>' : ''));
 
             });
 
@@ -231,12 +231,12 @@
             var tabTitle = $tab.text();
 
             var val = field.val();
-            $tab.html(tabTitle + (val.length ? ' <span class="acfe-tab-badge">' + val.length + '</span>' : ''));
+            $tab.html(tabTitle + (val.length ? ' <span class="acf-badge">' + val.length + '</span>' : ''));
 
             field.on('change', function() {
 
                 var val = field.val();
-                $tab.html(tabTitle + (val.length ? ' <span class="acfe-tab-badge">' + val.length + '</span>' : ''));
+                $tab.html(tabTitle + (val.length ? ' <span class="acf-badge">' + val.length + '</span>' : ''));
 
             });
 
@@ -248,12 +248,12 @@
             var tabTitle = $tab.text();
 
             var val = field.val();
-            $tab.html(tabTitle + (val ? ' <span class="acfe-tab-badge">' + val + '</span>' : ''));
+            $tab.html(tabTitle + (val ? ' <span class="acf-badge">' + val + '</span>' : ''));
 
             field.on('change', function() {
 
                 var val = field.val();
-                $tab.html(tabTitle + (val ? ' <span class="acfe-tab-badge">' + val + '</span>' : ''));
+                $tab.html(tabTitle + (val ? ' <span class="acf-badge">' + val + '</span>' : ''));
 
             });
 
@@ -265,12 +265,12 @@
             var tabTitle = $tab.text();
 
             var val = field.val();
-            $tab.html(tabTitle + (val.length ? ' <span class="acfe-tab-badge">1</span>' : ''));
+            $tab.html(tabTitle + (val.length ? ' <span class="acf-badge">1</span>' : ''));
 
             field.on('change', function() {
 
                 var val = field.val();
-                $tab.html(tabTitle + (val.length ? ' <span class="acfe-tab-badge">1</span>' : ''));
+                $tab.html(tabTitle + (val.length ? ' <span class="acf-badge">1</span>' : ''));
 
             });
 

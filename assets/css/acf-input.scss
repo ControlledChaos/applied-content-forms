@@ -1395,21 +1395,19 @@ html[dir="rtl"] .acf-relationship .selection .values .acf-icon {
 }
 
 .acf-tab-group li {
-	margin: 0 0.5em 0 0
-}
-
-.acf-tab-group li a {
-	padding: 5px 10px;
-	display: block;
-	color: #555;
-	font-size: 14px;
-	font-weight: 600;
-	line-height: 24px;
-	border: #ccc solid 1px;
-	border-bottom: 0 none;
-	text-decoration: none;
-	background: #e5e5e5;
-	transition: none
+	a {
+		padding: 5px 10px;
+		display: block;
+		color: inherit;
+		font-size: 14px;
+		font-weight: 600;
+		line-height: 24px;
+		border: #ccc solid 1px;
+		border-bottom: 0 none;
+		text-decoration: none;
+		background: #e5e5e5;
+		transition: none;
+	}
 }
 
 .acf-tab-group li a:hover {

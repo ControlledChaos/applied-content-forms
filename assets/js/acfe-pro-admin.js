@@ -1048,7 +1048,7 @@
                 acf.hide($this);
                 acf.show($this.closest('div').find('[data-acfe-settings-action="default"]'));
 
-                var $tab = $this.closest('.inside').find('> .acf-tab-wrap > .acf-tab-group > li.active span.acfe-tab-badge');
+                var $tab = $this.closest('.inside').find('> .acf-tab-wrap > .acf-tab-group > li.active span.acf-badge');
                 var count = parseInt($tab.text()) + 1;
                 $tab.text(count);
 
@@ -1069,7 +1069,7 @@
                 acf.hide($this);
                 acf.show($this.closest('div').find('[data-acfe-settings-action="edit"]'));
 
-                var $tab = $this.closest('.inside').find('> .acf-tab-wrap > .acf-tab-group > li.active span.acfe-tab-badge');
+                var $tab = $this.closest('.inside').find('> .acf-tab-wrap > .acf-tab-group > li.active span.acf-badge');
                 var count = parseInt($tab.text()) - 1;
                 $tab.text(count);
 

@@ -1389,14 +1389,10 @@ html[dir=rtl] .acf-relationship .selection .values .acf-icon {
   padding: 10px 10px 0;
 }
 
-.acf-tab-group li {
-  margin: 0 0.5em 0 0;
-}
-
 .acf-tab-group li a {
   padding: 5px 10px;
   display: block;
-  color: #555;
+  color: inherit;
   font-size: 14px;
   font-weight: 600;
   line-height: 24px;

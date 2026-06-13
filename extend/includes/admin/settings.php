@@ -573,7 +573,7 @@ class acfe_admin_settings_ui{
 
                 }
 
-                $class = $count > 0 ? 'acfe-tab-badge' : 'acfe-tab-badge acf-hidden';
+                $class = $count > 0 ? 'acf-badge' : 'acf-badge acf-hidden';
                 $tab .= ' <span class="' . $class . '">' . $count . '</span>';
 
                 // Tab
