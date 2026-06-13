@@ -1,20 +1,93 @@
-.acf-hl {
+///
+/// ACF global styles
+///
+
+@import 'modules/_root';
+
+///
+/// The badge class is used for general notification.
+/// Colors are for native CMS user color schemes as
+/// well as for the Admin Color Schemes plugin.
+.acf-badge {
+	display: inline-block;
+	width: 18px;
+	height: 18px;
+	margin: 0 0.5em;
 	padding: 0;
-	margin: 0;
-	list-style: none;
-	display: block;
-	position: relative
+	border-radius: 100px;
+	vertical-align: text-bottom;
+	background: var( --acf-badge--bg-color, #d63638 );
+	color: var( --acf-badge--text-color, #ffffff );
+	font-size: 12px;
+	line-height: 18px;
+	text-align: center;
 }
 
-.acf-hl>li {
+.acf-df {
+	display: flex;
+}
+
+.acf-jc {
+	justify-content: center;
+}
+
+.acf-jl {
+	justify-content: left;
+}
+
+.acf-jr {
+	justify-content: right;
+}
+
+.acf-hidden {
+	display: none !important;
+}
+
+.acf-empty {
+	display: table-cell !important;
+}
+
+.acf-empty * {
+	display: none !important;
+}
+
+.acf-fl {
 	float: left;
-	display: block;
-	margin: 0;
-	padding: 0
 }
 
-.acf-hl>li.acf-fr {
-	float: right
+.acf-fr {
+	float: right;
+}
+
+.acf-fn {
+	float: none;
+}
+
+.acf-al {
+	text-align: left;
+}
+
+.acf-ar {
+	text-align: right;
+}
+
+.acf-ac {
+	text-align: center;
+}
+
+.acf-hl {
+	display: flex;
+	gap: 0.5em;
+	position: relative;
+	margin: var( --acf--list-horizontal--margin, 0 );
+	padding: var( --acf--list-horizontal--padding, 0 );
+	list-style: var( --acf--list-horizontal--style, none );
+
+	> li {
+		display: block;
+		margin: 0;
+		padding: 0;
+	}
 }
 
 .acf-hl:before,
@@ -23,66 +96,29 @@
 .acf-bl:after,
 .acf-cf:before,
 .acf-cf:after {
-	content: "";
+	content: '';
 	display: block;
-	line-height: 0
+	line-height: 0;
 }
 
 .acf-hl:after,
 .acf-bl:after,
 .acf-cf:after {
-	clear: both
+	clear: both;
 }
 
-.acf-bl {
-	padding: 0;
+.acf-field-settings-list {
+	display: block;
+	position: relative;
 	margin: 0;
+	padding: 0;
 	list-style: none;
-	display: block;
-	position: relative
-}
 
-.acf-bl>li {
-	display: block;
-	margin: 0;
-	padding: 0;
-	float: none
-}
-
-.acf-hidden {
-	display: none !important
-}
-
-.acf-empty {
-	display: table-cell !important
-}
-
-.acf-empty * {
-	display: none !important
-}
-
-.acf-fl {
-	float: left
-}
-
-.acf-fr {
-	float: right
-}
-
-.acf-fn {
-	float: none
-}
-
-.acf-al {
-	text-align: left
-}
-
-.acf-ar {
-	text-align: right
-}
-
-.acf-ac {
-	text-align: center
+	> li {
+		display: block;
+		margin: 0;
+		padding: 0;
+	}
 }
 
 .acf-loading,
@@ -107,7 +143,7 @@
 }
 
 .acf-required {
-	color: #f00
+	color: var( --acf-red, #ff0000 );
 }
 
 .acf-soh .acf-soh-target {
@@ -152,14 +188,14 @@
 }
 
 .acf-tooltip {
-	background: #2F353E;
-	border-radius: 5px;
-	color: #fff;
-	padding: 5px 10px;
 	position: absolute;
-	font-size: 12px;
-	line-height: 1.4em;
-	z-index: 900000
+	z-index: 900000;
+	padding: 0.25rem 0.5rem;
+	line-height: 1.6em;
+	font-size: 0.75rem;
+	border-radius: 5px;
+	background: var( --acf-near_black, #1e1e1e );
+	color: var( --acf-white, #ffffff );
 }
 
 .acf-tooltip:before {
@@ -228,7 +264,7 @@
 
 .acf-tooltip.-confirm a {
 	text-decoration: none;
-	color: #9ea3a8
+	color: var( --acf-pale-gray, #cccccc );
 }
 
 .acf-tooltip.-confirm a:hover {
@@ -236,7 +272,8 @@
 }
 
 .acf-tooltip.-confirm a[data-event="confirm"] {
-	color: #F55E4F
+	font-weight: 600;
+	color: var( --acf-red, #ff0000 );
 }
 
 .acf-overlay {
@@ -425,9 +462,8 @@
 }
 
 span.acf-icon {
-	color: #555d66;
-	border-color: #b5bcc2;
-	background-color: #fff
+	border-color: var( --acf-border-color--light, #c3c4c7 );
+	background-color: inherit;
 }
 
 a.acf-icon {
@@ -732,12 +768,26 @@ a.acf-icon.dark.-cancel:hover {
 }
 
 .acf-thead>li,
-.acf-tbody>li,
-.acf-tfoot>li {
+.acf-tbody>li {
 	box-sizing: border-box;
 	padding: 8px 12px;
 	font-size: 12px;
 	line-height: 14px
+}
+
+.acf-tfoot {
+	box-sizing: border-box;
+	padding: 0.75rem;
+
+	p {
+		&:first-of-type {
+			margin: 0;
+		}
+
+		&:last-of-type {
+			margin-bottom: 0;
+		}
+	}
 }
 
 .acf-thead {
@@ -747,8 +797,8 @@ a.acf-icon.dark.-cancel:hover {
 
 .acf-thead>li {
 	font-size: 14px;
-	line-height: 1.4;
-	font-weight: bold
+	line-height: 1.48;
+	font-weight: 600
 }
 
 .acf-admin-3-8 .acf-thead {

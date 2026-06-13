@@ -3,8 +3,8 @@
 if( ! class_exists('acf_field_gallery') ) :
 
 class acf_field_gallery extends acf_field {
-	
-	
+
+
 	/*
 	*  __construct
 	*
@@ -17,9 +17,9 @@ class acf_field_gallery extends acf_field {
 	*  @param	n/a
 	*  @return	n/a
 	*/
-	
+
 	function initialize() {
-		
+
 		// vars
 		$this->name = 'gallery';
 		$this->label = __("Gallery",'acf');
@@ -39,20 +39,20 @@ class acf_field_gallery extends acf_field {
 			'max_size'		=> 0,
 			'mime_types'	=> '',
 		);
-		
-		
+
+
 		// actions
 		add_action('wp_ajax_acf/fields/gallery/get_attachment',				array($this, 'ajax_get_attachment'));
 		add_action('wp_ajax_nopriv_acf/fields/gallery/get_attachment',		array($this, 'ajax_get_attachment'));
-		
+
 		add_action('wp_ajax_acf/fields/gallery/update_attachment',			array($this, 'ajax_update_attachment'));
 		add_action('wp_ajax_nopriv_acf/fields/gallery/update_attachment',	array($this, 'ajax_update_attachment'));
-		
+
 		add_action('wp_ajax_acf/fields/gallery/get_sort_order',				array($this, 'ajax_get_sort_order'));
 		add_action('wp_ajax_nopriv_acf/fields/gallery/get_sort_order',		array($this, 'ajax_get_sort_order'));
-		
+
 	}
-	
+
 	/*
 	*  input_admin_enqueue_scripts
 	*
@@ -65,17 +65,17 @@ class acf_field_gallery extends acf_field {
 	*  @param	$post_id (int)
 	*  @return	$post_id (int)
 	*/
-	
+
 	function input_admin_enqueue_scripts() {
-		
+
 		// localize
 		acf_localize_text(array(
 		   	'Add Image to Gallery'		=> __('Add Image to Gallery', 'acf'),
 			'Maximum selection reached'	=> __('Maximum selection reached', 'acf'),
 	   	));
 	}
-	
-	
+
+
 	/*
 	*  ajax_get_attachment
 	*
@@ -88,40 +88,40 @@ class acf_field_gallery extends acf_field {
 	*  @param	$post_id (int)
 	*  @return	$post_id (int)
 	*/
-	
+
 	function ajax_get_attachment() {
-		
+
 		// Validate requrest.
 		if( !acf_verify_ajax() ) {
 			die();
 		}
-		
+
 		// Get args.
    		$args = acf_request_args(array(
 			'id'		=> 0,
 			'field_key'	=> '',
 		));
-		
+
 		// Cast args.
    		$args['id'] = (int) $args['id'];
-		
+
 		// Bail early if no id.
 		if( !$args['id'] ) {
 			die();
 		}
-		
+
 		// Load field.
 		$field = acf_get_field( $args['field_key'] );
 		if( !$field ) {
 			die();
 		}
-		
+
 		// Render.
 		$this->render_attachment( $args['id'], $field );
 		die;
 	}
-	
-	
+
+
 	/*
 	*  ajax_update_attachment
 	*
@@ -134,45 +134,45 @@ class acf_field_gallery extends acf_field {
 	*  @param	$post_id (int)
 	*  @return	$post_id (int)
 	*/
-	
+
 	function ajax_update_attachment() {
-		
+
 		// validate nonce
 		if( !wp_verify_nonce($_POST['nonce'], 'acf_nonce') ) {
-		
+
 			wp_send_json_error();
-			
+
 		}
-		
-		
+
+
 		// bail early if no attachments
 		if( empty($_POST['attachments']) ) {
-		
+
 			wp_send_json_error();
-			
+
 		}
-		
-		
+
+
 		// loop over attachments
 		foreach( $_POST['attachments'] as $id => $changes ) {
-			
+
 			if ( !current_user_can( 'edit_post', $id ) )
 				wp_send_json_error();
-				
+
 			$post = get_post( $id, ARRAY_A );
-		
+
 			if ( 'attachment' != $post['post_type'] )
 				wp_send_json_error();
-		
+
 			if ( isset( $changes['title'] ) )
 				$post['post_title'] = $changes['title'];
-		
+
 			if ( isset( $changes['caption'] ) )
 				$post['post_excerpt'] = $changes['caption'];
-		
+
 			if ( isset( $changes['description'] ) )
 				$post['post_content'] = $changes['description'];
-		
+
 			if ( isset( $changes['alt'] ) ) {
 				$alt = wp_unslash( $changes['alt'] );
 				if ( $alt != get_post_meta( $id, '_wp_attachment_image_alt', true ) ) {
@@ -180,31 +180,31 @@ class acf_field_gallery extends acf_field {
 					update_post_meta( $id, '_wp_attachment_image_alt', wp_slash( $alt ) );
 				}
 			}
-			
-			
+
+
 			// save post
 			wp_update_post( $post );
-			
-			
+
+
 			/** This filter is documented in wp-admin/includes/media.php */
 			// - seems off to run this filter AFTER the update_post function, but there is a reason
 			// - when placed BEFORE, an empty post_title will be populated by WP
 			// - this filter will still allow 3rd party to save extra image data!
 			$post = apply_filters( 'attachment_fields_to_save', $post, $changes );
-			
-			
+
+
 			// save meta
 			acf_save_post( $id );
-						
+
 		}
-		
-		
+
+
 		// return
 		wp_send_json_success();
-			
+
 	}
-	
-	
+
+
 	/*
 	*  ajax_get_sort_order
 	*
@@ -217,9 +217,9 @@ class acf_field_gallery extends acf_field {
 	*  @param	$post_id (int)
 	*  @return	$post_id (int)
 	*/
-	
+
 	function ajax_get_sort_order() {
-		
+
 		// vars
 		$r = array();
 		$order = 'DESC';
@@ -229,33 +229,33 @@ class acf_field_gallery extends acf_field {
 			'field_key'		=> '',
 			'nonce'			=> '',
 		));
-		
-		
+
+
 		// validate
 		if( ! wp_verify_nonce($args['nonce'], 'acf_nonce') ) {
-		
+
 			wp_send_json_error();
-			
+
 		}
-		
-		
+
+
 		// reverse
 		if( $args['sort'] == 'reverse' ) {
-		
+
 			$ids = array_reverse($args['ids']);
-			
+
 			wp_send_json_success($ids);
-			
+
 		}
-		
-		
+
+
 		if( $args['sort'] == 'title' ) {
-			
+
 			$order = 'ASC';
-			
+
 		}
-		
-		
+
+
 		// find attachments (DISTINCT POSTS)
 		$ids = get_posts(array(
 			'post_type'		=> 'attachment',
@@ -264,23 +264,23 @@ class acf_field_gallery extends acf_field {
 			'post__in'		=> $args['ids'],
 			'order'			=> $order,
 			'orderby'		=> $args['sort'],
-			'fields'		=> 'ids'		
+			'fields'		=> 'ids'
 		));
-		
-		
+
+
 		// success
 		if( !empty($ids) ) {
-		
+
 			wp_send_json_success($ids);
-			
+
 		}
-		
-		
+
+
 		// failure
 		wp_send_json_error();
-		
+
 	}
-	
+
 	/**
 	 * Renders the sidebar HTML shown when selecting an attachmemnt.
 	 *
@@ -290,40 +290,40 @@ class acf_field_gallery extends acf_field {
 	 * @param	int $id The attachment ID.
 	 * @param	array $field The field array.
 	 * @return	void
-	 */	
+	 */
 	function render_attachment( $id, $field ) {
 		// Load attachmenet data.
 		$attachment = wp_prepare_attachment_for_js( $id );
 		$compat = get_compat_media_markup( $id );
-		
+
 		// Get attachment thumbnail (video).
 		if( isset($attachment['thumb']['src']) ) {
 			$thumb = $attachment['thumb']['src'];
-		
+
 		// Look for thumbnail size (image).
 		} elseif( isset($attachment['sizes']['thumbnail']['url']) ) {
 			$thumb = $attachment['sizes']['thumbnail']['url'];
-		
+
 		// Use url for svg.
 		} elseif( $attachment['type'] === 'image' ) {
 			$thumb = $attachment['url'];
-		
+
 		// Default to icon.
 		} else {
-			$thumb = wp_mime_type_icon( $id );	
+			$thumb = wp_mime_type_icon( $id );
 		}
-		
+
 		// Get attachment dimensions / time / size.
 		$dimensions = '';
 		if( $attachment['type'] === 'audio' ) {
-			$dimensions = __('Length', 'acf') . ': ' . $attachment['fileLength'];	
+			$dimensions = __('Length', 'acf') . ': ' . $attachment['fileLength'];
 		} elseif( !empty($attachment['width']) ) {
 			$dimensions = $attachment['width'] . ' x ' . $attachment['height'];
 		}
 		if( !empty($attachment['filesizeHumanReadable']) ) {
 			$dimensions .=  ' (' . $attachment['filesizeHumanReadable'] . ')';
 		}
-		
+
 		?>
 		<div class="acf-gallery-side-info">
 			<img src="<?php echo esc_attr($thumb); ?>" alt="<?php echo esc_attr($attachment['alt']); ?>" />
@@ -337,11 +337,11 @@ class acf_field_gallery extends acf_field {
 		</div>
 		<table class="form-table">
 			<tbody>
-				<?php 
-				
+				<?php
+
 				// Render fields.
 				$prefix = 'attachments[' . $id . ']';
-				
+
 				acf_render_field_wrap(array(
 					//'key'		=> "{$field['key']}-title",
 					'name'		=> 'title',
@@ -350,7 +350,7 @@ class acf_field_gallery extends acf_field {
 					'label'		=> __('Title', 'acf'),
 					'value'		=> $attachment['title']
 				), 'tr');
-				
+
 				acf_render_field_wrap(array(
 					//'key'		=> "{$field['key']}-caption",
 					'name'		=> 'caption',
@@ -359,7 +359,7 @@ class acf_field_gallery extends acf_field {
 					'label'		=> __('Caption', 'acf'),
 					'value'		=> $attachment['caption']
 				), 'tr');
-				
+
 				acf_render_field_wrap(array(
 					//'key'		=> "{$field['key']}-alt",
 					'name'		=> 'alt',
@@ -368,7 +368,7 @@ class acf_field_gallery extends acf_field {
 					'label'		=> __('Alt Text', 'acf'),
 					'value'		=> $attachment['alt']
 				), 'tr');
-				
+
 				acf_render_field_wrap(array(
 					//'key'		=> "{$field['key']}-description",
 					'name'		=> 'description',
@@ -377,16 +377,16 @@ class acf_field_gallery extends acf_field {
 					'label'		=> __('Description', 'acf'),
 					'value'		=> $attachment['description']
 				), 'tr');
-				
+
 				?>
 			</tbody>
 		</table>
 		<?php
-		
+
 		// Display compat fields.
 		echo $compat['item'];
 	}
-	
+
 	/*
 	*  render_field()
 	*
@@ -398,12 +398,12 @@ class acf_field_gallery extends acf_field {
 	*  @since	3.6
 	*  @date	23/01/13
 	*/
-	
+
 	function render_field( $field ) {
-		
+
 		// Enqueue uploader assets.
 		acf_enqueue_uploader();
-		
+
 		// Control attributes.
 		$attrs = array(
 			'id'				=> $field['id'],
@@ -416,19 +416,19 @@ class acf_field_gallery extends acf_field {
 			'data-insert'		=> $field['insert'],
 			'data-columns'		=> 4
 		);
-		
+
 		// Set gallery height with deafult of 400px and minimum of 200px.
 		$height = acf_get_user_setting('gallery_height', 400);
 		$height = max( $height, 200 );
 		$attrs['style'] = "height:{$height}px";
-		
+
 		// Load attachments.
 		$attachments = array();
 		if( $field['value'] ) {
-			
+
 			// Clean value into an array of IDs.
 			$attachment_ids = array_map('intval', acf_array($field['value']));
-			
+
 			// Find posts in database (ensures all results are real).
 			$posts = acf_get_posts(array(
 				'post_type'					=> 'attachment',
@@ -436,30 +436,30 @@ class acf_field_gallery extends acf_field {
 				'update_post_meta_cache' 	=> true,
 				'update_post_term_cache' 	=> false
 			));
-			
+
 			// Load attatchment data for each post.
 			$attachments = array_map('acf_get_attachment', $posts);
 		}
-		
+
 		?>
 <div <?php acf_esc_attr_e($attrs); ?>>
 	<input type="hidden" name="<?php echo esc_attr($field['name']); ?>" value="" />
 	<div class="acf-gallery-main">
 		<div class="acf-gallery-attachments">
 			<?php if( $attachments ): ?>
-				<?php foreach( $attachments as $i => $attachment ): 
-					
+				<?php foreach( $attachments as $i => $attachment ):
+
 					// Vars
 					$a_id = $attachment['ID'];
 					$a_title = $attachment['title'];
 					$a_type = $attachment['type'];
 					$a_filename = $attachment['filename'];
 					$a_class = "acf-gallery-attachment -{$a_type}";
-					
+
 					// Get thumbnail.
 					$a_thumbnail = acf_get_post_thumbnail($a_id, $field['preview_size']);
 					$a_class .= ($a_thumbnail['type'] === 'icon') ? ' -icon' : '';
-					
+
 					?>
 					<div class="<?php echo esc_attr($a_class); ?>" data-id="<?php echo esc_attr($a_id); ?>">
 						<input type="hidden" name="<?php echo esc_attr($field['name']); ?>[]" value="<?php echo esc_attr($a_id); ?>" />
@@ -468,7 +468,7 @@ class acf_field_gallery extends acf_field {
 								<img src="<?php echo esc_url($a_thumbnail['url']); ?>" alt="" />
 							</div>
 							<?php if( $a_type !== 'image' ): ?>
-								<div class="filename"><?php echo acf_get_truncated( $a_filename, 30 ); ?></div>	
+								<div class="filename"><?php echo acf_get_truncated( $a_filename, 30 ); ?></div>
 							<?php endif; ?>
 						</div>
 						<div class="actions">
@@ -483,7 +483,7 @@ class acf_field_gallery extends acf_field {
 				<li>
 					<a href="#" class="acf-button button button-primary acf-gallery-add"><?php _e('Add to gallery', 'acf'); ?></a>
 				</li>
-				<li class="acf-fr">
+				<li>
 					<select class="acf-gallery-sort">
 						<option value=""><?php _e('Bulk actions', 'acf'); ?></option>
 						<option value="date"><?php _e('Sort by date uploaded', 'acf'); ?></option>
@@ -503,19 +503,19 @@ class acf_field_gallery extends acf_field {
 					<li>
 						<a href="#" class="acf-button button acf-gallery-close"><?php _e('Close', 'acf'); ?></a>
 					</li>
-					<li class="acf-fr">
+					<li>
 						<a class="acf-button button button-primary acf-gallery-update" href="#"><?php _e('Update', 'acf'); ?></a>
 					</li>
 				</ul>
 			</div>
-		</div>	
+		</div>
 	</div>
 </div>
 		<?php
-		
+
 	}
-	
-	
+
+
 	/*
 	*  render_field_settings()
 	*
@@ -528,9 +528,9 @@ class acf_field_gallery extends acf_field {
 	*
 	*  @param	$field	- an array holding all the field's data
 	*/
-	
+
 	function render_field_settings( $field ) {
-		
+
 		// clear numeric settings
 		$clear = array(
 			'min',
@@ -542,13 +542,13 @@ class acf_field_gallery extends acf_field {
 			'max_height',
 			'max_size'
 		);
-		
+
 		foreach( $clear as $k ) {
-			
+
 			if( empty($field[$k]) ) $field[$k] = '';
-			
+
 		}
-		
+
 		// return_format
 		acf_render_field_setting( $field, array(
 			'label'			=> __('Return Format','acf'),
@@ -562,7 +562,7 @@ class acf_field_gallery extends acf_field {
 				'id'			=> __("Image ID",'acf')
 			)
 		));
-		
+
 		// preview_size
 		acf_render_field_setting( $field, array(
 			'label'			=> __('Preview Size','acf'),
@@ -571,7 +571,7 @@ class acf_field_gallery extends acf_field {
 			'name'			=> 'preview_size',
 			'choices'		=> acf_get_image_sizes()
 		));
-		
+
 		// insert
 		acf_render_field_setting( $field, array(
 			'label'			=> __('Insert','acf'),
@@ -583,7 +583,7 @@ class acf_field_gallery extends acf_field {
 				'prepend'		=> __('Prepend to the beginning', 'acf')
 			)
 		));
-		
+
 		// library
 		acf_render_field_setting( $field, array(
 			'label'			=> __('Library','acf'),
@@ -596,7 +596,7 @@ class acf_field_gallery extends acf_field {
 				'uploadedTo'	=> __('Uploaded to post', 'acf')
 			)
 		));
-		
+
 		// min
 		acf_render_field_setting( $field, array(
 			'label'			=> __('Minimum Selection','acf'),
@@ -604,7 +604,7 @@ class acf_field_gallery extends acf_field {
 			'type'			=> 'number',
 			'name'			=> 'min'
 		));
-		
+
 		// max
 		acf_render_field_setting( $field, array(
 			'label'			=> __('Maximum Selection','acf'),
@@ -612,7 +612,7 @@ class acf_field_gallery extends acf_field {
 			'type'			=> 'number',
 			'name'			=> 'max'
 		));
-		
+
 		// min
 		acf_render_field_setting( $field, array(
 			'label'			=> __('Minimum','acf'),
@@ -622,7 +622,7 @@ class acf_field_gallery extends acf_field {
 			'prepend'		=> __('Width', 'acf'),
 			'append'		=> 'px',
 		));
-		
+
 		acf_render_field_setting( $field, array(
 			'label'			=> '',
 			'type'			=> 'text',
@@ -631,7 +631,7 @@ class acf_field_gallery extends acf_field {
 			'append'		=> 'px',
 			'_append' 		=> 'min_width'
 		));
-		
+
 		acf_render_field_setting( $field, array(
 			'label'			=> '',
 			'type'			=> 'text',
@@ -639,9 +639,9 @@ class acf_field_gallery extends acf_field {
 			'prepend'		=> __('File size', 'acf'),
 			'append'		=> 'MB',
 			'_append' 		=> 'min_width'
-		));	
-		
-		
+		));
+
+
 		// max
 		acf_render_field_setting( $field, array(
 			'label'			=> __('Maximum','acf'),
@@ -651,7 +651,7 @@ class acf_field_gallery extends acf_field {
 			'prepend'		=> __('Width', 'acf'),
 			'append'		=> 'px',
 		));
-		
+
 		acf_render_field_setting( $field, array(
 			'label'			=> '',
 			'type'			=> 'text',
@@ -660,7 +660,7 @@ class acf_field_gallery extends acf_field {
 			'append'		=> 'px',
 			'_append' 		=> 'max_width'
 		));
-		
+
 		acf_render_field_setting( $field, array(
 			'label'			=> '',
 			'type'			=> 'text',
@@ -668,8 +668,8 @@ class acf_field_gallery extends acf_field {
 			'prepend'		=> __('File size', 'acf'),
 			'append'		=> 'MB',
 			'_append' 		=> 'max_width'
-		));	
-		
+		));
+
 		// allowed type
 		acf_render_field_setting( $field, array(
 			'label'			=> __('Allowed file types','acf'),
@@ -678,8 +678,8 @@ class acf_field_gallery extends acf_field {
 			'name'			=> 'mime_types',
 		));
 	}
-	
-	
+
+
 	/*
 	*  format_value()
 	*
@@ -695,17 +695,17 @@ class acf_field_gallery extends acf_field {
 	*
 	*  @return	$value (mixed) the modified value
 	*/
-	
+
 	function format_value( $value, $post_id, $field ) {
-		
+
 		// Bail early if no value.
 		if( !$value ) {
 			return false;
 		}
-		
+
 		// Clean value into an array of IDs.
 		$attachment_ids = array_map('intval', acf_array($value));
-		
+
 		// Find posts in database (ensures all results are real).
 		$posts = acf_get_posts(array(
 			'post_type'					=> 'attachment',
@@ -713,42 +713,42 @@ class acf_field_gallery extends acf_field {
 			'update_post_meta_cache' 	=> true,
 			'update_post_term_cache' 	=> false
 		));
-		
+
 		// Bail early if no posts found.
 		if( !$posts ) {
 			return false;
 		}
-		
+
 		// Format values using field settings.
 		$value = array();
 		foreach( $posts as $post ) {
-			
+
 			// Return object.
 			if( $field['return_format'] == 'object' ) {
 				$item = $post;
-				
-			// Return array.		
+
+			// Return array.
 			} elseif( $field['return_format'] == 'array' ) {
 				$item = acf_get_attachment( $post );
-				
-			// Return URL.		
+
+			// Return URL.
 			} elseif( $field['return_format'] == 'url' ) {
 				$item = wp_get_attachment_url( $post->ID );
-			
-			// Return ID.		
+
+			// Return ID.
 			} else {
 				$item = $post->ID;
 			}
-			
+
 			// Append item.
 			$value[] = $item;
 		}
-		
+
 		// Return.
 		return $value;
 	}
-	
-	
+
+
 	/*
 	*  validate_value
 	*
@@ -761,29 +761,29 @@ class acf_field_gallery extends acf_field {
 	*  @param	$post_id (int)
 	*  @return	$post_id (int)
 	*/
-	
+
 	function validate_value( $valid, $value, $field, $input ){
-		
+
 		if( empty($value) || !is_array($value) ) {
-		
+
 			$value = array();
-			
+
 		}
-		
-		
+
+
 		if( count($value) < $field['min'] ) {
-		
+
 			$valid = _n( '%s requires at least %s selection', '%s requires at least %s selections', $field['min'], 'acf' );
 			$valid = sprintf( $valid, $field['label'], $field['min'] );
-			
+
 		}
-		
-				
+
+
 		return $valid;
-		
+
 	}
-	
-	
+
+
 	/*
 	*  update_value()
 	*
@@ -799,27 +799,27 @@ class acf_field_gallery extends acf_field {
 	*
 	*  @return	$value - the modified value
 	*/
-	
+
 	function update_value( $value, $post_id, $field ) {
-		
+
 		// Bail early if no value.
 		if( empty($value) ) {
 			return $value;
 		}
-		
+
 		// Convert to array.
 		$value = acf_array( $value );
-		
+
 		// Format array of values.
 		// - ensure each value is an id.
 		// - Parse each id as string for SQL LIKE queries.
 		$value = array_map('acf_idval', $value);
 		$value = array_map('strval', $value);
-		
+
 		// Return value.
 		return $value;
-		
-	}	
+
+	}
 }
 
 

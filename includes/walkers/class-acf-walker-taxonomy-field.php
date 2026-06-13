@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * CMS functions
  *
@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 class ACF_Taxonomy_Field_Walker extends Walker {
-	
+
 	/**
 	 * Tree type
 	 *
@@ -23,7 +23,7 @@ class ACF_Taxonomy_Field_Walker extends Walker {
 	 * @var    string
 	 */
 	public $tree_type = 'category';
-	
+
 	/**
 	 * DB fields
 	 *
@@ -35,7 +35,7 @@ class ACF_Taxonomy_Field_Walker extends Walker {
 		'parent' => 'parent',
 		'id'     => 'term_id'
 	];
-	
+
 	/**
 	 * The field being rendered
 	 *
@@ -44,7 +44,7 @@ class ACF_Taxonomy_Field_Walker extends Walker {
 	 * @var    array
 	 */
 	public $field;
-	
+
 	/**
 	 * Constructor method
 	 *
@@ -56,7 +56,7 @@ class ACF_Taxonomy_Field_Walker extends Walker {
 	public function __construct( $field ) {
 		$this->field = $field;
 	}
-	
+
 	/**
 	 * Start level
 	 *
@@ -74,9 +74,9 @@ class ACF_Taxonomy_Field_Walker extends Walker {
 	 */
 	public function start_lvl( &$output, $depth = 0, $args = [] ) {
 		$indent  = str_repeat( "\t", $depth );
-		$output .= "$indent<ul class='children acf-bl'>\n";
+		$output .= "$indent<ul class='children acf-field-settings-list'>\n";
 	}
-	
+
 	/**
 	 * End level
 	 *
@@ -95,7 +95,7 @@ class ACF_Taxonomy_Field_Walker extends Walker {
 		$indent  = str_repeat( "\t", $depth );
 		$output .= "$indent</ul>\n";
 	}
-	
+
 	/**
 	 * Start the element output
 	 *
@@ -113,9 +113,9 @@ class ACF_Taxonomy_Field_Walker extends Walker {
 	 * @return void
 	 */
 	public function start_el( &$output, $term, $depth = 0, $args = [], $id = 0 ) {
-		
+
 		$is_selected = in_array( $term->term_id, $this->field['value'] );
-		
+
 		// Generate array of checkbox input attributes.
 		$input_attrs = [
 			'type'	=> $this->field['field_type'],
@@ -125,14 +125,14 @@ class ACF_Taxonomy_Field_Walker extends Walker {
 		if ( $is_selected ) {
 			$input_attrs['checked'] = true;
 		}
-		
-		$output .= "\n" . '<li data-id="' . esc_attr( $term->term_id ) . '">' . 
-			'<label' . ( $is_selected ? ' class="selected"' : '' ) . '>' . 
-				'<input ' . acf_esc_attrs( $input_attrs ) . '/> ' . 
+
+		$output .= "\n" . '<li data-id="' . esc_attr( $term->term_id ) . '">' .
+			'<label' . ( $is_selected ? ' class="selected"' : '' ) . '>' .
+				'<input ' . acf_esc_attrs( $input_attrs ) . '/> ' .
 				'<span>' . acf_esc_html( $term->name ) . '</span>'.
 			'</label>';
 	}
-	
+
 	/**
 	 * Ends the element output
 	 *

@@ -53,7 +53,7 @@ class acfe_pro_field_checkbox{
 
 
         // append to class
-        $ul['class'] .= ' ' . ($field['layout'] == 'horizontal' ? 'acf-hl' : 'acf-bl');
+        $ul['class'] .= ' ' . ($field['layout'] == 'horizontal' ? 'acf-hl' : 'acf-field-settings-list');
         $ul['class'] .= ' ' . $field['class'];
 
 
