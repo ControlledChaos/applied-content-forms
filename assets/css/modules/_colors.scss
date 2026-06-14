@@ -1,0 +1,116 @@
+///
+/// ACF root styles
+///
+/// CSS variables defined for use in other stylesheets.
+///
+
+// General colors.
+$white: #ffffff !default;
+$off_white: #f5f5f5 !default;
+$black: #000000 !default;
+$near_black: #1e1e1e !default;
+$dark_gray: #333333 !default;
+$medium_gray: #555555 !default;
+$light_gray: #888888 !default;
+$pale_gray: #cccccc !default;
+$red: #ff0000 !default;
+$orange: #ee6600 !default;
+$yellow: #f8ce30 !default;
+$green: #4b9960 !default;
+$blue: #0000ff !default;
+$violet:  #551a8b !default;
+$error: $red !default;
+$notify: $orange !default;
+$warning: $yellow !default;
+$success: $green !default;
+
+:root {
+	--acf-white: #{$white};
+	--acf-off_white: #{$off_white};
+	--acf-black: #{$black};
+	--acf-near_black: #{$near_black};
+	--acf-dark_gray: #{$dark_gray};
+	--acf-medium_gray: #{$medium_gray};
+	--acf-light_gray: #{$light_gray};
+	--acf-pale_gray: #{$pale_gray};
+	--acf-red: #{$red};
+	--acf-orange: #{$orange};
+	--acf-yellow: #{$yellow};
+	--acf-green: #{$green};
+	--acf-blue: #{$blue};
+	--acf-violet: #{$violet};
+	--acf-error: #{$error};
+	--acf-notify: #{$notify};
+	--acf-warning: #{$warning};
+	--acf-success: #{$success};
+
+	--acf-border-color--light: #c3c4c7;
+}
+
+// Native CMS user color schemes.
+.admin-color-fresh {}
+.admin-color-modern {
+	--acf-badge--bg-color: #3858e9;
+}
+.admin-color-light {
+	--acf-badge--bg-color: #d64e07;
+}
+.admin-color-blue {
+	--acf-badge--bg-color: #e1a948;
+}
+.admin-color-coffee {
+	--acf-badge--bg-color: #9ea476;
+}
+.admin-color-ectoplasm {
+	--acf-badge--bg-color: #d46f15;
+}
+.admin-color-midnight {
+	--acf-badge--bg-color: #69a8bb;
+}
+.admin-color-ocean {
+	--acf-badge--bg-color: #aa9d88;
+}
+.admin-color-sunrise {
+	--acf-badge--bg-color: #ccaf0b;
+}
+
+// Admin Color Schemes plugin color schemes.
+.admin-color-80s-kid {
+	--acf-badge--bg-color: #28b811;
+}
+.admin-color-adderley {
+	--acf-badge--bg-color: #bde7f0;
+	--acf-badge--text-color: #216bce;
+}
+.admin-color-aubergine {
+	--acf-badge--bg-color: #ba5b32;
+}
+.admin-color-contrast-blue {
+	--acf-badge--bg-color: #9d2f4d;
+}
+.admin-color-cruise {
+	--acf-badge--bg-color: #cda200;
+}
+.admin-color-flat {
+	--acf-badge--bg-color: #d35401;
+}
+.admin-color-kirk {
+	--acf-badge--bg-color: #bd3854;
+	--acf-badge--text-color: #fefcf7;
+}
+.admin-color-lawn {
+	--acf-badge--bg-color: #456a7f;
+}
+.admin-color-modern-evergreen {
+	--acf-badge--bg-color: #1e1e1e;
+}
+.admin-color-primary {
+	--acf-badge--bg-color: #e46713;
+}
+.admin-color-seashore {
+	--acf-badge--bg-color: #73340f;
+	--acf-badge--text-color: #f8f6f1;
+}
+.admin-color-vinyard {
+	--acf-badge--bg-color: #ba8752;
+}

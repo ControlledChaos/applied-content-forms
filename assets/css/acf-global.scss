@@ -2,12 +2,9 @@
 /// ACF global styles
 ///
 
-@import 'modules/_root';
+@import 'modules/_colors';
 
-///
-/// The badge class is used for general notification.
-/// Colors are for native CMS user color schemes as
-/// well as for the Admin Color Schemes plugin.
+// The badge class is used for general notification.
 .acf-badge {
 	display: inline-block;
 	width: 1.125rem;
@@ -21,73 +18,6 @@
 	font-size: 0.625rem;
 	line-height: 1.125rem;
 	text-align: center;
-}
-
-// Native CMS user color schemes.
-.admin-color-modern {
-	--acf-badge--bg-color: #3858e9;
-}
-.admin-color-light {
-	--acf-badge--bg-color: #d64e07;
-}
-.admin-color-blue {
-	--acf-badge--bg-color: #e1a948;
-}
-.admin-color-coffee {
-	--acf-badge--bg-color: #9ea476;
-}
-.admin-color-ectoplasm {
-	--acf-badge--bg-color: #d46f15;
-}
-.admin-color-midnight {
-	--acf-badge--bg-color: #69a8bb;
-}
-.admin-color-ocean {
-	--acf-badge--bg-color: #aa9d88;
-}
-.admin-color-sunrise {
-	--acf-badge--bg-color: #ccaf0b;
-}
-
-// Admin Color Schemes plugin color schemes.
-.admin-color-80s-kid {
-	--acf-badge--bg-color: #28b811;
-}
-.admin-color-adderley {
-	--acf-badge--bg-color: #bde7f0;
-	--acf-badge--text-color: #216bce;
-}
-.admin-color-aubergine {
-	--acf-badge--bg-color: #ba5b32;
-}
-.admin-color-contrast-blue {
-	--acf-badge--bg-color: #9d2f4d;
-}
-.admin-color-cruise {
-	--acf-badge--bg-color: #cda200;
-}
-.admin-color-flat {
-	--acf-badge--bg-color: #d35401;
-}
-.admin-color-kirk {
-	--acf-badge--bg-color: #bd3854;
-	--acf-badge--text-color: #fefcf7;
-}
-.admin-color-lawn {
-	--acf-badge--bg-color: #456a7f;
-}
-.admin-color-modern-evergreen {
-	--acf-badge--bg-color: #1e1e1e;
-}
-.admin-color-primary {
-	--acf-badge--bg-color: #e46713;
-}
-.admin-color-seashore {
-	--acf-badge--bg-color: #73340f;
-	--acf-badge--text-color: #f8f6f1;
-}
-.admin-color-vinyard {
-	--acf-badge--bg-color: #ba8752;
 }
 
 .acf-df {
