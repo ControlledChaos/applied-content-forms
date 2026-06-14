@@ -302,7 +302,7 @@ final class ACF {
 
 		acf_include( 'includes/fields.php' );
 		acf_include( 'includes/locations.php' );
-		acf_include( 'includes/class-assets.php' );
+		acf_include( 'includes/class-acf-assets.php' );
 		acf_include( 'includes/compatibility.php' );
 		acf_include( 'includes/deprecated.php' );
 		acf_include( 'includes/l10n.php' );
@@ -395,6 +395,9 @@ final class ACF {
 
 		// Include 3rd party compatibility.
 		acf_include( 'includes/third-party.php' );
+		acf_include( 'extend/includes/hooks.php' );
+		// acf_include( 'extend/includes/admin/admin.php' );
+		acf_include( 'extend/includes/admin/plugins.php' );
 
 		// Include WPML support.
 		if ( defined( 'ICL_SITEPRESS_VERSION' ) ) {

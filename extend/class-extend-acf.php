@@ -121,11 +121,6 @@ final class Extend_ACF {
 	public function init() {
 
 		acf_include( 'extend/includes/class-extend-assets.php' );
-		acf_include( 'extend/includes/hooks.php' );
-
-		acf_include( 'extend/includes/admin/admin.php' );
-		acf_include( 'extend/includes/admin/plugins.php' );
-
 
 		acf_include( 'extend/includes/fields/field-clone.php' );
 		acf_include( 'extend/includes/fields/field-file.php' );
