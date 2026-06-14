@@ -33,7 +33,7 @@ class acfe_field_checkbox{
 
         if(acf_maybe_get($wrapper, 'data-setting') !== 'radio' && acf_maybe_get($wrapper, 'data-setting') !== 'checkbox') return $field;
 
-        $field['instructions'] .= '<br/><br/>You may use "## Title" to create a group of options.';
+        $field['instructions'] .= '<br/><br/>You may use <code style="white-space: nowrap">## $title</code> on a new line to create a group of options.';
 
         return $field;
 
