@@ -415,6 +415,7 @@ final class ACF {
 		acf_include( 'includes/fields/class-acf-field-oembed.php' );
 		acf_include( 'includes/fields/class-acf-field-select.php' );
 		acf_include( 'includes/fields/class-acf-field-checkbox.php' );
+		acf_include( 'extend/includes/fields/field-checkbox.php' );
 		acf_include( 'includes/fields/class-acf-field-radio.php' );
 		acf_include( 'includes/fields/class-acf-field-button-group.php' );
 		acf_include( 'includes/fields/class-acf-field-true_false.php' );
