@@ -222,4 +222,4 @@ class acfe_field_group_hide_on_screen {
 		}
 	}
 }
-new acfe_field_group_hide_on_screen();
+acf_new_instance( 'acfe_field_group_hide_on_screen' );

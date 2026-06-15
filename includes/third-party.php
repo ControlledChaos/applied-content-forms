@@ -155,4 +155,4 @@ class acf_third_party {
 		wp_enqueue_style( 'acf-dark', acf_get_url( 'assets/css/acf-dark.css' ), [], ACF_VERSION );
 	}
 }
-new acf_third_party();
+acf_new_instance( 'acf_third_party' );

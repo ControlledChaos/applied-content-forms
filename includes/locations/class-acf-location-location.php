@@ -173,7 +173,6 @@ class acfe_location extends ACF_Location {
     }
 
 }
-
-new acfe_location();
+acf_new_instance( 'acfe_location' );
 
 endif;

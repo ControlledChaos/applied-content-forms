@@ -225,7 +225,6 @@ class acfe_field_clone{
     }
 
 }
-
-new acfe_field_clone();
+acf_new_instance( 'acfe_field_clone' );
 
 endif;

@@ -319,7 +319,6 @@ class acfe_pro_global_field_condition{
     }
 
 }
-
-new acfe_pro_global_field_condition();
+acf_new_instance( 'acfe_pro_global_field_condition' );
 
 endif;

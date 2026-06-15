@@ -6,145 +6,145 @@ if(!defined('ABSPATH'))
 if(!class_exists('acfe_form_email')):
 
 class acfe_form_email{
-    
+
     function __construct(){
-    
+
         /*
          * Helpers
          */
         $helpers = acf_get_instance('acfe_dynamic_forms_helpers');
-    
+
         /*
          * Action
          */
         add_filter('acfe/form/actions',                                     array($this, 'add_action'));
         add_action('acfe/form/make/email',                                  array($this, 'make'), 10, 3);
         add_action('acfe/form/submit/email',                                array($this, 'submit'), 10, 3);
-        
+
         /*
          * Admin
          */
         add_filter('acf/prepare_field/name=acfe_form_email_file',           array($helpers, 'map_fields_deep'));
-        
+
     }
-    
+
     function make($form, $current_post_id, $action){
-        
+
         // Form
         $form_name = acf_maybe_get($form, 'name');
         $form_id = acf_maybe_get($form, 'ID');
-    
+
         // Prepare
         $prepare = true;
         $prepare = apply_filters('acfe/form/prepare/email',                          $prepare, $form, $current_post_id, $action);
         $prepare = apply_filters('acfe/form/prepare/email/form=' . $form_name,       $prepare, $form, $current_post_id, $action);
-    
+
         if(!empty($action))
             $prepare = apply_filters('acfe/form/prepare/email/action=' . $action,    $prepare, $form, $current_post_id, $action);
-    
+
         if($prepare === false)
             return;
-        
+
         // Fields
         $from = get_sub_field('acfe_form_email_from');
         $from = acfe_form_map_field_value($from, $current_post_id, $form);
-    
+
         $reply_to = get_sub_field('acfe_form_email_reply_to');
         $reply_to = acfe_form_map_field_value($reply_to, $current_post_id, $form);
-        
+
         $to = get_sub_field('acfe_form_email_to');
         $to = acfe_form_map_field_value($to, $current_post_id, $form);
-        
+
         $cc = get_sub_field('acfe_form_email_cc');
         $cc = acfe_form_map_field_value($cc, $current_post_id, $form);
-        
+
         $bcc = get_sub_field('acfe_form_email_bcc');
         $bcc = acfe_form_map_field_value($bcc, $current_post_id, $form);
-        
+
         $subject = get_sub_field('acfe_form_email_subject');
         $subject = acfe_form_map_field_value($subject, $current_post_id, $form);
-        
+
         $content = get_sub_field('acfe_form_email_content');
         $content = acfe_form_map_field_value($content, $current_post_id, $form);
-        
+
         $headers = array();
         $attachments = array();
-        
+
         // Delete files
         $delete_files = array();
-        
+
         // Attachments: Dynamic
         if(have_rows('acfe_form_email_files')):
             while(have_rows('acfe_form_email_files')): the_row();
-            
+
                 $file_field_key = get_sub_field('acfe_form_email_file');
                 $file_delete = get_sub_field('acfe_form_email_file_delete');
                 $file_id = acfe_form_map_field_value($file_field_key, $current_post_id, $form);
-                
+
                 // Force Array
                 $field = acf_get_field($file_field_key);
                 $field['return_format'] = 'array';
-                
+
                 $files = acf_format_value($file_id, 0, $field);
                 $files = acf_get_array($files);
-                
+
                 // Single
                 if(acf_maybe_get($files, 'ID')){
                     $files = array($files);
                 }
-                
+
                 foreach($files as $file){
-    
+
                     if(!acf_maybe_get($file, 'ID'))
                         continue;
-    
+
                     $attachments[] = get_attached_file($file['ID']);
-    
+
                     if($file_delete){
-        
+
                         $delete_files[] = $file['ID'];
-        
+
                     }
-                    
+
                 }
-        
+
             endwhile;
         endif;
-        
+
         // Attachments: Static
         if(have_rows('acfe_form_email_files_static')):
             while(have_rows('acfe_form_email_files_static')): the_row();
-            
+
                 $file = get_sub_field('acfe_form_email_file_static');
-                
+
                 $attachments[] = get_attached_file($file);
-        
+
             endwhile;
         endif;
-        
+
         $headers[] = 'From: ' . $from;
-    
+
         if(!empty($reply_to)){
-        
+
             $headers[] = 'Reply-To: ' . $reply_to;
-        
+
         }
-        
+
         if(!empty($cc)){
-    
+
             $headers[] = 'Cc: ' . $cc;
-         
+
         }
-        
+
         if(!empty($bcc)){
-    
+
             $headers[] = 'Bcc: ' . $bcc;
-         
+
         }
-    
+
         $headers[] = 'Content-Type: text/html';
         $headers[] = 'charset=UTF-8';
-        
+
         $args = array(
             'from'          => $from,
             'to'            => $to,
@@ -156,29 +156,29 @@ class acfe_form_email{
             'headers'       => $headers,
             'attachments'   => $attachments,
         );
-        
+
         // Deprecated filters
         $args = apply_filters_deprecated('acfe/form/submit/email/args',                      array($args, $form, $action), '0.8.1', 'acfe/form/submit/email_args');
         $args = apply_filters_deprecated('acfe/form/submit/email/args/form=' . $form_name,   array($args, $form, $action), '0.8.1', 'acfe/form/submit/email_args/form=' . $form_name);
-        
+
         // Filters
         $args = apply_filters('acfe/form/submit/email_args',                      $args, $form, $action);
         $args = apply_filters('acfe/form/submit/email_args/form=' . $form_name,   $args, $form, $action);
-        
+
         if(!empty($action)){
-    
+
             // Deprecated filter
             $args = apply_filters_deprecated('acfe/form/submit/email/args/action=' . $action, array($args, $form, $action), '0.8.1', 'acfe/form/submit/email_args/action=' . $action);
-            
+
             // Filter
             $args = apply_filters('acfe/form/submit/email_args/action=' . $action, $args, $form, $action);
-            
+
         }
-        
+
         // Bail early if no args
         if($args === false)
             return;
-    
+
         // Check if Headers changed
         $rules = array(
             array(
@@ -202,94 +202,94 @@ class acfe_form_email{
                 'header_key'   => 'Bcc:',
             ),
         );
-    
+
         foreach($rules as $rule){
-        
+
             $new_check = acf_maybe_get($args, $rule['args_key']);
-        
+
             if(!empty($new_check) && $new_check !== $rule['value_old']){
-            
+
                 foreach($args['headers'] as &$header){
-                
+
                     if(stripos($header, $rule['header_key']) !== 0)
                         continue;
-                
+
                     $header = $rule['header_key'] . ' ' . $new_check;
                     break;
-                
+
                 }
-            
+
             }
-        
+
         }
-        
+
         wp_mail($args['to'], $args['subject'], $args['content'], $args['headers'], $args['attachments']);
-        
+
         do_action('acfe/form/submit/email',                     $args, $form, $action);
         do_action('acfe/form/submit/email/form=' . $form_name,  $args, $form, $action);
-        
+
         if(!empty($action))
             do_action('acfe/form/submit/email/action=' . $action, $args, $form, $action);
-        
+
         // Delete files
         if(!empty($delete_files)){
-            
+
             foreach($delete_files as $file_id){
-    
+
                 wp_delete_attachment($file_id, true);
-            
+
             }
-            
+
         }
-        
+
     }
-    
+
     function submit($args, $form, $action){
-    
+
         // Form name
         $form_name = acf_maybe_get($form, 'name');
-    
+
         // Deprecated
         $args = apply_filters_deprecated("acfe/form/query_var/email",                    array($args, $form, $action), '0.8.7.5', "acfe/form/output/email");
         $args = apply_filters_deprecated("acfe/form/query_var/email/form={$form_name}",  array($args, $form, $action), '0.8.7.5', "acfe/form/output/email/form={$form_name}");
         $args = apply_filters_deprecated("acfe/form/query_var/email/action={$action}",   array($args, $form, $action), '0.8.7.5', "acfe/form/output/email/action={$action}");
-    
+
         // Output
         $args = apply_filters("acfe/form/output/email",                                       $args, $form, $action);
         $args = apply_filters("acfe/form/output/email/form={$form_name}",                     $args, $form, $action);
         $args = apply_filters("acfe/form/output/email/action={$action}",                      $args, $form, $action);
-    
+
         // Old Query var
         $query_var = acfe_form_unique_action_id($form, 'email');
-    
+
         if(!empty($action))
             $query_var = $action;
-        
+
         set_query_var($query_var, $args);
         // ------------------------------------------------------------
-    
+
         // Action Output
         $actions = get_query_var('acfe_form_actions', array());
-        
+
         $actions['email'] = $args;
-        
+
         if(!empty($action))
             $actions[$action] = $args;
-        
+
         set_query_var('acfe_form_actions', $actions);
         // ------------------------------------------------------------
-        
+
     }
-    
+
     function add_action($layouts){
-        
+
         $layouts['layout_email'] = array(
             'key' => 'layout_email',
             'name' => 'email',
             'label' => 'Email action',
             'display' => 'row',
             'sub_fields' => array(
-    
+
                 /*
                  * Documentation
                  */
@@ -310,7 +310,7 @@ class acfe_form_email{
                         echo '<a href="https://www.acf-extended.com/features/modules/dynamic-forms/e-mail-action" target="_blank">' . __('Documentation', 'acfe') . '</a>';
                     }
                 ),
-        
+
                 /*
                  * Layout: Email Action
                  */
@@ -353,7 +353,7 @@ class acfe_form_email{
                     'append' => '',
                     'maxlength' => '',
                 ),
-        
+
                 /*
                  * Layout: Email Send
                  */
@@ -514,7 +514,7 @@ class acfe_form_email{
                     'media_upload' => 1,
                     'delay' => 0,
                 ),
-        
+
                 /*
                  * Layout: Email Attachments
                  */
@@ -648,13 +648,12 @@ class acfe_form_email{
             'min' => '',
             'max' => '',
         );
-        
-        return $layouts;
-        
-    }
-    
-}
 
-new acfe_form_email();
+        return $layouts;
+
+    }
+
+}
+acf_new_instance( 'acfe_form_email' );
 
 endif;

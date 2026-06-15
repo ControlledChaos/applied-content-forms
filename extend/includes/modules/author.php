@@ -163,8 +163,6 @@ class acfe_author{
     }
 
 }
-
-// initialize
-new acfe_author();
+acf_new_instance( 'acfe_author' );
 
 endif;

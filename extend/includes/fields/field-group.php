@@ -162,7 +162,6 @@ class acfe_field_group_field{
     }
 
 }
-
-new acfe_field_group_field();
+acf_new_instance( 'acfe_field_group_field' );
 
 endif;

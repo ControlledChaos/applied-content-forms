@@ -104,7 +104,6 @@ class acfe_instructions{
 	}
 
 }
-
-new acfe_instructions();
+acf_new_instance( 'acfe_instructions' );
 
 endif;

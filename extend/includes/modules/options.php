@@ -555,7 +555,6 @@ class acfe_module_options{
     }
 
 }
-
-new acfe_module_options();
+acf_new_instance( 'acfe_module_options' );
 
 endif;

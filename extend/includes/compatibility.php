@@ -741,7 +741,6 @@ class acfe_compatibility{
 
 
 }
-
-new acfe_compatibility();
+acf_new_instance( 'acfe_compatibility' );
 
 endif;

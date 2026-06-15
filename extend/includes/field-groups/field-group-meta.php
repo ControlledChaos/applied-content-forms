@@ -177,8 +177,6 @@ class acfe_field_group_meta{
     }
 
 }
-
-// initialize
-new acfe_field_group_meta();
+acf_new_instance( 'acfe_field_group_meta' );
 
 endif;

@@ -325,9 +325,6 @@ class acf_form_widget {
 
 	}
 }
-
-new acf_form_widget();
+acf_new_instance( 'acf_form_widget' );
 
 endif;
-
-?>

@@ -138,7 +138,6 @@ class acfe_pro_hooks{
 	}
 
 }
-
-new acfe_pro_hooks();
+acf_new_instance( 'acfe_pro_hooks' );
 
 endif;

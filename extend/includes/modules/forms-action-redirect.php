@@ -6,67 +6,67 @@ if(!defined('ABSPATH'))
 if(!class_exists('acfe_form_redirect')):
 
 class acfe_form_redirect{
-    
+
     function __construct(){
-    
+
         /*
          * Action
          */
         add_filter('acfe/form/actions',         array($this, 'add_action'));
         add_action('acfe/form/make/redirect',   array($this, 'make'), 10, 3);
-        
+
     }
-    
+
     function make($form, $current_post_id, $action){
-    
+
         // Form
         $form_name = acf_maybe_get($form, 'name');
         $form_id = acf_maybe_get($form, 'ID');
-    
+
         // Prepare
         $prepare = true;
         $prepare = apply_filters('acfe/form/prepare/redirect',                          $prepare, $form, $current_post_id, $action);
         $prepare = apply_filters('acfe/form/prepare/redirect/form=' . $form_name,       $prepare, $form, $current_post_id, $action);
-    
+
         if(!empty($action))
             $prepare = apply_filters('acfe/form/prepare/redirect/action=' . $action,    $prepare, $form, $current_post_id, $action);
-        
+
         if($prepare === false)
             return;
-    
+
         // Fields
         $url = get_sub_field('acfe_form_redirect_url');
         $url = acfe_form_map_field_value($url, $current_post_id, $form);
-    
+
         // Args
         $url = apply_filters('acfe/form/submit/redirect_url',                     $url, $form, $action);
         $url = apply_filters('acfe/form/submit/redirect_url/form=' . $form_name,  $url, $form, $action);
-    
+
         if(!empty($action))
             $url = apply_filters('acfe/form/submit/redirect_url/action=' . $action, $url, $form, $action);
-        
+
         // Sanitize
         $url = trim($url);
-        
+
         // Bail early if empty
         if(empty($url))
             return;
-        
+
         // Redirect
         wp_redirect($url);
         exit;
-        
+
     }
-    
+
     function add_action($layouts){
-        
+
         $layouts['layout_redirect'] = array(
             'key' => 'layout_redirect',
             'name' => 'redirect',
             'label' => 'Redirect action',
             'display' => 'row',
             'sub_fields' => array(
-    
+
                 /*
                  * Documentation
                  */
@@ -87,7 +87,7 @@ class acfe_form_redirect{
                         echo '<a href="https://www.acf-extended.com/features/modules/dynamic-forms/redirect-action" target="_blank">' . __('Documentation', 'acfe') . '</a>';
                     }
                 ),
-                
+
                 /*
                  * Layout: Redirect Action
                  */
@@ -151,18 +151,17 @@ class acfe_form_redirect{
                     'append' => '',
                     'maxlength' => '',
                 ),
-                
+
             ),
             'min' => '',
             'max' => '',
         );
-        
-        return $layouts;
-        
-    }
-    
-}
 
-new acfe_form_redirect();
+        return $layouts;
+
+    }
+
+}
+acf_new_instance( 'acfe_form_redirect' );
 
 endif;

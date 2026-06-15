@@ -809,9 +809,7 @@ class acf_admin_field_group {
 	}
 
 }
-
-// initialize
-new acf_admin_field_group();
+acf_new_instance( 'acf_admin_field_group' );
 
 endif;
 

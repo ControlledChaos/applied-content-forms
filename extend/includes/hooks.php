@@ -641,4 +641,4 @@ class acfe_hooks{
 		return $file;
 	}
 }
-new acfe_hooks();
+acf_new_instance( 'acfe_hooks' );

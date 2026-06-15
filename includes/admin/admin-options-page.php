@@ -391,7 +391,4 @@ if( typeof acf !== 'undefined' ) {
 
 
 }
-
-
-// initialize
-new acf_admin_options_page();
+acf_new_instance( 'acf_admin_options_page' );

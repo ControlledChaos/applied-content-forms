@@ -6,33 +6,33 @@ if(!defined('ABSPATH'))
 if(!class_exists('acfe_field_visibility')):
 
 class acfe_field_visibility{
-    
+
     function __construct(){
-        
+
         // Actions
         add_action('acf/field_group/admin_head', array($this, 'admin_head'));
-        
+
     }
- 
+
     /*
      * Admin Head
      */
     function admin_head(){
-        
+
         global $field_group;
-        
+
         if(!acf_maybe_get($field_group, 'acfe_form'))
             return;
-    
+
         add_action('acf/render_field_settings', array($this, 'render_field_visibility_settings'), 15);
-        
+
     }
-    
+
     /*
      * Render Field Visibility Settings
      */
     function render_field_visibility_settings($field){
-        
+
         // Hide Field
         acf_render_field_setting($field, array(
             'label'         => __('Field Visibility', 'acfe'),
@@ -53,7 +53,7 @@ class acfe_field_visibility{
                 'data-acfe-prepend' => 'Field',
             )
         ), true);
-        
+
         // Hide Label
         acf_render_field_setting($field, array(
             'label'         => '',
@@ -74,7 +74,7 @@ class acfe_field_visibility{
             ),
             '_append' => 'hide_field'
         ), true);
-        
+
         // Hide Instructions
         acf_render_field_setting($field, array(
             'label'         => '',
@@ -95,7 +95,7 @@ class acfe_field_visibility{
             ),
             '_append' => 'hide_field'
         ), true);
-    
+
         // Hide Required
         acf_render_field_setting($field, array(
             'label'         => '',
@@ -116,12 +116,10 @@ class acfe_field_visibility{
             ),
             '_append' => 'hide_field'
         ), true);
-        
-    }
-    
-}
 
-// initialize
-new acfe_field_visibility();
+    }
+
+}
+acf_new_instance( 'acfe_field_visibility' );
 
 endif;

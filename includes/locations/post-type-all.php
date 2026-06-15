@@ -54,7 +54,6 @@ class acfe_location_post_type_all{
     }
 
 }
-
-new acfe_location_post_type_all();
+acf_new_instance( 'acfe_location_post_type_all' );
 
 endif;

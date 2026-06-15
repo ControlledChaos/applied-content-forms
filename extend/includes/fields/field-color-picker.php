@@ -464,7 +464,6 @@ class acfe_field_color_picker{
     }
 
 }
-
-new acfe_field_color_picker();
+acf_new_instance( 'acfe_field_color_picker' );
 
 endif;

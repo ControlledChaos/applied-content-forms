@@ -271,8 +271,6 @@ class acfe_field_group_ui{
     }
 
 }
-
-// initialize
-new acfe_field_group_ui();
+acf_new_instance( 'acfe_field_group_ui' );
 
 endif;

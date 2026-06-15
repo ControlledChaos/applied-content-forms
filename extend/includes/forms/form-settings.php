@@ -57,7 +57,6 @@ class acfe_screen_settings{
 		do_action('acfe/add_settings_meta_boxes', $this->page);
 	}
 }
-
-new acfe_screen_settings();
+acf_new_instance( 'acfe_screen_settings' );
 
 endif;

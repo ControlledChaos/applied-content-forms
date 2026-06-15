@@ -177,7 +177,6 @@ class acfe_screen_taxonomy{
 	}
 
 }
-
-new acfe_screen_taxonomy();
+acf_new_instance( 'acfe_screen_taxonomy' );
 
 endif;

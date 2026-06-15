@@ -473,8 +473,7 @@ class acf_form_customizer {
 	}
 
 }
-
-new acf_form_customizer();
+acf_new_instance( 'acf_form_customizer' );
 
 endif;
 

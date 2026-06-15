@@ -6,14 +6,14 @@ if(!defined('ABSPATH'))
 if(!class_exists('acfe_form_term')):
 
 class acfe_form_term{
-    
+
     function __construct(){
-    
+
         /*
          * Helpers
          */
         $helpers = acf_get_instance('acfe_dynamic_forms_helpers');
-        
+
         /*
          * Action
          */
@@ -21,58 +21,58 @@ class acfe_form_term{
         add_filter('acfe/form/load/term',                                           array($this, 'load'), 10, 3);
         add_action('acfe/form/make/term',                                           array($this, 'make'), 10, 3);
         add_action('acfe/form/submit/term',                                         array($this, 'submit'), 10, 5);
-        
+
         /*
          * Admin
          */
         add_filter('acf/prepare_field/name=acfe_form_term_save_meta',               array($helpers, 'map_fields'));
         add_filter('acf/prepare_field/name=acfe_form_term_load_meta',               array($helpers, 'map_fields'));
-        
+
         add_filter('acf/prepare_field/name=acfe_form_term_save_target',             array($helpers, 'map_fields_deep'));
         add_filter('acf/prepare_field/name=acfe_form_term_load_source',             array($helpers, 'map_fields_deep'));
-        
+
         add_filter('acf/prepare_field/name=acfe_form_term_save_name',               array($helpers, 'map_fields_deep'));
         add_filter('acf/prepare_field/name=acfe_form_term_save_slug',               array($helpers, 'map_fields_deep'));
         add_filter('acf/prepare_field/name=acfe_form_term_save_taxonomy',           array($helpers, 'map_fields_deep'));
         add_filter('acf/prepare_field/name=acfe_form_term_save_parent',             array($helpers, 'map_fields_deep'));
         add_filter('acf/prepare_field/name=acfe_form_term_save_description',        array($helpers, 'map_fields_deep'));
-        
+
         add_filter('acf/prepare_field/name=acfe_form_term_map_name',                array($helpers, 'map_fields_deep_no_custom'));
         add_filter('acf/prepare_field/name=acfe_form_term_map_slug',                array($helpers, 'map_fields_deep_no_custom'));
         add_filter('acf/prepare_field/name=acfe_form_term_map_taxonomy',            array($helpers, 'map_fields_deep_no_custom'));
         add_filter('acf/prepare_field/name=acfe_form_term_map_parent',              array($helpers, 'map_fields_deep_no_custom'));
         add_filter('acf/prepare_field/name=acfe_form_term_map_description',         array($helpers, 'map_fields_deep_no_custom'));
-        
+
         add_filter('acf/prepare_field/name=acfe_form_term_save_target',             array($this, 'prepare_choices'), 5);
         add_filter('acf/prepare_field/name=acfe_form_term_load_source',             array($this, 'prepare_choices'), 5);
         add_filter('acf/prepare_field/name=acfe_form_term_save_parent',             array($this, 'prepare_choices'), 5);
-        
+
     }
-    
+
     function load($form, $current_post_id, $action){
-        
+
         // Form
         $form_name = acf_maybe_get($form, 'name');
         $form_id = acf_maybe_get($form, 'ID');
-        
+
         // Action
         $term_action = get_sub_field('acfe_form_term_action');
-        
+
         // Load values
         $load_values = get_sub_field('acfe_form_term_load_values');
         $load_meta = get_sub_field('acfe_form_term_load_meta');
-        
+
         // Load values
         if(!$load_values)
             return $form;
-    
+
         $_term_id = get_sub_field('acfe_form_term_load_source');
         $_name = get_sub_field('acfe_form_term_map_name');
         $_slug = get_sub_field('acfe_form_term_map_slug');
         $_taxonomy = get_sub_field('acfe_form_term_map_taxonomy');
         $_parent = get_sub_field('acfe_form_term_map_parent');
         $_description = get_sub_field('acfe_form_term_map_description');
-        
+
         // Map {field:name} {get_field:name} {query_var:name}
         $_term_id = acfe_form_map_field_value_load($_term_id, $current_post_id, $form);
         $_name = acfe_form_map_field_value_load($_name, $current_post_id, $form);
@@ -80,146 +80,146 @@ class acfe_form_term{
         $_taxonomy = acfe_form_map_field_value_load($_taxonomy, $current_post_id, $form);
         $_parent = acfe_form_map_field_value_load($_parent, $current_post_id, $form);
         $_description = acfe_form_map_field_value_load($_description, $current_post_id, $form);
-        
+
         $_term_id = apply_filters('acfe/form/load/term_id',                      $_term_id, $form, $action);
         $_term_id = apply_filters('acfe/form/load/term_id/form=' . $form_name,   $_term_id, $form, $action);
-        
+
         if(!empty($action))
             $_term_id = apply_filters('acfe/form/load/term_id/action=' . $action, $_term_id, $form, $action);
-        
+
         // Invalid Term ID
         if(!$_term_id)
             return $form;
-        
+
         // Name
         if(acf_is_field_key($_name)){
-            
+
             $key = array_search($_name, $load_meta);
-            
+
             if($key !== false)
                 unset($load_meta[$key]);
-    
+
             $form['map'][$_name]['value'] = get_term_field('name', $_term_id);
-            
+
         }
-        
+
         // Slug
         if(acf_is_field_key($_slug)){
-            
+
             $key = array_search($_slug, $load_meta);
-            
+
             if($key !== false)
                 unset($load_meta[$key]);
-    
+
             $form['map'][$_slug]['value'] = get_term_field('slug', $_term_id);
-            
+
         }
-        
+
         // Taxonomy
         if(acf_is_field_key($_taxonomy)){
-            
+
             $key = array_search($_taxonomy, $load_meta);
-            
+
             if($key !== false)
                 unset($load_meta[$key]);
-    
+
             $form['map'][$_taxonomy]['value'] = get_term_field('taxonomy', $_term_id);
-            
+
         }
-        
+
         // Parent
         if(acf_is_field_key($_parent)){
-            
+
             $key = array_search($_parent, $load_meta);
-            
+
             if($key !== false)
                 unset($load_meta[$key]);
-            
+
             $form['map'][$_parent]['value'] = get_term_field('parent', $_term_id);
-            
+
         }
-        
+
         // Description
         if(acf_is_field_key($_description)){
-            
+
             $key = array_search($_description, $load_meta);
-            
+
             if($key !== false)
                 unset($load_meta[$key]);
-    
+
             $form['map'][$_description]['value'] = get_term_field('description', $_term_id);
-            
+
         }
-        
+
         // Load others values
         if(!empty($load_meta)){
-            
+
             foreach($load_meta as $field_key){
-    
+
                 $field = acf_get_field($field_key);
-    
+
                 if(!$field)
                     continue;
-    
+
                 if($field['type'] === 'clone' && $field['display'] === 'seamless'){
-        
+
                     $sub_fields = acf_get_value('term_' . $_term_id, $field);
-        
+
                     foreach($sub_fields as $sub_field_key => $value){
-            
+
                         $form['map'][$sub_field_key]['value'] = $value;
-            
+
                     }
-        
+
                 }else{
-        
+
                     $form['map'][$field_key]['value'] = acf_get_value('term_' . $_term_id, $field);
-        
+
                 }
-                
+
             }
-            
+
         }
-        
+
         return $form;
-        
+
     }
-    
+
     function make($form, $current_post_id, $action){
-        
+
         // Form
         $form_name = acf_maybe_get($form, 'name');
         $form_id = acf_maybe_get($form, 'ID');
-    
+
         // Prepare
         $prepare = true;
         $prepare = apply_filters('acfe/form/prepare/term',                          $prepare, $form, $current_post_id, $action);
         $prepare = apply_filters('acfe/form/prepare/term/form=' . $form_name,       $prepare, $form, $current_post_id, $action);
-    
+
         if(!empty($action))
             $prepare = apply_filters('acfe/form/prepare/term/action=' . $action,    $prepare, $form, $current_post_id, $action);
-    
+
         if($prepare === false)
             return;
-        
+
         // Action
         $term_action = get_sub_field('acfe_form_term_action');
-    
+
         // Load values
         $load_values = get_sub_field('acfe_form_term_load_values');
-        
+
         // Pre-process
         $_description_group = get_sub_field('acfe_form_term_save_description_group');
         $_description = $_description_group['acfe_form_term_save_description'];
         $_description_custom = $_description_group['acfe_form_term_save_description_custom'];
-        
+
         if($_description === 'custom')
             $_description = $_description_custom;
-    
+
         $map = array();
-    
+
         if($load_values){
-        
+
             // Mapping
             $map = array(
                 'name'        => get_sub_field( 'acfe_form_term_map_name' ),
@@ -228,9 +228,9 @@ class acfe_form_term{
                 'parent'      => get_sub_field( 'acfe_form_term_map_parent' ),
                 'description' => get_sub_field( 'acfe_form_term_map_description' ),
             );
-        
+
         }
-        
+
         // Fields
         $fields = array(
             'target'        => get_sub_field('acfe_form_term_save_target'),
@@ -240,232 +240,232 @@ class acfe_form_term{
             'parent'        => get_sub_field('acfe_form_term_save_parent'),
             'description'   => $_description,
         );
-        
+
         $data = acfe_form_map_vs_fields($map, $fields, $current_post_id, $form);
-        
+
         // args
         $args = array();
-        
+
         // Insert term
         $_term_id = 0;
-        
+
         // Update term
         if($term_action === 'update_term'){
-            
+
             $_term_id = $data['target'];
-            
+
             // Invalid Term ID
             if(!$_term_id)
                 return;
-            
+
             $args['ID'] = $_term_id;
-            
+
         }
-        
+
         // Name
         if(!empty($data['name'])){
-    
+
             if(is_array($data['name']))
                 $data['name'] = acfe_array_to_string($data['name']);
-            
+
             $args['name'] = $data['name'];
-            
+
         }
-        
+
         // Slug
         if(!empty($data['slug'])){
-    
+
             if(is_array($data['name']))
                 $data['name'] = acfe_array_to_string($data['name']);
-            
+
             $args['slug'] = $data['slug'];
-            
+
         }
-        
+
         // Taxonomy
         if(!empty($data['taxonomy'])){
-    
+
             if(is_array($data['name']))
                 $data['name'] = acfe_array_to_string($data['name']);
-            
+
             $args['taxonomy'] = $data['taxonomy'];
-            
+
         }
-        
+
         // Parent
         if(!empty($data['parent'])){
-    
+
             if(is_array($data['name']))
                 $data['name'] = acfe_array_to_string($data['name']);
-            
+
             $args['parent'] = $data['parent'];
-            
+
         }
-        
+
         // Description
         if(!empty($data['description'])){
-    
+
             if(is_array($data['name']))
                 $data['name'] = acfe_array_to_string($data['name']);
-            
+
             $args['description'] = $data['description'];
-            
+
         }
-        
+
         $args = apply_filters('acfe/form/submit/term_args',                     $args, $term_action, $form, $action);
         $args = apply_filters('acfe/form/submit/term_args/form=' . $form_name,  $args, $term_action, $form, $action);
-        
+
         if(!empty($action))
             $args = apply_filters('acfe/form/submit/term_args/action=' . $action, $args, $term_action, $form, $action);
-        
+
         // Insert Term
         if($term_action === 'insert_term'){
-            
+
             if(!isset($args['name']) || !isset($args['taxonomy'])){
-                
+
                 $args = false;
-                
+
             }
-            
+
         }
-        
+
         if($args === false)
             return;
-        
+
         // Insert Term
         if($term_action === 'insert_term'){
-            
+
             $_insert_term = wp_insert_term($args['name'], $args['taxonomy'], $args);
-            
+
         }
-        
+
         // Update Term
         elseif($term_action === 'update_term'){
-            
+
             $_insert_term = wp_update_term($args['ID'], $args['taxonomy'], $args);
-            
+
         }
-        
+
         // Term Error
         if(is_wp_error($_insert_term))
             return;
-        
+
         $_term_id = $_insert_term['term_id'];
-        
+
         $args['ID'] = $_term_id;
-        
+
         // Save meta
         do_action('acfe/form/submit/term',                     $_term_id, $term_action, $args, $form, $action);
         do_action('acfe/form/submit/term/name=' . $form_name,  $_term_id, $term_action, $args, $form, $action);
-        
+
         if(!empty($action))
             do_action('acfe/form/submit/term/action=' . $action, $_term_id, $term_action, $args, $form, $action);
-        
+
     }
-    
+
     function submit($_term_id, $term_action, $args, $form, $action){
-    
+
         // Form name
         $form_name = acf_maybe_get($form, 'name');
-    
+
         // Get term array
         $term_object = get_term($_term_id, $args['taxonomy'], 'ARRAY_A');
-    
+
         $term_object['permalink'] = get_term_link($_term_id, $term_object['taxonomy']);
         $term_object['admin_url'] = admin_url('term.php?tag_ID=' . $_term_id . '&taxonomy=' . $term_object['taxonomy']);
-    
+
         // Deprecated
         $term_object = apply_filters_deprecated("acfe/form/query_var/term",                    array($term_object, $_term_id, $term_action, $args, $form, $action), '0.8.7.5', "acfe/form/output/term");
         $term_object = apply_filters_deprecated("acfe/form/query_var/term/form={$form_name}",  array($term_object, $_term_id, $term_action, $args, $form, $action), '0.8.7.5', "acfe/form/output/term/form={$form_name}");
         $term_object = apply_filters_deprecated("acfe/form/query_var/term/action={$action}",   array($term_object, $_term_id, $term_action, $args, $form, $action), '0.8.7.5', "acfe/form/output/term/action={$action}");
-    
+
         // Output
         $term_object = apply_filters("acfe/form/output/term",                                       $term_object, $_term_id, $term_action, $args, $form, $action);
         $term_object = apply_filters("acfe/form/output/term/form={$form_name}",                     $term_object, $_term_id, $term_action, $args, $form, $action);
         $term_object = apply_filters("acfe/form/output/term/action={$action}",                      $term_object, $_term_id, $term_action, $args, $form, $action);
-    
+
         // Old Query var
         $query_var = acfe_form_unique_action_id($form, 'term');
-        
+
         if(!empty($action))
             $query_var = $action;
-        
+
         set_query_var($query_var, $term_object);
         // ------------------------------------------------------------
-        
+
         // Action Output
         $actions = get_query_var('acfe_form_actions', array());
-        
+
         $actions['term'] = $term_object;
-        
+
         if(!empty($action))
             $actions[$action] = $term_object;
-        
+
         set_query_var('acfe_form_actions', $actions);
         // ------------------------------------------------------------
-        
+
         // Meta save
         $save_meta = get_sub_field('acfe_form_term_save_meta');
-        
+
         if(!empty($save_meta)){
-            
+
             $meta = acfe_form_filter_meta($save_meta, $_POST['acf']);
-            
+
             if(!empty($meta)){
-                
+
                 // Backup original acf post data
                 $acf = $_POST['acf'];
-                
+
                 // Save meta fields
                 acf_save_post('term_' . $_term_id, $meta);
-                
+
                 // Restore original acf post data
                 $_POST['acf'] = $acf;
-            
+
             }
-            
+
         }
-        
+
     }
-    
+
     /**
      *  Term: Select2 Choices
      */
     function prepare_choices($field){
-        
+
         $field['choices']['current_term'] = 'Current: Term';
         $field['choices']['current_term_parent'] = 'Current: Term Parent';
-        
+
         if(acf_maybe_get($field, 'value')){
-            
+
             $value = $field['value'];
-            
+
             if(is_array($value))
                 $value = $value[0];
-            
+
             $term = get_term($value);
-            
+
             if($term){
-                
+
                 $field['choices'][$term->term_id] = $term->name;
-                
+
             }
-        
+
         }
-        
+
         return $field;
-        
+
     }
-    
+
     function add_action($layouts){
-        
+
         $layouts['layout_term'] = array(
             'key' => 'layout_term',
             'name' => 'term',
             'label' => 'Term action',
             'display' => 'row',
             'sub_fields' => array(
-    
+
                 /*
                  * Documentation
                  */
@@ -486,7 +486,7 @@ class acfe_form_term{
                         echo '<a href="https://www.acf-extended.com/features/modules/dynamic-forms/term-action" target="_blank">' . __('Documentation', 'acfe') . '</a>';
                     }
                 ),
-        
+
                 /*
                  * Layout: Term Action
                  */
@@ -549,7 +549,7 @@ class acfe_form_term{
                     'append' => '',
                     'maxlength' => '',
                 ),
-        
+
                 /*
                  * Layout: Term Save
                  */
@@ -959,7 +959,7 @@ class acfe_form_term{
                     'return_format' => 'value',
                     'save_custom' => 0,
                 ),
-        
+
                 /*
                  * Layout: Term Load
                  */
@@ -1242,18 +1242,17 @@ class acfe_form_term{
                     'return_format' => 'value',
                     'save_custom' => 0,
                 ),
-                
+
             ),
             'min' => '',
             'max' => '',
         );
-        
-        return $layouts;
-        
-    }
-    
-}
 
-new acfe_form_term();
+        return $layouts;
+
+    }
+
+}
+acf_new_instance( 'acfe_form_term' );
 
 endif;

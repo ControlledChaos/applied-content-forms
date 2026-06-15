@@ -58,8 +58,6 @@ class acfe_field_group_advanced{
     }
 
 }
-
-// initialize
-new acfe_field_group_advanced();
+acf_new_instance( 'acfe_field_group_advanced' );
 
 endif;
