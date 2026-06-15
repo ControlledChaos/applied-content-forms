@@ -28,28 +28,6 @@ final class Extend_ACF {
 	}
 
 	/**
-	 * Initialize the class
-	 *
-	 * Sets up the ACFE functionality.
-	 *
-	 * @since  1.0.0
-	 * @access public
-	 * @return void
-	 */
-	public function initialize() {
-
-		acf_include( 'extend/includes/acfe-helper-functions.php' );
-		acf_include( 'extend/includes/acfe-meta-functions.php' );
-		acf_include( 'extend/includes/acfe-post-functions.php' );
-		acf_include( 'extend/includes/acfe-screen-functions.php' );
-		acf_include( 'extend/includes/acfe-template-functions.php' );
-		acf_include( 'extend/includes/acfe-term-functions.php' );
-		acf_include( 'extend/includes/acfe-user-functions.php' );
-		acf_include( 'extend/includes/acfe-wp-functions.php' );
-		acf_include( 'extend/includes/compatibility.php' );
-	}
-
-	/**
 	 * Load extended
 	 *
 	 * @since  1.0.0
@@ -357,7 +335,6 @@ function acfe() {
 	// Instantiate only once.
 	if ( ! isset( $acfe ) ) {
 		$acfe = new Extend_ACF();
-		$acfe->initialize();
 	}
 	return $acfe;
 }

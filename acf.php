@@ -353,6 +353,17 @@ final class ACF {
 
 		// Extend original ACF.
 		acf_include( 'extend/class-extend-acf.php' );
+
+		acf_include( 'extend/includes/acfe-helper-functions.php' );
+		acf_include( 'extend/includes/acfe-meta-functions.php' );
+		acf_include( 'extend/includes/acfe-post-functions.php' );
+		acf_include( 'extend/includes/acfe-screen-functions.php' );
+		acf_include( 'extend/includes/acfe-template-functions.php' );
+		acf_include( 'extend/includes/acfe-term-functions.php' );
+		acf_include( 'extend/includes/acfe-user-functions.php' );
+		acf_include( 'extend/includes/acfe-wp-functions.php' );
+		acf_include( 'extend/includes/compatibility.php' );
+
 		if ( defined( 'ACF_DEV' ) && ACF_DEV ) {
 			acf_include( 'tests/tests.php' );
 		}
