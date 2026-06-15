@@ -396,7 +396,6 @@ final class ACF {
 		// Include 3rd party compatibility.
 		acf_include( 'includes/third-party.php' );
 		acf_include( 'extend/includes/hooks.php' );
-		// acf_include( 'extend/includes/admin/admin.php' );
 		acf_include( 'extend/includes/admin/plugins.php' );
 
 		// Include WPML support.
