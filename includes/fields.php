@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * Fields functions
  *
@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 class acf_fields {
-	
+
 	/**
 	 * Field type instances
 	 *
@@ -40,21 +40,21 @@ class acf_fields {
 	 *
 	 * @since  1.0.0
 	 * @access public
-	 * @param  string $class 
-	 * @return void          
+	 * @param  string $class
+	 * @return void
 	 */
 	public function register_field_type( $class ) {
-		
+
 		// Allow instance.
 		if  ( $class instanceOf acf_field ) {
 			$this->types[ $class->name ] = $class;
-		
+
 		// Allow class name.
 		} else {
 			$instance = new $class();
 			$this->types[ $instance->name ] = $instance;
 		}
-	}	
+	}
 
 	/**
 	 * Get field type
@@ -63,12 +63,12 @@ class acf_fields {
 	 *
 	 * @since  1.0.0
 	 * @access public
-	 * @param  string $name 
-	 * @return mixed         
+	 * @param  string $name
+	 * @return mixed
 	 */
 	public function get_field_type( $name ) {
 		return isset( $this->types[$name] ) ? $this->types[$name] : null;
-	}	
+	}
 
 	/**
 	 * Is field type
@@ -77,7 +77,7 @@ class acf_fields {
 	 *
 	 * @since  1.0.0
 	 * @access public
-	 * @param  string  $name 
+	 * @param  string  $name
 	 * @return boolean
 	 */
 	public function is_field_type( $name ) {
@@ -93,13 +93,13 @@ class acf_fields {
 	 *
 	 * @since  1.0.0
 	 * @access public
-	 * @param  array $info 
-	 * @return void         
+	 * @param  array $info
+	 * @return void
 	 */
 	public function register_field_type_info( $info ) {
 		$instance = (object) $info;
 		$this->types[ $instance->name ] = $instance;
-	}	
+	}
 
 	/**
 	 * Get field types
@@ -108,7 +108,7 @@ class acf_fields {
 	 *
 	 * @since  1.0.0
 	 * @access public
-	 * @return array 
+	 * @return array
 	 */
 	public function get_field_types() {
 		return $this->types;
@@ -122,8 +122,8 @@ acf()->fields = new acf_fields();
  * Alias of acf()->fields->register_field_type()
  *
  * @since  1.0.0
- * @param  string $class 
- * @return void          
+ * @param  string $class
+ * @return void
  */
 function acf_register_field_type( $class ) {
 	return acf()->fields->register_field_type( $class );
@@ -135,8 +135,8 @@ function acf_register_field_type( $class ) {
  * Alias of acf()->fields->register_field_type_info()
  *
  * @since  1.0.0
- * @param  array $info 
- * @return void         
+ * @param  array $info
+ * @return void
  */
 function acf_register_field_type_info( $info ) {
 	return acf()->fields->register_field_type_info( $info );
@@ -148,8 +148,8 @@ function acf_register_field_type_info( $info ) {
  * Alias of acf()->fields->get_field_type()
  *
  * @since  1.0.0
- * @param  string $name 
- * @return void         
+ * @param  string $name
+ * @return void
  */
 function acf_get_field_type( $name ) {
 	return acf()->fields->get_field_type( $name );
@@ -161,8 +161,8 @@ function acf_get_field_type( $name ) {
  * Alias of acf()->fields->get_field_types()
  *
  * @since  1.0.0
- * @param  array $args 
- * @return array        
+ * @param  array $args
+ * @return array
  */
 function acf_get_field_types( $args = [] ) {
 
@@ -182,7 +182,7 @@ function acf_get_field_types( $args = [] ) {
  * @return array
  */
 function acf_get_field_types_info( $args = [] ) {
-	
+
 	$data = [];
 	$field_types = acf_get_field_types();
 
@@ -203,8 +203,8 @@ function acf_get_field_types_info( $args = [] ) {
  * Alias of acf()->fields->is_field_type()
  *
  * @since  1.0.0
- * @param  string $name 
- * @return void         
+ * @param  string $name
+ * @return void
  */
 function acf_is_field_type( $name = '' ) {
 	return acf()->fields->is_field_type( $name );
@@ -216,9 +216,9 @@ function acf_is_field_type( $name = '' ) {
  * This function will return a field type's property.
  *
  * @since  1.0.0
- * @param  string $name 
- * @param  string $prop 
- * @return void         
+ * @param  string $name
+ * @param  string $prop
+ * @return void
  */
 function acf_get_field_type_prop( $name = '', $prop = '' ) {
 	$type = acf_get_field_type( $name );
@@ -235,7 +235,7 @@ function acf_get_field_type_prop( $name = '', $prop = '' ) {
  * @return string
  */
 function acf_get_field_type_label( $name = '' ) {
-	
+
 	$prop = acf_get_field_type_prop( $name, 'label' );
 	if ( $prop ) {
 		$label = $prop;
@@ -255,8 +255,8 @@ function acf_get_field_type_label( $name = '' ) {
  * @deprecated
  *
  * @since  1.0.0
- * @param  string $type 
- * @return string         
+ * @param  string $type
+ * @return string
  */
 function acf_field_type_exists( $type = '' ) {
 	return acf_is_field_type( $type );
@@ -269,7 +269,7 @@ function acf_field_type_exists( $type = '' ) {
  * "name => label" grouped by category.
  *
  * @since  1.0.0
- * @return array 
+ * @return array
  */
 function acf_get_grouped_field_types() {
 
