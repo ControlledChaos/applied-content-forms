@@ -408,6 +408,7 @@ final class ACF {
 		acf_include( 'includes/third-party.php' );
 		acf_include( 'extend/includes/hooks.php' );
 		acf_include( 'extend/includes/admin/plugins.php' );
+		acf_include( 'includes/class-extend-field.php' );
 
 		// Include WPML support.
 		if ( defined( 'ICL_SITEPRESS_VERSION' ) ) {
