@@ -2,15 +2,13 @@
 /**
  * Native content import/export
  *
- * Adds a metabox to the ACF content tools screen.
- *
- * @package    ACF
- * @subpackage Admin
+ * @package    Applied Content Forms
+ * @subpackage Includes
  * @category   Tools
  * @since      1.0.0
  */
 
-// Restrict direct access.
+// Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	die;
 }
@@ -18,16 +16,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 class ACF_Admin_Tool_Native_Content extends ACF_Admin_Tool {
 
 	/**
-	 * Menu icon
+	 * Constructor method
 	 *
 	 * @since  1.0.0
 	 * @access public
-	 * @var string Admin menu icon class.
+	 * @return self
 	 */
-	public $icon = '';
+	public function __construct() {
+		parent :: __construct();
+	}
 
 	/**
-	 * Initialize metabox
+	 * Initialize
 	 *
 	 * @since  1.0.0
 	 * @access public
@@ -40,7 +40,7 @@ class ACF_Admin_Tool_Native_Content extends ACF_Admin_Tool {
 	}
 
 	/**
-	 * Metabox output
+	 * Metabox HTML
 	 *
 	 * @since  1.0.0
 	 * @access public
@@ -62,5 +62,4 @@ class ACF_Admin_Tool_Native_Content extends ACF_Admin_Tool {
 
 	}
 }
-
 acf_register_admin_tool( 'ACF_Admin_Tool_Native_Content' );
