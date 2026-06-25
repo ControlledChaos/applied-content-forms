@@ -80,7 +80,7 @@ class acfe_dynamic_templates extends acf_module {
             'hierarchical'        => false,
             'public'              => false,
             'show_ui'             => true,
-            'show_in_menu'        => acf()->admin_slug,
+            'show_in_menu'        => acf()->admin_slug(),
             'menu_icon'           => 'dashicons-schedule',
             'show_in_admin_bar'   => false,
             'show_in_nav_menus'   => false,

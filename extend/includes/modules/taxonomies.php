@@ -90,7 +90,7 @@ class acfe_dynamic_taxonomies extends acf_module {
 			'hierarchical'        => false,
 			'public'              => false,
 			'show_ui'             => true,
-			'show_in_menu'        => acf()->admin_slug,
+			'show_in_menu'        => acf()->admin_slug(),
 			'menu_icon'           => 'dashicons-tag',
 			'show_in_admin_bar'   => false,
 			'show_in_nav_menus'   => false,

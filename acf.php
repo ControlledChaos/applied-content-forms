@@ -157,12 +157,28 @@ final class ACF {
 	public function __construct() {}
 
 	/**
+	 * Admin slug
+	 *
+	 * Apply a filter to the admin page slug.
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @return string
+	 */
+	public function admin_slug() {
+		$slug = $this->admin_slug;
+		return apply_filters( 'acf/admin_slug', $slug );
+	}
+
+	/**
 	 * Set constants
 	 *
+	 * @since  1.0.0
+	 * @access public
 	 * @param  array $array
 	 * @return void
 	 */
-    function constants( $array = [] ) {
+    public function constants( $array = [] ) {
 
         foreach ( $array as $name => $value ) {
             if ( defined( $name ) ) {
@@ -634,7 +650,7 @@ final class ACF {
 			'public'          => false,
 			'hierarchical'    => true,
 			'show_ui'         => true,
-			'show_in_menu'    => $this->admin_slug,
+			'show_in_menu'    => $this->admin_slug(),
 			'menu_icon'       => 'dashicons-list-view',
 			'_builtin'        => false,
 			'capability_type' => 'post',
@@ -687,7 +703,7 @@ final class ACF {
 				'public'            => false,
 				'show_ui'           => 'ACFE',
 				'show_admin_column' => true,
-				'show_in_menu'      => 'acf',
+				'show_in_menu'      => $this->admin_slug(),
 				'show_in_nav_menus' => true,
 				'show_tagcloud'     => false,
 				'rewrite'           => false,
