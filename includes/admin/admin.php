@@ -97,7 +97,7 @@ class ACF_Admin {
 			$title,
 			$menu,
 			acf_get_setting( 'capability' ),
-			acf()->admin_slug,
+			acf()->admin_slug(),
 			[ $this, 'page_content' ],
 			$icon,
 			acf_get_setting( 'menu_position' ),
@@ -130,7 +130,7 @@ class ACF_Admin {
 		}
 
 		add_submenu_page(
-			acf()->admin_slug,
+			acf()->admin_slug(),
 			__( 'Field Categories', 'acf' ),
 			__( 'Field Categories', 'acf' ),
 			acf_get_setting( 'capability' ),
@@ -145,7 +145,7 @@ class ACF_Admin {
 			'page_desc'       => __( 'Choose which content features to use and how to use them.', 'acf' ),
 			'menu_title'      => __( 'Settings', 'acf' ),
 			'menu_slug'       => 'content-settings',
-			'parent'          => acf()->admin_slug,
+			'parent'          => acf()->admin_slug(),
 			'capability'      => 'manage_options',
 			'redirect'        => false,
 			'update_location' => 'bottom',
@@ -199,7 +199,7 @@ class ACF_Admin {
 
 		// ACF page bases.
 		$pages = [
-			'toplevel_page_acf',
+			'toplevel_page_' . acf()->admin_slug(),
 			'content_page_acf-tools',
 			'content_page_content-settings'
 		];
@@ -226,7 +226,7 @@ class ACF_Admin {
 			$this->screen = true;
 		}
 
-		if ( isset( $screen->base ) && $screen->base === 'toplevel_page_acf' ) {
+		if ( isset( $screen->base ) && $screen->base === 'toplevel_page_' . acf()->admin_slug() ) {
 
 			add_action(
 				'admin_enqueue_scripts', function() {
