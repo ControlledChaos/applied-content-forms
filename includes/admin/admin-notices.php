@@ -103,6 +103,13 @@ add_action( 'admin_notices', 'acf_render_admin_notices', 99 );
  * @param  string $type
  * @return object
  */
-function acf_add_admin_notice( $text = '', $type = 'info' ) {
-	return acf_new_admin_notice( [ 'text' => $text, 'type' => $type ] );
+function acf_add_admin_notice( $text = '', $type = 'info', $dismissible = true, $persisted = false ) {
+	return acf_new_admin_notice(
+		[
+			'text'        => $text,
+			'type'        => $type,
+			'dismissible' => $dismissible,
+			'persisted'   => $persisted
+		]
+	);
 }
