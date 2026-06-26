@@ -141,9 +141,29 @@ class acf_admin_tools {
 	public function include_tools() {
 
 		acf_include( 'includes/admin/tools/class-acf-admin-tool.php' );
-		acf_include( 'includes/admin/tools/class-acf-admin-tool-native-content.php' );
-		acf_include( 'includes/admin/tools/class-acf-admin-tool-export.php' );
-		acf_include( 'includes/admin/tools/class-acf-admin-tool-import.php' );
+		acf_include( 'includes/admin/tools/class-acf-native-export-import.php' );
+		acf_include( 'includes/admin/tools/class-acf-module-export.php' );
+		acf_include( 'includes/admin/tools/class-acf-module-import.php' );
+		acf_include( 'includes/admin/tools/class-acf-field-groups-export.php' );
+		acf_include( 'includes/admin/tools/class-acf-field-groups-import.php' );
+		acf_include( 'includes/admin/tools/class-acf-post-types-export.php' );
+		acf_include( 'includes/admin/tools/class-acf-post-types-import.php' );
+		acf_include( 'includes/admin/tools/class-acf-taxonomies-export.php' );
+		acf_include( 'includes/admin/tools/class-acf-taxonomies-import.php' );
+		acf_include( 'includes/admin/tools/class-acf-block-types-export.php' );
+		acf_include( 'includes/admin/tools/class-acf-block-types-import.php' );
+		acf_include( 'includes/admin/tools/class-acf-forms-export.php' );
+		acf_include( 'includes/admin/tools/class-acf-forms-import.php' );
+		acf_include( 'includes/admin/tools/class-acf-options-pages-export.php' );
+		acf_include( 'includes/admin/tools/class-acf-options-pages-import.php' );
+		acf_include( 'includes/admin/tools/class-acf-templates-export.php' );
+		acf_include( 'includes/admin/tools/class-acf-templates-import.php' );
+		acf_include( 'includes/admin/tools/class-acf-rewrite-rules-export.php' );
+		acf_include( 'includes/admin/tools/class-acf-settings-export.php' );
+		acf_include( 'includes/admin/tools/class-acf-settings-import.php' );
+
+		acf_include( 'includes/admin/tools/field-groups-local.php' );
+		acf_include( 'includes/admin/tools/field-groups-export.php' );
 
 		do_action( 'acf/include_admin_tools' );
 	}

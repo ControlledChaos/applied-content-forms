@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	die;
 }
 
-class ACF_Admin_Tool_Native_Content extends ACF_Admin_Tool {
+class ACF_Native_Export_Import extends ACF_Admin_Tool {
 
 	/**
 	 * Constructor method
@@ -62,4 +62,4 @@ class ACF_Admin_Tool_Native_Content extends ACF_Admin_Tool {
 
 	}
 }
-acf_register_admin_tool( 'ACF_Admin_Tool_Native_Content' );
+acf_register_admin_tool( 'ACF_Native_Export_Import' );

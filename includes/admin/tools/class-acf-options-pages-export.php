@@ -9,7 +9,7 @@ if(!acf_get_setting('options_pages'))
 
 if(!class_exists('acfe_dynamic_options_pages_export')):
 
-class acfe_dynamic_options_pages_export extends acfe_module_export{
+class acfe_dynamic_options_pages_export extends ACF_Module_Export{
 
     function initialize(){
 

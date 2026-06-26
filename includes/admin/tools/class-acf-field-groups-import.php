@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-class ACF_Admin_Tool_Import extends ACF_Admin_Tool {
+class ACF_Field_Groups_Import extends ACF_Admin_Tool {
 
 	/**
 	 * Constructor method
@@ -33,7 +33,7 @@ class ACF_Admin_Tool_Import extends ACF_Admin_Tool {
 	 * @access public
 	 * @return void
 	 */
-	function initialize() {
+	public function initialize() {
 		$this->name  = 'import';
 		$this->title = __( 'Import Field Groups', 'acf' );
     	$this->icon  = 'dashicons-upload';
@@ -46,7 +46,7 @@ class ACF_Admin_Tool_Import extends ACF_Admin_Tool {
 	 * @access public
 	 * @return void
 	 */
-	function html() {
+	public function html() {
 
 		?>
 		<p><?php _e( 'Select the Applied Content Forms JSON file you would like to import. When you click the import button below, ACF will import the field groups.', 'acf' ); ?></p>
@@ -78,7 +78,7 @@ class ACF_Admin_Tool_Import extends ACF_Admin_Tool {
 	 * @access public
 	 * @return void
 	 */
-	function submit() {
+	public function submit() {
 
 		// Check file size.
 		if ( empty( $_FILES['acf_import_file']['size'] ) ) {
@@ -148,4 +148,4 @@ class ACF_Admin_Tool_Import extends ACF_Admin_Tool {
 		acf_add_admin_notice( $text, 'success' );
 	}
 }
-acf_register_admin_tool( 'ACF_Admin_Tool_Import' );
+acf_register_admin_tool( 'ACF_Field_Groups_Import' );

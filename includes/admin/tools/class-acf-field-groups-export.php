@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-class ACF_Admin_Tool_Export extends ACF_Admin_Tool {
+class ACF_Field_Groups_Export extends ACF_Admin_Tool {
 
 	/**
 	 * View context
@@ -419,7 +419,7 @@ class ACF_Admin_Tool_Export extends ACF_Admin_Tool {
 
 		$keys = $this->get_selected_keys();
 		if ( ! $keys ) {
-			return acf_add_admin_notice( __( 'No field groups selected', 'acf' ), 'warning' );
+			return acf_add_admin_notice( __( 'No field groups selected', 'acf' ), 'warning', true, false );
 		}
 		$url = add_query_arg( 'keys', implode( '+', $keys ), $this->get_url() );
 
@@ -427,4 +427,4 @@ class ACF_Admin_Tool_Export extends ACF_Admin_Tool {
 		exit;
 	}
 }
-acf_register_admin_tool( 'ACF_Admin_Tool_Export' );
+acf_register_admin_tool( 'ACF_Field_Groups_Export' );

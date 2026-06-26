@@ -15,7 +15,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 class ACF_Admin_Tool {
 
-
 	/**
 	 * Tool name
 	 *

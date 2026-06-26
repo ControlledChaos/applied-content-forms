@@ -9,7 +9,7 @@ if ( ! acf_get_setting( 'forms' ) )
 
 if(!class_exists('acfe_dynamic_forms_export')):
 
-class acfe_dynamic_forms_export extends acfe_module_export{
+class acfe_dynamic_forms_export extends ACF_Module_Export{
 
     function initialize(){
 

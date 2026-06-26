@@ -9,7 +9,7 @@ if(!acf_get_setting('taxonomies'))
 
 if(!class_exists('acfe_dynamic_taxonomies_export')):
 
-class acfe_dynamic_taxonomies_export extends acfe_module_export{
+class acfe_dynamic_taxonomies_export extends ACF_Module_Export{
 
     function initialize(){
 

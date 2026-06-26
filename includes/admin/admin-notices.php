@@ -34,15 +34,6 @@ class ACF_Admin_Notice extends ACF_Data {
 	];
 
 	/**
-	 * Constructor method
-	 *
-	 * @since  1.0.0
-	 * @access public
-	 * @return self
-	 */
-	public function __construct() {}
-
-	/**
 	 * Render the notice HTML
 	 *
 	 * @since  1.0.0
@@ -50,14 +41,17 @@ class ACF_Admin_Notice extends ACF_Data {
 	 * @return void
 	 */
 	public function render() {
-
 		$notice_text    = $this->get( 'text' );
 		$notice_type    = $this->get( 'type' );
 		$is_dismissible = $this->get( 'dismissible' );
+		$is_persisted   = $this->get( 'persisted' );
 
-		printf( '<div class="acf-admin-notice notice notice-%s %s">%s</div>',
+		printf(
+			'<div class="acf-admin-notice notice notice-%s %s" data-persisted="%s" data-persist-id="%s">%s</div>',
 			esc_attr( $notice_type ),
 			$is_dismissible ? 'is-dismissible' : '',
+			$is_persisted ? 'true' : 'false',
+			esc_attr( md5( $notice_text ) ),
 			acf_esc_html( wpautop( acf_punctify( $notice_text ) ) )
 		);
 	}

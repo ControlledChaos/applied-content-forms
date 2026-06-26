@@ -9,7 +9,7 @@ if ( ! acf_get_setting( 'templates' ) )
 
 if(!class_exists('acfe_dynamic_templates_import')):
 
-class acfe_dynamic_templates_import extends acfe_module_import{
+class acfe_dynamic_templates_import extends ACF_Module_Import{
 
     function initialize(){
 

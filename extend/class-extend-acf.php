@@ -63,8 +63,6 @@ final class Extend_ACF {
 		add_action( 'acf/init', [ $this, 'init' ], 99 );
 		add_action( 'acf/include_fields', [ $this, 'include_fields' ], 5 );
 		add_action( 'acf/include_field_types', [ $this, 'include_field_types' ], 99 );
-		add_action( 'acf/include_admin_tools', [ $this, 'include_admin_tools' ] );
-		add_action( 'acf/include_admin_tools', [ $this, 'include_admin_tools_late' ], 20 );
 
 		acf_include( 'extend/includes/local-meta.php' );
 		acf_include( 'extend/includes/multilang.php' );
@@ -225,73 +223,6 @@ final class Extend_ACF {
 		acf_include( 'extend/includes/fields/field-post-field.php' );
 		acf_include( 'extend/includes/fields/field-post-formats.php' );
 		acf_include( 'extend/includes/fields/field-relationship.php' );
-	}
-
-	/**
-	 * Include admin tools
-	 *
-	 * @since  1.0.0
-	 * @access public
-	 * @return void
-	 */
-	public function include_admin_tools(){
-
-		acf_include( 'extend/includes/admin/tools/module-export.php' );
-		acf_include( 'extend/includes/admin/tools/module-import.php' );
-		acf_include( 'extend/includes/admin/tools/module-import.php' );
-		acf_include( 'extend/includes/admin/tools/module-import.php' );
-		acf_include( 'extend/includes/admin/tools/module-import.php' );
-		acf_include( 'extend/includes/admin/tools/module-import.php' );
-		acf_include( 'extend/includes/admin/tools/module-import.php' );
-		acf_include( 'extend/includes/admin/tools/module-import.php' );
-		acf_include( 'extend/includes/admin/tools/module-import.php' );
-		acf_include( 'extend/includes/admin/tools/module-import.php' );
-		acf_include( 'extend/includes/admin/tools/module-import.php' );
-		acf_include( 'extend/includes/admin/tools/module-import.php' );
-		acf_include( 'extend/includes/admin/tools/module-import.php' );
-		acf_include( 'extend/includes/admin/tools/module-import.php' );
-		acf_include( 'extend/includes/admin/tools/module-import.php' );
-		acf_include( 'extend/includes/admin/tools/module-import.php' );
-		acf_include( 'extend/includes/admin/tools/module-import.php' );
-		acf_include( 'extend/includes/admin/tools/module-import.php' );
-		acf_include( 'extend/includes/admin/tools/module-import.php' );
-		acf_include( 'extend/includes/admin/tools/module-import.php' );
-		acf_include( 'extend/includes/admin/tools/module-import.php' );
-		acf_include( 'extend/includes/admin/tools/module-import.php' );
-		acf_include( 'extend/includes/admin/tools/module-import.php' );
-		acf_include( 'extend/includes/admin/tools/module-import.php' );
-		acf_include( 'extend/includes/admin/tools/module-import.php' );
-		acf_include( 'extend/includes/admin/tools/module-import.php' );
-		acf_include( 'extend/includes/admin/tools/module-import.php' );
-		acf_include( 'extend/includes/admin/tools/module-import.php' );
-		acf_include( 'extend/includes/admin/tools/module-import.php' );
-		acf_include( 'extend/includes/admin/tools/post-types-export.php' );
-		acf_include( 'extend/includes/admin/tools/post-types-import.php' );
-		acf_include( 'extend/includes/admin/tools/taxonomies-export.php' );
-		acf_include( 'extend/includes/admin/tools/taxonomies-import.php' );
-		acf_include( 'extend/includes/admin/tools/block-types-export.php' );
-		acf_include( 'extend/includes/admin/tools/block-types-import.php' );
-		acf_include( 'extend/includes/admin/tools/forms-export.php' );
-		acf_include( 'extend/includes/admin/tools/forms-import.php' );
-		acf_include( 'extend/includes/admin/tools/options-pages-export.php' );
-		acf_include( 'extend/includes/admin/tools/options-pages-import.php' );
-		acf_include( 'extend/includes/admin/tools/templates-export.php' );
-		acf_include( 'extend/includes/admin/tools/templates-import.php' );
-		acf_include( 'extend/includes/admin/tools/rewrite-rules-export.php' );
-		acf_include( 'extend/includes/admin/tools/settings-export.php' );
-		acf_include( 'extend/includes/admin/tools/settings-import.php' );
-	}
-
-	/**
-	 * Include admin tools late
-	 *
-	 * @since  1.0.0
-	 * @access public
-	 * @return void
-	 */
-	public function include_admin_tools_late() {
-		acf_include( 'extend/includes/admin/tools/field-groups-local.php' );
-		acf_include( 'extend/includes/admin/tools/field-groups-export.php' );
 	}
 
 	/**

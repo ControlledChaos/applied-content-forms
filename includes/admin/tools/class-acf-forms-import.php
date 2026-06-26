@@ -9,7 +9,7 @@ if ( ! acf_get_setting( 'forms' ) )
 
 if(!class_exists('acfe_dynamic_forms_import')):
 
-class acfe_dynamic_forms_import extends acfe_module_import{
+class acfe_dynamic_forms_import extends ACF_Module_Import{
 
     function initialize(){
 

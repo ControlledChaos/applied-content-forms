@@ -40,7 +40,7 @@ class acf_dynamic_post_types extends acf_module {
 		$this->label      = 'Post Type Label';
 		$this->textdomain = 'Post Types';
 
-		$this->tool    = 'acfe_dynamic_post_types_export';
+		$this->tool    = 'ACF_Post_Types_Export';
 		$this->tools   = [ 'php', 'json' ];
 		$this->columns = [
 			'acf-name'       => __( 'Name', 'acf' ),

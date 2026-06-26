@@ -9,7 +9,7 @@ if ( ! acf_get_setting( 'block_types' ) )
 
 if(!class_exists('acfe_dynamic_block_types_import')):
 
-class acfe_dynamic_block_types_import extends acfe_module_import{
+class acfe_dynamic_block_types_import extends ACF_Module_Import{
 
     function initialize(){
 
