@@ -156,7 +156,7 @@ final class Extend_ACF {
 	 * @access public
 	 * @return void
 	 */
-	public function include_field_types(){
+	public function include_field_types() {
 
 		acf_include( 'extend/includes/fields/field-button.php' );
 
