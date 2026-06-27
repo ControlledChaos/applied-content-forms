@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-class ACF_Field_Groups_Import extends ACF_Admin_Tool {
+final class ACF_Field_Groups_Import extends ACF_Admin_Tool {
 
 	/**
 	 * Constructor method
@@ -49,7 +49,7 @@ class ACF_Field_Groups_Import extends ACF_Admin_Tool {
 	public function html() {
 
 		?>
-		<p><?php _e( 'Select the Applied Content Forms JSON file you would like to import. When you click the import button below, ACF will import the field groups.', 'acf' ); ?></p>
+		<p><?php _e( 'Select the ACF JSON file that you would like to import. The field groups will be added to the database then can be edited using the field group interface.', 'acf' ); ?></p>
 		<div class="acf-fields">
 			<?php
 

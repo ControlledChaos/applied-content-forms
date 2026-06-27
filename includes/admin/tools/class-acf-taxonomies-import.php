@@ -1,33 +1,36 @@
 <?php
+/**
+ * Taxonomies import tool
+ *
+ * @package    Applied Content Forms
+ * @subpackage Includes
+ * @category   Tools
+ * @since      1.0.0
+ */
 
-if(!defined('ABSPATH'))
-    exit;
-
-// Check setting
-if(!acf_get_setting('taxonomies'))
-    return;
-
-if(!class_exists('acfe_dynamic_taxonomies_import')):
-
-class acfe_dynamic_taxonomies_import extends ACF_Module_Import{
-
-    function initialize(){
-
-        // vars
-        $this->hook = 'taxonomy';
-        $this->name = 'acfe_dynamic_taxonomies_import';
-        $this->title = __('Import Taxonomies');
-        $this->description = __('Import Taxonomies');
-        $this->instance = acf_get_instance('acfe_dynamic_taxonomies');
-        $this->messages = array(
-            'success_single'    => '1 taxonomy imported',
-            'success_multiple'  => '%s taxonomies imported',
-        );
-
-    }
-
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
 }
 
-acf_register_admin_tool('acfe_dynamic_taxonomies_import');
+// Stop if taxonomies are not active.
+if ( ! acf_get_setting( 'taxonomies' ) ) {
+	return;
+}
 
-endif;
+final class ACF_Taxonomies_Import extends ACF_Module_Import {
+
+	public function initialize() {
+
+		$this->hook  = 'taxonomy';
+		$this->name  = 'ACF_Taxonomies_Import';
+		$this->title = __( 'Import Taxonomies', 'acf' );
+		$this->description = __( 'Tool for dynamic taxonomiees registered by another instance of Applied Content Forms. Upload an exported JSON file to import into the database.', 'acf' );
+		$this->instance = acf_get_instance( 'acfe_dynamic_taxonomies' );
+		$this->messages = [
+			'success_single'   => __( '1 taxonomy imported', 'acf' ),
+			'success_multiple' => __( '%s taxonomies imported', 'acf' )
+		];
+	}
+}
+acf_register_admin_tool( 'ACF_Taxonomies_Import' );

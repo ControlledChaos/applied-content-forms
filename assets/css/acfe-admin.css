@@ -382,26 +382,22 @@ body.post-type-acf-template .column-acfe-terms {
   border-bottom: 0;
 }
 
-#acf-admin-tool-acfe_dynamic_block_types_export ul,
-#acf-admin-tool-acfe_dynamic_forms_export ul,
-#acf-admin-tool-acfe_dynamic_options_pages_export ul,
-#acf-admin-tool-acfe_dynamic_post_types_export ul,
-#acf-admin-tool-acfe_dynamic_taxonomies_export ul {
+#acf-admin-tool-ACF_Block_Types_Export ul,
+#acf-admin-tool-ACF_Forms_Export ul,
+#acf-admin-tool-ACF_Options_Pages_Export ul,
+#acf-admin-tool-ACF_Post_Types_Export ul,
+#acf-admin-tool-ACF_Taxonomies_Export ul {
   -webkit-column-width: 200px;
   -moz-column-width: 200px;
   column-width: 200px;
 }
 
-#acf-admin-tool-acfe_dynamic_block_types_export .acf-postbox-columns,
-#acf-admin-tool-acfe_dynamic_forms_export .acf-postbox-columns,
-#acf-admin-tool-acfe_dynamic_options_pages_export .acf-postbox-columns,
-#acf-admin-tool-acfe_dynamic_post_types_export .acf-postbox-columns,
-#acf-admin-tool-acfe_dynamic_taxonomies_export .acf-postbox-columns {
+#acf-admin-tool-ACF_Block_Types_Export .acf-postbox-columns,
+#acf-admin-tool-ACF_Forms_Export .acf-postbox-columns,
+#acf-admin-tool-ACF_Options_Pages_Export .acf-postbox-columns,
+#acf-admin-tool-ACF_Post_Types_Export .acf-postbox-columns,
+#acf-admin-tool-ACF_Taxonomies_Export .acf-postbox-columns {
   margin-right: 0;
-}
-
-.acf-meta-box-wrap.-grid #acf-admin-tool-acfe-fg-local {
-  display: none;
 }
 
 #acfe-admin-settings .inside > .acf-field {

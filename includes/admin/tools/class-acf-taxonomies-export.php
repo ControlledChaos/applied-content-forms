@@ -1,39 +1,42 @@
 <?php
+/**
+ * Taxonomies export tool
+ *
+ * @package    Applied Content Forms
+ * @subpackage Includes
+ * @category   Tools
+ * @since      1.0.0
+ */
 
-if(!defined('ABSPATH'))
-    exit;
-
-// Check setting
-if(!acf_get_setting('taxonomies'))
-    return;
-
-if(!class_exists('acfe_dynamic_taxonomies_export')):
-
-class acfe_dynamic_taxonomies_export extends ACF_Module_Export{
-
-    function initialize(){
-
-        // vars
-        $this->name = 'acfe_dynamic_taxonomies_export';
-        $this->title = __('Export Taxonomies');
-        $this->description = __('Export Taxonomies');
-        $this->select = __('Select Taxonomies');
-        $this->default_action = 'json';
-        $this->allowed_actions = array('json', 'php');
-        $this->instance = acf_get_instance('acfe_dynamic_taxonomies');
-        $this->file = 'taxonomy';
-        $this->files = 'taxonomies';
-        $this->messages = array(
-            'not_found'         => __('No taxonomy available.'),
-            'not_selected'      => __('No taxonomies selected'),
-            'success_single'    => '1 taxonomy exported',
-            'success_multiple'  => '%s taxonomies exported',
-        );
-
-    }
-
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
 }
 
-acf_register_admin_tool('acfe_dynamic_taxonomies_export');
+// Stop if taxonomies are not active.
+if ( ! acf_get_setting( 'taxonomies' ) ) {
+	return;
+}
 
-endif;
+final class ACF_Taxonomies_Export extends ACF_Module_Export {
+
+	public function initialize() {
+
+		$this->name  = 'ACF_Taxonomies_Export';
+		$this->title = __( 'Export Taxonomies', 'acf' );
+		$this->description = __( 'Tool for dynamic custom taxonomies registered by this instance of Applied Content Forms. Export JSON to import into another site, generate PHP to add to a theme or plugin.', 'acf' );
+		$this->select = __( 'Select Taxonomies', 'acf' );
+		$this->default_action  = 'json';
+		$this->allowed_actions = [ 'json', 'php' ];
+		$this->instance = acf_get_instance( 'acfe_dynamic_taxonomies' );
+		$this->file     = 'taxonomy';
+		$this->files    = 'taxonomies';
+		$this->messages = [
+			'not_found'        => __( 'No taxonomy available.', 'acf' ),
+			'not_selected'     => __( 'No taxonomies selected', 'acf' ),
+			'success_single'   => __( '1 taxonomy exported', 'acf' ),
+			'success_multiple' => __( '%s taxonomies exported', 'acf' )
+		];
+	}
+}
+acf_register_admin_tool( 'ACF_Taxonomies_Export' );

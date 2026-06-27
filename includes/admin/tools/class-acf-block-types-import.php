@@ -1,33 +1,43 @@
 <?php
+/**
+ * Block types import tool
+ *
+ * @package    Applied Content Forms
+ * @subpackage Includes
+ * @category   Tools
+ * @since      1.0.0
+ */
 
-if(!defined('ABSPATH'))
-    exit;
-
-// Check setting
-if ( ! acf_get_setting( 'block_types' ) )
-    return;
-
-if(!class_exists('acfe_dynamic_block_types_import')):
-
-class acfe_dynamic_block_types_import extends ACF_Module_Import{
-
-    function initialize(){
-
-        // vars
-        $this->hook = 'block_type';
-        $this->name = 'acfe_dynamic_block_types_import';
-        $this->title = __('Import Block Types');
-        $this->description = __('Import Block Types');
-        $this->instance = acf_get_instance('acfe_dynamic_block_types');
-        $this->messages = array(
-            'success_single'    => '1 block type imported',
-            'success_multiple'  => '%s block types imported',
-        );
-
-    }
-
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
 }
 
-acf_register_admin_tool('acfe_dynamic_block_types_import');
+// Stop if block types are not active.
+if ( ! acf_get_setting( 'block_types' ) ) {
+	return;
+}
 
-endif;
+final class ACF_Block_Types_Import extends ACF_Module_Import {
+
+	/**
+	 * Initialize
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @return void
+	 */
+	public function initialize() {
+
+		$this->hook  = 'block_type';
+		$this->name  = 'ACF_Block_Types_Import';
+		$this->title = __( 'Import Block Types', 'acf' );
+		$this->description = __( 'Tool for dynamic block types registered by another instance of Applied Content Forms. Upload an exported JSON file to import into the database.', 'acf' );
+		$this->instance    = acf_get_instance( 'acfe_dynamic_block_types' );
+		$this->messages    = [
+			'success_single'   => __( '1 block type imported', 'acf' ),
+			'success_multiple' => __( '%s block types imported', 'acf' )
+		];
+	}
+}
+acf_register_admin_tool( 'ACF_Block_Types_Import' );

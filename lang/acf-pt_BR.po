@@ -485,7 +485,7 @@ msgstr ""
 "arquivo externo."
 
 #: includes/admin/tools/class-acf-admin-tool-export.php:446
-msgid "Copy to clipboard"
+msgid "Copy to Clipboard"
 msgstr ""
 
 #: includes/admin/tools/class-acf-admin-tool-import.php:26

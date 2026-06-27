@@ -12,13 +12,13 @@ html.acfe-hide-wp #wpfooter {
     margin-left: 0
 }
 
-#acf-admin-tool-acfe_dynamic_templates_export ul {
+#acf-admin-tool-ACF_Templates_Export ul {
     -webkit-column-width: 200px;
     -moz-column-width: 200px;
     column-width: 200px
 }
 
-#acf-admin-tool-acfe_dynamic_templates_export .acf-postbox-columns {
+#acf-admin-tool-ACF_Templates_Export .acf-postbox-columns {
     margin-right: 0
 }
 

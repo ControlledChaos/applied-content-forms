@@ -18,7 +18,7 @@ class acfe_dynamic_options_pages extends acf_module{
 		$this->label = 'Options Page Title';
 		$this->textdomain = 'ACF Extended: Options Pages';
 
-		$this->tool = 'acfe_dynamic_options_pages_export';
+		$this->tool = 'ACF_Options_Pages_Export';
 		$this->tools = array('php', 'json');
 		$this->columns = array(
 			'name'      => __('Menu slug', 'acf'),

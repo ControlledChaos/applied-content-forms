@@ -563,7 +563,7 @@ msgid "The following code can be used to register a local version of the selecte
 msgstr "O código abaixo pode ser usado para registar uma versão local do(s) grupo(s) de campos seleccionado(s). Um grupo de campos local tem alguns benefícios, tais como maior velocidade de carregamento, controlo de versão, definições e campos dinâmicos. Copie e cole o código abaixo no ficheiro functions.php do seu tema, ou inclua-o num ficheiro externo."
 
 #: includes/admin/tools/class-acf-admin-tool-export.php:446
-msgid "Copy to clipboard"
+msgid "Copy to Clipboard"
 msgstr "Copiar para a área de transferência"
 
 #: includes/admin/tools/class-acf-admin-tool-export.php:483

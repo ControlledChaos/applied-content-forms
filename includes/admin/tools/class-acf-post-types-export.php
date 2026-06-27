@@ -1,6 +1,6 @@
 <?php
 /**
- * Post type export tool
+ * Post types export tool
  *
  * @package    Applied Content Forms
  * @subpackage Includes
@@ -18,7 +18,7 @@ if ( ! acf_get_setting( 'post_types' ) ) {
 	return;
 }
 
-class ACF_Post_Types_Export extends ACF_Module_Export {
+final class ACF_Post_Types_Export extends ACF_Module_Export {
 
 	/**
 	 * Initialize
@@ -32,9 +32,9 @@ class ACF_Post_Types_Export extends ACF_Module_Export {
 		$this->name  = 'ACF_Post_Types_Export';
 		$this->title = __( 'Export Post Types', 'acf' );
 		if ( $this->is_active() ) {
-			$this->title = __( 'Generated PHP: Post Types' );
+			$this->title = __( 'Generated PHP: Post Types', 'acf' );
 		}
-		$this->description = __( 'Export Post Types', 'acf' );
+		$this->description = __( 'Tool for dynamic custom post types registered by this instance of Applied Content Forms. Export JSON to import into another site, generate PHP to add to a theme or plugin.', 'acf' );
 		$this->select      = __( 'Select Post Types', 'acf' );
 		$this->default_action  = 'json';
 		$this->allowed_actions = [ 'json', 'php' ];
@@ -43,9 +43,9 @@ class ACF_Post_Types_Export extends ACF_Module_Export {
 		$this->files    = 'post-types';
 		$this->messages = [
 			'not_found'        => __( 'No post type available.', 'acf' ),
-			'not_selected'     => __( 'No post types selected', 'acf' ),
-			'success_single'   => __( '1 post type exported', 'acf' ),
-			'success_multiple' => __( '%s post types exported', 'acf' ),
+			'not_selected'     => __( 'No post types selected.', 'acf' ),
+			'success_single'   => __( '1 post type exported.', 'acf' ),
+			'success_multiple' => __( '%s post types exported.', 'acf' ),
 		];
 	}
 }

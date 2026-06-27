@@ -23,7 +23,7 @@ class acfe_dynamic_taxonomies extends acf_module {
 		$this->label = 'Taxonomy Label';
 		$this->textdomain = 'Taxonomies';
 
-		$this->tool = 'acfe_dynamic_taxonomies_export';
+		$this->tool = 'ACF_Taxonomies_Export';
 		$this->tools = array('php', 'json');
 		$this->columns = array(
 			'acf-name'         => __('Name', 'acf'),

@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	die;
 }
 
-class ACF_Native_Export_Import extends ACF_Admin_Tool {
+final class ACF_Native_Export_Import extends ACF_Admin_Tool {
 
 	/**
 	 * Constructor method
@@ -49,7 +49,7 @@ class ACF_Native_Export_Import extends ACF_Admin_Tool {
 	public function html() {
 
 	?>
-	<p><?php _e( 'Import and export native content as well as custom post types.', 'acf' ); ?></p>
+	<p><?php _e( 'Import and export native CMS content, such as posts & pages, and media, as well as custom post types.', 'acf' ); ?></p>
 	<p>
 		<a href="<?php echo admin_url( 'import.php' ); ?>" class="button button-primary">
 			<?php _e( 'Import Content', 'acf' ); ?>

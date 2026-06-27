@@ -477,7 +477,7 @@ msgstr ""
 "do externího souboru."
 
 #: includes/admin/tools/class-acf-admin-tool-export.php:446
-msgid "Copy to clipboard"
+msgid "Copy to Clipboard"
 msgstr "Zkopírovat od schránky"
 
 #: includes/admin/tools/class-acf-admin-tool-export.php:483

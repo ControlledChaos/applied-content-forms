@@ -242,7 +242,7 @@ class acfe_module_options{
      */
     function html_list(){
 
-        acfe_get_view('html-options-list');
+        acf_get_view('html-options-list');
 
     }
 
@@ -251,7 +251,7 @@ class acfe_module_options{
      */
     function html_edit(){
 
-        acfe_get_view('html-options-edit');
+        acf_get_view('html-options-edit');
 
     }
 

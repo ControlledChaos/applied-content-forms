@@ -710,7 +710,7 @@ msgstr ""
 "in die functions.php oder eine externe Datei in Ihrem Theme ein."
 
 #: includes/admin/tools/class-acf-admin-tool-export.php:446
-msgid "Copy to clipboard"
+msgid "Copy to Clipboard"
 msgstr "In die Zwischenablage kopieren"
 
 #: includes/admin/tools/class-acf-admin-tool-export.php:483

@@ -24,7 +24,7 @@ class acfe_dynamic_forms extends acf_module{
 		}
 		$this->label = 'Form Title';
 
-		$this->tool = 'acfe_dynamic_forms_export';
+		$this->tool = 'ACF_Forms_Export';
 		$this->tools = array('json');
 		$this->columns = array(
 			'name'          => __('Name', 'acf'),

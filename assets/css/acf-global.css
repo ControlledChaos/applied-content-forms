@@ -20,21 +20,6 @@
   --acf-border-color--light: #c3c4c7;
 }
 
-.acf-badge {
-  display: inline-block;
-  width: 1.125rem;
-  height: 1.125rem;
-  margin: 0 0.25em;
-  padding: 0;
-  border-radius: 100%;
-  vertical-align: text-bottom;
-  background: var(--acf-badge--bg-color, #d63638);
-  color: var(--acf-badge--text-color, #ffffff);
-  font-size: 0.625rem;
-  line-height: 1.125rem;
-  text-align: center;
-}
-
 .admin-color-modern {
   --acf-badge--bg-color: #3858e9;
 }
@@ -116,6 +101,21 @@
 
 .admin-color-vinyard {
   --acf-badge--bg-color: #ba8752;
+}
+
+.acf-badge {
+  display: inline-block;
+  width: 1.125rem;
+  height: 1.125rem;
+  margin: 0 0.25em;
+  padding: 0;
+  border-radius: 100%;
+  vertical-align: text-bottom;
+  background: var(--acf-badge--bg-color, #d63638);
+  color: var(--acf-badge--text-color, #ffffff);
+  font-size: 0.625rem;
+  line-height: 1.125rem;
+  text-align: center;
 }
 
 .acf-df {
@@ -1448,10 +1448,16 @@ html[dir=rtl] .acf-table > tbody > tr > td.order + td {
   display: block;
   width: 100%;
   min-height: 500px;
-  background: #fafafa;
+  padding: 0.5rem;
+  background: rgba(0, 0, 0, 0.025);
   box-shadow: none;
-  padding: 7px;
-  border-radius: 3px;
+  font-family: "Source Code Pro", "Roboto Mono", "Fira Code", "Liberation Mono", Inconsolata, Menlo, Monaco, Consolas, "Cascadia Mono", "Segoe UI Mono", "Oxygen Mono", "Ubuntu Monospace", "Fira Mono", "Droid Sans Mono", "Courier New", Courier, ui-monospace, monospace, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+@media (prefers-color-scheme: dark) {
+  #acf-admin-tool-export textarea {
+    background: rgba(0, 0, 0, 0.95);
+    color: #fefefe;
+  }
 }
 
 #acf-admin-tool-export .acf-panel-selection .acf-label {

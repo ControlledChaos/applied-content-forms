@@ -451,7 +451,7 @@ msgstr ""
 "php del vostre tema, o incloeu-lo en un fitxer extern."
 
 #: includes/admin/tools/class-acf-admin-tool-export.php:446
-msgid "Copy to clipboard"
+msgid "Copy to Clipboard"
 msgstr "Copia-ho al porta-retalls"
 
 #: includes/admin/tools/class-acf-admin-tool-export.php:483

@@ -446,7 +446,7 @@ msgstr ""
 "php خود کپی کنید و یا از یک فایل دیگر انرا فراخوانی نمایید."
 
 #: includes/admin/tools/class-acf-admin-tool-export.php:446
-msgid "Copy to clipboard"
+msgid "Copy to Clipboard"
 msgstr "درج در حافظه موقت"
 
 #: includes/admin/tools/class-acf-admin-tool-export.php:483

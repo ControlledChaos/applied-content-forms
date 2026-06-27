@@ -1,33 +1,43 @@
 <?php
+/**
+ * Options pages import tool
+ *
+ * @package    Applied Content Forms
+ * @subpackage Includes
+ * @category   Tools
+ * @since      1.0.0
+ */
 
-if(!defined('ABSPATH'))
-    exit;
-
-// Check setting
-if(!acf_get_setting('options_pages'))
-    return;
-
-if(!class_exists('acfe_dynamic_options_pages_import')):
-
-class acfe_dynamic_options_pages_import extends ACF_Module_Import{
-
-    function initialize(){
-
-        // vars
-        $this->hook = 'options_page';
-        $this->name = 'acfe_dynamic_options_pages_import';
-        $this->title = __('Import Options Pages');
-        $this->description = __('Import Options Pages');
-        $this->instance = acf_get_instance('acfe_dynamic_options_pages');
-        $this->messages = array(
-            'success_single'    => '1 options page imported',
-            'success_multiple'  => '%s options pages imported',
-        );
-
-    }
-
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
 }
 
-acf_register_admin_tool('acfe_dynamic_options_pages_import');
+// Stop if options pages are not active.
+if ( ! acf_get_setting( 'options_pages' ) ) {
+	return;
+}
 
-endif;
+final class ACF_Options_Pages_Import extends ACF_Module_Import {
+
+    /**
+	 * Initialize
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @return void
+	 */
+    public function initialize() {
+
+        $this->hook  = 'options_page';
+        $this->name  = 'ACF_Options_Pages_Import';
+        $this->title = __( 'Import Options Pages', 'acf' );
+        $this->description = __( 'Tool for dynamic options pages registered by another instance of Applied Content Forms. Upload an exported JSON file to import into the database.', 'acf' );
+        $this->instance = acf_get_instance( 'acfe_dynamic_options_pages' );
+        $this->messages = [
+            'success_single'   => __( '1 options page imported', 'acf' ),
+            'success_multiple' => __( '%s options pages imported', 'acf' )
+        ];
+    }
+}
+acf_register_admin_tool( 'ACF_Options_Pages_Import' );

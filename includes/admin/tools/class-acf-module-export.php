@@ -198,7 +198,7 @@ class ACF_Module_Export extends ACF_Admin_Tool {
 					<textarea id="acf-export-textarea" readonly="true"><?php $this->instance->export_php( $this->data ); ?></textarea>
 				</div>
 				<p class="acf-submit">
-					<a class="button" id="acf-export-copy"><?php _e( 'Copy to clipboard', 'acf' ); ?></a>
+					<a class="button" id="acf-export-copy"><?php _e( 'Copy to Clipboard', 'acf' ); ?></a>
 				</p>
 				<script type="text/javascript">
 				(function($){

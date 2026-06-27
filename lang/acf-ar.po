@@ -467,7 +467,7 @@ msgstr ""
 "إلى ملف functions.php بالقالب الخاص بك أو إدراجه ضمن ملف خارجي."
 
 #: includes/admin/tools/class-acf-admin-tool-export.php:446
-msgid "Copy to clipboard"
+msgid "Copy to Clipboard"
 msgstr "نسخ إلى الحافظة"
 
 #: includes/admin/tools/class-acf-admin-tool-export.php:483

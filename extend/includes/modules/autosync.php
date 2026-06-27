@@ -349,9 +349,9 @@ class ACFE_AutoSync{
         // Prepare
         $str_replace = array(
             "  "            => "\t",
-            "'!!__(!!\'"    => "__('",
+            "'!!__(!!\'"    => "__( '",
             "!!\', !!\'"    => "', '",
-            "!!\')!!'"      => "')",
+            "!!\')!!'"      => "' )",
             "array ("       => "array("
         );
 
@@ -363,7 +363,7 @@ class ACFE_AutoSync{
         ob_start();
 
         echo "<?php " . "\r\n" . "\r\n";
-        echo "if( function_exists('acf_add_local_field_group') ):" . "\r\n" . "\r\n";
+        echo "if ( function_exists( 'acf_add_local_field_group' ) ) :" . "\r\n" . "\r\n";
 
         // code
         $code = var_export($field_group, true);
@@ -375,7 +375,7 @@ class ACFE_AutoSync{
         $code = preg_replace( array_keys($preg_replace), array_values($preg_replace), $code );
 
         // echo
-        echo "acf_add_local_field_group({$code});" . "\r\n" . "\r\n";
+        echo "acf_add_local_field_group( {$code} );" . "\r\n" . "\r\n";
 
         echo "endif;";
 

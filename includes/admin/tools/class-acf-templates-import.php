@@ -1,33 +1,36 @@
 <?php
+/**
+ * Templates import tool
+ *
+ * @package    Applied Content Forms
+ * @subpackage Includes
+ * @category   Tools
+ * @since      1.0.0
+ */
 
-if(!defined('ABSPATH'))
-    exit;
-
-// Check setting
-if ( ! acf_get_setting( 'templates' ) )
-    return;
-
-if(!class_exists('acfe_dynamic_templates_import')):
-
-class acfe_dynamic_templates_import extends ACF_Module_Import{
-
-    function initialize(){
-
-        // vars
-        $this->hook = 'template';
-        $this->name = 'acfe_dynamic_templates_import';
-        $this->title = __('Import Templates');
-        $this->description = __('Import Templates');
-        $this->instance = acf_get_instance('acfe_dynamic_templates');
-        $this->messages = array(
-            'success_single'    => '1 template imported',
-            'success_multiple'  => '%s templates imported',
-        );
-
-    }
-
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
 }
 
-acf_register_admin_tool('acfe_dynamic_templates_import');
+// Stop if templates are not active.
+if ( ! acf_get_setting( 'templates' ) ) {
+	return;
+}
 
-endif;
+final class ACF_Templates_Import extends ACF_Module_Import {
+
+	public function initialize() {
+
+		$this->hook = 'template';
+		$this->name = 'ACF_Templates_Import';
+		$this->title = __( 'Import Templates', 'acf' );
+		$this->description = __( 'Tool for field group templates registered by another instance of Applied Content Forms. Upload an exported JSON file to import into the database.', 'acf' );
+		$this->instance = acf_get_instance( 'acfe_dynamic_templates' );
+		$this->messages = [
+			'success_single'   => __( '1 template imported', 'acf' ),
+			'success_multiple' => __( '%s templates imported', 'acf' )
+		];
+	}
+}
+acf_register_admin_tool( 'ACF_Templates_Import' );

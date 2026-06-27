@@ -522,7 +522,7 @@ msgstr ""
 "seguente codice nel file functions.php del vostro tema."
 
 #: includes/admin/tools/class-acf-admin-tool-export.php:446
-msgid "Copy to clipboard"
+msgid "Copy to Clipboard"
 msgstr "Copia negli appunti"
 
 #: includes/admin/tools/class-acf-admin-tool-export.php:483

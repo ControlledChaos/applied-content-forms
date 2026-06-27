@@ -1,6 +1,6 @@
 <?php
 /**
- * Post type import tool
+ * Post types import tool
  *
  * @package    Applied Content Forms
  * @subpackage Includes
@@ -18,7 +18,7 @@ if ( ! acf_get_setting( 'post_types' ) ) {
 	return;
 }
 
-class ACF_Post_Types_Import extends ACF_Module_Import {
+final class ACF_Post_Types_Import extends ACF_Module_Import {
 
 	/**
 	 * Initialize
@@ -32,7 +32,7 @@ class ACF_Post_Types_Import extends ACF_Module_Import {
 		$this->hook  = 'post_type';
 		$this->name  = 'ACF_Post_Types_Import';
 		$this->title = __( 'Import Post Types', 'acf' );
-		$this->description = __( 'Import Post Types', 'acf' );
+		$this->description = __( 'Tool for dynamic custom post types registered by another instance of Applied Content Forms. Upload an exported JSON file to import into the database.', 'acf' );
 		$this->instance    = acf_get_instance( 'acf_dynamic_post_types' );
 		$this->messages    = [
 			'success_single'   => __( '1 post type imported', 'acf' ),

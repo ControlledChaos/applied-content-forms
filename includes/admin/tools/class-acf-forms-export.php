@@ -1,39 +1,49 @@
 <?php
+/**
+ * Forms export tool
+ *
+ * @package    Applied Content Forms
+ * @subpackage Includes
+ * @category   Tools
+ * @since      1.0.0
+ */
 
-if(!defined('ABSPATH'))
-    exit;
-
-// Check setting
-if ( ! acf_get_setting( 'forms' ) )
-    return;
-
-if(!class_exists('acfe_dynamic_forms_export')):
-
-class acfe_dynamic_forms_export extends ACF_Module_Export{
-
-    function initialize(){
-
-        // vars
-        $this->name = 'acfe_dynamic_forms_export';
-        $this->title = __('Export Forms');
-        $this->description = __('Export Forms');
-        $this->select = __('Select Forms');
-        $this->default_action = 'json';
-        $this->allowed_actions = array('json');
-        $this->instance = acf_get_instance('acfe_dynamic_forms');
-        $this->file = 'form';
-        $this->files = 'forms';
-        $this->messages = array(
-            'not_found'         => __('No form available.'),
-            'not_selected'      => __('No forms selected'),
-            'success_single'    => '1 form exported',
-            'success_multiple'  => '%s forms exported',
-        );
-
-    }
-
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
 }
 
-acf_register_admin_tool('acfe_dynamic_forms_export');
+// Stop if forms are not active.
+if ( ! acf_get_setting( 'forms' ) ) {
+	return;
+}
 
-endif;
+final class ACF_Forms_Export extends ACF_Module_Export {
+
+	/**
+	 * Initialize
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @return void
+	 */
+	public function initialize() {
+
+		$this->name  = 'ACF_Forms_Export';
+		$this->title = __( 'Export Forms', 'acf' );
+		$this->description = __( 'Tool for dynamic frontend forms registered by this instance of Applied Content Forms. Export JSON to import into another site, generate PHP to add to a theme or plugin.', 'acf' );
+		$this->select = __( 'Select Forms', 'acf' );
+		$this->default_action  = 'json';
+		$this->allowed_actions = [ 'json' ];
+		$this->instance = acf_get_instance( 'acfe_dynamic_forms' );
+		$this->file     = 'form';
+		$this->files    = 'forms';
+		$this->messages = [
+			'not_found'        => __( 'No form available.', 'acf' ),
+			'not_selected'     => __( 'No forms selected.', 'acf' ),
+			'success_single'   => __( '1 form exported', 'acf' ),
+			'success_multiple' => __( '%s forms exported', 'acf' )
+		];
+	}
+}
+acf_register_admin_tool( 'ACF_Forms_Export' );

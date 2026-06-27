@@ -485,7 +485,7 @@ msgstr ""
 "functions.php или подключите его через внешний файл."
 
 #: includes/admin/tools/class-acf-admin-tool-export.php:446
-msgid "Copy to clipboard"
+msgid "Copy to Clipboard"
 msgstr "Скопировать в буфер обмена"
 
 #: includes/admin/tools/class-acf-admin-tool-export.php:483

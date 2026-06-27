@@ -1165,7 +1165,7 @@ class acf_dynamic_post_types extends acf_module {
 			// esc_textarea
 			$code = esc_textarea( $code );
 
-			echo "register_post_type('{$post_type}', {$code});" . "\r\n" . "\r\n";
+			echo __( '// Post Type: ', 'acf' ) . $args['label'] . "\n" . "register_post_type( '{$post_type}', {$code} );" . "\r\n" . "\r\n";
 		}
 	}
 
@@ -1176,7 +1176,7 @@ class acf_dynamic_post_types extends acf_module {
 	 * @access public
 	 * @return boolean
 	 */
-	public function reset(){
+	public function reset() {
 
 		$args = apply_filters( 'acfe/post_type/reset_args', [
 			'post_type'      => $this->post_type,

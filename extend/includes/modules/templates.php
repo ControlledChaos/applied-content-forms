@@ -20,7 +20,7 @@ class acfe_dynamic_templates extends acf_module {
 			$this->active = true;
 		}
         $this->label = 'Template Title';
-        $this->tool = 'acfe_dynamic_templates_export';
+        $this->tool = 'ACF_Templates_Export';
         $this->tools = array('php', 'json');
         $this->columns = array(
             'locations'     => __('Locations', 'acf'),

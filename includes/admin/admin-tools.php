@@ -146,6 +146,7 @@ class acf_admin_tools {
 		acf_include( 'includes/admin/tools/class-acf-module-import.php' );
 		acf_include( 'includes/admin/tools/class-acf-field-groups-export.php' );
 		acf_include( 'includes/admin/tools/class-acf-field-groups-import.php' );
+		acf_include( 'includes/admin/tools/class-acf-local-field-groups-export.php' );
 		acf_include( 'includes/admin/tools/class-acf-post-types-export.php' );
 		acf_include( 'includes/admin/tools/class-acf-post-types-import.php' );
 		acf_include( 'includes/admin/tools/class-acf-taxonomies-export.php' );
@@ -159,11 +160,6 @@ class acf_admin_tools {
 		acf_include( 'includes/admin/tools/class-acf-templates-export.php' );
 		acf_include( 'includes/admin/tools/class-acf-templates-import.php' );
 		acf_include( 'includes/admin/tools/class-acf-rewrite-rules-export.php' );
-		acf_include( 'includes/admin/tools/class-acf-settings-export.php' );
-		acf_include( 'includes/admin/tools/class-acf-settings-import.php' );
-
-		acf_include( 'includes/admin/tools/field-groups-local.php' );
-		acf_include( 'includes/admin/tools/field-groups-export.php' );
 
 		do_action( 'acf/include_admin_tools' );
 	}
@@ -236,7 +232,7 @@ class acf_admin_tools {
 		$tool = $this->get_tool( $metabox['args']['tool'] );
 
 		?>
-		<form method="post">
+		<form method="post" class="acf-admin-tool-form">
 			<?php $tool->html(); ?>
 			<?php acf_nonce_input( $tool->name ); ?>
 		</form>

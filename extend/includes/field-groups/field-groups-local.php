@@ -154,15 +154,15 @@ class ACFE_Field_Groups_Local{
                         <div class="row-actions">
 
                             <span>
-                                <a href="<?php echo add_query_arg(array('action' => 'php', 'keys' => $key), acf_get_admin_tool_url('acfe-fg-local')); ?>">PHP</a> |
+                                <a href="<?php echo add_query_arg(array('action' => 'php', 'keys' => $key), acf_get_admin_tool_url('local-fields')); ?>">PHP</a> |
                             </span>
 
                             <span>
-                                <a href="<?php echo add_query_arg(array('action' => 'json', 'keys' => $key), acf_get_admin_tool_url('acfe-fg-local')); ?>">Json</a> |
+                                <a href="<?php echo add_query_arg(array('action' => 'json', 'keys' => $key), acf_get_admin_tool_url('local-fields')); ?>">Json</a> |
                             </span>
 
                             <span>
-                                <a href="<?php echo add_query_arg(array('action' => 'sync', 'keys' => $key), acf_get_admin_tool_url('acfe-fg-local')); ?>">Sync to database</a> |
+                                <a href="<?php echo add_query_arg(array('action' => 'sync', 'keys' => $key), acf_get_admin_tool_url('local-fields')); ?>">Sync to database</a> |
                             </span>
 
                             <span class="acfe-key">
@@ -242,7 +242,7 @@ class ACFE_Field_Groups_Local{
 
             $post_ids = $_REQUEST['post'];
 
-            $url = admin_url('admin.php?page=acf-tools&tool=acfe-fg-local&action=php&keys=' . implode('+', $post_ids));
+            $url = admin_url('admin.php?page=acf-tools&tool=local-fields&action=php&keys=' . implode('+', $post_ids));
             wp_redirect($url);
             exit;
 
@@ -253,7 +253,7 @@ class ACFE_Field_Groups_Local{
 
             $post_ids = $_REQUEST['post'];
 
-            $url = admin_url('admin.php?page=acf-tools&tool=acfe-fg-local&action=json&keys=' . implode('+', $post_ids));
+            $url = admin_url('admin.php?page=acf-tools&tool=local-fields&action=json&keys=' . implode('+', $post_ids));
             wp_redirect($url);
             exit;
 
@@ -264,7 +264,7 @@ class ACFE_Field_Groups_Local{
 
             $post_ids = $_REQUEST['post'];
 
-            $url = admin_url('admin.php?page=acf-tools&tool=acfe-fg-local&action=sync&keys=' . implode('+', $post_ids));
+            $url = admin_url('admin.php?page=acf-tools&tool=local-fields&action=sync&keys=' . implode('+', $post_ids));
             wp_redirect($url);
             exit;
 

@@ -478,7 +478,7 @@ msgstr ""
 "Twojego motywu lub dołączyć go do zewnętrznego pliku."
 
 #: includes/admin/tools/class-acf-admin-tool-export.php:446
-msgid "Copy to clipboard"
+msgid "Copy to Clipboard"
 msgstr "Skopiuj do schowka"
 
 #: includes/admin/tools/class-acf-admin-tool-export.php:483

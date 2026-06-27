@@ -1,33 +1,43 @@
 <?php
+/**
+ * Forms import tool
+ *
+ * @package    Applied Content Forms
+ * @subpackage Includes
+ * @category   Tools
+ * @since      1.0.0
+ */
 
-if(!defined('ABSPATH'))
-    exit;
-
-// Check setting
-if ( ! acf_get_setting( 'forms' ) )
-    return;
-
-if(!class_exists('acfe_dynamic_forms_import')):
-
-class acfe_dynamic_forms_import extends ACF_Module_Import{
-
-    function initialize(){
-
-        // vars
-        $this->hook = 'form';
-        $this->name = 'acfe_dynamic_forms_import';
-        $this->title = __('Import Forms');
-        $this->description = __('Import Forms');
-        $this->instance = acf_get_instance('acfe_dynamic_forms');
-        $this->messages = array(
-            'success_single'    => '1 form imported',
-            'success_multiple'  => '%s forms imported',
-        );
-
-    }
-
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
 }
 
-acf_register_admin_tool('acfe_dynamic_forms_import');
+// Stop if forms are not active.
+if ( ! acf_get_setting( 'forms' ) ) {
+	return;
+}
 
-endif;
+final class ACF_Forms_Import extends ACF_Module_Import {
+
+    /**
+	 * Initialize
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @return void
+	 */
+    public function initialize() {
+
+        $this->hook  = 'form';
+        $this->name  = 'ACF_Forms_Import';
+        $this->title = __( 'Import Forms', 'acf' );
+        $this->description = __( 'Tool for dynamic frontend forms registered by another instance of Applied Content Forms. Upload an exported JSON file to import into the database.', 'acf' );
+        $this->instance = acf_get_instance( 'acfe_dynamic_forms' );
+        $this->messages = [
+            'success_single'   => __( '1 form imported', 'acf' ),
+            'success_multiple' => __( '%s forms imported', 'acf' )
+        ];
+    }
+}
+acf_register_admin_tool( 'ACF_Forms_Import' );

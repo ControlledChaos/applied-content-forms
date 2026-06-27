@@ -619,7 +619,7 @@ msgstr ""
 "bir dosya olarak temanıza dahil etmek."
 
 #: includes/admin/tools/class-acf-admin-tool-export.php:446
-msgid "Copy to clipboard"
+msgid "Copy to Clipboard"
 msgstr "Panoya kopyala"
 
 #: includes/admin/tools/class-acf-admin-tool-export.php:483

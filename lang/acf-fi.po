@@ -617,7 +617,7 @@ msgstr ""
 "teemasi functions.php tiedostoon tai sisällytä se ulkoisen tiedoston avulla."
 
 #: includes/admin/tools/class-acf-admin-tool-export.php:446
-msgid "Copy to clipboard"
+msgid "Copy to Clipboard"
 msgstr "Kopioi leikepöydälle"
 
 #: includes/admin/tools/class-acf-admin-tool-export.php:483

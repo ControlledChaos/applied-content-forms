@@ -476,7 +476,7 @@ msgstr ""
 "functions.php al temei sau să-l includeți într-un fișier extern."
 
 #: includes/admin/tools/class-acf-admin-tool-export.php:446
-msgid "Copy to clipboard"
+msgid "Copy to Clipboard"
 msgstr "Copiază în clipboar"
 
 #: includes/admin/tools/class-acf-admin-tool-export.php:483

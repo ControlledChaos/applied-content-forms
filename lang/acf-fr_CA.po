@@ -547,7 +547,7 @@ msgstr ""
 "fichier."
 
 #: includes/admin/tools/class-acf-admin-tool-export.php:446
-msgid "Copy to clipboard"
+msgid "Copy to Clipboard"
 msgstr "Copier dans le presse-papiers"
 
 #: includes/admin/tools/class-acf-admin-tool-export.php:483

@@ -24,7 +24,7 @@ class acfe_dynamic_block_types extends acf_module {
 		$this->label = 'Block Type Label';
 		$this->textdomain = 'Block Types';
 
-		$this->tool = 'acfe_dynamic_block_types_export';
+		$this->tool = 'ACF_Block_Types_Export';
 		$this->tools = array('php', 'json');
 		$this->columns = array(
 			'name'          => __('Name', 'acf'),
@@ -858,7 +858,7 @@ class acfe_dynamic_block_types extends acf_module {
 		$l10n = acf_get_setting('l10n');
 		$l10n_textdomain = acf_get_setting('l10n_textdomain');
 
-		echo "if( function_exists('acf_register_block_type') ):" . "\r\n" . "\r\n";
+		echo "if ( function_exists( 'acf_register_block_type' ) ) :" . "\r\n";
 
 		foreach($data as $args){
 
@@ -883,7 +883,7 @@ class acfe_dynamic_block_types extends acf_module {
 			$code = esc_textarea($code);
 
 			// echo
-			echo "acf_register_block_type({$code});" . "\r\n" . "\r\n";
+			echo "acf_register_block_type( {$code} );" . "\r\n";
 
 		}
 

@@ -445,7 +445,7 @@ msgstr ""
 "主題的 functions.php 文件中，或將它自外部文件包含進來。"
 
 #: includes/admin/tools/class-acf-admin-tool-export.php:446
-msgid "Copy to clipboard"
+msgid "Copy to Clipboard"
 msgstr "複製到剪貼簿"
 
 #: includes/admin/tools/class-acf-admin-tool-export.php:483
