@@ -76,9 +76,9 @@ final class Extend_ACF {
 		acf_include( 'extend/includes/forms/form-user.php' );
 
 		// Functions.
-		acf_include( 'extend/includes/acfe-script-functions.php' );
-		acf_include( 'extend/includes/acfe-template-functions.php' );
-		acf_include( 'extend/includes/acfe-world-functions.php' );
+		acf_include( 'includes/acf-script-functions.php' );
+		acf_include( 'includes/acf-template-functions.php' );
+		acf_include( 'includes/acf-world-functions.php' );
 		acf_include( 'extend/includes/payment.php' );
 		acf_include( 'extend/includes/world.php' );
 	}
