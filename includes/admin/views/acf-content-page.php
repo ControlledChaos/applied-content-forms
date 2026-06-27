@@ -1,4 +1,12 @@
 <?php
+/**
+ * ACF content management page
+ *
+ * @package    Applied Content Forms
+ * @subpackage Admin
+ * @category   Views
+ * @since      1.0.0
+ */
 
 ?>
 <div class="wrap acf-content-intro">
