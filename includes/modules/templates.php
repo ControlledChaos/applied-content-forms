@@ -678,7 +678,7 @@ class acfe_dynamic_templates extends acf_module {
     function location_types($choices){
 
         $name = __('Forms', 'acf');
-        $choices[$name] = acfe_array_insert_after('options_page', $choices[$name], 'acfe_template', __('Template', 'acfe'));
+        $choices[$name] = acf_array_insert_after('options_page', $choices[$name], 'acfe_template', __('Template', 'acfe'));
 
         return $choices;
 
@@ -837,7 +837,7 @@ class acfe_dynamic_templates extends acf_module {
         }
 
         // Do not apply on Template post type
-        if(acfe_maybe_get($post, 'post_type') === $this->post_type && in_array($pagenow, array('post.php', 'post-new.php'))){
+        if(acf_maybe_get($post, 'post_type') === $this->post_type && in_array($pagenow, array('post.php', 'post-new.php'))){
             return;
         }
 

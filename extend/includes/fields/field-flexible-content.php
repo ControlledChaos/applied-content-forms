@@ -74,7 +74,7 @@ class acfe_field_flexible_content{
 
         // Black magic
         parse_str($prefix, $output);
-        $keys = acfe_array_keys_r($output);
+        $keys = acf_array_keys_r($output);
 
         // ...
         $_field_id = $keys[1];

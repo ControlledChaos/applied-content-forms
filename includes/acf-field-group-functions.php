@@ -946,11 +946,11 @@ function acfe_get_post_id_field_groups( $post_id = 0 ) {
 	$taxonomy     = '';
 
 	// Override attachment.
-	if ( 'post' === $type && acfe_starts_with( $post_id, 'attachment_' ) ) {
+	if ( 'post' === $type && acf_starts_with( $post_id, 'attachment_' ) ) {
 		$type = 'attachment';
 
 	// Override menu.
-	} elseif ( 'term' === $type && acfe_starts_with( $post_id, 'menu_' ) ) {
+	} elseif ( 'term' === $type && acf_starts_with( $post_id, 'menu_' ) ) {
 		$type = 'menu';
 
 	// Override user list.

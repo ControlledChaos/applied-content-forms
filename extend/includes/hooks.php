@@ -546,7 +546,7 @@ class acfe_hooks{
 
 				global $tag;
 
-				$screen['term_id'] = acfe_maybe_get( $tag, 'term_id' );
+				$screen['term_id'] = acf_maybe_get( $tag, 'term_id' );
 
 			}
 

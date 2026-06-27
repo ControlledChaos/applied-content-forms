@@ -27,7 +27,7 @@ class acfe_field_column extends acf_field{
 
 	function new_validate_field($field){
 
-		if(!acfe_ends_with($field['columns'], '/6'))
+		if(!acf_ends_with($field['columns'], '/6'))
 			return $field;
 
 		if($field['columns'] === '1/6'){

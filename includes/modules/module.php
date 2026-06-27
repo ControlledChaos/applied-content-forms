@@ -167,7 +167,7 @@ class acf_module{
 
     function handle_bulk_actions($redirect, $action, $post_ids){
 
-        $post_ids = acfe_maybe_get_REQUEST('post');
+        $post_ids = acf_maybe_get_REQUEST('post');
 
         if(!$post_ids)
             return $redirect;

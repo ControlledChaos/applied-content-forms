@@ -309,7 +309,7 @@ final class ACF_Local_Field_Groups_Export extends ACF_Admin_Tool {
 	function get_action() {
 
 		$default = 'json';
-		$action  = acfe_maybe_get_REQUEST( 'action', $default );
+		$action  = acf_maybe_get_REQUEST( 'action', $default );
 
 		if ( ! in_array( $action, [ 'json', 'php', 'sync' ] ) ) {
 			$action = $default;

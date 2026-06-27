@@ -80,8 +80,8 @@ class acfe_dev{
      */
     function clean_meta(){
 
-        $post_id = acfe_maybe_get_REQUEST('acfe_dev_clean');
-        $nonce = acfe_maybe_get_REQUEST('acfe_dev_clean_nonce');
+        $post_id = acf_maybe_get_REQUEST('acfe_dev_clean');
+        $nonce = acf_maybe_get_REQUEST('acfe_dev_clean_nonce');
 
         if($post_id && wp_verify_nonce($nonce, 'acfe_dev_clean')){
 
@@ -560,7 +560,7 @@ class acfe_dev{
         }
 
         // Json
-        elseif(acfe_is_json($value)){
+        elseif(acf_is_json($value)){
 
             $return = '<pre>' . print_r(json_decode($value), true) . '</pre>';
             $return .= '<pre class="raw">' . print_r($value, true) . '</pre>';
@@ -717,7 +717,7 @@ class acfe_dev{
 
                 // Field type
                 $field_type = acf_get_field_type($field['type']);
-                $field_type = acfe_maybe_get($field_type, 'label', '<em>Undefined</em>');
+                $field_type = acf_maybe_get($field_type, 'label', '<em>Undefined</em>');
 
                 // Field Group
                 $field_group = acf_get_field_group_from_field($field);

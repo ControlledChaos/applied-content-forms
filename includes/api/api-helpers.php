@@ -2173,7 +2173,7 @@ function acf_is_screen( $id = '' ) {
 /**
  * Maybe get functions
  *
- * Theses functions will return a var if it exists in an array.
+ * These functions will return a var if it exists in an array.
  *
  * @since  1.0.0
  * @param  array $array The array to look within
@@ -2183,10 +2183,16 @@ function acf_is_screen( $id = '' ) {
  * @return mixed
  */
 function acf_maybe_get( $array = [], $key = 0, $default = null ) {
+	if ( is_object( $array ) ) {
+		return isset( $array->{$key} ) ? $array->{$key} : $default;
+	}
 	return isset( $array[$key] ) ? $array[$key] : $default;
 }
 function acf_maybe_get_POST( $key = '', $default = null ) {
 	return isset( $_POST[$key] ) ? $_POST[$key] : $default;
+}
+function acf_maybe_get_REQUEST( $key = '', $default = null ) {
+	return isset( $_REQUEST[$key] ) ? $_REQUEST[$key] : $default;
 }
 function acf_maybe_get_GET( $key = '', $default = null ) {
 	return isset( $_GET[$key] ) ? $_GET[$key] : $default;

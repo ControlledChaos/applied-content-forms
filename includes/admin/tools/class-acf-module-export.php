@@ -365,7 +365,7 @@ class ACF_Module_Export extends ACF_Admin_Tool {
 	public function get_action() {
 
 		$default = $this->default_action;
-		$action  = acfe_maybe_get_REQUEST( 'action', $default );
+		$action  = acf_maybe_get_REQUEST( 'action', $default );
 
 		if ( ! in_array( $action, $this->allowed_actions ) ) {
 			$action = $default;

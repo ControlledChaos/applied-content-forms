@@ -428,3 +428,149 @@ function acf_get_current_url() {
 	}
 	return '';
 }
+
+/**
+ * Is JSON
+ *
+ * Check if the string is a JSON input
+ * https://stackoverflow.com/a/6041773
+ *
+ * @since  1.0.0
+ * @param  string $string
+ * @return boolean
+ */
+function acf_is_json( $string ) {
+
+	// In case string = 1 or is not string.
+	if ( is_numeric( $string ) || ! is_string( $string ) ) {
+		return false;
+	}
+	json_decode( $string );
+
+	return json_last_error() == JSON_ERROR_NONE;
+}
+
+/**
+ * Array keys recursive
+ *
+ * @since  1.0.0
+ * @param  array $array
+ * @return array
+ */
+function acf_array_keys_r( $array ) {
+
+	$keys = array_keys( $array );
+	foreach ( $array as $i ) {
+		if ( ! is_array( $i ) ) {
+			continue;
+		}
+		$keys = array_merge( $keys, acf_array_keys_r( $i ) );
+	}
+	return $keys;
+}
+
+/**
+ * Starts with
+ *
+ * Checks if a strings starts with something.
+ *
+ * @since  1.0.0
+ * @param  string $haystack
+ * @param  string $needle
+ * @return boolean
+ */
+function acf_starts_with( $haystack, $needle ) {
+	$length = strlen( $needle );
+	return ( substr( $haystack, 0, $length ) === $needle );
+}
+
+/**
+ * Ends with
+ *
+ * Checks if a strings ends with something.
+ *
+ * @since  1.0.0
+ * @param  string $haystack
+ * @param  string $needle
+ * @return boolean
+ */
+function acf_ends_with( $haystack, $needle ) {
+
+	$length = strlen( $needle );
+	if ( $length == 0 ) {
+		return true;
+	}
+	return ( substr( $haystack, -$length ) === $needle );
+}
+
+/**
+ * Array insert before
+ *
+ * Insert data before a specific array key
+ *
+ * @since  1.0.0
+ * @param  string $key
+ * @param  array $array
+ * @param  mixed $new_key
+ * @param  mixed $new_value
+ * @return array
+ */
+function acf_array_insert_before( $key, array &$array, $new_key, $new_value ) {
+
+	if ( ! array_key_exists( $key, $array ) ) {
+		return $array;
+	}
+	$new = [];
+
+	foreach ( $array as $k => $value ) {
+		if ( $k === $key ) {
+			$new[$new_key] = $new_value;
+		}
+		$new[$k] = $value;
+	}
+	return $new;
+}
+
+/**
+ * Array insert after
+ *
+ * Insert data after a specific array key
+ *
+ * @since  1.0.0
+ * @param  string $key
+ * @param  array $array
+ * @param  mixed $new_key
+ * @param  mixed $new_value
+ * @return array
+ */
+function acf_array_insert_after( $key, array &$array, $new_key, $new_value ) {
+
+	if ( ! array_key_exists( $key, $array ) ) {
+		return $array;
+	}
+	$new = [];
+
+	foreach ( $array as $k => $value ) {
+		$new[$k] = $value;
+		if ( $k === $key ) {
+			$new[$new_key] = $new_value;
+		}
+	}
+	return $new;
+}
+
+/**
+ * Array move
+ *
+ * Moves an array key from position $a to $b.
+ *
+ * @since  1.0.0
+ * @param  array $array
+ * @param  integer $a
+ * @param  integer $b
+ * @return void
+ */
+function acf_array_move( &$array, $a, $b ) {
+	$out = array_splice( $array, $a, 1 );
+	array_splice( $array, $b, 0, $out );
+}

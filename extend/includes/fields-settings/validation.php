@@ -533,11 +533,11 @@ class acfe_field_validation{
                     $rule_match = true;
                 }
 
-                elseif($operator === 'ends' && acfe_ends_with($result, $match)){
+                elseif($operator === 'ends' && acf_ends_with($result, $match)){
                     $rule_match = true;
                 }
 
-                elseif($operator === '!ends' && !acfe_ends_with($result, $match)){
+                elseif($operator === '!ends' && !acf_ends_with($result, $match)){
                     $rule_match = true;
                 }
 

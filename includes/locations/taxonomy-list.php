@@ -212,7 +212,7 @@ class acfe_location_taxonomy_list{
 
         $name = __('Forms', 'acf');
 
-        $choices[$name] = acfe_array_insert_after('taxonomy', $choices[$name], 'taxonomy_list', __('Taxonomy List'));
+        $choices[$name] = acf_array_insert_after('taxonomy', $choices[$name], 'taxonomy_list', __('Taxonomy List'));
 
         return $choices;
 

@@ -1310,7 +1310,7 @@ class acf_payment extends acf_field{
         foreach($this->sub_fields as $sub_field){
 
             // ends with "{my_field}_{sub_field}"
-            if(acfe_ends_with($field['name'], "{$_name}_{$sub_field}")){
+            if(acf_ends_with($field['name'], "{$_name}_{$sub_field}")){
                 return $sub_field;
             }
 

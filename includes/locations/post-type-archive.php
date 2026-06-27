@@ -96,7 +96,7 @@ class acfe_location_post_type_archive{
         // Get Post Type object
         $post_type_obj = get_post_type_object($this->post_type);
 
-        if(acfe_maybe_get($post_type_obj, 'has_archive')){
+        if(acf_maybe_get($post_type_obj, 'has_archive')){
 
             // Add "Permalink" under title
             add_action('admin_footer', array($this, 'admin_footer'));
@@ -149,8 +149,8 @@ class acfe_location_post_type_archive{
         $object = get_post_type_object($post_type);
 
         // Check has archive
-        $has_archive = acfe_maybe_get($object, 'has_archive');
-        $has_archive_page = acfe_maybe_get($object, 'acfe_admin_archive');
+        $has_archive = acf_maybe_get($object, 'has_archive');
+        $has_archive_page = acf_maybe_get($object, 'acfe_admin_archive');
 
         if(!$has_archive || !$has_archive_page)
             return;
@@ -197,7 +197,7 @@ class acfe_location_post_type_archive{
 
         $name = __('Post', 'acf');
 
-        $choices[$name] = acfe_array_insert_after('post_type', $choices[$name], 'post_type_archive', __('Post Type Archive'));
+        $choices[$name] = acf_array_insert_after('post_type', $choices[$name], 'post_type_archive', __('Post Type Archive'));
 
         return $choices;
 

@@ -29,15 +29,15 @@ class ACFE_Field_Group{
         }
 
         if(isset($groups['E-Commerce'])){
-            $groups = acfe_array_insert_after('jQuery', $groups, 'E-Commerce', $groups['E-Commerce']);
+            $groups = acf_array_insert_after('jQuery', $groups, 'E-Commerce', $groups['E-Commerce']);
         }
 
         if(isset($groups['ACF'])){
-            $groups = acfe_array_insert_after('jQuery', $groups, 'ACF', $groups['ACF']);
+            $groups = acf_array_insert_after('jQuery', $groups, 'ACF', $groups['ACF']);
         }
 
         if(isset($groups['WordPress'])){
-            $groups = acfe_array_insert_after('jQuery', $groups, 'WordPress', $groups['WordPress']);
+            $groups = acf_array_insert_after('jQuery', $groups, 'WordPress', $groups['WordPress']);
         }
 
         return $groups;

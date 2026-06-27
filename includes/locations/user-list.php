@@ -200,7 +200,7 @@ class acfe_location_user_list{
 
     function rule_values($choices){
 
-        $choices = acfe_array_insert_after('all', $choices, 'list', __('List'));
+        $choices = acf_array_insert_after('all', $choices, 'list', __('List'));
 
         return $choices;
 

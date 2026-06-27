@@ -212,7 +212,7 @@ class acfe_location_post_type_list{
 
         $name = __('Post', 'acf');
 
-        $choices[$name] = acfe_array_insert_after('post_type', $choices[$name], 'post_type_list', __('Post Type List'));
+        $choices[$name] = acf_array_insert_after('post_type', $choices[$name], 'post_type_list', __('Post Type List'));
 
         return $choices;
 

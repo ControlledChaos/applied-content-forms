@@ -258,7 +258,7 @@ class acfe_dynamic_block_types extends acf_module {
 								if(!$field) continue;
 
 								$type = acf_get_field_type($field['type']);
-								$type_label = acfe_maybe_get($type, 'label', '-');
+								$type_label = acf_maybe_get($type, 'label', '-');
 								?>
 
 								<tr class="acf-row">

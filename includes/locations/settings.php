@@ -75,7 +75,7 @@ class acfe_location_settings{
 
         $name = __('Forms', 'acf');
 
-        $choices[$name] = acfe_array_insert_after('options_page', $choices[$name], 'wp_settings', __('WP Settings'));
+        $choices[$name] = acf_array_insert_after('options_page', $choices[$name], 'wp_settings', __('WP Settings'));
 
         return $choices;
 

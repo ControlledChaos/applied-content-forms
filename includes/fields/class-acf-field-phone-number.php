@@ -338,7 +338,7 @@ class acf_field_phone_number extends acf_field{
     function format_value($value, $post_id, $field){
 
         // Decode JSON string
-        if(acfe_is_json($value)){
+        if(acf_is_json($value)){
             $value = json_decode(wp_unslash($value), true);
         }
 

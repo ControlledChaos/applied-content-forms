@@ -784,7 +784,7 @@ class acfe_form_front{
             foreach(array('form_attributes_', 'fields_attributes_') as $allowed){
 
                 // check found allowed
-                if(!acfe_starts_with($key, $allowed)) continue;
+                if(!acf_starts_with($key, $allowed)) continue;
 
                 // explode
                 $explode = explode($allowed, $key);

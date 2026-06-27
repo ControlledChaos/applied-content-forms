@@ -121,7 +121,7 @@ class acfe_compatibility{
                     continue;
 
                 // Post Type List
-                if($and['param'] === 'post_type' && acfe_ends_with($and['value'], '_archive')){
+                if($and['param'] === 'post_type' && acf_ends_with($and['value'], '_archive')){
 
                     $and['param'] = 'post_type_list';
                     $and['value'] = substr_replace($and['value'], '', -8);
@@ -129,7 +129,7 @@ class acfe_compatibility{
                 }
 
                 // Taxonomy List
-                elseif($and['param'] === 'taxonomy' && acfe_ends_with($and['value'], '_archive')){
+                elseif($and['param'] === 'taxonomy' && acf_ends_with($and['value'], '_archive')){
 
                     $and['param'] = 'taxonomy_list';
                     $and['value'] = substr_replace($and['value'], '', -8);

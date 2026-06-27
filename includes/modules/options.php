@@ -83,12 +83,12 @@ class acfe_module_options{
         $this->action = 'list';
 
         // edit or delete
-        if(acfe_maybe_get_REQUEST('action', '-1') !== '-1'){
+        if(acf_maybe_get_REQUEST('action', '-1') !== '-1'){
 
             $this->action = $_REQUEST['action'];
 
         // bulk-delete
-        }elseif(acfe_maybe_get_REQUEST('action2', '-1') !== '-1'){
+        }elseif(acf_maybe_get_REQUEST('action2', '-1') !== '-1'){
 
             $this->action = $_REQUEST['action2'];
 
@@ -302,7 +302,7 @@ class acfe_module_options{
             'autoload'      => 'no',
         );
 
-        $option_id = absint(acfe_maybe_get_REQUEST('option'));
+        $option_id = absint(acf_maybe_get_REQUEST('option'));
 
         if($option_id){
 
@@ -388,7 +388,7 @@ class acfe_module_options{
         }
 
         // Serialized || HTML
-        elseif(acfe_is_json($option['option_value'])){
+        elseif(acf_is_json($option['option_value'])){
 
             $type = 'json';
             $instructions = 'Use this <a href="http://solutions.weblite.ca/php2json/" target="_blank">online tool</a> to decode/encode json.';

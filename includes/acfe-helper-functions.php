@@ -1,213 +1,7 @@
 <?php
 
 if(!defined('ABSPATH'))
-    exit;
-
-/**
- * acfe_maybe_get
- *
- * Similar to acf_maybe_get() but also works with OBJECTS
- *
- * @param array $array
- * @param int   $key
- * @param null  $default
- *
- * @return mixed|null
- */
-function acfe_maybe_get($array = array(), $key = 0, $default = null){
-
-    if(is_object($array)){
-        return isset($array->{$key}) ? $array->{$key} : $default;
-    }
-
-    return acf_maybe_get($array, $key, $default);
-
-}
-
-/**
- * acfe_maybe_get_REQUEST
- *
- * Similar to acf_maybe_get_POST() but works with $_REQUEST
- *
- * @param string $key
- * @param null   $default
- *
- * @return mixed|null
- */
-function acfe_maybe_get_REQUEST($key = '', $default = null){
-
-    return isset($_REQUEST[$key]) ? $_REQUEST[$key] : $default;
-
-}
-
-/**
- * acfe_is_json
- *
- * Check if the string is a json input
- * https://stackoverflow.com/a/6041773
- *
- * @param $string
- *
- * @return bool
- */
-function acfe_is_json($string){
-
-    // in case string = 1 or not string
-    if(is_numeric($string) || !is_string($string)){
-        return false;
-    }
-
-    json_decode($string);
-
-    return json_last_error() == JSON_ERROR_NONE;
-
-}
-
-/**
- * acfe_array_keys_r
- *
- * Array Keys Recursive
- *
- * @param $array
- *
- * @return int[]|string[]
- */
-function acfe_array_keys_r($array){
-
-    $keys = array_keys($array);
-
-    foreach($array as $i){
-
-        if(!is_array($i)) continue;
-
-        $keys = array_merge($keys, acfe_array_keys_r($i));
-
-    }
-
-    return $keys;
-
-}
-
-/**
- * acfe_starts_with
- *
- * Check if a strings starts with something
- *
- * @param $haystack
- * @param $needle
- *
- * @return bool
- */
-function acfe_starts_with($haystack, $needle){
-
-    $length = strlen($needle);
-    return (substr($haystack, 0, $length) === $needle);
-
-}
-
-/**
- * acfe_ends_with
- *
- * Check if a strings ends with something
- *
- * @param $haystack
- * @param $needle
- *
- * @return bool
- */
-function acfe_ends_with($haystack, $needle){
-
-    $length = strlen($needle);
-
-    if($length == 0) return true;
-
-    return (substr($haystack, -$length) === $needle);
-
-}
-
-/**
- * acfe_array_insert_before
- *
- * Insert data before a specific array key
- *
- * @param       $key
- * @param array $array
- * @param       $new_key
- * @param       $new_value
- *
- * @return array
- */
-function acfe_array_insert_before($key, array &$array, $new_key, $new_value){
-
-    if(!array_key_exists($key, $array)){
-        return $array;
-    }
-
-    $new = array();
-
-    foreach($array as $k => $value){
-
-        if($k === $key){
-            $new[$new_key] = $new_value;
-        }
-
-        $new[$k] = $value;
-
-    }
-
-    return $new;
-
-}
-
-/**
- * acfe_array_insert_after
- *
- * Insert data after a specific array key
- *
- * @param       $key
- * @param array $array
- * @param       $new_key
- * @param       $new_value
- *
- * @return array
- */
-function acfe_array_insert_after($key, array &$array, $new_key, $new_value){
-
-    if(!array_key_exists($key, $array)){
-        return $array;
-    }
-
-    $new = array();
-
-    foreach($array as $k => $value){
-
-        $new[$k] = $value;
-
-        if($k === $key){
-            $new[$new_key] = $new_value;
-        }
-
-    }
-
-    return $new;
-
-}
-
-/**
- * acfe_array_move
- *
- * Move the array key from position $a to $b
- *
- * @param $array
- * @param $a
- * @param $b
- */
-function acfe_array_move(&$array, $a, $b){
-
-    $out = array_splice($array, $a, 1);
-    array_splice($array, $b, 0, $out);
-
-}
+	exit;
 
 /**
  * acfe_add_validation_error
@@ -221,74 +15,74 @@ function acfe_array_move(&$array, $a, $b){
  */
 function acfe_add_validation_error($selector = '', $message = ''){
 
-    // general error
-    if(empty($selector)){
+	// general error
+	if(empty($selector)){
 
-        return acf_add_validation_error('', $message);
+		return acf_add_validation_error('', $message);
 
-    }
+	}
 
-    // selector is a field key
-    if(acf_is_field_key($selector)){
+	// selector is a field key
+	if(acf_is_field_key($selector)){
 
-        return add_filter("acf/validate_value/key={$selector}", function() use($message){
-            return $message;
-        });
+		return add_filter("acf/validate_value/key={$selector}", function() use($message){
+			return $message;
+		});
 
-    }
+	}
 
-    // get field by name
-    $field = acf_get_field($selector);
+	// get field by name
+	$field = acf_get_field($selector);
 
-    // check form data
-    if($form = acf_get_form_data('acfe/form')){
+	// check form data
+	if($form = acf_get_form_data('acfe/form')){
 
-        // vars
-        $fields = array();
-        $field_groups = acf_get_array($form['field_groups']);
+		// vars
+		$fields = array();
+		$field_groups = acf_get_array($form['field_groups']);
 
-        // loop field groups
-        foreach($field_groups as $key){
-            $fields = array_merge($fields, acf_get_fields($key));
-        }
+		// loop field groups
+		foreach($field_groups as $key){
+			$fields = array_merge($fields, acf_get_fields($key));
+		}
 
-        foreach($fields as $_field){
+		foreach($fields as $_field){
 
-            // field name is different
-            if($_field['name'] !== $selector) continue;
+			// field name is different
+			if($_field['name'] !== $selector) continue;
 
-            // assign field
-            $field = $_field;
-            break;
+			// assign field
+			$field = $_field;
+			break;
 
-        }
+		}
 
-    }
+	}
 
-    // check active loop
-    $row = acf_get_loop();
+	// check active loop
+	$row = acf_get_loop();
 
-    // exclude acfe form actions
-    if($row && acf_maybe_get($row, 'selector') !== 'acfe_form_actions'){
+	// exclude acfe form actions
+	if($row && acf_maybe_get($row, 'selector') !== 'acfe_form_actions'){
 
-        // get sub field
-        $field = acf_get_sub_field($selector, $row['field']);
+		// get sub field
+		$field = acf_get_sub_field($selector, $row['field']);
 
-    }
+	}
 
-    // field not found: add general error
-    if(!$field){
+	// field not found: add general error
+	if(!$field){
 
-        return acf_add_validation_error('', $message);
+		return acf_add_validation_error('', $message);
 
-    }
+	}
 
-    // add validation error
-    add_filter("acf/validate_value/key={$field['key']}", function() use($message){
-        return $message;
-    });
+	// add validation error
+	add_filter("acf/validate_value/key={$field['key']}", function() use($message){
+		return $message;
+	});
 
-    return false;
+	return false;
 
 }
 
@@ -303,17 +97,17 @@ function acfe_add_validation_error($selector = '', $message = ''){
  */
 function acfe_number_suffix($num){
 
-    if(!in_array(($num % 100), array(11,12,13))){
+	if(!in_array(($num % 100), array(11,12,13))){
 
-        switch($num % 10){
-            case 1:  return $num . 'st';
-            case 2:  return $num . 'nd';
-            case 3:  return $num . 'rd';
-        }
+		switch($num % 10){
+			case 1:  return $num . 'st';
+			case 2:  return $num . 'nd';
+			case 3:  return $num . 'rd';
+		}
 
-    }
+	}
 
-    return $num . 'th';
+	return $num . 'th';
 
 }
 
@@ -328,37 +122,37 @@ function acfe_number_suffix($num){
  */
 function acfe_array_to_string($array = array()){
 
-    if(!is_array($array)){
-        return $array;
-    }
+	if(!is_array($array)){
+		return $array;
+	}
 
-    if(empty($array)){
-        return false;
-    }
+	if(empty($array)){
+		return false;
+	}
 
-    if(acf_is_sequential_array($array)){
+	if(acf_is_sequential_array($array)){
 
-        foreach($array as $k => $v){
+		foreach($array as $k => $v){
 
-            if(!is_string($v)) continue;
+			if(!is_string($v)) continue;
 
-            return $v;
+			return $v;
 
-        }
+		}
 
-    }elseif(acf_is_associative_array($array)){
+	}elseif(acf_is_associative_array($array)){
 
-        foreach($array as $k => $v){
+		foreach($array as $k => $v){
 
-            if(!is_string($v)) continue;
+			if(!is_string($v)) continue;
 
-            return $v;
+			return $v;
 
-        }
+		}
 
-    }
+	}
 
-    return false;
+	return false;
 
 }
 
@@ -370,7 +164,7 @@ function acfe_array_to_string($array = array()){
  * @return bool
  */
 function acfe_is_dev() {
-    return acf_get_setting( 'dev_mode', false ) || ( defined( 'ACF_DEV' ) && ACF_DEV );
+	return acf_get_setting( 'dev_mode', false ) || ( defined( 'ACF_DEV' ) && ACF_DEV );
 }
 
 /**
@@ -382,7 +176,7 @@ function acfe_is_dev() {
  */
 function acfe_is_super_dev(){
 
-    return acf_get_setting('acfe/super_dev', false) || (defined('ACFE_super_dev') && ACFE_super_dev);
+	return acf_get_setting('acfe/super_dev', false) || (defined('ACFE_super_dev') && ACFE_super_dev);
 
 }
 
@@ -397,10 +191,10 @@ function acfe_is_super_dev(){
  */
 function acfe_is_post_type_reserved($post_type){
 
-    // restricted post types
-    $reserved = acf_get_setting('reserved_post_types', array());
+	// restricted post types
+	$reserved = acf_get_setting('reserved_post_types', array());
 
-    return in_array($post_type, $reserved);
+	return in_array($post_type, $reserved);
 
 }
 
@@ -415,10 +209,10 @@ function acfe_is_post_type_reserved($post_type){
  */
 function acfe_is_post_type_reserved_dev($post_type){
 
-    // restricted post types
-    $reserved = acf_get_setting('reserved_post_types', array());
+	// restricted post types
+	$reserved = acf_get_setting('reserved_post_types', array());
 
-    return !acfe_is_super_dev() && in_array($post_type, $reserved);
+	return !acfe_is_super_dev() && in_array($post_type, $reserved);
 
 }
 
@@ -433,10 +227,10 @@ function acfe_is_post_type_reserved_dev($post_type){
  */
 function acfe_is_taxonomy_reserved($taxonomy){
 
-    // restricted post types
-    $reserved = acf_get_setting('reserved_taxonomies', array());
+	// restricted post types
+	$reserved = acf_get_setting('reserved_taxonomies', array());
 
-    return in_array($taxonomy, $reserved);
+	return in_array($taxonomy, $reserved);
 
 }
 
@@ -451,10 +245,10 @@ function acfe_is_taxonomy_reserved($taxonomy){
  */
 function acfe_is_taxonomy_reserved_dev($taxonomy){
 
-    // restricted post types
-    $reserved = acf_get_setting('reserved_taxonomies', array());
+	// restricted post types
+	$reserved = acf_get_setting('reserved_taxonomies', array());
 
-    return !acfe_is_super_dev() && in_array($taxonomy, $reserved);
+	return !acfe_is_super_dev() && in_array($taxonomy, $reserved);
 
 }
 
@@ -470,7 +264,7 @@ function acfe_is_taxonomy_reserved_dev($taxonomy){
  */
 function acfe_update_setting($name, $value){
 
-    return acf_update_setting("acfe/{$name}", $value);
+	return acf_update_setting("acfe/{$name}", $value);
 
 }
 
@@ -486,7 +280,7 @@ function acfe_update_setting($name, $value){
  */
 function acfe_append_setting($name, $value){
 
-    return acf_append_setting("acfe/{$name}", $value);
+	return acf_append_setting("acfe/{$name}", $value);
 
 }
 
@@ -502,7 +296,7 @@ function acfe_append_setting($name, $value){
  */
 function acfe_get_setting($name, $value = null){
 
-    return acf_get_setting("acfe/{$name}", $value);
+	return acf_get_setting("acfe/{$name}", $value);
 
 }
 
@@ -516,9 +310,9 @@ function acfe_get_setting($name, $value = null){
  */
 function acfe_unset(&$array, $key){
 
-    if(isset($array[$key])){
-        unset($array[$key]);
-    }
+	if(isset($array[$key])){
+		unset($array[$key]);
+	}
 
 }
 
@@ -533,11 +327,11 @@ function acfe_unset(&$array, $key){
  */
 function acfe_unarray($val){
 
-    if(is_array($val)){
-        return reset($val);
-    }
+	if(is_array($val)){
+		return reset($val);
+	}
 
-    return $val;
+	return $val;
 }
 
 /**
@@ -546,39 +340,39 @@ function acfe_unarray($val){
  */
 function acfe_get_ip(){
 
-    $ip = false;
+	$ip = false;
 
-    // http client
-    if(!empty($_SERVER['HTTP_CLIENT_IP'])){
+	// http client
+	if(!empty($_SERVER['HTTP_CLIENT_IP'])){
 
-        $ip = filter_var(wp_unslash($_SERVER['HTTP_CLIENT_IP']), FILTER_VALIDATE_IP);
+		$ip = filter_var(wp_unslash($_SERVER['HTTP_CLIENT_IP']), FILTER_VALIDATE_IP);
 
-    // proxy pass
-    }elseif(!empty( $_SERVER['HTTP_X_FORWARDED_FOR'])){
+	// proxy pass
+	}elseif(!empty( $_SERVER['HTTP_X_FORWARDED_FOR'])){
 
-        // can include more than 1 ip, first is the public one.
-        $ips = explode(',', wp_unslash($_SERVER['HTTP_X_FORWARDED_FOR']));
+		// can include more than 1 ip, first is the public one.
+		$ips = explode(',', wp_unslash($_SERVER['HTTP_X_FORWARDED_FOR']));
 
-        if (is_array($ips)){
-            $ip = filter_var( $ips[0], FILTER_VALIDATE_IP );
-        }
+		if (is_array($ips)){
+			$ip = filter_var( $ips[0], FILTER_VALIDATE_IP );
+		}
 
-    // remote addr
-    }elseif(!empty($_SERVER['REMOTE_ADDR'])){
+	// remote addr
+	}elseif(!empty($_SERVER['REMOTE_ADDR'])){
 
-        $ip = filter_var(wp_unslash($_SERVER['REMOTE_ADDR']), FILTER_VALIDATE_IP);
+		$ip = filter_var(wp_unslash($_SERVER['REMOTE_ADDR']), FILTER_VALIDATE_IP);
 
-    }
+	}
 
-    // default
-    $ip = $ip !== false ? $ip : '127.0.0.1';
+	// default
+	$ip = $ip !== false ? $ip : '127.0.0.1';
 
-    // fix potential csv return
-    $ip_array = explode(',', $ip);
-    $ip_array = array_map('trim', $ip_array);
+	// fix potential csv return
+	$ip_array = explode(',', $ip);
+	$ip_array = array_map('trim', $ip_array);
 
-    // return
-    return $ip_array[0];
+	// return
+	return $ip_array[0];
 
 }
 
@@ -589,23 +383,23 @@ if(!function_exists('has_flexible_grid')){
 
 function has_flexible_grid($name, $post_id = false){
 
-    // get field
-    $field = acf_maybe_get_field($name, $post_id);
+	// get field
+	$field = acf_maybe_get_field($name, $post_id);
 
-    // bail early
-    if(!$field)
-        return false;
+	// bail early
+	if(!$field)
+		return false;
 
-    // vars
-    $flexible_grid = acf_maybe_get($field, 'acfe_flexible_grid');
-    $flexible_grid_enabled = acf_maybe_get($flexible_grid, 'acfe_flexible_grid_enabled');
+	// vars
+	$flexible_grid = acf_maybe_get($field, 'acfe_flexible_grid');
+	$flexible_grid_enabled = acf_maybe_get($flexible_grid, 'acfe_flexible_grid_enabled');
 
-    // not enabled
-    if(!$flexible_grid_enabled)
-        return false;
+	// not enabled
+	if(!$flexible_grid_enabled)
+		return false;
 
-    // return
-    return true;
+	// return
+	return true;
 
 }
 
@@ -618,26 +412,26 @@ if(!function_exists('get_flexible_grid')){
 
 function get_flexible_grid($name, $post_id = false){
 
-    // bail early
-    if(!has_flexible_grid($name, $post_id))
-        return false;
+	// bail early
+	if(!has_flexible_grid($name, $post_id))
+		return false;
 
-    // vars
-    $field = acf_maybe_get_field($name, $post_id);
-    $flexible_grid = acf_maybe_get($field, 'acfe_flexible_grid');
-    $flexible_grid_enabled = acf_maybe_get($flexible_grid, 'acfe_flexible_grid_enabled');
+	// vars
+	$field = acf_maybe_get_field($name, $post_id);
+	$flexible_grid = acf_maybe_get($field, 'acfe_flexible_grid');
+	$flexible_grid_enabled = acf_maybe_get($flexible_grid, 'acfe_flexible_grid_enabled');
 
-    // not enabled
-    if(!$flexible_grid_enabled)
-        return false;
+	// not enabled
+	if(!$flexible_grid_enabled)
+		return false;
 
-    // return data
-    return array(
-        'align'     => $flexible_grid['acfe_flexible_grid_align'],
-        'valign'    => $flexible_grid['acfe_flexible_grid_valign'],
-        'wrap'      => $flexible_grid['acfe_flexible_grid_wrap'],
-        'container' => $field['acfe_flexible_grid_container'],
-    );
+	// return data
+	return array(
+		'align'     => $flexible_grid['acfe_flexible_grid_align'],
+		'valign'    => $flexible_grid['acfe_flexible_grid_valign'],
+		'wrap'      => $flexible_grid['acfe_flexible_grid_wrap'],
+		'container' => $field['acfe_flexible_grid_container'],
+	);
 
 }
 
@@ -650,19 +444,19 @@ if(!function_exists('get_flexible_grid_class')){
 
 function get_flexible_grid_class($name, $post_id = false){
 
-    // get field
-    $grid = get_flexible_grid($name, $post_id);
+	// get field
+	$grid = get_flexible_grid($name, $post_id);
 
-    // bail early
-    if(!$grid)
-        return false;
+	// bail early
+	if(!$grid)
+		return false;
 
-    // vars
-    $class = "align-{$grid['align']} valign-{$grid['valign']}";
-    $class .= $grid['wrap'] ? " wrap" : "";
+	// vars
+	$class = "align-{$grid['align']} valign-{$grid['valign']}";
+	$class .= $grid['wrap'] ? " wrap" : "";
 
-    //return
-    return $class;
+	//return
+	return $class;
 
 }
 
@@ -674,7 +468,7 @@ function get_flexible_grid_class($name, $post_id = false){
 if(!function_exists('get_layout_col')){
 
 function get_layout_col(){
-    return get_sub_field('acfe_layout_col');
+	return get_sub_field('acfe_layout_col');
 }
 
 }

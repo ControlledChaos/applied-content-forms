@@ -370,14 +370,14 @@ class acf_dynamic_post_types extends acf_module {
 		$post_type = $query->get( 'post_type' );
 		$object    = get_post_type_object( $post_type );
 
-		$admin_order_by = acfe_maybe_get( $object, 'acfe_admin_orderby' );
-		$admin_order    = acfe_maybe_get( $object, 'acfe_admin_order' );
+		$admin_order_by = acf_maybe_get( $object, 'acfe_admin_orderby' );
+		$admin_order    = acf_maybe_get( $object, 'acfe_admin_order' );
 
-		if ( $admin_order_by && ! acfe_maybe_get_REQUEST( 'orderby' ) ) {
+		if ( $admin_order_by && ! acf_maybe_get_REQUEST( 'orderby' ) ) {
 			$query->set('orderby', $admin_order_by);
 		}
 
-		if ( $admin_order && ! acfe_maybe_get_REQUEST( 'order' ) ) {
+		if ( $admin_order && ! acf_maybe_get_REQUEST( 'order' ) ) {
 			$query->set('order', $admin_order);
 		}
 	}
@@ -401,7 +401,7 @@ class acf_dynamic_post_types extends acf_module {
 		}
 
 		$object    = get_post_type_object( $post_type );
-		$admin_ppp = acfe_maybe_get( $object, 'acfe_admin_ppp' );
+		$admin_ppp = acf_maybe_get( $object, 'acfe_admin_ppp' );
 		$user_ppp  = get_user_option( "edit_{$post_type}_per_page" );
 
 		if ( ! $admin_ppp || ! empty( $user_ppp ) ) {
@@ -427,9 +427,9 @@ class acf_dynamic_post_types extends acf_module {
 		$post_type = $query->get( 'post_type' );
 		$object    = get_post_type_object( $post_type );
 
-		$archive_ppp     = acfe_maybe_get( $object, 'acfe_archive_ppp' );
-		$archive_orderby = acfe_maybe_get( $object, 'acfe_archive_orderby' );
-		$archive_order   = acfe_maybe_get( $object, 'acfe_archive_order' );
+		$archive_ppp     = acf_maybe_get( $object, 'acfe_archive_ppp' );
+		$archive_orderby = acf_maybe_get( $object, 'acfe_archive_orderby' );
+		$archive_order   = acf_maybe_get( $object, 'acfe_archive_order' );
 
 		if ( $archive_ppp ) {
 			$query->set( 'posts_per_page', $archive_ppp );
