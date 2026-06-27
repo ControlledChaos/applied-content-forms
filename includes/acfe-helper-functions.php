@@ -157,30 +157,6 @@ function acfe_array_to_string($array = array()){
 }
 
 /**
- * acfe_is_dev
- *
- * Check if the developer mode is enabled
- *
- * @return bool
- */
-function acfe_is_dev() {
-	return acf_get_setting( 'dev_mode', false ) || ( defined( 'ACF_DEV' ) && ACF_DEV );
-}
-
-/**
- * acfe_is_super_dev
- *
- * Only for awesome developers!
- *
- * @return bool
- */
-function acfe_is_super_dev(){
-
-	return acf_get_setting('acfe/super_dev', false) || (defined('ACFE_super_dev') && ACFE_super_dev);
-
-}
-
-/**
  * acfe_is_post_type_reserved
  *
  * Check if the post type is reserved
@@ -212,7 +188,7 @@ function acfe_is_post_type_reserved_dev($post_type){
 	// restricted post types
 	$reserved = acf_get_setting('reserved_post_types', array());
 
-	return !acfe_is_super_dev() && in_array($post_type, $reserved);
+	return !acf_is_super_dev() && in_array($post_type, $reserved);
 
 }
 
@@ -248,7 +224,7 @@ function acfe_is_taxonomy_reserved_dev($taxonomy){
 	// restricted post types
 	$reserved = acf_get_setting('reserved_taxonomies', array());
 
-	return !acfe_is_super_dev() && in_array($taxonomy, $reserved);
+	return !acf_is_super_dev() && in_array($taxonomy, $reserved);
 
 }
 

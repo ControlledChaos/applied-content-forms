@@ -574,3 +574,27 @@ function acf_array_move( &$array, $a, $b ) {
 	$out = array_splice( $array, $a, 1 );
 	array_splice( $array, $b, 0, $out );
 }
+
+/**
+ * Is dev
+ *
+ * Checks if the developer mode is enabled.
+ *
+ * @since  1.0.0
+ * @return boolean
+ */
+function acf_is_dev() {
+	return acf_get_setting( 'dev_mode', false ) || ( defined( 'ACF_DEV' ) && ACF_DEV );
+}
+
+/**
+ * Is super dev
+ *
+ * From forked plugin. Not used.
+ *
+ * @since  1.0.0
+ * @return boolean
+ */
+function acf_is_super_dev() {
+	return acf_get_setting( 'acf/super_dev', false ) || ( defined( 'ACF_super_dev' ) && ACF_super_dev );
+}

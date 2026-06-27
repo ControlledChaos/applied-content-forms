@@ -13,7 +13,7 @@ class acfe_dev{
     function __construct(){
 
         // check settings
-        if((!acfe_is_dev() && !acfe_is_super_dev()) || !acf_current_user_can_admin()){
+        if((!acf_is_dev() && !acf_is_super_dev()) || !acf_current_user_can_admin()){
             return;
         }
 

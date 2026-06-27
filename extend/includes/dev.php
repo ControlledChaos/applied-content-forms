@@ -4,7 +4,7 @@ if(!defined('ABSPATH'))
     exit;
 
 // Check settings
-if((!acfe_is_dev() && !acfe_is_super_dev()) || !acf_current_user_can_admin())
+if((!acf_is_dev() && !acf_is_super_dev()) || !acf_current_user_can_admin())
     return;
 
 if(!class_exists('acfe_pro_dev')):
