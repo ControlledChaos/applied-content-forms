@@ -61,7 +61,6 @@ final class Extend_ACF {
 		] );
 
 		add_action( 'acf/init', [ $this, 'init' ], 99 );
-		add_action( 'acf/include_fields', [ $this, 'include_fields' ], 5 );
 		add_action( 'acf/include_field_types', [ $this, 'include_field_types' ], 99 );
 
 		acf_include( 'extend/includes/local-meta.php' );
@@ -82,9 +81,6 @@ final class Extend_ACF {
 		acf_include( 'extend/includes/acfe-world-functions.php' );
 		acf_include( 'extend/includes/payment.php' );
 		acf_include( 'extend/includes/world.php' );
-
-		// Modules.
-		acf_include( 'extend/includes/modules/scripts-class.php' );
 	}
 
 	/**
@@ -128,21 +124,6 @@ final class Extend_ACF {
 		acf_include( 'extend/includes/field-groups/field-groups-local.php' );
 		acf_include( 'extend/includes/field-groups/field-group-ui.php' );
 
-		acf_include( 'extend/includes/modules/module.php' );
-		acf_include( 'extend/includes/modules/author.php' );
-		acf_include( 'extend/includes/modules/dev.php' );
-		acf_include( 'extend/includes/modules/post-types.php' );
-		acf_include( 'extend/includes/modules/taxonomies.php' );
-		acf_include( 'extend/includes/modules/block-types.php' );
-		acf_include( 'extend/includes/modules/forms.php' );
-		acf_include( 'extend/includes/modules/templates.php' );
-		acf_include( 'extend/includes/modules/options-pages.php' );
-		acf_include( 'extend/includes/modules/options.php' );
-		acf_include( 'extend/includes/modules/single-meta.php' );
-		acf_include( 'extend/includes/modules/screen-layouts.php' );
-		acf_include( 'extend/includes/modules/global-field-condition.php' );
-		acf_include( 'extend/includes/modules/rewrite-rules.php' );
-
 		acf_include( 'extend/includes/pro-hooks.php' );
 
 		acf_include( 'extend/pro/includes/fields/field-checkbox.php' );
@@ -155,22 +136,6 @@ final class Extend_ACF {
 		acf_include( 'extend/pro/includes/fields/field-radio.php' );
 		acf_include( 'extend/pro/includes/fields/field-select.php' );
 		acf_include( 'extend/pro/includes/fields/field-tab.php' );
-
-		acf_include( 'extend/includes/modules/dev.php' );
-		acf_include( 'extend/includes/modules/force-sync.php' );
-		acf_include( 'extend/includes/modules/scripts.php' );
-		acf_include( 'extend/includes/modules/scripts-list.php' );
-	}
-
-	/**
-	 * Include fields
-	 *
-	 * @since  1.0.0
-	 * @access public
-	 * @return void
-	 */
-	public function include_fields() {
-		acf_include( 'extend/includes/modules/autosync.php' );
 	}
 
 	/**
@@ -181,7 +146,7 @@ final class Extend_ACF {
 	 * @return void
 	 */
 	function include_form_actions() {
-		acf_include( 'extend/includes/modules/forms-action-option.php' );
+		acf_include( 'includes/modules/forms-action-option.php' );
 	}
 
 	/**

@@ -487,6 +487,8 @@ final class ACF {
 		 */
 		do_action( 'acf/include_field_types' );
 
+		acf_include( 'includes/modules/scripts-class.php' );
+
 		// Include locations.
 		acf_include( 'includes/locations/class-acf-location-post-type.php' );
 		acf_include( 'includes/locations/class-acf-location-post-template. php' );
@@ -550,8 +552,29 @@ final class ACF {
 		 */
 		do_action( 'acf/include_fields' );
 
+		acf_include( 'includes/modules/autosync.php' );
+
 		// Settings update.
 		acf_include( 'includes/settings-update.php' );
+
+		acf_include( 'includes/modules/module.php' );
+		acf_include( 'includes/modules/author.php' );
+		acf_include( 'includes/modules/dev.php' );
+		acf_include( 'includes/modules/post-types.php' );
+		acf_include( 'includes/modules/taxonomies.php' );
+		acf_include( 'includes/modules/block-types.php' );
+		acf_include( 'includes/modules/forms.php' );
+		acf_include( 'includes/modules/templates.php' );
+		acf_include( 'includes/modules/options-pages.php' );
+		acf_include( 'includes/modules/options.php' );
+		acf_include( 'includes/modules/single-meta.php' );
+		acf_include( 'includes/modules/screen-layouts.php' );
+		acf_include( 'includes/modules/global-field-condition.php' );
+		acf_include( 'includes/modules/rewrite-rules.php' );
+		acf_include( 'includes/modules/dev.php' );
+		acf_include( 'includes/modules/force-sync.php' );
+		acf_include( 'includes/modules/scripts.php' );
+		acf_include( 'includes/modules/scripts-list.php' );
 
 		/**
 		 * Fires after ACF is completely "initialized".
