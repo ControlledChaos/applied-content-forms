@@ -300,7 +300,6 @@ final class ACF {
 
 		acf_include( 'includes/class-acf-data.php' );
 		acf_include( 'includes/fields/class-acf-field.php' );
-		acf_include( 'includes/locations/abstract-acf-legacy-location.php' );
 		acf_include( 'includes/locations/abstract-acf-location.php' );
 
 		acf_include( 'includes/acf-helper-functions.php' );
@@ -315,6 +314,7 @@ final class ACF {
 		acf_include( 'includes/acf-user-functions.php' );
 		acf_include( 'includes/acf-value-functions.php' );
 		acf_include( 'includes/acf-input-functions.php' );
+		acf_include( 'includes/acf-blocks-functions.php' );
 		acf_include( 'includes/acf-cms-functions.php' );
 
 		acf_include( 'includes/fields.php' );
@@ -357,17 +357,11 @@ final class ACF {
 			acf_include( 'includes/admin/admin-field-groups.php' );
 			acf_include( 'includes/admin/admin-notices.php' );
 			acf_include( 'includes/admin/admin-tools.php' );
+			acf_include( 'includes/admin/admin-options-page.php' );
 			acf_include( 'includes/admin/admin-upgrade.php' );
 		}
 
-		acf_include( 'includes/legacy/legacy-locations.php' );
-		acf_include( 'includes/blocks.php' );
-		acf_include( 'includes/options-page.php' );
-
-		if ( is_admin() ) {
-			acf_include( 'includes/admin/admin-options-page.php' );
-		}
-
+		acf_include( 'includes/class-options-page.php' );
 		acf_include( 'includes/acf-screen-functions.php' );
 		acf_include( 'includes/compatibility.php' );
 
@@ -1077,26 +1071,6 @@ final class ACF {
 	 */
 	public function __isset( $key ) {
 		return in_array( $key, [ 'locations', 'json' ] );
-	}
-
-	/**
-	 * Magic __get method
-	 *
-	 * This is for for backwards compatibility.
-	 *
-	 * @since  1.0.0
-	 * @access public
-	 * @param  string $key Key name.
-	 * @return mixed
-	 */
-	public function __get( $key ) {
-		switch ( $key ) {
-			case 'locations' :
-				return acf_get_instance( 'ACF_Legacy_Locations' );
-			case 'json' :
-				return acf_get_instance( 'ACF_Local_JSON' );
-		}
-		return null;
 	}
 }
 

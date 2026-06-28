@@ -163,30 +163,3 @@ function acf_include( $filename = '' ) {
 		include_once( $file_path );
 	}
 }
-
-/**
- * acfe_get_view
- *
- * @todo Eliminate this function.
- *
- * Load in a file from the 'admin/views' folder and allow variables to be passed through
- * Based on acf_get_view()
- *
- * @since  1.0.0
- * @param  string $path
- * @param  array $args
- * @return void
- */
-function acfe_get_view( $path = '', $args = [] ) {
-
-    // Allow view file name shortcut.
-    if ( substr( $path, -4 ) !== '.php' ) {
-        $path = acf_get_path( "extend/includes/admin/views/{$path}.php" );
-    }
-
-    // Include.
-    if ( file_exists( $path ) ) {
-        extract( $args );
-        include( $path );
-    }
-}
