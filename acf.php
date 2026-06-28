@@ -565,7 +565,6 @@ final class ACF {
 		acf_include( 'includes/modules/screen-layouts.php' );
 		acf_include( 'includes/modules/global-field-condition.php' );
 		acf_include( 'includes/modules/rewrite-rules.php' );
-		acf_include( 'includes/modules/dev.php' );
 		acf_include( 'includes/modules/force-sync.php' );
 		acf_include( 'includes/modules/scripts.php' );
 		acf_include( 'includes/modules/scripts-list.php' );

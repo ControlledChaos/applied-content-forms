@@ -136,6 +136,8 @@ final class Extend_ACF {
 		acf_include( 'extend/pro/includes/fields/field-radio.php' );
 		acf_include( 'extend/pro/includes/fields/field-select.php' );
 		acf_include( 'extend/pro/includes/fields/field-tab.php' );
+
+		acf_include( 'includes/dev.php' );
 	}
 
 	/**
