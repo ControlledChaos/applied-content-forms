@@ -290,7 +290,7 @@ class ACFE_Field_Groups_Local{
                 continue;
 
             // Exclude ACFE Field Groups
-            if(!acf_is_super_dev() && in_array($field_group['key'], acf_get_setting('reserved_field_groups', array())))
+            if(!acf_is_dev() && in_array($field_group['key'], acf_get_setting('reserved_field_groups', array())))
                 continue;
 
             $locals[] = $field_group;

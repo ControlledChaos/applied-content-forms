@@ -747,7 +747,7 @@ function acf_is_post_type_reserved( $post_type ) {
  */
 function acf_is_post_type_reserved_dev( $post_type ) {
 	$reserved = acf_get_setting( 'reserved_post_types', [] );
-	return ! acf_is_super_dev() && in_array( $post_type, $reserved );
+	return ! acf_is_dev() && in_array( $post_type, $reserved );
 }
 
 /**
@@ -771,7 +771,7 @@ function acf_is_taxonomy_reserved( $taxonomy ) {
  */
 function acf_is_taxonomy_reserved_dev( $taxonomy ) {
 	$reserved = acf_get_setting( 'reserved_taxonomies', [] );
-	return ! acf_is_super_dev() && in_array( $taxonomy, $reserved );
+	return ! acf_is_dev() && in_array( $taxonomy, $reserved );
 }
 
 // Settings, similar to `acf_` but with the `acfe_` prefix.

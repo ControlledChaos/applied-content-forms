@@ -43,4 +43,4 @@ function acf_settings_update() {
 	acf_update_setting( 'force_sync_delete', get_field( 'acf_force_deleted_sync', 'option' ) );
 	acf_update_setting( 'dev_mode', get_field( 'acf_dev_mode', 'option' ) );
 }
-add_action( 'acf/init', 'acf_settings_update' );
+add_action( 'acf/early_init', 'acf_settings_update' );

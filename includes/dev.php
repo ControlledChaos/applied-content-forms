@@ -3,10 +3,6 @@
 if(!defined('ABSPATH'))
     exit;
 
-// Check settings
-if((!acf_is_dev() && !acf_is_super_dev()) || !acf_current_user_can_admin())
-    return;
-
 if(!class_exists('acfe_pro_dev')):
 
 class acfe_pro_dev{
@@ -15,6 +11,11 @@ class acfe_pro_dev{
      * Construct
      */
     function __construct(){
+
+        // check settings
+		if(!acf_is_dev() || !acf_current_user_can_admin()){
+			return;
+		}
 
         // remove basic clean metabox
         acf_enable_filter('acfe/dev/clean_metabox');
