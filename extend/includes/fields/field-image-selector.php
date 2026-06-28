@@ -89,7 +89,7 @@ class acfe_field_image_selector extends acf_field{
             'type'          => 'textarea',
         ));
 
-        $image_sizes = acfe_get_registered_image_sizes();
+        $image_sizes = acf_get_registered_image_sizes();
         unset($image_sizes['full']);
 
         $image_sizes = wp_list_pluck($image_sizes, 'name');
@@ -219,7 +219,7 @@ class acfe_field_image_selector extends acf_field{
 
         // Vars
         $choices = array();
-        $data = acfe_get_registered_image_sizes($field['image_size']);
+        $data = acf_get_registered_image_sizes($field['image_size']);
 
         // Data
         $width = $data['width'];

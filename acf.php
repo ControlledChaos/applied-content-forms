@@ -376,7 +376,6 @@ final class ACF {
 		acf_include( 'includes/acfe-template-functions.php' );
 		acf_include( 'includes/acfe-term-functions.php' );
 		acf_include( 'includes/acfe-user-functions.php' );
-		acf_include( 'includes/acfe-wp-functions.php' );
 		acf_include( 'includes/compatibility.php' );
 
 		if ( defined( 'ACF_DEV' ) && ACF_DEV ) {

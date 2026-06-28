@@ -446,7 +446,7 @@ class acfe_field_image_sizes extends acf_field{
 
             foreach($field['choices'] as $size => &$choice){
 
-                $data = acfe_get_registered_image_sizes($size);
+                $data = acf_get_registered_image_sizes($size);
                 $width = $data['width'];
                 $height = $data['height'] ? $data['height'] : 'auto';
 
@@ -461,7 +461,7 @@ class acfe_field_image_sizes extends acf_field{
 
             foreach($field['choices'] as $size => &$choice){
 
-                $data = acfe_get_registered_image_sizes($size);
+                $data = acf_get_registered_image_sizes($size);
 
                 $width = $data['width'];
                 $height = $data['height'] ? $data['height'] : 'auto';
@@ -517,7 +517,7 @@ class acfe_field_image_sizes extends acf_field{
         foreach($value as &$v){
 
             // Retrieve Object
-            $object = acfe_get_registered_image_sizes($v);
+            $object = acf_get_registered_image_sizes($v);
 
             if(!$object || is_wp_error($object))
                 continue;

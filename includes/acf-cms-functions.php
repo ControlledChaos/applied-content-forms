@@ -580,3 +580,171 @@ function acf_decode_post_id( $post_id = 0 ) {
 
 	return apply_filters( 'acf/decode_post_id', compact( 'type', 'id' ), $post_id );
 }
+
+/**
+ * Get registered image sizes
+ *
+ * Clone of wp_get_registered_image_subsizes.
+ *
+ * @since  1.0.0
+ * @param  mixed $filter
+ * @return mixed
+ */
+function acf_get_registered_image_sizes( $filter = false ) {
+
+	$additional = wp_get_additional_image_sizes();
+	$all_sizes  = [];
+	$wp_sizes   = get_intermediate_image_sizes();
+	$wp_sizes[] = 'full';
+
+	foreach ( $wp_sizes as $size_name ) {
+
+		if ( $filter && $size_name !== $filter ) {
+			continue;
+		}
+		$size_data = [
+			'name'   => $size_name,
+			'width'  => 0,
+			'height' => 0,
+			'crop'   => false
+		];
+
+		// For sizes added by plugins and themes.
+		if ( isset( $additional[ $size_name ]['width'] ) ) {
+			$size_data['width'] = (int) $additional[ $size_name ]['width'];
+
+		// For default sizes set in options.
+		} else {
+			$size_data['width'] = (int) get_option( "{$size_name}_size_w" );
+		}
+
+		if ( isset( $additional[ $size_name ]['height'] ) ) {
+			$size_data['height'] = (int) $additional[ $size_name ]['height'];
+		} else {
+			$size_data['height'] = (int) get_option( "{$size_name}_size_h" );
+		}
+
+		if ( isset( $additional[ $size_name ]['crop'] ) ) {
+			$size_data['crop'] = $additional[ $size_name ]['crop'];
+		} else {
+			$size_data['crop'] = get_option( "{$size_name}_crop" );
+		}
+
+		if ( ! is_array( $size_data['crop'] ) || empty( $size_data['crop'] ) ) {
+			$size_data['crop'] = (bool) $size_data['crop'];
+		}
+		$all_sizes[ $size_name ] = $size_data;
+	}
+
+	if ( $filter && isset( $all_sizes[ $filter ] ) ) {
+		return $all_sizes[ $filter ];
+	}
+	return $all_sizes;
+}
+
+/**
+ * Remove class filter
+ *
+ * Removes hook from inaccessible PHP class.
+ * @link https://gist.github.com/tripflex/c6518efc1753cf2392559866b4bd1a53
+ *
+ * @since  1.0.0
+ * @param  string $tag
+ * @param  string $class_name
+ * @param  string $method_name
+ * @param  integer $priority
+ * @global array $wp_filter
+ * @return boolean
+ */
+function acf_remove_class_filter( $tag, $class_name = '', $method_name = '', $priority = 10 ) {
+
+	// Access global variables.
+	global $wp_filter;
+
+	// Check that filter actually exists first.
+	if ( ! isset( $wp_filter[ $tag ] ) ) {
+		return FALSE;
+	}
+
+	/**
+	 * To be backwards compatible, set $callbacks equal
+	 * to the correct array as a reference so $wp_filter
+	 * is updated.
+	 */
+	if ( is_object( $wp_filter[ $tag ] ) && isset( $wp_filter[ $tag ]->callbacks ) ) {
+
+		// Create $fob object from filter tag to use below.
+		$fob       = $wp_filter[ $tag ];
+		$callbacks = &$wp_filter[ $tag ]->callbacks;
+	} else {
+		$callbacks = &$wp_filter[ $tag ];
+	}
+
+	// Exit if there aren't any callbacks for specified priority.
+	if ( ! isset( $callbacks[ $priority ] ) || empty( $callbacks[ $priority ] ) ) {
+		return false;
+	}
+
+	// Loop through each filter for the specified priority to look for class & method.
+	foreach ( (array) $callbacks[ $priority ] as $filter_id => $filter ) {
+
+		// Filter should always be an array - array( $this, 'method' ), if not go to next.
+		if ( ! isset( $filter['function'] ) || ! is_array( $filter['function'] ) ) {
+			continue;
+		}
+
+		// If first value in array is not an object, it can't be a class.
+		if ( ! is_object( $filter['function'][0] ) ) {
+			continue;
+		}
+
+		// Method doesn't match the one looked for, go to next.
+		if ( $filter['function'][1] !== $method_name ) {
+			continue;
+		}
+
+		// Method matched, now check the class.
+		if ( get_class( $filter['function'][0] ) === $class_name ) {
+
+			if ( isset( $fob ) ) {
+
+				// Handles removing filter, reseting callback priority keys mid-iteration, etc.
+				$fob->remove_filter( $tag, $filter['function'], $priority );
+
+			} else {
+
+				// Use legacy removal process (pre 4.7).
+				unset( $callbacks[ $priority ][ $filter_id ] );
+
+				// If it was the only filter in that priority, unset that priority.
+				if ( empty( $callbacks[ $priority ] ) ) {
+					unset( $callbacks[ $priority ] );
+				}
+
+				// If the only filter for that tag, set the tag to an empty array.
+				if ( empty( $callbacks ) ) {
+					$callbacks = [];
+				}
+
+				// Remove this filter from merged_filters, which specifies if filters have been sorted
+				unset( $GLOBALS['merged_filters'][ $tag ] );
+			}
+			return true;
+		}
+	}
+	return false;
+}
+
+/**
+ * Remove class action
+ *
+ * @since  1.0.0
+ * @param  string $tag
+ * @param  string $class_name
+ * @param  string $method_name
+ * @param  integer $priority
+ * @return boolean
+ */
+function acf_remove_class_action( $tag, $class_name = '', $method_name = '', $priority = 10 ) {
+	return acf_remove_class_filter( $tag, $class_name, $method_name, $priority );
+}
