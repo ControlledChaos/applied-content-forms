@@ -402,7 +402,7 @@ final class ACF {
 			return;
 		}
 
-		do_action( 'acf/early_init' );
+		do_action( 'acf/init_early' );
 
 		// Allow other plugins to modify the URL (force SSL).
 		acf_update_setting( 'url', plugin_dir_url( __FILE__ ) );
@@ -667,6 +667,8 @@ final class ACF {
 		acf_include( 'includes/fields/extend-pro/field-tab.php' );
 
 		acf_include( 'includes/dev.php' );
+
+		do_action( 'acf/init_late' );
 	}
 
 	/**
