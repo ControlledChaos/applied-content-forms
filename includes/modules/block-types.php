@@ -182,7 +182,7 @@ class acfe_dynamic_block_types extends acf_module {
 
 		}
 
-		$prepend = acfe_get_setting('theme_folder') ? trailingslashit(acfe_get_setting('theme_folder')) : '';
+		$prepend = acf_get_setting('acfe/theme_folder') ? trailingslashit(acf_get_setting('acfe/theme_folder')) : '';
 
 		add_filter('acf/prepare_field/name=render_template', function($field) use($name, $prepend){
 

@@ -1616,7 +1616,7 @@ class acfe_dynamic_taxonomies extends acf_module {
 					'acfe_permissions' => '',
 					'default_value' => '',
 					'placeholder' => 'my-template.php',
-					'prepend' => trailingslashit(acfe_get_setting('theme_folder')),
+					'prepend' => trailingslashit(acf_get_setting('acfe/theme_folder')),
 					'append' => '',
 					'maxlength' => '',
 				),

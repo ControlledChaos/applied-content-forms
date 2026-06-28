@@ -679,7 +679,7 @@ class acf_field_wysiwyg extends acf_field {
         ));
 
         // Prepend
-        $prepend = acfe_get_setting('theme_folder') ? trailingslashit(acfe_get_setting('theme_folder')) : '';
+        $prepend = acf_get_setting('acfe/theme_folder') ? trailingslashit(acf_get_setting('acfe/theme_folder')) : '';
 
         // Style
         $prepend = apply_filters("acfe/wysiwyg/prepend/style",                         $prepend, $field);

@@ -30,7 +30,7 @@ class acfe_pro_scripts{
         acf_include('includes/modules/scripts/script-single-meta-converter.php');
 
         // scripts demo
-        if(acfe_get_setting('modules/scripts/demo')){
+        if(acf_get_setting('acfe/modules/scripts/demo')){
 
             acf_include('includes/modules/scripts/script-count-posts.php');
             acf_include('includes/modules/scripts/script-export-posts.php');
