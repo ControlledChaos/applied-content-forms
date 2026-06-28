@@ -79,8 +79,8 @@ class acfe_pro_global_field_condition{
         $layouts = acf_maybe_get($field, 'layouts');
 
         // unset
-        acfe_unset($field, 'sub_fields');
-        acfe_unset($field, 'layouts');
+        acf_unset($field, 'sub_fields');
+        acf_unset($field, 'layouts');
 
         // save
         $fields[] = $field;

@@ -78,7 +78,7 @@ class ACFE_Field_Groups{
             // View: Sync
             case('sync'):
 
-                acfe_unset($columns, 'acf-field-group-category');
+                acf_unset($columns, 'acf-field-group-category');
 
             break;
 
@@ -123,7 +123,7 @@ class ACFE_Field_Groups{
                 // ACF < 5.9
                 if($this->old_version){
 
-                    acfe_unset($columns, 'acf-fg-status');
+                    acf_unset($columns, 'acf-fg-status');
 
                     $columns['acfe-location'] = __('Location', 'acf');
                     $columns['acfe-load'] = __('Load', 'acf');
@@ -138,10 +138,10 @@ class ACFE_Field_Groups{
                 }else{
 
                     // Re-order
-                    acfe_unset($columns, 'acf-key');
-                    acfe_unset($columns, 'acf-location');
-                    acfe_unset($columns, 'acf-count');
-                    acfe_unset($columns, 'acf-json');
+                    acf_unset($columns, 'acf-key');
+                    acf_unset($columns, 'acf-location');
+                    acf_unset($columns, 'acf-count');
+                    acf_unset($columns, 'acf-json');
 
                     $columns['acf-count'] = __('Fields', 'acf');
                     $columns['acf-location'] = __('Location', 'acf');

@@ -152,7 +152,7 @@ class acf_module{
 
     function bulk_actions($actions){
 
-        acfe_unset($actions, 'edit');
+        acf_unset($actions, 'edit');
 
         foreach($this->tools as $action){
 
@@ -349,7 +349,7 @@ class acf_module{
         $post_id = $post->ID;
         $name = $this->get_name($post_id);
 
-        acfe_unset($actions, 'inline hide-if-no-js');
+        acf_unset($actions, 'inline hide-if-no-js');
 
         // View
         $view = $this->edit_row_actions_view($post, $name);

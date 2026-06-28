@@ -4,159 +4,6 @@ if(!defined('ABSPATH'))
 	exit;
 
 /**
- * acfe_add_validation_error
- *
- * Similar to acf_add_validation_error() but allows to use field name or field key
- *
- * @param string $selector
- * @param string $message
- *
- * @return mixed
- */
-function acfe_add_validation_error($selector = '', $message = ''){
-
-	// general error
-	if(empty($selector)){
-
-		return acf_add_validation_error('', $message);
-
-	}
-
-	// selector is a field key
-	if(acf_is_field_key($selector)){
-
-		return add_filter("acf/validate_value/key={$selector}", function() use($message){
-			return $message;
-		});
-
-	}
-
-	// get field by name
-	$field = acf_get_field($selector);
-
-	// check form data
-	if($form = acf_get_form_data('acfe/form')){
-
-		// vars
-		$fields = array();
-		$field_groups = acf_get_array($form['field_groups']);
-
-		// loop field groups
-		foreach($field_groups as $key){
-			$fields = array_merge($fields, acf_get_fields($key));
-		}
-
-		foreach($fields as $_field){
-
-			// field name is different
-			if($_field['name'] !== $selector) continue;
-
-			// assign field
-			$field = $_field;
-			break;
-
-		}
-
-	}
-
-	// check active loop
-	$row = acf_get_loop();
-
-	// exclude acfe form actions
-	if($row && acf_maybe_get($row, 'selector') !== 'acfe_form_actions'){
-
-		// get sub field
-		$field = acf_get_sub_field($selector, $row['field']);
-
-	}
-
-	// field not found: add general error
-	if(!$field){
-
-		return acf_add_validation_error('', $message);
-
-	}
-
-	// add validation error
-	add_filter("acf/validate_value/key={$field['key']}", function() use($message){
-		return $message;
-	});
-
-	return false;
-
-}
-
-/**
- * acfe_number_suffix
- *
- * Adds 1"st", 2"nd", 3"rd" to number
- *
- * @param $num
- *
- * @return string
- */
-function acfe_number_suffix($num){
-
-	if(!in_array(($num % 100), array(11,12,13))){
-
-		switch($num % 10){
-			case 1:  return $num . 'st';
-			case 2:  return $num . 'nd';
-			case 3:  return $num . 'rd';
-		}
-
-	}
-
-	return $num . 'th';
-
-}
-
-/**
- * acfe_array_to_string
- *
- * Convert an array to string
- *
- * @param array $array
- *
- * @return array|false|mixed|string
- */
-function acfe_array_to_string($array = array()){
-
-	if(!is_array($array)){
-		return $array;
-	}
-
-	if(empty($array)){
-		return false;
-	}
-
-	if(acf_is_sequential_array($array)){
-
-		foreach($array as $k => $v){
-
-			if(!is_string($v)) continue;
-
-			return $v;
-
-		}
-
-	}elseif(acf_is_associative_array($array)){
-
-		foreach($array as $k => $v){
-
-			if(!is_string($v)) continue;
-
-			return $v;
-
-		}
-
-	}
-
-	return false;
-
-}
-
-/**
  * acfe_is_post_type_reserved
  *
  * Check if the post type is reserved
@@ -277,22 +124,6 @@ function acfe_get_setting($name, $value = null){
 }
 
 /**
- * acfe_unset
- *
- * Safely remove an array key
- *
- * @param $array
- * @param $key
- */
-function acfe_unset(&$array, $key){
-
-	if(isset($array[$key])){
-		unset($array[$key]);
-	}
-
-}
-
-/**
  * acfe_unarray
  *
  * Retrieve and return only the first value of an array
@@ -301,12 +132,10 @@ function acfe_unset(&$array, $key){
  *
  * @return false|mixed
  */
-function acfe_unarray($val){
-
-	if(is_array($val)){
-		return reset($val);
+function acfe_unarray( $val ) {
+	if ( is_array( $val ) ) {
+		return reset( $val );
 	}
-
 	return $val;
 }
 

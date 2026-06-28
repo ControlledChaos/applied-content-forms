@@ -334,7 +334,7 @@ class acfe_form_user{
 
         if(empty($login) || empty($pass)){
 
-            acfe_add_validation_error('', $errors['empty_user_pass']);
+            acf_add_validation_error('', $errors['empty_user_pass']);
             return;
 
         }
@@ -380,7 +380,7 @@ class acfe_form_user{
 
             if(empty($login) || !is_email($login)){
 
-                acfe_add_validation_error('', $errors['invalid_email']);
+                acf_add_validation_error('', $errors['invalid_email']);
                 return;
 
             }
@@ -389,7 +389,7 @@ class acfe_form_user{
 
             if(!$user || !wp_check_password($pass, $user->data->user_pass, $user->ID)){
 
-                acfe_add_validation_error('', $errors['invalid_email_password']);
+                acf_add_validation_error('', $errors['invalid_email_password']);
                 return;
 
             }
@@ -400,7 +400,7 @@ class acfe_form_user{
 
             if(empty($login)){
 
-                acfe_add_validation_error('', $errors['invalid_username']);
+                acf_add_validation_error('', $errors['invalid_username']);
                 return;
 
             }
@@ -409,7 +409,7 @@ class acfe_form_user{
 
             if(!$user || !wp_check_password($pass, $user->data->user_pass, $user->ID)){
 
-                acfe_add_validation_error('', $errors['invalid_username_password']);
+                acf_add_validation_error('', $errors['invalid_username_password']);
                 return;
 
             }
@@ -519,7 +519,7 @@ class acfe_form_user{
             if(!empty($data['user_email'])){
 
                 if(is_array($data['user_email']))
-                    $data['user_email'] = acfe_array_to_string($data['user_email']);
+                    $data['user_email'] = acf_array_to_string($data['user_email']);
 
                 $args['user_email'] = $data['user_email'];
 
@@ -529,7 +529,7 @@ class acfe_form_user{
             if(!empty($data['user_login'])){
 
                 if(is_array($data['user_login']))
-                    $data['user_login'] = acfe_array_to_string($data['user_login']);
+                    $data['user_login'] = acf_array_to_string($data['user_login']);
 
                 $args['user_login'] = $data['user_login'];
 
@@ -539,7 +539,7 @@ class acfe_form_user{
             if(!empty($data['user_pass'])){
 
                 if(is_array($data['user_pass']))
-                    $data['user_pass'] = acfe_array_to_string($data['user_pass']);
+                    $data['user_pass'] = acf_array_to_string($data['user_pass']);
 
                 $args['user_pass'] = $data['user_pass'];
 
@@ -552,7 +552,7 @@ class acfe_form_user{
             if(!empty($data['first_name'])){
 
                 if(is_array($data['first_name']))
-                    $data['first_name'] = acfe_array_to_string($data['first_name']);
+                    $data['first_name'] = acf_array_to_string($data['first_name']);
 
                 $args['first_name'] = $data['first_name'];
 
@@ -562,7 +562,7 @@ class acfe_form_user{
             if(!empty($data['last_name'])){
 
                 if(is_array($data['last_name']))
-                    $data['last_name'] = acfe_array_to_string($data['last_name']);
+                    $data['last_name'] = acf_array_to_string($data['last_name']);
 
                 $args['last_name'] = $data['last_name'];
 
@@ -572,7 +572,7 @@ class acfe_form_user{
             if(!empty($data['nickname'])){
 
                 if(is_array($data['nickname']))
-                    $data['nickname'] = acfe_array_to_string($data['nickname']);
+                    $data['nickname'] = acf_array_to_string($data['nickname']);
 
                 $args['nickname'] = $data['nickname'];
 
@@ -582,7 +582,7 @@ class acfe_form_user{
             if(!empty($data['display_name'])){
 
                 if(is_array($data['display_name']))
-                    $data['display_name'] = acfe_array_to_string($data['display_name']);
+                    $data['display_name'] = acf_array_to_string($data['display_name']);
 
                 $args['display_name'] = $data['display_name'];
 
@@ -592,7 +592,7 @@ class acfe_form_user{
             if(!empty($data['user_url'])){
 
                 if(is_array($data['user_url']))
-                    $data['user_url'] = acfe_array_to_string($data['user_url']);
+                    $data['user_url'] = acf_array_to_string($data['user_url']);
 
                 $args['user_url'] = $data['user_url'];
 
@@ -602,7 +602,7 @@ class acfe_form_user{
             if(!empty($data['description'])){
 
                 if(is_array($data['description']))
-                    $data['description'] = acfe_array_to_string($data['description']);
+                    $data['description'] = acf_array_to_string($data['description']);
 
                 $args['description'] = $data['description'];
 
@@ -612,7 +612,7 @@ class acfe_form_user{
             if(!empty($data['role'])){
 
                 if(is_array($data['role']))
-                    $data['role'] = acfe_array_to_string($data['role']);
+                    $data['role'] = acf_array_to_string($data['role']);
 
                 $args['role'] = $data['role'];
 

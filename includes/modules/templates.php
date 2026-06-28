@@ -604,7 +604,7 @@ class acfe_dynamic_templates extends acf_module {
 
         // Values
         $values = acfe_get_fields($template->ID);
-        acfe_unset($values, 'field_acfe_template_active');
+        acf_unset($values, 'field_acfe_template_active');
 
         // Args
         $args = array(

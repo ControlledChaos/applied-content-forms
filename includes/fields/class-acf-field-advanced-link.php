@@ -434,10 +434,10 @@ class acf_field_advanced_link extends acf_field{
         $value = $this->get_value($value);
 
         // clean
-        acfe_unset($value, 'type');
-        acfe_unset($value, 'post');
-        acfe_unset($value, 'term');
-        acfe_unset($value, 'url_title');
+        acf_unset($value, 'type');
+        acf_unset($value, 'post');
+        acf_unset($value, 'term');
+        acf_unset($value, 'url_title');
 
         return $value;
 

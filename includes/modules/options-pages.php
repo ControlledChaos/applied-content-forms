@@ -644,7 +644,7 @@ class acfe_dynamic_options_pages extends acf_module{
 		$settings = acfe_get_settings($this->settings);
 
 		// Unset ACFE option
-		acfe_unset($settings, $name);
+		acf_unset($settings, $name);
 
 		// Update ACFE option
 		acfe_update_settings($this->settings, $settings);

@@ -170,9 +170,6 @@ acf()->validation = new acf_validation();
  * @param  string $message
  * @return void
  */
-function acf_add_validation_error( $input, $message = '' ) {
-	return acf()->validation->add_error( $input, $message );
-}
 function acf_get_validation_errors() {
 	return acf()->validation->get_errors();
 }
@@ -181,6 +178,59 @@ function acf_get_validation_error() {
 }
 function acf_reset_validation_errors() {
 	return acf()->validation->reset_errors();
+}
+
+/**
+ * Add validation error
+ *
+ * @since  1.0.0
+ * @param  string $selector
+ * @param  string $message
+ * @return mixed
+ */
+function acf_add_validation_error( $selector = '', $message = '' ) {
+
+	if ( empty( $selector ) ) {
+		return acf()->validation->add_error( '', $message );
+	}
+
+	if ( acf_is_field_key( $selector ) ) {
+		return add_filter( "acf/validate_value/key={$selector}", function() use( $message ) {
+			return $message;
+		} );
+	}
+
+	$field = acf_get_field( $selector );
+	if ( $form = acf_get_form_data( 'acfe/form' ) ) {
+
+		$fields = [];
+		$field_groups = acf_get_array( $form['field_groups'] );
+
+		foreach ( $field_groups as $key ) {
+			$fields = array_merge( $fields, acf_get_fields( $key ) );
+		}
+
+		foreach ( $fields as $_field ) {
+			if ( $_field['name'] !== $selector ) {
+				continue;
+			}
+			$field = $_field;
+			break;
+		}
+	}
+
+	$row = acf_get_loop();
+	if ( $row && acf_maybe_get( $row, 'selector' ) !== 'acfe_form_actions' ) {
+		$field = acf_get_sub_field( $selector, $row['field'] );
+	}
+
+	if ( ! $field ) {
+		return acf()->validation->add_error( '', $message );
+	}
+	add_filter( "acf/validate_value/key={$field['key']}", function() use( $message ) {
+		return $message;
+	} );
+	return false;
 }
 
 /**

@@ -379,7 +379,7 @@ class acfe_form_post{
         if(!empty($data['post_type'])){
 
             if(is_array($data['post_type']))
-                $data['post_type'] = acfe_array_to_string($data['post_type']);
+                $data['post_type'] = acf_array_to_string($data['post_type']);
 
             $args['post_type'] = $data['post_type'];
 
@@ -389,7 +389,7 @@ class acfe_form_post{
         if(!empty($data['post_status'])){
 
             if(is_array($data['post_status']))
-                $data['post_status'] = acfe_array_to_string($data['post_status']);
+                $data['post_status'] = acf_array_to_string($data['post_status']);
 
             $args['post_status'] = $data['post_status'];
 
@@ -399,7 +399,7 @@ class acfe_form_post{
         if(!empty($data['post_title'])){
 
             if(is_array($data['post_title']))
-                $data['post_title'] = acfe_array_to_string($data['post_title']);
+                $data['post_title'] = acf_array_to_string($data['post_title']);
 
             $args['post_title'] = $data['post_title'];
 
@@ -415,7 +415,7 @@ class acfe_form_post{
         if(!empty($data['post_name'])){
 
             if(is_array($data['post_name']))
-                $data['post_name'] = acfe_array_to_string($data['post_name']);
+                $data['post_name'] = acf_array_to_string($data['post_name']);
 
             $args['post_name'] = $data['post_name'];
 
@@ -428,7 +428,7 @@ class acfe_form_post{
         if(!empty($data['post_content'])){
 
             if(is_array($data['post_content']))
-                $data['post_content'] = acfe_array_to_string($data['post_content']);
+                $data['post_content'] = acf_array_to_string($data['post_content']);
 
             $args['post_content'] = $data['post_content'];
 
@@ -438,7 +438,7 @@ class acfe_form_post{
         if(!empty($data['post_excerpt'])){
 
             if(is_array($data['post_excerpt']))
-                $data['post_excerpt'] = acfe_array_to_string($data['post_excerpt']);
+                $data['post_excerpt'] = acf_array_to_string($data['post_excerpt']);
 
             $args['post_excerpt'] = $data['post_excerpt'];
 
@@ -448,7 +448,7 @@ class acfe_form_post{
         if(!empty($data['post_author'])){
 
             if(is_array($data['post_author']))
-                $data['post_author'] = acfe_array_to_string($data['post_author']);
+                $data['post_author'] = acf_array_to_string($data['post_author']);
 
             $args['post_author'] = $data['post_author'];
 
@@ -458,7 +458,7 @@ class acfe_form_post{
         if(!empty($data['post_parent'])){
 
             if(is_array($data['post_author']))
-                $data['post_author'] = acfe_array_to_string($data['post_author']);
+                $data['post_author'] = acf_array_to_string($data['post_author']);
 
             $args['post_parent'] = $data['post_parent'];
 

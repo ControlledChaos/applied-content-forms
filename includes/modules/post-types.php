@@ -870,7 +870,7 @@ class acf_dynamic_post_types extends acf_module {
 		$settings = acfe_get_settings( $this->settings );
 
 		// Unset option.
-		acfe_unset( $settings, $name );
+		acf_unset( $settings, $name );
 
 		// Update option.
 		acfe_update_settings( $this->settings, $settings );

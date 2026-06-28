@@ -6,18 +6,18 @@ if(!defined('ABSPATH'))
 if(!class_exists('acfe_field_flexible_content_edit')):
 
 class acfe_field_flexible_content_edit{
-    
+
     //
-    
+
     function __construct(){
-    
+
         // Hooks
         add_filter('acfe/flexible/defaults_field',          array($this, 'defaults_field'), 9);
         add_filter('acfe/flexible/defaults_layout',         array($this, 'defaults_layout'), 9);
-        
+
         add_action('acfe/flexible/render_field_settings',   array($this, 'render_field_settings'), 9);
         add_action('acfe/flexible/render_layout_settings',  array($this, 'render_layout_settings'), 19, 3);
-        
+
         add_filter('acfe/flexible/validate_field',          array($this, 'validate_edit'));
         add_filter('acfe/flexible/wrapper_attributes',      array($this, 'wrapper_attributes'), 10, 2);
         add_action('acfe/flexible/pre_render_layout',       array($this, 'pre_render_layout'), 5, 5);
@@ -26,30 +26,30 @@ class acfe_field_flexible_content_edit{
         add_filter('acfe/flexible/layouts/icons',           array($this, 'layout_icons'), 50, 3);
         add_filter('acfe/flexible/layouts/handle',          array($this, 'layout_handle'), 10, 3);
         add_filter('acfe/flexible/layouts/placeholder',     array($this, 'layout_handle'), 10, 3);
-        
+
     }
-    
+
     function defaults_field($field){
-        
+
         $field['acfe_flexible_modal_edit'] = array(
             'acfe_flexible_modal_edit_enabled'  => false,
             'acfe_flexible_modal_edit_size'     => 'large',
         );
-        
+
         return $field;
-        
+
     }
-    
+
     function defaults_layout($layout){
-        
+
         $layout['acfe_flexible_modal_edit_size'] = false;
-        
+
         return $layout;
-        
+
     }
-    
+
     function render_field_settings($field){
-    
+
         acf_render_field_setting($field, array(
             'label'         => __('Edit Modal', 'acfe'),
             'name'          => 'acfe_flexible_modal_edit',
@@ -122,14 +122,14 @@ class acfe_field_flexible_content_edit{
                 'class' => 'acfe-field-setting-flex'
             )
         ));
-        
+
     }
-    
+
     function render_layout_settings($field, $layout, $prefix){
-        
+
         if(!$field['acfe_flexible_modal_edit']['acfe_flexible_modal_edit_enabled'])
             return;
-        
+
         // Title
         echo '</li>';
         acf_render_field_wrap(array(
@@ -141,7 +141,7 @@ class acfe_field_flexible_content_edit{
             )
         ), 'ul');
         echo '<li>';
-        
+
         acf_render_field_wrap(array(
             'label'         => '',
             'name'          => 'acfe_flexible_modal_edit_size',
@@ -168,104 +168,104 @@ class acfe_field_flexible_content_edit{
             'ajax'          => 0,
             'return_format' => 0,
         ), 'ul');
-        
+
     }
-    
+
     function validate_edit($field){
-        
+
         if(!isset($field['acfe_flexible_modal_edition']))
             return $field;
-        
+
         $field['acfe_flexible_modal_edit']['acfe_flexible_modal_edit_enabled'] = $field['acfe_flexible_modal_edition'];
-        
+
         unset($field['acfe_flexible_modal_edition']);
-        
+
         return $field;
-        
+
     }
-    
+
     function wrapper_attributes($wrapper, $field){
-        
+
         // Check setting
         if(!$field['acfe_flexible_modal_edit']['acfe_flexible_modal_edit_enabled'])
             return $wrapper;
-    
+
         $wrapper['data-acfe-flexible-modal-edition'] = 1;
-        
+
         return $wrapper;
-        
+
     }
-    
+
     function pre_render_layout($layout, $field, $i, $value, $prefix){
-        
+
         if(empty($layout['sub_fields']) || !$field['acfe_flexible_modal_edit']['acfe_flexible_modal_edit_enabled'])
             return;
-        
+
         // Field
         $size = $field['acfe_flexible_modal_edit']['acfe_flexible_modal_edit_size'];
-        
+
         // Layout
         if(!empty($layout['acfe_flexible_modal_edit_size']))
             $size = $layout['acfe_flexible_modal_edit_size'];
-        
+
         ?>
         <div class="acfe-modal -fields -<?php echo $size; ?>">
         <div class="acfe-modal-wrapper">
         <div class="acfe-modal-content">
         <?php
-        
+
     }
-    
+
     function render_layout($layout, $field, $i, $value, $prefix){
-        
+
         if(empty($layout['sub_fields']) || !$field['acfe_flexible_modal_edit']['acfe_flexible_modal_edit_enabled'])
             return;
-        
+
         ?>
         </div>
         </div>
         </div>
         <?php
-        
+
     }
-    
+
     function layout_div($div, $layout, $field){
-        
+
         if(!$field['acfe_flexible_modal_edit']['acfe_flexible_modal_edit_enabled'])
             return $div;
-        
+
         // Already in class
         if(in_array('-collapsed', explode(' ', $div['class'])))
             return $div;
-        
+
         $div['class'] .= ' -collapsed';
-        
+
         return $div;
-        
+
     }
-    
+
     function layout_icons($icons, $layout, $field){
-        
+
         if(!$field['acfe_flexible_modal_edit']['acfe_flexible_modal_edit_enabled'])
             return $icons;
-        
-        acfe_unset($icons, 'collapse');
-        
+
+        acf_unset($icons, 'collapse');
+
         return $icons;
-        
+
     }
-    
+
     function layout_handle($handle, $layout, $field){
-    
+
         if(!$field['acfe_flexible_modal_edit']['acfe_flexible_modal_edit_enabled'])
             return $handle;
-    
+
         $handle['data-action'] = 'acfe-flexible-modal-edit';
-        
+
         return $handle;
-        
+
     }
-    
+
 }
 
 acf_new_instance('acfe_field_flexible_content_edit');

@@ -136,7 +136,7 @@ class acfe_field_taxonomy_terms extends acf_field{
                     if($options['level'] >= 1){
 
                         $id .= '|' . $options['level'];
-                        $text .= acfe_number_suffix($options['level']) . ' Level ';
+                        $text .= acf_number_suffix($options['level']) . ' Level ';
 
                     }
 
@@ -733,7 +733,7 @@ class acfe_field_taxonomy_terms extends acf_field{
                         $taxonomy = $level[0];
                         $level = $level[1];
 
-                        $level = acfe_number_suffix($level) . ' Level ';
+                        $level = acf_number_suffix($level) . ' Level ';
 
                     }
 

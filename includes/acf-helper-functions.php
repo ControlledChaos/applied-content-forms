@@ -576,6 +576,96 @@ function acf_array_move( &$array, $a, $b ) {
 }
 
 /**
+ * Array to string
+ *
+ * Convert an array to a string.
+ *
+ * @since  1.0.0
+ * @param  array $array
+ * @return mixed
+ */
+function acf_array_to_string( $array = [] ) {
+
+	if ( ! is_array( $array ) ) {
+		return $array;
+	}
+
+	if ( empty( $array ) ) {
+		return false;
+	}
+
+	if ( acf_is_sequential_array( $array ) ) {
+		foreach ( $array as $k => $v ) {
+			if ( ! is_string( $v ) ) {
+				continue;
+			}
+			return $v;
+		}
+	} elseif ( acf_is_associative_array( $array ) ) {
+		foreach ( $array as $k => $v ) {
+			if ( ! is_string( $v ) ) {
+				continue;
+			}
+			return $v;
+		}
+	}
+	return false;
+}
+
+/**
+ * Unset
+ *
+ * Safely remove an array key.
+ *
+ * @since  1.0.0
+ * @param  array $array
+ * @param  string $key
+ * @return void
+ */
+function acf_unset( &$array, $key ) {
+	if ( isset( $array[$key] ) ) {
+		unset( $array[$key] );
+	}
+}
+
+/**
+ * Number suffix
+ *
+ * Adds 1"st", 2"nd", 3"rd" to number.
+ *
+ * @since  1.0.0
+ * @param  integer $num
+ * @return mixed
+ */
+function acf_number_suffix( $num ) {
+
+	// English locale options.
+	$locale = [
+		'en',
+		'en_AU',
+		'en_CA',
+		'en_GB',
+		'en_NZ',
+		'en_US',
+		'en_ZA'
+	];
+
+	// Only apply suffix to English.
+	if ( ! in_array( get_locale(), $locale ) ) {
+		return $num;
+	}
+
+	if ( ! in_array( ( $num % 100 ), [ 11, 12, 13 ] ) ) {
+		switch ( $num % 10 ) {
+			case 1:  return $num . 'st';
+			case 2:  return $num . 'nd';
+			case 3:  return $num . 'rd';
+		}
+	}
+	return $num . 'th';
+}
+
+/**
  * Is dev
  *
  * Checks if the developer mode is enabled.

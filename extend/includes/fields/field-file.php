@@ -116,7 +116,7 @@ class acfe_field_file{
 
         // ACFE Form force uploader type
         if(acf_is_filter_enabled('acfe/form/uploader'))
-            acfe_unset($field, 'uploader');
+            acf_unset($field, 'uploader');
 
         if(!acf_maybe_get($field, 'uploader'))
             $field['uploader'] = acf_get_setting('uploader');

@@ -266,7 +266,7 @@ class acfe_form_term{
         if(!empty($data['name'])){
 
             if(is_array($data['name']))
-                $data['name'] = acfe_array_to_string($data['name']);
+                $data['name'] = acf_array_to_string($data['name']);
 
             $args['name'] = $data['name'];
 
@@ -276,7 +276,7 @@ class acfe_form_term{
         if(!empty($data['slug'])){
 
             if(is_array($data['name']))
-                $data['name'] = acfe_array_to_string($data['name']);
+                $data['name'] = acf_array_to_string($data['name']);
 
             $args['slug'] = $data['slug'];
 
@@ -286,7 +286,7 @@ class acfe_form_term{
         if(!empty($data['taxonomy'])){
 
             if(is_array($data['name']))
-                $data['name'] = acfe_array_to_string($data['name']);
+                $data['name'] = acf_array_to_string($data['name']);
 
             $args['taxonomy'] = $data['taxonomy'];
 
@@ -296,7 +296,7 @@ class acfe_form_term{
         if(!empty($data['parent'])){
 
             if(is_array($data['name']))
-                $data['name'] = acfe_array_to_string($data['name']);
+                $data['name'] = acf_array_to_string($data['name']);
 
             $args['parent'] = $data['parent'];
 
@@ -306,7 +306,7 @@ class acfe_form_term{
         if(!empty($data['description'])){
 
             if(is_array($data['name']))
-                $data['name'] = acfe_array_to_string($data['name']);
+                $data['name'] = acf_array_to_string($data['name']);
 
             $args['description'] = $data['description'];
 
