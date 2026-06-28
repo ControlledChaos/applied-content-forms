@@ -72,6 +72,8 @@ class acfe_dynamic_forms extends acf_module{
         add_action('wp_ajax_acfe/form/shortcode',           array($this, 'ajax_shortcode'));
         add_action('wp_ajax_nopriv_acfe/form/shortcode',    array($this, 'ajax_shortcode'));
 
+		acf_include( 'includes/modules/forms-action-option.php' );
+
 		do_action('acfe/include_form_actions');
 
 	}
