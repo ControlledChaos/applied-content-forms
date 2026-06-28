@@ -629,6 +629,43 @@ function acf_unset( &$array, $key ) {
 }
 
 /**
+ * Get IP
+ *
+ * @since  1.0.0
+ * @return mixed
+ */
+function acf_get_ip() {
+
+	$ip = false;
+	if ( ! empty( $_SERVER['HTTP_CLIENT_IP'] ) ) {
+
+		$ip = filter_var( wp_unslash( $_SERVER['HTTP_CLIENT_IP'] ), FILTER_VALIDATE_IP );
+
+	} elseif ( ! empty( $_SERVER['HTTP_X_FORWARDED_FOR'] ) ) {
+
+		// Can include more than 1 IP, first is the public one.
+		$ips = explode( ',', wp_unslash( $_SERVER['HTTP_X_FORWARDED_FOR'] ) );
+		if ( is_array( $ips ) ) {
+			$ip = filter_var( $ips[0], FILTER_VALIDATE_IP );
+		}
+	} elseif ( ! empty( $_SERVER['REMOTE_ADDR'] ) ) {
+		$ip = filter_var( wp_unslash( $_SERVER['REMOTE_ADDR'] ), FILTER_VALIDATE_IP );
+	}
+
+	if ( $ip !== false ) {
+		$ip = $ip;
+	} else {
+		$ip = '127.0.0.1';
+	}
+
+	// Fix potential CSV return.
+	$ip_array = explode( ',', $ip );
+	$ip_array = array_map( 'trim', $ip_array );
+
+	return $ip_array[0];
+}
+
+/**
  * Number suffix
  *
  * Adds 1"st", 2"nd", 3"rd" to number.
@@ -687,4 +724,63 @@ function acf_is_dev() {
  */
 function acf_is_super_dev() {
 	return acf_get_setting( 'acf/super_dev', false ) || ( defined( 'ACF_super_dev' ) && ACF_super_dev );
+}
+
+/**
+ * Is reserved post type
+ *
+ * @since  1.0.0
+ * @param  string $post_type
+ * @return boolean
+ */
+function acf_is_post_type_reserved( $post_type ) {
+	$reserved = acf_get_setting( 'reserved_post_types', [] );
+	return in_array( $post_type, $reserved );
+}
+
+/**
+ * Is reserved post type in dev mode
+ *
+ * @since  1.0.0
+ * @param  string $post_type
+ * @return boolean
+ */
+function acf_is_post_type_reserved_dev( $post_type ) {
+	$reserved = acf_get_setting( 'reserved_post_types', [] );
+	return ! acf_is_super_dev() && in_array( $post_type, $reserved );
+}
+
+/**
+ * Is reserved taxonomy
+ *
+ * @since  1.0.0
+ * @param  string $taxonomy
+ * @return boolean
+ */
+function acf_is_taxonomy_reserved( $taxonomy ) {
+	$reserved = acf_get_setting( 'reserved_taxonomies', [] );
+	return in_array( $taxonomy, $reserved );
+}
+
+/**
+ * Is reserved taxonomy in dev mode
+ *
+ * @since  1.0.0
+ * @param  string $taxonomy
+ * @return boolean
+ */
+function acf_is_taxonomy_reserved_dev( $taxonomy ) {
+	$reserved = acf_get_setting( 'reserved_taxonomies', [] );
+	return ! acf_is_super_dev() && in_array( $taxonomy, $reserved );
+}
+
+// Settings, similar to `acf_` but with the `acfe_` prefix.
+function acfe_update_setting( $name, $value ) {
+	return acf_update_setting( "acfe/{$name}", $value );
+}
+function acfe_append_setting( $name, $value ) {
+	return acf_append_setting( "acfe/{$name}", $value );
+}
+function acfe_get_setting( $name, $value = null ) {
+	return acf_get_setting( "acfe/{$name}", $value );
 }

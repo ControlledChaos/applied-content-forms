@@ -870,7 +870,7 @@ class acfe_pro_field_file{
 
         if(!acf_maybe_get($field, 'multiple')){
 
-            $return = acfe_unarray($return);
+            $return = acf_unarray($return);
 
             if(empty($return)){
                 $return = false;

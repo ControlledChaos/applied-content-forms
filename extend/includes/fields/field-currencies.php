@@ -6,9 +6,9 @@ if(!defined('ABSPATH'))
 if(!class_exists('acfe_currencies')):
 
 class acfe_currencies extends acf_field{
-    
+
     function __construct(){
-        
+
         $this->name = 'acfe_currencies';
         $this->label = __('Currencies', 'acfe');
         $this->category = 'choice';
@@ -32,19 +32,19 @@ class acfe_currencies extends acf_field{
             'display_format'        => '{symbol} {code}',
             'return_format'         => 'array',
         );
-        
+
         parent::__construct();
-        
+
     }
-    
+
     /*
      * Render Field Settings
      */
     function render_field_settings($field){
-        
+
         // Encode Choices
         $field['default_value'] = acf_encode_choices($field['default_value'], false);
-        
+
         // Allow Currencies
         acf_render_field_setting($field, array(
             'label'         => __('Allow Currencies','acf'),
@@ -60,7 +60,7 @@ class acfe_currencies extends acf_field{
             'allow_null'    => 1,
             'placeholder'   => __('All Currencies','acf'),
         ));
-        
+
         // Field Type
         acf_render_field_setting($field, array(
             'label'         => __('Appearance','acf'),
@@ -73,7 +73,7 @@ class acfe_currencies extends acf_field{
                 'select'        => _x('Select', 'noun', 'acf')
             )
         ));
-        
+
         // Default Value
         acf_render_field_setting($field, array(
             'label'         => __('Default Value','acf'),
@@ -81,7 +81,7 @@ class acfe_currencies extends acf_field{
             'name'          => 'default_value',
             'type'          => 'textarea',
         ));
-    
+
         // display format
         acf_render_field_setting($field, array(
             'label'         => __('Display Format','acf'),
@@ -96,7 +96,7 @@ class acfe_currencies extends acf_field{
                 'other'             => '<span>' . __('Custom:', 'acf') . '</span>',
             )
         ));
-        
+
         // Return Format
         acf_render_field_setting($field, array(
             'label'         => __('Return Value', 'acf'),
@@ -111,7 +111,7 @@ class acfe_currencies extends acf_field{
                 'symbol'        => __('Currency symbol', 'acfe'),
             ),
         ));
-        
+
         // Display Flags
         acf_render_field_setting($field, array(
             'label'         => __('Display Flags','acf'),
@@ -148,7 +148,7 @@ class acfe_currencies extends acf_field{
                 ),
             )
         ));
-        
+
         // Group by Continents
         acf_render_field_setting($field, array(
             'label'         => __('Group by Continents','acf'),
@@ -157,7 +157,7 @@ class acfe_currencies extends acf_field{
             'type'          => 'true_false',
             'ui'            => 1,
         ));
-        
+
         // Select: Allow Null
         acf_render_field_setting($field, array(
             'label'         => __('Allow Null?','acf'),
@@ -182,7 +182,7 @@ class acfe_currencies extends acf_field{
                 ),
             )
         ));
-        
+
         // Select: Multiple
         acf_render_field_setting($field, array(
             'label'         => __('Select multiple values?','acf'),
@@ -200,7 +200,7 @@ class acfe_currencies extends acf_field{
                 ),
             )
         ));
-        
+
         // Select: UI
         acf_render_field_setting($field, array(
             'label'         => __('Stylised UI','acf'),
@@ -218,7 +218,7 @@ class acfe_currencies extends acf_field{
                 ),
             )
         ));
-        
+
         // Select: Ajax
         acf_render_field_setting($field, array(
             'label'         => __('Use AJAX to lazy load choices?','acf'),
@@ -241,7 +241,7 @@ class acfe_currencies extends acf_field{
                 ),
             )
         ));
-        
+
         // Select: Placeholder
         acf_render_field_setting($field, array(
             'label'             => __('Placeholder','acf'),
@@ -308,7 +308,7 @@ class acfe_currencies extends acf_field{
                 ),
             )
         ));
-        
+
         // Select: Search Placeholder
         acf_render_field_setting($field, array(
             'label'             => __('Search Input Placeholder','acf'),
@@ -336,7 +336,7 @@ class acfe_currencies extends acf_field{
                 ),
             )
         ));
-        
+
         // Radio: Other Choice
         acf_render_field_setting($field, array(
             'label'         => __('Other','acf'),
@@ -355,14 +355,14 @@ class acfe_currencies extends acf_field{
                 ),
             )
         ));
-        
+
         // Checkbox: Layout
         acf_render_field_setting($field, array(
             'label'         => __('Layout','acf'),
             'instructions'  => '',
             'type'          => 'radio',
             'name'          => 'layout',
-            'layout'        => 'horizontal', 
+            'layout'        => 'horizontal',
             'choices'       => array(
                 'vertical'      => __("Vertical",'acf'),
                 'horizontal'    => __("Horizontal",'acf')
@@ -384,7 +384,7 @@ class acfe_currencies extends acf_field{
                 ),
             )
         ));
-        
+
         // Checkbox: Toggle
         acf_render_field_setting($field, array(
             'label'         => __('Toggle','acf'),
@@ -402,7 +402,7 @@ class acfe_currencies extends acf_field{
                 ),
             )
         ));
-        
+
         // Checkbox: Allow Custom
         acf_render_field_setting($field, array(
             'label'         => __('Allow Custom','acf'),
@@ -433,181 +433,181 @@ class acfe_currencies extends acf_field{
                 )
             )
         ));
-        
+
     }
-    
+
     /*
      * Update Field
      */
     function update_field($field){
-        
+
         // Checkbox: Default Value
         $field['default_value'] = acf_decode_choices($field['default_value'], true);
-        
+
         // Radio: Default Value
         if($field['field_type'] === 'radio')
-            $field['default_value'] = acfe_unarray($field['default_value']);
-        
+            $field['default_value'] = acf_unarray($field['default_value']);
+
         return $field;
-        
+
     }
-    
+
     /*
      * Prepare Field
      */
     function prepare_field($field){
-        
+
         // Field Type
         $field['type'] = $field['field_type'];
-        
+
         // Choices
         $field['choices'] = $this->get_choices($field);
-    
+
         // Radio: Value
         if($field['field_type'] === 'radio')
-            $field['value'] = acfe_unarray($field['value']);
-    
+            $field['value'] = acf_unarray($field['value']);
+
         // Labels
         $field = acfe_prepare_checkbox_labels($field);
-        
+
         // Checkbox: Allow Custom
         if(acf_maybe_get($field, 'allow_custom')){
-            
+
             if($value = acf_maybe_get($field, 'value')){
-                
+
                 $value = acf_get_array($value);
-                
+
                 foreach($value as $v){
-                    
+
                     if(isset($field['choices'][$v]))
                         continue;
-                    
+
                     $field['choices'][$v] = $v;
-                    
+
                 }
-                
+
             }
-            
+
         }
-        
+
         // return
         return $field;
-        
+
     }
-    
+
     /*
      * Format Value
      */
     function format_value($value, $post_id, $field){
-        
+
         // Bail early
         if(empty($value))
             return $value;
-    
+
         // Vars
         $is_array = is_array($value);
         $value = acf_get_array($value);
-    
+
         // Loop
         foreach($value as &$v){
-        
+
             // Retrieve Object
             $object = acfe_get_currency($v);
-        
+
             if(!$object || is_wp_error($object))
                 continue;
-        
+
             // Return: Object
             if($field['return_format'] === 'array'){
-                
+
                 $v = $object;
-                
+
             // Return: Symbol
             }elseif($field['return_format'] === 'symbol'){
-    
+
                 $v = acf_maybe_get($object, 'symbol');
-    
+
             // Return: Name
             }elseif($field['return_format'] === 'name'){
-    
+
                 $v = acf_maybe_get($object, 'name');
-    
+
             }
-        
+
         }
-        
+
         // Do not return array
         if(!$is_array){
-            $value = acfe_unarray($value);
+            $value = acf_unarray($value);
         }
-        
+
         // Return
         return $value;
-        
+
     }
-    
+
     /*
      * Get Choices
      */
     function get_choices($field){
-        
+
         // Default
         $args = array(
             'field' => 'code',
             'display' => $field['display_format']
         );
-    
+
         // Flags
         if($field['flags']){
             $args['prepend'] = '<span class="iti__flag iti__{flag}"></span>';
         }
-        
+
         // Allowed Currencies
         if($field['currencies']){
             $args['code__in'] = $field['currencies'];
             $args['orderby'] = 'code__in';
         }
-        
+
         // Group by Continents
         if($field['continents']){
             $args['groupby'] = 'continent';
         }
-    
+
         // Vars
         $post_id = acfe_get_post_id();
         $field_name = $field['_name'];
         $field_key = $field['key'];
-    
+
         // Filters
         $args = apply_filters("acfe/fields/currencies/query",                       $args, $field, $post_id);
         $args = apply_filters("acfe/fields/currencies/query/name={$field_name}",    $args, $field, $post_id);
         $args = apply_filters("acfe/fields/currencies/query/key={$field_key}",      $args, $field, $post_id);
-        
+
         // Query
         $choices = acfe_get_currencies($args);
-    
+
         // Loop
         foreach(array_keys($choices) as $code){
-        
+
             // Vars
             $text = $choices[$code];
             $currency = acfe_get_currency($code);
-        
+
             // Filters
             $text = apply_filters("acfe/fields/currencies/result",                      $text, $currency, $field, $post_id);
             $text = apply_filters("acfe/fields/currencies/result/name={$field_name}",   $text, $currency, $field, $post_id);
             $text = apply_filters("acfe/fields/currencies/result/key={$field_key}",     $text, $currency, $field, $post_id);
-        
+
             // Apply
             $choices[$code] = $text;
-        
+
         }
-    
+
         // Return
         return $choices;
-        
+
     }
-    
+
 }
 
 // initialize

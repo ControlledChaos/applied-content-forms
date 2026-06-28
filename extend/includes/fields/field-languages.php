@@ -6,9 +6,9 @@ if(!defined('ABSPATH'))
 if(!class_exists('acfe_languages')):
 
 class acfe_languages extends acf_field{
-    
+
     function __construct(){
-        
+
         $this->name = 'acfe_languages';
         $this->label = __('Languages', 'acfe');
         $this->category = 'choice';
@@ -33,25 +33,25 @@ class acfe_languages extends acf_field{
             'display_format'        => '{name}',
             'return_format'         => 'array',
         );
-        
+
         parent::__construct();
-        
+
     }
-    
+
     /*
      * Render Field Settings
      */
     function render_field_settings($field){
-        
+
         // Encode Choices
         $field['default_value'] = acf_encode_choices($field['default_value'], false);
-        
+
         $allow_conditions = array();
-        
+
         if(acfe_is_multilang()){
-            
+
             $plugin = acfe_is_polylang() ? 'Polylang' : 'WPML';
-    
+
             // Multilingual Support
             acf_render_field_setting($field, array(
                 'label'         => $plugin . ' ' . __('Languages','acf'),
@@ -60,7 +60,7 @@ class acfe_languages extends acf_field{
                 'type'          => 'true_false',
                 'ui'            => 1,
             ));
-    
+
             $allow_conditions = array(
                 array(
                     array(
@@ -70,9 +70,9 @@ class acfe_languages extends acf_field{
                     ),
                 ),
             );
-            
+
         }
-        
+
         // Allow Languages
         acf_render_field_setting($field, array(
             'label'         => __('Allow Languages','acf'),
@@ -90,7 +90,7 @@ class acfe_languages extends acf_field{
             'placeholder'   => __('All Languages','acf'),
             'conditions'    => $allow_conditions
         ));
-        
+
         // Field Type
         acf_render_field_setting($field, array(
             'label'         => __('Appearance','acf'),
@@ -103,7 +103,7 @@ class acfe_languages extends acf_field{
                 'select'        => _x('Select', 'noun', 'acf')
             )
         ));
-        
+
         // Default Value
         acf_render_field_setting($field, array(
             'label'         => __('Default Value','acf'),
@@ -111,7 +111,7 @@ class acfe_languages extends acf_field{
             'name'          => 'default_value',
             'type'          => 'textarea',
         ));
-        
+
         // Return Format
         acf_render_field_setting($field, array(
             'label'         => __('Return Value', 'acf'),
@@ -125,7 +125,7 @@ class acfe_languages extends acf_field{
                 'locale'        => __('Language locale code', 'acfe'),
             ),
         ));
-    
+
         // display format
         acf_render_field_setting($field, array(
             'label'         => __('Display Format','acf'),
@@ -140,7 +140,7 @@ class acfe_languages extends acf_field{
                 'other'                 => '<span>' . __('Custom:', 'acf') . '</span>',
             )
         ));
-        
+
         // Display Flags
         acf_render_field_setting($field, array(
             'label'         => __('Display Flags','acf'),
@@ -177,7 +177,7 @@ class acfe_languages extends acf_field{
                 ),
             )
         ));
-        
+
         // Group by Continents
         acf_render_field_setting($field, array(
             'label'         => __('Group by Continents','acf'),
@@ -186,7 +186,7 @@ class acfe_languages extends acf_field{
             'type'          => 'true_false',
             'ui'            => 1,
         ));
-        
+
         // Select: Allow Null
         acf_render_field_setting($field, array(
             'label'         => __('Allow Null?','acf'),
@@ -211,7 +211,7 @@ class acfe_languages extends acf_field{
                 ),
             )
         ));
-        
+
         // Select: Multiple
         acf_render_field_setting($field, array(
             'label'         => __('Select multiple values?','acf'),
@@ -229,7 +229,7 @@ class acfe_languages extends acf_field{
                 ),
             )
         ));
-        
+
         // Select: UI
         acf_render_field_setting($field, array(
             'label'         => __('Stylised UI','acf'),
@@ -247,7 +247,7 @@ class acfe_languages extends acf_field{
                 ),
             )
         ));
-        
+
         // Select: Ajax
         acf_render_field_setting($field, array(
             'label'         => __('Use AJAX to lazy load choices?','acf'),
@@ -270,7 +270,7 @@ class acfe_languages extends acf_field{
                 ),
             )
         ));
-        
+
         // Select: Placeholder
         acf_render_field_setting($field, array(
             'label'             => __('Placeholder','acf'),
@@ -337,7 +337,7 @@ class acfe_languages extends acf_field{
                 ),
             )
         ));
-        
+
         // Select: Search Placeholder
         acf_render_field_setting($field, array(
             'label'             => __('Search Input Placeholder','acf'),
@@ -365,7 +365,7 @@ class acfe_languages extends acf_field{
                 ),
             )
         ));
-        
+
         // Radio: Other Choice
         acf_render_field_setting($field, array(
             'label'         => __('Other','acf'),
@@ -384,14 +384,14 @@ class acfe_languages extends acf_field{
                 ),
             )
         ));
-        
+
         // Checkbox: Layout
         acf_render_field_setting($field, array(
             'label'         => __('Layout','acf'),
             'instructions'  => '',
             'type'          => 'radio',
             'name'          => 'layout',
-            'layout'        => 'horizontal', 
+            'layout'        => 'horizontal',
             'choices'       => array(
                 'vertical'      => __("Vertical",'acf'),
                 'horizontal'    => __("Horizontal",'acf')
@@ -413,7 +413,7 @@ class acfe_languages extends acf_field{
                 ),
             )
         ));
-        
+
         // Checkbox: Toggle
         acf_render_field_setting($field, array(
             'label'         => __('Toggle','acf'),
@@ -431,7 +431,7 @@ class acfe_languages extends acf_field{
                 ),
             )
         ));
-        
+
         // Checkbox: Allow Custom
         acf_render_field_setting($field, array(
             'label'         => __('Allow Custom','acf'),
@@ -462,225 +462,225 @@ class acfe_languages extends acf_field{
                 )
             )
         ));
-        
+
     }
-    
+
     /*
      * Update Field
      */
     function update_field($field){
-        
+
         // Checkbox: Default Value
         $field['default_value'] = acf_decode_choices($field['default_value'], true);
-        
+
         // Radio: Default Value
         if($field['field_type'] === 'radio')
-            $field['default_value'] = acfe_unarray($field['default_value']);
-        
+            $field['default_value'] = acf_unarray($field['default_value']);
+
         return $field;
-        
+
     }
-    
+
     /*
      * Prepare Field
      */
     function prepare_field($field){
-        
+
         // Field Type
         $field['type'] = $field['field_type'];
-        
+
         // Choices
         $field['choices'] = $this->get_choices($field);
-    
+
         // Radio: Value
         if($field['field_type'] === 'radio')
-            $field['value'] = acfe_unarray($field['value']);
-    
+            $field['value'] = acf_unarray($field['value']);
+
         // Labels
         $field = acfe_prepare_checkbox_labels($field);
-        
+
         // Checkbox: Allow Custom
         if(acf_maybe_get($field, 'allow_custom')){
-            
+
             if($value = acf_maybe_get($field, 'value')){
-                
+
                 $value = acf_get_array($value);
-                
+
                 foreach($value as $v){
-                    
+
                     if(isset($field['choices'][$v]))
                         continue;
-                    
+
                     $field['choices'][$v] = $v;
-                    
+
                 }
-                
+
             }
-            
+
         }
-        
+
         // return
         return $field;
-        
+
     }
-    
+
     /*
      * Format Value
      */
     function format_value($value, $post_id, $field){
-        
+
         // Bail early
         if(empty($value))
             return $value;
-    
+
         // Vars
         $is_array = is_array($value);
         $value = acf_get_array($value);
-    
+
         // Loop
         foreach($value as &$v){
-        
+
             // Retrieve Object
             $object = acfe_get_language($v);
-        
+
             if(!$object || is_wp_error($object))
                 continue;
-        
+
             // Return: Object
             if($field['return_format'] === 'array'){
-                
+
                 $v = $object;
-    
+
             // Return: Name
             }elseif($field['return_format'] === 'name'){
-    
+
                 $v = acf_maybe_get($object, 'name');
-    
+
             }
-        
+
         }
-        
+
         // Do not return array
         if(!$is_array){
-            $value = acfe_unarray($value);
+            $value = acf_unarray($value);
         }
-        
+
         // Return
         return $value;
-        
+
     }
-    
+
     /*
      * Get Choices
      */
     function get_choices($field){
-        
+
         // Default args
         $args = array(
             'field'  => 'name',
             'display' => $field['display_format']
         );
-    
+
         // Flags
         if($field['flags']){
             $args['prepend'] = '<span class="iti__flag iti__{flag}"></span>';
         }
-        
+
         // Allow Languages
         if($field['languages']){
             $args['locale__in'] = $field['languages'];
             $args['orderby'] = 'locale__in';
         }
-        
+
         // Group by Continents
         if($field['continents']){
             $args['groupby'] = 'continent';
         }
-    
+
         // Multilingual Support
         if(acfe_is_multilang() && $field['multilang']){
-            
+
             // Get active languages
             $locales = acfe_get_multilang_languages('locale', 'active');
-            
+
             // Search in locale
             $args['locale__in'] = $locales;
-            
+
             // Wildcard search for WPML
             if(acfe_is_wpml()){
-                
+
                 // First pass
                 $wpml_choices = acfe_get_languages(array(
                     'locale__in' => $locales,
                     'field'      => 'name'
                 ));
-                
+
                 $not_found = array();
-                
+
                 foreach($locales as $locale){
-                    
+
                     if(isset($wpml_choices[$locale]))
                         continue;
-    
+
                     $not_found[] = $locale;
-                    
+
                 }
-                
+
                 // There's still locales not found
                 if($not_found){
-                    
+
                     // Second pass
                     $wpml_alt_choices = acfe_get_languages(array(
                         'alt__in' => $not_found,
                         'field'      => 'name'
                     ));
-    
+
                     $wpml_choices = array_merge($wpml_choices, $wpml_alt_choices);
-                    
+
                 }
-                
+
                 // Change arguments
                 $args['locale__in'] = array_keys($wpml_choices);
-                
+
             }
-        
+
         }
-    
+
         // Vars
         $post_id = acfe_get_post_id();
         $field_name = $field['_name'];
         $field_key = $field['key'];
-        
+
         // Filters
         $args = apply_filters("acfe/fields/languages/query",                    $args, $field, $post_id);
         $args = apply_filters("acfe/fields/languages/query/name={$field_name}", $args, $field, $post_id);
         $args = apply_filters("acfe/fields/languages/query/key={$field_key}",   $args, $field, $post_id);
-        
+
         // Query
         $choices = acfe_get_languages($args);
-        
+
         // Loop
         foreach(array_keys($choices) as $code){
-        
+
             // Vars
             $text = $choices[$code];
             $language = acfe_get_language($code);
-        
+
             // Filters
             $text = apply_filters("acfe/fields/languages/result",                       $text, $language, $field, $post_id);
             $text = apply_filters("acfe/fields/languages/result/name={$field_name}",    $text, $language, $field, $post_id);
             $text = apply_filters("acfe/fields/languages/result/key={$field_key}",      $text, $language, $field, $post_id);
-        
+
             // Apply
             $choices[$code] = $text;
-        
+
         }
-        
+
         // Return
         return $choices;
-        
+
     }
-    
+
 }
 
 // initialize

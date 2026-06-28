@@ -27,7 +27,7 @@ class acfe_location_post_type_list{
     function load_posts($post_type){
 
         // bail early if restricted
-        if(acfe_is_post_type_reserved($post_type)){
+        if(acf_is_post_type_reserved($post_type)){
             return;
         }
 

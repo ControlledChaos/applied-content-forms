@@ -393,7 +393,7 @@ class acf_payment_cart extends acf_field{
 
         // single line
         if(!$field['multiple'] && $field['field_type'] !== 'checkbox'){
-            $field['default_value'] = acfe_unarray($field['default_value']);
+            $field['default_value'] = acf_unarray($field['default_value']);
         }
 
         return $field;

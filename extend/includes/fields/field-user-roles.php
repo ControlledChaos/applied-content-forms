@@ -6,9 +6,9 @@ if(!defined('ABSPATH'))
 if(!class_exists('acfe_field_user_roles')):
 
 class acfe_field_user_roles extends acf_field{
-    
+
     function __construct(){
-        
+
         $this->name = 'acfe_user_roles';
         $this->label = __('User Roles', 'acfe');
         $this->category = 'WordPress';
@@ -27,16 +27,16 @@ class acfe_field_user_roles extends acf_field{
             'toggle'                => 0,
             'allow_custom'          => 0,
         );
-        
+
         parent::__construct();
-        
+
     }
-    
+
     function render_field_settings($field){
-        
+
         if(isset($field['default_value']))
             $field['default_value'] = acf_encode_choices($field['default_value'], false);
-        
+
         // Allow User Role
         acf_render_field_setting($field, array(
             'label'         => __('Allow User Role','acf'),
@@ -49,7 +49,7 @@ class acfe_field_user_roles extends acf_field{
             'allow_null'    => 1,
             'placeholder'   => __("All user roles",'acf'),
         ));
-        
+
         // field_type
         acf_render_field_setting($field, array(
             'label'         => __('Appearance','acf'),
@@ -63,7 +63,7 @@ class acfe_field_user_roles extends acf_field{
                 'select'        => _x('Select', 'noun', 'acf')
             )
         ));
-        
+
         // default_value
         acf_render_field_setting($field, array(
             'label'         => __('Default Value','acf'),
@@ -71,7 +71,7 @@ class acfe_field_user_roles extends acf_field{
             'name'          => 'default_value',
             'type'          => 'textarea',
         ));
-        
+
         // Select + Radio: allow_null
         acf_render_field_setting($field, array(
             'label'         => __('Allow Null?','acf'),
@@ -96,7 +96,7 @@ class acfe_field_user_roles extends acf_field{
                 ),
             )
         ));
-        
+
         // Select: multiple
         acf_render_field_setting($field, array(
             'label'         => __('Select multiple values?','acf'),
@@ -114,7 +114,7 @@ class acfe_field_user_roles extends acf_field{
                 ),
             )
         ));
-        
+
         // Select: ui
         acf_render_field_setting($field, array(
             'label'         => __('Stylised UI','acf'),
@@ -132,8 +132,8 @@ class acfe_field_user_roles extends acf_field{
                 ),
             )
         ));
-                
-        
+
+
         // Select: ajax
         acf_render_field_setting($field, array(
             'label'         => __('Use AJAX to lazy load choices?','acf'),
@@ -156,7 +156,7 @@ class acfe_field_user_roles extends acf_field{
                 ),
             )
         ));
-    
+
         // Select: Placeholder
         acf_render_field_setting($field, array(
             'label'             => __('Placeholder','acf'),
@@ -223,7 +223,7 @@ class acfe_field_user_roles extends acf_field{
                 ),
             )
         ));
-    
+
         // Select: Search Placeholder
         acf_render_field_setting($field, array(
             'label'             => __('Search Input Placeholder','acf'),
@@ -251,7 +251,7 @@ class acfe_field_user_roles extends acf_field{
                 ),
             )
         ));
-        
+
         // Radio: other_choice
         acf_render_field_setting($field, array(
             'label'         => __('Other','acf'),
@@ -270,14 +270,14 @@ class acfe_field_user_roles extends acf_field{
                 ),
             )
         ));
-        
+
         // Checkbox: layout
         acf_render_field_setting($field, array(
             'label'         => __('Layout','acf'),
             'instructions'  => '',
             'type'          => 'radio',
             'name'          => 'layout',
-            'layout'        => 'horizontal', 
+            'layout'        => 'horizontal',
             'choices'       => array(
                 'vertical'      => __("Vertical",'acf'),
                 'horizontal'    => __("Horizontal",'acf')
@@ -299,7 +299,7 @@ class acfe_field_user_roles extends acf_field{
                 ),
             )
         ));
-        
+
         // Checkbox: toggle
         acf_render_field_setting($field, array(
             'label'         => __('Toggle','acf'),
@@ -317,7 +317,7 @@ class acfe_field_user_roles extends acf_field{
                 ),
             )
         ));
-        
+
         // Checkbox: other_choice
         acf_render_field_setting($field, array(
             'label'         => __('Allow Custom','acf'),
@@ -348,50 +348,50 @@ class acfe_field_user_roles extends acf_field{
                 )
             )
         ));
-        
+
     }
-    
+
     function update_field($field){
-        
+
         $field['default_value'] = acf_decode_choices($field['default_value'], true);
-        
+
         if($field['field_type'] === 'radio')
-            $field['default_value'] = acfe_unarray($field['default_value']);
-        
+            $field['default_value'] = acf_unarray($field['default_value']);
+
         return $field;
-        
+
     }
-    
+
     function prepare_field($field){
-        
+
         // Set Field Type
         $field['type'] = $field['field_type'];
-        
+
         // Choices
         $field['choices'] = acfe_get_roles($field['user_role']);
-        
+
         // Allow Custom
         if(acf_maybe_get($field, 'allow_custom')){
-            
+
             if($value = acf_maybe_get($field, 'value')){
-                
+
                 $value = acf_get_array($value);
-                
+
                 foreach($value as $v){
-                    
+
                     if(isset($field['choices'][$v]))
                         continue;
-                    
+
                     $field['choices'][$v] = $v;
-                    
+
                 }
-                
+
             }
-            
+
         }
-        
+
         return $field;
-        
+
     }
 
 }

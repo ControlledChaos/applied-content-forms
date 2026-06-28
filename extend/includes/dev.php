@@ -40,7 +40,7 @@ class acfe_pro_dev{
     function post_submitbox_misc_actions($post){
 
         // check restricted post types
-        if(acfe_is_post_type_reserved_dev($post->post_type)) return;
+        if(acf_is_post_type_reserved_dev($post->post_type)) return;
 
         //vars
         $post_id = $post->ID;
@@ -116,7 +116,7 @@ class acfe_pro_dev{
     function term_submitbox_misc_actions($term){
 
         // check restricted taxonomies
-        if(acfe_is_taxonomy_reserved_dev($term->taxonomy)) return;
+        if(acf_is_taxonomy_reserved_dev($term->taxonomy)) return;
 
         //vars
         $post_id = "term_{$term->term_id}";

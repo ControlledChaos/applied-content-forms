@@ -154,7 +154,7 @@ class acfe_dev{
     function add_post_meta_boxes($post_type, $post){
 
         // check restricted post types
-        if(acfe_is_post_type_reserved_dev($post_type)) return;
+        if(acf_is_post_type_reserved_dev($post_type)) return;
 
         // post id
         $post_id = $post->ID;

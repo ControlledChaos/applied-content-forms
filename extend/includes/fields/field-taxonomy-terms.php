@@ -1142,7 +1142,7 @@ class acfe_field_taxonomy_terms extends acf_field{
 
             if($field['field_type'] === 'radio'){
 
-                $term_ids = acfe_unarray($term_ids);
+                $term_ids = acf_unarray($term_ids);
 
             }
 
@@ -1249,7 +1249,7 @@ class acfe_field_taxonomy_terms extends acf_field{
         $field['default_value'] = acf_decode_choices($field['default_value'], true);
 
         if($field['field_type'] === 'radio')
-            $field['default_value'] = acfe_unarray($field['default_value']);
+            $field['default_value'] = acf_unarray($field['default_value']);
 
         return $field;
 
@@ -1290,7 +1290,7 @@ class acfe_field_taxonomy_terms extends acf_field{
 
         // Do not return array
         if(!$is_array){
-            $value = acfe_unarray($value);
+            $value = acf_unarray($value);
         }
 
         // Return

@@ -6,9 +6,9 @@ if(!defined('ABSPATH'))
 if(!class_exists('acfe_field_types')):
 
 class acfe_field_types extends acf_field{
-    
+
     function __construct(){
-        
+
         $this->name = 'acfe_field_types';
         $this->label = __('Field Types', 'acfe');
         $this->category = 'ACF';
@@ -28,37 +28,37 @@ class acfe_field_types extends acf_field{
             'allow_custom'          => 0,
             'return_format'         => 'object',
         );
-        
+
         parent::__construct();
-        
+
     }
-    
+
     function get_pretty_field_types($allowed = array()){
-    
+
         $groups = acf_get_grouped_field_types();
         $choices = array();
-        
+
         foreach($groups as $group_cat => $field_types){
-    
+
             foreach($field_types as $field_type_name => $field_type_label){
-        
+
                 if(!empty($allowed) && !in_array($field_type_name, $allowed))
                     continue;
-        
+
                 $choices[$group_cat][$field_type_name] = $field_type_label;
-        
+
             }
-            
+
         }
-        
+
         return $choices;
-    
+
     }
-    
+
     function render_field_settings($field){
-        
+
         $field['default_value'] = acf_encode_choices($field['default_value'], false);
-        
+
         // Allow Field Types
         acf_render_field_setting($field, array(
             'label'         => __('Allow Field Types','acf'),
@@ -71,7 +71,7 @@ class acfe_field_types extends acf_field{
             'allow_null'    => 1,
             'placeholder'   => __("All field types",'acf'),
         ));
-        
+
         // field_type
         acf_render_field_setting($field, array(
             'label'         => __('Appearance','acf'),
@@ -85,7 +85,7 @@ class acfe_field_types extends acf_field{
                 'select'        => _x('Select', 'noun', 'acf')
             )
         ));
-        
+
         // default_value
         acf_render_field_setting($field, array(
             'label'         => __('Default Value','acf'),
@@ -93,7 +93,7 @@ class acfe_field_types extends acf_field{
             'name'          => 'default_value',
             'type'          => 'textarea',
         ));
-        
+
         // return_format
         acf_render_field_setting($field, array(
             'label'         => __('Return Value', 'acf'),
@@ -106,7 +106,7 @@ class acfe_field_types extends acf_field{
             ),
             'layout'        => 'horizontal',
         ));
-        
+
         // Select + Radio: allow_null
         acf_render_field_setting($field, array(
             'label'         => __('Allow Null?','acf'),
@@ -131,7 +131,7 @@ class acfe_field_types extends acf_field{
                 ),
             )
         ));
-        
+
         // Select: multiple
         acf_render_field_setting($field, array(
             'label'         => __('Select multiple values?','acf'),
@@ -149,7 +149,7 @@ class acfe_field_types extends acf_field{
                 ),
             )
         ));
-        
+
         // Select: ui
         acf_render_field_setting($field, array(
             'label'         => __('Stylised UI','acf'),
@@ -167,8 +167,8 @@ class acfe_field_types extends acf_field{
                 ),
             )
         ));
-                
-        
+
+
         // Select: ajax
         acf_render_field_setting($field, array(
             'label'         => __('Use AJAX to lazy load choices?','acf'),
@@ -191,7 +191,7 @@ class acfe_field_types extends acf_field{
                 ),
             )
         ));
-    
+
         // Select: Placeholder
         acf_render_field_setting($field, array(
             'label'             => __('Placeholder','acf'),
@@ -258,7 +258,7 @@ class acfe_field_types extends acf_field{
                 ),
             )
         ));
-    
+
         // Select: Search Placeholder
         acf_render_field_setting($field, array(
             'label'             => __('Search Input Placeholder','acf'),
@@ -286,7 +286,7 @@ class acfe_field_types extends acf_field{
                 ),
             )
         ));
-        
+
         // Radio: other_choice
         acf_render_field_setting($field, array(
             'label'         => __('Other','acf'),
@@ -305,14 +305,14 @@ class acfe_field_types extends acf_field{
                 ),
             )
         ));
-        
+
         // Checkbox: layout
         acf_render_field_setting($field, array(
             'label'         => __('Layout','acf'),
             'instructions'  => '',
             'type'          => 'radio',
             'name'          => 'layout',
-            'layout'        => 'horizontal', 
+            'layout'        => 'horizontal',
             'choices'       => array(
                 'vertical'      => __("Vertical",'acf'),
                 'horizontal'    => __("Horizontal",'acf')
@@ -334,7 +334,7 @@ class acfe_field_types extends acf_field{
                 ),
             )
         ));
-        
+
         // Checkbox: toggle
         acf_render_field_setting($field, array(
             'label'         => __('Toggle','acf'),
@@ -352,7 +352,7 @@ class acfe_field_types extends acf_field{
                 ),
             )
         ));
-        
+
         // Checkbox: other_choice
         acf_render_field_setting($field, array(
             'label'         => __('Allow Custom','acf'),
@@ -383,91 +383,91 @@ class acfe_field_types extends acf_field{
                 )
             )
         ));
-        
+
     }
-    
+
     function update_field($field){
-        
+
         $field['default_value'] = acf_decode_choices($field['default_value'], true);
-        
+
         if($field['field_type'] === 'radio')
-            $field['default_value'] = acfe_unarray($field['default_value']);
-        
+            $field['default_value'] = acf_unarray($field['default_value']);
+
         return $field;
-        
+
     }
-    
+
     function prepare_field($field){
-        
+
         // Set Field Type
         $field['type'] = $field['field_type'];
-        
+
         // Choices
         $field['choices'] = $this->get_pretty_field_types($field['field_types']);
-        
+
         // Allow Custom
         if(acf_maybe_get($field, 'allow_custom')){
-            
+
             if($value = acf_maybe_get($field, 'value')){
-                
+
                 $value = acf_get_array($value);
-                
+
                 foreach($value as $v){
-                    
+
                     if(isset($field['choices'][$v]))
                         continue;
-                    
+
                     $field['choices'][$v] = $v;
-                    
+
                 }
-                
+
             }
-            
+
         }
-        
+
         // return
         return $field;
-        
+
     }
-    
+
     function format_value($value, $post_id, $field){
-        
+
         // Bail early
         if(empty($value))
             return $value;
-        
+
         // Vars
         $is_array = is_array($value);
         $value = acf_get_array($value);
-        
+
         // Loop
         foreach($value as &$v){
-            
+
             // Retrieve Object
             $object = acf_get_field_type($v);
-            
+
             if(!$object || is_wp_error($object))
                 continue;
-            
+
             // Return: Object
             if($field['return_format'] === 'object'){
-    
+
                 $v = $object;
-                
+
             }
-            
+
         }
-        
+
         // Do not return array
         if(!$is_array){
-            $value = acfe_unarray($value);
+            $value = acf_unarray($value);
         }
-        
+
         // Return
         return $value;
-    
+
     }
-    
+
 }
 
 // initialize

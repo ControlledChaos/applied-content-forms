@@ -370,7 +370,6 @@ final class ACF {
 		// Extend original ACF.
 		acf_include( 'extend/class-extend-acf.php' );
 
-		acf_include( 'includes/acfe-helper-functions.php' );
 		acf_include( 'includes/acfe-meta-functions.php' );
 		acf_include( 'includes/acfe-post-functions.php' );
 		acf_include( 'includes/acf-screen-functions.php' );

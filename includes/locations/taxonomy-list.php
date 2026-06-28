@@ -27,7 +27,7 @@ class acfe_location_taxonomy_list{
     function load_terms($taxonomy){
 
         // bail early if restricted
-        if(acfe_is_taxonomy_reserved($taxonomy)){
+        if(acf_is_taxonomy_reserved($taxonomy)){
             return;
         }
 

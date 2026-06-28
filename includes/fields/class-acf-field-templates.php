@@ -396,7 +396,7 @@ class acf_templates extends acf_field{
         $field['default_value'] = acf_decode_choices($field['default_value'], true);
 
         if($field['field_type'] === 'radio')
-            $field['default_value'] = acfe_unarray($field['default_value']);
+            $field['default_value'] = acf_unarray($field['default_value']);
 
         return $field;
 
@@ -465,7 +465,7 @@ class acf_templates extends acf_field{
 
         // Do not return array
         if(!$is_array){
-            $value = acfe_unarray($value);
+            $value = acf_unarray($value);
         }
 
         // Return

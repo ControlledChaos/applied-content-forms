@@ -899,7 +899,7 @@ class acf_payment extends acf_field{
         $response['currency'] = 'USD';
         $response['items'] = array();
         $response['date'] = date_i18n('U');
-        $response['ip'] = acfe_get_ip();
+        $response['ip'] = acf_get_ip();
         $response['mode'] = $field['mode'];
         $response['object'] = $object;
 

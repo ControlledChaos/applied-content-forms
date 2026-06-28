@@ -141,7 +141,7 @@ class acfe_field_post_object{
         }
 
         if(!$is_array){
-            $value = acfe_unarray($value);
+            $value = acf_unarray($value);
         }
 
         return $value;
