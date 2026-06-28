@@ -651,18 +651,19 @@ final class ACF {
 		acf_include( 'extend/includes/field-groups/field-groups-local.php' );
 		acf_include( 'extend/includes/field-groups/field-group-ui.php' );
 
-		acf_include( 'extend/includes/pro-hooks.php' );
+		acf_include( 'includes/class-advanced-fields-hooks.php' );
+		acf_include( 'includes/class-advanced-values-hooks.php' );
 
-		acf_include( 'extend/pro/includes/fields/field-checkbox.php' );
-		acf_include( 'extend/pro/includes/fields/field-column.php' );
+		acf_include( 'includes/fields/extend-pro/field-checkbox.php' );
+		acf_include( 'includes/fields/extend-pro/field-column.php' );
 		acf_include( 'extend/includes/fields/field-color-picker.php' );
 		acf_include( 'extend/includes/fields/field-date-picker.php' );
-		acf_include( 'extend/pro/includes/fields/field-flexible-content-grid.php' );
-		acf_include( 'extend/pro/includes/fields/field-flexible-content-locations.php' );
-		acf_include( 'extend/pro/includes/fields/field-file.php' );
-		acf_include( 'extend/pro/includes/fields/field-radio.php' );
-		acf_include( 'extend/pro/includes/fields/field-select.php' );
-		acf_include( 'extend/pro/includes/fields/field-tab.php' );
+		acf_include( 'includes/fields/extend-pro/field-flexible-content-grid.php' );
+		acf_include( 'includes/fields/extend-pro/field-flexible-content-locations.php' );
+		acf_include( 'includes/fields/extend-pro/field-file.php' );
+		acf_include( 'includes/fields/extend-pro/field-radio.php' );
+		acf_include( 'includes/fields/extend-pro/field-select.php' );
+		acf_include( 'includes/fields/extend-pro/field-tab.php' );
 
 		acf_include( 'includes/dev.php' );
 	}
