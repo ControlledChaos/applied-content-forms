@@ -366,7 +366,6 @@ final class ACF {
 
 		acf_include( 'includes/class-options-page.php' );
 		acf_include( 'includes/acf-screen-functions.php' );
-		acf_include( 'includes/compatibility.php' );
 
 		if ( defined( 'ACF_DEV' ) && ACF_DEV ) {
 			acf_include( 'tests/tests.php' );
@@ -515,7 +514,6 @@ final class ACF {
 		acf_include( 'extend/includes/local-meta.php' );
 		acf_include( 'extend/includes/multilang.php' );
 		acf_include( 'extend/includes/settings.php' );
-		acf_include( 'extend/includes/upgrades.php' );
 
 		acf_include( 'extend/includes/forms/form-attachment.php' );
 		acf_include( 'extend/includes/forms/form-options-page.php' );
