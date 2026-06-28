@@ -311,6 +311,7 @@ final class ACF {
 		acf_include( 'includes/acf-form-functions.php' );
 		acf_include( 'includes/acf-meta-functions.php' );
 		acf_include( 'includes/acf-post-functions.php' );
+		acf_include( 'includes/acf-term-functions.php' );
 		acf_include( 'includes/acf-user-functions.php' );
 		acf_include( 'includes/acf-value-functions.php' );
 		acf_include( 'includes/acf-input-functions.php' );
@@ -370,12 +371,7 @@ final class ACF {
 		// Extend original ACF.
 		acf_include( 'extend/class-extend-acf.php' );
 
-		acf_include( 'includes/acfe-meta-functions.php' );
-		acf_include( 'includes/acfe-post-functions.php' );
 		acf_include( 'includes/acf-screen-functions.php' );
-		acf_include( 'includes/acfe-template-functions.php' );
-		acf_include( 'includes/acfe-term-functions.php' );
-		acf_include( 'includes/acfe-user-functions.php' );
 		acf_include( 'includes/compatibility.php' );
 
 		if ( defined( 'ACF_DEV' ) && ACF_DEV ) {
