@@ -39,7 +39,7 @@ class ACF_Admin {
 		add_action( 'admin_menu', [ $this, 'admin_page' ], 9 );
 		add_action( 'admin_menu', [ $this, 'categories_screen' ] );
 		add_action( 'acf/init', [ $this, 'settings_page' ] );
-		add_action( 'acf/post_types_grid', [ $this, 'post_types_grid' ] );
+		add_action( 'acf/admin_page_grid', [ $this, 'admin_page_grid' ] );
 	}
 
 	/**
@@ -98,7 +98,7 @@ class ACF_Admin {
 			$menu,
 			acf_get_setting( 'capability' ),
 			acf()->admin_slug(),
-			[ $this, 'page_content' ],
+			[ $this, 'admin_page_content' ],
 			$icon,
 			acf_get_setting( 'menu_position' ),
 		);
@@ -111,7 +111,7 @@ class ACF_Admin {
 	 * @access public
 	 * @return void
 	 */
-	public function page_content() {
+	public function admin_page_content() {
 		acf_get_view( 'acf-content-page' );
 	}
 
@@ -323,16 +323,16 @@ class ACF_Admin {
 	}
 
 	/**
-	 * Post types grid
+	 * Admin page grid
 	 *
-	 * The HTML markup for the grid of post types
-	 * on the first, default tab of the content screen.
+	 * The HTML markup for the grid of content types
+	 * on the first, default tab of the content screens.
 	 *
 	 * @since  1.0.0
 	 * @access public
 	 * @return void
 	 */
-	public function post_types_grid() {
+	public function admin_page_grid() {
 
 		// Array of data from relevant post types.
 		$types = $this->get_post_type_data();
