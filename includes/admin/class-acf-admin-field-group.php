@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-class acf_admin_field_group {
+class ACF_Admin_Field_Group {
 
 	/**
 	 * Constructor method
@@ -641,4 +641,4 @@ class acf_admin_field_group {
 		die();
 	}
 }
-acf_new_instance( 'acf_admin_field_group' );
+acf_new_instance( 'ACF_Admin_Field_Group' );

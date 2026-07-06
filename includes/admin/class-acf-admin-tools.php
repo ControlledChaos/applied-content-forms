@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-class acf_admin_tools {
+class ACF_Admin_Tools {
 
 	/**
 	 * Tools
@@ -239,7 +239,7 @@ class acf_admin_tools {
 		<?php
 	}
 }
-acf()->admin_tools = new acf_admin_tools();
+acf()->admin_tools = new ACF_Admin_Tools();
 
 /**
  * Register admin tool

@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-class acf_admin_options_page {
+class ACF_Admin_Options_Page {
 
 	/**
 	 * Options page
@@ -294,4 +294,4 @@ class acf_admin_options_page {
 		acf_get_view( dirname(__FILE__) . '/views/html-options-page.php', $this->page );
 	}
 }
-acf_new_instance( 'acf_admin_options_page' );
+acf_new_instance( 'ACF_Admin_Options_Page' );

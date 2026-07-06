@@ -355,13 +355,13 @@ final class ACF {
 		acf_include( 'includes/forms/form-widget.php' );
 
 		if ( is_admin() ) {
-			acf_include( 'includes/admin/admin.php' );
-			acf_include( 'includes/admin/admin-field-group.php' );
-			acf_include( 'includes/admin/admin-field-groups.php' );
-			acf_include( 'includes/admin/admin-notices.php' );
-			acf_include( 'includes/admin/admin-tools.php' );
-			acf_include( 'includes/admin/admin-options-page.php' );
-			acf_include( 'includes/admin/admin-upgrade.php' );
+			acf_include( 'includes/admin/class-acf-admin.php' );
+			acf_include( 'includes/admin/class-acf-admin-field-group.php' );
+			acf_include( 'includes/admin/class-acf-admin-field-groups.php' );
+			acf_include( 'includes/admin/class-acf-admin-notices.php' );
+			acf_include( 'includes/admin/class-acf-admin-tools.php' );
+			acf_include( 'includes/admin/class-acf-admin-options-page.php' );
+			acf_include( 'includes/admin/class-acf-admin-upgrade.php' );
 		}
 
 		acf_include( 'includes/class-options-page.php' );
