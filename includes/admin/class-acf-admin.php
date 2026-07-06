@@ -112,7 +112,8 @@ class ACF_Admin {
 	 * @return void
 	 */
 	public function admin_page_content() {
-		acf_get_view( 'acf-content-page' );
+		$content = acf_get_view( 'acf-content-page' );
+		return apply_filters( 'acf/admin_page_content', $content );
 	}
 
 	/**
