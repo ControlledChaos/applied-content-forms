@@ -15,6 +15,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 class acf_dynamic_post_types extends acf_module {
 
+	public $active = false;
+
 	/**
 	 * Post type
 	 *
@@ -36,7 +38,7 @@ class acf_dynamic_post_types extends acf_module {
 		if ( acf_get_setting( 'post_types' ) ) {
 			$this->active = true;
 		}
-		$this->settings   = 'post_types';
+		$this->settings   = 'modules.post_types';
 		$this->label      = 'Post Type Label';
 		$this->textdomain = 'Post Types';
 
@@ -79,6 +81,7 @@ class acf_dynamic_post_types extends acf_module {
 
 		// Multilang.
 		add_action( 'acfe/post_type/save', [ $this, 'l10n_save' ], 10, 3 );
+		add_filter( 'acfe/post_type/register', [ $this, 'register' ], 15, 2 );
 		add_filter( 'acfe/post_type/register', [ $this, 'l10n_register' ], 10, 2 );
 
 		// Help.
@@ -136,6 +139,19 @@ class acf_dynamic_post_types extends acf_module {
 		$this->register_acf_post_types();
 	}
 
+	/*
+	 * Register
+	 */
+	function register($args, $name){
+
+		// Check Active
+		if(!acf_maybe_get($args, 'active', true))
+			return false;
+
+		return $args;
+
+	}
+
 	/**
 	 * Register ACF post types
 	 *
@@ -186,7 +202,7 @@ class acf_dynamic_post_types extends acf_module {
 			'acfe_admin_ppp'     => 999,
 		] );
 
-		$settings = apply_filters( 'acfe/post_type/prepare_register', acfe_get_settings( 'post_types' ) );
+		$settings = apply_filters( 'acfe/post_type/prepare_register', acfe_get_settings( $this->settings ) );
 
 		if ( empty( $settings ) ) {
 			return;
@@ -595,7 +611,7 @@ class acf_dynamic_post_types extends acf_module {
 
 		// Value changed, delete option.
 		if ( $_value !== $value ) {
-			acfe_delete_settings( 'post_types' . "{$_value}" );
+			acfe_delete_settings( "{$this->settings}.{$_value}" );
 		}
 		return $value;
 	}
@@ -641,7 +657,7 @@ class acf_dynamic_post_types extends acf_module {
 	public function save_args( $args, $name, $post_id ) {
 
 		$active = get_field( 'acfe_dpt_active', $post_id );
-        $active = $active === null ? true : $active;
+		$active = $active === null ? true : $active;
 		$label  = get_post_field( 'post_title', $post_id );
 		$name   = get_field( 'acfe_dpt_name', $post_id );
 		$public = get_field( 'public', $post_id );
@@ -835,7 +851,7 @@ class acf_dynamic_post_types extends acf_module {
 	public function save( $name, $args, $post_id ) {
 
 		// Get option.
-		$settings = acfe_get_settings( 'post_types' );
+		$settings = acfe_get_settings( $this->settings );
 
 		// Create option.
 		$settings[$name] = $args;
@@ -844,13 +860,13 @@ class acf_dynamic_post_types extends acf_module {
 		ksort( $settings );
 
 		// Update option.
-		acfe_update_settings( 'post_types', $settings );
+		acfe_update_settings( $this->settings, $settings );
 
 		// Update post
 		wp_update_post( [
 			'ID'          => $post_id,
 			'post_name'   => $name,
-			'post_status' => 'publish',
+			'post_status' => $args['active'] ? 'publish' : 'acf-disabled',
 		] );
 	}
 
@@ -867,13 +883,13 @@ class acf_dynamic_post_types extends acf_module {
 		$name = $this->get_name( $post_id );
 
 		// Get option.
-		$settings = acfe_get_settings( 'post_types' );
+		$settings = acfe_get_settings( $this->settings );
 
 		// Unset option.
 		acf_unset( $settings, $name );
 
 		// Update option.
-		acfe_update_settings( 'post_types', $settings );
+		acfe_update_settings( $this->settings, $settings );
 
 		// Flush permalinks.
 		flush_rewrite_rules();
@@ -890,7 +906,7 @@ class acf_dynamic_post_types extends acf_module {
 	 */
 	public function import( $name, $args ) {
 
-		$settings = acfe_get_settings( 'post_types' );
+		$settings = acfe_get_settings( $this->settings );
 		$title    = $args['label'];
 
 		// Already exists.
@@ -1074,7 +1090,7 @@ class acf_dynamic_post_types extends acf_module {
 	public function export_choices() {
 
 		$choices  = [];
-		$settings = acfe_get_settings( 'post_types' );
+		$settings = acfe_get_settings( $this->settings );
 
 		if ( ! $settings ) {
 			return $choices;
@@ -1097,7 +1113,7 @@ class acf_dynamic_post_types extends acf_module {
 	public function export_data( $name ) {
 
 		// Settings
-		$settings = acfe_get_settings( 'post_types' );
+		$settings = acfe_get_settings( $this->settings );
 
 		// Doesn't exist
 		if ( ! isset( $settings[$name] ) ) {
