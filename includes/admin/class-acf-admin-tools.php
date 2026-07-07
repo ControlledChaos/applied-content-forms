@@ -111,7 +111,7 @@ class ACF_Admin_Tools {
 			__( 'Content Tools', 'acf' ),
 			__( 'Tools', 'acf' ),
 			acf_get_setting( 'capability' ),
-			'acf-tools',
+			acf()->admin_slug() . '-tools',
 			[ $this, 'html' ]
 		);
 		add_action( 'load-' . $page, [ $this, 'load' ] );

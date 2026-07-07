@@ -147,7 +147,7 @@ class ACF_Admin {
 			'page_title'      => __( 'Content Settings', 'acf' ),
 			'page_desc'       => __( 'Choose which content features to use and how to use them.', 'acf' ),
 			'menu_title'      => __( 'Settings', 'acf' ),
-			'menu_slug'       => 'content-settings',
+			'menu_slug'       => acf()->admin_slug() . '-settings',
 			'parent'          => acf()->admin_slug(),
 			'capability'      => 'manage_options',
 			'redirect'        => false,
