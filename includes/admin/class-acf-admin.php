@@ -40,6 +40,8 @@ class ACF_Admin {
 		add_action( 'admin_menu', [ $this, 'categories_screen' ] );
 		add_action( 'acf/init', [ $this, 'settings_page' ] );
 		add_action( 'acf/admin_page_grid', [ $this, 'admin_page_grid' ] );
+		add_filter( 'default_hidden_meta_boxes', [ $this, 'show_page_excerpt_metabox' ], 10, 2 );
+		add_action( 'add_meta_boxes', [ $this, 'page_excerpt_metabox' ] );
 	}
 
 	/**
@@ -591,6 +593,89 @@ class ACF_Admin {
 			}
 		}
 		return $data;
+	}
+
+	/**
+	 * Page excerpt default
+	 *
+	 * Make excerpts visible by default if used as meta descriptions.
+	 * Add your post types as necessary.
+	 *
+	 * @since  1.0.0
+	 * @param  array $hidden
+	 * @param  object $screen
+	 * @return array Unsets the hidden value in the screen base array.
+	 */
+	function show_page_excerpt_metabox( $hidden, $screen ) {
+
+		$post_types = get_post_types();
+
+		foreach ( $post_types as $post_type ) {
+			if (
+				$post_type == $screen->base &&
+				post_type_supports( $post_type, 'excerpt' )
+			) {
+				foreach ( $hidden as $key=>$value ) {
+					if ( 'postexcerpt' == $value ) {
+						unset( $hidden[$key] );
+						break;
+					}
+				}
+			}
+		}
+		return $hidden;
+	}
+
+	/**
+	 * Page excerpt metabox
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @global array $wp_meta_boxes Access the metaboxes array.
+	 * @return void
+	 */
+	public function page_excerpt_metabox() {
+
+		// Access global variables.
+		global $wp_meta_boxes;
+
+		$post_types = [ 'page' ];
+		if ( $post_types ) {
+
+			foreach ( $post_types as $post_type ) {
+
+				$type = get_post_type_object( $post_type );
+
+				$wp_meta_boxes[ $type->name ]['normal']['core']['postexcerpt']['args'] = [];
+				$wp_meta_boxes[ $type->name ]['normal']['core']['postexcerpt']['id'] = 'postexcerpt';
+				$wp_meta_boxes[ $type->name ]['normal']['core']['postexcerpt']['title'] = __( 'Excerpt', 'acf' );
+				$wp_meta_boxes[ $type->name ]['normal']['core']['postexcerpt']['callback'] = [ $this, 'page_excerpt_metabox_cb' ];
+			}
+		}
+	}
+
+	/**
+	 * Page excerpt markup
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @param  WP_Post $post The post object.
+	 * @return void
+	 */
+	public function page_excerpt_metabox_cb( $post ) {
+
+	?>
+	<p>
+		<?php _e( 'Excerpts are optional hand-crafted summaries of your content that can be used in your theme. <a href="https://wordpress.org/documentation/article/what-is-an-excerpt-classic-editor/" target="_blank" rel="noopener noreferrer">Learn more about manual excerpts.</a>', 'acf' ); ?>
+	</p>
+	<label class="screen-reader-text" for="excerpt">
+		<?php _e( 'Excerpt', 'acf' ); ?>
+	</label>
+	<textarea rows="1" cols="40" name="excerpt" id="excerpt">
+		<?php echo $post->post_excerpt; ?>
+	</textarea>
+	<?php
+
 	}
 }
 
