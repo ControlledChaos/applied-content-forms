@@ -261,7 +261,7 @@
 
         actions: {
             'new_field/name=acfe_meta': 'renderClass',
-            'new_field/name=acfe_settings': 'renderClass',
+            'new_field/name=ACF_Module_Settings': 'renderClass',
             'new_field/name=acfe_validate': 'renderClass',
         },
 

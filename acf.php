@@ -566,7 +566,7 @@ final class ACF {
 		acf_include( 'includes/fields/extend/field-relationship.php' );
 
 		acf_include( 'includes/multilang.php' );
-		acf_include( 'includes/settings.php' );
+		acf_include( 'includes/class-acf-module-settings.php' );
 
 		acf_include( 'extend/includes/forms/form-attachment.php' );
 		acf_include( 'extend/includes/forms/form-options-page.php' );

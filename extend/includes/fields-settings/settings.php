@@ -247,14 +247,14 @@ class acfe_field_settings{
      */
     function load_field($field){
 
-        if(!acf_maybe_get($field, 'acfe_settings'))
+        if(!acf_maybe_get($field, 'ACF_Module_Settings'))
             return $field;
 
         $exclude = apply_filters('acfe/settings/exclude', false, $field);
         if($exclude)
             return $field;
 
-        foreach($field['acfe_settings'] as $k => $rule){
+        foreach($field['ACF_Module_Settings'] as $k => $rule){
 
             // Fix possible ACF Clone Index
             if($k === 'acfcloneindex')
@@ -409,7 +409,7 @@ class acfe_field_settings{
      */
     function prepare_settings(){
 
-        $fields = array('acfe_settings', 'acfe_settings_location', 'acfe_settings_settings', 'acfe_settings_setting_type', 'acfe_settings_setting_name', 'acfe_settings_setting_operator', 'acfe_settings_setting_value');
+        $fields = array('ACF_Module_Settings', 'acfe_settings_location', 'acfe_settings_settings', 'acfe_settings_setting_type', 'acfe_settings_setting_name', 'acfe_settings_setting_operator', 'acfe_settings_setting_value');
 
         foreach($fields as $name){
 
