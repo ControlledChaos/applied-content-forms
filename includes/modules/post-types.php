@@ -88,6 +88,9 @@ class acf_dynamic_post_types extends acf_module {
 		add_action( 'load-post.php', [ $this, 'help_tabs_type_post' ] );
 		add_action( 'load-post-new.php', [ $this, 'help_tabs_type_post' ] );
 		add_action( 'load-edit.php', [ $this, 'help_tabs_type_edit' ] );
+
+		// Footer scripts.
+		add_action( 'admin_print_footer_scripts', [ $this, 'menu_icon_script' ] );
 	}
 
 	/**
@@ -139,17 +142,20 @@ class acf_dynamic_post_types extends acf_module {
 		$this->register_acf_post_types();
 	}
 
-	/*
+	/**
 	 * Register
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @return mixed
 	 */
-	function register($args, $name){
+	function register( $args, $name ) {
 
-		// Check Active
-		if(!acf_maybe_get($args, 'active', true))
+		// Check if active.
+		if ( ! acf_maybe_get( $args, 'active', true ) ) {
 			return false;
-
+		}
 		return $args;
-
 	}
 
 	/**
@@ -682,7 +688,7 @@ class acf_dynamic_post_types extends acf_module {
 
 		// Menu.
 		$menu_position = get_field( 'menu_position', $post_id );
-		$menu_icon     = 'dashicons-' . get_field( 'menu_icon', $post_id );
+		$menu_icon     = 'dashicons-' . get_field( 'acf_dpt_menu_icon', $post_id );
 		$show_ui       = get_field( 'show_ui', $post_id );
 		$show_in_menu  = get_field( 'show_in_menu', $post_id );
 		$show_in_menu_text = get_field( 'show_in_menu_text', $post_id );
@@ -1280,24 +1286,97 @@ class acf_dynamic_post_types extends acf_module {
 		return $args;
 	}
 
+	/**
+	 * Menu icon preview
+	 *
+	 * Prints an unordered list of all Dashicons icons
+	 * plus a corresponding CSS block.
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @return string
+	 */
 	public function menu_icon_preview() {
 
 		$icons = acf_dashicon_icons();
 		$list  = [];
 
-		foreach ( $icons as $css => $name ) {
+		$post_id = false;
+		if ( isset( $_GET['post'] ) ) {
+			$post_id = $_GET['post'];
+		}
+		$option = get_field( 'acf_dpt_menu_icon', $post_id );
 
-			if ( str_contains( $css, '##' ) ) {
+		$css  = sprintf(
+			'<style>%s %s %s %s %s</style>',
+			'#icon-preview-list { list-style: none; }',
+			'#icon-preview-list li { margin: 0 !important; }',
+			'.icon-preview.dashicons { box-sizing: border-box; width: 100%; height: unset; text-align: unset; font-size: 3em; }',
+			'.icon-preview.dashicons:before { display: inline-block; }',
+			'.icon-preview:not( .active ) { display: none; }'
+		);
+
+		$html = '<ul id="icon-preview-list">';
+		foreach ( $icons as $slug => $name ) {
+
+			// Skip options group headings.
+			if ( str_contains( $slug, '##' ) ) {
 				continue;
 			}
 
+			$class  = 'icon-preview';
+			if ( $slug == $option ) {
+				$class = 'icon-preview active';
+			}
 			$list[] = sprintf(
-				'<span class="icon-preview dashicons dashicons-%s"><span class="screen-reader-text">%s</span></span>',
-				$css,
+				'<li><span id="icon-%s" class="%s dashicons dashicons-%s"><span class="screen-reader-text">%s</span></span></li>',
+				$slug,
+				$class,
+				$slug,
 				$name
 			);
 		}
-		return implode( '', $list );
+		$html .= implode( '', $list );
+		$html .= '</ul>';
+
+		return $css . $html;
+	}
+
+	/**
+	 * Menu icon JavaScript
+	 *
+	 * jQuery control of post type menu icon preview.
+	 * Shows the selected icon from the dropdown.
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @return void
+	 */
+	public function menu_icon_script() {
+
+		$icons = acf_dashicon_icons();
+		$list  = [];
+
+		$post_id = false;
+		if ( isset( $_GET['post'] ) ) {
+			$post_id = $_GET['post'];
+		}
+		$option = get_field( 'acf_dpt_menu_icon', $post_id );
+
+		$script = '<script type="text/javascript">jQuery(document).ready( function($) {';
+		$script .= "$( '#acf-field_acf_dpt_menu_icon' ).on( 'change', function() { var show = $(this).val();";
+
+		foreach ( $icons as $slug => $name ) {
+
+			// Skip options group headings.
+			if ( str_contains( $slug, '##' ) ) {
+				continue;
+			}
+			$script .= "if ( show == '{$slug}' ) { $( '#icon-{$slug}' ).addClass( 'active' ); } else if ( show != '{$slug}' ) { $( '#icon-{$slug}' ).removeClass( 'active' ); }";
+		}
+		$script .= '}); });</script>';
+
+		echo $script;
 	}
 
 	/**
@@ -1665,7 +1744,7 @@ class acf_dynamic_post_types extends acf_module {
 				[
 					'key'   => 'field_acf_dpt_menu_icon',
 					'label' => 'Select Menu Icon',
-					'name'  => 'menu_icon',
+					'name'  => 'acf_dpt_menu_icon',
 					'type'  => 'select',
 					'required'     => 0,
 					'instructions' => 'Preview of the selected icon.<br />' . $this->menu_icon_preview(),
