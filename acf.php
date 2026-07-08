@@ -49,7 +49,7 @@ final class ACF {
 	public $plugin = '1.0.0';
 
 	/**
-	 * Original plugin version.
+	 * Original plugin version
 	 *
 	 * @since  1.0.0
 	 * @access public
@@ -58,7 +58,34 @@ final class ACF {
 	public $version = '5.9.6';
 
 	/**
-	 * Fields class.
+	 * Plugin basename
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @var    string
+	 */
+	public $basename;
+
+	/**
+	 * Plugin path
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @var    string
+	 */
+	public $dir_path;
+
+	/**
+	 * Plugin URL
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @var    string
+	 */
+	public $dir_url;
+
+	/**
+	 * Fields class
 	 *
 	 * @since  1.0.0
 	 * @access public
@@ -67,7 +94,7 @@ final class ACF {
 	public $fields;
 
 	/**
-	 * Loop class.
+	 * Loop class
 	 *
 	 * @since  1.0.0
 	 * @access public
@@ -76,7 +103,7 @@ final class ACF {
 	public $loop;
 
 	/**
-	 * Revisions class.
+	 * Revisions class
 	 *
 	 * @since  1.0.0
 	 * @access public
@@ -85,7 +112,7 @@ final class ACF {
 	public $revisions;
 
 	/**
-	 * Validation class.
+	 * Validation class
 	 *
 	 * @since  1.0.0
 	 * @access public
@@ -94,7 +121,7 @@ final class ACF {
 	public $validation;
 
 	/**
-	 * Form front class.
+	 * Form front class
 	 *
 	 * @since  1.0.0
 	 * @access public
@@ -103,7 +130,7 @@ final class ACF {
 	public $form_front;
 
 	/**
-	 * Admin tools class.
+	 * Admin tools class
 	 *
 	 * @since  1.0.0
 	 * @access public
@@ -199,18 +226,21 @@ final class ACF {
 	 */
 	public function initialize() {
 
-		// Define constants.
+		// Define plugin utility properties.
+		$this->basename = plugin_basename( __FILE__ );
+		$this->dir_path = plugin_dir_path( __FILE__ );
+		$this->dir_url  = plugin_dir_url( __FILE__ );
+
+		// Define constants for compatibility.
 		$this->constants( [
             'ACF'          => true,
 			'ACF_PRO'      => true,
-			'ACFE'         => true,
-			'ACF_BASENAME' => plugin_basename( __FILE__ ),
-			'ACF_PATH'     => plugin_dir_path( __FILE__ ),
-            'ACFE_FILE'    => __FILE__,
-			'ACF_VERSION'  => $this->version,
-            'ACFE_VERSION' => $this->plugin
+			'ACF_BASENAME' => $this->basename,
+			'ACF_PATH'     => $this->dir_path,
+			'ACF_VERSION'  => $this->version
         ] );
 
+		// Active theme strings.
 		$theme_path = get_stylesheet_directory();
 		$theme_url  = get_stylesheet_directory_uri();
 
@@ -219,14 +249,14 @@ final class ACF {
 			'name'                   => __( 'Applied Content Forms', 'acf' ),
 			'desc'                   => __( 'A suite of tools for adding and managing custom content types and user forms.', 'acf' ),
 			'website'                => 'https://github.com/ControlledChaos/applied-content-forms',
-			'slug'                   => dirname( ACF_BASENAME ),
+			'slug'                   => dirname( $this->basename ),
 			'plugin'                 => $this->plugin,
 			'version'                => $this->version,
 			'pro'                    => true,
-			'basename'               => ACF_BASENAME,
-			'path'                   => ACF_PATH,
+			'basename'               => $this->basename,
+			'path'                   => $this->dir_path,
 			'file'                   => __FILE__,
-			'url'                    => plugin_dir_url( __FILE__ ),
+			'url'                    => $this->dir_url,
 			'show_admin'             => true,
 			'dev_mode'               => false,
 			'menu_position'          => '2',
@@ -292,7 +322,7 @@ final class ACF {
 			'recaptcha_v3_hide_logo' => null
 		];
 
-		include_once( ACF_PATH . 'includes/utility-functions.php' );
+		include_once( $this->dir_path . 'includes/utility-functions.php' );
 
 		// Settings update.
 		acf_include( 'includes/settings-update.php' );
@@ -863,7 +893,7 @@ final class ACF {
 			[
 				'hierarchical'      => true,
 				'public'            => false,
-				'show_ui'           => 'ACFE',
+				'show_ui'           => true,
 				'show_admin_column' => true,
 				'show_in_menu'      => $this->admin_slug(),
 				'show_in_nav_menus' => true,

@@ -126,31 +126,26 @@ add_action( 'switch_blog', 'acf_switch_stores', 10, 2 );
  * @return string
  */
 function acf_get_path( $filename = '' ) {
-	return ACF_PATH . ltrim( $filename, '/' );
+	return acf()->dir_path . ltrim( $filename, '/' );
 }
 
 /**
  * Get URL
  *
  * Returns the plugin url to a specified file.
- * This function also defines the ACF_URL constant.
  *
  * @since  1.0.0
  * @param  string $filename The specified file.
  * @return string
  */
 function acf_get_url( $filename = '' ) {
-
-	if ( ! defined( 'ACF_URL' ) ) {
-		define( 'ACF_URL', acf_get_setting( 'url' ) );
-	}
-	return ACF_URL . ltrim( $filename, '/' );
+	return acf()->dir_url . ltrim( $filename, '/' );
 }
 
 /**
  * Include file
  *
- * Includes a file within the ACF plugin.
+ * Includes a file within the plugin.
  *
  * @since  1.0.0
  * @param  string $filename The specified file.
