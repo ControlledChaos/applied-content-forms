@@ -184,6 +184,30 @@ final class ACF {
 	public function __construct() {}
 
 	/**
+	 * Plugin name
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @return string
+	 */
+	public function plugin_name() {
+		$name = 'Applied Content Forms';
+		return apply_filters( 'acf/plugin_name', $name );
+	}
+
+	/**
+	 * Plugin description
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @return string
+	 */
+	public function plugin_description() {
+		$desc = __( 'A suite of tools for adding and managing custom content types and user forms.', 'acf' );
+		return apply_filters( 'acf/plugin_description', $desc );
+	}
+
+	/**
 	 * Admin slug
 	 *
 	 * Apply a filter to the admin page slug.
@@ -246,36 +270,36 @@ final class ACF {
 
 		// Define settings.
 		$this->settings = [
-			'name'                   => __( 'Applied Content Forms', 'acf' ),
-			'desc'                   => __( 'A suite of tools for adding and managing custom content types and user forms.', 'acf' ),
-			'website'                => 'https://github.com/ControlledChaos/applied-content-forms',
-			'slug'                   => dirname( $this->basename ),
-			'plugin'                 => $this->plugin,
-			'version'                => $this->version,
-			'pro'                    => true,
-			'basename'               => $this->basename,
-			'path'                   => $this->dir_path,
-			'file'                   => __FILE__,
-			'url'                    => $this->dir_url,
-			'show_admin'             => true,
-			'dev_mode'               => false,
-			'menu_position'          => '2',
-			'show_updates'           => true,
-			'stripslashes'           => false,
-			'local'                  => true,
-			'json'                   => true,
-			'save_json'              => '',
-			'load_json'              => [],
-			'json_found'             => false,
-			'default_language'       => '',
-			'current_language'       => '',
-			'capability'             => 'manage_options',
-			'uploader'               => 'wp',
-			'autoload'               => false,
-			'l10n'                   => true,
-			'l10n_textdomain'        => '',
-			'multilang'              => false,
-			'google_api_key'         => '',
+			'name'       => $this->plugin_name(),
+			'desc'       => $this->plugin_description(),
+			'website'    => 'https://github.com/ControlledChaos/applied-content-forms',
+			'slug'       => dirname( $this->basename ),
+			'plugin'     => $this->plugin,
+			'version'    => $this->version,
+			'pro'        => true,
+			'basename'   => $this->basename,
+			'path'       => $this->dir_path,
+			'file'       => __FILE__,
+			'url'        => $this->dir_url,
+			'show_admin' => true,
+			'dev_mode'   => false,
+			'local'      => true,
+			'json'       => true,
+			'save_json'  => '',
+			'load_json'  => [],
+			'json_found' => false,
+			'menu_position'    => '2',
+			'show_updates'     => true,
+			'stripslashes'     => false,
+			'default_language' => '',
+			'current_language' => '',
+			'capability'       => 'manage_options',
+			'uploader'         => 'wp',
+			'autoload'         => false,
+			'l10n'             => true,
+			'l10n_textdomain'  => '',
+			'multilang'        => false,
+			'google_api_key'   => '',
 			'google_api_client'      => '',
 			'enqueue_google_maps'    => true,
 			'enqueue_select2'        => true,
@@ -418,14 +442,14 @@ final class ACF {
 	 */
 	public function init() {
 
-		// Bail early if called directly from functions.php or plugin file.
+		// Stop if called directly from functions.php or plugin file.
 		if ( ! did_action( 'plugins_loaded' ) ) {
 			return;
 		}
 
 		/**
 		 * May be called directly from template functions.
-		 * Bail early if already did this.
+		 * Stop if already did this.
 		 */
 		if ( acf_did( 'init' ) ) {
 			return;
