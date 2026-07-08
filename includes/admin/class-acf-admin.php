@@ -52,7 +52,15 @@ class ACF_Admin {
 	 * @return string
 	 */
 	public function admin_page_title() {
-		return apply_filters( 'acf/acf_admin_page_title', __( 'Website Content', 'acf' ) );
+
+		// Return the title from the content page option.
+		$option = get_field( 'acf_admin_page_content', 'option' );
+		if ( $option ) {
+			return $option->post_title;
+		}
+
+		// Return the default, filterable title.
+		return apply_filters( 'acf/acf_admin_page_title', __( 'Content Management', 'acf' ) );
 	}
 
 	/**

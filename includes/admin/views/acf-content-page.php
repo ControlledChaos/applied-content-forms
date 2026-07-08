@@ -8,12 +8,31 @@
  * @since      1.0.0
  */
 
+$admin  = acf_new_instance( 'ACF_Admin' );
+$option = get_field( 'acf_admin_page_content', 'option' );
+$styles = get_field( 'acf_admin_page_css', 'option' );
+
+if ( $styles ) {
+	printf(
+		'<style>%s</style>',
+		$styles
+	);
+}
+
 ?>
+
 <?php do_action( 'acf/before_admin_page' ); ?>
 
 <div class="wrap acf-content-intro">
 
-	<h1><?php _e( 'Content Management', 'acf' ); ?></h1>
+	<?php if ( $option ) : ?>
+
+	<h1><?php echo $option->post_title; ?></h1>
+	<?php echo wpautop( $option->post_content ); ?>
+
+	<?php else : ?>
+
+	<h1><?php echo $admin->admin_page_title(); ?></h1>
 	<p class="description"><?php echo acf_get_setting( 'desc' ); ?></p>
 
 	<?php do_action( 'acf/admin_page_grid' ); ?>
@@ -43,5 +62,7 @@
 		</form>
 		<?php endif; ?>
 	</div>
+
+	<?php endif; ?>
 </div>
 <?php do_action( 'acf/after_admin_page' ); ?>
