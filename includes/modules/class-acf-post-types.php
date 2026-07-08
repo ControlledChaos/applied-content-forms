@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-class acf_dynamic_post_types extends acf_module {
+class ACF_Post_Types extends ACF_Module {
 
 	public $active = false;
 
@@ -3830,4 +3830,4 @@ etc...', 'acf' ),
 		}
 	}
 }
-acf_new_instance( 'acf_dynamic_post_types' );
+acf_new_instance( 'ACF_Post_Types' );

@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-class acf_options_page {
+class ACF_Options_Page {
 
 	/**
 	 * Page settings
@@ -229,7 +229,7 @@ class acf_options_page {
 	global $acf_options_page;
 
 	if ( ! isset( $acf_options_page ) ) {
-		$acf_options_page = new acf_options_page();
+		$acf_options_page = new ACF_Options_Page();
 	}
 	return $acf_options_page;
 }

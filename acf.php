@@ -649,7 +649,7 @@ final class ACF {
 		acf_include( 'includes/modules/module.php' );
 		acf_include( 'includes/modules/author.php' );
 		acf_include( 'includes/modules/dev.php' );
-		acf_include( 'includes/modules/post-types.php' );
+		acf_include( 'includes/modules/class-acf-post-types.php' );
 		acf_include( 'includes/modules/taxonomies.php' );
 		acf_include( 'includes/modules/block-types.php' );
 		acf_include( 'includes/modules/forms.php' );

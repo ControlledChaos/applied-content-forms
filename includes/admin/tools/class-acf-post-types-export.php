@@ -38,7 +38,7 @@ final class ACF_Post_Types_Export extends ACF_Module_Export {
 		$this->select      = __( 'Select Post Types', 'acf' );
 		$this->default_action  = 'json';
 		$this->allowed_actions = [ 'json', 'php' ];
-		$this->instance = acf_get_instance( 'acf_dynamic_post_types' );
+		$this->instance = acf_get_instance( 'ACF_Post_Types' );
 		$this->file     = 'post-type';
 		$this->files    = 'post-types';
 		$this->messages = [

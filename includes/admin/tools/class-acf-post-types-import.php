@@ -33,7 +33,7 @@ final class ACF_Post_Types_Import extends ACF_Module_Import {
 		$this->name  = 'ACF_Post_Types_Import';
 		$this->title = __( 'Import Post Types', 'acf' );
 		$this->description = __( 'Tool for dynamic custom post types registered by another instance of Applied Content Forms. Upload an exported JSON file to import into the database.', 'acf' );
-		$this->instance    = acf_get_instance( 'acf_dynamic_post_types' );
+		$this->instance    = acf_get_instance( 'ACF_Post_Types' );
 		$this->messages    = [
 			'success_single'   => __( '1 post type imported', 'acf' ),
 			'success_multiple' => __( '%s post types imported', 'acf' ),
