@@ -121,7 +121,7 @@ class ACF_Admin {
 	 * @return void
 	 */
 	public function admin_page_callback() {
-		$content = acf_get_view( 'acf-admin-page' );
+		$content = acf_get_view( 'html-admin-page' );
 		return apply_filters( 'acf/admin_page', $content );
 	}
 
