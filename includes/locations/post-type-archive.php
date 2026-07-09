@@ -177,7 +177,7 @@ class acfe_location_post_type_archive{
     function get_options_pages($pages){
 
         // Bail early if screen is not Field Group configuration & Ajax Calls
-        if(!acfe_is_admin_screen() && !wp_doing_ajax())
+        if(!acf_is_admin_screen() && !wp_doing_ajax())
             return $pages;
 
         foreach($pages as $page => $args){

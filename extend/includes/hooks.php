@@ -397,7 +397,7 @@ class acfe_hooks{
 	public function load_field_groups( $field_groups){
 
 		// Do not execute in ACF Field Group UI
-		if(acfe_is_admin_screen()){
+		if(acf_is_admin_screen()){
 			return $field_groups;
 		}
 
@@ -504,7 +504,7 @@ class acfe_hooks{
 			return $field;
 
 		// Do not execute in ACF Field Group UI
-		if(acfe_is_admin_screen()) return $field;
+		if(acf_is_admin_screen()) return $field;
 
 		// Hooks
 		$field = apply_filters("acfe/load_field",                       $field);
@@ -514,7 +514,7 @@ class acfe_hooks{
 
 
 		// Deprecated: Admin
-		if(acfe_is_admin()){
+		if(acf_is_admin()){
 
 			$field = apply_filters_deprecated("acfe/load_field_admin",                          array( $field), '0.8.8', "acfe/load_field");
 			$field = apply_filters_deprecated("acfe/load_field_admin/type={$field['type']}",    array( $field), '0.8.8', "acfe/load_field/type={$field['type']}");

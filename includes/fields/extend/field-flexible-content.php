@@ -206,7 +206,7 @@ class acfe_field_flexible_content{
      */
     function load_fields($fields, $field){
 
-        if(acfe_is_admin_screen())
+        if(acf_is_admin_screen())
             return $fields;
 
         // check layouts

@@ -1,214 +1,209 @@
 <?php
-
-if(!defined('ABSPATH'))
-    exit;
-
 /**
- * acfe_is_admin
+ * Screen functions
  *
- * Check if current screen is back-end
- *
- * @return bool
+ * @package    Applied Content Forms
+ * @subpackage Includes
+ * @category   Functions
+ * @since      1.0.0
  */
-function acfe_is_admin(){
 
-    return !acfe_is_front();
-
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
 }
 
 /**
- * acfe_is_front
+ * Is admin
  *
- * Check if current screen is front-end
+ * Check if current screen is back end.
  *
- * @return bool
+ * @since  1.0.0
+ * @return boolean
  */
-function acfe_is_front(){
+function acf_is_admin() {
+	return ! acf_is_front();
+}
 
-    // todo: use acf_get_form_data('screen')
+/**
+ * Is front
+ *
+ * Check if current screen is front end.
+ *
+ * @todo Use acf_get_form_data( 'screen' ).
+ *
+ * @since  1.0.0
+ * @return boolean
+ */
+function acf_is_front() {
 
-    if(!is_admin() || (is_admin() && wp_doing_ajax() && (acf_maybe_get_POST('_acf_screen') === 'acfe_form' || acf_maybe_get_POST('_acf_screen') === 'acf_form')))
-        return true;
-
-    return false;
-
+	if ( ! is_admin() || ( is_admin() && wp_doing_ajax() && ( 'acfe_form' === acf_maybe_get_POST( '_acf_screen' ) || 'acf_form' === acf_maybe_get_POST( '_acf_screen' ) ) ) ) {
+		return true;
+	}
+	return false;
 }
 
 
 /**
- * acfe_get_acf_screen_id
+ * Get plugin screen ID
  *
- * Check if the current admin screen is ACF Field Group UI, ACF Tools, ACF Updates screens etc...
+ * Check if the current admin screen is field group UI, admin tools etc.
  *
- * @param string $page
- *
+ * @since  1.0.0
+ * @param  string $page
  * @return string
  */
-function acfe_get_acf_screen_id($page = ''){
+function acf_get_acf_screen_id( $page = '' ) {
 
-    $prefix = sanitize_title( __("Custom Fields", 'acf') );
+	$prefix = sanitize_title( __( 'Custom Fields', 'acf' ) );
 
-    if(empty($page))
-        return $prefix;
-
-    return $prefix . '_page_' . $page;
-
+	if ( empty( $page ) ) {
+		return $prefix;
+	}
+	return $prefix . '_page_' . $page;
 }
 
 /**
- * acfe_is_admin_screen
+ * Is plugin admin screen
  *
- * Check if the current admin screen is ACF Field Group UI, ACF tools, ACF Updates screens etc...
+ * Check if the current admin screen is field group UI, admin tools etc.
  *
- * @param false $modules
- *
- * @return bool
+ * @since  1.0.0
+ * @param  boolean $modules
+ * @return boolean
  */
-function acfe_is_admin_screen($modules = false){
+function acf_is_admin_screen( $modules = false ) {
 
-    // bail early if not defined
-    if(!function_exists('get_current_screen'))
-        return false;
+	// Stop if not defined.
+	if ( ! function_exists( 'get_current_screen' ) ) {
+		return false;
+	}
 
-    // vars
-    $screen = get_current_screen();
+	$screen = get_current_screen();
+	if ( ! $screen ) {
+		return false;
+	}
 
-    // no screen
-    if(!$screen)
-        return false;
+	$post_types = [ 'acf-field-group' ];
+	$field_group_category = false;
 
-    $post_types = array(
-        'acf-field-group',  // ACF
-    );
+	if ( $modules ) {
 
-    $field_group_category = false;
+		// Reserved.
+		$post_types = array_merge( $post_types, acf_get_setting( 'reserved_post_types', [] ) );
 
-    // include ACF Extended Modules?
-    if($modules){
+		// Field group category.
+		$field_group_category = 'post' === $screen->post_type && 'acf-field-group-category' === $screen->taxonomy;
+	}
 
-        // Reserved
-        $post_types = array_merge($post_types, acf_get_setting('reserved_post_types', array()));
-
-        // Field Group Category
-        $field_group_category = $screen->post_type === 'post' && $screen->taxonomy === 'acf-field-group-category';
-
-    }
-
-    if(in_array($screen->post_type, $post_types) || $field_group_category)
-        return true;
-
-    return false;
-
+	if ( in_array( $screen->post_type, $post_types ) || $field_group_category ) {
+		return true;
+	}
+	return false;
 }
 
 /**
- * acfe_match_location_rules
+ * Match location rules
  *
- * Match screen data against an array of location
+ * Match screen data against an array of location.
  *
- * @param $location
- * @param $screen
- *
- * @return bool
+ * @since  1.0.0
+ * @param  $location
+ * @param  $screen
+ * @return boolean
  */
-function acfe_match_location_rules($location, $screen){
+function acfe_match_location_rules( $location, $screen ) {
 
-    // Loop through location groups.
-    foreach($location as $group){
+	// Loop through location groups.
+	foreach ( $location as $group ) {
 
-        // ignore group if no rules.
-        if(empty($group)) continue;
+		// Ignore group if no rules.
+		if ( empty( $group ) ) {
+			continue;
+		}
 
-        // Loop over rules and determine if all rules match.
-        $match_group = true;
+		// Loop over rules and determine if all rules match.
+		$match_group = true;
+		foreach ( $group as $rule ) {
+			if ( ! acf_match_location_rule( $rule, $screen, [] ) ) {
+				$match_group = false;
+				break;
+			}
+		}
 
-        foreach($group as $rule){
-
-            if(!acf_match_location_rule($rule, $screen, array())){
-                $match_group = false;
-                break;
-            }
-
-        }
-
-        // Show the field group
-        if($match_group) return true;
-
-    }
-
-    return false;
-
+		if ( $match_group ) {
+			return true;
+		}
+	}
+	return false;
 }
 
 /**
- * acfe_is_dynamic_preview
+ * Is dynamic preview
  *
- * Check if currently in ACFE FlexibleContent Preview or ACF Block Type Preview
+ * Check if currently in flexible content preview or block type preview.
  *
- * @return bool
+ * @since  1.0.0
+ * @global boolean $is_preview
+ * @return boolean
  */
-function acfe_is_dynamic_preview(){
+function acfe_is_dynamic_preview() {
 
-    // vars
-    global $is_preview;
-    $return = false;
+	// Access global variables.
+	global $is_preview;
 
-    // flexible content
-    if(isset($is_preview) && $is_preview){
+	$return = false;
 
-        $return = true;
+	// Flexible content.
+	if ( isset( $is_preview ) && $is_preview ) {
+		$return = true;
 
-    // block type
-    }elseif(wp_doing_ajax() && acf_maybe_get_POST('query')){
+	// Block type.
+	} elseif ( wp_doing_ajax() && acf_maybe_get_POST( 'query' ) ) {
 
-        $query = acf_maybe_get_POST('query');
-
-        if(acf_maybe_get($query, 'preview')){
-            $return = true;
-        }
-
-    }
-
-    return apply_filters('acfe/is_preview', $return);
-
+		$query = acf_maybe_get_POST( 'query' );
+		if ( acf_maybe_get( $query, 'preview' ) ) {
+			$return = true;
+		}
+	}
+	return apply_filters( 'acfe/is_preview', $return );
 }
 
 /**
- * acfe_is_block_editor
+ * Is block editor
  *
- * An enhanced version of acf_is_block_editor that also check if currently in a block type
+ * An enhanced version of acf_is_block_editor that also
+ * checks if currently in a block type.
  *
- * @return bool
+ * @since  1.0.0
+ * @return boolean
  */
-function acfe_is_block_editor(){
+function acfe_is_block_editor() {
 
-    // check block editor screen
-    if(acf_is_block_editor()){
-        return true;
-    }
+	// Check block editor screen.
+	if ( acf_is_block_editor() ) {
+		return true;
+	}
 
-    // check if a block is currently fetched (edit mode)
-    if(acf_maybe_get_POST('action') === 'acf/ajax/fetch-block'){
-        return true;
-    }
-
-    return false;
-
+	// Check if a block is currently fetched (edit mode).
+	if ( acf_maybe_get_POST( 'action' ) === 'acf/ajax/fetch-block' ) {
+		return true;
+	}
+	return false;
 }
 
-
 /**
- * acfe_is_gutenberg
+ * Is Gutenberg
  *
- * Check if current screen is block editor
+ * Checks if current screen is block editor.
  *
- * @return bool
  * @deprecated
+ *
+ * @since  1.0.0
+ * @return boolean
  */
-function acfe_is_gutenberg(){
-
-    return acfe_is_block_editor();
-
+function acfe_is_gutenberg() {
+	return acfe_is_block_editor();
 }
 
 /**
@@ -221,32 +216,33 @@ function acfe_is_gutenberg(){
  * @return array
  */
 function acf_help_heading_allowed() {
-$allowed = [
-    'h3' => [
-        'style' => []
-    ],
-    'h4' => [
-        'style' => []
-    ],
-    'h5' => [
-        'style' => []
-    ],
-    'p'  => [
-        'style' => []
-    ],
-    'a'  => [
-        'href'  => [],
-        'title' => [],
-        'style' => []
-    ],
-    'hr'     => [],
-    'br'     => [],
-    'em'     => [],
-    'strong' => [],
-    'b'      => [],
-    'i'      => [],
-    'code'   => [],
-    'style'  => []
-];
-return apply_filters( 'acf/help_heading_allowed', $allowed );
+
+	$allowed = [
+		'h3' => [
+			'style' => []
+		],
+		'h4' => [
+			'style' => []
+		],
+		'h5' => [
+			'style' => []
+		],
+		'p'  => [
+			'style' => []
+		],
+		'a'  => [
+			'href'  => [],
+			'title' => [],
+			'style' => []
+		],
+		'hr'     => [],
+		'br'     => [],
+		'em'     => [],
+		'strong' => [],
+		'b'      => [],
+		'i'      => [],
+		'code'   => [],
+		'style'  => []
+	];
+	return apply_filters( 'acf/help_heading_allowed', $allowed );
 }

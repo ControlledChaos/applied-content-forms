@@ -417,14 +417,14 @@ class acfe_field_validation{
             }
 
             // Screen: Admin
-            elseif($screen === 'admin' && acfe_is_admin()){
+            elseif($screen === 'admin' && acf_is_admin()){
 
                 $screen_allow = true;
 
             }
 
             // Screen: Front
-            elseif($screen === 'front' && acfe_is_front()){
+            elseif($screen === 'front' && acf_is_front()){
 
                 $screen_allow = true;
 

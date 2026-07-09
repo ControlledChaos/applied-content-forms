@@ -513,7 +513,7 @@ class ACF_Compatibility {
 	public function field_flexible_settings_title( $fields, $parent ) {
 
 		// Check if is tool screen.
-		if ( ! acf_is_screen( acfe_get_acf_screen_id( 'acf-tools' ) ) ) {
+		if ( ! acf_is_screen( acf_get_acf_screen_id( 'acf-tools' ) ) ) {
 			return $fields;
 		}
 

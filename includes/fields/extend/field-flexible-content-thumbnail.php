@@ -100,7 +100,7 @@ class acfe_field_flexible_content_thumbnail{
 
     function validate_thumbnail($field){
 
-        if(acfe_is_admin_screen())
+        if(acf_is_admin_screen())
             return $field;
 
         // Vars

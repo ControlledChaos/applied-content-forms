@@ -346,8 +346,8 @@ function acfe_form_get_action( $name = false, $key = false ) {
  * @return boolean
  */
 function acfe_form_is_admin() {
-    _deprecated_function( 'acfe_form_is_admin()', '0.8.8', 'acfe_is_admin()' );
-    return acfe_is_admin();
+    _deprecated_function( 'acfe_form_is_admin()', '0.8.8', 'acf_is_admin()' );
+    return acf_is_admin();
 }
 
 /**
@@ -360,6 +360,6 @@ function acfe_form_is_admin() {
  * @return boolean
  */
 function acfe_form_is_front() {
-    _deprecated_function( 'acfe_form_is_front()', '0.8.8', 'acfe_is_front()' );
-    return acfe_is_front();
+    _deprecated_function( 'acfe_form_is_front()', '0.8.8', 'acf_is_front()' );
+    return acf_is_front();
 }

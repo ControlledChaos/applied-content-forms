@@ -258,7 +258,7 @@ class acfe_pro_global_field_condition{
         if(!$this->match)
             return $fields;
 
-        if(acfe_is_admin_screen())
+        if(acf_is_admin_screen())
             return $fields;
 
         if(!acf_is_field_group_key(acf_maybe_get($parent, 'key')))

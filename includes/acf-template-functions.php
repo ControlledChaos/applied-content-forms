@@ -613,7 +613,7 @@ function acfe_the_archive_post_id($null, $post_id){
 function acfe_get_post_id($format = true){
 
     // Admin
-    if(acfe_is_admin()){
+    if(acf_is_admin()){
 
         // Legacy ACF method
         $post_id = acf_get_valid_post_id();

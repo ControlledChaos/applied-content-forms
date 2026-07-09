@@ -69,7 +69,7 @@ class acfe_form_front{
     function validate_save_post(){
 
         // validate front-end
-        if(!acfe_is_front()){
+        if(!acf_is_front()){
             return;
         }
 

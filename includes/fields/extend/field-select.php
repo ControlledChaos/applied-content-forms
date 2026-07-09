@@ -22,7 +22,7 @@ class acfe_field_select{
 
     function current_screen(){
 
-        if(!acfe_is_admin_screen())
+        if(!acf_is_admin_screen())
             return;
 
         add_filter('acf/prepare_field/name=choices', array($this, 'prepare_field_choices'), 5);
