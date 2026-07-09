@@ -377,7 +377,7 @@ final class ACF {
 		acf_include( 'includes/fields.php' );
 		acf_include( 'includes/locations.php' );
 		acf_include( 'includes/class-acf-assets.php' );
-		acf_include( 'includes/compatibility.php' );
+		acf_include( 'includes/class-acf-compatibility.php' );
 		acf_include( 'includes/deprecated.php' );
 		acf_include( 'includes/l10n.php' );
 		acf_include( 'includes/local-fields.php' );
