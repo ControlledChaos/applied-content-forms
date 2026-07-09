@@ -1,6 +1,8 @@
 <?php
 /**
- * Primary admin page
+ * Top level admin page
+ *
+ * Gets content from the `ACF_Admin` class.
  *
  * @package    Applied Content Forms
  * @subpackage Admin
