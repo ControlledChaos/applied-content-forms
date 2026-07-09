@@ -721,7 +721,7 @@ final class ACF {
 		acf_include( 'includes/fields/extend/field-color-picker.php' );
 		acf_include( 'includes/fields/extend/field-date-picker.php' );
 		acf_include( 'includes/fields/extend-pro/field-flexible-content-grid.php' );
-		acf_include( 'includes/fields/extend-pro/field-flexible-content-locations.php' );
+		acf_include( 'includes/fields/extend/field-flexible-content-locations.php' );
 		acf_include( 'includes/fields/extend-pro/field-file.php' );
 		acf_include( 'includes/fields/extend-pro/field-radio.php' );
 		acf_include( 'includes/fields/extend-pro/field-select.php' );

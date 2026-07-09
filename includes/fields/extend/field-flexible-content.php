@@ -655,13 +655,13 @@ endif;
 /*
  * Includes
  */
-acf_include('extend/includes/fields/field-flexible-content-actions.php');
-acf_include('extend/includes/fields/field-flexible-content-async.php');
-acf_include('extend/includes/fields/field-flexible-content-controls.php');
-acf_include('extend/includes/fields/field-flexible-content-edit.php');
-acf_include('extend/includes/fields/field-flexible-content-hide.php');
-acf_include('extend/includes/fields/field-flexible-content-preview.php');
-acf_include('extend/includes/fields/field-flexible-content-select.php');
-acf_include('extend/includes/fields/field-flexible-content-settings.php');
-acf_include('extend/includes/fields/field-flexible-content-state.php');
-acf_include('extend/includes/fields/field-flexible-content-thumbnail.php');
+acf_include('includes/fields/extend/field-flexible-content-actions.php');
+acf_include('includes/fields/extend/field-flexible-content-async.php');
+acf_include('includes/fields/extend/field-flexible-content-controls.php');
+acf_include('includes/fields/extend/field-flexible-content-edit.php');
+acf_include('includes/fields/extend/field-flexible-content-hide.php');
+acf_include('includes/fields/extend/field-flexible-content-preview.php');
+acf_include('includes/fields/extend/field-flexible-content-select.php');
+acf_include('includes/fields/extend/field-flexible-content-settings.php');
+acf_include('includes/fields/extend/field-flexible-content-state.php');
+acf_include('includes/fields/extend/field-flexible-content-thumbnail.php');
