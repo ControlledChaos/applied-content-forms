@@ -7,8 +7,6 @@ A suite of tools for adding and managing custom content types and user forms.
 ![WordPress tested on version 7.0](https://img.shields.io/badge/WordPress_tested-7.0-2271b1.svg?style=flat-square)
 ![ClassicPress tested on version 2.0](https://img.shields.io/badge/ClassicPress_tested-2.0-03768e.svg?style=flat-square)
 
-## Applied
-
 **Applied:** put to practical use, especially applying general principles to solve definite problems.
 
 ## Overview
