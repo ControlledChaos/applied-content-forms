@@ -89,7 +89,7 @@ final class ACF {
 	 *
 	 * @since  1.0.0
 	 * @access public
-	 * @var    object The acf_fields class.
+	 * @var    object The ACF_Fields class.
 	 */
 	public $fields;
 
@@ -358,6 +358,7 @@ final class ACF {
 		acf_include( 'includes/class-acf-data.php' );
 		acf_include( 'includes/fields/class-acf-field.php' );
 		acf_include( 'includes/locations/abstract-acf-location.php' );
+		acf_include( 'includes/class-acf-fields.php' );
 
 		acf_include( 'includes/acf-helper-functions.php' );
 		acf_include( 'includes/acf-hook-functions.php' );
@@ -374,7 +375,6 @@ final class ACF {
 		acf_include( 'includes/acf-blocks-functions.php' );
 		acf_include( 'includes/acf-cms-functions.php' );
 
-		acf_include( 'includes/fields.php' );
 		acf_include( 'includes/locations.php' );
 		acf_include( 'includes/class-acf-assets.php' );
 		acf_include( 'includes/class-acf-compatibility.php' );

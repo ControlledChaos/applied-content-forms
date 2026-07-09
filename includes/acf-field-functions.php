@@ -1360,3 +1360,182 @@ function acf_extract_sub_field( &$layout, $name, $value ) {
     }
     return $sub_field;
 }
+
+/**
+ * Register field type
+ *
+ * Alias of acf()->fields->register_field_type()
+ *
+ * @since  1.0.0
+ * @param  string $class
+ * @return void
+ */
+function acf_register_field_type( $class ) {
+	return acf()->fields->register_field_type( $class );
+}
+
+/**
+ * Register field type info
+ *
+ * Alias of acf()->fields->register_field_type_info()
+ *
+ * @since  1.0.0
+ * @param  array $info
+ * @return void
+ */
+function acf_register_field_type_info( $info ) {
+	return acf()->fields->register_field_type_info( $info );
+}
+
+/**
+ * Get field type
+ *
+ * Alias of acf()->fields->get_field_type()
+ *
+ * @since  1.0.0
+ * @param  string $name
+ * @return void
+ */
+function acf_get_field_type( $name ) {
+	return acf()->fields->get_field_type( $name );
+}
+
+/**
+ * Get field types
+ *
+ * Alias of acf()->fields->get_field_types()
+ *
+ * @since  1.0.0
+ * @param  array $args
+ * @return array
+ */
+function acf_get_field_types( $args = [] ) {
+
+	$args = wp_parse_args( $args, [ 'public' => true ] );
+	$field_types = acf()->fields->get_field_types();
+
+    return wp_filter_object_list( $field_types, $args );
+}
+
+/**
+ * Get field types info
+ *
+ * Returns an array containing information about each field type.
+ *
+ * @since  1.0.0
+ * @param  array $args
+ * @return array
+ */
+function acf_get_field_types_info( $args = [] ) {
+
+	$data = [];
+	$field_types = acf_get_field_types();
+
+	foreach ( $field_types as $type ) {
+		$data[ $type->name ] = [
+			'label'    => $type->label,
+			'name'     => $type->name,
+			'category' => $type->category,
+			'public'   => $type->public
+		];
+	}
+	return $data;
+}
+
+/**
+ * Is field type
+ *
+ * Alias of acf()->fields->is_field_type()
+ *
+ * @since  1.0.0
+ * @param  string $name
+ * @return void
+ */
+function acf_is_field_type( $name = '' ) {
+	return acf()->fields->is_field_type( $name );
+}
+
+/**
+ * Get field type prop
+ *
+ * This function will return a field type's property.
+ *
+ * @since  1.0.0
+ * @param  string $name
+ * @param  string $prop
+ * @return void
+ */
+function acf_get_field_type_prop( $name = '', $prop = '' ) {
+	$type = acf_get_field_type( $name );
+	return ( $type && isset( $type->$prop ) ) ? $type->$prop : null;
+}
+
+/**
+ * Get field type label
+ *
+ * This function will return the label of a field type.
+ *
+ * @since  1.0.0
+ * @param  string $name
+ * @return string
+ */
+function acf_get_field_type_label( $name = '' ) {
+
+	$prop = acf_get_field_type_prop( $name, 'label' );
+	if ( $prop ) {
+		$label = $prop;
+	} else {
+		$label = sprintf(
+			'<span class="acf-tooltip-js" title="%s">%s</span>',
+			__( 'Field type does not exist', 'acf' ),
+			__( 'Unknown', 'acf' )
+		);
+	}
+	return $label;
+}
+
+/**
+ * Field type exists
+ *
+ * @deprecated
+ *
+ * @since  1.0.0
+ * @param  string $type
+ * @return string
+ */
+function acf_field_type_exists( $type = '' ) {
+	return acf_is_field_type( $type );
+}
+
+/**
+ * Get grouped field types
+ *
+ * Returns an multi-dimensional array of field types
+ * "name => label" grouped by category.
+ *
+ * @since  1.0.0
+ * @return array
+ */
+function acf_get_grouped_field_types() {
+
+	$types  = acf_get_field_types();
+	$groups = [];
+	$l10n   = [
+		'basic'      => __( 'Basic', 'acf' ),
+		'content'    => __( 'Content', 'acf' ),
+		'choice'     => __( 'Choice', 'acf' ),
+		'relational' => __( 'Relational', 'acf' ),
+		'jquery'     => __( 'jQuery', 'acf' ),
+		'layout'     => __( 'Layout', 'acf' )
+	];
+
+	foreach ( $types as $type ) {
+
+		$cat = $type->category;
+		$cat = isset( $l10n[$cat] ) ? $l10n[$cat] : $cat;
+
+		$groups[ $cat ][ $type->name ] = $type->label;
+	}
+	$groups = apply_filters( 'acf/get_field_types', $groups );
+	return $groups;
+}
