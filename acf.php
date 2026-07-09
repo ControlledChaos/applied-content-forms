@@ -166,6 +166,15 @@ final class ACF {
 	public $instances = [];
 
 	/**
+	 * Admin class
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @var    object Instance of ACF_Admin()
+	 */
+	public $admin;
+
+	/**
 	 * Admin page slug
 	 *
 	 * @since  1.0.0

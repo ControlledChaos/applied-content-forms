@@ -39,7 +39,6 @@ class ACF_Admin {
 		add_action( 'admin_menu', [ $this, 'admin_page' ], 9 );
 		add_action( 'admin_menu', [ $this, 'categories_screen' ] );
 		add_action( 'acf/init', [ $this, 'settings_page' ] );
-		add_action( 'acf/admin_page_grid', [ $this, 'admin_page_grid' ] );
 		add_filter( 'default_hidden_meta_boxes', [ $this, 'show_page_excerpt_metabox' ], 10, 2 );
 		add_action( 'add_meta_boxes', [ $this, 'page_excerpt_metabox' ] );
 	}
@@ -108,10 +107,22 @@ class ACF_Admin {
 			$menu,
 			acf_get_setting( 'capability' ),
 			acf()->admin_slug(),
-			[ $this, 'admin_page_content' ],
+			[ $this, 'admin_page_callback' ],
 			$icon,
 			acf_get_setting( 'menu_position' ),
 		);
+	}
+
+	/**
+	 * Admin page callback
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @return void
+	 */
+	public function admin_page_callback() {
+		$content = acf_get_view( 'acf-admin-page' );
+		return apply_filters( 'acf/admin_page', $content );
 	}
 
 	/**
@@ -122,8 +133,59 @@ class ACF_Admin {
 	 * @return void
 	 */
 	public function admin_page_content() {
-		$content = acf_get_view( 'acf-content-page' );
+
+		$option = get_field( 'acf_admin_page_content', 'option' );
+		$styles = get_field( 'acf_admin_page_css', 'option' );
+
+		if ( $styles ) {
+			$styles = sprintf(
+				'<style>%s</style>',
+				$styles
+			);
+		} else {
+			$styles = '';
+		}
+
+		if ( $option ) {
+			$content  = $styles;
+			$content .= wpautop( $option->post_content );
+		} else {
+			$content  = $this->admin_page_grid();
+			$content .= $this->admin_page_search();
+		}
 		return apply_filters( 'acf/admin_page_content', $content );
+	}
+
+	public function admin_page_search() {
+
+		$content_id = 'site-' . get_current_blog_id() . '-acf-search-content';
+		$media_id   = 'site-' . get_current_blog_id() . '-acf-search-media';
+
+		?>
+		<h2><?php _e( 'Search Content', 'acf' ); ?></h2>
+
+		<div class="acf-content-search">
+			<form role="search" action="<?php echo esc_url( home_url( '/' ) ); ?>" method="get" target="_blank" rel="nofollow noreferrer noopener">
+				<fieldset>
+					<label class="screen-reader-text" for="<?php echo $content_id; ?>" aria-label="<?php _e( 'Search Content', 'acf' ); ?>"><?php _e( 'Search Content', 'acf' ); ?></label>
+
+					<input type="search" name="s" id="<?php echo $content_id; ?>" aria-labelledby="<?php _e( 'Search Content', 'acf' ); ?>" value="<?php echo get_search_query(); ?>" autocomplete="off" placeholder="<?php _e( 'Enter title or content search terms', 'acf' ); ?>" aria-placeholder="<?php _e( 'Enter content search terms', 'acf' ); ?>" />
+					<?php submit_button( __( 'Search Content', 'acf' ), '', false, false, [ 'id' => 'submit-' . $content_id ] ); ?>
+				</fieldset>
+			</form>
+
+			<?php if ( current_user_can( 'upload_files' ) ) : ?>
+			<form role="search" action="<?php echo self_admin_url( 'upload.php' ); ?>" method="get">
+				<fieldset>
+					<label class="screen-reader-text" for="<?php echo $media_id; ?>" aria-label="<?php _e( 'Search Media', 'acf' ); ?>"><?php _e( 'Search Media', 'acf' ); ?></label>
+
+					<input type="search" name="search" id="<?php echo $media_id; ?>" aria-labelledby="<?php _e( 'Search Media', 'acf' ); ?>" value="<?php echo get_search_query(); ?>" autocomplete="off" placeholder="<?php _e( 'Enter media title, meta, or filename', 'acf' ); ?>" aria-placeholder="<?php _e( 'Enter media title or filename', 'acf' ); ?>" />
+					<?php submit_button( __( 'Search Media', 'acf' ), '', false, false, [ 'id' => 'submit-' . $media_id ] ); ?>
+				</fieldset>
+			</form>
+		</div>
+		<?php endif; ?>
+		<?php
 	}
 
 	/**
@@ -688,4 +750,4 @@ class ACF_Admin {
 }
 
 // Instantiate the class.
-acf_new_instance( 'ACF_Admin' );
+acf()->admin = acf_new_instance( 'ACF_Admin' );
