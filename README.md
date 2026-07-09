@@ -19,6 +19,8 @@ Use the documentation for Advanced Custom Fields and Advanced Custom Fields: Ext
 
 Following are some of the features offered by the plugin.
 
+- Custom content fields
+- Custom options fields
 - Custom post types
 - Custom taxonomies
 - Custom block types
