@@ -244,7 +244,7 @@ class acfe_field_date_range_picker extends acf_field{
         wp_register_style('acfe-date-range-picker', acf_get_url('assets/inc/daterangepicker/daterangepicker' . $suffix . '.css'), array(), '3.1');
 
         // enqueue if gutenberg
-        if(acfe_is_block_editor()){
+        if(acf_is_block_editor()){
 
             wp_enqueue_script('moment');
             wp_enqueue_script('acfe-date-range-picker');

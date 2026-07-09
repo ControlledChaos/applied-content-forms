@@ -112,7 +112,7 @@ function acf_is_admin_screen( $modules = false ) {
  * @param  $screen
  * @return boolean
  */
-function acfe_match_location_rules( $location, $screen ) {
+function acf_match_location_rules( $location, $screen ) {
 
 	// Loop through location groups.
 	foreach ( $location as $group ) {
@@ -147,7 +147,7 @@ function acfe_match_location_rules( $location, $screen ) {
  * @global boolean $is_preview
  * @return boolean
  */
-function acfe_is_dynamic_preview() {
+function acf_is_dynamic_preview() {
 
 	// Access global variables.
 	global $is_preview;
@@ -170,29 +170,6 @@ function acfe_is_dynamic_preview() {
 }
 
 /**
- * Is block editor
- *
- * An enhanced version of acf_is_block_editor that also
- * checks if currently in a block type.
- *
- * @since  1.0.0
- * @return boolean
- */
-function acfe_is_block_editor() {
-
-	// Check block editor screen.
-	if ( acf_is_block_editor() ) {
-		return true;
-	}
-
-	// Check if a block is currently fetched (edit mode).
-	if ( acf_maybe_get_POST( 'action' ) === 'acf/ajax/fetch-block' ) {
-		return true;
-	}
-	return false;
-}
-
-/**
  * Is Gutenberg
  *
  * Checks if current screen is block editor.
@@ -202,8 +179,8 @@ function acfe_is_block_editor() {
  * @since  1.0.0
  * @return boolean
  */
-function acfe_is_gutenberg() {
-	return acfe_is_block_editor();
+function acf_is_gutenberg() {
+	return acf_is_block_editor();
 }
 
 /**

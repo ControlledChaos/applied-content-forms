@@ -859,7 +859,7 @@ class acfe_dynamic_templates extends acf_module {
             if(!$template['location']) continue;
 
             // Match screen
-            if(!acfe_match_location_rules($template['location'], $screen)) continue;
+            if(!acf_match_location_rules($template['location'], $screen)) continue;
 
             // Apply
             $this->apply_values($template['values']);

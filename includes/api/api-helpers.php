@@ -3377,5 +3377,10 @@ function acf_is_block_editor() {
 			return $screen->is_block_editor();
 		}
 	}
+
+	// Check if a block is currently fetched (edit mode).
+	if ( 'acf/ajax/fetch-block' === acf_maybe_get_POST( 'action' ) ) {
+		return true;
+	}
 	return false;
 }

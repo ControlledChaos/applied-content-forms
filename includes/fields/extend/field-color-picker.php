@@ -67,7 +67,7 @@ class acfe_field_color_picker{
             wp_register_script('acfe-color-picker-alpha', acf_get_url('assets/inc/wp-color-picker-alpha/wp-color-picker-alpha' . $suffix . '.js'), array('wp-color-picker'), '3.0.0');
 
             // enqueue if gutenberg
-            if(acfe_is_block_editor()){
+            if(acf_is_block_editor()){
                 wp_enqueue_script('acfe-color-picker-alpha');
             }
 

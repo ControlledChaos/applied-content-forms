@@ -583,7 +583,7 @@ class acfe_form_front{
     function form_wrapper($args, $open = true){
 
         // preview mode
-        $is_preview = acfe_is_dynamic_preview();
+        $is_preview = acf_is_dynamic_preview();
 
         // remove <form>
         if($is_preview){
@@ -667,7 +667,7 @@ class acfe_form_front{
     function form_data($args){
 
         // bail early in preview mode
-        if(acfe_is_dynamic_preview()) return;
+        if(acf_is_dynamic_preview()) return;
 
         // render form data
         acf_form_data(array(

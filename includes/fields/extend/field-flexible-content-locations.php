@@ -71,7 +71,7 @@ class acfe_field_flexible_content_layout_locations{
             if(!$layout['acfe_layout_locations']) continue;
 
             // match location rules
-            if(acfe_match_location_rules($layout['acfe_layout_locations'], $screen)) continue;
+            if(acf_match_location_rules($layout['acfe_layout_locations'], $screen)) continue;
 
             // unset
             unset($field['layouts'][$i]);
@@ -158,7 +158,7 @@ class acfe_field_flexible_content_layout_locations{
             if(!$layout['acfe_layout_locations']) continue;
 
             // match location rules
-            if(acfe_match_location_rules($layout['acfe_layout_locations'], $screen)) continue;
+            if(acf_match_location_rules($layout['acfe_layout_locations'], $screen)) continue;
 
             // unset
             unset($layouts[$i]);
