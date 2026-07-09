@@ -13,5 +13,21 @@ Development thus far is focused on merging the two plugins and bringing a tidy, 
 
 The goal is to have a brand-free, drama-free plugin that does what ACF & ACFE do, and more, with one seamless user interface.
 
-Not compatible with Advanced Custom Fields or Advanced Custom Fields: Extended, basic or pro.
+Use the documentation for Advanced Custom Fields and Advanced Custom Fields: Extended.
 
+## Features
+
+Following are some of the features offered by the plugin.
+
+- Custom post types
+- Custom taxonomies
+- Custom block types
+- Dynamic options pages
+- Post edit templates
+- Frontend form builder
+- Additional & improved fields
+- Import & export tools
+- Backend PHP generators
+- Field groups sync to theme
+- Options database editor
+- Post meta cleaner
