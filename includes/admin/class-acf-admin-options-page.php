@@ -225,7 +225,7 @@ class ACF_Admin_Options_Page {
 		<div id="major-publishing-actions">
 			<div id="publishing-action">
 				<span class="spinner"></span>
-				<input type="submit" accesskey="p" value="<?php echo $this->page['update_button']; ?>" class="button button-primary button-large" id="publish" name="publish">
+				<input type="submit" accesskey="p" value="<?php echo $this->page['update_button']; ?>" class="button button-primary button-large" id="publish" name="publish" />
 			</div>
 
 			<?php

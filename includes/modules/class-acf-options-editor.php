@@ -493,21 +493,29 @@ class acfe_module_options{
             $delete_nonce = wp_create_nonce('acfe_options_delete_option');
 
             ?>
-            <div id="major-publishing-actions">
+            <div id="major-publishing-actions" class="submitbox">
 
-                <?php if(!empty($option['option_id'])){ ?>
+                <?php if ( ! empty( $option['option_id'] ) ) : ?>
 
                     <div id="delete-action">
-                        <a class="submitdelete deletion" style="color:#a00;" href="<?php echo sprintf('?page=%s&action=%s&option=%s&_wpnonce=%s', esc_attr($_REQUEST['page']), 'delete', $option['option_id'], $delete_nonce); ?>">
+                        <a class="submitdelete deletion" href="<?php echo sprintf('?page=%s&action=%s&option=%s&_wpnonce=%s', esc_attr($_REQUEST['page']), 'delete', $option['option_id'], $delete_nonce); ?>">
                             <?php _e('Delete'); ?>
                         </a>
+                        &nbsp;
+                        <a href="<?php echo esc_attr( admin_url( 'tools.php?page=acfe-options' ) ); ?>" class="submitdelete"><?php _e( 'Cancel', 'acf' ); ?></a>
                     </div>
 
-                <?php } ?>
+                <?php else : ?>
+
+                    <div id="delete-action">
+                        <a href="<?php echo esc_attr( admin_url( 'tools.php?page=acfe-options' ) ); ?>" class="submitdelete"><?php _e( 'Cancel', 'acf' ); ?></a>
+                    </div>
+
+                <?php endif; ?>
 
                 <div id="publishing-action">
                     <span class="spinner"></span>
-                    <input type="submit" accesskey="p" value="<?php _e('Update'); ?>" class="button button-primary button-large" id="publish" name="publish">
+                    <input type="submit" accesskey="p" value="<?php _e('Update'); ?>" class="button button-primary button-large" id="publish" name="publish" />
                 </div>
 
                 <div class="clear"></div>
