@@ -36,7 +36,7 @@ class ACF_Admin {
 		add_action( 'admin_enqueue_scripts', [ $this, 'admin_enqueue_scripts' ] );
 		add_action( 'current_screen', [ $this, 'current_screen' ] );
 		add_action( 'admin_body_class', [ $this, 'admin_body_class' ] );
-		add_action( 'admin_menu', [ $this, 'admin_page' ], 9 );
+		add_action( 'admin_menu', [ $this, 'add_admin_page' ], 9 );
 		add_action( 'admin_menu', [ $this, 'categories_screen' ] );
 		add_action( 'acf/init', [ $this, 'settings_page' ] );
 		add_filter( 'default_hidden_meta_boxes', [ $this, 'show_page_excerpt_metabox' ], 10, 2 );
@@ -91,7 +91,7 @@ class ACF_Admin {
 	 * @access public
 	 * @return void
 	 */
-	public function admin_page() {
+	public function add_admin_page() {
 
 		// Stop if ACF is hidden.
 		if ( ! acf_get_setting( 'show_admin' ) ) {
