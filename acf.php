@@ -580,7 +580,7 @@ final class ACF {
 		acf_include( 'includes/payment.php' );
 		acf_include( 'includes/world.php' );
 
-		acf_include( 'includes/modules/scripts-class.php' );
+		acf_include( 'includes/modules/class-acf-script.php' );
 
 		// Include locations.
 		acf_include( 'includes/locations/class-acf-location-post-type.php' );
@@ -645,25 +645,25 @@ final class ACF {
 		 */
 		do_action( 'acf/include_fields' );
 
-		acf_include( 'includes/modules/autosync.php' );
-		acf_include( 'includes/modules/module.php' );
-		acf_include( 'includes/modules/author.php' );
+		acf_include( 'includes/modules/class-acf-autosync.php' );
+		acf_include( 'includes/modules/class-acf-module.php' );
+		acf_include( 'includes/modules/class-acf-author.php' );
 		acf_include( 'includes/modules/class-acf-dev.php' );
 		acf_include( 'includes/modules/class-acf-dev-pro.php' );
 		acf_include( 'includes/modules/class-acf-post-types.php' );
-		acf_include( 'includes/modules/taxonomies.php' );
-		acf_include( 'includes/modules/block-types.php' );
-		acf_include( 'includes/modules/forms.php' );
-		acf_include( 'includes/modules/templates.php' );
-		acf_include( 'includes/modules/options-pages.php' );
-		acf_include( 'includes/modules/options.php' );
-		acf_include( 'includes/modules/single-meta.php' );
-		acf_include( 'includes/modules/screen-layouts.php' );
-		acf_include( 'includes/modules/global-field-condition.php' );
-		acf_include( 'includes/modules/rewrite-rules.php' );
-		acf_include( 'includes/modules/force-sync.php' );
-		acf_include( 'includes/modules/scripts.php' );
-		acf_include( 'includes/modules/scripts-list.php' );
+		acf_include( 'includes/modules/class-acf-taxonomies.php' );
+		acf_include( 'includes/modules/class-acf-block-types.php' );
+		acf_include( 'includes/modules/class-acf-forms.php' );
+		acf_include( 'includes/modules/class-acf-templates.php' );
+		acf_include( 'includes/modules/class-acf-options-pages.php' );
+		acf_include( 'includes/modules/class-acf-options-editor.php' );
+		acf_include( 'includes/modules/class-acf-single-meta.php' );
+		acf_include( 'includes/modules/class-acf-screen-layouts.php' );
+		acf_include( 'includes/modules/class-acf-global-field-condition.php' );
+		acf_include( 'includes/modules/class-acf-rewrite-rules.php' );
+		acf_include( 'includes/modules/class-acf-force-sync.php' );
+		acf_include( 'includes/modules/class-acf-scripts.php' );
+		acf_include( 'includes/modules/class-acf-scripts-list.php' );
 
 		/**
 		 * Fires after ACF is completely "initialized".

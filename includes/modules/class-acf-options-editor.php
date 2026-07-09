@@ -18,7 +18,7 @@ class acfe_module_options{
      */
     function __construct(){
 
-        acf_include( 'includes/modules/options.class.php' );
+        acf_include( 'includes/modules/class-acf-options-list-table.php' );
         add_filter( 'set-screen-option', array( $this, 'acfe_options_screen' ), 10, 3 );
         add_action( 'admin_menu', array( $this, 'admin_menu' ), 25 );
         add_action( 'acf/save_post', array( $this, 'save_post' ), 5 );
@@ -140,7 +140,7 @@ class acfe_module_options{
     function load_list(){
 
         add_screen_option('per_page', array(
-            'label'     => 'Options',
+            'label'     => 'Options Per Page',
             'default'   => 100,
             'option'    => 'options_per_page'
         ));

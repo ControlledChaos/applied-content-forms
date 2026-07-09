@@ -56,23 +56,23 @@ class acfe_dynamic_forms extends acf_module{
 		add_action('acfe/form/import_fields',                   array($this, 'import_fields'), 10, 3);
 
 		// Includes
-		acf_include('includes/modules/forms-cheatsheet.php');
-		acf_include('includes/modules/forms-front.php');
-		acf_include('includes/modules/forms-helpers.php');
-		acf_include('includes/modules/forms-hooks.php');
+		acf_include('includes/class-acf-forms-cheatsheet.php');
+		acf_include('includes/modules/class-acf-forms-front.php');
+		acf_include('includes/modules/class-acf-forms-helpers.php');
+		acf_include('includes/modules/class-acf-forms-hooks.php');
 
-		acf_include('includes/modules/forms-action-custom.php');
-		acf_include('includes/modules/forms-action-email.php');
-		acf_include('includes/modules/forms-action-post.php');
-		acf_include('includes/modules/forms-action-redirect.php');
-		acf_include('includes/modules/forms-action-term.php');
-		acf_include('includes/modules/forms-action-user.php');
+		acf_include('includes/modules/class-acf-forms-action-custom.php');
+		acf_include('includes/modules/class-acf-forms-action-email.php');
+		acf_include('includes/modules/class-acf-forms-action-post.php');
+		acf_include('includes/modules/class-acf-forms-action-redirect.php');
+		acf_include('includes/modules/class-acf-forms-action-term.php');
+		acf_include('includes/modules/class-acf-forms-action-user.php');
 
 		// ajax
         add_action('wp_ajax_acfe/form/shortcode',           array($this, 'ajax_shortcode'));
         add_action('wp_ajax_nopriv_acfe/form/shortcode',    array($this, 'ajax_shortcode'));
 
-		acf_include( 'includes/modules/forms-action-option.php' );
+		acf_include( 'includes/modules/class-acf-forms-action-option.php' );
 
 		do_action('acfe/include_form_actions');
 
