@@ -7,6 +7,12 @@ A suite of tools for adding and managing custom content types and user forms.
 ![WordPress tested on version 7.0](https://img.shields.io/badge/WordPress_tested-7.0-2271b1.svg?style=flat-square)
 ![ClassicPress tested on version 2.0](https://img.shields.io/badge/ClassicPress_tested-2.0-03768e.svg?style=flat-square)
 
+## Applied
+
+**Applied:** put to practical use, especially applying general principles to solve definite problems.
+
+## Overview
+
 This began as a fork of Advanced Custom Fields PRO version 5.9.6 plus a fork of Advanced Custom Fields: Extended PRO version 0.8.8.6.
 
 Development thus far is focused on merging the two plugins and bringing a tidy, legible code format to all files. Minor feature improvements have been made, some of which took much time to implement, but no major advancements or new features yet.
