@@ -3,9 +3,9 @@
 if(!defined('ABSPATH'))
 	exit;
 
-if(!class_exists('acfe_dev')):
+if(!class_exists('ACF_Dev')):
 
-class acfe_dev{
+class ACF_Dev{
 
 	public $wp_meta = array();
 	public $acf_meta = array();
@@ -722,7 +722,7 @@ class acfe_dev{
 				// Field Group
 				$field_group = acf_get_field_group_from_field($field);
 
-				if($field_group){
+				if( $field_group ){
 
 					$field_group_title = $field_group['title'];
 
@@ -732,7 +732,7 @@ class acfe_dev{
 					}
 
 					// found db field group
-					if($field_group['ID']){
+					if(is_array( $field_group ) && $field_group['ID']){
 
 						$post_status = get_post_status($field_group['ID']);
 
@@ -852,16 +852,16 @@ class acfe_dev{
 
 }
 
-acf_new_instance('acfe_dev');
+acf_new_instance('ACF_Dev');
 
 endif;
 
 function acfe_dev_get_wp_meta(){
-	return acf_get_instance('acfe_dev')->wp_meta;
+	return acf_get_instance('ACF_Dev')->wp_meta;
 }
 
 function acfe_dev_get_acf_meta(){
-	return acf_get_instance('acfe_dev')->acf_meta;
+	return acf_get_instance('ACF_Dev')->acf_meta;
 }
 
 function acfe_dev_count_meta(){

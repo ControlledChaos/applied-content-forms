@@ -648,7 +648,8 @@ final class ACF {
 		acf_include( 'includes/modules/autosync.php' );
 		acf_include( 'includes/modules/module.php' );
 		acf_include( 'includes/modules/author.php' );
-		acf_include( 'includes/modules/dev.php' );
+		acf_include( 'includes/modules/class-acf-dev.php' );
+		acf_include( 'includes/modules/class-acf-dev-pro.php' );
 		acf_include( 'includes/modules/class-acf-post-types.php' );
 		acf_include( 'includes/modules/taxonomies.php' );
 		acf_include( 'includes/modules/block-types.php' );
@@ -716,8 +717,6 @@ final class ACF {
 		acf_include( 'includes/fields/extend-pro/field-radio.php' );
 		acf_include( 'includes/fields/extend-pro/field-select.php' );
 		acf_include( 'includes/fields/extend-pro/field-tab.php' );
-
-		acf_include( 'includes/dev.php' );
 
 		do_action( 'acf/init_late' );
 	}

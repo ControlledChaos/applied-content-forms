@@ -3,9 +3,9 @@
 if(!defined('ABSPATH'))
     exit;
 
-if(!class_exists('acfe_pro_dev')):
+if(!class_exists('ACF_Dev_Pro')):
 
-class acfe_pro_dev{
+class ACF_Dev_Pro{
 
     /*
      * Construct
@@ -596,6 +596,6 @@ class acfe_pro_dev{
     }
 
 }
-acf_new_instance( 'acfe_pro_dev' );
+acf_new_instance( 'ACF_Dev_Pro' );
 
 endif;
