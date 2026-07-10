@@ -75,7 +75,7 @@ class acfe_screen_user{
 		}
 
 		// vars
-		$this->user_id = acfe_get_post_id(false);
+		$this->user_id = acf_get_post_id(false);
 
 		// actions
 		do_action("acfe/load_user", $this->user_id);

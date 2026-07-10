@@ -586,7 +586,7 @@ class acfe_countries extends acf_field{
         }
 
         // Vars
-        $post_id = acfe_get_post_id();
+        $post_id = acf_get_post_id();
         $field_name = $field['_name'];
         $field_key = $field['key'];
 

@@ -599,7 +599,7 @@ class acfe_dynamic_forms extends acf_module{
 			return $valid;
 
 		// Check current name
-		$post_id = acfe_get_post_id();
+		$post_id = acf_get_post_id();
 
 		if(empty($post_id))
 			return $valid;

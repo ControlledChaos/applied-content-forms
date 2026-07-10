@@ -71,10 +71,10 @@ if ( ! function_exists( 'get_flexible' ) ) {
 			echo "\n" . '<!-- ' . $layout['label'] . ' -->' . "\n";
 
 			// Render enqueue.
-			acfe_flexible_render_layout_enqueue( $layout, $field );
+			acf_flexible_render_layout_enqueue( $layout, $field );
 
 			// Render template.
-			acfe_flexible_render_layout_template( $layout, $field );
+			acf_flexible_render_layout_template( $layout, $field );
 
 		endwhile;
 		return ob_get_clean();
@@ -125,7 +125,7 @@ if ( ! function_exists( 'has_flexible' ) ) {
  * @global boolean $is_preview
  * @return void
  */
-function acfe_flexible_render_layout_template( $layout, $field ) {
+function acf_flexible_render_layout_template( $layout, $field ) {
 
 	// Access global variables.
 	global $col, $is_preview;
@@ -198,7 +198,7 @@ function acfe_flexible_render_layout_template( $layout, $field ) {
  * @global boolean $is_preview
  * @return void
  */
-function acfe_flexible_render_layout_enqueue( $layout, $field ) {
+function acf_flexible_render_layout_enqueue( $layout, $field ) {
 
 	// Access global variables.
 	global $is_preview;
@@ -455,7 +455,7 @@ if ( ! function_exists( 'have_archive' ) ) {
 
 		}
 
-		remove_filter( 'acf/pre_load_post_id', 'acfe_the_archive_post_id' );
+		remove_filter( 'acf/pre_load_post_id', 'acf_the_archive_post_id' );
 		return false;
 	}
 }
@@ -475,7 +475,7 @@ if ( ! function_exists( 'the_archive' ) ) {
 		// Access global variables.
 		global $acfe_archive_i;
 
-		add_filter( 'acf/pre_load_post_id', 'acfe_the_archive_post_id', 10, 2 );
+		add_filter( 'acf/pre_load_post_id', 'acf_the_archive_post_id', 10, 2 );
 		$acfe_archive_i++;
 	}
 }
@@ -489,7 +489,7 @@ if ( ! function_exists( 'the_archive' ) ) {
  * @global string $acfe_archive_post_type
  * @return mixed
  */
-function acfe_the_archive_post_id( $null, $post_id ) {
+function acf_the_archive_post_id( $null, $post_id ) {
 
 	// Access global variables.
 	global $acfe_archive_post_type;
@@ -520,7 +520,7 @@ function acfe_the_archive_post_id( $null, $post_id ) {
  * @global integer $user_ID
  * @return mixed
  */
-function acfe_get_post_id( $format = true ) {
+function acf_get_post_id( $format = true ) {
 
 	// Access global variables.
 	global $pagenow, $user_ID;
@@ -606,7 +606,7 @@ acf_register_store( 'local-templates' );
  * @since  1.0.0
  * @return method
  */
-function acfe_get_local_templates() {
+function acf_get_local_templates() {
 	return acf_get_local_store( 'templates' )->get();
 }
 
@@ -617,7 +617,7 @@ function acfe_get_local_templates() {
  * @param  string $name
  * @return method
  */
-function acfe_get_local_template( $name = '' ) {
+function acf_get_local_template( $name = '' ) {
 	return acf_get_local_store( 'templates' )->get( $name );
 }
 
@@ -628,7 +628,7 @@ function acfe_get_local_template( $name = '' ) {
  * @param  string $name
  * @return method
  */
-function acfe_remove_local_template( $name = '' ) {
+function acf_remove_local_template( $name = '' ) {
 	return acf_get_local_store( 'templates' )->remove( $name );
 }
 
@@ -638,7 +638,7 @@ function acfe_remove_local_template( $name = '' ) {
  * @since  1.0.0
  * @return boolean
  */
-function acfe_have_local_templates() {
+function acf_have_local_templates() {
 	if ( acf_get_local_store( 'templates' )->count() ) {
 		return true;
 	}
@@ -652,7 +652,7 @@ function acfe_have_local_templates() {
  * @param  string $name
  * @return method
  */
-function acfe_is_local_template( $name = '' ) {
+function acf_is_local_template( $name = '' ) {
 	return acf_get_local_store( 'templates' )->has( $name );
 }
 
@@ -662,7 +662,7 @@ function acfe_is_local_template( $name = '' ) {
  * @since  1.0.0
  * @return method
  */
-function acfe_count_local_templates() {
+function acf_count_local_template() {
 	return acf_get_local_store( 'templates' )->count();
 }
 
@@ -673,7 +673,7 @@ function acfe_count_local_templates() {
  * @param  array $args
  * @return boolean
  */
-function acfe_add_local_template( $args = [] ) {
+function acf_add_local_template( $args = [] ) {
 
 	$args = wp_parse_args( $args, [
 		'title'    => '',

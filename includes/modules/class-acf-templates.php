@@ -127,7 +127,7 @@ class acfe_dynamic_templates extends acf_module {
      */
     function validate_values($valid, $value, $field, $input){
 
-        $post_id = acfe_get_post_id();
+        $post_id = acf_get_post_id();
 
         if(!$post_id || get_post_type($post_id) !== $this->post_type)
             return $valid;
@@ -664,7 +664,7 @@ class acfe_dynamic_templates extends acf_module {
             $code = esc_textarea($code);
 
             // echo
-            echo "acfe_add_local_template({$code});" . "\r\n" . "\r\n";
+            echo "acf_add_local_template({$code});" . "\r\n" . "\r\n";
 
         }
 
@@ -842,7 +842,7 @@ class acfe_dynamic_templates extends acf_module {
         }
 
         // Get local templates
-        $templates = acfe_get_local_templates();
+        $templates = acf_get_local_templates();
 
         if(!$templates) return;
 

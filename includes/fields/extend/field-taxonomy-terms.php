@@ -462,7 +462,7 @@ class acfe_field_taxonomy_terms extends acf_field{
         //vars
         $name = $field['_name'];
         $key = $field['key'];
-        $post_id = acfe_get_post_id();
+        $post_id = acf_get_post_id();
 
         foreach($choices as $taxonomy => &$terms){
 
@@ -610,7 +610,7 @@ class acfe_field_taxonomy_terms extends acf_field{
             //vars
             $name = $field['_name'];
             $key = $field['key'];
-            $post_id = acfe_get_post_id();
+            $post_id = acf_get_post_id();
 
             // filters
             $args = array();

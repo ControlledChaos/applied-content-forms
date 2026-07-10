@@ -48,7 +48,7 @@ class acfe_screen_post{
 
         // vars
         $post_type = $typenow;
-        $post_id = (int) acfe_get_post_id(false);
+        $post_id = (int) acf_get_post_id(false);
 
         // set vars
         $this->post_type = $post_type;

@@ -41,7 +41,7 @@ class acfe_screen_taxonomy{
 
 		// vars
 		$taxonomy = $taxnow;
-		$term_id = (int) acfe_get_post_id(false);
+		$term_id = (int) acf_get_post_id(false);
 
 		// set vars
 		$this->taxonomy = $taxonomy;

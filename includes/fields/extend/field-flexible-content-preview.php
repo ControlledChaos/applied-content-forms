@@ -232,7 +232,7 @@ class acfe_field_flexible_content_preview{
         foreach($field['layouts'] as $layout){
 
             // Enqueue
-            acfe_flexible_render_layout_enqueue($layout, $field);
+            acf_flexible_render_layout_enqueue($layout, $field);
 
         }
 
@@ -373,7 +373,7 @@ class acfe_field_flexible_content_preview{
                 do_action_deprecated("acfe/flexible/preview",                                      array($field, $layout), '0.8.6.7');
 
                 // Template
-                acfe_flexible_render_layout_template($layout, $field);
+                acf_flexible_render_layout_template($layout, $field);
 
                 $post = $_post;
 

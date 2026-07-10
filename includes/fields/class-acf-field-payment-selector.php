@@ -168,7 +168,7 @@ class acf_payment_selector extends acf_field{
         }
 
         // get meta
-        $meta = acf_get_meta(acfe_get_post_id());
+        $meta = acf_get_meta(acf_get_post_id());
 
         // loop meta
         foreach($meta as $key => $val){
