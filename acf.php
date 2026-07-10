@@ -372,6 +372,7 @@ final class ACF {
 		acf_include( 'includes/class-acf-compatibility.php' );
 		acf_include( 'includes/class-acf-loop.php' );
 		acf_include( 'includes/class-acf-media.php' );
+		acf_include( 'includes/class-acf-multilang.php' );
 
 		acf_include( 'includes/acf-helper-functions.php' );
 		acf_include( 'includes/acf-hook-functions.php' );

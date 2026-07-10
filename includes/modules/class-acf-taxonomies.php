@@ -1099,7 +1099,7 @@ class acfe_dynamic_taxonomies extends acf_module {
 	function l10n_save($name, $args, $post_id){
 
 		// Bail early
-		if(!acfe_is_wpml())
+		if(!acf_is_wpml())
 			return;
 
 		// Translate: Label
@@ -1130,19 +1130,19 @@ class acfe_dynamic_taxonomies extends acf_module {
 
 		// Translate: Label
 		if(isset($args['label'])){
-			$args['label'] = acfe_translate($args['label'], 'Label', $this->textdomain);
+			$args['label'] = acf_str_translate($args['label'], 'Label', $this->textdomain);
 		}
 
 		// Translate: Description
 		if(isset($args['description'])){
-			$args['description'] = acfe_translate($args['description'], 'Description', $this->textdomain);
+			$args['description'] = acf_str_translate($args['description'], 'Description', $this->textdomain);
 		}
 
 		// Translate: Labels
 		if(isset($args['labels'])){
 
 			foreach($args['labels'] as $label_name => &$label_text){
-				$label_text = acfe_translate($label_text, ucfirst($label_name), $this->textdomain);
+				$label_text = acf_str_translate($label_text, ucfirst($label_name), $this->textdomain);
 			}
 
 		}

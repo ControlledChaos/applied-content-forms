@@ -48,9 +48,9 @@ class acfe_languages extends ACF_Field{
 
         $allow_conditions = array();
 
-        if(acfe_is_multilang()){
+        if(acf_is_multilang()){
 
-            $plugin = acfe_is_polylang() ? 'Polylang' : 'WPML';
+            $plugin = acf_is_polylang() ? 'Polylang' : 'WPML';
 
             // Multilingual Support
             acf_render_field_setting($field, array(
@@ -598,16 +598,16 @@ class acfe_languages extends ACF_Field{
         }
 
         // Multilingual Support
-        if(acfe_is_multilang() && $field['multilang']){
+        if(acf_is_multilang() && $field['multilang']){
 
             // Get active languages
-            $locales = acfe_get_multilang_languages('locale', 'active');
+            $locales = acf_get_multilang_languages('locale', 'active');
 
             // Search in locale
             $args['locale__in'] = $locales;
 
             // Wildcard search for WPML
-            if(acfe_is_wpml()){
+            if(acf_is_wpml()){
 
                 // First pass
                 $wpml_choices = acf_get_languages(array(

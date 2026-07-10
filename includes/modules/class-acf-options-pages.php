@@ -917,7 +917,7 @@ class acfe_dynamic_options_pages extends acf_module{
 	function l10n_save($name, $args, $post_id){
 
 		// Bail early
-		if(!acfe_is_wpml())
+		if(!acf_is_wpml())
 			return;
 
 		// Translate: Page Title
@@ -949,22 +949,22 @@ class acfe_dynamic_options_pages extends acf_module{
 
 		// Translate: Page Title
 		if(isset($args['page_title'])){
-			$args['page_title'] = acfe_translate($args['page_title'], 'Page_title', $this->textdomain);
+			$args['page_title'] = acf_str_translate($args['page_title'], 'Page_title', $this->textdomain);
 		}
 
 		// Translate: Menu Title
 		if(isset($args['menu_title'])){
-			$args['menu_title'] = acfe_translate($args['menu_title'], 'Menu_title', $this->textdomain);
+			$args['menu_title'] = acf_str_translate($args['menu_title'], 'Menu_title', $this->textdomain);
 		}
 
 		// Translate: Update button
 		if(isset($args['update_button'])){
-			$args['update_button'] = acfe_translate($args['update_button'], 'Update_button', $this->textdomain);
+			$args['update_button'] = acf_str_translate($args['update_button'], 'Update_button', $this->textdomain);
 		}
 
 		// Translate: Updated message
 		if(isset($args['update_message'])){
-			$args['update_message'] = acfe_translate($args['update_message'], 'Updated_message', $this->textdomain);
+			$args['update_message'] = acf_str_translate($args['update_message'], 'Updated_message', $this->textdomain);
 		}
 
 		return $args;

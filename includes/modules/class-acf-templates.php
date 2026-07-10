@@ -752,7 +752,7 @@ class acfe_dynamic_templates extends acf_module {
         // Retrieve template
         $template_id = $rule['value'];
         $template_id = acf_get_valid_post_id($template_id);
-        $template_id = acfe_get_post_translated($template_id);
+        $template_id = acf_get_post_translated($template_id);
 
         // Check template status
         if(get_post_status($template_id) !== 'publish')
@@ -969,7 +969,7 @@ class acfe_dynamic_templates extends acf_module {
     function validate_post_id($post_id){
 
         $post_id = acf_get_valid_post_id($post_id);
-        $post_id = acfe_get_post_translated_default($post_id);
+        $post_id = acf_get_post_translated_default($post_id);
         $post_id = (int) $post_id;
 
         return $post_id;

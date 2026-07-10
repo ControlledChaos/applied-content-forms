@@ -1234,7 +1234,7 @@ class ACF_Post_Types extends ACF_Module {
 	 */
 	public function l10n_save( $name, $args, $post_id ) {
 
-		if ( ! acfe_is_wpml() ) {
+		if ( ! acf_is_wpml() ) {
 			return;
 		}
 
@@ -1269,18 +1269,18 @@ class ACF_Post_Types extends ACF_Module {
 
 		// Translate: Label
 		if ( isset( $args['label'] ) ) {
-			$args['label'] = acfe_translate( $args['label'], 'Label', $this->textdomain );
+			$args['label'] = acf_str_translate( $args['label'], 'Label', $this->textdomain );
 		}
 
 		// Translate: Description
 		if ( isset( $args['description'] ) ) {
-			$args['description'] = acfe_translate( $args['description'], 'Description', $this->textdomain );
+			$args['description'] = acf_str_translate( $args['description'], 'Description', $this->textdomain );
 		}
 
 		// Translate: Labels
 		if ( isset($args['labels'] ) ) {
 			foreach ( $args['labels'] as $label_name => &$label_text ) {
-				$label_text = acfe_translate( $label_text, ucfirst( $label_name ), $this->textdomain );
+				$label_text = acf_str_translate( $label_text, ucfirst( $label_name ), $this->textdomain );
 			}
 		}
 		return $args;

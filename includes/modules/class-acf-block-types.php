@@ -925,7 +925,7 @@ class acfe_dynamic_block_types extends acf_module {
 	function l10n_save($name, $args, $post_id){
 
 		// Bail early
-		if(!acfe_is_wpml())
+		if(!acf_is_wpml())
 			return;
 
 		// Translate: Title
@@ -947,12 +947,12 @@ class acfe_dynamic_block_types extends acf_module {
 
 		// Translate: Title
 		if(isset($args['title'])){
-			$args['title'] = acfe_translate($args['title'], 'Title', $this->textdomain);
+			$args['title'] = acf_str_translate($args['title'], 'Title', $this->textdomain);
 		}
 
 		// Translate: Description
 		if(isset($args['description'])){
-			$args['description'] = acfe_translate($args['description'], 'Description', $this->textdomain);
+			$args['description'] = acf_str_translate($args['description'], 'Description', $this->textdomain);
 		}
 
 		return $args;
