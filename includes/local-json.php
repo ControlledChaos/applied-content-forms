@@ -287,39 +287,38 @@ class ACF_Local_JSON {
 acf_new_instance( 'ACF_Local_JSON' );
 
 /**
+ * Get local JSON
+ *
  * Returns an array of found JSON field group files.
  *
- * @date	14/4/20
- * @since	5.9.0
- *
- * @param	type $var Description. Default.
- * @return	type Description.
+ * @since  1.0.0
+ * @return method
  */
 function acf_get_local_json_files() {
 	return acf_get_instance( 'ACF_Local_JSON' )->get_files();
 }
 
 /**
+ * Write JSON
+ *
  * Saves a field group JSON file.
  *
- * @date	5/12/2014
- * @since	5.1.5
- *
- * @param	array $field_group The field group.
- * @return	bool
+ * @since  1.0.0
+ * @param  array $field_group The field group.
+ * @return boolean
  */
 function acf_write_json_field_group( $field_group ) {
 	return acf_get_instance( 'ACF_Local_JSON' )->save_file( $field_group['key'], $field_group );
 }
 
 /**
+ * Delete JSON
+ *
  * Deletes a field group JSON file.
  *
- * @date	5/12/2014
- * @since	5.1.5
- *
- * @param	string $key The field group key.
- * @return	bool True on success.
+ * @since  1.0.0
+ * @param  string $key The field group key.
+ * @return method
  */
 function acf_delete_json_field_group( $key ) {
 	return acf_get_instance( 'ACF_Local_JSON' )->delete_file( $key );
