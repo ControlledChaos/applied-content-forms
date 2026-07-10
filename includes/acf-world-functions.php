@@ -1,171 +1,180 @@
 <?php
-
-if(!defined('ABSPATH'))
-    exit;
-
-/*
- * Get Countries
+/**
+ * World functions
+ *
+ * @package    Applied Content Forms
+ * @subpackage Includes
+ * @category   Functions
+ * @since      1.0.0
  */
-function acfe_get_countries($args = array()){
-    
-    // Default args
-    $args = wp_parse_args($args, array(
-        'type'          => 'countries',
-        'code__in'      => false,
-        'name__in'      => false,
-        'continent__in' => false,
-        'language__in'  => false,
-        'currency__in'  => false,
 
-        'orderby'       => false,
-        'order'         => 'ASC',
-        'offset'        => 0,
-        'limit'         => -1,
-
-        'field'         => false,
-        'display'       => false,
-        'prepend'       => false,
-        'append'        => false,
-        'groupby'       => false,
-    ));
-    
-    // Query
-    $query = new ACFE_World_Query($args);
-    
-    // Results
-    return $query->data;
-    
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
 }
 
-/*
- * Get Country
+/**
+ * Get countries
+ *
+ * @since  1.0.0
+ * @param  array $args
+ * @return array
  */
-function acfe_get_country($code, $field = ''){
-    
-    $data = acfe_get_countries(array(
-        'code__in'  => $code,
-        'limit'     => 1
-    ));
-    
-    $data = reset($data);
-    
-    if($field){
-        return acf_maybe_get($data, $field);
-    }
-    
-    return $data;
-    
+function acf_get_countries( $args = [] ) {
+
+	// Default arguments.
+	$args = wp_parse_args( $args, [
+		'type'          => 'countries',
+		'code__in'      => false,
+		'name__in'      => false,
+		'continent__in' => false,
+		'language__in'  => false,
+		'currency__in'  => false,
+		'orderby'       => false,
+		'order'         => 'ASC',
+		'offset'        => 0,
+		'limit'         => -1,
+		'field'         => false,
+		'display'       => false,
+		'prepend'       => false,
+		'append'        => false,
+		'groupby'       => false
+	] );
+	$query = new ACFE_World_Query( $args );
+
+	return $query->data;
 }
 
-/*
- * Get Languages
+/**
+ * Get country
+ *
+ * @since  1.0.0
+ * @param  string $code
+ * @param  string $field
+ * @return string
  */
-function acfe_get_languages($args = array()){
-    
-    // Default args
-    $args = wp_parse_args($args, array(
-        'type'              => 'languages',
-        'name__in'          => false,
-        'locale__in'        => false,
-        'alt__in'           => false,
-        'code__in'          => false,
-        'continent__in'     => false,
-        'country__in'       => false,
-        'currency__in'      => false,
-        
-        'orderby'           => false,
-        'order'             => 'ASC',
-        'offset'            => 0,
-        'limit'             => -1,
+function acf_get_country( $code, $field = '' ) {
 
-        'field'             => false,
-        'display'           => false,
-        'prepend'           => false,
-        'append'            => false,
-        'groupby'           => false,
-    ));
-    
-    // Query
-    $query = new ACFE_World_Query($args);
-    
-    // Results
-    return $query->data;
-    
+	$data = acf_get_countries( [
+		'code__in' => $code,
+		'limit'    => 1
+	] );
+	$data = reset( $data );
+
+	if ( $field ) {
+		return acf_maybe_get( $data, $field );
+	}
+	return $data;
 }
 
-/*
- * Get Language
+/**
+ * Get languages
+ *
+ * @since  1.0.0
+ * @param  array $args
+ * @return array
  */
-function acfe_get_language($locale, $field = ''){
-    
-    $data = acfe_get_languages(array(
-        'locale__in'  => $locale,
-        'limit'       => 1
-    ));
-    
-    $data = reset($data);
-    
-    if($field){
-        return acf_maybe_get($data, $field);
-    }
-    
-    return $data;
-    
+function acf_get_languages( $args = [] ) {
+
+	// Default arguments.
+	$args = wp_parse_args( $args, [
+		'type'          => 'languages',
+		'name__in'      => false,
+		'locale__in'    => false,
+		'alt__in'       => false,
+		'code__in'      => false,
+		'continent__in' => false,
+		'country__in'   => false,
+		'currency__in'  => false,
+		'orderby'       => false,
+		'order'         => 'ASC',
+		'offset'        => 0,
+		'limit'         => -1,
+		'field'         => false,
+		'display'       => false,
+		'prepend'       => false,
+		'append'        => false,
+		'groupby'       => false
+	] );
+	$query = new ACFE_World_Query( $args );
+
+	return $query->data;
 }
 
-/*
- * Get Currencies
+/**
+ * Get language
+ *
+ * @since  1.0.0
+ * @param  string $locale
+ * @param  string $field
+ * @return string
  */
-function acfe_get_currencies($args = array()){
-    
-    // Default args
-    $args = wp_parse_args($args, array(
-        'type'          => 'currencies',
-        'name__in'      => false,
-        'code__in'      => false,
-        'continent__in' => false,
-        'country__in'   => false,
-        'language__in'  => false,
-        
-        'countries'     => false,
-        'languages'     => false,
-        
-        'orderby'       => false,
-        'order'         => 'ASC',
-        'offset'        => 0,
-        'limit'         => -1,
+function acf_get_language( $locale, $field = '' ) {
 
-        'field'         => false,
-        'display'       => false,
-        'prepend'       => false,
-        'append'        => false,
-        'groupby'       => false,
-    ));
-    
-    // Query
-    $query = new ACFE_World_Query($args);
-    
-    // Results
-    return $query->data;
-    
+	$data = acf_get_languages( [
+		'locale__in' => $locale,
+		'limit'      => 1
+	] );
+	$data = reset( $data );
+
+	if ( $field ) {
+		return acf_maybe_get( $data, $field );
+	}
+	return $data;
 }
 
-/*
- * Get Currency
+/**
+ * Get currencies
+ *
+ * @since  1.0.0
+ * @param  array $args
+ * @return array
  */
-function acfe_get_currency($code, $field = ''){
-    
-    $data = acfe_get_currencies(array(
-        'code__in'  => $code,
-        'limit'     => 1
-    ));
-    
-    $data = reset($data);
-    
-    if($field){
-        return acf_maybe_get($data, $field);
-    }
-    
-    return $data;
-    
+function acf_get_currencies( $args = [] ) {
+
+	// Default arguments.
+	$args = wp_parse_args( $args, [
+		'type'          => 'currencies',
+		'name__in'      => false,
+		'code__in'      => false,
+		'continent__in' => false,
+		'country__in'   => false,
+		'language__in'  => false,
+		'countries'     => false,
+		'languages'     => false,
+		'orderby'       => false,
+		'order'         => 'ASC',
+		'offset'        => 0,
+		'limit'         => -1,
+		'field'         => false,
+		'display'       => false,
+		'prepend'       => false,
+		'append'        => false,
+		'groupby'       => false
+	] );
+	$query = new ACFE_World_Query( $args );
+
+	return $query->data;
+}
+
+/**
+ * Get currency
+ *
+ * @since  1.0.0
+ * @param  string $code
+ * @param  string $field
+ * @return string
+ */
+function acf_get_currency( $code, $field = '' ) {
+
+	$data = acf_get_currencies( [
+		'code__in' => $code,
+		'limit'    => 1
+	] );
+	$data = reset( $data );
+
+	if ( $field ) {
+		return acf_maybe_get( $data, $field );
+	}
+	return $data;
 }

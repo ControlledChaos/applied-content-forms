@@ -357,7 +357,7 @@ class acf_payment_cart extends acf_field{
 
         // currency
         $currency = acf_maybe_get($this->payment_field, 'currency', 'USD');
-        $currency = acfe_get_currency($currency, 'symbol');
+        $currency = acf_get_currency($currency, 'symbol');
 
         // loop choices
         foreach(array_keys($field['choices']) as $item){

@@ -26,7 +26,7 @@ class acfe_permissions{
                 'type'          => 'checkbox',
                 'required'      => false,
                 'default_value' => false,
-                'choices'       => acfe_get_roles(),
+                'choices'       => acf_get_roles(),
                 'layout'        => 'horizontal',
                 'wrapper'       => array(
                     'data-after' => 'instructions'
@@ -42,7 +42,7 @@ class acfe_permissions{
         if(!acf_maybe_get($field, 'acfe_permissions'))
             return $field;
 
-        $user_roles = acfe_get_current_user_roles();
+        $user_roles = acf_get_current_user_roles();
         $render = false;
 
         foreach($user_roles as $user_role){

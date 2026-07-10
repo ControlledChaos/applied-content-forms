@@ -21,7 +21,7 @@ class acfe_field_group_permissions{
         if(!acf_maybe_get($field_group, 'acfe_permissions'))
             return $field_group;
 
-        $current_user_roles = acfe_get_current_user_roles();
+        $current_user_roles = acf_get_current_user_roles();
         $render_field_group = false;
 
         foreach($current_user_roles as $current_user_role){

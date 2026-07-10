@@ -389,7 +389,7 @@ class acf_payment extends acf_field{
         $data = $this->format_value($value, false, $field);
 
         // currency symbol
-        $symbol = acfe_get_currency($data['currency'], 'symbol');
+        $symbol = acf_get_currency($data['currency'], 'symbol');
 
         // gateway url
         $url = '';
@@ -1123,7 +1123,7 @@ class acf_payment extends acf_field{
         $data = $this->format_value($value, false, $field);
 
         // currency symbol
-        $symbol = acfe_get_currency($data['currency'], 'symbol');
+        $symbol = acf_get_currency($data['currency'], 'symbol');
 
         // gateway url
         $url = '';

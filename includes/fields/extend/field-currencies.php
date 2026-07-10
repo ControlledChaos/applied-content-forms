@@ -51,7 +51,7 @@ class acfe_currencies extends acf_field{
             'instructions'  => '',
             'type'          => 'select',
             'name'          => 'currencies',
-            'choices'       => acfe_get_currencies(array(
+            'choices'       => acf_get_currencies(array(
                 'field'         => 'code',
                 'display'       => '<span class="iti__flag iti__{flag}"></span>{symbol} {code}',
             )),
@@ -512,7 +512,7 @@ class acfe_currencies extends acf_field{
         foreach($value as &$v){
 
             // Retrieve Object
-            $object = acfe_get_currency($v);
+            $object = acf_get_currency($v);
 
             if(!$object || is_wp_error($object))
                 continue;
@@ -584,14 +584,14 @@ class acfe_currencies extends acf_field{
         $args = apply_filters("acfe/fields/currencies/query/key={$field_key}",      $args, $field, $post_id);
 
         // Query
-        $choices = acfe_get_currencies($args);
+        $choices = acf_get_currencies($args);
 
         // Loop
         foreach(array_keys($choices) as $code){
 
             // Vars
             $text = $choices[$code];
-            $currency = acfe_get_currency($code);
+            $currency = acf_get_currency($code);
 
             // Filters
             $text = apply_filters("acfe/fields/currencies/result",                      $text, $currency, $field, $post_id);

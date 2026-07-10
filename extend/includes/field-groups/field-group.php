@@ -277,7 +277,7 @@ class ACFE_Field_Group{
                     'instructions'  => __('Select user roles that are allowed to view and edit this field group in post edition'),
                     'required'      => false,
                     'default_value' => false,
-                    'choices'       => acfe_get_roles(),
+                    'choices'       => acf_get_roles(),
                     'value'         => acf_maybe_get($field_group, 'acfe_permissions', array()),
                     'layout'        => 'vertical'
                 ));

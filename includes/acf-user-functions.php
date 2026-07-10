@@ -48,7 +48,7 @@ function acf_get_users( $args = [] ) {
  * Returns a result containing "id" and "text" for the given user.
  *
  * @since  1.0.0
- * @param  WP_User $user The user object.
+ * @param  object $user
  * @return array
  */
 function acf_get_user_result( $user ) {
@@ -108,69 +108,69 @@ function acf_allow_unfiltered_html() {
 }
 
 /**
- * acfe_get_roles
+ * Get roles
  *
- * Retrieve all available roles (working with WPMU)
+ * Retrieve all available roles (working with WPMU).
  *
- * @param array $filtered_user_roles
- *
+ * @since  1.0.0
+ * @param  array $filtered_user_roles
+ * @global array $wp_roles
  * @return array
  */
-function acfe_get_roles($filtered_user_roles = array()){
+function acf_get_roles( $filtered_user_roles = [] ) {
 
-	$list = array();
-
+	// Access global variables.
 	global $wp_roles;
 
-	if(is_multisite())
-		$list['super_admin'] = __('Super Admin');
+	$list = [];
 
-	foreach($wp_roles->roles as $role => $settings){
+	if ( is_multisite() ) {
+		$list['super_admin'] = __( 'Super Admin', 'acf' );
+	}
 
+	foreach ( $wp_roles->roles as $role => $settings ) {
 		$list[$role] = $settings['name'];
-
 	}
 
 	$user_roles = $list;
+	if ( ! empty( $filtered_user_roles ) ) {
 
-	if(!empty($filtered_user_roles)){
+		$user_roles = [];
+		foreach ( $list as $role => $role_label ) {
 
-		$user_roles = array();
-
-		foreach($list as $role => $role_label){
-
-			if(!in_array($role, $filtered_user_roles))
+			if ( ! in_array( $role, $filtered_user_roles ) ) {
 				continue;
-
+			}
 			$user_roles[$role] = $role_label;
-
 		}
-
 	}
-
 	return $user_roles;
-
 }
 
 /**
- * acfe_get_current_user_roles
+ * Get current user roles
  *
- * Retrieve currently logged user roles
+ * Retrieve currently logged user roles.
  *
- * @return false|string[]
+ * @since  1.0.0
+ * @global integer $current_user
+ * @return mixed
  */
-function acfe_get_current_user_roles(){
+function acf_get_current_user_roles() {
 
+	// Access global variables.
 	global $current_user;
 
-	if(!is_object($current_user) || !isset($current_user->roles))
+	if (
+		! is_object( $current_user ) ||
+		! isset( $current_user->roles )
+	) {
 		return false;
-
+	}
 	$roles = $current_user->roles;
 
-	if(is_multisite() && current_user_can('setup_network'))
+	if ( is_multisite() && current_user_can( 'setup_network' ) ) {
 		$roles[] = 'super_admin';
-
+	}
 	return $roles;
-
 }

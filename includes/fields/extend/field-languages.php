@@ -79,7 +79,7 @@ class acfe_languages extends acf_field{
             'instructions'  => '',
             'type'          => 'select',
             'name'          => 'languages',
-            'choices'       => acfe_get_languages(array(
+            'choices'       => acf_get_languages(array(
                 'field'         => 'native',
                 'orderby'       => 'code',
                 'display'       => '<span class="iti__flag iti__{flag}"></span>{native} ({locale})',
@@ -541,7 +541,7 @@ class acfe_languages extends acf_field{
         foreach($value as &$v){
 
             // Retrieve Object
-            $object = acfe_get_language($v);
+            $object = acf_get_language($v);
 
             if(!$object || is_wp_error($object))
                 continue;
@@ -610,7 +610,7 @@ class acfe_languages extends acf_field{
             if(acfe_is_wpml()){
 
                 // First pass
-                $wpml_choices = acfe_get_languages(array(
+                $wpml_choices = acf_get_languages(array(
                     'locale__in' => $locales,
                     'field'      => 'name'
                 ));
@@ -630,7 +630,7 @@ class acfe_languages extends acf_field{
                 if($not_found){
 
                     // Second pass
-                    $wpml_alt_choices = acfe_get_languages(array(
+                    $wpml_alt_choices = acf_get_languages(array(
                         'alt__in' => $not_found,
                         'field'      => 'name'
                     ));
@@ -657,14 +657,14 @@ class acfe_languages extends acf_field{
         $args = apply_filters("acfe/fields/languages/query/key={$field_key}",   $args, $field, $post_id);
 
         // Query
-        $choices = acfe_get_languages($args);
+        $choices = acf_get_languages($args);
 
         // Loop
         foreach(array_keys($choices) as $code){
 
             // Vars
             $text = $choices[$code];
-            $language = acfe_get_language($code);
+            $language = acf_get_language($code);
 
             // Filters
             $text = apply_filters("acfe/fields/languages/result",                       $text, $language, $field, $post_id);

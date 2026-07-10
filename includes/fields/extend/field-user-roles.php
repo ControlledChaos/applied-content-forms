@@ -43,7 +43,7 @@ class acfe_field_user_roles extends acf_field{
             'instructions'  => '',
             'type'          => 'select',
             'name'          => 'user_role',
-            'choices'       => acfe_get_roles(),
+            'choices'       => acf_get_roles(),
             'multiple'      => 1,
             'ui'            => 1,
             'allow_null'    => 1,
@@ -368,7 +368,7 @@ class acfe_field_user_roles extends acf_field{
         $field['type'] = $field['field_type'];
 
         // Choices
-        $field['choices'] = acfe_get_roles($field['user_role']);
+        $field['choices'] = acf_get_roles($field['user_role']);
 
         // Allow Custom
         if(acf_maybe_get($field, 'allow_custom')){

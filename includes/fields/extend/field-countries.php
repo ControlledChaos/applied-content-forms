@@ -51,7 +51,7 @@ class acfe_countries extends acf_field{
             'instructions'  => '',
             'type'          => 'select',
             'name'          => 'countries',
-            'choices'       => acfe_get_countries(array(
+            'choices'       => acf_get_countries(array(
                 'field'         => 'localized',
                 'display'       => '<span class="iti__flag iti__{code}"></span>{localized}',
             )),
@@ -523,7 +523,7 @@ class acfe_countries extends acf_field{
         foreach($value as &$v){
 
             // Retrieve Object
-            $object = acfe_get_country($v);
+            $object = acf_get_country($v);
 
             if(!$object || is_wp_error($object))
                 continue;
@@ -596,14 +596,14 @@ class acfe_countries extends acf_field{
         $args = apply_filters("acfe/fields/countries/query/key={$field_key}",   $args, $field, $post_id);
 
         // Query
-        $choices = acfe_get_countries($args);
+        $choices = acf_get_countries($args);
 
         // Loop
         foreach(array_keys($choices) as $code){
 
             // Vars
             $text = $choices[$code];
-            $country = acfe_get_country($code);
+            $country = acf_get_country($code);
 
             // Filters
             $text = apply_filters("acfe/fields/countries/result",                       $text, $country, $field, $post_id);
