@@ -137,7 +137,7 @@ class acfe_dynamic_block_types extends acf_module {
 	 */
 	function register_user_block_types(){
 
-		$settings = apply_filters('acfe/block_type/prepare_register', acfe_get_settings($this->settings));
+		$settings = apply_filters('acfe/block_type/prepare_register', acf_get_settings($this->settings));
 
 		if(empty($settings))
 			return;
@@ -426,7 +426,7 @@ class acfe_dynamic_block_types extends acf_module {
 
 		// Value Changed. Delete option
 		if($_value !== $value){
-			acfe_delete_settings("{$this->settings}.{$_value}");
+			acf_delete_settings("{$this->settings}.{$_value}");
 		}
 
 		return $value;
@@ -628,7 +628,7 @@ class acfe_dynamic_block_types extends acf_module {
 	function save($name, $args, $post_id){
 
 		// Get ACFE option
-		$settings = acfe_get_settings($this->settings);
+		$settings = acf_get_settings($this->settings);
 
 		// Create ACFE option
 		$settings[$name] = $args;
@@ -637,7 +637,7 @@ class acfe_dynamic_block_types extends acf_module {
 		ksort($settings);
 
 		// Update ACFE option
-		acfe_update_settings($this->settings, $settings);
+		acf_update_settings($this->settings, $settings);
 
 		// Update post
 		wp_update_post(array(
@@ -656,13 +656,13 @@ class acfe_dynamic_block_types extends acf_module {
 		$name = $this->get_name($post_id);
 
 		// Get ACFE option
-		$settings = acfe_get_settings($this->settings);
+		$settings = acf_get_settings($this->settings);
 
 		// Unset ACFE option
 		acf_unset($settings, $name);
 
 		// Update ACFE option
-		acfe_update_settings($this->settings, $settings);
+		acf_update_settings($this->settings, $settings);
 
 	}
 
@@ -672,7 +672,7 @@ class acfe_dynamic_block_types extends acf_module {
 	function import($name, $args){
 
 		// Vars
-		$settings = acfe_get_settings($this->settings);
+		$settings = acf_get_settings($this->settings);
 		$title = $args['title'];
 
 		// Already exists
@@ -795,7 +795,7 @@ class acfe_dynamic_block_types extends acf_module {
 	function export_choices(){
 
 		$choices = array();
-		$settings = acfe_get_settings($this->settings);
+		$settings = acf_get_settings($this->settings);
 
 		if(!$settings)
 			return $choices;
@@ -816,7 +816,7 @@ class acfe_dynamic_block_types extends acf_module {
 	function export_data($name){
 
 		// Settings
-		$settings = acfe_get_settings($this->settings);
+		$settings = acf_get_settings($this->settings);
 
 		// Doesn't exist
 		if(!isset($settings[$name]))

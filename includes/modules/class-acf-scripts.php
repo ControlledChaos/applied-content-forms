@@ -113,7 +113,7 @@ class acfe_pro_scripts{
                 }
 
                 // Update Settings
-                acfe_update_settings("modules.scripts.{$this->script->name}", $acf);
+                acf_update_settings("modules.scripts.{$this->script->name}", $acf);
 
                 // redirect
                 wp_redirect(add_query_arg(array('message' => '1')));
@@ -291,7 +291,7 @@ class acfe_pro_scripts{
         // get fields
         $fields = acf_get_fields($field_group);
 
-        $meta = acfe_get_settings("modules.scripts.{$this->script->name}", array());
+        $meta = acf_get_settings("modules.scripts.{$this->script->name}", array());
 
         acfe_setup_meta($meta, 'acfe/scripts/load', true);
 
