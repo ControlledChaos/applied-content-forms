@@ -257,6 +257,6 @@ class acfe_script_import_posts extends acfe_script{
 
 }
 
-acfe_register_script('acfe_script_import_posts');
+acf_register_script('acfe_script_import_posts');
 
 endif;

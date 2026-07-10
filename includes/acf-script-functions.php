@@ -1,102 +1,131 @@
 <?php
-
-if(!defined('ABSPATH'))
-    exit;
-
-/*
- * Register Scripts Store
+/**
+ * Script functions
+ *
+ * @package    Applied Content Forms
+ * @subpackage Includes
+ * @category   Functions
+ * @since      1.0.0
  */
-acf_register_store('acfe-scripts');
 
-/*
- * Get Scripts
- */
-function acfe_get_scripts(){
-    return acf_get_store('acfe-scripts')->get();
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
 }
 
-/*
- * Get Script
+// Register scripts store.
+acf_register_store( 'acfe-scripts' );
+
+/**
+ * Get scripts
+ *
+ * @since  1.0.0
+ * @return method
  */
-function acfe_get_script($name = ''){
-    return acf_get_store('acfe-scripts')->get($name);
+function acf_get_scripts() {
+	return acf_get_store( 'acfe-scripts' )->get();
 }
 
-/*
- * Remove Script
+/**
+ * Get script
+ *
+ * @since  1.0.0
+ * @return method
  */
-function acfe_remove_script($name = ''){
-    return acf_get_store('acfe-scripts')->remove($name);
+function acf_get_script( $name = '' ) {
+	return acf_get_store( 'acfe-scripts' )->get( $name );
 }
 
-/*
- * Have Scripts
+/**
+ * Remove script
+ *
+ * @since  1.0.0
+ * @return method
  */
-function acfe_have_scripts() {
-    return acf_get_store('acfe-scripts')->count() ? true : false;
+function acf_remove_script( $name = '' ) {
+	return acf_get_store( 'acfe-scripts' )->remove( $name );
 }
 
-/*
- * Is Script
+/**
+ * Have scripts
+ *
+ * @since  1.0.0
+ * @return boolean
  */
-function acfe_is_script($name = ''){
-    return acf_get_store('acfe-scripts')->has($name);
+function acf_have_scripts() {
+	if ( acf_get_store( 'acfe-scripts' )->count() ) {
+		return true;
+	}
+	return false;
 }
 
-/*
- * Count Script
+/**
+ * Is script
+ *
+ * @since  1.0.0
+ * @return method
  */
-function acfe_count_scripts(){
-    return acf_get_store('acfe-scripts')->count();
+function acf_is_script( $name = '' ) {
+	return acf_get_store( 'acfe-scripts' )->has( $name );
 }
 
-/*
- * Get Script Categories
+/**
+ * Count scripts
+ *
+ * @since  1.0.0
+ * @return method
  */
-function acfe_get_scripts_categories(){
-    
-    $scripts = acfe_get_scripts();
-    
-    $categories = array();
-    
-    foreach($scripts as $script){
-        
-        if(!$script->category || in_array($script->category, $categories)) continue;
-    
-        $categories[] = $script->category;
-        
-    }
-    
-    return $categories;
-    
+function acf_count_scripts() {
+	return acf_get_store( 'acfe-scripts' )->count();
 }
 
-/*
- * Register Script
+/**
+ * Get scripts categories
+ *
+ * @since  1.0.0
+ * @return array
  */
-function acfe_register_script($class){
-    
-    // var
-    $instance = $class;
-    
-    // instanciate
-    if(!$instance instanceOf acfe_script){
-        $instance = new $class();
-    }
-    
-    // no name
-    if(empty($instance->name)) return false;
-    
-    // no permission
-    if(!current_user_can($instance->capability)) return false;
-    
-    // disabled
-    if(!$instance->active) return false;
-    
-    // add to store
-    acf_get_store('acfe-scripts')->set($instance->name, $instance);
-    
-    // return
-    return true;
-    
+function acf_get_scripts_categories() {
+
+	$scripts    = acf_get_scripts();
+	$categories = [];
+
+	foreach( $scripts as $script ) {
+
+		if ( ! $script->category || in_array( $script->category, $categories ) ) {
+			continue;
+		}
+		$categories[] = $script->category;
+	}
+	return $categories;
+}
+
+/**
+ * Register script
+ *
+ * @since  1.0.0
+ * @return boolean
+ */
+function acf_register_script( $class ) {
+
+	$instance = $class;
+	if ( ! $instance instanceOf acfe_script ) {
+		$instance = new $class();
+	}
+
+	if ( empty( $instance->name ) ) {
+		return false;
+	}
+
+	if ( ! current_user_can( $instance->capability ) ) {
+		return false;
+	}
+
+	if ( ! $instance->active ) {
+		return false;
+	}
+
+	acf_get_store( 'acfe-scripts' )->set( $instance->name, $instance );
+
+	return true;
 }

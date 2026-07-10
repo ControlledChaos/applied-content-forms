@@ -80,7 +80,7 @@ class acfe_pro_scripts{
         if($this->is_post()){
 
             // get script
-            $this->script = acfe_get_script($_REQUEST['script']);
+            $this->script = acf_get_script($_REQUEST['script']);
 
             // bail early if doesn't exists
             if(!$this->script){
@@ -420,7 +420,7 @@ class acfe_pro_scripts{
         ));
 
         // Script
-        $script = acfe_get_script($options['script']);
+        $script = acf_get_script($options['script']);
 
         // No action: error 400
         if(!$script){
@@ -600,7 +600,7 @@ class acfe_pro_scripts{
 
         // retrieve script
         $script = acf_maybe_get_POST('_acf_script');
-        $script = acfe_get_script($script);
+        $script = acf_get_script($script);
 
         // validate script
         if(!$script) return;

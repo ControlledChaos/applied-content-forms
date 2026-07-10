@@ -1210,6 +1210,6 @@ class acfe_script_single_meta_converter extends acfe_script{
 
 }
 
-acfe_register_script('acfe_script_single_meta_converter');
+acf_register_script('acfe_script_single_meta_converter');
 
 endif;

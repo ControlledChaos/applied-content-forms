@@ -878,6 +878,6 @@ class acfe_script_orphan_meta_cleaner extends acfe_script{
 
 }
 
-acfe_register_script('acfe_script_orphan_meta_cleaner');
+acf_register_script('acfe_script_orphan_meta_cleaner');
 
 endif;
