@@ -2,7 +2,7 @@
 
 if( ! class_exists('acf_field_gallery') ) :
 
-class acf_field_gallery extends acf_field {
+class acf_field_gallery extends ACF_Field {
 
 
 	/*

@@ -5,7 +5,7 @@ if(!defined('ABSPATH'))
 
 if(!class_exists('acfe_currencies')):
 
-class acfe_currencies extends acf_field{
+class acfe_currencies extends ACF_Field{
 
     function __construct(){
 

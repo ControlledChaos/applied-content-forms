@@ -2,7 +2,7 @@
 
 if( ! class_exists('acf_field_oembed') ) :
 
-class acf_field_oembed extends acf_field {
+class acf_field_oembed extends ACF_Field {
 
 	var $width;
 	var $height;

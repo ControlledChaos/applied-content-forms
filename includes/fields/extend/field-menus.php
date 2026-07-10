@@ -5,7 +5,7 @@ if(!defined('ABSPATH'))
 
 if(!class_exists('acfe_field_menus')):
 
-class acfe_field_menus extends acf_field{
+class acfe_field_menus extends ACF_Field{
 
     function __construct(){
 

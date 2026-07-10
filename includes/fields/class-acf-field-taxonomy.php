@@ -2,7 +2,7 @@
 
 if( ! class_exists('acf_field_taxonomy') ) :
 
-class acf_field_taxonomy extends acf_field {
+class acf_field_taxonomy extends ACF_Field {
 
 	// vars
 	var $save_post_terms = array();

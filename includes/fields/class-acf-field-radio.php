@@ -2,7 +2,7 @@
 
 if( ! class_exists('acf_field_radio') ) :
 
-class acf_field_radio extends acf_field {
+class acf_field_radio extends ACF_Field {
 
 
 	/*

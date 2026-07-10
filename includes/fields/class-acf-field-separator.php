@@ -2,9 +2,9 @@
 
 if( ! class_exists('acf_field_separator') ) :
 
-class acf_field_separator extends acf_field {
-	
-	
+class acf_field_separator extends ACF_Field {
+
+
 	/*
 	*  __construct
 	*
@@ -17,17 +17,17 @@ class acf_field_separator extends acf_field {
 	*  @param	n/a
 	*  @return	n/a
 	*/
-	
+
 	function initialize() {
-		
+
 		// vars
 		$this->name = 'separator';
 		$this->label = __("Separator",'acf');
 		$this->category = 'layout';
-		
+
 	}
-	
-	
+
+
 	/*
 	*  render_field()
 	*
@@ -39,14 +39,14 @@ class acf_field_separator extends acf_field {
 	*  @since	3.6
 	*  @date	23/01/13
 	*/
-	
+
 	function render_field( $field ) {
-		
+
 		/* do nothing */
-		
+
 	}
-	
-	
+
+
 	/*
 	*  load_field()
 	*
@@ -60,26 +60,26 @@ class acf_field_separator extends acf_field {
 	*
 	*  @return	$field - the field array holding all the field options
 	*/
-	
+
 	function load_field( $field ) {
-		
+
 		// remove name to avoid caching issue
 		$field['name'] = '';
-		
-		
+
+
 		// remove required to avoid JS issues
 		$field['required'] = 0;
-		
-		
+
+
 		// set value other than 'null' to avoid ACF loading / caching issue
 		$field['value'] = false;
-		
-		
+
+
 		// return
 		return $field;
-		
+
 	}
-	
+
 }
 
 

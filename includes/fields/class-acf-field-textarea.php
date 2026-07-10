@@ -2,9 +2,9 @@
 
 if( ! class_exists('acf_field_textarea') ) :
 
-class acf_field_textarea extends acf_field {
-	
-	
+class acf_field_textarea extends ACF_Field {
+
+
 	/*
 	*  initialize
 	*
@@ -17,9 +17,9 @@ class acf_field_textarea extends acf_field {
 	*  @param	n/a
 	*  @return	n/a
 	*/
-	
+
 	function initialize() {
-		
+
 		// vars
 		$this->name = 'textarea';
 		$this->label = __("Text Area",'acf');
@@ -30,10 +30,10 @@ class acf_field_textarea extends acf_field {
 			'placeholder'	=> '',
 			'rows'			=> ''
 		);
-		
+
 	}
-	
-	
+
+
 	/*
 	*  render_field()
 	*
@@ -45,43 +45,43 @@ class acf_field_textarea extends acf_field {
 	*  @since	3.6
 	*  @date	23/01/13
 	*/
-	
+
 	function render_field( $field ) {
-		
+
 		// vars
 		$atts = array();
 		$keys = array( 'id', 'class', 'name', 'value', 'placeholder', 'rows', 'maxlength' );
 		$keys2 = array( 'readonly', 'disabled', 'required' );
-		
-		
+
+
 		// rows
 		if( !$field['rows'] ) {
 			$field['rows'] = 8;
 		}
-		
-		
+
+
 		// atts (value="123")
 		foreach( $keys as $k ) {
 			if( isset($field[ $k ]) ) $atts[ $k ] = $field[ $k ];
 		}
-		
-		
+
+
 		// atts2 (disabled="disabled")
 		foreach( $keys2 as $k ) {
 			if( !empty($field[ $k ]) ) $atts[ $k ] = $k;
 		}
-		
-		
+
+
 		// remove empty atts
 		$atts = acf_clean_atts( $atts );
-		
-		
+
+
 		// return
 		acf_textarea_input( $atts );
-		
+
 	}
-	
-	
+
+
 	/*
 	*  render_field_settings()
 	*
@@ -94,9 +94,9 @@ class acf_field_textarea extends acf_field {
 	*  @since	3.6
 	*  @date	23/01/13
 	*/
-	
+
 	function render_field_settings( $field ) {
-		
+
 		// default_value
 		acf_render_field_setting( $field, array(
 			'label'			=> __('Default Value','acf'),
@@ -104,8 +104,8 @@ class acf_field_textarea extends acf_field {
 			'type'			=> 'textarea',
 			'name'			=> 'default_value',
 		));
-		
-		
+
+
 		// placeholder
 		acf_render_field_setting( $field, array(
 			'label'			=> __('Placeholder Text','acf'),
@@ -113,8 +113,8 @@ class acf_field_textarea extends acf_field {
 			'type'			=> 'text',
 			'name'			=> 'placeholder',
 		));
-		
-		
+
+
 		// maxlength
 		acf_render_field_setting( $field, array(
 			'label'			=> __('Character Limit','acf'),
@@ -122,8 +122,8 @@ class acf_field_textarea extends acf_field {
 			'type'			=> 'number',
 			'name'			=> 'maxlength',
 		));
-		
-		
+
+
 		// rows
 		acf_render_field_setting( $field, array(
 			'label'			=> __('Rows','acf'),
@@ -132,8 +132,8 @@ class acf_field_textarea extends acf_field {
 			'name'			=> 'rows',
 			'placeholder'	=> 8
 		));
-		
-		
+
+
 		// formatting
 		acf_render_field_setting( $field, array(
 			'label'			=> __('New Lines','acf'),
@@ -146,10 +146,10 @@ class acf_field_textarea extends acf_field {
 				''				=> __("No Formatting",'acf')
 			)
 		));
-		
+
 	}
-	
-	
+
+
 	/*
 	*  format_value()
 	*
@@ -165,33 +165,33 @@ class acf_field_textarea extends acf_field {
 	*
 	*  @return	$value (mixed) the modified value
 	*/
-	
+
 	function format_value( $value, $post_id, $field ) {
-		
+
 		// bail early if no value or not for template
 		if( empty($value) || !is_string($value) ) {
-			
+
 			return $value;
-		
+
 		}
-				
-		
+
+
 		// new lines
 		if( $field['new_lines'] == 'wpautop' ) {
-			
+
 			$value = wpautop($value);
-			
+
 		} elseif( $field['new_lines'] == 'br' ) {
-			
+
 			$value = nl2br($value);
-			
+
 		}
-		
-		
+
+
 		// return
 		return $value;
 	}
-	
+
 	/**
 	 * validate_value
 	 *
@@ -207,12 +207,12 @@ class acf_field_textarea extends acf_field {
 	 * @return	(bool|string)
 	 */
 	function validate_value( $valid, $value, $field, $input ){
-		
+
 		// Check maxlength.
 		if( $field['maxlength'] && (acf_strlen($value) > $field['maxlength']) ) {
 			return sprintf( __('Value must not exceed %d characters', 'acf'), $field['maxlength'] );
 		}
-		
+
 		// Return.
 		return $valid;
 	}

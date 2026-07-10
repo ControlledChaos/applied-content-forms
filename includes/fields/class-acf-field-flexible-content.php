@@ -2,7 +2,7 @@
 
 if( ! class_exists('acf_field_flexible_content') ) :
 
-class acf_field_flexible_content extends acf_field {
+class acf_field_flexible_content extends ACF_Field {
 
 
 	/*

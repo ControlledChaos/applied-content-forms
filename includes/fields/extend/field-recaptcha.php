@@ -3,7 +3,7 @@
 if(!defined('ABSPATH'))
     exit;
 
-class acfe_field_recaptcha extends acf_field{
+class acfe_field_recaptcha extends ACF_Field{
 
     function __construct(){
 

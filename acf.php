@@ -364,9 +364,9 @@ final class ACF {
 		acf_include( 'includes/api/api-template.php' );
 		acf_include( 'includes/api/api-term.php' );
 
-		acf_include( 'includes/class-acf-data.php' );
-		acf_include( 'includes/fields/class-acf-field.php' );
 		acf_include( 'includes/locations/abstract-acf-location.php' );
+		acf_include( 'includes/class-acf-data.php' );
+		acf_include( 'includes/class-acf-field.php' );
 		acf_include( 'includes/class-acf-fields.php' );
 
 		acf_include( 'includes/acf-helper-functions.php' );

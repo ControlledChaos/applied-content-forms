@@ -2,9 +2,9 @@
 
 if( ! class_exists('acf_field_text') ) :
 
-class acf_field_text extends acf_field {
-	
-	
+class acf_field_text extends ACF_Field {
+
+
 	/*
 	*  initialize
 	*
@@ -17,9 +17,9 @@ class acf_field_text extends acf_field {
 	*  @param	n/a
 	*  @return	n/a
 	*/
-	
+
 	function initialize() {
-		
+
 		// vars
 		$this->name = 'text';
 		$this->label = __("Text",'acf');
@@ -30,10 +30,10 @@ class acf_field_text extends acf_field {
 			'prepend'		=> '',
 			'append'		=> ''
 		);
-		
+
 	}
-	
-	
+
+
 	/*
 	*  render_field()
 	*
@@ -45,22 +45,22 @@ class acf_field_text extends acf_field {
 	*  @since	3.6
 	*  @date	23/01/13
 	*/
-	
+
 	function render_field( $field ) {
 		$html = '';
-		
+
 		// Prepend text.
 		if( $field['prepend'] !== '' ) {
 			$field['class'] .= ' acf-is-prepended';
 			$html .= '<div class="acf-input-prepend">' . acf_esc_html($field['prepend']) . '</div>';
 		}
-		
+
 		// Append text.
 		if( $field['append'] !== '' ) {
 			$field['class'] .= ' acf-is-appended';
 			$html .= '<div class="acf-input-append">' . acf_esc_html($field['append']) . '</div>';
 		}
-		
+
 		// Input.
 		$input_attrs = array();
 		foreach( array( 'type', 'id', 'class', 'name', 'value', 'placeholder', 'maxlength', 'pattern', 'readonly', 'disabled', 'required' ) as $k ) {
@@ -69,12 +69,12 @@ class acf_field_text extends acf_field {
 			}
 		}
 		$html .= '<div class="acf-input-wrap">' . acf_get_text_input( acf_filter_attrs($input_attrs) ) . '</div>';
-		
+
 		// Display.
 		echo $html;
 	}
-	
-	
+
+
 	/*
 	*  render_field_settings()
 	*
@@ -87,9 +87,9 @@ class acf_field_text extends acf_field {
 	*  @since	3.6
 	*  @date	23/01/13
 	*/
-	
+
 	function render_field_settings( $field ) {
-		
+
 		// default_value
 		acf_render_field_setting( $field, array(
 			'label'			=> __('Default Value','acf'),
@@ -97,8 +97,8 @@ class acf_field_text extends acf_field {
 			'type'			=> 'text',
 			'name'			=> 'default_value',
 		));
-		
-		
+
+
 		// placeholder
 		acf_render_field_setting( $field, array(
 			'label'			=> __('Placeholder Text','acf'),
@@ -106,8 +106,8 @@ class acf_field_text extends acf_field {
 			'type'			=> 'text',
 			'name'			=> 'placeholder',
 		));
-		
-		
+
+
 		// prepend
 		acf_render_field_setting( $field, array(
 			'label'			=> __('Prepend','acf'),
@@ -115,8 +115,8 @@ class acf_field_text extends acf_field {
 			'type'			=> 'text',
 			'name'			=> 'prepend',
 		));
-		
-		
+
+
 		// append
 		acf_render_field_setting( $field, array(
 			'label'			=> __('Append','acf'),
@@ -124,8 +124,8 @@ class acf_field_text extends acf_field {
 			'type'			=> 'text',
 			'name'			=> 'append',
 		));
-		
-		
+
+
 		// maxlength
 		acf_render_field_setting( $field, array(
 			'label'			=> __('Character Limit','acf'),
@@ -133,9 +133,9 @@ class acf_field_text extends acf_field {
 			'type'			=> 'number',
 			'name'			=> 'maxlength',
 		));
-		
+
 	}
-	
+
 	/**
 	 * validate_value
 	 *
@@ -151,12 +151,12 @@ class acf_field_text extends acf_field {
 	 * @return	(bool|string)
 	 */
 	function validate_value( $valid, $value, $field, $input ){
-		
+
 		// Check maxlength
 		if( $field['maxlength'] && (acf_strlen($value) > $field['maxlength']) ) {
 			return sprintf( __('Value must not exceed %d characters', 'acf'), $field['maxlength'] );
 		}
-		
+
 		// Return.
 		return $valid;
 	}

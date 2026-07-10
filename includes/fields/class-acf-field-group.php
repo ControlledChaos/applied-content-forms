@@ -2,7 +2,7 @@
 
 if( ! class_exists('acf_field__group') ) :
 
-class acf_field__group extends acf_field {
+class acf_field__group extends ACF_Field {
 
 	var $have_rows;
 

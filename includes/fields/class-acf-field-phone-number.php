@@ -5,7 +5,7 @@ if(!defined('ABSPATH'))
 
 if(!class_exists('acf_field_phone_number')):
 
-class acf_field_phone_number extends acf_field{
+class acf_field_phone_number extends ACF_Field{
 
     /*
      * Construct

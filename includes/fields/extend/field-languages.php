@@ -5,7 +5,7 @@ if(!defined('ABSPATH'))
 
 if(!class_exists('acfe_languages')):
 
-class acfe_languages extends acf_field{
+class acfe_languages extends ACF_Field{
 
     function __construct(){
 

@@ -5,7 +5,7 @@ if(!defined('ABSPATH'))
 
 if(!class_exists('acfe_post_formats')):
 
-class acfe_post_formats extends acf_field{
+class acfe_post_formats extends ACF_Field{
 
     function __construct(){
 

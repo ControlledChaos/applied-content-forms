@@ -5,7 +5,7 @@ if(!defined('ABSPATH'))
 
 if(!class_exists('acfe_field_user_roles')):
 
-class acfe_field_user_roles extends acf_field{
+class acfe_field_user_roles extends ACF_Field{
 
     function __construct(){
 

@@ -5,7 +5,7 @@ if(!defined('ABSPATH'))
 
 if(!class_exists('acf_payment_cart')):
 
-class acf_payment_cart extends acf_field{
+class acf_payment_cart extends ACF_Field{
 
     public $payment_field = false;
 

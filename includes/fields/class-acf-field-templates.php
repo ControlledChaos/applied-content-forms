@@ -5,7 +5,7 @@ if(!defined('ABSPATH'))
 
 if(!class_exists('acf_templates')):
 
-class acf_templates extends acf_field{
+class acf_templates extends ACF_Field{
 
     function __construct(){
 

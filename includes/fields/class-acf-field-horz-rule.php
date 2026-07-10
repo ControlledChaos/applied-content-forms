@@ -2,7 +2,7 @@
 
 if ( ! class_exists( 'acf_field_hr' ) ) :
 
-class acf_field_hr extends acf_field {
+class acf_field_hr extends ACF_Field {
 
 
 	/*

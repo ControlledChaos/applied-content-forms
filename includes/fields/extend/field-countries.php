@@ -5,7 +5,7 @@ if(!defined('ABSPATH'))
 
 if(!class_exists('acfe_countries')):
 
-class acfe_countries extends acf_field{
+class acfe_countries extends ACF_Field{
 
     function __construct(){
 

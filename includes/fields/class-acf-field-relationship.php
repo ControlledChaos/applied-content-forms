@@ -2,7 +2,7 @@
 
 if( ! class_exists('acf_field_relationship') ) :
 
-class acf_field_relationship extends acf_field {
+class acf_field_relationship extends ACF_Field {
 
 
 	/*

@@ -5,7 +5,7 @@ if(!defined('ABSPATH'))
 
 if(!class_exists('acf_payment')):
 
-class acf_payment extends acf_field{
+class acf_payment extends ACF_Field{
 
     var $sub_fields;
 

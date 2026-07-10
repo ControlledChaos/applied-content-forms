@@ -2,7 +2,7 @@
 
 if( ! class_exists('acf_field_checkbox') ) :
 
-class acf_field_checkbox extends acf_field {
+class acf_field_checkbox extends ACF_Field {
 
 
 	/*

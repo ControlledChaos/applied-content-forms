@@ -2,7 +2,7 @@
 
 if( ! class_exists('acf_field_clone') ) :
 
-class acf_field_clone extends acf_field {
+class acf_field_clone extends ACF_Field {
 
 	var $name = '';
 	var $label = '';

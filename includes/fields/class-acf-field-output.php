@@ -2,9 +2,9 @@
 
 if( ! class_exists('acf_field_output') ) :
 
-class acf_field_output extends acf_field {
-	
-	
+class acf_field_output extends ACF_Field {
+
+
 	/*
 	*  __construct
 	*
@@ -17,9 +17,9 @@ class acf_field_output extends acf_field {
 	*  @param	n/a
 	*  @return	n/a
 	*/
-	
+
 	function initialize() {
-		
+
 		// vars
 		$this->name = 'output';
 		$this->label = 'output';
@@ -27,10 +27,10 @@ class acf_field_output extends acf_field {
 		$this->defaults = array(
 			'html'	=> false
 		);
-		
+
 	}
-		
-	
+
+
 	/*
 	*  render_field()
 	*
@@ -45,27 +45,27 @@ class acf_field_output extends acf_field {
 	*  @param	$field (array) the $field being edited
 	*  @return	n/a
 	*/
-	
+
 	function render_field( $field ) {
-		
+
 		// bail early if no html
 		if( !$field['html'] ) return;
-		
-		
+
+
 		// html
 		if( is_string($field['html']) && !function_exists($field['html']) ) {
-			
+
 			echo $field['html'];
-		
-		// function	
+
+		// function
 		} else {
-			
+
 			call_user_func_array($field['html'], array($field));
-			
+
 		}
-		
+
 	}
-		
+
 }
 
 

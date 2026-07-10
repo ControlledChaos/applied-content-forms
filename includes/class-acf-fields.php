@@ -46,7 +46,7 @@ class ACF_Fields {
 	public function register_field_type( $class ) {
 
 		// Allow instance.
-		if  ( $class instanceOf acf_field ) {
+		if  ( $class instanceOf ACF_Field ) {
 			$this->types[ $class->name ] = $class;
 
 		// Allow class name.

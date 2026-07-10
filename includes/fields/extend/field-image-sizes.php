@@ -5,7 +5,7 @@ if(!defined('ABSPATH'))
 
 if(!class_exists('acfe_field_image_sizes')):
 
-class acfe_field_image_sizes extends acf_field{
+class acfe_field_image_sizes extends ACF_Field{
 
     /*
      * Construct

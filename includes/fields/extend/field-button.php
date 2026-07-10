@@ -5,8 +5,8 @@ if(!defined('ABSPATH'))
 
 if(!class_exists('acfe_field_button')):
 
-class acfe_field_button extends acf_field{
-    
+class acfe_field_button extends ACF_Field{
+
     function __construct(){
 
         $this->name = 'acfe_button';
@@ -21,46 +21,46 @@ class acfe_field_button extends acf_field{
             'button_id'     => '',
             'button_ajax'   => 0,
         );
-        
+
         add_action('wp_ajax_acfe/fields/button',        array($this, 'ajax_request'), 99);
         add_action('wp_ajax_nopriv_acfe/fields/button', array($this, 'ajax_request'), 99);
 
         parent::__construct();
 
     }
-    
+
     function ajax_request(){
-        
+
         // vars
         $field_key = acf_maybe_get_POST('field_key', '');
         $post_id = acf_maybe_get_POST('post_id', 0);
         $acf = acf_maybe_get_POST('acf', array());
-        
+
         // get field
         $field = acf_get_field($field_key);
-        
+
         // field not found
         if(!$field){
             die;
         }
-        
+
         // setup meta
         acfe_setup_meta($acf, 'acfe/button', true);
-            
+
             // actions
             do_action("acfe/fields/button",                         $field, $post_id);
             do_action("acfe/fields/button/name={$field['name']}",   $field, $post_id);
             do_action("acfe/fields/button/key={$field_key}",        $field, $post_id);
-        
+
         // reset
         acfe_reset_meta();
-        
+
         die;
-        
+
     }
-      
+
     function render_field_settings($field){
-        
+
         // Value
         acf_render_field_setting($field, array(
             'label'         => __('Button value', 'acfe'),
@@ -68,7 +68,7 @@ class acfe_field_button extends acf_field{
             'type'          => 'text',
             'name'          => 'button_value',
         ));
-        
+
         // Type
         acf_render_field_setting($field, array(
             'label'         => __('Button type', 'acfe'),
@@ -81,7 +81,7 @@ class acfe_field_button extends acf_field{
                 'submit'        => __('Input', 'acfe'),
             ),
         ));
-        
+
         // class
         acf_render_field_setting($field, array(
             'label'         => __('Button attributes','acf'),
@@ -90,7 +90,7 @@ class acfe_field_button extends acf_field{
             'name'          => 'button_class',
             'prepend'       => __('class', 'acf'),
         ));
-        
+
         // id
         acf_render_field_setting($field, array(
             'label'         => '',
@@ -100,7 +100,7 @@ class acfe_field_button extends acf_field{
             'prepend'       => __('id', 'acf'),
             '_append'       => 'button_class'
         ));
-        
+
         // Before HTML
         acf_render_field_setting($field, array(
             'label'         => __('Before HTML', 'acfe'),
@@ -109,7 +109,7 @@ class acfe_field_button extends acf_field{
             'name'          => 'button_before',
             'rows'          => 4,
         ));
-        
+
         // After HTML
         acf_render_field_setting($field, array(
             'label'         => __('After HTML', 'acfe'),
@@ -118,7 +118,7 @@ class acfe_field_button extends acf_field{
             'name'          => 'button_after',
             'rows'          => 4,
         ));
-        
+
         // Ajax
         acf_render_field_setting($field, array(
             'label'         => __('Ajax Request', 'acfe'),
@@ -127,55 +127,55 @@ class acfe_field_button extends acf_field{
             'type'          => 'true_false',
             'ui'            => 1,
         ));
-        
+
     }
-    
+
     function render_field($field){
-        
+
         // Before
         if($field['button_before']){
             echo $field['button_before'];
         }
-        
+
         $ajax = false;
-        
+
         if($field['button_ajax']){
             $ajax = 'data-ajax="1"';
         }
-        
+
         // Button
         if($field['button_type'] === 'button'){
-            
+
             echo '<button
                 type="submit"
-                id="' . esc_attr($field['button_id']) . '" 
-                class="' . esc_attr($field['button_class']) . '" 
+                id="' . esc_attr($field['button_id']) . '"
+                class="' . esc_attr($field['button_class']) . '"
                 name="' . esc_attr($field['name']) . '"
                 value="' . esc_attr($field['button_value']) . '"
                 ' . $ajax . '
                 >' . esc_attr($field['button_value']) . '</button>';
-        
+
         // Submit
         }elseif($field['button_type'] === 'submit'){
-            
-            echo '<input 
+
+            echo '<input
                 type="submit"
-                id="' . esc_attr($field['button_id']) . '" 
+                id="' . esc_attr($field['button_id']) . '"
                 class="' . esc_attr($field['button_class']) . '"
                 name="' . esc_attr($field['name']) . '"
                 value="' . esc_attr($field['button_value']) . '"
                 ' . $ajax . '
                 />';
-            
+
         }
-        
+
         // After
         if($field['button_after']){
             echo $field['button_after'];
         }
-        
+
     }
-    
+
 }
 
 // initialize

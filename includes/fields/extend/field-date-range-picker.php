@@ -5,7 +5,7 @@ if(!defined('ABSPATH'))
 
 if(!class_exists('acfe_field_date_range_picker')):
 
-class acfe_field_date_range_picker extends acf_field{
+class acfe_field_date_range_picker extends ACF_Field{
 
     var $sub_fields;
 

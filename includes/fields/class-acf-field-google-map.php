@@ -2,7 +2,7 @@
 
 if( ! class_exists('acf_field_google_map') ) :
 
-class acf_field_google_map extends acf_field {
+class acf_field_google_map extends ACF_Field {
 
 	var $default_values;
 

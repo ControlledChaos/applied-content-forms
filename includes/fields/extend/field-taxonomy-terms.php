@@ -5,7 +5,7 @@ if(!defined('ABSPATH'))
 
 if(!class_exists('acfe_field_taxonomy_terms')):
 
-class acfe_field_taxonomy_terms extends acf_field{
+class acfe_field_taxonomy_terms extends ACF_Field{
 
     // vars
     var $save_post_terms = array();

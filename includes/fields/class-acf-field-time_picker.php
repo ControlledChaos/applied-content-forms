@@ -2,9 +2,9 @@
 
 if( ! class_exists('acf_field_time_picker') ) :
 
-class acf_field_time_picker extends acf_field {
-	
-	
+class acf_field_time_picker extends ACF_Field {
+
+
 	/*
 	*  __construct
 	*
@@ -17,9 +17,9 @@ class acf_field_time_picker extends acf_field {
 	*  @param	n/a
 	*  @return	n/a
 	*/
-	
+
 	function initialize() {
-		
+
 		// vars
 		$this->name = 'time_picker';
 		$this->label = __("Time Picker",'acf');
@@ -28,10 +28,10 @@ class acf_field_time_picker extends acf_field {
 			'display_format'		=> 'g:i a',
 			'return_format'			=> 'g:i a'
 		);
-		
+
 	}
-	
-	
+
+
 	/*
 	*  render_field()
 	*
@@ -43,16 +43,16 @@ class acf_field_time_picker extends acf_field {
 	*  @since	3.6
 	*  @date	23/01/13
 	*/
-	
+
 	function render_field( $field ) {
-		
+
 		// Set value.
 		$display_value = '';
-		
+
 		if( $field['value'] ) {
 			$display_value = acf_format_date( $field['value'], $field['display_format'] );
 		}
-		
+
 		// Elements.
 		$div = array(
 			'class'					=> 'acf-time-picker acf-input-wrap',
@@ -76,7 +76,7 @@ class acf_field_time_picker extends acf_field {
 				$text_input[ $k ] = $k;
 			}
 		}
-		
+
 		// Output.
 		?>
 		<div <?php acf_esc_attr_e( $div ); ?>>
@@ -84,10 +84,10 @@ class acf_field_time_picker extends acf_field {
 			<?php acf_text_input( $text_input ); ?>
 		</div>
 		<?php
-		
+
 	}
-	
-	
+
+
 	/*
 	*  render_field_settings()
 	*
@@ -100,14 +100,14 @@ class acf_field_time_picker extends acf_field {
 	*
 	*  @param	$field	- an array holding all the field's data
 	*/
-	
+
 	function render_field_settings( $field ) {
-		
+
 		// vars
 		$g_i_a = date_i18n('g:i a');
 		$H_i_s = date_i18n('H:i:s');
-		
-		
+
+
 		// display_format
 		acf_render_field_setting( $field, array(
 			'label'			=> __('Display Format','acf'),
@@ -121,8 +121,8 @@ class acf_field_time_picker extends acf_field {
 				'other'	=> '<span>' . __('Custom:','acf') . '</span>'
 			)
 		));
-				
-		
+
+
 		// return_format
 		acf_render_field_setting( $field, array(
 			'label'			=> __('Return Format','acf'),
@@ -136,10 +136,10 @@ class acf_field_time_picker extends acf_field {
 				'other'	=> '<span>' . __('Custom:','acf') . '</span>'
 			)
 		));
-		
+
 	}
-	
-	
+
+
 	/*
 	*  format_value()
 	*
@@ -155,13 +155,13 @@ class acf_field_time_picker extends acf_field {
 	*
 	*  @return	$value (mixed) the modified value
 	*/
-	
+
 	function format_value( $value, $post_id, $field ) {
-		
+
 		return acf_format_date( $value, $field['return_format'] );
-		
+
 	}
-	
+
 }
 
 

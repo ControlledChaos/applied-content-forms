@@ -5,7 +5,7 @@ if(!defined('ABSPATH'))
 
 if(!class_exists('acf_field_advanced_link')):
 
-class acf_field_advanced_link extends acf_field{
+class acf_field_advanced_link extends ACF_Field{
 
     public $post_object = '';
 

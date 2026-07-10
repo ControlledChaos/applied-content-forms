@@ -2,7 +2,7 @@
 
 if( ! class_exists('acf_field_wysiwyg') ) :
 
-class acf_field_wysiwyg extends acf_field {
+class acf_field_wysiwyg extends ACF_Field {
 
 
 	/*
