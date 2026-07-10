@@ -46,6 +46,7 @@ function acf_update_loop( $i = 'active', $key = null, $value = null ) {
  *
  * An alias of acf()->loop->get_loop()
  *
+ * @since  1.0.0
  * @param  mixed $i
  * @param  string $key
  * @return mixed
