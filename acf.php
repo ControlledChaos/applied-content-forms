@@ -368,6 +368,10 @@ final class ACF {
 		acf_include( 'includes/class-acf-data.php' );
 		acf_include( 'includes/class-acf-field.php' );
 		acf_include( 'includes/class-acf-fields.php' );
+		acf_include( 'includes/class-acf-assets.php' );
+		acf_include( 'includes/class-acf-compatibility.php' );
+		acf_include( 'includes/class-acf-loop.php' );
+		acf_include( 'includes/class-acf-media.php' );
 
 		acf_include( 'includes/acf-helper-functions.php' );
 		acf_include( 'includes/acf-hook-functions.php' );
@@ -382,12 +386,7 @@ final class ACF {
 		acf_include( 'includes/acf-value-functions.php' );
 		acf_include( 'includes/acf-input-functions.php' );
 		acf_include( 'includes/acf-blocks-functions.php' );
-		acf_include( 'includes/acf-cms-functions.php' );
-
-		acf_include( 'includes/class-acf-assets.php' );
-		acf_include( 'includes/class-acf-compatibility.php' );
-		acf_include( 'includes/class-acf-loop.php' );
-		acf_include( 'includes/class-acf-media.php' );
+		acf_include( 'includes/cms.php' );
 
 		acf_include( 'includes/deprecated.php' );
 		acf_include( 'includes/l10n.php' );
