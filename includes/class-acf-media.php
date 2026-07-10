@@ -1,6 +1,6 @@
 <?php
 /**
- * Media functions
+ * Media class
  *
  * @package    Applied Content Forms
  * @subpackage Includes

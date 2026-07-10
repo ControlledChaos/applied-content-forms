@@ -387,6 +387,7 @@ final class ACF {
 		acf_include( 'includes/class-acf-assets.php' );
 		acf_include( 'includes/class-acf-compatibility.php' );
 		acf_include( 'includes/class-acf-loop.php' );
+		acf_include( 'includes/class-acf-media.php' );
 
 		acf_include( 'includes/deprecated.php' );
 		acf_include( 'includes/l10n.php' );
@@ -396,7 +397,6 @@ final class ACF {
 
 		acf_include( 'includes/locations.php' );
 		acf_include( 'includes/loop.php' );
-		acf_include( 'includes/media.php' );
 		acf_include( 'includes/revisions.php' );
 		acf_include( 'includes/upgrades.php' );
 		acf_include( 'includes/validation.php' );
