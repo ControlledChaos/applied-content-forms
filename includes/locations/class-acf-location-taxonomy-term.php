@@ -17,7 +17,7 @@ class acfe_location_taxonomy_term extends acfe_location{
 
     function rule_values($choices, $rule){
 
-        $choices = acfe_get_taxonomy_terms_ids();
+        $choices = acf_get_taxonomy_terms_ids();
 
         return $choices;
 

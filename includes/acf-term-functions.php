@@ -22,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @param  array $args
  * @return array
  */
-function acfe_get_taxonomy_objects( $args = [] ) {
+function acf_get_taxonomy_objects( $args = [] ) {
 
 	$return     = [];
 	$taxonomies = acf_get_taxonomies( $args );
@@ -47,7 +47,7 @@ function acfe_get_taxonomy_objects( $args = [] ) {
  * @param  array $taxonomies
  * @return array
  */
-function acfe_get_taxonomy_terms_ids( $taxonomies = [] ) {
+function acf_get_taxonomy_terms_ids( $taxonomies = [] ) {
 
 	// Force array.
 	$taxonomies = acf_get_array( $taxonomies );
@@ -98,7 +98,7 @@ function acfe_get_taxonomy_terms_ids( $taxonomies = [] ) {
  * @param  $taxonomy
  * @return integer
  */
-function acfe_get_term_level( $term, $taxonomy ) {
+function acf_get_term_level( $term, $taxonomy ) {
 	$ancestors = get_ancestors( $term, $taxonomy );
 	return count( $ancestors ) + 1;
 }

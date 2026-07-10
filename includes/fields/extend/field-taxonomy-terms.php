@@ -90,7 +90,7 @@ class acfe_field_taxonomy_terms extends acf_field{
 
                 foreach($_terms as $term_id => $term){
 
-                    if(acfe_get_term_level($term_id, $term->taxonomy) !== $options['level'])
+                    if(acf_get_term_level($term_id, $term->taxonomy) !== $options['level'])
                         continue;
 
                     $terms_final[$group][$term_id] = $term;
@@ -279,7 +279,7 @@ class acfe_field_taxonomy_terms extends acf_field{
             // Add term level
             foreach($all_terms as $term_id => &$_term){
 
-                $level = acfe_get_term_level($_term->term_id, $_term->taxonomy);
+                $level = acf_get_term_level($_term->term_id, $_term->taxonomy);
                 $_term->level = $level;
 
             }
