@@ -25,7 +25,7 @@ final class ACF_Taxonomies_Import extends ACF_Module_Import {
 		$this->hook  = 'taxonomy';
 		$this->name  = 'ACF_Taxonomies_Import';
 		$this->title = __( 'Import Taxonomies', 'acf' );
-		$this->description = __( 'Tool for dynamic taxonomiees registered by another instance of Applied Content Forms. Upload an exported JSON file to import into the database.', 'acf' );
+		$this->description = __( 'Tool for dynamic taxonomies registered by another instance of Applied Content Forms. Upload an exported JSON file to import into the database.', 'acf' );
 		$this->instance = acf_get_instance( 'acfe_dynamic_taxonomies' );
 		$this->messages = [
 			'success_single'   => __( '1 taxonomy imported', 'acf' ),
