@@ -40,6 +40,15 @@ if ( ! class_exists( 'ACF' ) ) :
 final class ACF {
 
 	/**
+	 * Plugin name
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @var    string
+	 */
+	public $plugin_name = 'Applied Content Forms';
+
+	/**
 	 * This plugin version
 	 *
 	 * @since  1.0.0
@@ -199,12 +208,7 @@ final class ACF {
 	 * @access public
 	 * @return self
 	 */
-	public function __construct() {
-		$this->settings_group = apply_filters(
-			'acf/settings_group',
-			'group_acf_settings'
-		);
-	}
+	public function __construct() {}
 
 	/**
 	 * Plugin name
@@ -214,7 +218,7 @@ final class ACF {
 	 * @return string
 	 */
 	public function plugin_name() {
-		$name = 'Applied Content Forms';
+		$name = $this->plugin_name;
 		return apply_filters( 'acf/plugin_name', $name );
 	}
 
@@ -278,7 +282,12 @@ final class ACF {
 		$this->dir_path = plugin_dir_path( __FILE__ );
 		$this->dir_url  = plugin_dir_url( __FILE__ );
 
-
+		$this->plugin_name    = $this->plugin_name();
+		$this->admin_slug     = $this->admin_slug();
+		$this->settings_group = apply_filters(
+			'acf/settings_group',
+			'group_acf_settings'
+		);
 
 		// Define constants for compatibility.
 		$this->constants( [
