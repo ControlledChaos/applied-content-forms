@@ -148,6 +148,15 @@ final class ACF {
 	public $settings = [];
 
 	/**
+	 * Settings group
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @var    string
+	 */
+	public $settings_group;
+
+	/**
 	 * Plugin data
 	 *
 	 * @since  1.0.0
@@ -264,6 +273,11 @@ final class ACF {
 		$this->dir_path = plugin_dir_path( __FILE__ );
 		$this->dir_url  = plugin_dir_url( __FILE__ );
 
+		$this->settings_group = apply_filters(
+			'acf/settings_group',
+			'group_acf_settings'
+		);
+
 		// Define constants for compatibility.
 		$this->constants( [
             'ACF'          => true,
@@ -357,9 +371,6 @@ final class ACF {
 
 		include_once( $this->dir_path . 'includes/utility-functions.php' );
 
-		// Settings update.
-		acf_include( 'includes/acf-settings-update.php' );
-
 		acf_include( 'includes/api/api-helpers.php' );
 		acf_include( 'includes/api/api-template.php' );
 		acf_include( 'includes/api/api-term.php' );
@@ -438,9 +449,57 @@ final class ACF {
 		}
 
 		add_action( 'init', [ $this, 'init' ], 5 );
+		add_action( 'acf/init_early', [ $this, 'settings_update' ] );
 		add_action( 'init', [ $this, 'register_post_types' ], 11 );
 		add_action( 'init', [ $this, 'register_post_status' ], 5 );
 		add_filter( 'posts_where', [ $this, 'posts_where' ], 10, 2 );
+	}
+
+	/**
+	 * Settings update
+	 *
+	 * Updates settings in the settings array by
+	 * fields in the settings field group.
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @return void
+	 */
+	public function settings_update() {
+
+		// Stop if the settings field group does not exist.
+		if ( ! acf_get_field_group( $this->settings_group ) ) {
+			return;
+		}
+
+		// Get fields from the settings field group.
+		$fields = acf_get_fields( $this->settings_group );
+
+		foreach ( $fields as $group => $field ) {
+
+			$name   = $field['name'];
+			$prefix = false;
+			if ( 'acf_' === substr( $name, 0, 4 ) ) {
+				$prefix = substr( $name, 0, 4 );
+			}
+
+			// Settings array key has no prefix so remove it.
+			$setting = '';
+			if ( $prefix ) {
+				$setting = str_replace( $prefix, '', $name );
+			}
+
+			/**
+			 * Skip tab field types as there is no
+			 * associated setting.
+			 *
+			 * Skip fields without the `acf_` prefix.
+			 */
+			if ( 'tab' === $field['type'] || ! $prefix ) {
+				continue;
+			}
+			acf_update_setting( $setting, get_field( $name, 'option' ) );
+		}
 	}
 
 	/**
