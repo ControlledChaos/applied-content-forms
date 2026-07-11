@@ -98,7 +98,7 @@ class acf_field_true_false extends ACF_Field {
 	<label>
 		<input <?php echo acf_esc_attr($input); ?>/>
 		<?php if( $switch ) echo acf_esc_html($switch); ?>
-		<?php if( $field['message'] ): ?><span class="message"><?php echo acf_esc_html($field['message']); ?></span><?php endif; ?>
+		<?php if( isset( $field['message'] ) && $field['message'] ): ?><span class="message"><?php echo acf_esc_html($field['message']); ?></span><?php endif; ?>
 	</label>
 </div>
 <?php

@@ -54,7 +54,7 @@ class ACF_Admin {
 
 		// Return the title from the content page option.
 		$option = get_field( 'acf_admin_page_content', 'option' );
-		if ( $option ) {
+		if ( is_object( $option ) ) {
 			return $option->post_title;
 		}
 
