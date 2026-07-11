@@ -449,10 +449,322 @@ final class ACF {
 		}
 
 		add_action( 'init', [ $this, 'init' ], 5 );
+		add_action( 'acf/init_early', [ $this, 'settings_group' ] );
 		add_action( 'acf/init_early', [ $this, 'settings_update' ] );
 		add_action( 'init', [ $this, 'register_post_types' ], 11 );
 		add_action( 'init', [ $this, 'register_post_status' ], 5 );
 		add_filter( 'posts_where', [ $this, 'posts_where' ], 10, 2 );
+	}
+
+	/**
+	 * Settings field group
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @return void
+	 */
+	public function settings_group() {
+
+		// Admin page CSS
+		$admin_css = '
+		p {
+			margin: 1rem 0 0 0;
+			font-size: 1rem;
+		}';
+		$admin_css .= '
+		img {
+			max-width: 100%;
+			height: auto;
+		}';
+
+		acf_add_local_field_group( [
+			'key'         => $this->settings_group,
+			'active'      => true,
+			'title'       => __( 'Settings Page', 'acf' ),
+			'description' => __( 'Settings for adding and managing custom content.', 'acf' ),
+			'location' => [
+				[
+					[
+						'param'    => 'options_page',
+						'operator' => '==',
+						'value'    => $this->admin_slug() . '-settings'
+					],
+				],
+			],
+			'menu_order' => 0,
+			'position'   => 'acf_after_title',
+			'style'      => 'seamless',
+			'label_placement'       => 'left',
+			'instruction_placement' => 'label',
+			'fields'    => [
+				[
+					'key'           => 'acf_content_features_tab',
+					'label'         => __( 'Features', 'acf' ),
+					'aria-label'    => __( 'Content Features', 'acf' ),
+					'name'          => 'acf_content_features_tab',
+					'type'          => 'tab',
+					'required'      => 0,
+					'placement'     => 'top',
+					'endpoint'      => 0,
+					'no_preference' => 0
+				],
+				[
+					'key'   => 'acf_post_types',
+					'label' => __( 'Post Types', 'acf' ),
+					'name'  => 'acf_post_types',
+					'type'  => 'true_false',
+					'instructions'  => __( 'Allow dynamic custom post types.', 'acf' ),
+					'default_value' => 1,
+					'ui'            => 1,
+					'ui_on_text'    => __( 'Enabled', 'acf' ),
+					'ui_off_text'   => __( 'Disabled', 'acf' )
+				],
+				[
+					'key'   => 'acf_taxonomies',
+					'label' => __( 'Taxonomies', 'acf' ),
+					'name'  => 'acf_taxonomies',
+					'type'  => 'true_false',
+					'instructions'  => __( 'Allow dynamic custom taxonomies.', 'acf' ),
+					'default_value' => 1,
+					'ui'            => 1,
+					'ui_on_text'    => __( 'Enabled', 'acf' ),
+					'ui_off_text'   => __( 'Disabled', 'acf' )
+				],
+				[
+					'key'   => 'acf_block_types',
+					'label' => __( 'Block Types', 'acf' ),
+					'name'  => 'acf_block_types',
+					'type'  => 'true_false',
+					'instructions'  => __( 'Allow dynamic custom blocks.', 'acf' ),
+					'default_value' => 0,
+					'ui'            => 1,
+					'ui_on_text'    => __( 'Enabled', 'acf' ),
+					'ui_off_text'   => __( 'Disabled', 'acf' )
+				],
+				[
+					'key'   => 'acf_forms',
+					'label' => __( 'Forms', 'acf' ),
+					'name'  => 'acf_forms',
+					'type'  => 'true_false',
+					'instructions'  => __( 'Allow dynamic user forms.', 'acf' ),
+					'default_value' => 0,
+					'ui'            => 1,
+					'ui_on_text'    => __( 'Enabled', 'acf' ),
+					'ui_off_text'   => __( 'Disabled', 'acf' )
+				],
+				[
+					'key'   => 'acf_templates',
+					'label' => __( 'Templates', 'acf' ),
+					'name'  => 'acf_templates',
+					'type'  => 'true_false',
+					'instructions'  => __( 'Allow new content templates.', 'acf' ),
+					'default_value' => 0,
+					'ui'            => 1,
+					'ui_on_text'    => __( 'Enabled', 'acf' ),
+					'ui_off_text'   => __( 'Disabled', 'acf' )
+				],
+				[
+					'key'   => 'acf_options_pages',
+					'label' => __( 'Options Pages', 'acf' ),
+					'name'  => 'acf_options_pages',
+					'type'  => 'true_false',
+					'instructions'  => __( 'Allow dynamic options pages.', 'acf' ),
+					'default_value' => 0,
+					'ui'            => 1,
+					'ui_on_text'    => __( 'Enabled', 'acf' ),
+					'ui_off_text'   => __( 'Disabled', 'acf' )
+				],
+				[
+					'key'           => 'acf_content_admin_tab',
+					'label'         => __( 'Admin', 'acf' ),
+					'aria-label'    => __( 'Admin Settings', 'acf' ),
+					'name'          => 'acf_content_admin_tab',
+					'type'          => 'tab',
+					'placement'     => 'top',
+					'endpoint'      => 0,
+					'no_preference' => 0
+				],
+				[
+					'key'   => 'acf_menu_position',
+					'label' => __( 'Menu Position', 'acf' ),
+					'name'  => 'acf_menu_position',
+					'type'  => 'range',
+					'instructions'  => __( 'Position of the content admin pages entry in the admin menu.', 'acf' ),
+					'default_value' => 70,
+					'min'  => 2,
+					'max'  => 100,
+					'step' => 1
+				],
+				[
+					'key'   => 'acf_admin_page_content',
+					'label' => __( 'Admin Page Content', 'acf' ),
+					'name'  => 'acf_admin_page_content',
+					'type'  => 'post_object',
+					'instructions'   => __( 'Choose a page to replace the default admin landing page content.', 'acf' ),
+					'post_type'      => [ 0 => 'page' ],
+					'allow_null'     => 1,
+					'multiple'       => 0,
+					'return_format'  => 'object',
+					'acfe_add_post'  => 1,
+					'acfe_edit_post' => 1,
+					'save_custom'    => 0,
+					'ui'             => 1
+				],
+				[
+					'key'   => 'acf_admin_page_css',
+					'label' => __( 'Admin Page CSS', 'acf' ),
+					'name'  => 'acf_admin_page_css',
+					'type'  => 'acfe_code_editor',
+					'instructions' => __( 'Styles for the custom admin landing page content.', 'acf' ),
+					'conditional_logic' => [
+						[
+							[
+								'field'    => 'acf_admin_page_content',
+								'operator' => '!=empty',
+							]
+						]
+					],
+					'default_value'   => $admin_css,
+					'placeholder'     => '',
+					'mode'            => 'css',
+					'lines'           => 1,
+					'indent_unit'     => 4,
+					'maxlength'       => '',
+					'rows'            => 8,
+					'max_rows'        => 16,
+					'return_entities' => 0
+				],
+				[
+					'key'   => 'acf_field_group_ui',
+					'label' => __( 'Field Group UI', 'acf' ),
+					'name'  => 'acf_field_group_ui',
+					'type'  => 'true_false',
+					'instructions'  => __( 'Enhanced field group settings with tabs rather than separate metaboxes.', 'acf' ),
+					'default_value' => 1,
+					'ui'            => 1,
+					'ui_on_text'    => __( 'Enabled', 'acf' ),
+					'ui_off_text'   => __( 'Disabled', 'acf' )
+				],
+				[
+					'key'   => 'acf_screen_layouts',
+					'label' => __( 'Screen Layouts', 'acf' ),
+					'name'  => 'acf_screen_layouts',
+					'type'  => 'true_false',
+					'instructions'  => __( 'Extended layout options on the post edit screens.', 'acf' ),
+					'default_value' => 1,
+					'ui'            => 1,
+					'ui_on_text'    => __( 'Enabled', 'acf' ),
+					'ui_off_text'   => __( 'Disabled', 'acf' )
+				],
+				[
+					'key'           => 'acf_content_tools_tab',
+					'label'         => __( 'Tools', 'acf' ),
+					'aria-label'    => __( 'Tools Settings', 'acf' ),
+					'name'          => 'acf_content_tools_tab',
+					'type'          => 'tab',
+					'placement'     => 'top',
+					'endpoint'      => 0,
+					'no_preference' => 0
+				],
+				[
+					'key'   => 'acf_options_editor',
+					'label' => __( 'Options Editor', 'acf' ),
+					'name'  => 'acf_options_editor',
+					'type'  => 'true_false',
+					'instructions'  => __( 'Enhanced site options editor. Find under Tools in the admin menu. Use with caution.', 'acf' ),
+					'default_value' => 0,
+					'ui'            => 1,
+					'ui_on_text'    => __( 'Enabled', 'acf' ),
+					'ui_off_text'   => __( 'Disabled', 'acf' )
+				],
+				[
+					'key'   => 'acf_multilang',
+					'label' => __( 'Multilang', 'acf' ),
+					'name'  => 'acf_multilang',
+					'type'  => 'true_false',
+					'instructions'  => __( 'Multi-language compatibility with the WPML & Polylang plugins.', 'acf' ),
+					'default_value' => 0,
+					'ui'            => 1,
+					'ui_on_text'    => __( 'Enabled', 'acf' ),
+					'ui_off_text'   => __( 'Disabled', 'acf' )
+				],
+				[
+					'key'   => 'acf_rewrite_rules',
+					'label' => __( 'Rewrite Rules', 'acf' ),
+					'name'  => 'acf_rewrite_rules',
+					'type'  => 'true_false',
+					'instructions'  => __( 'Enable the Rewrite Rules UI.', 'acf' ),
+					'default_value' => 0,
+					'ui'            => 1,
+					'ui_on_text'    => __( 'Enabled', 'acf' ),
+					'ui_off_text'   => __( 'Disabled', 'acf' )
+				],
+				[
+					'key'   => 'acf_dev_mode',
+					'label' => __( 'Developer Mode', 'acf' ),
+					'name'  => 'acf_dev_mode',
+					'type'  => 'true_false',
+					'instructions'  => __( 'View meta data on post edit screens and options pages.', 'acf' ),
+					'default_value' => 0,
+					'ui'            => 1,
+					'ui_on_text'    => __( 'Enabled', 'acf' ),
+					'ui_off_text'   => __( 'Disabled', 'acf' )
+				],
+				[
+					'key'           => 'acf_content_sync_tab',
+					'label'         => __( 'Sync', 'acf' ),
+					'aria-label'    => __( 'Sync Settings', 'acf' ),
+					'name'          => 'acf_content_sync_tab',
+					'type'          => 'tab',
+					'placement'     => 'top',
+					'endpoint'      => 0,
+					'no_preference' => 0
+				],
+				[
+					'key'   => 'acf_sync_path',
+					'label' => __( 'Sync Path', 'acf' ),
+					'name'  => 'acf_sync_path',
+					'type'  => 'text'
+				],
+				[
+					'key'   => 'acf_sync_url',
+					'label' => __( 'Sync URL', 'acf' ),
+					'name'  => 'acf_sync_url',
+					'type'  => 'text'
+				],
+				[
+					'key'   => 'acf_force_sync',
+					'label' => __( 'Force Sync', 'acf' ),
+					'name'  => 'acf_force_sync',
+					'type'  => 'true_false',
+					'instructions'  => __( 'Force synchronization of field groups to JSON local directory.', 'acf' ),
+					'default_value' => 0,
+					'ui'            => 1,
+					'ui_on_text'    => __( 'Enabled', 'acf' ),
+					'ui_off_text'   => __( 'Disabled', 'acf' )
+				],
+				[
+					'key'   => 'acf_force_deleted_sync',
+					'label' => __( 'Force Deleted Sync', 'acf' ),
+					'name'  => 'acf_force_deleted_sync',
+					'type'  => 'true_false',
+					'instructions' => __( 'Force synchronization of deleted field groups to JSON local directory.', 'acf' ),
+					'conditional_logic' => [
+						[
+							[
+								'field'    => 'acf_force_sync',
+								'operator' => '==',
+								'value'    => '1'
+							]
+						]
+					],
+					'default_value' => 0,
+					'ui'            => 1,
+					'ui_on_text'    => __( 'Enabled', 'acf' ),
+					'ui_off_text'   => __( 'Disabled', 'acf' )
+				]
+			] // End fields array.
+		] );
 	}
 
 	/**
@@ -473,7 +785,7 @@ final class ACF {
 		}
 
 		// Get fields from the settings field group.
-		$fields = acf_get_fields( $this->settings_group );
+		$fields = acf_get_field_types_info( $this->settings_group );
 
 		foreach ( $fields as $group => $field ) {
 
@@ -882,15 +1194,13 @@ final class ACF {
 	/**
 	 * Reserved field groups
 	 *
-	 * @todo Uncomment settings group when hard coded.
-	 *
 	 * @since  1.0.0
 	 * @access public
 	 * @return array
 	 */
 	public function reserved_field_groups() {
 		$reserved = [
-			// 'group_acf_settings',
+			$this->settings_group,
 			'group_acf_post_type',
 			'group_acf_post_type_side',
 			'group_acf_taxonomy',
