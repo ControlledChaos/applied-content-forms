@@ -199,7 +199,12 @@ final class ACF {
 	 * @access public
 	 * @return self
 	 */
-	public function __construct() {}
+	public function __construct() {
+		$this->settings_group = apply_filters(
+			'acf/settings_group',
+			'group_acf_settings'
+		);
+	}
 
 	/**
 	 * Plugin name
@@ -273,10 +278,7 @@ final class ACF {
 		$this->dir_path = plugin_dir_path( __FILE__ );
 		$this->dir_url  = plugin_dir_url( __FILE__ );
 
-		$this->settings_group = apply_filters(
-			'acf/settings_group',
-			'group_acf_settings'
-		);
+
 
 		// Define constants for compatibility.
 		$this->constants( [
@@ -514,7 +516,7 @@ final class ACF {
 					'name'  => 'acf_post_types',
 					'type'  => 'true_false',
 					'instructions'  => __( 'Allow dynamic custom post types.', 'acf' ),
-					'default_value' => 1,
+					'default_value' => $this->settings['post_types'],
 					'ui'            => 1,
 					'ui_on_text'    => __( 'Enabled', 'acf' ),
 					'ui_off_text'   => __( 'Disabled', 'acf' )
@@ -525,7 +527,7 @@ final class ACF {
 					'name'  => 'acf_taxonomies',
 					'type'  => 'true_false',
 					'instructions'  => __( 'Allow dynamic custom taxonomies.', 'acf' ),
-					'default_value' => 1,
+					'default_value' => $this->settings['taxonomies'],
 					'ui'            => 1,
 					'ui_on_text'    => __( 'Enabled', 'acf' ),
 					'ui_off_text'   => __( 'Disabled', 'acf' )
@@ -536,7 +538,7 @@ final class ACF {
 					'name'  => 'acf_block_types',
 					'type'  => 'true_false',
 					'instructions'  => __( 'Allow dynamic custom blocks.', 'acf' ),
-					'default_value' => 0,
+					'default_value' => $this->settings['block_types'],
 					'ui'            => 1,
 					'ui_on_text'    => __( 'Enabled', 'acf' ),
 					'ui_off_text'   => __( 'Disabled', 'acf' )
@@ -547,7 +549,7 @@ final class ACF {
 					'name'  => 'acf_forms',
 					'type'  => 'true_false',
 					'instructions'  => __( 'Allow dynamic user forms.', 'acf' ),
-					'default_value' => 0,
+					'default_value' => $this->settings['forms'],
 					'ui'            => 1,
 					'ui_on_text'    => __( 'Enabled', 'acf' ),
 					'ui_off_text'   => __( 'Disabled', 'acf' )
@@ -558,7 +560,7 @@ final class ACF {
 					'name'  => 'acf_templates',
 					'type'  => 'true_false',
 					'instructions'  => __( 'Allow new content templates.', 'acf' ),
-					'default_value' => 0,
+					'default_value' => $this->settings['templates'],
 					'ui'            => 1,
 					'ui_on_text'    => __( 'Enabled', 'acf' ),
 					'ui_off_text'   => __( 'Disabled', 'acf' )
@@ -569,7 +571,7 @@ final class ACF {
 					'name'  => 'acf_options_pages',
 					'type'  => 'true_false',
 					'instructions'  => __( 'Allow dynamic options pages.', 'acf' ),
-					'default_value' => 0,
+					'default_value' => $this->settings['options_pages'],
 					'ui'            => 1,
 					'ui_on_text'    => __( 'Enabled', 'acf' ),
 					'ui_off_text'   => __( 'Disabled', 'acf' )
@@ -590,7 +592,7 @@ final class ACF {
 					'name'  => 'acf_menu_position',
 					'type'  => 'range',
 					'instructions'  => __( 'Position of the content admin pages entry in the admin menu.', 'acf' ),
-					'default_value' => 70,
+					'default_value' => $this->settings['menu_position'],
 					'min'  => 2,
 					'max'  => 100,
 					'step' => 1
@@ -640,7 +642,7 @@ final class ACF {
 					'name'  => 'acf_field_group_ui',
 					'type'  => 'true_false',
 					'instructions'  => __( 'Enhanced field group settings with tabs rather than separate metaboxes.', 'acf' ),
-					'default_value' => 1,
+					'default_value' => $this->settings['field_group_ui'],
 					'ui'            => 1,
 					'ui_on_text'    => __( 'Enabled', 'acf' ),
 					'ui_off_text'   => __( 'Disabled', 'acf' )
@@ -651,7 +653,7 @@ final class ACF {
 					'name'  => 'acf_screen_layouts',
 					'type'  => 'true_false',
 					'instructions'  => __( 'Extended layout options on the post edit screens.', 'acf' ),
-					'default_value' => 1,
+					'default_value' => $this->settings['screen_layouts'],
 					'ui'            => 1,
 					'ui_on_text'    => __( 'Enabled', 'acf' ),
 					'ui_off_text'   => __( 'Disabled', 'acf' )
@@ -672,7 +674,7 @@ final class ACF {
 					'name'  => 'acf_options_editor',
 					'type'  => 'true_false',
 					'instructions'  => __( 'Enhanced site options editor. Find under Tools in the admin menu. Use with caution.', 'acf' ),
-					'default_value' => 0,
+					'default_value' => $this->settings['options_editor'],
 					'ui'            => 1,
 					'ui_on_text'    => __( 'Enabled', 'acf' ),
 					'ui_off_text'   => __( 'Disabled', 'acf' )
@@ -683,7 +685,7 @@ final class ACF {
 					'name'  => 'acf_multilang',
 					'type'  => 'true_false',
 					'instructions'  => __( 'Multi-language compatibility with the WPML & Polylang plugins.', 'acf' ),
-					'default_value' => 0,
+					'default_value' => $this->settings['multilang'],
 					'ui'            => 1,
 					'ui_on_text'    => __( 'Enabled', 'acf' ),
 					'ui_off_text'   => __( 'Disabled', 'acf' )
@@ -694,7 +696,7 @@ final class ACF {
 					'name'  => 'acf_rewrite_rules',
 					'type'  => 'true_false',
 					'instructions'  => __( 'Enable the Rewrite Rules UI.', 'acf' ),
-					'default_value' => 0,
+					'default_value' => $this->settings['rewrite_rules'],
 					'ui'            => 1,
 					'ui_on_text'    => __( 'Enabled', 'acf' ),
 					'ui_off_text'   => __( 'Disabled', 'acf' )
@@ -705,7 +707,7 @@ final class ACF {
 					'name'  => 'acf_dev_mode',
 					'type'  => 'true_false',
 					'instructions'  => __( 'View meta data on post edit screens and options pages.', 'acf' ),
-					'default_value' => 0,
+					'default_value' => $this->settings['dev_mode'],
 					'ui'            => 1,
 					'ui_on_text'    => __( 'Enabled', 'acf' ),
 					'ui_off_text'   => __( 'Disabled', 'acf' )
@@ -738,15 +740,15 @@ final class ACF {
 					'name'  => 'acf_force_sync',
 					'type'  => 'true_false',
 					'instructions'  => __( 'Force synchronization of field groups to JSON local directory.', 'acf' ),
-					'default_value' => 0,
+					'default_value' => $this->settings['force_sync'],
 					'ui'            => 1,
 					'ui_on_text'    => __( 'Enabled', 'acf' ),
 					'ui_off_text'   => __( 'Disabled', 'acf' )
 				],
 				[
-					'key'   => 'acf_force_deleted_sync',
+					'key'   => 'acf_force_sync_delete',
 					'label' => __( 'Force Deleted Sync', 'acf' ),
-					'name'  => 'acf_force_deleted_sync',
+					'name'  => 'acf_force_sync_delete',
 					'type'  => 'true_false',
 					'instructions' => __( 'Force synchronization of deleted field groups to JSON local directory.', 'acf' ),
 					'conditional_logic' => [
@@ -758,7 +760,7 @@ final class ACF {
 							]
 						]
 					],
-					'default_value' => 0,
+					'default_value' => $this->settings['force_sync_delete'],
 					'ui'            => 1,
 					'ui_on_text'    => __( 'Enabled', 'acf' ),
 					'ui_off_text'   => __( 'Disabled', 'acf' )
@@ -785,14 +787,14 @@ final class ACF {
 		}
 
 		// Get fields from the settings field group.
-		$fields = acf_get_field_types_info( $this->settings_group );
+		$fields = acf_get_fields( $this->settings_group );
 
 		foreach ( $fields as $group => $field ) {
 
 			$name   = $field['name'];
 			$prefix = false;
 			if ( 'acf_' === substr( $name, 0, 4 ) ) {
-				$prefix = substr( $name, 0, 4 );
+				$prefix = 'acf_';
 			}
 
 			// Settings array key has no prefix so remove it.
@@ -812,6 +814,7 @@ final class ACF {
 			}
 			acf_update_setting( $setting, get_field( $name, 'option' ) );
 		}
+		return true;
 	}
 
 	/**
