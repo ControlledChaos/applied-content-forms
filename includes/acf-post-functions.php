@@ -102,3 +102,40 @@ function acfe_get_pretty_post_statuses( $posts_statuses = [] ) {
 	}
 	return $return;
 }
+
+/**
+ * Save post revision
+ *
+ * This function will copy meta from a post to its latest revision.
+ *
+ * @since  1.0.0
+ * @param  integer $post_id
+ * @return void
+ */
+function acf_save_post_revision( $post_id = 0 ) {
+
+	// Get latest revision.
+	$revision = acf_get_post_latest_revision( $post_id );
+	if ( $revision ) {
+		acf_copy_postmeta( $post_id, $revision->ID );
+	}
+}
+
+/**
+ * Get post latest revision
+ *
+ * This function will return the latest revision for a given post
+ *
+ * @since  1.0.0
+ * @param  integer $post_id
+ * @return integer
+ */
+function acf_get_post_latest_revision( $post_id ) {
+
+	$revisions = wp_get_post_revisions( $post_id );
+
+	// Shift off and return first revision (will return null if no revisions).
+	$revision = array_shift( $revisions );
+
+	return $revision;
+}

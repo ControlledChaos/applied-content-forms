@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-class acf_revisions {
+class ACF_Revisions {
 
 	/**
 	 * Cache
@@ -224,6 +224,10 @@ class acf_revisions {
 		$post_id = $post->ID;
 		$field   = acf_maybe_get_field( $field_name, $post_id );
 
+		if ( ! $field ) {
+			return $value;
+		}
+
 		// Default formatting.
 		if ( is_array( $value ) ) {
 			$value = implode( ', ', $value );
@@ -327,53 +331,4 @@ class acf_revisions {
 		return $post_id;
 	}
 }
-acf()->revisions = new acf_revisions();
-
-/*
-*  acf_save_post_revision
-*
-*  This function will copy meta from a post to it's latest revision
-*
-*  @type	function
-*  @date	26/09/2016
-*  @since	5.4.0
-*
-*  @param	$post_id (int)
-*  @return	n/a
-*/
-/**
- * Save post revision
- *
- * This function will copy meta from a post to its latest revision.
- *
- * @since  1.0.0
- * @param  integer $post_id
- * @return void
- */
-function acf_save_post_revision( $post_id = 0 ) {
-
-	// Get latest revision.
-	$revision = acf_get_post_latest_revision( $post_id );
-	if ( $revision ) {
-		acf_copy_postmeta( $post_id, $revision->ID );
-	}
-}
-
-/**
- * Get post latest revision
- *
- * This function will return the latest revision for a given post
- *
- * @since  1.0.0
- * @param  integer $post_id
- * @return integer
- */
-function acf_get_post_latest_revision( $post_id ) {
-
-	$revisions = wp_get_post_revisions( $post_id );
-
-	// Shift off and return first revision (will return null if no revisions).
-	$revision = array_shift( $revisions );
-
-	return $revision;
-}
+acf()->revisions = new ACF_Revisions();

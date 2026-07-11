@@ -107,7 +107,7 @@ final class ACF {
 	 *
 	 * @since  1.0.0
 	 * @access public
-	 * @var    object The acf_revisions class.
+	 * @var    object The ACF_Revisions class.
 	 */
 	public $revisions;
 
@@ -373,6 +373,7 @@ final class ACF {
 		acf_include( 'includes/class-acf-loop.php' );
 		acf_include( 'includes/class-acf-media.php' );
 		acf_include( 'includes/class-acf-multilang.php' );
+		acf_include( 'includes/class-acf-revisions.php' );
 
 		acf_include( 'includes/acf-helper-functions.php' );
 		acf_include( 'includes/acf-hook-functions.php' );
@@ -397,7 +398,6 @@ final class ACF {
 
 		acf_include( 'includes/locations.php' );
 		acf_include( 'includes/loop.php' );
-		acf_include( 'includes/revisions.php' );
 		acf_include( 'includes/upgrades.php' );
 		acf_include( 'includes/validation.php' );
 
