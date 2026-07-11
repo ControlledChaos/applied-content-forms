@@ -358,7 +358,7 @@ final class ACF {
 		include_once( $this->dir_path . 'includes/utility-functions.php' );
 
 		// Settings update.
-		acf_include( 'includes/settings-update.php' );
+		acf_include( 'includes/acf-settings-update.php' );
 
 		acf_include( 'includes/api/api-helpers.php' );
 		acf_include( 'includes/api/api-template.php' );
