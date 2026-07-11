@@ -181,7 +181,7 @@ class ACF_Compatibility {
 		}
 
 		// Remove 'all' from taxonomy.
-		if ( acf_in_array( 'all', $field['taxonomy'] ) ) {
+		if ( isset( $field['taxonomy'] ) && acf_in_array( 'all', $field['taxonomy'] ) ) {
 			$field['taxonomy'] = [];
 		}
 
