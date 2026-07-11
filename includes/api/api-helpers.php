@@ -1013,7 +1013,7 @@ function acf_get_posts( $args = [] ) {
 		$args['post_type'] = acf_get_post_types();
 	}
 
-	// Check if specifc post ID's have been provided.
+	// Check if specific post ID's have been provided.
 	if ( $args['post__in'] ) {
 
 		// Clean value into an array of IDs.
