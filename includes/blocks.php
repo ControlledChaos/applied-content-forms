@@ -1,6 +1,6 @@
 <?php
 /**
- * ACF blocks
+ * ACF block functions
  *
  * @package    Applied Content Forms
  * @subpackage Includes

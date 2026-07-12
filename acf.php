@@ -396,7 +396,7 @@ final class ACF {
 			'recaptcha_v3_hide_logo' => null
 		];
 
-		include_once( $this->dir_path . 'includes/utility-functions.php' );
+		include_once( $this->dir_path . 'includes/utility.php' );
 
 		acf_include( 'includes/api/api-helpers.php' );
 		acf_include( 'includes/api/api-template.php' );
@@ -413,20 +413,19 @@ final class ACF {
 		acf_include( 'includes/class-acf-multilang.php' );
 		acf_include( 'includes/class-acf-revisions.php' );
 
-		acf_include( 'includes/acf-helper-functions.php' );
-		acf_include( 'includes/acf-hook-functions.php' );
-		acf_include( 'includes/acf-field-functions.php' );
-		acf_include( 'includes/acf-field-group-functions.php' );
-		acf_include( 'includes/acf-file-functions.php' );
-		acf_include( 'includes/acf-form-functions.php' );
-		acf_include( 'includes/acf-meta-functions.php' );
-		acf_include( 'includes/acf-post-functions.php' );
-		acf_include( 'includes/acf-term-functions.php' );
-		acf_include( 'includes/acf-user-functions.php' );
-		acf_include( 'includes/acf-value-functions.php' );
-		acf_include( 'includes/acf-input-functions.php' );
-		acf_include( 'includes/acf-blocks-functions.php' );
-		acf_include( 'includes/cms.php' );
+		acf_include( 'includes/general.php' );
+		acf_include( 'includes/hooks.php' );
+		acf_include( 'includes/fields.php' );
+		acf_include( 'includes/field-groups.php' );
+		acf_include( 'includes/files.php' );
+		acf_include( 'includes/forms.php' );
+		acf_include( 'includes/meta.php' );
+		acf_include( 'includes/posts.php' );
+		acf_include( 'includes/terms.php' );
+		acf_include( 'includes/users.php' );
+		acf_include( 'includes/values.php' );
+		acf_include( 'includes/inputs.php' );
+		acf_include( 'includes/blocks.php' );
 
 		acf_include( 'includes/deprecated.php' );
 		acf_include( 'includes/l10n.php' );
@@ -469,7 +468,7 @@ final class ACF {
 		}
 
 		acf_include( 'includes/class-options-page.php' );
-		acf_include( 'includes/acf-screen-functions.php' );
+		acf_include( 'includes/screen.php' );
 
 		if ( defined( 'ACF_DEV' ) && ACF_DEV ) {
 			acf_include( 'tests/tests.php' );
@@ -1005,11 +1004,12 @@ final class ACF {
 		acf_include( 'extend/includes/forms/form-settings.php' );
 		acf_include( 'extend/includes/forms/form-taxonomy.php' );
 		acf_include( 'extend/includes/forms/form-user.php' );
-		acf_include( 'includes/acf-script-functions.php' );
-		acf_include( 'includes/acf-template-functions.php' );
-		acf_include( 'includes/acf-world-functions.php' );
-		acf_include( 'includes/payment.php' );
+		acf_include( 'includes/script.php' );
+		acf_include( 'includes/template.php' );
 		acf_include( 'includes/world.php' );
+		acf_include( 'includes/payment.php' );
+		acf_include( 'includes/class-acf-world-data.php' );
+		acf_include( 'includes/class-acf-world-query.php' );
 
 		acf_include( 'includes/modules/class-acf-script.php' );
 

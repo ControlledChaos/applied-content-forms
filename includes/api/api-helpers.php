@@ -152,6 +152,17 @@ function acf_append_setting( $name, $value ) {
 	return acf_update_setting( $name, $setting );
 }
 
+// Settings, similar to `acf_` but with the `acfe_` prefix.
+function acfe_update_setting( $name, $value ) {
+	return acf_update_setting( "acfe/{$name}", $value );
+}
+function acfe_append_setting( $name, $value ) {
+	return acf_append_setting( "acfe/{$name}", $value );
+}
+function acfe_get_setting( $name, $value = null ) {
+	return acf_get_setting( "acfe/{$name}", $value );
+}
+
 /**
  * Get data
  *
