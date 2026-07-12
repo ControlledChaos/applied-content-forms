@@ -477,7 +477,7 @@ final class ACF {
 
 		add_action( 'init', [ $this, 'init' ], 5 );
 		add_action( 'acf/init_early', [ $this, 'settings_group' ] );
-		add_action( 'acf/init_early', [ $this, 'settings_update' ] );
+		add_action( 'acf/init_early', [ $this, 'update_settings' ] );
 		add_action( 'init', [ $this, 'register_post_types' ], 11 );
 		add_action( 'init', [ $this, 'register_post_status' ], 5 );
 		add_filter( 'posts_where', [ $this, 'posts_where' ], 10, 2 );
@@ -810,47 +810,56 @@ final class ACF {
 	 *
 	 * @since  1.0.0
 	 * @access public
-	 * @return void
+	 * @return boolean
 	 */
-	public function settings_update() {
+	public function update_settings() {
 
 		// Stop if the settings field group does not exist.
 		if ( ! acf_get_field_group( $this->settings_group ) ) {
-			return;
+			return false;
 		}
 
 		// Get fields from the settings field group.
 		$fields = acf_get_fields( $this->settings_group );
 		if ( ! $fields ) {
-			return;
+			return false;
 		}
 
+		// Update fields.
 		foreach ( $fields as $group => $field ) {
 
-			$name   = $field['name'];
-			$prefix = false;
-			if ( 'acf_' === substr( $name, 0, 4 ) ) {
-				$prefix = 'acf_';
-			}
+			$name    = $field['name'];
+			$setting = false;
 
 			// Settings array key has no prefix so remove it.
-			$setting = '';
-			if ( $prefix ) {
-				$setting = str_replace( $prefix, '', $name );
+			if ( 'acf_' === substr( $name, 0, 4 ) ) {
+				$setting = str_replace( 'acf_', '', $name );
 			}
 
-			/**
-			 * Skip tab field types as there is no
-			 * associated setting.
-			 *
-			 * Skip fields without the `acf_` prefix.
-			 */
-			if ( 'tab' === $field['type'] || ! $prefix ) {
+			// Skip tab field types as there is no associated setting.
+			if ( 'tab' === $field['type'] || ! $setting ) {
 				continue;
 			}
-			acf_update_setting( $setting, get_field( $name, 'option' ) );
+			$this->settings[$setting] = get_field( $name, 'option' );
 		}
 		return true;
+	}
+
+	/**
+	 * Settings updated
+	 *
+	 * Whether the settings have been updated from
+	 * the settings field group.
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @return boolean
+	 */
+	public function updated_settings() {
+		if ( $this->update_settings() ) {
+			return true;
+		}
+		return false;
 	}
 
 	/**

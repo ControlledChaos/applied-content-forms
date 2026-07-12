@@ -151,7 +151,7 @@ class acfe_dynamic_taxonomies extends acf_module {
 	 */
 	function register_user_taxonomies(){
 
-		$settings = apply_filters('acfe/taxonomy/prepare_register', acf_get_settings($this->settings));
+		$settings = apply_filters('acfe/taxonomy/prepare_register', acf_get_module_settings($this->settings));
 
 		if(empty($settings))
 			return;
@@ -580,7 +580,7 @@ class acfe_dynamic_taxonomies extends acf_module {
 
 		// Value Changed. Delete option
 		if($_value !== $value){
-			acf_delete_settings("{$this->settings}.{$_value}");
+			acf_delete_module_settings("{$this->settings}.{$_value}");
 		}
 
 		return $value;
@@ -746,7 +746,7 @@ class acfe_dynamic_taxonomies extends acf_module {
 	function save($name, $args, $post_id){
 
 		// Get ACFE option
-		$settings = acf_get_settings($this->settings);
+		$settings = acf_get_module_settings($this->settings);
 
 		// Create ACFE option
 		$settings[$name] = $args;
@@ -755,7 +755,7 @@ class acfe_dynamic_taxonomies extends acf_module {
 		ksort($settings);
 
 		// Update ACFE option
-		acf_update_settings($this->settings, $settings);
+		acf_update_module_settings($this->settings, $settings);
 
 		// Update post
 		wp_update_post(array(
@@ -774,13 +774,13 @@ class acfe_dynamic_taxonomies extends acf_module {
 		$name = $this->get_name($post_id);
 
 		// Get ACFE option
-		$settings = acf_get_settings($this->settings);
+		$settings = acf_get_module_settings($this->settings);
 
 		// Unset ACFE option
 		acf_unset($settings, $name);
 
 		// Update ACFE option
-		acf_update_settings($this->settings, $settings);
+		acf_update_module_settings($this->settings, $settings);
 
 		// Flush permalinks
 		flush_rewrite_rules();
@@ -793,7 +793,7 @@ class acfe_dynamic_taxonomies extends acf_module {
 	function import($name, $args){
 
 		// Vars
-		$settings = acf_get_settings($this->settings);
+		$settings = acf_get_module_settings($this->settings);
 		$title = $args['label'];
 
 		// Already exists
@@ -949,7 +949,7 @@ class acfe_dynamic_taxonomies extends acf_module {
 	function export_choices(){
 
 		$choices = array();
-		$settings = acf_get_settings($this->settings);
+		$settings = acf_get_module_settings($this->settings);
 
 		if(!$settings)
 			return $choices;
@@ -970,7 +970,7 @@ class acfe_dynamic_taxonomies extends acf_module {
 	function export_data($name){
 
 		// Settings
-		$settings = acf_get_settings($this->settings);
+		$settings = acf_get_module_settings($this->settings);
 
 		// Doesn't exist
 		if(!isset($settings[$name]))

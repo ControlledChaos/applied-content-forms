@@ -208,7 +208,7 @@ class ACF_Post_Types extends ACF_Module {
 			'acfe_admin_ppp'     => 999,
 		] );
 
-		$settings = apply_filters( 'acfe/post_type/prepare_register', acf_get_settings( $this->settings ) );
+		$settings = apply_filters( 'acfe/post_type/prepare_register', acf_get_module_settings( $this->settings ) );
 
 		if ( empty( $settings ) ) {
 			return;
@@ -617,7 +617,7 @@ class ACF_Post_Types extends ACF_Module {
 
 		// Value changed, delete option.
 		if ( $_value !== $value ) {
-			acf_delete_settings( "{$this->settings}.{$_value}" );
+			acf_delete_module_settings( "{$this->settings}.{$_value}" );
 		}
 		return $value;
 	}
@@ -857,7 +857,7 @@ class ACF_Post_Types extends ACF_Module {
 	public function save( $name, $args, $post_id ) {
 
 		// Get option.
-		$settings = acf_get_settings( $this->settings );
+		$settings = acf_get_module_settings( $this->settings );
 
 		// Create option.
 		$settings[$name] = $args;
@@ -866,7 +866,7 @@ class ACF_Post_Types extends ACF_Module {
 		ksort( $settings );
 
 		// Update option.
-		acf_update_settings( $this->settings, $settings );
+		acf_update_module_settings( $this->settings, $settings );
 
 		// Update post
 		wp_update_post( [
@@ -889,13 +889,13 @@ class ACF_Post_Types extends ACF_Module {
 		$name = $this->get_name( $post_id );
 
 		// Get option.
-		$settings = acf_get_settings( $this->settings );
+		$settings = acf_get_module_settings( $this->settings );
 
 		// Unset option.
 		acf_unset( $settings, $name );
 
 		// Update option.
-		acf_update_settings( $this->settings, $settings );
+		acf_update_module_settings( $this->settings, $settings );
 
 		// Flush permalinks.
 		flush_rewrite_rules();
@@ -912,7 +912,7 @@ class ACF_Post_Types extends ACF_Module {
 	 */
 	public function import( $name, $args ) {
 
-		$settings = acf_get_settings( $this->settings );
+		$settings = acf_get_module_settings( $this->settings );
 		$title    = $args['label'];
 
 		// Already exists.
@@ -1096,7 +1096,7 @@ class ACF_Post_Types extends ACF_Module {
 	public function export_choices() {
 
 		$choices  = [];
-		$settings = acf_get_settings( $this->settings );
+		$settings = acf_get_module_settings( $this->settings );
 
 		if ( ! $settings ) {
 			return $choices;
@@ -1119,7 +1119,7 @@ class ACF_Post_Types extends ACF_Module {
 	public function export_data( $name ) {
 
 		// Settings
-		$settings = acf_get_settings( $this->settings );
+		$settings = acf_get_module_settings( $this->settings );
 
 		// Doesn't exist
 		if ( ! isset( $settings[$name] ) ) {

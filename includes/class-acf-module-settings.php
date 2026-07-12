@@ -299,19 +299,19 @@ class ACF_Module_Settings {
  * @param  mixed $default
  * @return method
  */
-function acf_get_settings( $selector = null, $default = null ) {
+function acf_get_module_settings( $selector = null, $default = null ) {
 	return acf_get_instance( 'ACF_Module_Settings' )->get( $selector, $default );
 }
 
 /**
- * Update setting
+ * Update module settings
  *
  * @since  1.0.0
  * @param  string $selector
  * @param  mixed $value
  * @return method
  */
-function acf_update_settings( $selector = null, $value = null ) {
+function acf_update_module_settings( $selector = null, $value = null ) {
 
 	if ( null === $value ) {
 		$value    = $selector;
@@ -321,12 +321,12 @@ function acf_update_settings( $selector = null, $value = null ) {
 }
 
 /**
- * Delete setting
+ * Delete module settings
  *
  * @since  1.0.0
  * @param  string $selector
  * @return method
  */
-function acf_delete_settings( $selector = null ) {
+function acf_delete_module_settings( $selector = null ) {
 	return acf_get_instance( 'ACF_Module_Settings' )->delete( $selector );
 }

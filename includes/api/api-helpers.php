@@ -14,9 +14,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- *  Is array
+ * Is array
  *
- *  This function will return true for a non empty array
+ * This function will return true for a non empty array
  *
  * @since  1.0.0
  * @param  array $array
@@ -28,9 +28,9 @@ function acf_is_array( $array ) {
 }
 
 /**
- *  Has setting
+ * Has setting
  *
- *  Alias of acf()->has_setting()
+ * Alias of acf()->has_setting()
  *
  * @since  1.0.0
  * @param  string $name
@@ -62,6 +62,40 @@ function acf_raw_setting( $name = '' ) {
 function acf_update_setting( $name, $value ) {
 	$name = acf_validate_setting( $name );
 	return acf()->update_setting( $name, $value );
+}
+
+/**
+ * Update core settings
+ *
+ * Update the settings from the plugin
+ * settings field group.
+ *
+ * Alias of acf()->update_settings()
+ *
+ * @since  1.0.0
+ * @param  string $name
+ * @param  string $value
+ * @return method
+ */
+function acf_update_settings() {
+	return acf()->update_settings();
+}
+
+/**
+ * Updated core settings
+ *
+ * Whether the settings have been updated from
+ * the plugin settings field group.
+ *
+ * Alias of acf()->updated_settings()
+ *
+ * @since  1.0.0
+ * @param  string $name
+ * @param  string $value
+ * @return method
+ */
+function acf_updated_settings() {
+	return acf()->updated_settings();
 }
 
 /**
@@ -3307,7 +3341,7 @@ function acf_convert_rules_to_groups( $rules, $anyorall = 'any' ) {
 /**
  * Register AJAX
  *
- * Regsiters an AJAX callback.
+ * Registers an AJAX callback.
  *
  * @since  1.0.0
  * @param  string $name The AJAX action name.
