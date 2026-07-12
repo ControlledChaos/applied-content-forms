@@ -16,6 +16,16 @@
 <div class="wrap acf-content-intro">
 
 	<h1><?php echo acf()->admin->admin_page_title(); ?></h1>
+	<?php
+	if ( ! acf_get_setting( 'admin_page_content' ) &&
+		! empty( acf()->plugin_desc ) &&
+		! ctype_space( acf()->plugin_desc )
+	) {
+		printf(
+			'<p class="description">%s</p>',
+			acf()->plugin_desc
+		);
+	} ?>
 
 	<?php echo acf()->admin->admin_page_content(); ?>
 
