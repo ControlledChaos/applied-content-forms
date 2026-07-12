@@ -406,6 +406,7 @@ final class ACF {
 		acf_include( 'includes/class-acf-data.php' );
 		acf_include( 'includes/class-acf-field.php' );
 		acf_include( 'includes/class-acf-fields.php' );
+		acf_include( 'includes/class-options-page.php' );
 		acf_include( 'includes/class-acf-assets.php' );
 		acf_include( 'includes/class-acf-compatibility.php' );
 		acf_include( 'includes/class-acf-loop.php' );
@@ -467,7 +468,7 @@ final class ACF {
 			acf_include( 'includes/admin/class-acf-admin-upgrade.php' );
 		}
 
-		acf_include( 'includes/class-options-page.php' );
+		acf_include( 'includes/options-page.php' );
 		acf_include( 'includes/screen.php' );
 
 		if ( defined( 'ACF_DEV' ) && ACF_DEV ) {
