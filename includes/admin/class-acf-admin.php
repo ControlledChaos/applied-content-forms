@@ -54,6 +54,7 @@ class ACF_Admin {
 
 		// Return the title from the content page option.
 		$option = get_field( 'acf_admin_page_content', 'option' );
+		$option = get_post( $option );
 		if ( is_object( $option ) ) {
 			return $option->post_title;
 		}
@@ -135,6 +136,7 @@ class ACF_Admin {
 	public function admin_page_content() {
 
 		$option = get_field( 'acf_admin_page_content', 'option' );
+		$option = get_post( $option );
 		$styles = get_field( 'acf_admin_page_css', 'option' );
 
 		if ( $styles ) {
@@ -146,7 +148,7 @@ class ACF_Admin {
 			$styles = '';
 		}
 
-		if ( $option ) {
+		if ( is_object( $option ) ) {
 			$content  = $styles;
 			$content .= wpautop( $option->post_content );
 		} else {
@@ -544,7 +546,7 @@ class ACF_Admin {
 		}
 
 		$types = array_merge( $types, [ 'acf-field-group' ] );
-		return apply_filters( 'acf_builtin_post_types', $types );
+		return apply_filters( 'acf/builtin_post_types', $types );
 	}
 
 	/**

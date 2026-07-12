@@ -49,6 +49,15 @@ final class ACF {
 	public $plugin_name = 'Applied Content Forms';
 
 	/**
+	 * Plugin description
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @var    string
+	 */
+	public $plugin_desc;
+
+	/**
 	 * This plugin version
 	 *
 	 * @since  1.0.0
@@ -229,9 +238,9 @@ final class ACF {
 	 * @access public
 	 * @return string
 	 */
-	public function plugin_description() {
+	public function plugin_desc() {
 		$desc = __( 'A suite of tools for adding and managing custom content types and user forms.', 'acf' );
-		return apply_filters( 'acf/plugin_description', $desc );
+		return apply_filters( 'acf/plugin_desc', $desc );
 	}
 
 	/**
@@ -283,6 +292,7 @@ final class ACF {
 		$this->dir_url  = plugin_dir_url( __FILE__ );
 
 		$this->plugin_name    = $this->plugin_name();
+		$this->plugin_desc    = $this->plugin_desc();
 		$this->admin_slug     = $this->admin_slug();
 		$this->settings_group = apply_filters(
 			'acf/settings_group',
@@ -304,8 +314,8 @@ final class ACF {
 
 		// Define settings.
 		$this->settings = [
-			'name'       => $this->plugin_name(),
-			'desc'       => $this->plugin_description(),
+			'name'       => $this->plugin_name,
+			'desc'       => $this->plugin_desc,
 			'website'    => 'https://github.com/ControlledChaos/applied-content-forms',
 			'slug'       => dirname( $this->basename ),
 			'plugin'     => $this->plugin,
@@ -322,18 +332,22 @@ final class ACF {
 			'save_json'  => '',
 			'load_json'  => [],
 			'json_found' => false,
-			'menu_position'    => '2',
-			'show_updates'     => true,
-			'stripslashes'     => false,
-			'default_language' => '',
-			'current_language' => '',
-			'capability'       => 'manage_options',
-			'uploader'         => 'wp',
-			'autoload'         => false,
-			'l10n'             => true,
-			'l10n_textdomain'  => '',
-			'multilang'        => false,
-			'google_api_key'   => '',
+			'admin_slug'         => $this->admin_slug,
+			'admin_page_content' => '',
+			'admin_page_css'     => '',
+			'menu_position'      => '2',
+			'settings_group'     => $this->settings_group,
+			'show_updates'       => true,
+			'stripslashes'       => false,
+			'default_language'   => '',
+			'current_language'   => '',
+			'capability'         => 'manage_options',
+			'uploader'           => 'wp',
+			'autoload'           => false,
+			'l10n'               => true,
+			'l10n_textdomain'    => '',
+			'multilang'          => false,
+			'google_api_key'     => '',
 			'google_api_client'      => '',
 			'enqueue_google_maps'    => true,
 			'enqueue_select2'        => true,
@@ -358,6 +372,8 @@ final class ACF {
 			'options_editor'         => false,
 			'single_meta'            => false,
 			'meta_tools'             => true,
+			'sync_path'              => '',
+			'sync_url'               => '',
 			'force_sync'             => false,
 			'force_sync_delete'      => false,
 			'form_shortcode_preview' => true,
@@ -493,6 +509,9 @@ final class ACF {
 			'active'      => true,
 			'title'       => __( 'Settings Page', 'acf' ),
 			'description' => __( 'Settings for adding and managing custom content.', 'acf' ),
+			'acfe_categories'   => [
+				'core-settings' => __( 'Core Settings', 'acf' ),
+			],
 			'location' => [
 				[
 					[
@@ -507,6 +526,11 @@ final class ACF {
 			'style'      => 'seamless',
 			'label_placement'       => 'left',
 			'instruction_placement' => 'label',
+			'acfe_display_title' => '',
+			'acfe_autosync' => [ 'php' ],
+			'acfe_form' => 1,
+			'acfe_meta' => '',
+			'acfe_note' => '',
 			'fields'    => [
 				[
 					'key'           => 'acf_content_features_tab',
@@ -616,8 +640,8 @@ final class ACF {
 					'allow_null'     => 1,
 					'multiple'       => 0,
 					'return_format'  => 'object',
-					'acfe_add_post'  => 1,
-					'acfe_edit_post' => 1,
+					'acfe_add_post'  => 0,
+					'acfe_edit_post' => 0,
 					'save_custom'    => 0,
 					'ui'             => 1
 				],
@@ -797,6 +821,9 @@ final class ACF {
 
 		// Get fields from the settings field group.
 		$fields = acf_get_fields( $this->settings_group );
+		if ( ! $fields ) {
+			return;
+		}
 
 		foreach ( $fields as $group => $field ) {
 
