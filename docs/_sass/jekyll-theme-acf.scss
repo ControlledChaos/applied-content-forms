@@ -53,11 +53,6 @@ body {
 	padding: 0 0 2rem 0;
 	background: #00e4bc;
 	color: #ffffff;
-
-	p {
-		margin: 0;
-	}
-
 	a {
 		color: #ffffff;
 	}
@@ -97,6 +92,7 @@ body {
 }
 
 .page-description {
+	margin: 0;
 	font-size: 1.125rem;
 	font-weight: 400;
 }
