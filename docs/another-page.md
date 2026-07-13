@@ -1,5 +1,6 @@
 ---
 layout: default
+title: Applied Content Forms
 ---
 
 # Plugin Overview
@@ -14,4 +15,4 @@ Burgdoggen short ribs jowl hamburger sausage cupim tri-tip. Landjaeger ball tip 
 
 Short loin pork chop andouille ball tip. Kevin porchetta buffalo cupim. Brisket pork loin hamburger pork belly biltong swine spare ribs ham shankle pork chop. Fatback chuck landjaeger cow sirloin alcatra short ribs ham shank ribeye tongue porchetta drumstick ball tip tri-tip.
 
-[back](./)
+[Back](./)
