@@ -87,9 +87,15 @@ header h2 {
   width: auto;
 }
 
-#downloads {
-	margin-bottom: 2rem;
+.page-footer {
+	margin: 2rem 0;
 	padding: 0 2rem;
+}
+
+.download-links {
+	list-style: none;
+	display: flex;
+	gap: 0.625em;
 	font-size: 0.875rem;
 }
 
