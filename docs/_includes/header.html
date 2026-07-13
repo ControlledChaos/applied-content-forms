@@ -11,7 +11,9 @@
 				</ul>
 			</nav>
 			<div id="header-action">
-				<a href="{{ site.github.repository_url }}/releases/latest/download/asset-name.zip" id="download-latest" class="button"><span id="download-icon" class="svg-icon inline-icon">{% include download.svg %}</span> Latest</a>
+				{% if site.github.latest_release %}
+				<a href="{{ site.github.releases_url }}/latest/download/asset-name.zip" id="download-latest" class="button"><span id="download-icon" class="svg-icon inline-icon">{% include download.svg %}</span> Latest</a>
+				{% endif %}
 			</div>
 		</div>
 		{% if page.title %}
