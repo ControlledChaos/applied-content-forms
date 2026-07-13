@@ -1,6 +1,6 @@
 <?php
 /**
- * ACF third-party compatibility
+ * Third-party compatibility
  *
  * @package    Applied Content Forms
  * @subpackage Includes
@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-class acf_third_party {
+class ACF_Third_Party {
 
 	/**
 	 * Constructor method
@@ -155,4 +155,4 @@ class acf_third_party {
 		wp_enqueue_style( 'acf-dark', acf_get_url( 'assets/css/acf-dark.css' ), [], ACF_VERSION );
 	}
 }
-acf_new_instance( 'acf_third_party' );
+acf_new_instance( 'ACF_Third_Party' );

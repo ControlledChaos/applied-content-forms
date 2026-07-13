@@ -134,7 +134,7 @@ final class ACF {
 	 *
 	 * @since  1.0.0
 	 * @access public
-	 * @var    object The acf_validation class.
+	 * @var    object The ACF_Validation class.
 	 */
 	public $validation;
 
@@ -413,6 +413,7 @@ final class ACF {
 		acf_include( 'includes/class-acf-media.php' );
 		acf_include( 'includes/class-acf-multilang.php' );
 		acf_include( 'includes/class-acf-revisions.php' );
+		acf_include( 'includes/class-acf-validation.php' );
 
 		acf_include( 'includes/general.php' );
 		acf_include( 'includes/hooks.php' );
@@ -902,7 +903,7 @@ final class ACF {
 
 		// Include WPML support.
 		if ( defined( 'ICL_SITEPRESS_VERSION' ) ) {
-			acf_include( 'includes/wpml.php' );
+			acf_include( 'includes/acf-wpml-compatibility.php' );
 		}
 
 		// Include fields.
