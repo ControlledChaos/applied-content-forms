@@ -57,8 +57,12 @@ body {
 	background: #ffffff;
 }
 
-header {
+.page-header {
 	padding: 3rem 2rem 1rem;
+
+	p {
+		margin: 0;
+	}
 }
 
 .page-title {
