@@ -2,7 +2,7 @@
 layout: index
 ---
 
-## Like An Old Friend
+<h2 class="content-title">Like An Old Friend</h2>
 
 A suite of ClassicPress/WordPress tools for adding and managing custom content types and user forms.
 
