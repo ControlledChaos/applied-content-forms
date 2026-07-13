@@ -19,6 +19,11 @@ body {
 	}
 }
 
+.page-nav-wrap {
+	display: flex;
+	justify-content: space-between;
+}
+
 .page-nav {
 	ul {
 		list-style: none;
@@ -71,6 +76,17 @@ body {
 	img {
 		max-width: 100%;
 		width: auto;
+	}
+}
+
+.inline-icon {
+	display: inline-block;
+	vertical-align: middle;
+
+	svg {
+		display: inline-block;
+		height: 1em;
+		color: currentColor;
 	}
 }
 
