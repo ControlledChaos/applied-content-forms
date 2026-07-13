@@ -59,9 +59,16 @@ body {
 
 .page-header {
 	padding: 3rem 2rem 1rem;
-
 	p {
 		margin: 0;
+	}
+}
+
+.page-navigation {
+	ul {
+		list-style: none;
+		display: flex;
+		gap: 1em;
 	}
 }
 
@@ -75,20 +82,16 @@ body {
 	font-weight: 400;
 }
 
-#container {}
-
-#main_content {}
-
 .inner {
 	width: 100%;
 	max-width: 960px;
 	margin: 0 auto;
 	padding: 0 2rem;
-}
 
-#container .inner img {
-  max-width: 100%;
-  width: auto;
+	img {
+		max-width: 100%;
+		width: auto;
+	}
 }
 
 .page-footer {
@@ -123,12 +126,13 @@ pre {
 	color: #f2f2f2;
 	text-shadow: none;
 	background: #303030;
-}
-pre code {
-	padding: 0;
-	color: #f2f2f2;
-	background-color: #303030;
-	border: none;
+
+	code {
+		padding: 0;
+		color: #f2f2f2;
+		background-color: #303030;
+		border: none;
+	}
 }
 
 hr {
