@@ -1,6 +1,6 @@
-title: Minimal theme
-logo: /assets/img/logo.png
-description: Minimal is a theme for GitHub Pages.
+title: Applied Content Forms
+description: A suite of tools for adding and managing custom content types and user forms.
+logo:
 show_downloads: true
 google_analytics:
 theme: jekyll-theme-minimal
