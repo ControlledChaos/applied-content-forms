@@ -33,9 +33,6 @@ footer, header, hgroup, menu, nav, section {
 body {
 	line-height: 1;
 }
-ol, ul {
-	list-style: none;
-}
 blockquote, q {
 	quotes: none;
 }
@@ -58,7 +55,7 @@ body {
 }
 
 .page-header {
-	padding: 3rem 2rem 1rem;
+	padding: 3rem 0 1rem;
 	p {
 		margin: 0;
 	}
@@ -67,8 +64,9 @@ body {
 .page-navigation {
 	ul {
 		list-style: none;
+		margin: 0;
 		display: flex;
-		gap: 1em;
+		gap: 1em 1.5em;
 	}
 }
 
@@ -80,6 +78,10 @@ body {
 .page-description {
 	font-size: 1.125rem;
 	font-weight: 400;
+}
+
+#main_content {
+	padding-top: 3rem;
 }
 
 .inner {
@@ -193,7 +195,11 @@ blockquote {
 }
 
 ul, ol {
-	margin-left: 1em;
+	margin: 1rem 0 0 1em;
+
+	li {
+		margin-top: 1em;
+	}
 }
 
 footer {

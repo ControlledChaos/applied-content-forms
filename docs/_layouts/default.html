@@ -17,7 +17,11 @@
 	<div id="container">
 		<header class="page-header">
 			<div class="inner">
+				{% if page.title %}
 				<p class="page-title">Applied Content Forms</p>
+				{% else %}
+				<h1 class="page-title">Applied Content Forms</h1>
+				{% endif %}
 				<p class="page-description">{{ page.description | default: site.description | default: site.github.project_tagline }}</p>
 			</div>
 		</header>
