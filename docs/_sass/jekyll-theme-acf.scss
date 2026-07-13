@@ -108,11 +108,23 @@ body {
 	border-top: 1px solid #ebebeb;
 	border-bottom: 1px solid #ebebeb;
 	background: #fafafb;
+
+	header {
+
+		h2 {
+			font-size: 2.25rem;
+			font-weight: 400;
+		}
+
+		p {
+			margin: 1.5em 0 0;
+		}
+	}
 }
 
 .repo-links {
 	list-style: none;
-	margin: 0;
+	margin: 0.75rem 0 0;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -128,8 +140,11 @@ body {
 	}
 
 	&.top-repo-links {
+		margin: 0;
+
 		.button {
 			padding: 1.5rem 2.25rem;
+			font-weight: 600;
 		}
 	}
 }
