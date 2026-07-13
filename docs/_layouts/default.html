@@ -17,26 +17,25 @@
 	<div id="container">
 		<header class="page-header">
 			<div class="inner">
+				<nav class="page-navigation">
+					<ul>
+						<li><a href="plugin-overview.html">About</a></li>
+						<li><a href="#">Nav Item</a></li>
+						<li><a href="#">Nav Item</a></li>
+						<li><a href="#">Nav Item</a></li>
+						<li><a href="#">Nav Item</a></li>
+					</ul>
+				</nav>
 				{% if page.title %}
-				<p class="page-title">Applied Content Forms</p>
+				<p class="page-title">
+					<a href="./">Applied Content Forms</a>
+				</p>
 				{% else %}
 				<h1 class="page-title">Applied Content Forms</h1>
 				{% endif %}
 				<p class="page-description">{{ page.description | default: site.description | default: site.github.project_tagline }}</p>
 			</div>
 		</header>
-
-		<nav class="page-navigation">
-			<div class="inner">
-				<ul>
-					<li><a href="plugin-overview.html">About</a></li>
-					<li><a href="#">Nav Item</a></li>
-					<li><a href="#">Nav Item</a></li>
-					<li><a href="#">Nav Item</a></li>
-					<li><a href="#">Nav Item</a></li>
-				</ul>
-			</div>
-		</nav>
 
 		<main id="main_content">
 			<div class="inner">
