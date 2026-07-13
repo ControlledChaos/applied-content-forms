@@ -1,6 +1,8 @@
 ---
 layout: default
-title:
+title: Applied Content Forms
+obs.html.tags:
+- dont_add_embedded_title
 ---
 
 ## Like An Old Friend
