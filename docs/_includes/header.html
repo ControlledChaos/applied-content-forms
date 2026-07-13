@@ -11,12 +11,12 @@
 				</ul>
 			</nav>
 			<div id="header-action">
-				<a href="{{ site.github.zip_url }}" id="download-latest" class="button"><span id="download-icon" class="svg-icon inline-icon">{% include download.svg %}</span> Latest</a>
+				<a href="{{ site.github.repository_url }}/releases/latest/download/asset-name.zip" id="download-latest" class="button"><span id="download-icon" class="svg-icon inline-icon">{% include download.svg %}</span> Latest</a>
 			</div>
 		</div>
 		{% if page.title %}
 		<p class="page-title">
-			<a href="./">Applied Content Forms</a>
+			<a href="{{ site.github.repository_url }}">Applied Content Forms</a>
 		</p>
 		{% else %}
 		<h1 class="page-title">Applied Content Forms</h1>

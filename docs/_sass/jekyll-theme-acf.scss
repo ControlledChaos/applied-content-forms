@@ -22,6 +22,13 @@ body {
 .page-nav-wrap {
 	display: flex;
 	justify-content: space-between;
+	align-items: baseline;
+}
+
+#header-action {
+	.button {
+		margin-top: 1rem;
+	}
 }
 
 .page-nav {
@@ -188,14 +195,19 @@ a {
 
 .button {
 	font-size: 0.9375rem;
-	font-weight: 400;;
+	font-weight: 400;
 	line-height: 1;
 	display: inline-block;
-	padding: 0.9375rem 1.1875rem;
+	padding: 0.875rem 1.125rem;
 	border-radius: 3px;
-	background: #4d5cf1;
+	background-color: #4d5cf1;
 	border: none;
 	color: #ffffff;
+
+	&:hover,
+	&:focus {
+		background-color: #3546ef;
+	}
 }
 
 blockquote {
