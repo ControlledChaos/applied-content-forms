@@ -3,4 +3,4 @@ description: A suite of tools for adding and managing custom content types and u
 logo:
 show_downloads: true
 google_analytics:
-theme: jekyll-theme-acf
+remote_theme: jekyll-theme-acf
