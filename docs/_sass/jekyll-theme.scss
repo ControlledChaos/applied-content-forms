@@ -82,6 +82,10 @@ body {
 		display: inline-block;
 		padding: 1.25rem;
 		line-height: 1;
+
+		&:hover {
+			background: rgba( 0, 0, 0, 0.03 );
+		}
 	}
 }
 
