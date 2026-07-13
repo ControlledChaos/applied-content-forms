@@ -74,7 +74,14 @@ body {
 		margin: 0;
 		display: flex;
 		gap: 1em;
-		font-weight: 600;
+		font-size: 0.9375rem;
+		font-weight: 700;
+	}
+
+	a {
+		display: inline-block;
+		padding: 1.25rem;
+		line-height: 1;
 	}
 }
 
