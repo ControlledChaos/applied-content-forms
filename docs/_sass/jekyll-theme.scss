@@ -58,7 +58,7 @@ body {
 }
 
 header {
-	padding: 2rem 0;
+	padding: 0 2rem;
 }
 
 header h1 {
@@ -75,11 +75,12 @@ header h2 {
 
 #main_content {
 	max-width: 960px;
+	padding: 0 2rem;
 }
 
 .inner {
 	width: 100vw;
-	margin: 0 auto;
+	margin: 0;
 }
 
 #container .inner img {
@@ -89,7 +90,7 @@ header h2 {
 
 #downloads {
 	margin-bottom: 2rem;
-	padding: 2rem 0;
+	padding: 0 2rem;
 }
 
 code, pre {
