@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html lang="{{ site.lang | default: "en-US" }}">
+<html class="no-js" lang="{{ site.lang | default: "en-US" }}" dir="auto">
 <head>
 	<meta charset='utf-8'>
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<script>(function(html){html.className = html.className.replace(/\bno-js\b/,'js')})(document.documentElement);</script>
 	<link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
-	<!--[if lt IE 9]>
-	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-	<![endif]-->
 
 	{% seo %}
 </head>
@@ -17,11 +16,11 @@
 			<div class="inner">
 				<nav class="page-navigation">
 					<ul>
-						<li><a href="plugin-overview.html">About</a></li>
+						<li><a href="{% link about.html %}">About</a></li>
 						<li><a href="features.html">Features</a></li>
 						<li><a href="docs.html">Docs</a></li>
 						<li><a href="https://github.com/ControlledChaos/applied-content-forms">Code</a></li>
-						<li><a href="{{ site.url }}">Home</a></li>
+						<li><a href="{{ site.url }}/applied-content-forms/">Home</a></li>
 					</ul>
 				</nav>
 				{% if page.title %}
