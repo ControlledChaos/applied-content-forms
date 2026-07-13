@@ -76,15 +76,19 @@ body {
 		font-size: 0.9375rem;
 		font-weight: 700;
 		transform: translate( -1.25rem );
-	}
 
-	a {
-		display: inline-block;
-		padding: 0.9375rem 1.25rem;
-		line-height: 1;
+		li {
+			margin: 0;
 
-		&:hover {
-			background: rgba( 0, 0, 0, 0.03 );
+			a {
+				display: inline-block;
+				padding: 0.9375rem 1.25rem;
+				line-height: 1;
+
+				&:hover {
+					background: rgba( 0, 0, 0, 0.03 );
+				}
+			}
 		}
 	}
 }
