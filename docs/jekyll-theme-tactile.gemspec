@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 Gem::Specification.new do |s|
-  s.name          = "jekyll-theme-tactile"
+  s.name          = "jekyll-theme-acf"
   s.version       = "0.2.0"
   s.license       = "CC0-1.0"
   s.authors       = ["Jason Long", "GitHub, Inc."]
-  s.email         = ["opensource+jekyll-theme-tactile@github.com"]
+  s.email         = ["opensource+jekyll-theme-acf@github.com"]
   s.homepage      = "https://github.com/pages-themes/tactile"
   s.summary       = "Tactile is a Jekyll theme for GitHub Pages"
 
