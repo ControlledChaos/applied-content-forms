@@ -17,15 +17,15 @@
 	<div id="container">
 		<header>
 			<div class="inner">
-				<h1>{{ page.title | default: site.title | default: site.github.repository_name }}</h1>
-				<h2>{{ page.description | default: site.description | default: site.github.project_tagline }}</h2>
+				<p class="page-title">{{default: site.title}}</p>
+				<p class="page-description">{{ page.description | default: site.description | default: site.github.project_tagline }}</p>
 			</div>
 		</header>
 
 		<nav class="page-navigation">
 			<ul>
 				<li>
-					<a href="about.html">About</a>
+					<a href="plugin-overview.html">About</a>
 					<a href="#">Nav Item</a>
 					<a href="#">Nav Item</a>
 					<a href="#">Nav Item</a>
@@ -36,6 +36,7 @@
 
 		<main id="main_content">
 			<div class="inner">
+				<h1>{{ page.title | default: site.title | default: site.github.repository_name }}</h1>
 				{{ content }}
 			</div>
 		</main>
