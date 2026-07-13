@@ -55,7 +55,7 @@ body {
 }
 
 .page-header {
-	padding: 0 0 1rem 0;
+	padding: 0 0 2rem 0;
 	background: #00e4bc;
 	color: #ffffff;
 
@@ -94,9 +94,11 @@ body {
 }
 
 .page-title {
+	margin-top: 4.375rem;
 	font-size: 3.1875rem;
 	font-weight: 700;
 	letter-spacing: -2%;
+	line-height: 1.1em;
 }
 
 .page-description {
