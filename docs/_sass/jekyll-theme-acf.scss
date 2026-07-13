@@ -104,7 +104,7 @@ body {
 }
 
 #repo-links-section {
-	padding: 4.375 0;
+	padding: 4.375rem 0;
 	border-top: 1px solid #ebebeb;
 	border-bottom: 1px solid #ebebeb;
 	background: #fafafb;
@@ -119,11 +119,15 @@ body {
 	gap: 1em;
 	font-size: 0.875rem;
 
+	li {
+		margin: 0;
+	}
+
 	.button {
 		padding: 0.625rem 1rem;
 	}
 
-	.top-repo-links {
+	&.top-repo-links {
 		.button {
 			padding: 1.5rem 2.25rem;
 		}
