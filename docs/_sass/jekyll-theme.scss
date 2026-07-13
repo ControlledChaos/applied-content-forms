@@ -94,8 +94,9 @@ header h2 {
 
 .download-links {
 	list-style: none;
+	margin: 0;
 	display: flex;
-	gap: 0.625em;
+	gap: 1em;
 	font-size: 0.875rem;
 }
 
