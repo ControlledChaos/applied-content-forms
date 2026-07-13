@@ -70,14 +70,14 @@ body {
 		display: flex;
 		font-size: 0.9375rem;
 		font-weight: 700;
-		transform: translate( -1.25rem );
+		transform: translate( -1em );
 
 		li {
 			margin: 0;
 
 			a {
 				display: inline-block;
-				padding: 0.9375rem 1.25rem;
+				padding: 1.25rem 0.9375rem;
 				line-height: 1;
 
 				&:hover {
