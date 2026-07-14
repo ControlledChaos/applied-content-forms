@@ -1,6 +1,5 @@
 ---
-permalink: /block-types/
-parent: /features/
+permalink: /features/block-types/
 layout: default
 title: Custom Block Types
 ---

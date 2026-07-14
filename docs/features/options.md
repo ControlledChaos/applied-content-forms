@@ -1,6 +1,5 @@
 ---
-permalink: /options/
-parent: /features/
+permalink: /features/options/
 layout: default
 title: Options Pages
 ---

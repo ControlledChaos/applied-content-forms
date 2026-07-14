@@ -1,6 +1,5 @@
 ---
-permalink: /tools/
-parent: /features/
+permalink: /features/tools/
 layout: default
 title: Content Tools
 ---

@@ -1,6 +1,5 @@
 ---
-permalink: /forms/
-parent: /features/
+permalink: /features/forms/
 layout: default
 title: User Forms
 ---
