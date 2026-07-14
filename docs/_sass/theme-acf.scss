@@ -94,7 +94,7 @@ body {
 }
 
 .page-sidebar {
-	min-width: 320px;
+	width: 240px;
 }
 
 .inline-icon {
@@ -295,10 +295,6 @@ blockquote {
 
 ul, ol {
 	margin: 1rem 0 0 1em;
-
-	li {
-		margin-top: 1em;
-	}
 }
 
 img {
