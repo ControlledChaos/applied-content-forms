@@ -11,9 +11,9 @@
 				</ul>
 			</nav>
 			<div id="header-action">
-				<!-- {% if site.github.latest_release %} -->
+				{% unless site.github.latest_release %}
 				<a href="{{ site.github.releases_url }}/latest/download/asset-name.zip" class="button button-featured"><span class="svg-icon inline-icon">{% include download.svg %}</span> Latest</a>
-				<!-- {% endif %} -->
+				{% endunless %}
 			</div>
 		</div>
 		{% if page.title %}
