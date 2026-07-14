@@ -15,11 +15,15 @@
 
 		{% include header.html %}
 
-		<main class="page-content">
+		<section class="page-content">
 			<div class="inner">
-				{{ content }}
+				<main class="page-main">
+					<div class="inner">
+						{{ content }}
+					</div>
+				</main>
 			</div>
-		</main>
+		</section>
 
 		{% if site.show_downloads %}
 			{% include front-page-repo.html %}

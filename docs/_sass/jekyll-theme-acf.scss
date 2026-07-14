@@ -80,11 +80,21 @@ body {
 	max-width: 960px;
 	margin: 0 auto;
 	padding: 0 2rem;
+}
 
-	img {
-		max-width: 100%;
-		width: auto;
-	}
+.content-wrap {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	gap: 0 2rem;
+}
+
+.page-main {
+	width: 100%;
+}
+
+.page-sidebar {
+	min-width: 320px;
 }
 
 .inline-icon {
@@ -256,7 +266,7 @@ a {
 	display: inline-block;
 	padding: 0.875rem 1.125rem;
 	border-radius: 3px;
-	background-color: #00e4bc;
+	background-color: #00dbb5;
 	border: none;
 	color: #ffffff;
 
@@ -289,6 +299,11 @@ ul, ol {
 	li {
 		margin-top: 1em;
 	}
+}
+
+img {
+	max-width: 100%;
+	width: auto;
 }
 
 footer {

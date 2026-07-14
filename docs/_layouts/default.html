@@ -15,14 +15,17 @@
 
 		{% include header.html %}
 
-		<main class="page-content">
-			<div class="inner">
-				{% if page.title %}
-				<h1>{{ page.title }}</h1>
-				{% endif %}
-				{{ content }}
+		<section class="page-content">
+			<div class="inner content-wrap">
+				<main class="page-main"></main>
+					{% if page.title %}
+					<h1>{{ page.title }}</h1>
+					{% endif %}
+					{{ content }}
+				</main>
+				{% include aside.html %}
 			</div>
-		</main>
+		</section>
 
 		<footer class="page-footer">
 			<div class="inner">
