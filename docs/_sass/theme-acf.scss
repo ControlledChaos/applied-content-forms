@@ -140,18 +140,9 @@ body {
 
 .page-sidebar {
 	width: 240px;
-
-	:after {
-		content: '';
-		display: block;
-		position: absolute;
-		top: 0;
-		height: 100%;
-		background: var( --acf-secondary--bg-color );
-		border-left: var( --acf-border--color ) solid 1px;
-		width: 50%;
-		margin-left: -30px;
-	}
+	height: 100%;
+	background-color: var( --acf-secondary--bg-color );
+	border-left: var( --acf-border--color ) solid 1px;
 }
 
 .inline-icon {
@@ -168,13 +159,13 @@ body {
 .page-footer {
 	margin: 2rem 0;
 	padding: 0 2rem;
+	border-top: 1px solid var( --acf-border--color );
 }
 
 #repo-actions {
 	margin-top: 3rem;
 	padding: 4.375rem 0;
 	border-top: 1px solid var( --acf-border--color );
-	border-bottom: 1px solid var( --acf-border--color );
 	background: var( --acf-secondary--bg-color );
 
 	header {
