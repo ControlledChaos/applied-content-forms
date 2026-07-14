@@ -1,6 +1,6 @@
 # Applied Content Forms
 
-A suite of tools for adding and managing custom content types and user forms.
+A plugin for ClassicPress and WordPress that provides a suite of tools for adding & managing custom content types and user forms.
 
 ![Minimum PHP version 7.4](https://img.shields.io/badge/PHP_minimum-7.4-8892bf.svg?style=flat-square)
 ![Tested on PHP version 8.2.4](https://img.shields.io/badge/PHP_tested-8.2.4-8892bf.svg?style=flat-square)
