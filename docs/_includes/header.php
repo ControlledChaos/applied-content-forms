@@ -1,3 +1,6 @@
+<?php
+
+?>
 <header class="page-header">
 	<div class="inner page-header-inner">
 		<div class="page-nav-wrap">
