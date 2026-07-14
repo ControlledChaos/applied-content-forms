@@ -2,7 +2,7 @@
 /**
  * Applied Content Forms
  *
- * Content editing for ClassicPress and WordPress.
+ * A suite of tools for adding and managing custom content types and user forms.
  *
  * @package  ACF
  * @category Core
@@ -11,7 +11,7 @@
  *
  * Plugin Name:       Applied Content Forms
  * Plugin URI:        https://github.com/ControlledChaos/applied-content-forms
- * Description:       Content editing for ClassicPress and WordPress.
+ * Description:       A suite of tools for adding and managing custom content types and user forms.
  * Version:           1.0.0
  * UpdateURI:         https://github.com/ControlledChaos/releases/latest/download/applied-content-forms.zip
  * Author:            Controlled Chaos Design
