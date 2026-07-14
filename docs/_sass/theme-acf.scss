@@ -116,6 +116,7 @@ body {
 }
 
 .page-content {
+	position: relative;
 	padding-top: 3rem;
 }
 
@@ -139,6 +140,18 @@ body {
 
 .page-sidebar {
 	width: 240px;
+
+	:after {
+		content: '';
+		display: block;
+		position: absolute;
+		top: 0;
+		height: 100%;
+		background: var( --acf-secondary--bg-color );
+		border-left: var( --acf-border--color ) solid 1px;
+		width: 50%;
+		margin-left: -30px;
+	}
 }
 
 .inline-icon {
@@ -162,7 +175,7 @@ body {
 	padding: 4.375rem 0;
 	border-top: 1px solid var( --acf-border--color );
 	border-bottom: 1px solid var( --acf-border--color );
-	background: #fafafb;
+	background: var( --acf-secondary--bg-color );
 
 	header {
 		text-align: center;
