@@ -218,6 +218,7 @@ td {
 
 h1,
 h2 {
+	margin-top: 1.5rem;
 	font-size: 1.625rem;
 	font-weight: 600;
 
@@ -226,6 +227,13 @@ h2 {
 	a:focus {
 		color: inherit;
 	}
+}
+
+h3,
+h4,
+h5,
+h6 {
+	margin-top: 1rem;
 }
 
 p {
