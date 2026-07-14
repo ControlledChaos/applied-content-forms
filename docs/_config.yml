@@ -1,6 +1,17 @@
+url: "https://controlledchaos.github.io"
+baseurl: "/applied-content-forms"
+
 title: Applied Content Forms
 description: A suite of tools for adding and managing custom content types and user forms.
-logo:
+author: Applied Content Forms
+email:
 show_downloads: true
-google_analytics:
 remote_theme: theme-acf
+markdown: kramdown
+permalink: pretty
+paginate: 5
+paginate_path: "/posts/page:num/"
+plugins:
+  - jekyll-feed
+  - jekyll-paginate
+  - jekyll-sitemap
